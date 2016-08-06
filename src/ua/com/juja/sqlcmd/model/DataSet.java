@@ -7,26 +7,17 @@ import java.util.Arrays;
  */
 public class DataSet {
 
-    static class Data {
-        private String name;
-        private Object value;
+    //    public Data[] data = new Data[100];
+    public Data[] data;
+    public int freeIndex = 0;
 
-        public Data(String name, Object value) {
-            this.name = name;
-            this.value = value;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public Object getValue() {
-            return value;
-        }
+    public DataSet() {
+        this.data = new Data[100];
     }
 
-    public Data[] data = new Data[100]; // TODO remove magic number 100
-    public int freeIndex = 0;
+    public DataSet(int lenght) {
+        this.data = new Data[lenght];
+    }
 
     public void put(String name, Object value) {
         for (int index = 0; index < freeIndex; index++) {
@@ -77,5 +68,23 @@ public class DataSet {
                 "names:" + Arrays.toString(getNames()) + ", " +
                 "values:" + Arrays.toString(getValues()) +
                 "}";
+    }
+
+    static class Data {
+        private String name;
+        private Object value;
+
+        public Data(String name, Object value) {
+            this.name = name;
+            this.value = value;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public Object getValue() {
+            return value;
+        }
     }
 }

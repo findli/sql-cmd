@@ -11,7 +11,11 @@ public interface DatabaseManager {
 
     void connect(String database, String userName, String password);
 
+    public void insertData(String tableName, DataSet rows);
+
     void clear(String tableName);
+
+    void delete(String tableName);
 
     void create(String tableName, DataSet input);
 

@@ -14,7 +14,8 @@ import static org.junit.Assert.assertEquals;
  */
 public abstract class DatabaseManagerTest {
 
-    private DatabaseManager manager;
+//    private DatabaseManager manager;
+    protected DatabaseManager manager;
 
     @Before
     public void setup() {

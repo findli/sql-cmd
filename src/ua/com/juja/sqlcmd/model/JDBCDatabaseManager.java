@@ -86,6 +86,11 @@ public class JDBCDatabaseManager implements DatabaseManager {
     }
 
     @Override
+    public void insertData(String tableName, DataSet rows) {
+        // TODO implement
+    }
+
+    @Override
     public void clear(String tableName) {
         try {
             Statement stmt = connection.createStatement();
@@ -94,6 +99,11 @@ public class JDBCDatabaseManager implements DatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void delete(String tableName) {
+        // TODO implement
     }
 
     @Override
