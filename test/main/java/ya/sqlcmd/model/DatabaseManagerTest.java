@@ -4,6 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -13,7 +16,7 @@ import static org.junit.Assert.assertEquals;
  */
 public abstract class DatabaseManagerTest {
 
-//    private DatabaseManager manager;
+    //    private DatabaseManager manager;
     protected DatabaseManager manager;
 
     @Before
@@ -36,19 +39,25 @@ public abstract class DatabaseManagerTest {
         manager.clear("user");
 
         // when
-        DataSet input = new DataSet();
-        input.put("name", "Stiven");
-        input.put("password", "pass");
-        input.put("id", 13);
+        LinkedList<String> input = new LinkedList<String>();
+        input.add("name");
+        input.add("password");
+        input.add("id");
         manager.create("user", input);
 
+        HashMap<String, String> rows = new HashMap<String, String>();
+        rows.put("name", "Ivan");
+        rows.put("password", "ivanPassword");
+        rows.put("id", "1");
+        manager.insertData("user", rows);
         // then
-        DataSet[] users = manager.getTableData("user");
+        Map<String, String>[] users = manager.getTableData("user");
         assertEquals(1, users.length);
 
-        DataSet user = users[0];
-        assertEquals("[name, password, id]", Arrays.toString(user.getNames()));
-        assertEquals("[Stiven, pass, 13]", Arrays.toString(user.getValues()));
+        Map<String, String> user = users[0];
+        assertEquals(user.get("name"), "Ivan");
+        assertEquals(user.get("password"), "ivanPassword");
+        assertEquals(user.get("id"), "1");
     }
 
     @Test
@@ -56,25 +65,33 @@ public abstract class DatabaseManagerTest {
         // given
         manager.clear("user");
 
-        DataSet input = new DataSet();
-        input.put("name", "Stiven");
-        input.put("password", "pass");
-        input.put("id", 13);
+        LinkedList<String> input = new LinkedList<String>();
+        input.add("name");
+        input.add("password");
+        input.add("id");
         manager.create("user", input);
 
+        HashMap<String, String> rows = new HashMap<String, String>();
+        rows.put("name", "Ivan");
+        rows.put("password", "ivanPassword");
+        rows.put("id", "1");
+        manager.insertData("user", rows);
+
         // when
-        DataSet newValue = new DataSet();
-        newValue.put("password", "pass2");
-        newValue.put("name", "Pup");
-        manager.update("user", 13, newValue);
+        rows = new HashMap<String, String>();
+        rows.put("name", "Ivan2");
+        rows.put("password", "ivanPassword2");
+        manager.insertData("user", rows);
+        manager.update("user", "1", rows);
 
         // then
-        DataSet[] users = manager.getTableData("user");
+        Map<String, String>[] users = manager.getTableData("user");
         assertEquals(1, users.length);
 
-        DataSet user = users[0];
-        assertEquals("[name, password, id]", Arrays.toString(user.getNames()));
-        assertEquals("[Pup, pass2, 13]", Arrays.toString(user.getValues()));
+        Map<String, String> user = users[0];
+        assertEquals(user.get("name"), "Ivan2");
+        assertEquals(user.get("password"), "ivanPassword2");
+        assertEquals(user.get("id"), "1");
     }
 
     @Test

@@ -3,9 +3,6 @@ package ya.sqlcmd.controller.command;
 import ya.sqlcmd.model.DatabaseManager;
 import ya.sqlcmd.view.View;
 
-/**
- * Created by indigo on 28.08.2015.
- */
 public class Clear implements Command {
 
     private DatabaseManager manager;

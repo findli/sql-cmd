@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * Created by indigo on 21.08.2015.
  */
-public class JDBCDatabaseManager implements DatabaseManager {
+public class JDBCDatabaseManager /*implements DatabaseManager*/ {
 
     private Connection connection;
 

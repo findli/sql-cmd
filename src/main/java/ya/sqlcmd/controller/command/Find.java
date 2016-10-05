@@ -4,6 +4,10 @@ import ya.sqlcmd.model.DataSet;
 import ya.sqlcmd.model.DatabaseManager;
 import ya.sqlcmd.view.View;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by indigo on 28.08.2015.
  */
@@ -30,21 +34,21 @@ public class Find implements Command {
         String[] tableColumns = manager.getTableColumns(tableName);
         printHeader(tableColumns);
 
-        DataSet[] tableData = manager.getTableData(tableName);
+        HashMap<String, String>[] tableData = manager.getTableData(tableName);
         printTable(tableData);
     }
 
-    private void printTable(DataSet[] tableData) {
-        for (DataSet row : tableData) {
+    private void printTable(HashMap<String, String>[] tableData) {
+        for (HashMap<String, String> row : tableData) {
             printRow(row);
         }
         view.write("--------------------");
     }
 
-    private void printRow(DataSet row) {
-        Object[] values = row.getValues();
+    private void printRow(HashMap<String, String> row) {
+        Collection<String> values = row.values();
         String result = "|";
-        for (Object value : values) {
+        for (String value : values) {
             result += value + "|";
         }
         view.write(result);

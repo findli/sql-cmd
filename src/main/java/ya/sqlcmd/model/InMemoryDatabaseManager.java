@@ -10,19 +10,18 @@ public class InMemoryDatabaseManager implements DatabaseManager {
     private InMemoryDatabaseManager.DataBase dataBase = this.new DataBase();
 
     @Override
-    public DataSet[] getTableData(String tableName) {
-        validateTable(tableName);
-
-        return Arrays.copyOf(data, freeIndex);
+    public HashMap<String, String>[] getTableData(String tableName) {
+        DataBase.Table table = null;
+        try {
+            table = this.dataBase.getTable(tableName);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return table.getRows();
     }
 
     private void validateTable(String tableName) {
-        LinkedList<String> fiedls = new LinkedList<>();
-        fiedls.add(0, "id");
-        fiedls.add(0, "name");
-        fiedls.add(0, "password");
-        dataBase.createTable("user", fiedls);
-
+        // @todo implement
 //        if (!"user".equals(tableName)) {
 //        if (tableName != "user") {
 //            throw new UnsupportedOperationException("Only for 'user' table, but you try to work with: " + tableName);
@@ -41,10 +40,12 @@ public class InMemoryDatabaseManager implements DatabaseManager {
 
     @Override
     public void clear(String tableName) {
+        // @todo implement
+        this.dataBase.clear(tableName);
 //        validateTable(tableName);
 
-        data = new DataSet[1000];
-        freeIndex = 0;
+//        data = new DataSet[1000];
+//        freeIndex = 0;
     }
 
     @Override
@@ -56,29 +57,31 @@ public class InMemoryDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public void create(String tableName, DataSet input) {
-        insertData(tableName, input);
+    public void create(String tableName, LinkedList<String> fields) {
+        this.dataBase.createTable(tableName, fields);
 
-        validateTable(tableName);
+//        insertData(tableName, fields);
 
-        data[freeIndex] = input;
-        freeIndex++;
+//        validateTable(tableName);
+
+//        data[freeIndex] = input;
+//        freeIndex++;
     }
 
-    public void insertData(String tableName, DataSet rows) {
-//        Array rows = Arrays.asList(rows);
-//        this.dataBase.insert(tableName, rows);
+    public void insertData(String tableName, HashMap<String, String> row) {
+        try {
+            this.dataBase.insert(tableName, row);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void update(String tableName, int id, DataSet newValue) {
-        validateTable(tableName);
-
-        for (int index = 0; index < freeIndex; index++) {
-//            if (data[index].get("id").equals((Object) id)/* == id*/) {// not correct!!!
-            if ((int) data[index].get("id") == id) {
-                data[index].updateFrom(newValue);
-            }
+    public void update(String tableName, String id, HashMap<String, String> newValue) {
+        try {
+            this.dataBase.update(tableName, newValue, id);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 
@@ -111,7 +114,7 @@ public class InMemoryDatabaseManager implements DatabaseManager {
             this.getTable(tableName).insert(row);
         }
 
-        public void update(String tableName, HashMap<String, String> newValues, int rowId) throws IllegalAccessException {
+        public void update(String tableName, HashMap<String, String> newValues, String rowId) throws IllegalAccessException {
             this.getTable(tableName).update(newValues, rowId);
         }
 
@@ -124,17 +127,26 @@ public class InMemoryDatabaseManager implements DatabaseManager {
             throw new IllegalAccessException("There is no table named: " + tableName);
         }
 
+        public void clear(String tableName) {
+            try {
+                Table table = this.getTable(tableName);
+                table.clear();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
         final class Table {
             protected String name;
             protected LinkedList<String> fields;
-            protected Map<String, String>[] rows = new HashMap[]{};
+            protected HashMap<String, String>[] rows = new HashMap[]{};
 
             public Table(final String tableName, final LinkedList<String> fields) {
                 this.name = tableName;
                 this.fields = fields;
             }
 
-            public void clear(String tableName) {
+            public void clear() {
                 this.rows = new HashMap[]{};
                 for (Map<String, String> row : this.rows) {
                     row = null;
@@ -149,8 +161,8 @@ public class InMemoryDatabaseManager implements DatabaseManager {
                 this.rows[this.rows.length] = row;
             }
 
-            public void update(HashMap<String, String> newValues, int rowId) throws IllegalAccessException {
-                HashMap<String, String> row = getRow(rowId);
+            public void update(HashMap<String, String> newValues, String rowId) throws IllegalAccessException {
+                Map<String, String> row = getRow(rowId);
 
                 for (String fieldName : newValues.keySet()) {
                     String fieldValue = newValues.get(fieldName);
@@ -160,9 +172,13 @@ public class InMemoryDatabaseManager implements DatabaseManager {
                 }
             }
 
-            private HashMap<String, String> getRow(int rowId) throws IllegalAccessException {
-                for (HashMap<String, String> row : rows) {
-                    if (row.get("id") == Integer.toString(rowId)) {
+            public HashMap<String, String>[] getRows() {
+                return rows;
+            }
+
+            public Map<String, String> getRow(String rowId) throws IllegalAccessException {
+                for (Map<String, String> row : rows) {
+                    if (row.get("id") == rowId) {
                         return row;
                     }
                 }
@@ -170,5 +186,4 @@ public class InMemoryDatabaseManager implements DatabaseManager {
             }
         }
     }
-
 }
