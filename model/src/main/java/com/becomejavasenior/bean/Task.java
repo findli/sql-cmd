@@ -4,19 +4,72 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Task implements Serializable {
-    protected int id;
-    protected String title;
-    protected int taskTypeId;
-    protected String description;
-    protected Date deadlineDate;
-    protected Date time;
-    protected int periodInDaysTypeId;
-    protected int periodInMinutes;
-    protected int responsibleUserId;
-    protected boolean isFinished;
-    protected boolean isDeleted;
-
+    private int id;
+    private String title;
+    private int taskTypeId;
+    private String description;
+    private Date deadlineDate;
+    private Date time;
+    private int periodInDaysTypeId;
+    private int periodInMinutes;
+    private int responsibleUserId;
+    private boolean isFinished;
+    private boolean isDeleted;
     public Task() {
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", taskTypeId=" + taskTypeId +
+                ", description='" + description + '\'' +
+                ", deadlineDate=" + deadlineDate +
+                ", time=" + time +
+                ", periodInDaysTypeId=" + periodInDaysTypeId +
+                ", periodInMinutes=" + periodInMinutes +
+                ", responsibleUserId=" + responsibleUserId +
+                ", isFinished=" + isFinished +
+                ", isDeleted=" + isDeleted +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Task task = (Task) o;
+
+        if (id != task.id) return false;
+        if (taskTypeId != task.taskTypeId) return false;
+        if (periodInDaysTypeId != task.periodInDaysTypeId) return false;
+        if (periodInMinutes != task.periodInMinutes) return false;
+        if (responsibleUserId != task.responsibleUserId) return false;
+        if (isFinished != task.isFinished) return false;
+        if (isDeleted != task.isDeleted) return false;
+        if (title != null ? !title.equals(task.title) : task.title != null) return false;
+        if (description != null ? !description.equals(task.description) : task.description != null) return false;
+        if (deadlineDate != null ? !deadlineDate.equals(task.deadlineDate) : task.deadlineDate != null) return false;
+        return time != null ? time.equals(task.time) : task.time == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + taskTypeId;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (deadlineDate != null ? deadlineDate.hashCode() : 0);
+        result = 31 * result + (time != null ? time.hashCode() : 0);
+        result = 31 * result + periodInDaysTypeId;
+        result = 31 * result + periodInMinutes;
+        result = 31 * result + responsibleUserId;
+        result = 31 * result + (isFinished ? 1 : 0);
+        result = 31 * result + (isDeleted ? 1 : 0);
+        return result;
     }
 
     public int getId() {
