@@ -7,6 +7,33 @@ public class PeriodInDaysType implements Serializable {
     private String title;
     private int daysInPeriod;
 
+    public PeriodInDaysType() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getDaysInPeriod() {
+        return daysInPeriod;
+    }
+
+    public void setDaysInPeriod(int daysInPeriod) {
+        this.daysInPeriod = daysInPeriod;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,32 +62,5 @@ public class PeriodInDaysType implements Serializable {
                 ", title='" + title + '\'' +
                 ", daysInPeriod=" + daysInPeriod +
                 '}';
-    }
-
-    public PeriodInDaysType() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getDaysInPeriod() {
-        return daysInPeriod;
-    }
-
-    public void setDaysInPeriod(int daysInPeriod) {
-        this.daysInPeriod = daysInPeriod;
     }
 }

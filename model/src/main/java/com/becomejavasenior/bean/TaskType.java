@@ -26,14 +26,6 @@ public class TaskType implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "TaskType{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -50,5 +42,13 @@ public class TaskType implements Serializable {
         int result = id;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TaskType{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
     }
 }
