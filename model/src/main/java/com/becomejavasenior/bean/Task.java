@@ -6,15 +6,16 @@ import java.util.Date;
 public class Task implements Serializable {
     private int id;
     private String title;
-    private int taskTypeId;
+    private TaskType taskTypeId;
     private String description;
     private Date deadlineDate;
     private Date time;
-    private int periodInDaysTypeId;
+    private PeriodInDaysType periodInDaysTypeId;
     private int periodInMinutes;
     private int responsibleUserId;
     private boolean isFinished;
     private boolean isDeleted;
+
     public Task() {
     }
 
@@ -43,16 +44,16 @@ public class Task implements Serializable {
         Task task = (Task) o;
 
         if (id != task.id) return false;
-        if (taskTypeId != task.taskTypeId) return false;
-        if (periodInDaysTypeId != task.periodInDaysTypeId) return false;
         if (periodInMinutes != task.periodInMinutes) return false;
         if (responsibleUserId != task.responsibleUserId) return false;
         if (isFinished != task.isFinished) return false;
         if (isDeleted != task.isDeleted) return false;
         if (title != null ? !title.equals(task.title) : task.title != null) return false;
+        if (taskTypeId != null ? !taskTypeId.equals(task.taskTypeId) : task.taskTypeId != null) return false;
         if (description != null ? !description.equals(task.description) : task.description != null) return false;
         if (deadlineDate != null ? !deadlineDate.equals(task.deadlineDate) : task.deadlineDate != null) return false;
-        return time != null ? time.equals(task.time) : task.time == null;
+        if (time != null ? !time.equals(task.time) : task.time != null) return false;
+        return periodInDaysTypeId != null ? periodInDaysTypeId.equals(task.periodInDaysTypeId) : task.periodInDaysTypeId == null;
 
     }
 
@@ -60,11 +61,11 @@ public class Task implements Serializable {
     public int hashCode() {
         int result = id;
         result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + taskTypeId;
+        result = 31 * result + (taskTypeId != null ? taskTypeId.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (deadlineDate != null ? deadlineDate.hashCode() : 0);
         result = 31 * result + (time != null ? time.hashCode() : 0);
-        result = 31 * result + periodInDaysTypeId;
+        result = 31 * result + (periodInDaysTypeId != null ? periodInDaysTypeId.hashCode() : 0);
         result = 31 * result + periodInMinutes;
         result = 31 * result + responsibleUserId;
         result = 31 * result + (isFinished ? 1 : 0);
@@ -88,11 +89,11 @@ public class Task implements Serializable {
         this.title = title;
     }
 
-    public int getTaskTypeId() {
+    public TaskType getTaskTypeId() {
         return taskTypeId;
     }
 
-    public void setTaskTypeId(int taskTypeId) {
+    public void setTaskTypeId(TaskType taskTypeId) {
         this.taskTypeId = taskTypeId;
     }
 
@@ -120,11 +121,11 @@ public class Task implements Serializable {
         this.time = time;
     }
 
-    public int getPeriodInDaysTypeId() {
+    public PeriodInDaysType getPeriodInDaysTypeId() {
         return periodInDaysTypeId;
     }
 
-    public void setPeriodInDaysTypeId(int periodInDaysTypeId) {
+    public void setPeriodInDaysTypeId(PeriodInDaysType periodInDaysTypeId) {
         this.periodInDaysTypeId = periodInDaysTypeId;
     }
 
