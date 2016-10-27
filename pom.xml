@@ -14,6 +14,15 @@
   <name>CRM Maven Webapp</name>
 
   <dependencies>
-    <!-- Put here PostgreSQL connector dependency-->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>9.4.1211.jre7</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+      <version>1.4</version>
+    </dependency>
   </dependencies>
 </project>
