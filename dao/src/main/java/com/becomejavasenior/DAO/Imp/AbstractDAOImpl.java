@@ -12,6 +12,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     @Override
     public T create(T entity) {
+        T createEntity = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
@@ -24,7 +25,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
                 Integer generatedId = resultSet.getInt(1);
-                return getById(generatedId);
+                createEntity = getById(generatedId);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,13 +41,14 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
                 logOrIgnore.printStackTrace();
             }
         }
-        return null;
+        return createEntity;
     }
 
     abstract void createStatement(PreparedStatement preparedStatement, T entity);
 
     @Override
     public T update(T entity) {
+        T updateEntity = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -55,6 +57,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             preparedStatement = connection.prepareStatement(query);
             updateStatement(preparedStatement, entity);
             preparedStatement.executeUpdate();
+            updateEntity = entity;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -69,7 +72,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
                 logOrIgnore.printStackTrace();
             }
         }
-        return null;
+        return updateEntity;
     }
 
     abstract void updateStatement(PreparedStatement preparedStatement, T entity);
@@ -104,6 +107,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     @Override
     public T getById(Integer id) {
+        T entity = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
@@ -114,7 +118,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return getEntity(resultSet);
+                entity = getEntity(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -130,7 +134,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
                 logOrIgnore.printStackTrace();
             }
         }
-        return null;
+        return entity;
     }
 
     abstract T getEntity(ResultSet resultSet);
@@ -166,7 +170,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             }
         }
 
-        return null;
+        return listEntity;
     }
 
     abstract String getCreateQuery();
