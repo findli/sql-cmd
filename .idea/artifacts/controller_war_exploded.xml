@@ -16,13 +16,6 @@
           <element id="archive" name="model-1.0-SNAPSHOT.jar">
             <element id="module-output" name="model" />
           </element>
-          <element id="library" level="project" name="Maven: org.postgresql:postgresql:9.4-1200-jdbc41" />
-          <element id="library" level="project" name="Maven: com.github.dblock.waffle:waffle-jna:1.7" />
-          <element id="library" level="project" name="Maven: net.java.dev.jna:jna:4.1.0" />
-          <element id="library" level="project" name="Maven: net.java.dev.jna:jna-platform:4.1.0" />
-          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.7" />
-          <element id="library" level="project" name="Maven: com.google.guava:guava:18.0" />
-          <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:1.7.7" />
         </element>
       </element>
       <element id="directory" name="META-INF">
