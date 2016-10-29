@@ -1,5 +1,7 @@
 package com.becomejavasenior.DAO.Impl;
 
-public class CompanyDaoJdbcImpl extends AbstractDAOImpl<T> {
+import com.becomejavasenior.DAO.CompanyDao;
+
+public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements CompanyDao<Company>{
 
 }
