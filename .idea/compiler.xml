@@ -17,33 +17,21 @@
       <profile default="true" name="Default" enabled="false">
         <processorPath useClasspath="true" />
       </profile>
-      <profile default="false" name="Annotation profile for model" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="true" />
-        <module name="model" />
-      </profile>
-      <profile default="false" name="Annotation profile for dao" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="true" />
-        <module name="dao" />
-      </profile>
-      <profile default="false" name="Annotation profile for controller" enabled="true">
+      <profile default="false" name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="controller" />
+        <module name="dao" />
+        <module name="model" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="controller" target="1.8" />
-      <module name="crm-pallas" target="1.8" />
-      <module name="dao" target="1.8" />
-      <module name="model" target="1.8" />
+      <module name="controller" target="1.5" />
+      <module name="crm-system" target="1.5" />
+      <module name="dao" target="1.5" />
+      <module name="model" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
