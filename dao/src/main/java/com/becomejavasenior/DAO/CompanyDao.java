@@ -1,5 +1,5 @@
 package com.becomejavasenior.DAO;
 
-public interface CompanyDao extends AbstractDAO<Company> {
+public interface CompanyDao<Company> extends AbstractDAO<Company> {
 
 }
