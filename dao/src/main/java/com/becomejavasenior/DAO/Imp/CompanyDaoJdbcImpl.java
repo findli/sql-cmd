@@ -8,35 +8,38 @@ import java.sql.ResultSet;
 
 public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements AbstractDAO<Company> {
 
-    void createStatement(PreparedStatement preparedStatement, Company entity) {
+    public static Logger log = Logger.getLogger(CompanyDaoJdbcImpl.class.getName());
+
+    public void createStatement(PreparedStatement statement, Company entity) {
 
     }
 
-    void updateStatement(PreparedStatement preparedStatement, Company entity) {
+    public void updateStatement(PreparedStatement statement, Company entity) {
 
     }
 
-    Company getEntity(ResultSet resultSet) {
+    public Company getEntity(ResultSet resultSet) {
+
         return null;
     }
 
-    String getCreateQuery() {
-        return null;
+    public String getCreateQuery() {
+        return "INSERT INTO company (title, phone_number, email, website, address_id, responsible_user_id, is_deleted) VALUES (?, ?, ?, ?, ?, ?, ?)";
     }
 
-    String getUpdateQuery() {
-        return null;
+    public String getUpdateQuery() {
+        return "UPDATE company SET title = ?, phone_number = ?, email = ?, website = ?, address_id = ?, responsible_user_id = ?, is_deleted = ?";
     }
 
-    String getDeleteQuery() {
-        return null;
+    public String getDeleteQuery() {
+        return "DELETE FROM company WHERE id = ?";
     }
 
-    String getByIdQuery() {
-        return null;
+    public String getByIdQuery() {
+        return "SELECT * FROM company WHERE id = ?";
     }
 
-    String getAllQuery() {
-        return null;
+    public String getAllQuery() {
+        return "SELECT * FROM company";
     }
 }
