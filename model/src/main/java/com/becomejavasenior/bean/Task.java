@@ -6,13 +6,13 @@ import java.util.Date;
 public class Task implements Serializable {
     private int id;
     private String title;
-    private TaskType taskTypeId;
+    private TaskType taskType;
     private String description;
     private Date deadlineDate;
     private Date time;
-    private PeriodInDaysType periodInDaysTypeId;
+    private PeriodInDaysType periodInDaysType;
     private int periodInMinutes;
-    private int responsibleUserId;
+    private User responsibleUser;
     private boolean isFinished;
     private boolean isDeleted;
 
@@ -35,12 +35,12 @@ public class Task implements Serializable {
         this.title = title;
     }
 
-    public TaskType getTaskTypeId() {
-        return taskTypeId;
+    public TaskType getTaskType() {
+        return taskType;
     }
 
-    public void setTaskTypeId(TaskType taskTypeId) {
-        this.taskTypeId = taskTypeId;
+    public void setTaskType(TaskType taskType) {
+        this.taskType = taskType;
     }
 
     public String getDescription() {
@@ -67,12 +67,12 @@ public class Task implements Serializable {
         this.time = time;
     }
 
-    public PeriodInDaysType getPeriodInDaysTypeId() {
-        return periodInDaysTypeId;
+    public PeriodInDaysType getPeriodInDaysType() {
+        return periodInDaysType;
     }
 
-    public void setPeriodInDaysTypeId(PeriodInDaysType periodInDaysTypeId) {
-        this.periodInDaysTypeId = periodInDaysTypeId;
+    public void setPeriodInDaysType(PeriodInDaysType periodInDaysType) {
+        this.periodInDaysType = periodInDaysType;
     }
 
     public int getPeriodInMinutes() {
@@ -83,12 +83,12 @@ public class Task implements Serializable {
         this.periodInMinutes = periodInMinutes;
     }
 
-    public int getResponsibleUserId() {
-        return responsibleUserId;
+    public User getResponsibleUser() {
+        return responsibleUser;
     }
 
-    public void setResponsibleUserId(int responsibleUserId) {
-        this.responsibleUserId = responsibleUserId;
+    public void setResponsibleUser(User responsibleUser) {
+        this.responsibleUser = responsibleUser;
     }
 
     public boolean isFinished() {
@@ -116,15 +116,16 @@ public class Task implements Serializable {
 
         if (id != task.id) return false;
         if (periodInMinutes != task.periodInMinutes) return false;
-        if (responsibleUserId != task.responsibleUserId) return false;
         if (isFinished != task.isFinished) return false;
         if (isDeleted != task.isDeleted) return false;
         if (title != null ? !title.equals(task.title) : task.title != null) return false;
-        if (taskTypeId != null ? !taskTypeId.equals(task.taskTypeId) : task.taskTypeId != null) return false;
+        if (taskType != null ? !taskType.equals(task.taskType) : task.taskType != null) return false;
         if (description != null ? !description.equals(task.description) : task.description != null) return false;
         if (deadlineDate != null ? !deadlineDate.equals(task.deadlineDate) : task.deadlineDate != null) return false;
         if (time != null ? !time.equals(task.time) : task.time != null) return false;
-        return periodInDaysTypeId != null ? periodInDaysTypeId.equals(task.periodInDaysTypeId) : task.periodInDaysTypeId == null;
+        if (periodInDaysType != null ? !periodInDaysType.equals(task.periodInDaysType) : task.periodInDaysType != null)
+            return false;
+        return responsibleUser != null ? responsibleUser.equals(task.responsibleUser) : task.responsibleUser == null;
 
     }
 
@@ -132,13 +133,13 @@ public class Task implements Serializable {
     public int hashCode() {
         int result = id;
         result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (taskTypeId != null ? taskTypeId.hashCode() : 0);
+        result = 31 * result + (taskType != null ? taskType.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (deadlineDate != null ? deadlineDate.hashCode() : 0);
         result = 31 * result + (time != null ? time.hashCode() : 0);
-        result = 31 * result + (periodInDaysTypeId != null ? periodInDaysTypeId.hashCode() : 0);
+        result = 31 * result + (periodInDaysType != null ? periodInDaysType.hashCode() : 0);
         result = 31 * result + periodInMinutes;
-        result = 31 * result + responsibleUserId;
+        result = 31 * result + (responsibleUser != null ? responsibleUser.hashCode() : 0);
         result = 31 * result + (isFinished ? 1 : 0);
         result = 31 * result + (isDeleted ? 1 : 0);
         return result;
@@ -149,13 +150,13 @@ public class Task implements Serializable {
         return "Task{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", taskTypeId=" + taskTypeId +
+                ", taskType=" + taskType +
                 ", description='" + description + '\'' +
                 ", deadlineDate=" + deadlineDate +
                 ", time=" + time +
-                ", periodInDaysTypeId=" + periodInDaysTypeId +
+                ", periodInDaysType=" + periodInDaysType +
                 ", periodInMinutes=" + periodInMinutes +
-                ", responsibleUserId=" + responsibleUserId +
+                ", responsibleUser=" + responsibleUser +
                 ", isFinished=" + isFinished +
                 ", isDeleted=" + isDeleted +
                 '}';
