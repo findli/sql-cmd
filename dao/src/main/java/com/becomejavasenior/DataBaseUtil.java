@@ -27,4 +27,8 @@ public class DataBaseUtil {
         }
         return con;
     }
+
+    public static String getQuery(String name) {
+        return name;
+    }
 }
