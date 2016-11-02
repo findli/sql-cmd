@@ -5,22 +5,71 @@ import com.becomejavasenior.bean.Company;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements AbstractDAO<Company> {
 
     public static Logger log = Logger.getLogger(CompanyDaoJdbcImpl.class.getName());
 
-    public void createStatement(PreparedStatement statement, Company entity) {
+    public void createStatement(PreparedStatement statement, Company company {
+
+        try{
+
+            statement.setString(1, company.getTitle());
+            statement.setString(2, company.getPhoneNumber());
+            statement.setString(3, company.getEmail());
+            statement.setString(4, company.getWebsite());
+            statement.setInt(5, company.getAddress().getId());
+            statement.setInt(6, company.getResponsibleUser().getId());
+            statement.setBoolean(7, company.isDeleted());
+
+        } catch (SQLException e) {
+            log.warn("Can't create statement for Company");
+            e.printStackTrace();
+        }
 
     }
 
-    public void updateStatement(PreparedStatement statement, Company entity) {
+    public void updateStatement(PreparedStatement statement, Company company) {
 
+        try{
+
+            statement.setString(1, company.getTitle());
+            statement.setString(2, company.getPhoneNumber());
+            statement.setString(3, company.getEmail());
+            statement.setString(4, company.getWebsite());
+            statement.setInt(5, company.getAddress().getId());
+            statement.setInt(6, company.getResponsibleUser().getId());
+            statement.setBoolean(7, company.isDeleted());
+
+        } catch (SQLException e) {
+            log.warn("Can't update statement for Company");
+            e.printStackTrace();
+        }
     }
 
     public Company getEntity(ResultSet resultSet) {
 
-        return null;
+        Company company = new Company();
+        AddressDaoJdbcImpl address = new AddressDaoJdbcImpl();
+        UserDaoJdbcImpl user = new UserDaoJdbcImpl();
+
+        try{
+
+            company.setId(resultSet.getInt("id"));
+            company.setTitle(resultSet.getString("title"));
+            company.setPhoneNumber(resultSet.getString("phone_number"));
+            company.setEmail(resultSet.getString("email"));
+            company.setWebsite(resultSet.getString("website"));
+            company.setAddress(address.getById(resultSet.getInt("address_id")));
+            company.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
+            company.setDeleted(resultSet.getBoolean("is_deleted"));
+
+        } catch (SQLException e){
+            log.warn("Can't get entity from Company");
+            e.printStackTrace();
+        }
+        return company;
     }
 
     public String getCreateQuery() {

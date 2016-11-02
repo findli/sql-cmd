@@ -1,8 +1,10 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.AbstractDAO;
+import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Address;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,22 +13,59 @@ public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements Abst
 
     public static Logger log = Logger.getLogger(AddressDaoJdbcImpl.class.getName());
 
-    public void createStatement(PreparedStatement preparedStatement, Address entity) {
+    public void createStatement(PreparedStatement statement, Address address) {
 
         try {
 
-        } catch (SQLException e){
+            statement.setString(1, address.getCountry());
+            statement.setString(2, address.getCity());
+            statement.setString(3, address.getStreet());
+            statement.setString(4, address.getBuildNum());
+            statement.setInt(5, address.getZipcode());
+            statement.setString(6, address.getOfficeRoom());
 
+        } catch (SQLException e) {
+            log.warn("Can't create statement for Address");
+            e.printStackTrace();
         }
     }
 
-    public void updateStatement(PreparedStatement preparedStatement, Address entity) {
+    public void updateStatement(PreparedStatement statement, Address address) {
 
+        try {
+
+            statement.setString(1, address.getCountry());
+            statement.setString(2, address.getCity());
+            statement.setString(3, address.getStreet());
+            statement.setString(4, address.getBuildNum());
+            statement.setInt(5, address.getZipcode());
+            statement.setString(6, address.getOfficeRoom());
+
+        } catch (SQLException e) {
+            log.warn("Can't update statement for Address");
+            e.printStackTrace();
+        }
     }
 
     public Address getEntity(ResultSet resultSet) {
 
-        return null;
+        Address address = new Address();
+
+        try {
+            address.setId(resultSet.getInt("id"));
+            address.setCountry(resultSet.getString("country"));
+            address.setCity(resultSet.getString("city"));
+            address.setStreet(resultSet.getString("street"));
+            address.setBuildNum(resultSet.getString("build_number"));
+            address.setZipcode(resultSet.getInt("zipcode"));
+            address.setOfficeRoom(resultSet.getString("office_room"));
+
+        } catch (SQLException e){
+            log.warn("Can't get entity for Address");
+            e.printStackTrace();
+        }
+
+        return address;
     }
 
     public String getCreateQuery() {

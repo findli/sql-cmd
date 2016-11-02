@@ -13,6 +13,7 @@ public class Company implements Serializable {
     private String website;
     private Address address;
     private User responsibleUser;
+    private Boolean isDeleted;
     private List<Tag> tags;
     private List<Note> notes;
     private List<Task> tasks;
@@ -75,6 +76,14 @@ public class Company implements Serializable {
 
     public void setResponsibleUser(User responsibleUser) {
         this.responsibleUser = responsibleUser;
+    }
+
+    public Boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 
     public List<Tag> getTags() {
