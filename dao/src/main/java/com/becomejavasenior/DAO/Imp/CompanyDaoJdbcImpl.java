@@ -25,7 +25,7 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
 
         } catch (SQLException e) {
             log.warn("Can't create statement for Company");
-            e.printStackTrace();
+            throw new DAOException("Can't create statement for Company", e);
         }
 
     }
@@ -44,7 +44,7 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
 
         } catch (SQLException e) {
             log.warn("Can't update statement for Company");
-            e.printStackTrace();
+            throw new DAOException("Can't update statement for Company", e);
         }
     }
 
@@ -67,7 +67,7 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
 
         } catch (SQLException e){
             log.warn("Can't get entity from Company");
-            e.printStackTrace();
+            throw new DAOException("Can't get entity from Company", e);
         }
         return company;
     }

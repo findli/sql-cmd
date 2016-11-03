@@ -26,7 +26,7 @@ public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements Abst
 
         } catch (SQLException e) {
             log.warn("Can't create statement for Address");
-            e.printStackTrace();
+            throw new DAOException("Can't create statement for Address", e);
         }
     }
 
@@ -43,7 +43,7 @@ public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements Abst
 
         } catch (SQLException e) {
             log.warn("Can't update statement for Address");
-            e.printStackTrace();
+            throw new DAOException("Can't update statement for Address", e);
         }
     }
 
@@ -62,7 +62,7 @@ public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements Abst
 
         } catch (SQLException e){
             log.warn("Can't get entity for Address");
-            e.printStackTrace();
+            throw new DAOException("Can't get entity for Address", e);
         }
 
         return address;
