@@ -24,7 +24,7 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
             statement.setBoolean(7, company.isDeleted());
 
         } catch (SQLException e) {
-            log.warn("Can't create statement for Company");
+            log.error("Can't create statement for Company");
             throw new DAOException("Can't create statement for Company", e);
         }
 
@@ -43,7 +43,7 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
             statement.setBoolean(7, company.isDeleted());
 
         } catch (SQLException e) {
-            log.warn("Can't update statement for Company");
+            log.error("Can't update statement for Company");
             throw new DAOException("Can't update statement for Company", e);
         }
     }
@@ -66,7 +66,7 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
             company.setDeleted(resultSet.getBoolean("is_deleted"));
 
         } catch (SQLException e){
-            log.warn("Can't get entity from Company");
+            log.error("Can't get entity from Company");
             throw new DAOException("Can't get entity from Company", e);
         }
         return company;
