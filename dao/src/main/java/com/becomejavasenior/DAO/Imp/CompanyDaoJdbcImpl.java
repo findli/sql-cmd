@@ -1,6 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.AbstractDAO;
+import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.bean.Company;
 
 import java.sql.PreparedStatement;
@@ -24,8 +25,9 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
             statement.setBoolean(7, company.isDeleted());
 
         } catch (SQLException e) {
-            log.error("Can't create statement for Company");
+
             throw new DAOException("Can't create statement for Company", e);
+
         }
 
     }
@@ -43,8 +45,9 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
             statement.setBoolean(7, company.isDeleted());
 
         } catch (SQLException e) {
-            log.error("Can't update statement for Company");
+
             throw new DAOException("Can't update statement for Company", e);
+
         }
     }
 
@@ -66,8 +69,9 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
             company.setDeleted(resultSet.getBoolean("is_deleted"));
 
         } catch (SQLException e){
-            log.error("Can't get entity from Company");
+
             throw new DAOException("Can't get entity from Company", e);
+
         }
         return company;
     }

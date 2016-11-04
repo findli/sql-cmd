@@ -1,6 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.AbstractDAO;
+import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Address;
 
@@ -25,8 +26,9 @@ public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements Abst
             statement.setString(6, address.getOfficeRoom());
 
         } catch (SQLException e) {
-            log.error("Can't create statement for Address");
+
             throw new DAOException("Can't create statement for Address", e);
+
         }
     }
 
@@ -42,8 +44,9 @@ public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements Abst
             statement.setString(6, address.getOfficeRoom());
 
         } catch (SQLException e) {
-            log.error("Can't update statement for Address");
+
             throw new DAOException("Can't update statement for Address", e);
+
         }
     }
 
@@ -52,6 +55,7 @@ public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements Abst
         Address address = new Address();
 
         try {
+
             address.setId(resultSet.getInt("id"));
             address.setCountry(resultSet.getString("country"));
             address.setCity(resultSet.getString("city"));
@@ -61,8 +65,9 @@ public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements Abst
             address.setOfficeRoom(resultSet.getString("office_room"));
 
         } catch (SQLException e){
-            log.error("Can't get entity for Address");
+
             throw new DAOException("Can't get entity for Address", e);
+
         }
 
         return address;
