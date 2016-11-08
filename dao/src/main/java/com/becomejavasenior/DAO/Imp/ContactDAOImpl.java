@@ -22,7 +22,7 @@ public class ContactDAOImpl extends AbstractDAOImpl<Contact> implements ContactD
             preparedStatement.setString(5, contact.getSkype());
             preparedStatement.setInt(6, contact.getCompany().getId());
             preparedStatement.setInt(7, contact.getResponsibleUser().getId());
-            preparedStatement.setDate(8, new Date(contact.getCreated().getTime()) );
+//            preparedStatement.setDate(8, new Date(contact.getCreated().getTime()) );
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -39,8 +39,8 @@ public class ContactDAOImpl extends AbstractDAOImpl<Contact> implements ContactD
             preparedStatement.setString(5, contact.getSkype());
             preparedStatement.setInt(6, contact.getCompany().getId());
             preparedStatement.setInt(7, contact.getResponsibleUser().getId());
-            preparedStatement.setDate(8, new Date(contact.getUpdated().getTime()));
-            preparedStatement.setBoolean(9, contact.isDeleted());
+//            preparedStatement.setDate(8, new Date(contact.getUpdated().getTime()));
+//            preparedStatement.setBoolean(9, contact.isDeleted());
             preparedStatement.setInt(10, contact.getId());
             } catch (SQLException e) {
             e.printStackTrace();
@@ -51,7 +51,7 @@ public class ContactDAOImpl extends AbstractDAOImpl<Contact> implements ContactD
     Contact getEntity(ResultSet resultSet) {
         Contact contact = new Contact();
         Company company;
-        CompanyDao<Company> companyDao = new CompanyDaoImpl();
+//        CompanyDao<Company> companyDao = new CompanyDaoImpl();
         List<String> taskList = new ArrayList<>();
         List<String> eventHistoryList = new ArrayList<>();
         List<String> phoneList = new ArrayList<>();
@@ -64,14 +64,14 @@ public class ContactDAOImpl extends AbstractDAOImpl<Contact> implements ContactD
             contact.setSkype(resultSet.getString("skype"));
             contact.setEmail(resultSet.getString("email"));
             contact.setDeleted(resultSet.getBoolean("deleted"));
-            company = companyDao.getById(resultSet.getInt("company_id"));
-            contact.setCompany(company);
+//            company = companyDao.getById(resultSet.getInt("company_id"));
+//            contact.setCompany(company);
             taskList.add(resultSet.getString("tasks"));
-            contact.setTasks(taskList);
+//            contact.setTasks(taskList);
             phoneList.add(resultSet.getString("phoneNumbers"));
-            contact.setPhoneNumbers(phoneList);
+//            contact.setPhoneNumbers(phoneList);
             eventHistoryList.add(resultSet.getString("events"));
-            contact.setEvents(eventHistoryList);
+//            contact.setEvents(eventHistoryList);
         } catch (SQLException e) {
             e.printStackTrace();
         }

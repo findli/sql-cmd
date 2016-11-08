@@ -7,6 +7,7 @@ import com.becomejavasenior.bean.Company;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements AbstractDAO<Company> {
@@ -95,5 +96,10 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
 
     public String getAllQuery() {
         return "SELECT * FROM company";
+    }
+
+    @Override
+    public List<Company> getByFilter(String query) {
+        return null;
     }
 }

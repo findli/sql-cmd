@@ -88,7 +88,6 @@ public class Address implements Serializable {
         if (street != null ? !street.equals(address.street) : address.street != null) return false;
         if (buildNum != null ? !buildNum.equals(address.buildNum) : address.buildNum != null) return false;
         return officeRoom != null ? officeRoom.equals(address.officeRoom) : address.officeRoom == null;
-
     }
 
     @Override

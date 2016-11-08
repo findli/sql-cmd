@@ -6,6 +6,7 @@ import com.becomejavasenior.bean.Stage;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class StageDAO extends AbstractDAOImpl<Stage> {
 
@@ -27,6 +28,11 @@ public class StageDAO extends AbstractDAOImpl<Stage> {
     @Override
     public String getAllQuery(){
         return "SELECT * FROM stage";
+    }
+
+    @Override
+    public List<Stage> getByFilter(String query) {
+        return null;
     }
 
     @Override

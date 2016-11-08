@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements AbstractDAO<Address>{
@@ -92,5 +93,10 @@ public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements Abst
 
     public String getAllQuery() {
         return "SELECT * FROM address";
+    }
+
+    @Override
+    public List<Address> getByFilter(String query) {
+        return null;
     }
 }
