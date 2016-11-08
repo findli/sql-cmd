@@ -16,3 +16,5 @@ buildNumber.properties
 controller/controller.iml
 dao/dao.iml
 model/model.iml
+crm-pallas.iml
+crm-system.iml
