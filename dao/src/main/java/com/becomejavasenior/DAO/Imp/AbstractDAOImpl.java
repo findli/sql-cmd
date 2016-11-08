@@ -1,6 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.AbstractDAO;
+import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DataBaseUtil;
 
 import java.sql.*;
@@ -29,6 +30,8 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (DAOException e) {
+            e.printStackTrace();
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -44,7 +47,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
         return createEntity;
     }
 
-    abstract void createStatement(PreparedStatement preparedStatement, T entity);
+    abstract void createStatement(PreparedStatement preparedStatement, T entity) throws DAOException;
 
 
     public T update(T entity) {
@@ -59,6 +62,8 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             preparedStatement.executeUpdate();
             updateEntity = entity;
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (DAOException e) {
             e.printStackTrace();
         } finally {
             if (preparedStatement != null) try {
@@ -75,7 +80,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
         return updateEntity;
     }
 
-    abstract void updateStatement(PreparedStatement preparedStatement, T entity);
+    abstract void updateStatement(PreparedStatement preparedStatement, T entity) throws DAOException;
 
 
     public void delete(Integer id) {
@@ -122,6 +127,8 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (DAOException e) {
+            e.printStackTrace();
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -137,7 +144,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
         return entity;
     }
 
-    abstract T getEntity(ResultSet resultSet);
+    abstract T getEntity(ResultSet resultSet) throws DAOException;
 
 
     public List<T> getAll() {
@@ -156,6 +163,8 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (DAOException e) {
             e.printStackTrace();
         } finally {
             if (preparedStatement != null) try {

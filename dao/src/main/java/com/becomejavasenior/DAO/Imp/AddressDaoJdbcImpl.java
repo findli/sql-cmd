@@ -9,12 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements AbstractDAO<Address>{
 
     public static Logger log = Logger.getLogger(AddressDaoJdbcImpl.class.getName());
 
-    public void createStatement(PreparedStatement statement, Address address) {
+    public void createStatement(PreparedStatement statement, Address address) throws DAOException {
 
         try {
 
@@ -32,7 +33,7 @@ public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements Abst
         }
     }
 
-    public void updateStatement(PreparedStatement statement, Address address) {
+    public void updateStatement(PreparedStatement statement, Address address) throws DAOException {
 
         try {
 
@@ -50,7 +51,7 @@ public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements Abst
         }
     }
 
-    public Address getEntity(ResultSet resultSet) {
+    public Address getEntity(ResultSet resultSet) throws DAOException {
 
         Address address = new Address();
 

@@ -7,12 +7,13 @@ import com.becomejavasenior.bean.Company;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements AbstractDAO<Company> {
 
     public static Logger log = Logger.getLogger(CompanyDaoJdbcImpl.class.getName());
 
-    public void createStatement(PreparedStatement statement, Company company {
+    public void createStatement(PreparedStatement statement, Company company) throws DAOException {
 
         try{
 
@@ -32,7 +33,7 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
 
     }
 
-    public void updateStatement(PreparedStatement statement, Company company) {
+    public void updateStatement(PreparedStatement statement, Company company) throws DAOException {
 
         try{
 
@@ -51,11 +52,11 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
         }
     }
 
-    public Company getEntity(ResultSet resultSet) {
+    public Company getEntity(ResultSet resultSet) throws DAOException {
 
         Company company = new Company();
         AddressDaoJdbcImpl address = new AddressDaoJdbcImpl();
-        UserDaoJdbcImpl user = new UserDaoJdbcImpl();
+//        UserDaoJdbcImpl user = new UserDaoJdbcImpl();
 
         try{
 
@@ -65,7 +66,7 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
             company.setEmail(resultSet.getString("email"));
             company.setWebsite(resultSet.getString("website"));
             company.setAddress(address.getById(resultSet.getInt("address_id")));
-            company.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
+//            company.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
             company.setDeleted(resultSet.getBoolean("is_deleted"));
 
         } catch (SQLException e){
