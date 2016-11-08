@@ -6,12 +6,11 @@ import com.becomejavasenior.bean.Adress;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDAO<Adress>{
 
-    public static Logger log = Logger.getLogger(AddressDaoJdbcImpl.class.getName());
-
-    public void createStatement(PreparedStatement statement, Address address) {
+    public void createStatement(PreparedStatement statement, Adress address) {
 
         try {
 
@@ -29,7 +28,7 @@ public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDA
         }
     }
 
-    public void updateStatement(PreparedStatement statement, Address address) {
+    public void updateStatement(PreparedStatement statement, Adress address) {
 
         try {
 
@@ -47,9 +46,9 @@ public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDA
         }
     }
 
-    public Address getEntity(ResultSet resultSet) {
+    public Adress getEntity(ResultSet resultSet) {
 
-        Address address = new Address();
+        Adress address = new Adress();
 
         try {
 
