@@ -11,7 +11,7 @@ import java.util.List;
 public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     @Override
-    public T create(T entity) {
+    public T create(T entity) throws DAOException{
         T createEntity = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -28,9 +28,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
                 createEntity = getById(generatedId);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (DAOException e) {
-            e.printStackTrace();
+            throw new DAOException("Can't create Entity", e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -48,8 +46,8 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     abstract void createStatement(PreparedStatement preparedStatement, T entity) throws DAOException;
 
-
-    public T update(T entity) {
+    @Override
+    public T update(T entity) throws DAOException{
         T updateEntity = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -61,9 +59,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             preparedStatement.executeUpdate();
             updateEntity = entity;
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (DAOException e) {
-            e.printStackTrace();
+            throw new DAOException("Can't update Entity", e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -81,8 +77,8 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     abstract void updateStatement(PreparedStatement preparedStatement, T entity) throws DAOException;
 
-
-    public void delete(Integer id) {
+    @Override
+    public void delete(Integer id) throws DAOException{
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -93,7 +89,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DAOException("Can't delete Entity", e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -109,8 +105,8 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     }
 
-
-    public T getById(Integer id) {
+    @Override
+    public T getById(Integer id) throws DAOException{
         T entity = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -125,9 +121,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
                 entity = getEntity(resultSet);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (DAOException e) {
-            e.printStackTrace();
+            throw new DAOException("Can't get Entity by ID", e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -145,8 +139,8 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     abstract T getEntity(ResultSet resultSet) throws DAOException;
 
-
-    public List<T> getAll() {
+    @Override
+    public List<T> getAll() throws DAOException{
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
@@ -162,9 +156,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (DAOException e) {
-            e.printStackTrace();
+            throw new DAOException("Can't get all Entity", e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
