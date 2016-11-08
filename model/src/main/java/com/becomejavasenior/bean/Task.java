@@ -1,6 +1,7 @@
 package com.becomejavasenior.bean;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Task implements Serializable {
@@ -8,7 +9,7 @@ public class Task implements Serializable {
     private String title;
     private TaskType taskType;
     private String description;
-    private Date deadlineDate;
+    private LocalDateTime deadlineDate;
     private Date time;
     private PeriodInDaysType periodInDaysType;
     private int periodInMinutes;
@@ -51,11 +52,11 @@ public class Task implements Serializable {
         this.description = description;
     }
 
-    public Date getDeadlineDate() {
+    public LocalDateTime getDeadlineDate() {
         return deadlineDate;
     }
 
-    public void setDeadlineDate(Date deadlineDate) {
+    public void setDeadlineDate(LocalDateTime deadlineDate) {
         this.deadlineDate = deadlineDate;
     }
 

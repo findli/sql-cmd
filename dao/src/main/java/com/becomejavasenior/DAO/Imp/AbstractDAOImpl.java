@@ -10,7 +10,7 @@ import java.util.List;
 public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
 
-    @Override
+
     public T create(T entity) {
         T createEntity = null;
         Connection connection = null;
@@ -46,7 +46,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     abstract void createStatement(PreparedStatement preparedStatement, T entity);
 
-    @Override
+
     public T update(T entity) {
         T updateEntity = null;
         Connection connection = null;
@@ -77,7 +77,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     abstract void updateStatement(PreparedStatement preparedStatement, T entity);
 
-    @Override
+
     public void delete(Integer id) {
 
         Connection connection = null;
@@ -105,7 +105,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     }
 
-    @Override
+
     public T getById(Integer id) {
         T entity = null;
         Connection connection = null;
@@ -139,12 +139,12 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     abstract T getEntity(ResultSet resultSet);
 
-    @Override
+
     public List<T> getAll() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
-        List<T> listEntity = new ArrayList<>();
+        List<T> listEntity = new ArrayList<T>();
         try {
             connection = DataBaseUtil.getConnection();
             String query = getAllQuery();
