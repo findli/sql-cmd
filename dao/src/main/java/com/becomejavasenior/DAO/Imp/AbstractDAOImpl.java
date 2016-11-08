@@ -10,8 +10,7 @@ import java.util.List;
 
 public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
-
-
+    @Override
     public T create(T entity) {
         T createEntity = null;
         Connection connection = null;
@@ -192,5 +191,6 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     abstract String getAllQuery();
 
+    public abstract List<T> getByFilter(String query);
 
 }
