@@ -2,18 +2,18 @@ package com.becomejavasenior.bean;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.Objects;
 
 public class Task implements Serializable {
+
     private int id;
     private String title;
-    private TaskType taskType;
+    private int taskTypeId;
     private String description;
-    private LocalDateTime deadlineDate;
-    private Date time;
-    private PeriodInDaysType periodInDaysType;
+    private LocalDateTime deadLine;
+    private int periodInDaysTypeId;
     private int periodInMinutes;
-    private User responsibleUser;
+    private int responsibleUserId;
     private boolean isFinished;
     private boolean isDeleted;
 
@@ -36,12 +36,12 @@ public class Task implements Serializable {
         this.title = title;
     }
 
-    public TaskType getTaskType() {
-        return taskType;
+    public int getTaskTypeId() {
+        return taskTypeId;
     }
 
-    public void setTaskType(TaskType taskType) {
-        this.taskType = taskType;
+    public void setTaskTypeId(int taskTypeId) {
+        this.taskTypeId = taskTypeId;
     }
 
     public String getDescription() {
@@ -52,28 +52,20 @@ public class Task implements Serializable {
         this.description = description;
     }
 
-    public LocalDateTime getDeadlineDate() {
-        return deadlineDate;
+    public LocalDateTime getDeadLine() {
+        return deadLine;
     }
 
-    public void setDeadlineDate(LocalDateTime deadlineDate) {
-        this.deadlineDate = deadlineDate;
+    public void setDeadLine(LocalDateTime deadLine) {
+        this.deadLine = deadLine;
     }
 
-    public Date getTime() {
-        return time;
+    public int getPeriodInDaysTypeId() {
+        return periodInDaysTypeId;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
-    public PeriodInDaysType getPeriodInDaysType() {
-        return periodInDaysType;
-    }
-
-    public void setPeriodInDaysType(PeriodInDaysType periodInDaysType) {
-        this.periodInDaysType = periodInDaysType;
+    public void setPeriodInDaysTypeId(int periodInDaysTypeId) {
+        this.periodInDaysTypeId = periodInDaysTypeId;
     }
 
     public int getPeriodInMinutes() {
@@ -84,12 +76,12 @@ public class Task implements Serializable {
         this.periodInMinutes = periodInMinutes;
     }
 
-    public User getResponsibleUser() {
-        return responsibleUser;
+    public int getResponsibleUserId() {
+        return responsibleUserId;
     }
 
-    public void setResponsibleUser(User responsibleUser) {
-        this.responsibleUser = responsibleUser;
+    public void setResponsibleUserId(int responsibleUserId) {
+        this.responsibleUserId = responsibleUserId;
     }
 
     public boolean isFinished() {
@@ -111,39 +103,23 @@ public class Task implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (!(o instanceof Task)) return false;
         Task task = (Task) o;
-
-        if (id != task.id) return false;
-        if (periodInMinutes != task.periodInMinutes) return false;
-        if (isFinished != task.isFinished) return false;
-        if (isDeleted != task.isDeleted) return false;
-        if (title != null ? !title.equals(task.title) : task.title != null) return false;
-        if (taskType != null ? !taskType.equals(task.taskType) : task.taskType != null) return false;
-        if (description != null ? !description.equals(task.description) : task.description != null) return false;
-        if (deadlineDate != null ? !deadlineDate.equals(task.deadlineDate) : task.deadlineDate != null) return false;
-        if (time != null ? !time.equals(task.time) : task.time != null) return false;
-        if (periodInDaysType != null ? !periodInDaysType.equals(task.periodInDaysType) : task.periodInDaysType != null)
-            return false;
-        return responsibleUser != null ? responsibleUser.equals(task.responsibleUser) : task.responsibleUser == null;
-
+        return id == task.id &&
+                taskTypeId == task.taskTypeId &&
+                periodInDaysTypeId == task.periodInDaysTypeId &&
+                periodInMinutes == task.periodInMinutes &&
+                responsibleUserId == task.responsibleUserId &&
+                isFinished == task.isFinished &&
+                isDeleted == task.isDeleted &&
+                Objects.equals(title, task.title) &&
+                Objects.equals(description, task.description) &&
+                Objects.equals(deadLine, task.deadLine);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (taskType != null ? taskType.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (deadlineDate != null ? deadlineDate.hashCode() : 0);
-        result = 31 * result + (time != null ? time.hashCode() : 0);
-        result = 31 * result + (periodInDaysType != null ? periodInDaysType.hashCode() : 0);
-        result = 31 * result + periodInMinutes;
-        result = 31 * result + (responsibleUser != null ? responsibleUser.hashCode() : 0);
-        result = 31 * result + (isFinished ? 1 : 0);
-        result = 31 * result + (isDeleted ? 1 : 0);
-        return result;
+        return Objects.hash(id, title, taskTypeId, description, deadLine, periodInDaysTypeId, periodInMinutes, responsibleUserId, isFinished, isDeleted);
     }
 
     @Override
@@ -151,15 +127,15 @@ public class Task implements Serializable {
         return "Task{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", taskType=" + taskType +
+                ", taskTypeId=" + taskTypeId +
                 ", description='" + description + '\'' +
-                ", deadlineDate=" + deadlineDate +
-                ", time=" + time +
-                ", periodInDaysType=" + periodInDaysType +
+                ", deadLine=" + deadLine +
+                ", periodInDaysTypeId=" + periodInDaysTypeId +
                 ", periodInMinutes=" + periodInMinutes +
-                ", responsibleUser=" + responsibleUser +
+                ", responsibleUserId=" + responsibleUserId +
                 ", isFinished=" + isFinished +
                 ", isDeleted=" + isDeleted +
                 '}';
     }
+
 }

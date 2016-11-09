@@ -22,13 +22,13 @@ public class User implements Serializable {
     public User() {
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) { this.id = id; }
+
+    public boolean isAdmin() { return isAdmin; }
+
+    public boolean isNotification() { return isNotification; }
 
     public String getfName() {
         return fName;

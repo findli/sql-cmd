@@ -8,6 +8,7 @@ import com.becomejavasenior.bean.TaskType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class TaskTypeDAOImpl extends AbstractDAOImpl<TaskType> implements TaskTypeDAO<TaskType>{
 
@@ -29,6 +30,11 @@ public class TaskTypeDAOImpl extends AbstractDAOImpl<TaskType> implements TaskTy
     @Override
     public String getAllQuery(){
         return "SELECT * FROM task_type";
+    }
+
+    @Override
+    public List<TaskType> getByFilter(String query) {
+        return null;
     }
 
     @Override
