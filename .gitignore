@@ -13,7 +13,7 @@ buildNumber.properties
 .idea/
 .git
 *.iml
-src
-out
+/src
+/out
 
 .DS_Store
