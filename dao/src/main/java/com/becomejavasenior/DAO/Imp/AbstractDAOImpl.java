@@ -10,8 +10,13 @@ import java.util.List;
 public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
 
+<<<<<<< HEAD
 
     public T create(T entity) {
+=======
+    @Override
+    public T create(T entity) throws DAOException{
+>>>>>>> master
         T createEntity = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -28,7 +33,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
                 createEntity = getById(generatedId);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DAOException("Can't create Entity", e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -44,10 +49,15 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
         return createEntity;
     }
 
-    abstract void createStatement(PreparedStatement preparedStatement, T entity);
+    abstract void createStatement(PreparedStatement preparedStatement, T entity) throws DAOException;
 
+<<<<<<< HEAD
 
     public T update(T entity) {
+=======
+    @Override
+    public T update(T entity) throws DAOException{
+>>>>>>> master
         T updateEntity = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -59,7 +69,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             preparedStatement.executeUpdate();
             updateEntity = entity;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DAOException("Can't update Entity", e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -75,10 +85,15 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
         return updateEntity;
     }
 
-    abstract void updateStatement(PreparedStatement preparedStatement, T entity);
+    abstract void updateStatement(PreparedStatement preparedStatement, T entity) throws DAOException;
 
+<<<<<<< HEAD
 
     public void delete(Integer id) {
+=======
+    @Override
+    public void delete(Integer id) throws DAOException{
+>>>>>>> master
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -89,7 +104,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DAOException("Can't delete Entity", e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -105,8 +120,13 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     }
 
+<<<<<<< HEAD
 
     public T getById(Integer id) {
+=======
+    @Override
+    public T getById(Integer id) throws DAOException{
+>>>>>>> master
         T entity = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -121,7 +141,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
                 entity = getEntity(resultSet);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DAOException("Can't get Entity by ID", e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -137,10 +157,15 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
         return entity;
     }
 
-    abstract T getEntity(ResultSet resultSet);
+    abstract T getEntity(ResultSet resultSet) throws DAOException;
 
+<<<<<<< HEAD
 
     public List<T> getAll() {
+=======
+    @Override
+    public List<T> getAll() throws DAOException{
+>>>>>>> master
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
@@ -156,7 +181,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DAOException("Can't get all Entity", e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();

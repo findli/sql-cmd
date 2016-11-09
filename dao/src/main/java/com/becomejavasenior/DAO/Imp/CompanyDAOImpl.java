@@ -1,17 +1,15 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.AbstractDAO;
+import com.becomejavasenior.DAO.CompanyDAO;
 import com.becomejavasenior.bean.Company;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements AbstractDAO<Company> {
+public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyDAO<Company>{
 
-    public static Logger log = Logger.getLogger(CompanyDaoJdbcImpl.class.getName());
-
-    public void createStatement(PreparedStatement statement, Company company {
+    public void createStatement(PreparedStatement statement, Company company) {
 
         try{
 
@@ -19,7 +17,7 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
             statement.setString(2, company.getPhoneNumber());
             statement.setString(3, company.getEmail());
             statement.setString(4, company.getWebsite());
-            statement.setInt(5, company.getAddress().getId());
+            statement.setInt(5, company.getAdress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.isDeleted());
 
@@ -39,7 +37,7 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
             statement.setString(2, company.getPhoneNumber());
             statement.setString(3, company.getEmail());
             statement.setString(4, company.getWebsite());
-            statement.setInt(5, company.getAddress().getId());
+            statement.setInt(5, company.getAdress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.isDeleted());
 
@@ -53,8 +51,8 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
     public Company getEntity(ResultSet resultSet) {
 
         Company company = new Company();
-        AddressDaoJdbcImpl address = new AddressDaoJdbcImpl();
-        UserDaoJdbcImpl user = new UserDaoJdbcImpl();
+        AddressDAOImpl address = new AddressDAOImpl();
+        UserDAOImpl user = new UserDAOImpl();
 
         try{
 
@@ -63,7 +61,7 @@ public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements Abst
             company.setPhoneNumber(resultSet.getString("phone_number"));
             company.setEmail(resultSet.getString("email"));
             company.setWebsite(resultSet.getString("website"));
-            company.setAddress(address.getById(resultSet.getInt("address_id")));
+            company.setAdress(address.getById(resultSet.getInt("address_id")));
             company.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
             company.setDeleted(resultSet.getBoolean("is_deleted"));
 
