@@ -51,9 +51,6 @@
                 <div class="forms--lContact--Filter">
                     <form class="form-horizontal">
                         <h2>Фильтры</h2><br>
-                        <!-- <div id="contacts" class="tab-pane fade">
-                            <form class="form-horizontal"> -->
-                        <!-- <div class="form-group"> -->
                         <div class="radio">
                             <label><input type="radio" name="optradio" value="0" checked> Полный список контактов</label>
                         </div>
@@ -134,53 +131,51 @@
                         <hr>
                         <input class="formAddBut" type="button" value="Применить">
                         <input class="formAddBut" type="button" value="Очистить">
+
+                    </form>
                 </div>
-                </form>
 
-                <form class="form-horizontal">
-
-                    <div class="forms--lContact">
-                        <h2>List contacts</h2>
-                        <div class="col-sm-6">
-                            <input class="actionBut" type="button" value="Contact">
-                            <input class="actionBut" type="button" value="Company">
-                            <input class="actionBut" type="button" value="All">
-                        </div>
-                        <br><br><br>
-                        <input class="formAddBut" type="button" value="Add contact">
-
-                        <br><br><br>
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th>Имя</th>
-                                    <th>Компания</th>
-                                    <th>Телефон</th>
-                                    <th>Email</th>
-                                </tr>
-                                <tr>
-                                    <td>Иван Петров</td>
-                                    <td>БМВ Бавария</td>
-                                    <td>(067) 485-85-03</td>
-                                    <td>ivan@google.com</td>
-                                </tr>
-                                <tr>
-                                    <td>Елена Бабич</td>
-                                    <td>Митсубиси</td>
-                                    <td>(067) 444-67-34</td>
-                                    <td>elena@google.com</td>
-                                </tr>
-                                <tr>
-                                    <td>Дмитрий Агафонов</td>
-                                    <td>Митсубиси Электрик</td>
-                                    <td>(067) 454-77-84</td>
-                                    <td>dmitry@google.com</td>
-                                </tr>
-
-                            </table>
-                        </div>
+                <div class="forms--lContact">
+                    <h2>List contacts</h2>
+                    <div class="col-sm-6">
+                        <input class="actionBut" type="button" value="Contact">
+                        <input class="actionBut" type="button" value="Company">
+                        <input class="actionBut" type="button" value="All">
                     </div>
-                </form>
+                    <br><br><br>
+                    <input class="formAddBut" type="button" value="Add contact">
+
+                    <br><br><br>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Имя</th>
+                                <th>Компания</th>
+                                <th>Телефон</th>
+                                <th>Email</th>
+                            </tr>
+                            <tr>
+                                <td>Иван Петров</td>
+                                <td>БМВ Бавария</td>
+                                <td>(067) 485-85-03</td>
+                                <td>ivan@google.com</td>
+                            </tr>
+                            <tr>
+                                <td>Елена Бабич</td>
+                                <td>Митсубиси</td>
+                                <td>(067) 444-67-34</td>
+                                <td>elena@google.com</td>
+                            </tr>
+                            <tr>
+                                <td>Дмитрий Агафонов</td>
+                                <td>Митсубиси Электрик</td>
+                                <td>(067) 454-77-84</td>
+                                <td>dmitry@google.com</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

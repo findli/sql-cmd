@@ -15,7 +15,7 @@
     <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css" />
 
-    <title>Deal</title>
+    <title>Funnel</title>
 </head>
 <body>
 <header>
@@ -24,7 +24,7 @@
             <p>Logo</p>
         </div>
         <div class="header__title">
-            <h3>Deal</h3>
+            <h3>Sales funnel</h3>
             <div class="header__user">
                 <div class="header__user--photo">
                     <i class="fa fa-user"></i>
@@ -154,28 +154,42 @@
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <tr>
-                                <th>Имя</th>
-                                <th>Компания</th>
-                                <th>Телефон</th>
-                                <th>Email</th>
+                                <th>Первичный контакт</th>
+                                <th>Переговоры</th>
+                                <th>Принимают решение</th>
+                                <th>Согласование договора</th>
                             </tr>
                             <tr>
-                                <td>Иван Петров</td>
-                                <td>БМВ Бавария</td>
-                                <td>(067) 485-85-03</td>
-                                <td>ivan@google.com</td>
+                                <td>Name deal1<br>
+                                    10000$<br>
+                                    Ivanov, Petrov<br>
+                                    MMM
+                                </td>
+                                <td>Name deal2<br>
+                                    15200$<br>
+                                    Zaharov, Petrov<br>
+                                    Bank
+                                </td>
+                                <td></td>
+                                <td>Name deal3<br>
+                                    2520$<br>
+                                    Agapov, Ivanov2<br>
+                                    STO
+                                </td>
                             </tr>
                             <tr>
-                                <td>Елена Бабич</td>
-                                <td>Митсубиси</td>
-                                <td>(067) 444-67-34</td>
-                                <td>elena@google.com</td>
-                            </tr>
-                            <tr>
-                                <td>Дмитрий Агафонов</td>
-                                <td>Митсубиси Электрик</td>
-                                <td>(067) 454-77-84</td>
-                                <td>dmitry@google.com</td>
+                                <td>Name deal3<br>
+                                    2520$<br>
+                                    Agapov, Ivanov2<br>
+                                    STO
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td>Name deal4<br>
+                                    32400$<br>
+                                    Agapov, Ivanov2<br>
+                                    STO2
+                                </td>
                             </tr>
 
                         </table>
