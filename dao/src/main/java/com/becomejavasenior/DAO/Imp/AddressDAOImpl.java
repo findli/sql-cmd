@@ -1,17 +1,17 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.AbstractDAO;
-import com.becomejavasenior.bean.Address;
+import com.becomejavasenior.DAO.AddressDAO;
+import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.bean.Adress;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
-public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements AbstractDAO<Address>{
+public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDAO<Adress>{
 
-    public static Logger log = Logger.getLogger(AddressDaoJdbcImpl.class.getName());
-
-    public void createStatement(PreparedStatement statement, Address address) {
+    public void createStatement(PreparedStatement statement, Adress address) {
 
         try {
 
@@ -29,7 +29,7 @@ public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements Abst
         }
     }
 
-    public void updateStatement(PreparedStatement statement, Address address) {
+    public void updateStatement(PreparedStatement statement, Adress address) {
 
         try {
 
@@ -47,9 +47,9 @@ public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements Abst
         }
     }
 
-    public Address getEntity(ResultSet resultSet) {
+    public Adress getEntity(ResultSet resultSet) {
 
-        Address address = new Address();
+        Adress address = new Adress();
 
         try {
 
@@ -88,5 +88,13 @@ public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements Abst
 
     public String getAllQuery() {
         return "SELECT * FROM address";
+    }
+
+    public Adress getById(Integer id) throws DAOException {
+        return null;
+    }
+
+    public List<Adress> getAll() throws DAOException {
+        return null;
     }
 }
