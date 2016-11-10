@@ -1,4 +1,4 @@
-package com.becomejavasenior.bean;
+package model.src.main.java.com.becomejavasenior.bean;
 
 import java.io.Serializable;
 import java.util.Date;

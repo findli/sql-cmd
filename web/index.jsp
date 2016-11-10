@@ -14,10 +14,10 @@
     <title>Company</title>
 </head>
 <body>
-<jsp:useBean id="user"  scope="session"/>             <%--Add class--%>
+<%--<jsp:useBean id="user"  scope="session"/>    --%>         <%--Add class--%>
 <jsp:useBean id="contact" scope="session"/>
-<jsp:useBean id="deal" scope="session"/>
-<jsp:useBean id="task" scope="session"/>
+<%--<jsp:useBean id="deal" scope="session"/>--%>
+<%--<jsp:useBean id="task" scope="session"/>--%>
 <jsp:useBean id="company" scope="session"/>
 <header>
     <div class="wrapper">
@@ -54,42 +54,41 @@
             <div class="forms">
                 <div class="forms--nCompany">
                     <p>Name Company <input class="text" id='formCompany' type="text" name="formCompany"
-                                           placeholder="Name Company" value="${company.setTitle()}"></p>
-                    <p>Tags <input class="text" id='formTag' type="text" name="formTag" placeholder="Tag" value="${company.setTags()}">>    </p>
+                                           placeholder="Name Company"></p>
+                    <p>Tags <input class="text" id='formTag' type="text" name="formTag" placeholder="Tag">    </p>
                     <a href="">Responsible</a><br>
                     <select>
                         <option>Work telephone</option>
                         <option>Mobile telephone</option>
                         <option>Home telephone</option>
                     </select>
-                    <input class="text" id='formPhone' type="text" name="formPhone" placeholder="Number" value="${company.setPhoneNumber()}">>
-                    <p>Email <input class="text" id='formEmail' type="text" name="formEmail" placeholder="Email"value="${company.setEmail()}">></p>
-                    <p>Web <input class="text" id='formWeb' type="text" name="formWeb" placeholder="Url"value="${company.setWebsite()}">></p>
+                    <input class="text" id='formPhone' type="text" name="formPhone" placeholder="Number">
+                    <p>Email <input class="text" id='formEmail' type="text" name="formEmail" placeholder="Email"></p>
+                    <p>Web <input class="text" id='formWeb' type="text" name="formWeb" placeholder="Url"></p>
                     <p>Address <input class="text" id='formAddress' type="text" name="formAddress"
-                                      placeholder="Address"value="${company.setAdress()}">></p>
+                                      placeholder="Address"></p>
                 </div>
 
                 <div class="forms--users">
-
                     <div class="wrapper__users">
-                        <c:forEach items="contact" var="0">
-                        <div id="fu${contact.getId()}" class="users__panel">
-                            <p>${contact.getName()}</p> <%--Correct--%>
+                        <c:forEach items="${'requestScope.contactList'}" var="contactList">
+                        <div id="fu${contactList.getId()}" class="users__panel">
+                            <p>${contactList.getName()}</p>
                             <a href="#">Edit</a>
                             <a href="#">Undock</a>
-                            <input class="users__panel--input" id='cbfu${contact.getId()}' type="checkbox"> <%--Correct--%>
+                            <input class="users__panel--input" id='cbfu${contactList.getId()}' type="checkbox">
                         </div>
                         <div class="users__panel--body">
-                            <p>Position ${contact.getPosition()}</p> <%--Correct--%>
-                            <p>Email ${contact.getEmail()}</p> <%--Correct--%>
+                            <p>Position ${contactList.getPosition()}</p>
+                            <p>Email ${contactList.getEmail()}</p>
                             <select>
                                 <option>Work telephone</option>
                                 <option>Mobile telephone</option>
                                 <option>Home telephone</option>
                             </select>
-                            <input class="text" id='formPhonefu${contact.getId()}' type="text" name="formPhone"
+                            <input class="text" id='formPhonefu${contactList.getId()}' type="text" name="formPhone"
                                    placeholder="Number">
-                            <p>Skype ${contact.getSkype()}</p> <%--Correct--%>
+                            <p>Skype ${contactList.getSkype()}</p>
                         </div>
                         </c:forEach>
                     </div>
