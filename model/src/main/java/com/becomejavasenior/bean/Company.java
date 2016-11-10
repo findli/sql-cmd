@@ -18,6 +18,7 @@ public class Company implements Serializable {
     private List<Note> notes;
     private List<Task> tasks;
     private List<Contact> contacts;
+    private List<Deal> deals;
 
     public Company() {
     }
@@ -156,5 +157,13 @@ public class Company implements Serializable {
                 ", address=" + address +
                 ", responsibleUser=" + responsibleUser +
                 '}';
+    }
+
+    public List<Deal> getDeals() {
+        return deals;
+    }
+
+    public void setDeals(List<Deal> deals) {
+        this.deals = deals;
     }
 }
