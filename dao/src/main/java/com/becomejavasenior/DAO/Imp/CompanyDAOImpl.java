@@ -1,6 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.CompanyDAO;
+import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.bean.Company;
 
 import java.sql.PreparedStatement;

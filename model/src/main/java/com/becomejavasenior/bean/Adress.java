@@ -2,7 +2,7 @@ package com.becomejavasenior.bean;
 
 import java.io.Serializable;
 
-public class Address implements Serializable {
+public class Adress implements Serializable {
 
     private int id;
     private String country;
@@ -13,7 +13,7 @@ public class Address implements Serializable {
     private String officeRoom;
 
 
-    public Address() {
+    public Adress() {
     }
 
 
@@ -79,15 +79,15 @@ public class Address implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Address address = (Address) o;
+        Adress adress = (Adress) o;
 
-        if (id != address.id) return false;
-        if (zipcode != address.zipcode) return false;
-        if (country != null ? !country.equals(address.country) : address.country != null) return false;
-        if (city != null ? !city.equals(address.city) : address.city != null) return false;
-        if (street != null ? !street.equals(address.street) : address.street != null) return false;
-        if (buildNum != null ? !buildNum.equals(address.buildNum) : address.buildNum != null) return false;
-        return officeRoom != null ? officeRoom.equals(address.officeRoom) : address.officeRoom == null;
+        if (id != adress.id) return false;
+        if (zipcode != adress.zipcode) return false;
+        if (country != null ? !country.equals(adress.country) : adress.country != null) return false;
+        if (city != null ? !city.equals(adress.city) : adress.city != null) return false;
+        if (street != null ? !street.equals(adress.street) : adress.street != null) return false;
+        if (buildNum != null ? !buildNum.equals(adress.buildNum) : adress.buildNum != null) return false;
+        return officeRoom != null ? officeRoom.equals(adress.officeRoom) : adress.officeRoom == null;
 
     }
 
@@ -106,7 +106,7 @@ public class Address implements Serializable {
 
     @Override
     public String toString() {
-        return "Address{" +
+        return "Adress{" +
                 "id=" + id +
                 ", country='" + country + '\'' +
                 ", city='" + city + '\'' +

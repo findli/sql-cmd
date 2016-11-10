@@ -7,7 +7,6 @@ import com.becomejavasenior.bean.Adress;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDAO<Adress>{
 
@@ -88,13 +87,5 @@ public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDA
 
     public String getAllQuery() {
         return "SELECT * FROM address";
-    }
-
-    public Adress getById(Integer id) throws DAOException {
-        return null;
-    }
-
-    public List<Adress> getAll() throws DAOException {
-        return null;
     }
 }

@@ -1,6 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
 
+import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DAO.TaskTypeDAO;
 import com.becomejavasenior.bean.TaskType;
 

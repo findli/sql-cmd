@@ -1,6 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.AbstractDAO;
+import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DataBaseUtil;
 
 import java.sql.*;
@@ -10,13 +11,8 @@ import java.util.List;
 public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
 
-<<<<<<< HEAD
-
-    public T create(T entity) {
-=======
     @Override
     public T create(T entity) throws DAOException{
->>>>>>> master
         T createEntity = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -51,13 +47,8 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     abstract void createStatement(PreparedStatement preparedStatement, T entity) throws DAOException;
 
-<<<<<<< HEAD
-
-    public T update(T entity) {
-=======
     @Override
     public T update(T entity) throws DAOException{
->>>>>>> master
         T updateEntity = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -87,13 +78,8 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     abstract void updateStatement(PreparedStatement preparedStatement, T entity) throws DAOException;
 
-<<<<<<< HEAD
-
-    public void delete(Integer id) {
-=======
     @Override
     public void delete(Integer id) throws DAOException{
->>>>>>> master
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -120,13 +106,8 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     }
 
-<<<<<<< HEAD
-
-    public T getById(Integer id) {
-=======
     @Override
     public T getById(Integer id) throws DAOException{
->>>>>>> master
         T entity = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -159,17 +140,12 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     abstract T getEntity(ResultSet resultSet) throws DAOException;
 
-<<<<<<< HEAD
-
-    public List<T> getAll() {
-=======
     @Override
     public List<T> getAll() throws DAOException{
->>>>>>> master
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
-        List<T> listEntity = new ArrayList<T>();
+        List<T> listEntity = new ArrayList<>();
         try {
             connection = DataBaseUtil.getConnection();
             String query = getAllQuery();
