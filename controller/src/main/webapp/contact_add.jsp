@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="style/reset.css">
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
@@ -54,112 +54,252 @@
 
                 <!--Add contact-->
                 <div class="forms--nCompany">
-                    <h2>Contact</h2>
-                    <p>Name <input class="text" id='formCompany' type="text" name="formCompany"
-                                   placeholder="Name"></p>
-                    <p>Tags <input class="text" id='formTag' type="text" name="formTag" placeholder="Tag"></p>
-                    <a href="">Responsible</a><br>
-                    <select>
-                        <option>Work telephone</option>
-                        <option>Mobile telephone</option>
-                        <option>Home telephone</option>
-                    </select>
-                    <input class="text" id='formPhone' type="text" name="formPhone" placeholder="Number">
-                    <p>Email <input class="text" id='formEmail' type="text" name="formEmail" placeholder="Email"></p>
-                    <p>Skype <input class="text" id='formSkype' type="text" name="formSkype" placeholder="Skype"></p>
-                    <p>Address <input class="text" id='formAddress' type="text" name="formAddress"
-                                      placeholder="Address"></p>
-                    <p>Comment <input id="formContactText" class="formActionText" type="text"></p><br>
-                    <p>Add files <input type="file" name="chooseFile" title="Search for a file to add" data-bfi-disabled></p>
-                    <div class="form-group" align="center">
-                        <input class="formAddBut" type="button" value="Применить">
-                        <input class="formAddBut" type="button" value="Очистить">
-                    </div>
+                    <form class="form-horizontal">
+                        <h2>Contact</h2>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Name </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Tags </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Tag">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <a href="#">Responsible</a><br>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="col-sm-3 form-control">
+                                <option>Work</option>
+                                <option>Mobile</option>
+                                <option>Home</option>
+                            </select>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" name="formPhone" placeholder="Number">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Email </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Skype </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Skype">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Address </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Address">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Comment </label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" placeholder="Message"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Add files </label>
+                            <div class="col-sm-9">
+                                <input type="file" title="Search for a file to add">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <input class="formAddBut" type="button" value="Применить">
+                                <input class="formAddBut" type="button" value="Очистить">
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
                 <!--Add company-->
                 <div class="forms--nCompany">
-                    <h2>Company</h2>
-                    <p>Name <input class="text" type="text" name="formCompany"
-                                   placeholder="Name company"></p>
-                    <p>Tags <input class="text" type="text" name="formTag" placeholder="Tag"></p>
-                    <select>
-                        <option>Work telephone</option>
-                        <option>Mobile telephone</option>
-                        <option>Fax</option>
-                    </select>
-                    <input class="text" type="text" name="formPhone" placeholder="Number">
-                    <p>Email <input class="text" type="text" name="formEmail" placeholder="Email"></p>
-                    <p>Web <input class="text" type="text" name="formWeb" placeholder="Url"></p>
-                    <p>Address <input class="text" type="text" name="formAddress"
-                                      placeholder="Address"></p>
-                    <div class="form-group" align="center">
-                        <input class="formAddBut" type="button" value="Применить">
-                        <input class="formAddBut" type="button" value="Очистить">
-                    </div>
+                    <form class="form-horizontal">
+                        <h2>Company</h2>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Name </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Name company">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Tags </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Tag">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="col-sm-3 form-control">
+                                <option>Work</option>
+                                <option>Mobile</option>
+                                <option>Home</option>
+                            </select>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" name="formPhone" placeholder="Number">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Email </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Web </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Url">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Address </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Address">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <input class="formAddBut" type="button" value="Применить">
+                                <input class="formAddBut" type="button" value="Очистить">
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
                 <!--Add task-->
-                <div class="forms--nCompany">
-                    <h2>Task</h2>
-                    <p>Period
-                        <select>
-                            <option>Today</option>
-                            <option>All day</option>
-                            <option>Tommorow</option>
-                            <option>Next week</option>
-                            <option>Next month</option>
-                            <option>Next year</option>
-                        </select></p>
+                <div class="forms--nContact--Task">
+                    <form class="form-horizontal">
+                        <h2>Task</h2>
 
-                    <p>Date and Time
-                    <div class="form-group">
-                        <div class="input-group date" id="datetimepicker">
-                            <input type="text" class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon-calendar glyphicon"></span>
-                                </span>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Period </label>
+                            <div class="col-sm-9">
+                                <select class="form-control">
+                                    <option>Today</option>
+                                    <option>All day</option>
+                                    <option>Tommorow</option>
+                                    <option>Next week</option>
+                                    <option>Next month</option>
+                                    <option>Next year</option>
+                                </select>
+                            </div>
                         </div>
-                    </div></p>
 
-                    <p>Responsible
-                        <select>
-                            <option>Manager 1</option>
-                            <option>Manager 2</option>
-                            <option>Manager 3</option>
-                            <option>Manager 4</option>
-                            <option>Manager 5</option>
-                            <option>Manager 6</option>
-                        </select></p>
-                    <p>Task type
-                        <select>
-                            <option>Follow-up</option>
-                            <option>Meeting</option>
-                            <option>Order</option>
-                        </select></p>
-                    <p>Comment <input class="formActionText" type="text"></p><br><br>
-                    <div class="form-group" align="center">
-                        <input class="formAddBut" type="button" value="Применить">
-                        <input class="formAddBut" type="button" value="Очистить">
-                    </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Date and time </label>
+                            <div class="col-sm-8">
+                                <div class="input-group date" id="datetimepicker">
+                                    <input type="text" class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon-calendar glyphicon"></span>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Responsible </label>
+                            <div class="col-sm-9">
+                                <select class="form-control">
+                                    <option>Manager 1</option>
+                                    <option>Manager 2</option>
+                                    <option>Manager 3</option>
+                                    <option>Manager 4</option>
+                                    <option>Manager 5</option>
+                                    <option>Manager 6</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Task type </label>
+                            <div class="col-sm-9">
+                                <select class="form-control">
+                                    <option>Follow-up</option>
+                                    <option>Meeting</option>
+                                    <option>Order</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Comment </label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" placeholder="Message"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <input class="formAddBut" type="button" value="Применить">
+                                <input class="formAddBut" type="button" value="Очистить">
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
 
                 <!--Add deal-->
-                <div class="forms--nCompany">
-                    <h2>Deal</h2>
-                    <p>Name <input class="text" id='formDeal' type="text" name="formDeal"
-                                   placeholder="Name deal"></p>
-                    <p>Satus
-                        <select>
-                            <option>Deal off</option>
-                            <option>in progress</option>
-                            <option>pause</option>
-                        </select></p>
-                    <p>Budget <input class="text" id='formBudget' type="text" name="formBudget" placeholder="$"></p>
-                    <div class="form-group" align="center">
-                        <input class="formAddBut" type="button" value="Применить">
-                        <input class="formAddBut" type="button" value="Очистить">
-                    </div>
+                <div class="forms--nContact--Deal">
+                    <form class="form-horizontal">
+                        <h2>Deal</h2>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Name </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Name deal">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Status </label>
+                            <div class="col-sm-9">
+                                <select class="form-control">
+                                    <option>Deal off</option>
+                                    <option>in progress</option>
+                                    <option>pause</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Budget </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="$">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <input class="formAddBut" type="button" value="Применить">
+                                <input class="formAddBut" type="button" value="Очистить">
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
 
