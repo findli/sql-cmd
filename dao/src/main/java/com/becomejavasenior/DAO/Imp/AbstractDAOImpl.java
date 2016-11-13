@@ -1,6 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.AbstractDAO;
+import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DataBaseUtil;
 
 import java.sql.*;
@@ -11,7 +12,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
 
     @Override
-    public T create(T entity) {
+    public T create(T entity) throws DAOException{
         T createEntity = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -28,7 +29,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
                 createEntity = getById(generatedId);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DAOException("Can't create Entity", e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -44,10 +45,10 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
         return createEntity;
     }
 
-    abstract void createStatement(PreparedStatement preparedStatement, T entity);
+    abstract void createStatement(PreparedStatement preparedStatement, T entity) throws DAOException;
 
     @Override
-    public T update(T entity) {
+    public T update(T entity) throws DAOException{
         T updateEntity = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -59,7 +60,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             preparedStatement.executeUpdate();
             updateEntity = entity;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DAOException("Can't update Entity", e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -75,10 +76,10 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
         return updateEntity;
     }
 
-    abstract void updateStatement(PreparedStatement preparedStatement, T entity);
+    abstract void updateStatement(PreparedStatement preparedStatement, T entity) throws DAOException;
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Integer id) throws DAOException{
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -89,7 +90,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DAOException("Can't delete Entity", e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -106,7 +107,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
     }
 
     @Override
-    public T getById(Integer id) {
+    public T getById(Integer id) throws DAOException{
         T entity = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -121,7 +122,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
                 entity = getEntity(resultSet);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DAOException("Can't get Entity by ID", e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -137,10 +138,10 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
         return entity;
     }
 
-    abstract T getEntity(ResultSet resultSet);
+    abstract T getEntity(ResultSet resultSet) throws DAOException;
 
     @Override
-    public List<T> getAll() {
+    public List<T> getAll() throws DAOException{
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
@@ -156,7 +157,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DAOException("Can't get all Entity", e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();

@@ -1,11 +1,9 @@
 package com.becomejavasenior.DAO.Imp;
 
-
-import com.becomejavasenior.bean.Stage;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import com.becomejavasenior.bean.Stage;
 
 public class StageDAO extends AbstractDAOImpl<Stage> {
 
