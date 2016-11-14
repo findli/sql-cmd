@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyDAO<Company>{
 
-    public void createStatement(PreparedStatement statement, Company company) {
+    public void createStatement(PreparedStatement statement, Company company) throws DAOException{
 
         try{
 
@@ -20,7 +20,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             statement.setString(4, company.getWebsite());
             statement.setInt(5, company.getAdress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
-            statement.setBoolean(7, company.isDeleted());
+            statement.setBoolean(7, company.getIsDeleted());
 
         } catch (SQLException e) {
 
@@ -30,7 +30,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
 
     }
 
-    public void updateStatement(PreparedStatement statement, Company company) {
+    public void updateStatement(PreparedStatement statement, Company company) throws DAOException{
 
         try{
 
@@ -40,7 +40,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             statement.setString(4, company.getWebsite());
             statement.setInt(5, company.getAdress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
-            statement.setBoolean(7, company.isDeleted());
+            statement.setBoolean(7, company.getIsDeleted());
 
         } catch (SQLException e) {
 
@@ -49,7 +49,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
         }
     }
 
-    public Company getEntity(ResultSet resultSet) {
+    public Company getEntity(ResultSet resultSet) throws DAOException{
 
         Company company = new Company();
         AddressDAOImpl address = new AddressDAOImpl();
@@ -64,7 +64,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             company.setWebsite(resultSet.getString("website"));
             company.setAdress(address.getById(resultSet.getInt("address_id")));
             company.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
-            company.setDeleted(resultSet.getBoolean("is_deleted"));
+            company.setIsDeleted(resultSet.getBoolean("is_deleted"));
 
         } catch (SQLException e){
 
