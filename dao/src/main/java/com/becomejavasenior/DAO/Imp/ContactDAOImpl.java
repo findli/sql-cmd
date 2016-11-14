@@ -52,9 +52,9 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         Contact contact = new Contact();
         Company company;
 //        CompanyDao<Company> companyDao = new CompanyDaoImpl();
-        List<String> taskList = new ArrayList<>();
-        List<String> eventHistoryList = new ArrayList<>();
-        List<String> phoneList = new ArrayList<>();
+        List<String> taskList = new ArrayList<String>();
+        List<String> eventHistoryList = new ArrayList<String>();
+        List<String> phoneList = new ArrayList<String>();
 
         try {
             contact.setId(resultSet.getInt("contact_id"));
@@ -108,7 +108,7 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
     @Override
     public List<Contact> getByFilter(String query) {
 
-        List<Contact> contactList = new ArrayList<>();
+        List<Contact> contactList = new ArrayList<Contact>();
 
         try {
             Connection connection = DataBaseUtil.getConnection();
