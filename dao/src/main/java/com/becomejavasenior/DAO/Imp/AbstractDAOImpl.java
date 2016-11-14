@@ -1,6 +1,6 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.AbstractDAO;
+import com.becomejavasenior.DAO.AbstractDao;
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DataBaseUtil;
 
@@ -8,8 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
-
+public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 
     @Override
     public T create(T entity) throws DAOException{
@@ -145,7 +144,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
-        List<T> listEntity = new ArrayList<>();
+        List<T> listEntity = new ArrayList<T>();
         try {
             connection = DataBaseUtil.getConnection();
             String query = getAllQuery();
@@ -184,5 +183,6 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     abstract String getAllQuery();
 
+    public abstract List<T> getByFilter(String query);
 
 }

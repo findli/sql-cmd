@@ -5,7 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.becomejavasenior.bean.Stage;
 
-public class StageDAO extends AbstractDAOImpl<Stage> {
+import java.util.List;
+
+
+public class StageDao extends AbstractDaoImpl<Stage> {
 
     @Override
     public String getCreateQuery(){
@@ -25,6 +28,11 @@ public class StageDAO extends AbstractDAOImpl<Stage> {
     @Override
     public String getAllQuery(){
         return "SELECT * FROM stage";
+    }
+
+    @Override
+    public List<Stage> getByFilter(String query) {
+        return null;
     }
 
     @Override

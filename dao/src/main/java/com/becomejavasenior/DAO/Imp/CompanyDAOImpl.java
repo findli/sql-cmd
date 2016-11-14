@@ -1,16 +1,18 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.CompanyDAO;
+import com.becomejavasenior.DAO.CompanyDao;
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.bean.Company;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
-public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyDAO<Company>{
+public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyDao<Company> {
 
-    public void createStatement(PreparedStatement statement, Company company) {
+    @Override
+    public void createStatement(PreparedStatement statement, Company company) throws DAOException{
 
         try{
 
@@ -18,7 +20,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             statement.setString(2, company.getPhoneNumber());
             statement.setString(3, company.getEmail());
             statement.setString(4, company.getWebsite());
-            statement.setInt(5, company.getAdress().getId());
+            statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.isDeleted());
 
@@ -30,7 +32,8 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
 
     }
 
-    public void updateStatement(PreparedStatement statement, Company company) {
+    @Override
+    public void updateStatement(PreparedStatement statement, Company company) throws DAOException{
 
         try{
 
@@ -38,7 +41,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             statement.setString(2, company.getPhoneNumber());
             statement.setString(3, company.getEmail());
             statement.setString(4, company.getWebsite());
-            statement.setInt(5, company.getAdress().getId());
+            statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.isDeleted());
 
@@ -49,11 +52,12 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
         }
     }
 
-    public Company getEntity(ResultSet resultSet) {
+    @Override
+    public Company getEntity(ResultSet resultSet) throws DAOException{
 
         Company company = new Company();
-        AddressDAOImpl address = new AddressDAOImpl();
-        UserDAOImpl user = new UserDAOImpl();
+        AddressDaoImpl address = new AddressDaoImpl();
+        UserDaoImpl user = new UserDaoImpl();
 
         try{
 
@@ -62,7 +66,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             company.setPhoneNumber(resultSet.getString("phone_number"));
             company.setEmail(resultSet.getString("email"));
             company.setWebsite(resultSet.getString("website"));
-            company.setAdress(address.getById(resultSet.getInt("address_id")));
+//            company.setAddress(address.getById(resultSet.getInt("address_id")));
             company.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
             company.setDeleted(resultSet.getBoolean("is_deleted"));
 
@@ -92,5 +96,10 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
 
     public String getAllQuery() {
         return "SELECT * FROM company";
+    }
+
+    @Override
+    public List<Company> getByFilter(String query) {
+        return null;
     }
 }

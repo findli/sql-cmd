@@ -2,14 +2,15 @@ package com.becomejavasenior.DAO.Imp;
 
 
 import com.becomejavasenior.DAO.DAOException;
-import com.becomejavasenior.DAO.TaskTypeDAO;
+import com.becomejavasenior.DAO.TaskTypeDao;
 import com.becomejavasenior.bean.TaskType;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
-public class TaskTypeDAOImpl extends AbstractDAOImpl<TaskType> implements TaskTypeDAO<TaskType>{
+public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTypeDao<TaskType> {
 
     @Override
     public String getCreateQuery(){
@@ -32,6 +33,11 @@ public class TaskTypeDAOImpl extends AbstractDAOImpl<TaskType> implements TaskTy
     }
 
     @Override
+    public List<TaskType> getByFilter(String query) {
+        return null;
+    }
+
+    @Override
     public String getByIdQuery(){
         return "SELECT * FROM task_type WHERE id = ?";
     }
@@ -39,7 +45,7 @@ public class TaskTypeDAOImpl extends AbstractDAOImpl<TaskType> implements TaskTy
     @Override
     public void createStatement(PreparedStatement preparedStatement, TaskType taskType) throws DAOException{
         try {
-            preparedStatement.setString(1, taskType.getTitle());
+            preparedStatement.setString(1, taskType.getType());
         } catch (SQLException e){
             throw new DAOException("Can't create statement for Task", e);
         }
@@ -48,7 +54,7 @@ public class TaskTypeDAOImpl extends AbstractDAOImpl<TaskType> implements TaskTy
     @Override
     public void updateStatement(PreparedStatement preparedStatement, TaskType taskType) throws DAOException{
         try {
-            preparedStatement.setString(1, taskType.getTitle());
+            preparedStatement.setString(1, taskType.getType());
         } catch (SQLException e){
             throw new DAOException("Can't update statement for TaskType", e);
         }
@@ -59,7 +65,7 @@ public class TaskTypeDAOImpl extends AbstractDAOImpl<TaskType> implements TaskTy
         TaskType taskType = new TaskType();
         try {
             taskType.setId(resultSet.getInt("id"));
-            taskType.setTitle(resultSet.getString("title"));
+            taskType.setType(resultSet.getString("title"));
 
         } catch (SQLException e){
             throw new DAOException("Can't get entity from Company", e);
