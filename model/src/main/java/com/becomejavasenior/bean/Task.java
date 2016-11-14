@@ -9,7 +9,6 @@ public class Task implements Serializable {
     private TaskType taskType;
     private String description;
     private Date deadlineDate;
-    private Date time;
     private PeriodInDaysType periodInDaysType;
     private int periodInMinutes;
     private User responsibleUser;
@@ -57,14 +56,6 @@ public class Task implements Serializable {
 
     public void setDeadlineDate(Date deadlineDate) {
         this.deadlineDate = deadlineDate;
-    }
-
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
     }
 
     public PeriodInDaysType getPeriodInDaysType() {
@@ -122,7 +113,6 @@ public class Task implements Serializable {
         if (taskType != null ? !taskType.equals(task.taskType) : task.taskType != null) return false;
         if (description != null ? !description.equals(task.description) : task.description != null) return false;
         if (deadlineDate != null ? !deadlineDate.equals(task.deadlineDate) : task.deadlineDate != null) return false;
-        if (time != null ? !time.equals(task.time) : task.time != null) return false;
         if (periodInDaysType != null ? !periodInDaysType.equals(task.periodInDaysType) : task.periodInDaysType != null)
             return false;
         return responsibleUser != null ? responsibleUser.equals(task.responsibleUser) : task.responsibleUser == null;
@@ -136,7 +126,6 @@ public class Task implements Serializable {
         result = 31 * result + (taskType != null ? taskType.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (deadlineDate != null ? deadlineDate.hashCode() : 0);
-        result = 31 * result + (time != null ? time.hashCode() : 0);
         result = 31 * result + (periodInDaysType != null ? periodInDaysType.hashCode() : 0);
         result = 31 * result + periodInMinutes;
         result = 31 * result + (responsibleUser != null ? responsibleUser.hashCode() : 0);
@@ -153,7 +142,6 @@ public class Task implements Serializable {
                 ", taskType=" + taskType +
                 ", description='" + description + '\'' +
                 ", deadlineDate=" + deadlineDate +
-                ", time=" + time +
                 ", periodInDaysType=" + periodInDaysType +
                 ", periodInMinutes=" + periodInMinutes +
                 ", responsibleUser=" + responsibleUser +

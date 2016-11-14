@@ -1,17 +1,18 @@
 package com.becomejavasenior.DAO.Imp;
 
 
+import com.becomejavasenior.DAO.StageDAO;
 import com.becomejavasenior.bean.Stage;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class StageDAO extends AbstractDAOImpl<Stage> {
+public class StageDAOImpl extends AbstractDAOImpl<Stage> implements StageDAO<Stage> {
 
     @Override
     public String getCreateQuery(){
-     return "INSERT INTO stage (title, color, priority, is_deletable) VALUES(?,?,?,?)";
+        return "INSERT INTO stage (title, color, priority, is_deletable) VALUES(?,?,?,?)";
     }
 
     @Override
@@ -36,14 +37,14 @@ public class StageDAO extends AbstractDAOImpl<Stage> {
 
     @Override
     public void createStatement(PreparedStatement preparedStatement, Stage stage){
-     try {
-         preparedStatement.setString(1, stage.getTitle());
-         preparedStatement.setString(2, stage.getColor());
-         preparedStatement.setInt(3, stage.getPriority());
-         preparedStatement.setBoolean(4, stage.is_deletable());
-     } catch (SQLException e){
-         e.printStackTrace();
-     }
+        try {
+            preparedStatement.setString(1, stage.getTitle());
+            preparedStatement.setString(2, stage.getColor());
+            preparedStatement.setInt(3, stage.getPriority());
+            preparedStatement.setBoolean(4, stage.is_deletable());
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -62,7 +63,7 @@ public class StageDAO extends AbstractDAOImpl<Stage> {
     public Stage getEntity(ResultSet resultSet){
         Stage stage = new Stage();
         try {
-          stage.setId(resultSet.getInt("id"));
+            stage.setId(resultSet.getInt("id"));
             stage.setTitle(resultSet.getString("title"));
             stage.setColor(resultSet.getString("color"));
             stage.setPriority(resultSet.getInt("priority"));
@@ -74,3 +75,4 @@ public class StageDAO extends AbstractDAOImpl<Stage> {
     }
 
 }
+
