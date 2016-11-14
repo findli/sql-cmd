@@ -1,6 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
 
+import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DAO.StageDAO;
 import com.becomejavasenior.bean.Stage;
 
@@ -36,31 +37,31 @@ public class StageDAOImpl extends AbstractDAOImpl<Stage> implements StageDAO<Sta
     }
 
     @Override
-    public void createStatement(PreparedStatement preparedStatement, Stage stage){
+    public void createStatement(PreparedStatement preparedStatement, Stage stage) throws DAOException{
         try {
             preparedStatement.setString(1, stage.getTitle());
             preparedStatement.setString(2, stage.getColor());
             preparedStatement.setInt(3, stage.getPriority());
             preparedStatement.setBoolean(4, stage.is_deletable());
         } catch (SQLException e){
-            e.printStackTrace();
+            throw new DAOException("Can't create statement for Stage", e);
         }
     }
 
     @Override
-    public void updateStatement(PreparedStatement preparedStatement, Stage stage){
+    public void updateStatement(PreparedStatement preparedStatement, Stage stage) throws DAOException{
         try {
             preparedStatement.setString(1, stage.getTitle());
             preparedStatement.setString(2, stage.getColor());
             preparedStatement.setInt(3, stage.getPriority());
             preparedStatement.setBoolean(4, stage.is_deletable());
         } catch (SQLException e){
-            e.printStackTrace();
+            throw new DAOException("Can't update statement for Stage", e);
         }
     }
 
     @Override
-    public Stage getEntity(ResultSet resultSet){
+    public Stage getEntity(ResultSet resultSet) throws DAOException{
         Stage stage = new Stage();
         try {
             stage.setId(resultSet.getInt("id"));
@@ -69,7 +70,7 @@ public class StageDAOImpl extends AbstractDAOImpl<Stage> implements StageDAO<Sta
             stage.setPriority(resultSet.getInt("priority"));
             stage.setDeletable(resultSet.getBoolean("is_deletable"));
         } catch (SQLException e){
-            e.printStackTrace();
+            throw new DAOException("Can't get entity from Stage", e);
         }
         return stage;
     }
