@@ -2,9 +2,9 @@ package com.becomejavasenior.DAO.Imp;
 
 
 import com.becomejavasenior.DAO.DAOException;
-import com.becomejavasenior.DAO.PeriodInDaysTypeDAO;
-import com.becomejavasenior.DAO.TaskDAO;
-import com.becomejavasenior.DAO.TaskTypeDAO;
+import com.becomejavasenior.DAO.PeriodInDaysTypeDao;
+import com.becomejavasenior.DAO.TaskDao;
+import com.becomejavasenior.DAO.TaskTypeDao;
 import com.becomejavasenior.bean.PeriodInDaysType;
 import com.becomejavasenior.bean.Task;
 import com.becomejavasenior.bean.TaskType;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.List;
 
-public class TaskDAOImpl extends AbstractDAOImpl<Task> implements TaskDAO<Task> {
+public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> {
 
     @Override
     public String getCreateQuery() {
@@ -51,17 +51,17 @@ public class TaskDAOImpl extends AbstractDAOImpl<Task> implements TaskDAO<Task> 
     public void createStatement(PreparedStatement preparedStatement, Task task) throws DAOException {
 //        Date sqlDate = new Date(task.getDeadlineDate().getTime());
 
-        Time sqlTime = new Time(task.getTime().getTime());
+//        Time sqlTime = new Time(task.getTime().getTime());
 
         try {
             preparedStatement.setString(1, task.getTitle());
-            preparedStatement.setInt(2, task.getTaskType().getId());
+            preparedStatement.setInt(2, task.getTaskTypeId());
             preparedStatement.setString(3, task.getDescription());
 //            preparedStatement.setDate(4, sqlDate);
-            preparedStatement.setTime(5, sqlTime);
-            preparedStatement.setInt(6, task.getPeriodInDaysType().getId());
+//            preparedStatement.setTime(5, sqlTime);
+            preparedStatement.setInt(6, task.getPeriodInDaysTypeId());
             preparedStatement.setInt(7, task.getPeriodInMinutes());
-            preparedStatement.setInt(8, task.getResponsibleUser().getId());
+            preparedStatement.setInt(8, task.getResponsibleUserId());
             preparedStatement.setBoolean(9, task.isFinished());
             preparedStatement.setBoolean(10, task.isDeleted());
         } catch (SQLException e) {
@@ -72,16 +72,16 @@ public class TaskDAOImpl extends AbstractDAOImpl<Task> implements TaskDAO<Task> 
     @Override
     public void updateStatement(PreparedStatement preparedStatement, Task task) throws DAOException {
 //        Date sqlDate = new Date(task.getDeadlineDate().getTime());
-        Time sqlTime = new Time(task.getTime().getTime());
+//        Time sqlTime = new Time(task.getTime().getTime());
         try {
             preparedStatement.setString(1, task.getTitle());
-            preparedStatement.setInt(2, task.getTaskType().getId());
+            preparedStatement.setInt(2, task.getTaskTypeId());
             preparedStatement.setString(3, task.getDescription());
 //            preparedStatement.setDate(4, sqlDate);
-            preparedStatement.setTime(5, sqlTime);
-            preparedStatement.setInt(6, task.getPeriodInDaysType().getId());
+//            preparedStatement.setTime(5, sqlTime);
+            preparedStatement.setInt(6, task.getPeriodInDaysTypeId());
             preparedStatement.setInt(7, task.getPeriodInMinutes());
-            preparedStatement.setInt(8, task.getResponsibleUser().getId());
+            preparedStatement.setInt(8, task.getResponsibleUserId());
             preparedStatement.setBoolean(9, task.isFinished());
             preparedStatement.setBoolean(10, task.isDeleted());
         } catch (SQLException e) {
@@ -92,17 +92,17 @@ public class TaskDAOImpl extends AbstractDAOImpl<Task> implements TaskDAO<Task> 
     @Override
     public Task getEntity(ResultSet resultSet) throws DAOException {
         Task task = new Task();
-        TaskTypeDAO<TaskType> taskType = new TaskTypeDAOImpl();
-        PeriodInDaysTypeDAO<PeriodInDaysType> periodInDaysType = new PeriodInDaysTypeDAOImpl();
+        TaskTypeDao<TaskType> taskType = new TaskTypeDaoImpl();
+        PeriodInDaysTypeDao<PeriodInDaysType> periodInDaysType = new PeriodInDaysTypeDaoImpl();
 //        UserDAO<User> user = new UserDAOImpl();
         try {
             task.setId(resultSet.getInt("id"));
             task.setTitle(resultSet.getString("title"));
-            task.setTaskType(taskType.getById(resultSet.getInt("task_type_id")));
+//            task.setTaskTypeId(taskType.getById(resultSet.getInt("task_type_id")));
             task.setDescription(resultSet.getString("description"));
 //            task.setDeadlineDate(resultSet.getDate("deadline_date"));
-            task.setTime(resultSet.getTime("time"));
-            task.setPeriodInDaysType(periodInDaysType.getById(resultSet.getInt("period_in_days_type_id")));
+//            task.setTime(resultSet.getTime("time"));
+//            task.setPeriodInDaysTypeId(periodInDaysType.getById(resultSet.getInt("period_in_days_type_id")));
             task.setPeriodInMinutes(resultSet.getInt("period_in_minutes"));
 //            task.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
             task.setFinished(resultSet.getBoolean("is_finished"));

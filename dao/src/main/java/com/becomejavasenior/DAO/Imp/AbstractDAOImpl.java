@@ -1,6 +1,6 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.AbstractDAO;
+import com.becomejavasenior.DAO.AbstractDao;
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DataBaseUtil;
 
@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
+public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 
     @Override
     public T create(T entity) throws DAOException{

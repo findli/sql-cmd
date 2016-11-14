@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class StageDAO extends AbstractDAOImpl<Stage> {
+public class StageDao extends AbstractDaoImpl<Stage> {
 
     @Override
     public String getCreateQuery(){

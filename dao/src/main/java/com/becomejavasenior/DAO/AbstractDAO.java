@@ -2,7 +2,7 @@ package com.becomejavasenior.DAO;
 
 import java.util.List;
 
-public interface AbstractDAO<T> {
+public interface AbstractDao<T> {
 
     T create(T entity) throws DAOException;
 

@@ -1,6 +1,6 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.AbstractDAO;
+import com.becomejavasenior.DAO.AbstractDao;
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.bean.Company;
 
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class CompanyDaoJdbcImpl extends AbstractDAOImpl<Company> implements AbstractDAO<Company> {
+public class CompanyDaoJdbcImpl extends AbstractDaoImpl<Company> implements AbstractDao<Company> {
 
     public static Logger log = Logger.getLogger(CompanyDaoJdbcImpl.class.getName());
 

@@ -1,18 +1,16 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.AbstractDAO;
+import com.becomejavasenior.DAO.AbstractDao;
 import com.becomejavasenior.DAO.DAOException;
-import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Address;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class AddressDaoJdbcImpl extends AbstractDAOImpl<Address> implements AbstractDAO<Address>{
+public class AddressDaoJdbcImpl extends AbstractDaoImpl<Address> implements AbstractDao<Address> {
 
     public static Logger log = Logger.getLogger(AddressDaoJdbcImpl.class.getName());
 

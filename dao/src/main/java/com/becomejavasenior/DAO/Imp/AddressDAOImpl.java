@@ -1,16 +1,18 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.AddressDAO;
+import com.becomejavasenior.DAO.AddressDao;
 import com.becomejavasenior.DAO.DAOException;
-import com.becomejavasenior.bean.Adress;
+import com.becomejavasenior.bean.Address;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
-public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDAO<Adress>{
+public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressDao<Address> {
 
-    public void createStatement(PreparedStatement statement, Adress address) {
+    @Override
+    public void createStatement(PreparedStatement statement, Address address) throws DAOException{
 
         try {
 
@@ -28,7 +30,8 @@ public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDA
         }
     }
 
-    public void updateStatement(PreparedStatement statement, Adress address) {
+    @Override
+    public void updateStatement(PreparedStatement statement, Address address) throws DAOException{
 
         try {
 
@@ -46,9 +49,10 @@ public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDA
         }
     }
 
-    public Adress getEntity(ResultSet resultSet) {
+    @Override
+    public Address getEntity(ResultSet resultSet) throws DAOException{
 
-        Adress address = new Adress();
+        Address address = new Address();
 
         try {
 
@@ -88,4 +92,10 @@ public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDA
     public String getAllQuery() {
         return "SELECT * FROM address";
     }
+
+    @Override
+    public List<Address> getByFilter(String query) {
+        return null;
+    }
+
 }

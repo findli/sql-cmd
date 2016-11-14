@@ -1,10 +1,13 @@
 package com.becomejavasenior.bean;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Task implements Serializable {
+
+    private static final long serialVersionUID = 6293431459384559680L;
 
     private int id;
     private String title;
