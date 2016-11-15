@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDAO<Adress>{
 
-    public void createStatement(PreparedStatement statement, Adress address) {
+    public void createStatement(PreparedStatement statement, Adress address) throws DAOException {
 
         try {
 
@@ -28,7 +28,7 @@ public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDA
         }
     }
 
-    public void updateStatement(PreparedStatement statement, Adress address) {
+    public void updateStatement(PreparedStatement statement, Adress address) throws DAOException{
 
         try {
 
@@ -46,7 +46,7 @@ public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDA
         }
     }
 
-    public Adress getEntity(ResultSet resultSet) {
+    public Adress getEntity(ResultSet resultSet) throws DAOException{
 
         Adress address = new Adress();
 
