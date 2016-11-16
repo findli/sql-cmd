@@ -1,5 +1,6 @@
 package com.becomejavasenior;
 
+import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DAO.Imp.TaskDAOImpl;
 import com.becomejavasenior.DAO.TaskDAO;
 import com.becomejavasenior.bean.*;
@@ -56,19 +57,31 @@ public class ServletCompany extends javax.servlet.http.HttpServlet {
         /*remove task*/
         int idTask = Integer.parseInt(request.getParameter("idTask"));
         if (request.getParameter("formTaskDel") != null) {
-            taskDAO.delete(idTask);
+            try {
+                taskDAO.delete(idTask);
+            } catch (DAOException e) {
+                e.printStackTrace();
+            }
         }
 
          /*remove note*/
         int idNote = Integer.parseInt(request.getParameter("idNote"));
         if (request.getParameter("formNoteDel") != null) {
-            taskDAO.delete(idNote);
+            try {
+                taskDAO.delete(idNote);
+            } catch (DAOException e) {
+                e.printStackTrace();
+            }
         }
 
             /*remove file*/
         int idFile = Integer.parseInt(request.getParameter("idFile"));
         if (request.getParameter("formFileDel") != null) {
-            taskDAO.delete(idFile);
+            try {
+                taskDAO.delete(idFile);
+            } catch (DAOException e) {
+                e.printStackTrace();
+            }
         }
 
 
