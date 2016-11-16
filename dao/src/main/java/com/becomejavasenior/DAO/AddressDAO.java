@@ -1,4 +1,4 @@
 package com.becomejavasenior.DAO;
 
-public interface AddressDAO<Adress> extends AbstractDAO<Adress> {
+public interface AddressDAO<Address> extends AbstractDAO<Address> {
 }
