@@ -1,6 +1,6 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.CompanyDao;
+import com.becomejavasenior.DAO.CompanyDAO;
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.bean.Company;
 
@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyDao<Company> {
+public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyDAO<Company> {
 
     @Override
     public void createStatement(PreparedStatement statement, Company company) throws DAOException{
@@ -56,8 +56,8 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
     public Company getEntity(ResultSet resultSet) throws DAOException{
 
         Company company = new Company();
-        AddressDaoImpl address = new AddressDaoImpl();
-        UserDaoImpl user = new UserDaoImpl();
+        AddressDAOImpl address = new AddressDAOImpl();
+        UserDAOImpl user = new UserDAOImpl();
 
         try{
 

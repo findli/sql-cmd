@@ -1,4 +1,4 @@
 package com.becomejavasenior.DAO;
 
-public interface ContactDao<Contact> extends AbstractDao<Contact> {
+public interface ContactDAO<Contact> extends AbstractDAO<Contact> {
 }

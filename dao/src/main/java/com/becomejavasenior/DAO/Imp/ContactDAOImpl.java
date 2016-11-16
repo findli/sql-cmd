@@ -1,6 +1,6 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.ContactDao;
+import com.becomejavasenior.DAO.ContactDAO;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.Contact;
@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactDao<Contact> {
+public class ContactDAOImpl extends AbstractDAOImpl<Contact> implements ContactDAO<Contact> {
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Contact contact) {
@@ -51,7 +51,7 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
     Contact getEntity(ResultSet resultSet) {
         Contact contact = new Contact();
         Company company;
-//        CompanyDao<Company> companyDao = new CompanyDaoImpl();
+//        CompanyDAO<Company> companyDao = new CompanyDAOImpl();
         List<String> taskList = new ArrayList<String>();
         List<String> eventHistoryList = new ArrayList<String>();
         List<String> phoneList = new ArrayList<String>();

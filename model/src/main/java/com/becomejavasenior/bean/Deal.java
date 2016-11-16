@@ -21,11 +21,6 @@ public class Deal implements Serializable {
 
     }
 
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
-
-
     public int getId() {
         return id;
     }
@@ -78,8 +73,8 @@ public class Deal implements Serializable {
         return isDeleted;
     }
 
-    public void setIsDeleted(boolean deleted) {
-        this.isDeleted = deleted;
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     public List<Task> getDealTask() {

@@ -1,4 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -153,30 +155,26 @@
 
                     <div class="table-responsive">
                         <table class="table table-striped">
+                            <thead>
                             <tr>
-                                <th>Имя</th>
-                                <th>Компания</th>
-                                <th>Телефон</th>
-                                <th>Email</th>
+                                <th>Название сделки</th>
+                                <th>Основной контакт</th>
+                                <th>Компания контакта</th>
+                                <th>Этап сделки</th>
+                                <th>Бюджет</th>
                             </tr>
-                            <tr>
-                                <td>Иван Петров</td>
-                                <td>БМВ Бавария</td>
-                                <td>(067) 485-85-03</td>
-                                <td>ivan@google.com</td>
-                            </tr>
-                            <tr>
-                                <td>Елена Бабич</td>
-                                <td>Митсубиси</td>
-                                <td>(067) 444-67-34</td>
-                                <td>elena@google.com</td>
-                            </tr>
-                            <tr>
-                                <td>Дмитрий Агафонов</td>
-                                <td>Митсубиси Электрик</td>
-                                <td>(067) 454-77-84</td>
-                                <td>dmitry@google.com</td>
-                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="deal" items="${dealList}">
+                                <tr>
+                                    <td><c:out value="${deal.title}"/></td>
+                                    <td><c:out value="${deal.title}"/></td>
+                                    <td><c:out value="${deal.title}"/></td>
+                                    <td><c:out value="${deal.title}"/></td>
+                                    <td><c:out value="${deal.budget}"/></td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
 
                         </table>
                     </div>

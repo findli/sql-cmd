@@ -1,6 +1,6 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.AddressDao;
+import com.becomejavasenior.DAO.AddressDAO;
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.bean.Address;
 
@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressDao<Address> {
+public class AddressDAOImpl extends AbstractDAOImpl<Address> implements AddressDAO<Address> {
 
     @Override
     public void createStatement(PreparedStatement statement, Address address) throws DAOException{

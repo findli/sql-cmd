@@ -2,7 +2,7 @@ package com.becomejavasenior.DAO.Imp;
 
 
 import com.becomejavasenior.DAO.DAOException;
-import com.becomejavasenior.DAO.TaskTypeDao;
+import com.becomejavasenior.DAO.TaskTypeDAO;
 import com.becomejavasenior.bean.TaskType;
 
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTypeDao<TaskType> {
+public class TaskTypeDAOImpl extends AbstractDAOImpl<TaskType> implements TaskTypeDAO<TaskType> {
 
     @Override
     public String getCreateQuery(){

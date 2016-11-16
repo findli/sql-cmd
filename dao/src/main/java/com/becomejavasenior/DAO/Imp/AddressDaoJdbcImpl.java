@@ -1,6 +1,6 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.AbstractDao;
+import com.becomejavasenior.DAO.AbstractDAO;
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.bean.Address;
 
@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class AddressDaoJdbcImpl extends AbstractDaoImpl<Address> implements AbstractDao<Address> {
+public class AddressDAOJdbcImpl extends AbstractDAOImpl<Address> implements AbstractDAO<Address> {
 
-    public static Logger log = Logger.getLogger(AddressDaoJdbcImpl.class.getName());
+    public static Logger log = Logger.getLogger(AddressDAOJdbcImpl.class.getName());
 
     public void createStatement(PreparedStatement statement, Address address) throws DAOException {
 

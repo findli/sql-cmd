@@ -1,5 +1,5 @@
 package com.becomejavasenior.DAO;
 
 
-public interface TaskTypeDao<TaskType> extends AbstractDao<TaskType> {
+public interface TaskTypeDAO<TaskType> extends AbstractDAO<TaskType> {
 }

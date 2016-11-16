@@ -1,14 +1,14 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.DAOException;
-import com.becomejavasenior.DAO.TaskDao;
+import com.becomejavasenior.DAO.TaskDAO;
 import com.becomejavasenior.bean.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 
-public class UserDaoImpl extends AbstractDaoImpl<User> implements TaskDao<User> {
+public class UserDAOImpl extends AbstractDAOImpl<User> implements TaskDAO<User> {
     @Override
     void createStatement(PreparedStatement preparedStatement, User entity) throws DAOException {
 

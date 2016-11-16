@@ -3,12 +3,14 @@ package com.becomejavasenior.DAO.Imp;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.becomejavasenior.DAO.StageDAO;
 import com.becomejavasenior.bean.Stage;
 
 import java.util.List;
 
 
-public class StageDao extends AbstractDaoImpl<Stage> {
+public class StageDAOImpl extends AbstractDAOImpl<Stage> implements StageDAO<Stage> {
 
     @Override
     public String getCreateQuery(){

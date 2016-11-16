@@ -1,8 +1,8 @@
 package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.DAO.DAOException;
-import com.becomejavasenior.DAO.DealDao;
-import com.becomejavasenior.DAO.Imp.DealDaoImpl;
+import com.becomejavasenior.DAO.DealDAO;
+import com.becomejavasenior.DAO.Imp.DealDAOImpl;
 import com.becomejavasenior.bean.Deal;
 import com.becomejavasenior.service.DealService;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DealServiceImpl implements DealService {
 
-    private DealDao dealDao = new DealDaoImpl();
+    private DealDAO dealDao = new DealDAOImpl();
     private Deal deal = new Deal();
 
 
@@ -31,7 +31,7 @@ public class DealServiceImpl implements DealService {
         dealDao.delete(id);
     }
 
-    public List<Deal> getAll() {
-        return null;
+    public List<Deal> getAll() throws DAOException {
+        return dealDao.getAll();
     }
 }
