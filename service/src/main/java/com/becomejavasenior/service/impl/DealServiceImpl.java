@@ -11,7 +11,7 @@ import java.util.List;
 public class DealServiceImpl implements DealService {
 
     private DealDAO dealDao = new DealDAOImpl();
-    private Deal deal = new Deal();
+//    private Deal deal = new Deal();
 
 
     public Deal create (Deal deal) throws DAOException {

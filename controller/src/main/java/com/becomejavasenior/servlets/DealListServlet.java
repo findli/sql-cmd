@@ -33,4 +33,9 @@ public class DealListServlet extends HttpServlet {
         response.sendRedirect("/pages/deal.jsp");
 
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
+    }
 }

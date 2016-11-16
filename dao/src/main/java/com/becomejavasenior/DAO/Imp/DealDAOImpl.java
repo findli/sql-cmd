@@ -121,12 +121,22 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
         List<Deal> deals = new ArrayList<>();
         Deal deal;
         User responsibleUser;
-        User creator;
         Company company;
-
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        /*
+        Connection connection = DataBaseUtil.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+         */
+        /*
+        Connection connection = PostgresDAOFactory.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(SELECT_ALL_SQL)) {
+             ResultSet resultSet = statement.executeQuery(SELECT_ALL_SQL))
+
+         */
+
+        try (Connection connection = DataBaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_SQL);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
 
@@ -142,7 +152,7 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
                 deal.setCompany(company);
                 deal.setTitle(resultSet.getString("title"));
                 deal.setBudget(resultSet.getInt("budget"));
-                deal.setDeleted(false);
+                deal.setDeleted(resultSet.getBoolean("is_budget"));
                 stage.setId(resultSet.getInt("stage_id"));
                 deal.setStage(stage);
                 deals.add(deal);
