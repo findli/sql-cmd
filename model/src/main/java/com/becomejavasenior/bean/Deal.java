@@ -21,6 +21,11 @@ public class Deal implements Serializable {
 
     }
 
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+
     public int getId() {
         return id;
     }
