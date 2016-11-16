@@ -16,8 +16,8 @@
 <body>
 <%--<jsp:useBean id="user"  scope="session"/>    --%>         <%--Add class--%>
 <jsp:useBean id="contact" scope="session"/>
-<%--<jsp:useBean id="deal" scope="session"/>--%>
-<%--<jsp:useBean id="task" scope="session"/>--%>
+<jsp:useBean id="deal" scope="session"/>
+<jsp:useBean id="task" scope="session"/>
 <jsp:useBean id="company" scope="session"/>
 <header>
     <div class="wrapper">
@@ -107,11 +107,11 @@
                         </header>
                         <p style="display: inline">Name <input style="float: none; width: 148px" type="text"
                                                                class="modalInput"
-                                                               id="modalContactName" value="${contact.setfName()}"></p>
+                                                               id="modalContactName"></p>
                         <p style="display: inline;">Surname <input style="float: none; width: 147px" type="text"
                                                                    class="modalInput"
-                                                                   id="modalContactSurname" value="${contact.setlName()}"></p>
-                        <p>Position <input type="text" class="modalInput" id="modalContactPosition" value="${contact.setPosition()}"></p>
+                                                                   id="modalContactSurname"></p>
+                        <p>Position <input type="text" class="modalInput" id="modalContactPosition"></p>
                         <p>Phone <i class="fa fa-plus-square"></i>
                             <select>
                                 <option>Working</option>
@@ -124,9 +124,9 @@
                             <input class="modalInput" id='modalContactPhone' name="formPhone"
                                    placeholder="+38(067)123-45-67">
                         </p>
-                        <p>Email <input type="text" class="modalInput" id="modalContactEmail" value="${contact.setEmail()}"></p>
-                        <p>Skype <input type="text" class="modalInput" id="modalContactSkype" value="${contact.setSkype()}"></p>
-                        <input class="modalBut" type="button" value="Save contact">
+                        <p>Email <input type="text" class="modalInput" id="modalContactEmail"></p>
+                        <p>Skype <input type="text" class="modalInput" id="modalContactSkype"></p>
+                        <input class="modalBut" name="modalButContact" type="button" value="Save contact">
                         <input class="modalBut cancel" onclick="location.href='#close'" type="button"
                                value="Cancel">
                     </div>
@@ -164,7 +164,7 @@
                                 </div>
                             </header>
                             <table border="1">
-                                <caption>Current deals with ServletCompany:</caption>
+                                <caption>Current deals with main.java.com.becomejavasenior.ServletCompany:</caption>
                                 <tr>
                                     <th>deal(s)</th>
                                     <th style="width: 60px">6500</th>
@@ -178,7 +178,7 @@
                                 </tr>
                                 </c:forEach>
                             </table>
-                            <span><input class="checkboxDeal" type="checkbox" value="${deal.setTitle()}">Add more deals</span>
+                            <span><input class="checkboxDeal" type="checkbox">Add more deals</span>
                             <p>Title: <input type="text" class="modalInput" id="modalDealTitle" disabled></p>
                             <p>Stage:
                                 <select disabled>
@@ -191,8 +191,8 @@
                                     <option>Closed or sold</option>
                                 </select>
                             </p>
-                            <p>Budget: <input type="text" class="modalInput" id="modalDealBudget" disabled value="${deal.setBudget()}"></p>
-                            <input class="modalBut" type="button" value="Save contact">
+                            <p>Budget: <input type="text" class="modalInput" id="modalDealBudget" disabled></p>
+                            <input class="modalBut" type="button" name="modalButDeal" value="Save contact">
                             <input class="modalBut cancel" onclick="location.href='#close'" type="button"
                                    value="Cancel">
                         </div>
@@ -205,7 +205,7 @@
                     <h3>Tasks and Notes</h3>
 
                     <section id="cd-timeline">
-                        <c:forEach items="${Ddal.getTask}" var="task">
+                        <c:forEach items="${deal.getTask}" var="task">
                             <div class="cd-timeline-block">
                                 <div class="cd-timeline-content">
                                     <div id="task" class="action__task action--task">
@@ -215,7 +215,7 @@
                                         <p>Type of task ${task.getTaskType()}</p>
                                         <textarea rows="3" cols="21" id="formTaskText${task.getId()}" class="formActionText"
                                                   name="text"></textarea>
-                                        <input id="formTaskDel" class="actionBut" type="button" value="Delete">
+                                        <input id="formTaskDel?idTask=${task.getId()}" class="actionBut" type="button" value="Delete">
                                         <input id="formTaskEdit" class="actionBut" type="button" value="Edit">
                                         <input id="formTaskDone" class="actionBut" type="button" value="Done">
                                     </div>
@@ -237,7 +237,7 @@
                                         <p>User name: ${note.getCreatetByUserId()}</p>
                                         <textarea rows="3" cols="21" id="formNoteText" class="formActionText"
                                                   name="text"></textarea>
-                                        <input id="formNoteDel" class="actionBut" type="button" value="Delete">
+                                        <input id="formNoteDel?idDeal=${deal.getId()}" class="actionBut" type="button" value="Delete">
                                         <input id="formNoteEdit" class="actionBut" type="button" value="Edit">
                                     </div>
                                     <span class="cd-date">Jan 20</span>
@@ -256,7 +256,7 @@
                                     <h4>Action</h4>
                                     <p>Activiity;</p>
                                     <p>User name:</p>
-                                    <p>Name ServletCompany:</p>
+                                    <p>Name main.java.com.becomejavasenior.ServletCompany:</p>
                                     <p>Name entity:</p>
                                 </div>
                                 <span class="cd-date">Jan 20</span>
@@ -274,7 +274,7 @@
                                         <p>Created: ${file.getFileName()}</p>
                                         <p>User name: </p>
                                         <a>${file.getFileName()}</a>
-                                        <input id="formFileDel" class="actionBut" type="button" value="Delete">
+                                        <input id="formFileDel?idFile=${file.getId()}" class="actionBut" type="button" value="Delete">
                                     </div>
                                     <span class="cd-date">Jan 20</span>
                                 </div> <!-- cd-timeline-content -->
@@ -317,7 +317,7 @@
                             <div class="myCalendar" id="myCalendar-1"></div>
 
                             <div class="container">
-                                <input class="clockpicker" value="Choose time" data-default="20:48" value="${task.setTime()}">
+                                <input class="clockpicker" value="Choose time" id="timeChoose" data-default="20:48">
                             </div>
                             <p>Type:
                                 <select>
@@ -327,9 +327,9 @@
                                     <option>other</option>
                                 </select>
                             </p>
-                            <p>Description:<textarea class="modalTextArea" rows="5" cols="42" name="text" value="${task.setDescription()}"></textarea>
+                            <p>Description:<textarea class="modalTextArea" id="modalTaskDesc" rows="5" cols="42" name="text"></textarea>
                             </p>
-                            <input class="modalBut" type="button" value="Save contact">
+                            <input class="modalBut" type="button" name="modalButTask" value="Save contact">
                             <input class="modalBut cancel" onclick="location.href='#close'" type="button"
                                    value="Cancel">
                         </div>

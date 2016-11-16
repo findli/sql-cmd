@@ -1,4 +1,4 @@
-package model.src.main.java.com.becomejavasenior.bean;
+package com.becomejavasenior.bean;
 
 import java.io.Serializable;
 import java.util.List;
@@ -158,4 +158,5 @@ public class Company implements Serializable {
                 ", responsibleUser=" + responsibleUser +
                 '}';
     }
+
 }

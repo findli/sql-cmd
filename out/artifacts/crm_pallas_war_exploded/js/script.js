@@ -63,7 +63,7 @@ $('.clockpicker').clockpicker({
     donetext: 'Done'
 });
 
-console.log($('.action__task note').closest('.cd-timeline-block'));
+/*console.log($('.action__task note').closest('.cd-timeline-block'));*/
 
 
 /*reset forms*/

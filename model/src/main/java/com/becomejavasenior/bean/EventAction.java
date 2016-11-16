@@ -1,4 +1,4 @@
-package model.src.main.java.com.becomejavasenior.bean;
+package com.becomejavasenior.bean;
 
 
 public enum  EventAction {
