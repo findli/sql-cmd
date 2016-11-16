@@ -3,7 +3,6 @@ package com.becomejavasenior.factory;
 import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DAO.Imp.*;
 import com.becomejavasenior.DataBaseUtil;
-//import org.postgresql.jdbc2.optional.ConnectionPool;
 
 import java.sql.Connection;
 import java.sql.SQLException;
