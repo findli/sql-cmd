@@ -60,7 +60,7 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements TaskDAO<User> 
     }
 
     @Override
-    public List<User> getAll() throws DAOException {
+    public List<User> getAll() throws DAOException, ClassNotFoundException {
         return super.getAll();
     }
 

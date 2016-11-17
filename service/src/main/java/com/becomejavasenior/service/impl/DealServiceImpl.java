@@ -4,6 +4,7 @@ import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DAO.DealDAO;
 import com.becomejavasenior.DAO.Imp.DealDAOImpl;
 import com.becomejavasenior.bean.Deal;
+import com.becomejavasenior.bean.Stage;
 import com.becomejavasenior.service.DealService;
 
 import java.util.List;
@@ -11,7 +12,6 @@ import java.util.List;
 public class DealServiceImpl implements DealService {
 
     private DealDAO dealDao = new DealDAOImpl();
-//    private Deal deal = new Deal();
 
 
     public Deal create (Deal deal) throws DAOException {
@@ -31,7 +31,17 @@ public class DealServiceImpl implements DealService {
         dealDao.delete(id);
     }
 
-    public List<Deal> getAll() throws DAOException {
+    public List<Deal> getAll() throws DAOException, ClassNotFoundException {
         return dealDao.getAll();
+    }
+
+    @Override
+    public List<Stage> getAllStage() {
+        return dealDao.getAllStage();
+    }
+
+    @Override
+    public List<Deal> getDealsForList() {
+        return dealDao.getDealsForList();
     }
 }

@@ -16,9 +16,18 @@ public class Deal implements Serializable {
     private List<Tag> dealTag;
     private List<Contact> dealContact;
     private List<Note> dealNote;
+    private Contact primaryContact;
 
     public Deal(){
 
+    }
+
+    public Contact getPrimaryContact() {
+        return primaryContact;
+    }
+
+    public void setPrimaryContact(Contact primaryContact) {
+        this.primaryContact = primaryContact;
     }
 
     public int getId() {
@@ -150,6 +159,5 @@ public class Deal implements Serializable {
                 ", isDeleted=" + isDeleted +
                 '}';
     }
-
 }
 

@@ -1,12 +1,14 @@
 package com.becomejavasenior.DAO.Imp;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
+import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DAO.StageDAO;
 import com.becomejavasenior.bean.Stage;
+import com.becomejavasenior.exceptions.DatabaseException;
+import com.becomejavasenior.factory.PostgresDAOFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,22 +16,22 @@ public class StageDAOImpl extends AbstractDAOImpl<Stage> implements StageDAO<Sta
 
     @Override
     public String getCreateQuery(){
-     return "INSERT INTO stage (title, color, priority, is_deletable) VALUES(?,?,?,?)";
+     return "INSERT INTO crm_pallas.stage (title, color, priority, is_deletable) VALUES(?,?,?,?)";
     }
 
     @Override
     public String getUpdateQuery(){
-        return "UPDATE stage SET title = ?, color = ?, priority = ?, is_deletable = ?";
+        return "UPDATE crm_pallas.stage SET title = ?, color = ?, priority = ?, is_deletable = ?";
     }
 
     @Override
     public String getDeleteQuery(){
-        return "DELETE FROM stage WHERE id = ?";
+        return "DELETE FROM crm_pallas.stage WHERE id = ?";
     }
 
     @Override
     public String getAllQuery(){
-        return "SELECT * FROM stage";
+        return "SELECT * FROM crm_pallas.stage";
     }
 
     @Override
@@ -39,7 +41,7 @@ public class StageDAOImpl extends AbstractDAOImpl<Stage> implements StageDAO<Sta
 
     @Override
     public String getByIdQuery(){
-        return "SELECT * FROM stage WHERE id = ?";
+        return "SELECT * FROM crm_pallas.stage WHERE id = ?";
     }
 
     @Override
@@ -81,4 +83,36 @@ public class StageDAOImpl extends AbstractDAOImpl<Stage> implements StageDAO<Sta
         return stage;
     }
 
+    @Override
+    public Stage getById(Integer id) throws DAOException {
+        try (Connection connection = PostgresDAOFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(getByIdQuery() + " AND id = ?")) {
+
+            statement.setInt(1, id);
+
+            List<Stage> stageList = parseResultSet(statement.executeQuery());
+            return stageList == null || stageList.isEmpty() ? null : stageList.get(0);
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex);
+        }
+    }
+
+    private List<Stage> parseResultSet(ResultSet resultSet) throws SQLException {
+
+        List<Stage> stageList = new ArrayList<>();
+        try {
+            while (resultSet.next()) {
+                Stage stage = new Stage();
+                stage.setId(resultSet.getInt("id"));
+                stage.setTitle(resultSet.getString("title"));
+                stage.setColor(resultSet.getString("color"));
+                stage.setPriority(resultSet.getByte("priority"));
+                stage.setDeletable(false);
+                stageList.add(stage);
+            }
+        } catch (Exception e) {
+            throw new DatabaseException(e);
+        }
+        return stageList;
+    }
 }

@@ -140,7 +140,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
     abstract T getEntity(ResultSet resultSet) throws DAOException;
 
     @Override
-    public List<T> getAll() throws DAOException{
+    public List<T> getAll() throws DAOException, ClassNotFoundException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;

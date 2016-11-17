@@ -40,7 +40,7 @@
         <div id="navbar">
             <ul>
                 <li><a href="#" target="_self">Home</a></li>
-                <li><a href="#" target="_self">Deals</a></li>
+                <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="#" target="_self">Company</a></li>
                 <li><a href="#" target="_self">Contacts</a></li>
                 <li><a href="#" target="_self">Tasks</a></li>
@@ -103,8 +103,8 @@
 
                         <div class="form-group">
                             <div class="col-sm-10">
-                                <input class="formAddBut" type="button" value="Применить">
-                                <input class="formAddBut" type="button" value="Очистить">
+                                <a href="/deal" class="btn btn-primary">Применить</a>
+                                <a href="#" class="btn btn-primary">Очистить</a>
                             </div>
                         </div>
                     </form>

@@ -42,7 +42,7 @@
         <div id="navbar">
             <ul>
                 <li><a href="#" target="_self">Home</a></li>
-                <li><a href="#" target="_self">Deals</a></li>
+                <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="#" target="_self">Company</a></li>
                 <li><a href="#" target="_self">Contacts</a></li>
                 <li><a href="#" target="_self">Tasks</a></li>
@@ -145,11 +145,14 @@
                 <div class="forms--lDeal">
 
                     <div class="col-md-12">
-                        <input class="actionBut" type="button" value="Deals">
-                        <input class="actionBut" type="button" value="Sales funnel">
+                        <%--<input class="actionBut" type="button" value="Deals">--%>
+                        <%--<input class="actionBut" type="button" value="Sales funnel">--%>
+                            <a href="#" class="btn btn-primary">Funnel</a>
+                            <a href="#" class="btn btn-primary">List</a>
+                            <a href="/dealCreate" class="btn btn-primary pull-center">Add deal</a>
                     </div>
 
-                    <input class="formAddBut" type="button" value="Add deal" align="right">
+                    <%--<input class="formAddBut" type="button" value="Add deal" align="right">--%>
 
                     <br><br><br><br>
 
@@ -168,9 +171,9 @@
                             <c:forEach var="deal" items="${dealList}">
                                 <tr>
                                     <td><c:out value="${deal.title}"/></td>
-                                    <td><c:out value="${deal.title}"/></td>
-                                    <td><c:out value="${deal.title}"/></td>
-                                    <td><c:out value="${deal.title}"/></td>
+                                    <td><c:out value="${deal.getPrimaryContact().getlName()}"/></td>
+                                    <td><c:out value="${deal.getPrimaryContact().getCompany().getTitle()}"/></td>
+                                    <td><c:out value="${deal.getStage().getTitle()}"/></td>
                                     <td><c:out value="${deal.budget}"/></td>
                                 </tr>
                             </c:forEach>
