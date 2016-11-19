@@ -22,6 +22,10 @@ public class Contact implements Serializable {
     public Contact() {
     }
 
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
     public int getId() {
         return id;
     }
@@ -151,11 +155,11 @@ public class Contact implements Serializable {
                 "id=" + id +
                 ", name='" + fName + '\'' +
                 ", Surname='" + lName + '\'' +
-                ", responsibleUser=" + responsibleUser.getfName() + " " + responsibleUser.getlName() + '\'' +
+//                ", responsibleUser=" + responsibleUser.getfName() + " " + responsibleUser.getlName() + '\'' +
                 ", position='" + position + '\'' +
                 ", skype='" + skype + '\'' +
                 ", email='" + email + '\'' +
-                ", company=" + company.getTitle() +
+//                ", company=" + company.getTitle() +
                 '}';
     }
 }

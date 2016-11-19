@@ -29,13 +29,14 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
     @Override
     void createStatement(PreparedStatement preparedStatement, Deal deal) throws DAOException {
         try {
-
-            preparedStatement.setInt(1, deal.getCompany().getId());
-            preparedStatement.setInt(2, deal.getStage().getId());
-            preparedStatement.setInt(3, deal.getResponsibleUser().getId());
-            preparedStatement.setString(4, deal.getTitle());
-            preparedStatement.setInt(5, deal.getBudget());
+            preparedStatement.setString(1, deal.getTitle());
+            preparedStatement.setInt(2, deal.getCompany().getId());
+            preparedStatement.setInt(3, deal.getBudget());
+            preparedStatement.setInt(4, deal.getStage().getId());
+            preparedStatement.setInt(5, deal.getResponsibleUser().getId());
             preparedStatement.setBoolean(6, deal.isDeleted());
+            preparedStatement.setInt(7, deal.getPrimaryContact().getId());
+            preparedStatement.setTimestamp(8, new Timestamp(deal.getCreateDate().getTime()));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -46,13 +47,14 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
     @Override
     void updateStatement(PreparedStatement preparedStatement, Deal deal) throws DAOException {
         try {
-
-            preparedStatement.setInt(1, deal.getCompany().getId());
-            preparedStatement.setInt(2, deal.getStage().getId());
-            preparedStatement.setInt(3, deal.getResponsibleUser().getId());
-            preparedStatement.setString(4, deal.getTitle());
-            preparedStatement.setInt(5, deal.getBudget());
+            preparedStatement.setString(1, deal.getTitle());
+            preparedStatement.setInt(2, deal.getCompany().getId());
+            preparedStatement.setInt(3, deal.getBudget());
+            preparedStatement.setInt(4, deal.getStage().getId());
+            preparedStatement.setInt(5, deal.getResponsibleUser().getId());
             preparedStatement.setBoolean(6, deal.isDeleted());
+            preparedStatement.setInt(7, deal.getPrimaryContact().getId());
+            preparedStatement.setTimestamp(8, new Timestamp(deal.getCreateDate().getTime()));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -82,7 +84,7 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
 
     @Override
     String getAllQuery() {
-        return DataBaseUtil.getQuery("SELECT * FROM crm_pallas.deal");
+        return DataBaseUtil.getQuery("SELECT * FROM crm_pallas.deal WHERE is_deleted = FALSE");
     }
 
     @Override
@@ -92,7 +94,7 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
 
     @Override
     String getCreateQuery() {
-        return DataBaseUtil.getQuery("INSERT INTO crm_pallas.deal (company_id, stage_id, responsible_user_id, title, budget, is_deleted) values (?,?,?,?,?,?)");
+        return DataBaseUtil.getQuery("INSERT INTO crm_pallas.deal (title, company_id, budget, stage_id, responsible_user_id,  is_deleted, primary_contact_id, date_create) values (?,?,?,?,?,?,?,?)");
     }
 
     @Override
@@ -158,6 +160,7 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
                 deal.setStage(stage);
                 contact.setId(resultSet.getInt("primary_contact_id"));
                 deal.setPrimaryContact(contact);
+                deal.setCreateDate(resultSet.getDate("date_create"));
 
                 deals.add(deal);
             }
@@ -201,10 +204,13 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
                 deals.add(deal);
             }
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
 
         return deals;
+    }
+
+    public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
+        return new java.sql.Date(date.getTime());
     }
 }

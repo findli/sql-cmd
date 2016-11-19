@@ -151,7 +151,7 @@
 
                     <br><br><br><br>
 
-                    <div class="table-responsive">
+                    <div class="wrapper__deals">
                         <table class="table table-striped">
                             <thead>
                             <tr>

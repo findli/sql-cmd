@@ -14,8 +14,4 @@ public class DealFunnelServlet extends HttpServlet {
         response.sendRedirect("/pages/funnel.jsp");
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doPost(request, response);
-    }
 }

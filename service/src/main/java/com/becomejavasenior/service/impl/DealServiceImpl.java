@@ -11,16 +11,13 @@ import java.util.Date;
 import java.util.List;
 
 public class DealServiceImpl implements DealService {
-    private final CompanyDAO companyDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getCompanyDAO();
-    private final UserDAO userDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getUserDAO();
-    private final ContactDAO contactDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getContactDAO();
-    private final TaskDAO taskDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getTaskDAO();
-    private final DealDAO dealDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getDealDAO();
-//    private final NoteDAO noteDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getNoteDAO();
-//    private final TagDAO tagDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getTagDAO();
-//    private final FileDAO fileDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getFileDAO();
+    private final CompanyDAO companyDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getCompanyDAO();
+    private final UserDAO userDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getUserDAO();
+    private final ContactDAO contactDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getContactDAO();
+    private final TaskDAO taskDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getTaskDAO();
+    private final DealDAO dealDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getDealDAO();
 
-    private DealDAO dealDao = new DealDAOImpl();
+//    private DealDAO dealDao = new DealDAOImpl();
 
 
     public Deal create (Deal deal) throws DAOException {
@@ -50,7 +47,30 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
-    public int createNewDeal(Company company, Contact contact, Deal deal, Task task, File file) throws DAOException{
-        return 0;
+    public void createNewDeal(Deal deal) throws DAOException {
+        Contact contact = new Contact();
+        contact.setId(1);
+        contact.setlName("Ivanishenko");
+        deal.setPrimaryContact(contact);
+
+        Company company = new Company();
+        company.setId(1);
+        company.setTitle("BRAVO");
+        deal.setCompany(company);
+
+        Stage stage = new Stage();
+        stage.setId(1);
+        stage.setTitle("Stage");
+        deal.setStage(stage);
+
+//        User user = new User();
+//        user.setId(1);
+//        user.setlName("Agapov");
+//        deal.setResponsibleUser(user);
+
+        deal.setDeleted(false);
+
+        dealDao.create(deal);
+
     }
 }

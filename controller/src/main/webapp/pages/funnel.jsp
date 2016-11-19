@@ -1,4 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,12 +108,9 @@
                             <label class="col-sm-3 control-label">Responsible </label>
                             <div class="col-sm-9">
                                 <select class="form-control">
-                                    <option>Manager 1</option>
-                                    <option>Manager 2</option>
-                                    <option>Manager 3</option>
-                                    <option>Manager 4</option>
-                                    <option>Manager 5</option>
-                                    <option>Manager 6</option>
+                                    <c:forEach var="user" items="${users}">
+                                        <option><c:out value="${user.lName}"/></option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>

@@ -1,4 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +57,7 @@
 
                 <!--Add deal-->
                 <div class="forms--nDeal">
-                    <form class="form-horizontal" method="post" action="/deal" enctype="multipart/form-data">
+                    <form class="form-horizontal" method="post" action="/dealCreate" enctype="multipart/form-data">
                         <h2>Add deal</h2>
 
                         <div class="form-group">
@@ -74,10 +76,10 @@
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Responsible </label>
-                            <select class="col-sm-9 form-control">
-                                <option>Manager1</option>
-                                <option>Manager2</option>
-                                <option>Manager3</option>
+                            <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
+                                <c:forEach var="user" items="${users}">
+                                    <option><c:out value="${user.lName}"/></option>
+                                </c:forEach>
                             </select>
                         </div>
 
@@ -193,7 +195,7 @@
                         <div class="wrapper__users">
                             <div class="users__panel">
                                 <br>
-                                <label>Bank PeterPen</label>
+                                <label name="company_name">Bank PeterPen</label>
                                 <a href="#">Edit</a>
                                 <a href="#">Undock</a>
                                 <input class="users__panel--input" type="checkbox">
@@ -297,12 +299,9 @@
                             <label class="col-sm-3 control-label">Responsible </label>
                             <div class="col-sm-9">
                                 <select class="form-control">
-                                    <option>Manager 1</option>
-                                    <option>Manager 2</option>
-                                    <option>Manager 3</option>
-                                    <option>Manager 4</option>
-                                    <option>Manager 5</option>
-                                    <option>Manager 6</option>
+                                    <c:forEach var="user" items="${users}">
+                                        <option><c:out value="${user.lName}"/></option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>

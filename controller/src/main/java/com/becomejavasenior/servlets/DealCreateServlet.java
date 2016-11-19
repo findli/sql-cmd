@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 @WebServlet(name = "dealCreateServlet", urlPatterns = "/dealCreate")
 @MultipartConfig(maxFileSize = 102400)
@@ -32,27 +33,22 @@ public class DealCreateServlet extends HttpServlet{
         Deal deal = new Deal();
         deal.setTitle(request.getParameter("dealName"));
 
-        Company company = new Company();
-        company.setTitle("new company");
-        deal.setCompany(company);
+        User user = new User();
+        user.setlName(request.getParameter("responsibleUser"));
+        user.setId(1);
+        deal.setResponsibleUser(user);
 
-        Stage stage = new Stage();
-        stage.setTitle("new stage");
-        deal.setStage(stage);
-
-        deal.setDeleted(false);
-
+        deal.setCreateDate(new Date());
 
         if (!request.getParameter("dealBudget").isEmpty()) {
             deal.setBudget(new Integer(request.getParameter("dealBudget")));
         }
-        deal.setDeleted(false);
 
         try {
-            dealService.create(deal);
+            dealService.createNewDeal(deal);
         } catch (DAOException e) {
             e.printStackTrace();
         }
-        System.out.println("TEST");
+        response.sendRedirect("/deal");
     }
 }

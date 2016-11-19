@@ -28,7 +28,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
                 createEntity = getById(generatedId);
             }
         } catch (SQLException e) {
-            throw new DAOException("Can't create Entity", e);
+            throw new DAOException("Can't create Entity " + entity, e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();

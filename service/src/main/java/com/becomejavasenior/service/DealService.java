@@ -12,6 +12,6 @@ public interface DealService {
     Deal getById(int id) throws DAOException;
     void delete(int id) throws DAOException;
     List<Deal> getDealsForList();
-    public int createNewDeal(Company company, Contact contact, Deal deal, Task task, File file) throws DAOException;
+    public void createNewDeal(Deal deal) throws DAOException;
 
 }

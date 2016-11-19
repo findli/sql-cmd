@@ -1,6 +1,7 @@
 package com.becomejavasenior.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class Deal implements Serializable {
@@ -17,9 +18,18 @@ public class Deal implements Serializable {
     private List<Contact> dealContact;
     private List<Note> dealNote;
     private Contact primaryContact;
+    private Date createDate;
 
     public Deal(){
 
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public Contact getPrimaryContact() {
@@ -157,6 +167,7 @@ public class Deal implements Serializable {
                 ", stage=" + stage +
                 ", responsible_user=" + responsibleUser +
                 ", isDeleted=" + isDeleted +
+                ", primary_contact_id=" + primaryContact +
                 '}';
     }
 }
