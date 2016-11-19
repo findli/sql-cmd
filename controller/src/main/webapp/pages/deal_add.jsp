@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,13 +55,13 @@
 
                 <!--Add deal-->
                 <div class="forms--nDeal">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" method="post" action="/deal" enctype="multipart/form-data">
                         <h2>Add deal</h2>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Name">
+                                <input class="form-control" type="text" placeholder="Name" id="dealName" name="dealName">
                             </div>
                         </div>
 
@@ -83,7 +84,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Budget </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="$">
+                                <input class="form-control" type="text" placeholder="$" id="dealBudget" name="dealBudget">
                             </div>
                         </div>
 
@@ -103,8 +104,9 @@
 
                         <div class="form-group">
                             <div class="col-sm-10">
-                                <a href="/deal" class="btn btn-primary">Применить</a>
-                                <a href="#" class="btn btn-primary">Очистить</a>
+                                <button>Применить</button>
+                                <%--<a href="/deal" class="btn btn-primary">Применить</a>--%>
+                                <%--<a href="#" class="btn btn-primary">Очистить</a>--%>
                             </div>
                         </div>
                     </form>
@@ -158,10 +160,10 @@
                         </header>
                         <p style="display: inline">Name <input style="float: none; width: 148px" type="text"
                                                                class="modalInput"
-                                                               id="modalContactName" value="${contact.setfName()}"></p>
+                                                                value="${contact.setfName()}"></p>
                         <p style="display: inline;">Surname <input style="float: none; width: 147px" type="text"
                                                                    class="modalInput"
-                                                                   id="modalContactSurname" value="${contact.setlName()}"></p>
+                                                                    value="${contact.setlName()}"></p>
                         <p>Position <input type="text" class="modalInput" id="modalContactPosition" value="${contact.setPosition()}"></p>
                         <p>Phone <i class="fa fa-plus-square"></i>
                             <select>
@@ -172,11 +174,11 @@
                                 <option>Home</option>
                                 <option>Other</option>
                             </select>
-                            <input style="float: none; width: 140px" class="modalInput" id='modalContactPhone' name="formPhone"
+                            <input style="float: none; width: 140px" class="modalInput" name="formPhone"
                                    placeholder="+38(067)123-45-67">
                         </p>
-                        <p>Email <input type="text" class="modalInput" id="modalContactEmail" value="${contact.setEmail()}"></p>
-                        <p>Skype <input type="text" class="modalInput" id="modalContactSkype" value="${contact.setSkype()}"></p>
+                        <p>Email <input type="text" class="modalInput"  value="${contact.setEmail()}"></p>
+                        <p>Skype <input type="text" class="modalInput"  value="${contact.setSkype()}"></p>
                         <input class="modalBut" type="button" value="Save contact">
                         <input class="modalBut cancel" onclick="location.href='#close'" type="button"
                                value="Cancel">

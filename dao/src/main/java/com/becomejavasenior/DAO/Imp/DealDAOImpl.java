@@ -13,8 +13,6 @@ import java.util.List;
 
 public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> {
 
-    private static final String SELECT_ALL_STAGES = "SELECT id, name FROM crm_pallas.stage LIMIT 4";
-
     private static final String SELECT_DEALS_FOR_LIST = "SELECT\n" +
             "  crm_pallas.deal.title,\n" +
             "  crm_pallas.deal.budget,\n" +
@@ -169,28 +167,6 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
         return deals;
     }
 
-    @Override
-    public List<Stage> getAllStage() {
-        List<Stage> stages = new ArrayList<>();
-        Stage stage;
-
-        try (Connection connection = PostgresDAOFactory.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(SELECT_ALL_STAGES)) {
-
-            while (resultSet.next()) {
-
-                stage = new Stage();
-                stage.setId(resultSet.getInt("id"));
-                stage.setTitle(resultSet.getString("title"));
-
-                stages.add(stage);
-            }
-        } catch (SQLException ex) {
-            throw new DatabaseException(ex);
-        }
-        return stages;
-    }
     @Override
     public List<Deal> getDealsForList() {
         List<Deal> deals = new ArrayList<>();

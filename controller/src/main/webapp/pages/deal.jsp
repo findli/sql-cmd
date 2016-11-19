@@ -108,12 +108,9 @@
                             <label class="col-sm-3 control-label">Responsible </label>
                             <div class="col-sm-9">
                                 <select class="form-control">
-                                    <option>Manager 1</option>
-                                    <option>Manager 2</option>
-                                    <option>Manager 3</option>
-                                    <option>Manager 4</option>
-                                    <option>Manager 5</option>
-                                    <option>Manager 6</option>
+                                    <c:forEach var="user" items="${users}">
+                                        <option><c:out value="${user.lName}"/></option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
@@ -122,9 +119,9 @@
                             <label class="col-sm-3 control-label">Task type</label>
                             <div class="col-sm-9">
                                 <select class="form-control">
-                                    <option>Follow-up</option>
-                                    <option>Meeting</option>
-                                    <option>Order</option>
+                                    <c:forEach var="stage" items="${stageList}">
+                                        <option><c:out value="${stage.title}"/></option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
@@ -145,10 +142,8 @@
                 <div class="forms--lDeal">
 
                     <div class="col-md-12">
-                        <%--<input class="actionBut" type="button" value="Deals">--%>
-                        <%--<input class="actionBut" type="button" value="Sales funnel">--%>
-                            <a href="#" class="btn btn-primary">Funnel</a>
-                            <a href="#" class="btn btn-primary">List</a>
+                            <a href="/funnel" class="btn btn-primary">Funnel</a>
+                            <a href="/deal" class="btn btn-primary">List</a>
                             <a href="/dealCreate" class="btn btn-primary pull-center">Add deal</a>
                     </div>
 

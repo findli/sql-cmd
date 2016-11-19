@@ -72,7 +72,7 @@ public class StageDAOImpl extends AbstractDAOImpl<Stage> implements StageDAO<Sta
     public Stage getEntity(ResultSet resultSet){
         Stage stage = new Stage();
         try {
-          stage.setId(resultSet.getInt("id"));
+            stage.setId(resultSet.getInt("id"));
             stage.setTitle(resultSet.getString("title"));
             stage.setColor(resultSet.getString("color"));
             stage.setPriority(resultSet.getInt("priority"));
@@ -114,5 +114,28 @@ public class StageDAOImpl extends AbstractDAOImpl<Stage> implements StageDAO<Sta
             throw new DatabaseException(e);
         }
         return stageList;
+    }
+
+    @Override
+    public List<Stage> getAll() throws DAOException, ClassNotFoundException {
+        List<Stage> stages = new ArrayList<>();
+        Stage stage;
+
+        try (Connection connection = PostgresDAOFactory.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(getAllQuery())) {
+
+            while (resultSet.next()) {
+
+                stage = new Stage();
+                stage.setId(resultSet.getInt("id"));
+                stage.setTitle(resultSet.getString("title"));
+
+                stages.add(stage);
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex);
+        }
+        return stages;
     }
 }
