@@ -17,7 +17,7 @@
     <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
     <link rel="stylesheet" href="style/bootstrap-datetimepicker.min.css" />
 
-    <title>Deal</title>
+    <title>Company List</title>
 </head>
 <body>
 <header>
@@ -26,7 +26,7 @@
             <p>Logo</p>
         </div>
         <div class="header__title">
-            <h3>Deal</h3>
+            <h3>Company List</h3>
             <div class="header__user">
                 <div class="header__user--photo">
                     <i class="fa fa-user"></i>
@@ -42,8 +42,8 @@
         <div id="navbar">
             <ul>
                 <li><a href="#" target="_self">Home</a></li>
-                <li><a href="/deal" target="_self">Deals</a></li>
-                <li><a href="#" target="_self">Company</a></li>
+                <li><a href="#" target="_self">Deals</a></li>
+                <li><a href="/company" target="_self">Company</a></li>
                 <li><a href="#" target="_self">Contacts</a></li>
                 <li><a href="#" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
@@ -52,7 +52,7 @@
         </div>
         <div class="wrapper__aboutCompany">
             <div class="forms">
-                <div class="forms--lDeal--Filter">
+               <!-- <div class="forms--lDeal--Filter">
                     <form class="form-horizontal">
                         <h2>Фильтры</h2><br>
 
@@ -140,16 +140,16 @@
                         <input class="formAddBut" type="button" value="Применить">
                         <input class="formAddBut" type="button" value="Очистить">
                     </form>
-                </div>
+                </div> -->
 
                 <div class="forms--lDeal">
 
                     <div class="col-md-12">
                         <%--<input class="actionBut" type="button" value="Deals">--%>
                         <%--<input class="actionBut" type="button" value="Sales funnel">--%>
-                        <a href="#" class="btn btn-primary">Funnel</a>
-                        <a href="#" class="btn btn-primary">List</a>
-                        <a href="/dealCreate" class="btn btn-primary pull-center">Add deal</a>
+                     <!--   <a href="#" class="btn btn-primary">Funnel</a>
+                        <a href="#" class="btn btn-primary">List</a> -->
+                        <a href="/companyCreate" class="btn btn-primary pull-center">Add company</a>
                     </div>
 
                     <%--<input class="formAddBut" type="button" value="Add deal" align="right">--%>
@@ -163,18 +163,18 @@
                                 <th>Название сделки</th>
                                 <th>Основной контакт</th>
                                 <th>Компания контакта</th>
-                                <th>Этап сделки</th>
-                                <th>Бюджет</th>
+              <!--                  <th>Этап сделки</th>
+                                <th>Бюджет</th>  -->
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="deal" items="${dealList}">
+                            <c:forEach var="company" items="${companyList}">
                                 <tr>
                                     <td><c:out value="${deal.title}"/></td>
                                     <td><c:out value="${deal.getPrimaryContact().getlName()}"/></td>
                                     <td><c:out value="${deal.getPrimaryContact().getCompany().getTitle()}"/></td>
-                                    <td><c:out value="${deal.getStage().getTitle()}"/></td>
-                                    <td><c:out value="${deal.budget}"/></td>
+                    <!--                <td><c:out value="${deal.getStage().getTitle()}"/></td>
+                                    <td><c:out value="${deal.budget}"/></td>  -->
                                 </tr>
                             </c:forEach>
                             </tbody>
