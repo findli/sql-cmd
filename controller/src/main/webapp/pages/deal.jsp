@@ -119,8 +119,8 @@
                             <label class="col-sm-3 control-label">Task type</label>
                             <div class="col-sm-9">
                                 <select class="form-control">
-                                    <c:forEach var="stage" items="${stageList}">
-                                        <option><c:out value="${stage.title}"/></option>
+                                    <c:forEach var="taskType" items="${taskTypeList}">
+                                        <option><c:out value="${taskType.type}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>

@@ -35,7 +35,6 @@ public class DealCreateServlet extends HttpServlet{
 
         User user = new User();
         user.setlName(request.getParameter("responsibleUser"));
-        user.setId(1);
         deal.setResponsibleUser(user);
 
         deal.setCreateDate(new Date());
@@ -47,6 +46,8 @@ public class DealCreateServlet extends HttpServlet{
         try {
             dealService.createNewDeal(deal);
         } catch (DAOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         response.sendRedirect("/deal");

@@ -35,7 +35,7 @@ public class PostgresDAOFactory extends AbstractDAOFactory {
 
     @Override
     public UserDAO getUserDAO() {
-        return null;
+        return new UserDAOImpl();
     }
 
     @Override

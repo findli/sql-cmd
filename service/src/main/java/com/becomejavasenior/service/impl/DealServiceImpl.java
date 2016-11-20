@@ -47,7 +47,7 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
-    public void createNewDeal(Deal deal) throws DAOException {
+    public void createNewDeal(Deal deal) throws DAOException, ClassNotFoundException {
         Contact contact = new Contact();
         contact.setId(1);
         contact.setlName("Ivanishenko");
@@ -63,14 +63,22 @@ public class DealServiceImpl implements DealService {
         stage.setTitle("Stage");
         deal.setStage(stage);
 
-//        User user = new User();
-//        user.setId(1);
-//        user.setlName("Agapov");
-//        deal.setResponsibleUser(user);
-
         deal.setDeleted(false);
+        User user = responsibleUserWithId(deal.getResponsibleUser());
+        deal.setResponsibleUser(user);
 
         dealDao.create(deal);
 
+    }
+
+    public User responsibleUserWithId(User user) throws ClassNotFoundException, DAOException {
+        List<User> users = userDao.getAll();
+        for(int i = 0; i < users.size(); i++) {
+            if(users.get(i).getlName().equals(user.getlName())) {
+                user = users.get(i);
+                break;
+            }
+        }
+        return user;
     }
 }

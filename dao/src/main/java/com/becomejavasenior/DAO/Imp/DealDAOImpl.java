@@ -209,8 +209,4 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
 
         return deals;
     }
-
-    public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
-        return new java.sql.Date(date.getTime());
-    }
 }
