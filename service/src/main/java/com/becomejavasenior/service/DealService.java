@@ -12,6 +12,6 @@ public interface DealService {
     Deal getById(int id) throws DAOException;
     void delete(int id) throws DAOException;
     List<Deal> getDealsForList();
-    public void createNewDeal(Deal deal) throws DAOException, ClassNotFoundException;
+    public void createNewDeal(Deal deal, Contact contact, Task task, Company company, File file) throws DAOException, ClassNotFoundException;
 
 }

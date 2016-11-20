@@ -54,288 +54,270 @@
 
         <div class="wrapper__aboutCompany">
             <div class="forms">
+                <form class="form-horizontal" role="form" method="post" action="/dealCreate" id="dealForm"
+                      enctype="multipart/form-data">
 
-                <!--Add deal-->
-                <div class="forms--nDeal">
-                    <form class="form-horizontal" method="post" action="/dealCreate" enctype="multipart/form-data">
-                        <h2>Add deal</h2>
+                    <!--Add deal-->
+                    <div class="forms--nDeal">
+                        <form class="form-horizontal">
+                            <h2>Add deal</h2>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Name </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Name" id="dealName" name="dealName">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Tag </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Responsible </label>
-                            <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
-                                <c:forEach var="user" items="${users}">
-                                    <option><c:out value="${user.lName}"/></option>
-                                </c:forEach>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Budget </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="$" id="dealBudget" name="dealBudget">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Comment </label>
-                            <div class="col-sm-9">
-                                <textarea class="form-control" placeholder="Message"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Add files </label>
-                            <div class="col-sm-9">
-                                <input type="file" title="Search for a file to add">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <button>Применить</button>
-                                <%--<a href="/deal" class="btn btn-primary">Применить</a>--%>
-                                <%--<a href="#" class="btn btn-primary">Очистить</a>--%>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!--Add contact-->
-                <div class="forms--nDeal--Contact">
-                    <form class="form-horizontal">
-                        <h2>Add contact</h2>
-                        <div class="wrapper__users">
-                            <div class="users__panel">
-                                <br>
-                                <label>Makarov</label>
-                                <a href="#">Edit</a>
-                                <a href="#">Undock</a>
-                                <input class="users__panel--input" type="checkbox">
-                            </div>
-                            <div class="users__panel--body">
-                                <label>Position: Director</label><br>
-                                <label>Email: makarov@gmail.com</label><br>
-
-                                <div class="form-group">
-                                    <select class="col-sm-4 form-control">
-                                        <option>Work telephone</option>
-                                        <option>Mobile telephone</option>
-                                        <option>Home telephone</option>
-                                    </select>
-                                    <div class="col-sm-7">
-                                        <input class="form-control" type="text" name="formPhone"
-                                               placeholder="Number">
-                                    </div>
-                                </div>
-
-
-                                <label>Skype: skypeMakarov</label>
-                            </div>
-                        </div>
-
-                        <input onclick="location.href='#modalAddContact'" class="formAddBut" type="button"
-                               value="Add contact">
-                    </form>
-                </div>
-                <!--Modal window contact-->
-                <div id="modalAddContact" class="modalDialog">
-                    <div>
-                        <header>
-                            <div class="wrapper__modal1Title">
-                                <div><i class="fa fa-user"></i></div>
-                                <h3>Add contact</h3>
-                            </div>
-                        </header>
-                        <p style="display: inline">Name <input style="float: none; width: 148px" type="text"
-                                                               class="modalInput"
-                                                                value="${contact.setfName()}"></p>
-                        <p style="display: inline;">Surname <input style="float: none; width: 147px" type="text"
-                                                                   class="modalInput"
-                                                                    value="${contact.setlName()}"></p>
-                        <p>Position <input type="text" class="modalInput" id="modalContactPosition" value="${contact.setPosition()}"></p>
-                        <p>Phone <i class="fa fa-plus-square"></i>
-                            <select>
-                                <option>Working</option>
-                                <option>Direct working</option>
-                                <option>Mobile</option>
-                                <option>Fax</option>
-                                <option>Home</option>
-                                <option>Other</option>
-                            </select>
-                            <input style="float: none; width: 140px" class="modalInput" name="formPhone"
-                                   placeholder="+38(067)123-45-67">
-                        </p>
-                        <p>Email <input type="text" class="modalInput"  value="${contact.setEmail()}"></p>
-                        <p>Skype <input type="text" class="modalInput"  value="${contact.setSkype()}"></p>
-                        <input class="modalBut" type="button" value="Save contact">
-                        <input class="modalBut cancel" onclick="location.href='#close'" type="button"
-                               value="Cancel">
-                    </div>
-                </div>
-                <!--End-->
-
-                <!--Add company-->
-                <div class="forms--nDeal--Company">
-                    <form class="form-horizontal">
-                        <h2>Add company</h2>
-                        <div class="wrapper__users">
-                            <div class="users__panel">
-                                <br>
-                                <label name="company_name">Bank PeterPen</label>
-                                <a href="#">Edit</a>
-                                <a href="#">Undock</a>
-                                <input class="users__panel--input" type="checkbox">
-                            </div>
-                            <div class="users__panel--body">
-                                <label>Name:</label><br>
-                                <label>Tags:</label><br>
-                                <label>Email: makarov@gmail.com</label><br>
-
-                                <div class="form-group">
-                                    <select class="col-sm-4 form-control">
-                                        <option>Work telephone</option>
-                                        <option>Mobile telephone</option>
-                                        <option>Home telephone</option>
-                                    </select>
-                                    <div class="col-sm-7">
-                                        <input class="form-control" type="text" name="formPhone"
-                                               placeholder="Number">
-                                    </div>
-                                </div>
-                                <label>Web: site.ua</label><br>
-                                <label>Address:</label><br>
-                                <label>Skype: skypeMakarov</label>
-                            </div>
-                        </div>
-
-                        <input onclick="location.href='#modalAddCompany'" class="formAddBut" type="button"
-                               value="Add company">
-                    </form>
-                </div>
-                <!--Modal window contact-->
-                <div id="modalAddCompany" class="modalDialog">
-                    <div>
-                        <header>
-                            <div class="wrapper__modal1Title">
-                                <div><i class="fa fa-user"></i></div>
-                                <h3>Add company</h3>
-                            </div>
-                        </header>
-                        <p>Name <input style="float: none; width: 148px" type="text"
-                                       class="modalInput"
-                                       id="modalContactName" value="${contact.setfName()}"></p>
-                        <p>Tags <input style="float: none; width: 147px" type="text"
-                                       class="modalInput"
-                                       id="modalContactSurname" value="${contact.setlName()}"></p>
-
-                        <p>Phone <i class="fa fa-plus-square"></i>
-                            <select>
-                                <option>Working</option>
-                                <option>Direct working</option>
-                                <option>Mobile</option>
-                                <option>Fax</option>
-                                <option>Home</option>
-                                <option>Other</option>
-                            </select>
-                            <input style="float: none; width: 140px" class="modalInput" id='modalContactPhone' name="formPhone"
-                                   placeholder="+38(067)123-45-67">
-                        </p>
-                        <p>Email <input type="text" class="modalInput" id="modalContactEmail" value="${contact.setEmail()}"></p>
-                        <p>Web <input type="text" class="modalInput" value=""></p>
-                        <p>Address <input type="text" class="modalInput" value=""></p>
-                        <input class="modalBut" type="button" value="Save contact">
-                        <input class="modalBut cancel" onclick="location.href='#close'" type="button"
-                               value="Cancel">
-                    </div>
-                </div>
-                <!--End-->
-
-                <!--Add task-->
-                <div class="forms--nDeal--Task">
-                    <form class="form-horizontal">
-                        <h2>Add task</h2>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Period </label>
-                            <div class="col-sm-9">
-                                <select class="form-control">
-                                    <option>Today</option>
-                                    <option>All day</option>
-                                    <option>Tommorow</option>
-                                    <option>Next week</option>
-                                    <option>Next month</option>
-                                    <option>Next year</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Date and time </label>
-                            <div class="col-sm-8">
-                                <div class="input-group date" id="datetimepicker">
-                                    <input type="text" class="form-control" />
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon-calendar glyphicon"></span>
-                                        </span>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Name </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" placeholder="Name" id="dealName" name="dealName">
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Responsible </label>
-                            <div class="col-sm-9">
-                                <select class="form-control">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Tag </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" placeholder="Tag" id="dealTag" name="dealTag">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Responsible </label>
+                                <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
                                     <c:forEach var="user" items="${users}">
                                         <option><c:out value="${user.lName}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Task type </label>
-                            <div class="col-sm-9">
-                                <select class="form-control">
-                                    <c:forEach var="taskType" items="${taskTypeList}">
-                                        <option><c:out value="${taskType.type}"/></option>
-                                    </c:forEach>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Budget </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" placeholder="$" id="dealBudget" name="dealBudget">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Comment </label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" placeholder="Message" id="noteDeal" name="noteDeal"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Add files </label>
+                                <div class="col-sm-9">
+                                    <input type="file" title="Search for a file to add">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <button>Применить</button>
+                                    <%--<a href="/deal" class="btn btn-primary">Применить</a>--%>
+                                    <%--<a href="#" class="btn btn-primary">Очистить</a>--%>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--Add contact-->
+                    <div class="forms--nDeal--Contact">
+                        <form class="form-horizontal">
+                            <h2>Add contact</h2>
+                            <div class="wrapper__users">
+                                <div class="users__panel">
+                                    <br>
+                                    <label>Makarov</label>
+                                    <a href="#">Edit</a>
+                                    <a href="#">Undock</a>
+                                    <input class="users__panel--input" type="checkbox">
+                                </div>
+                                <div class="users__panel--body">
+                                    <label>Position: Director</label><br>
+                                    <label>Email: makarov@gmail.com</label><br>
+
+                                    <div class="form-group">
+                                        <select class="col-sm-4 form-control">
+                                            <option>Work telephone</option>
+                                            <option>Mobile telephone</option>
+                                            <option>Home telephone</option>
+                                        </select>
+                                        <div class="col-sm-7">
+                                            <input class="form-control" type="text" name="formPhone"
+                                                   placeholder="Number">
+                                        </div>
+                                    </div>
+
+
+                                    <label>Skype: skypeMakarov</label>
+                                </div>
+                            </div>
+
+                            <input onclick="location.href='#modalAddContact'" class="formAddBut" type="button"
+                                   value="Add contact">
+                        </form>
+                    </div>
+                    <!--Modal window contact-->
+                    <div id="modalAddContact" class="modalDialog">
+                        <div>
+                            <header>
+                                <div class="wrapper__modal1Title">
+                                    <div><i class="fa fa-user"></i></div>
+                                    <h3>Add contact</h3>
+                                </div>
+                            </header>
+                            <p style="display: inline">Name <input style="float: none; width: 148px" type="text"
+                                                                   class="modalInput"
+                                                                    value="${contact.setfName()}"></p>
+                            <p style="display: inline;">Surname <input style="float: none; width: 147px" type="text"
+                                                                       class="modalInput"
+                                                                        value="${contact.setlName()}"></p>
+                            <p>Position <input type="text" class="modalInput" id="modalContactPosition" value="${contact.setPosition()}"></p>
+                            <p>Phone <i class="fa fa-plus-square"></i>
+                                <select>
+                                    <option>Working</option>
+                                    <option>Direct working</option>
+                                    <option>Mobile</option>
+                                    <option>Fax</option>
+                                    <option>Home</option>
+                                    <option>Other</option>
                                 </select>
-                            </div>
+                                <input style="float: none; width: 140px" class="modalInput" name="formPhone"
+                                       placeholder="+38(067)123-45-67">
+                            </p>
+                            <p>Email <input type="text" class="modalInput"  value="${contact.setEmail()}"></p>
+                            <p>Skype <input type="text" class="modalInput"  value="${contact.setSkype()}"></p>
+                            <input class="modalBut" type="button" value="Save contact">
+                            <input class="modalBut cancel" onclick="location.href='#close'" type="button"
+                                   value="Cancel">
                         </div>
+                    </div>
+                    <!--End-->
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Comment </label>
-                            <div class="col-sm-9">
-                                <textarea class="form-control" placeholder="Message"></textarea>
+                    <!--Add company-->
+                    <div class="forms--nDeal--Company">
+                        <form class="form-horizontal">
+                            <h2>Add company</h2>
+
+                            <!-- Навигация -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="active"><a href="#old" aria-controls="old" role="tab" data-toggle="tab">Old company</a></li>
+                                <li><a href="#new" aria-controls="new" role="tab" data-toggle="tab">New company</a></li>
+                            </ul>
+
+                            <!-- Содержимое вкладок -->
+                            <div class="tab-content">
+                                <br>
+                                <div role="tabpanel" class="tab-pane active" id="old">
+
+                                    <select class="form-control" style="float: none; width: 250px" id="companyDeal" name="companyDeal">>
+
+                                        <c:forEach var="company" items="${companyList}">
+                                            <option><c:out value="${company.title}"/></option>
+                                        </c:forEach>
+                                    </select>
+
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane" id="new">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Name: </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Name">
+                                        </div>
+
+                                        <label class="col-sm-3 control-label">Phone: </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Name">
+                                        </div>
+
+                                        <label class="col-sm-3 control-label">email: </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Name">
+                                        </div>
+
+                                        <label class="col-sm-3 control-label">Web: </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Name">
+                                        </div>
+
+                                        <label class="col-sm-3 control-label">Address: </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Name">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </form>
+                    </div>
 
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <input class="formAddBut" type="button" value="Применить">
-                                <input class="formAddBut" type="button" value="Очистить">
+                    <!--Add task-->
+                    <div class="forms--nDeal--Task">
+                        <form class="form-horizontal">
+                            <h2>Add task</h2>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Period </label>
+                                <div class="col-sm-9">
+                                    <select class="form-control">
+                                        <option>Today</option>
+                                        <option>All day</option>
+                                        <option>Tommorow</option>
+                                        <option>Next week</option>
+                                        <option>Next month</option>
+                                        <option>Next year</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
-                    </form>
-                </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Date and time </label>
+                                <div class="col-sm-8">
+                                    <div class="input-group date" id="datetimepicker">
+                                        <input type="text" class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon-calendar glyphicon"></span>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Responsible </label>
+                                <div class="col-sm-9">
+                                    <select class="form-control">
+                                        <c:forEach var="user" items="${users}">
+                                            <option><c:out value="${user.lName}"/></option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
 
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Task type </label>
+                                <div class="col-sm-9">
+                                    <select class="form-control">
+                                        <c:forEach var="taskType" items="${taskTypeList}">
+                                            <option><c:out value="${taskType.type}"/></option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
 
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Comment </label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" placeholder="Message"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <input class="formAddBut" type="button" value="Применить">
+                                    <input class="formAddBut" type="button" value="Очистить">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </form>
 
             </div>
         </div>

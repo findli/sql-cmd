@@ -15,7 +15,6 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
     public void createStatement(PreparedStatement statement, Company company) throws DAOException{
 
         try{
-
             statement.setString(1, company.getTitle());
             statement.setString(2, company.getPhoneNumber());
             statement.setString(3, company.getEmail());
@@ -23,13 +22,9 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.isDeleted());
-
         } catch (SQLException e) {
-
             throw new DAOException("Can't create statement for Company", e);
-
         }
-
     }
 
     @Override
@@ -46,9 +41,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             statement.setBoolean(7, company.isDeleted());
 
         } catch (SQLException e) {
-
             throw new DAOException("Can't update statement for Company", e);
-
         }
     }
 
@@ -60,7 +53,6 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
         UserDAOImpl user = new UserDAOImpl();
 
         try{
-
             company.setId(resultSet.getInt("id"));
             company.setTitle(resultSet.getString("title"));
             company.setPhoneNumber(resultSet.getString("phone_number"));
@@ -79,23 +71,23 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
     }
 
     public String getCreateQuery() {
-        return "INSERT INTO company (title, phone_number, email, website, address_id, responsible_user_id, is_deleted) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        return "INSERT INTO crm_pallas.company (title, phone_number, email, website, address_id, responsible_user_id, is_deleted) VALUES (?, ?, ?, ?, ?, ?, ?)";
     }
 
     public String getUpdateQuery() {
-        return "UPDATE company SET title = ?, phone_number = ?, email = ?, website = ?, address_id = ?, responsible_user_id = ?, is_deleted = ?";
+        return "UPDATE crm_pallas.company SET title = ?, phone_number = ?, email = ?, website = ?, address_id = ?, responsible_user_id = ?, is_deleted = ?";
     }
 
     public String getDeleteQuery() {
-        return "DELETE FROM company WHERE id = ?";
+        return "DELETE FROM crm_pallas.company WHERE id = ?";
     }
 
     public String getByIdQuery() {
-        return "SELECT * FROM company WHERE id = ?";
+        return "SELECT * FROM crm_pallas.company WHERE id = ?";
     }
 
     public String getAllQuery() {
-        return "SELECT * FROM company";
+        return "SELECT * FROM crm_pallas.company";
     }
 
     @Override

@@ -366,6 +366,12 @@ Forms New Deal Company
     font-size: 18px;
 }
 
+.forms--nDeal--Company label {
+    padding: 10px 10px 10px 15px;
+    width: 200px;
+    /*font-size: 18px;*/
+}
+
 .forms--nDeal--Company a {
     font-size: 15px;
     margin-left: 15px;

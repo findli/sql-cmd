@@ -23,6 +23,7 @@ public class Company implements Serializable {
     public Company() {
     }
 
+
     public int getId() {
         return id;
     }
@@ -69,6 +70,10 @@ public class Company implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
     }
 
     public User getResponsibleUser() {

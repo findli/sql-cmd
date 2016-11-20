@@ -17,9 +17,6 @@ public class DealServiceImpl implements DealService {
     private final TaskDAO taskDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getTaskDAO();
     private final DealDAO dealDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getDealDAO();
 
-//    private DealDAO dealDao = new DealDAOImpl();
-
-
     public Deal create (Deal deal) throws DAOException {
         return (Deal) dealDao.create(deal);
     }
@@ -47,15 +44,13 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
-    public void createNewDeal(Deal deal) throws DAOException, ClassNotFoundException {
+    public void createNewDeal(Deal deal, Contact contact2, Task task2, Company company, File file2) throws DAOException, ClassNotFoundException {
         Contact contact = new Contact();
         contact.setId(1);
         contact.setlName("Ivanishenko");
         deal.setPrimaryContact(contact);
 
-        Company company = new Company();
-        company.setId(1);
-        company.setTitle("BRAVO");
+        company = companyWithId(company);
         deal.setCompany(company);
 
         Stage stage = new Stage();
@@ -80,5 +75,15 @@ public class DealServiceImpl implements DealService {
             }
         }
         return user;
+    }
+    public Company companyWithId(Company company) throws ClassNotFoundException, DAOException {
+        List<Company> companies = companyDao.getAll();
+        for(int i = 0; i < companies.size(); i++) {
+            if(companies.get(i).getTitle().equals(company.getTitle())) {
+                company = companies.get(i);
+                break;
+            }
+        }
+        return company;
     }
 }

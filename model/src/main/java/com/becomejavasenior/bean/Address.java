@@ -16,7 +16,6 @@ public class Address implements Serializable {
     public Address() {
     }
 
-
     public int getId() {
         return id;
     }
