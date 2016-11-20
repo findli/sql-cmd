@@ -7,28 +7,24 @@ import com.becomejavasenior.bean.*;
 
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("main.java.com.becomejavasenior.ServletCompany")
+/*@WebServlet("main.java.com.becomejavasenior.ServletCompany")*/
 public class ServletCompany extends javax.servlet.http.HttpServlet {
 
     private TaskDAO<Task> taskDAO = new TaskDAOImpl();
 
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, java.io.IOException {
-
-    }
-
-    protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, java.io.IOException {
-
         Contact contact = new Contact();
         Company company = new Company();
+        Tag tag = new Tag();
         Deal deal = new Deal();
         Task task = new Task();
-
+/*
         company.setTitle(request.getParameter("formCompany"));
-        company.setTags(request.getParameter("formTag"));
+        tag.setTitle(request.getParameter("formTag"));
         company.setPhoneNumber(request.getParameter("formPhone"));
         company.setEmail(request.getParameter("formEmail"));
         company.setWebsite(request.getParameter("formWeb"));
-        company.setAdress(request.getParameter("formAddress"));
+        company.setAdress(request.getParameter("formAddress"));*/
 
 
         /*add contact*/
@@ -43,13 +39,13 @@ public class ServletCompany extends javax.servlet.http.HttpServlet {
        /* add deal*/
         if (request.getParameter("modalButDeal") != null) {
             deal.setTitle(request.getParameter("modalDealTitle"));
-            deal.setBudget(request.getParameter("modalDealBudget"));
+            deal.setBudget(Integer.parseInt(request.getParameter("modalDealBudget")));
         }
 
         /* add task*/
         if (request.getParameter("modalButTask") != null) {
-            task.setDeadlineDate(request.getParameter("myCalendar-1"));
-            task.setTime(request.getParameter("timeChoose"));
+/*            task.setDeadlineDate(request.getParameter("myCalendar-1"));
+            task.setDeadlineDate(request.getParameter("timeChoose"));*/
             task.setDescription(request.getParameter("modalTaskDesc"));
         }
 
@@ -86,6 +82,11 @@ public class ServletCompany extends javax.servlet.http.HttpServlet {
 
 
         request.getRequestDispatcher("company.jsp").forward(request, response);
+    }
+
+    protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, java.io.IOException {
+
+
     }
 
 }

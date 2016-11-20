@@ -1,11 +1,14 @@
 package com.becomejavasenior.DAO;
 
-import org.apache.log4j.Logger;
+/*import org.apache.log4j.Logger;*/
 
 import java.sql.SQLException;
 
 
 public class DAOException extends Exception {
+    public DAOException(String s, SQLException e) {
+    }
+/*
 
     public static Logger log = Logger.getLogger(DAOException.class);
 
@@ -27,7 +30,8 @@ public class DAOException extends Exception {
         super(errorMsg);
         log.error(errorMsg, exception);
 
-    }
+    }*/
+
 
 }
 
