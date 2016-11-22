@@ -65,19 +65,17 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Название сделки</th>
-                                <th>Основной контакт</th>
-                                <th>Компания контакта</th>
+                                <th>Название компании</th>
+                                <th>Тел. номер</th>
+                                <th>эл. почта</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach var="company" items="${companyList}">
                                 <tr>
-                                    <td><c:out value="${company.title}"/></td>
-                                    <td><c:out value="${company.getPrimaryContact().getlName()}"/></td>
-                                    <td><c:out value="${company.getPrimaryContact().getCompany().getTitle()}"/></td>
-                    <!--                <td><c:out value="${deal.getStage().getTitle()}"/></td>
-                                    <td><c:out value="${deal.budget}"/></td>  -->
+                                    <td><c:out value="${company.getTitle()}"/></td>
+                                    <td><c:out value="${company.getPhoneNumber()}"/></td>
+                                    <td><c:out value="${company.getEmail()}"/></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
