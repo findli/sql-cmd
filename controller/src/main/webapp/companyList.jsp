@@ -73,9 +73,9 @@
                             <tbody>
                             <c:forEach var="company" items="${companyList}">
                                 <tr>
-                                    <td><c:out value="${deal.title}"/></td>
-                                    <td><c:out value="${deal.getPrimaryContact().getlName()}"/></td>
-                                    <td><c:out value="${deal.getPrimaryContact().getCompany().getTitle()}"/></td>
+                                    <td><c:out value="${company.title}"/></td>
+                                    <td><c:out value="${company.getPrimaryContact().getlName()}"/></td>
+                                    <td><c:out value="${company.getPrimaryContact().getCompany().getTitle()}"/></td>
                     <!--                <td><c:out value="${deal.getStage().getTitle()}"/></td>
                                     <td><c:out value="${deal.budget}"/></td>  -->
                                 </tr>
