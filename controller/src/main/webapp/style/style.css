@@ -614,6 +614,16 @@ Forms Deals
     border: 1px solid #000;
 }
 
+.wrapper__deals table {
+    width: 100%; /* Ширина таблицы */
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+}
+
+.wrapper__deals tbody tr:hover {
+    background: #f3bd48; /* Цвет фона при наведении */
+    color: #fff; /* Цвет текста при наведении */
+}
+
 .deal__panel {
     background: #75a9fb;
     height: 50px;

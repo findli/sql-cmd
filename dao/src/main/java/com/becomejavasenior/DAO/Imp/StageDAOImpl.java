@@ -83,19 +83,19 @@ public class StageDAOImpl extends AbstractDAOImpl<Stage> implements StageDAO<Sta
         return stage;
     }
 
-    @Override
-    public Stage getById(Integer id) throws DAOException {
-        try (Connection connection = PostgresDAOFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement(getByIdQuery() + " AND id = ?")) {
-
-            statement.setInt(1, id);
-
-            List<Stage> stageList = parseResultSet(statement.executeQuery());
-            return stageList == null || stageList.isEmpty() ? null : stageList.get(0);
-        } catch (SQLException ex) {
-            throw new DatabaseException(ex);
-        }
-    }
+//    @Override
+//    public Stage getById(Integer id) throws DAOException {
+//        try (Connection connection = PostgresDAOFactory.getConnection();
+//             PreparedStatement statement = connection.prepareStatement(getByIdQuery() + " AND id = ?")) {
+//
+//            statement.setInt(1, id);
+//
+//            List<Stage> stageList = parseResultSet(statement.executeQuery());
+//            return stageList == null || stageList.isEmpty() ? null : stageList.get(0);
+//        } catch (SQLException ex) {
+//            throw new DatabaseException(ex);
+//        }
+//    }
 
     private List<Stage> parseResultSet(ResultSet resultSet) throws SQLException {
 

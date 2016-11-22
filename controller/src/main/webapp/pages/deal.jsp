@@ -15,6 +15,8 @@
     <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="../js/script.js">
+    <%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>--%>
     <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
 
     <title>Deal</title>
@@ -152,29 +154,33 @@
                     <br><br><br><br>
 
                     <div class="wrapper__deals">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>Название сделки</th>
-                                <th>Основной контакт</th>
-                                <th>Компания контакта</th>
-                                <th>Этап сделки</th>
-                                <th>Бюджет</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach var="deal" items="${dealList}">
+                        <form action="/dealEdit" method="post">
+                            <table class="table table-striped">
+                                <thead>
                                 <tr>
-                                    <td><c:out value="${deal.title}"/></td>
-                                    <td><c:out value="${deal.getPrimaryContact().getlName()}"/></td>
-                                    <td><c:out value="${deal.getPrimaryContact().getCompany().getTitle()}"/></td>
-                                    <td><c:out value="${deal.getStage().getTitle()}"/></td>
-                                    <td><c:out value="${deal.budget}"/></td>
+                                    <th>Название сделки</th>
+                                    <th>Основной контакт</th>
+                                    <th>Компания контакта</th>
+                                    <th>Этап сделки</th>
+                                    <th>Бюджет</th>
                                 </tr>
-                            </c:forEach>
-                            </tbody>
+                                </thead>
+                                <tbody id="t_deals">
+                                <c:forEach var="deal" items="${dealList}">
+                                    <%--<tr id="idElement?idDeal=${deal.id}" class="rowlink" onclick="window.location.href='/dealEdit'; return false">--%>
+                                    <tr data-href="/dealEdit?idDeal=${deal.getId()}">
+                                    <%--<tr>--%>
+                                        <td class="item"><c:out value="${deal.title}"/></td>
+                                        <td><c:out value="${deal.getPrimaryContact().getlName()}"/></td>
+                                        <td><c:out value="${deal.getCompany().getTitle()}"/></td>
+                                        <td><c:out value="${deal.getStage().getTitle()}"/></td>
+                                        <td><c:out value="${deal.budget}"/></td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
 
-                        </table>
+                            </table>
+                        </form>
                     </div>
                 </div>
             </div>

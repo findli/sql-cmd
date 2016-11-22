@@ -59,7 +59,7 @@
 
                     <!--Add deal-->
                     <div class="forms--nDeal">
-                        <form class="form-horizontal">
+                        <%--<form class="form-horizontal">--%>
                             <h2>Add deal</h2>
 
                             <div class="form-group">
@@ -113,12 +113,15 @@
                                     <%--<a href="#" class="btn btn-primary">Очистить</a>--%>
                                 </div>
                             </div>
-                        </form>
+                            <%--<select class="form-control" style="float: none; width: 250px" id="companyDeal" name="companyDeal">--%>
+                            <%----%>
+                            <%--</select>--%>
+                        <%--</form>--%>
                     </div>
 
                     <!--Add contact-->
                     <div class="forms--nDeal--Contact">
-                        <form class="form-horizontal">
+                        <%--<form id="add_contact_form">--%>
                             <h2>Add contact</h2>
                             <div class="wrapper__users">
                                 <div class="users__panel">
@@ -133,13 +136,13 @@
                                     <label>Email: makarov@gmail.com</label><br>
 
                                     <div class="form-group">
-                                        <select class="col-sm-4 form-control">
+                                        <select class="col-sm-4 form-control" name="phone_type" id=phone_type">
                                             <option>Work telephone</option>
                                             <option>Mobile telephone</option>
                                             <option>Home telephone</option>
                                         </select>
                                         <div class="col-sm-7">
-                                            <input class="form-control" type="text" name="formPhone"
+                                            <input class="form-control" type="text" name="formPhone" id="formPhone"
                                                    placeholder="Number">
                                         </div>
                                     </div>
@@ -151,48 +154,50 @@
 
                             <input onclick="location.href='#modalAddContact'" class="formAddBut" type="button"
                                    value="Add contact">
-                        </form>
+                        <%--</form>--%>
                     </div>
                     <!--Modal window contact-->
                     <div id="modalAddContact" class="modalDialog">
-                        <div>
-                            <header>
-                                <div class="wrapper__modal1Title">
-                                    <div><i class="fa fa-user"></i></div>
-                                    <h3>Add contact</h3>
-                                </div>
-                            </header>
-                            <p style="display: inline">Name <input style="float: none; width: 148px" type="text"
-                                                                   class="modalInput"
-                                                                    value="${contact.setfName()}"></p>
-                            <p style="display: inline;">Surname <input style="float: none; width: 147px" type="text"
+                        <%--<form id="add_contact_form">--%>
+                            <div>
+                                <header>
+                                    <div class="wrapper__modal1Title">
+                                        <div><i class="fa fa-user"></i></div>
+                                        <h3>Add contact</h3>
+                                    </div>
+                                </header>
+                                <p style="display: inline">Name <input style="float: none; width: 148px" type="text"
                                                                        class="modalInput"
-                                                                        value="${contact.setlName()}"></p>
-                            <p>Position <input type="text" class="modalInput" id="modalContactPosition" value="${contact.setPosition()}"></p>
-                            <p>Phone <i class="fa fa-plus-square"></i>
-                                <select>
-                                    <option>Working</option>
-                                    <option>Direct working</option>
-                                    <option>Mobile</option>
-                                    <option>Fax</option>
-                                    <option>Home</option>
-                                    <option>Other</option>
-                                </select>
-                                <input style="float: none; width: 140px" class="modalInput" name="formPhone"
-                                       placeholder="+38(067)123-45-67">
-                            </p>
-                            <p>Email <input type="text" class="modalInput"  value="${contact.setEmail()}"></p>
-                            <p>Skype <input type="text" class="modalInput"  value="${contact.setSkype()}"></p>
-                            <input class="modalBut" type="button" value="Save contact">
-                            <input class="modalBut cancel" onclick="location.href='#close'" type="button"
-                                   value="Cancel">
-                        </div>
+                                                                        value="${contact.setfName()}"></p>
+                                <p style="display: inline;">Surname <input style="float: none; width: 147px" type="text"
+                                                                           class="modalInput"
+                                                                            value="${contact.setlName()}"></p>
+                                <p>Position <input type="text" class="modalInput" id="modalContactPosition" value="${contact.setPosition()}"></p>
+                                <p>Phone <i class="fa fa-plus-square"></i>
+                                    <select>
+                                        <option>Working</option>
+                                        <option>Direct working</option>
+                                        <option>Mobile</option>
+                                        <option>Fax</option>
+                                        <option>Home</option>
+                                        <option>Other</option>
+                                    </select>
+                                    <input style="float: none; width: 140px" class="modalInput" name="formPhone"
+                                           placeholder="+38(067)123-45-67">
+                                </p>
+                                <p>Email <input type="text" class="modalInput"  value="${contact.setEmail()}"></p>
+                                <p>Skype <input type="text" class="modalInput"  value="${contact.setSkype()}"></p>
+                                <input class="modalBut" type="button" value="Save contact" onclick="add_contact();">
+                                <input class="modalBut cancel" onclick="location.href='#close'" type="button"
+                                       value="Cancel">
+                            </div>
+                        <%--</form>--%>
                     </div>
                     <!--End-->
 
                     <!--Add company-->
-                    <div class="forms--nDeal--Company">
-                        <form class="form-horizontal">
+                    <div class="forms--nDeal">
+                        <%--<form class="form-horizontal">--%>
                             <h2>Add company</h2>
 
                             <!-- Навигация -->
@@ -206,8 +211,7 @@
                                 <br>
                                 <div role="tabpanel" class="tab-pane active" id="old">
 
-                                    <select class="form-control" style="float: none; width: 250px" id="companyDeal" name="companyDeal">>
-
+                                    <select class="form-control" style="float: none; width: 250px" id="companyDeal" name="companyDeal">
                                         <c:forEach var="company" items="${companyList}">
                                             <option><c:out value="${company.title}"/></option>
                                         </c:forEach>
@@ -221,35 +225,43 @@
                                         <div class="col-sm-9">
                                             <input class="form-control" type="text" placeholder="Name">
                                         </div>
+                                    </div>
 
+                                    <div class="form-group">
                                         <label class="col-sm-3 control-label">Phone: </label>
                                         <div class="col-sm-9">
-                                            <input class="form-control" type="text" placeholder="Name">
+                                            <input class="form-control" type="text" placeholder="Phone">
                                         </div>
+                                    </div>
 
+                                    <div class="form-group">
                                         <label class="col-sm-3 control-label">email: </label>
                                         <div class="col-sm-9">
-                                            <input class="form-control" type="text" placeholder="Name">
+                                            <input class="form-control" type="text" placeholder="email">
                                         </div>
+                                    </div>
 
+                                    <div class="form-group">
                                         <label class="col-sm-3 control-label">Web: </label>
                                         <div class="col-sm-9">
-                                            <input class="form-control" type="text" placeholder="Name">
+                                            <input class="form-control" type="text" placeholder="Url">
                                         </div>
+                                    </div>
 
+                                    <div class="form-group">
                                         <label class="col-sm-3 control-label">Address: </label>
                                         <div class="col-sm-9">
-                                            <input class="form-control" type="text" placeholder="Name">
+                                            <input class="form-control" type="text" placeholder="Address">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        <%--</form>--%>
                     </div>
 
                     <!--Add task-->
                     <div class="forms--nDeal--Task">
-                        <form class="form-horizontal">
+                        <%--<form class="form-horizontal">--%>
                             <h2>Add task</h2>
 
                             <div class="form-group">
@@ -314,7 +326,7 @@
                                 </div>
                             </div>
 
-                        </form>
+                        <%--</form>--%>
                     </div>
 
                 </form>

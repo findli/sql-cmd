@@ -14,6 +14,7 @@ import java.util.List;
 public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> {
 
     private static final String SELECT_DEALS_FOR_LIST = "SELECT\n" +
+            "  crm_pallas.deal.id AS dealId,\n" +
             "  crm_pallas.deal.title,\n" +
             "  crm_pallas.deal.budget,\n" +
             "  crm_pallas.stage.title AS stage,\n" +
@@ -24,7 +25,7 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
             "FROM crm_pallas.deal\n" +
             "  JOIN crm_pallas.stage ON crm_pallas.deal.stage_id = crm_pallas.stage.id\n" +
             "  JOIN crm_pallas.contact ON crm_pallas.deal.primary_contact_id = crm_pallas.contact.id\n" +
-            "  JOIN crm_pallas.company ON crm_pallas.contact.company_id = crm_pallas.company.id\n";
+            "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id\n";
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Deal deal) throws DAOException {
@@ -190,16 +191,19 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
                 contact = new Contact();
                 stage = new Stage();
 
+                deal.setId(resultSet.getInt("dealId"));
                 deal.setTitle(resultSet.getString("title"));
                 deal.setBudget(resultSet.getInt("budget"));
                 stage.setTitle(resultSet.getString("stage"));
                 deal.setStage(stage);
                 contact.setId(resultSet.getInt("contactId"));
                 contact.setlName(resultSet.getString("contact"));
-                deal.setPrimaryContact(contact);
+
                 company.setId(resultSet.getInt("companyId"));
                 company.setTitle(resultSet.getString("company"));
                 contact.setCompany(company);
+                deal.setPrimaryContact(contact);
+                deal.setCompany(company);
 
                 deals.add(deal);
             }

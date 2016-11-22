@@ -46,7 +46,7 @@ public class DealServiceImpl implements DealService {
     @Override
     public void createNewDeal(Deal deal, Contact contact2, Task task2, Company company, File file2) throws DAOException, ClassNotFoundException {
         Contact contact = new Contact();
-        contact.setId(1);
+        contact.setId(2);
         contact.setlName("Ivanishenko");
         deal.setPrimaryContact(contact);
 

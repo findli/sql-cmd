@@ -2,13 +2,10 @@ package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.bean.*;
-import com.becomejavasenior.service.CompanyService;
-import com.becomejavasenior.service.DealService;
-import com.becomejavasenior.service.impl.CompanyServiceImpl;
-import com.becomejavasenior.service.impl.DealServiceImpl;
+import com.becomejavasenior.service.*;
+import com.becomejavasenior.service.impl.*;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,30 +16,57 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet(name = "dealCreateServlet", urlPatterns = "/dealCreate")
-@MultipartConfig(maxFileSize = 102400)
-public class DealCreateServlet extends HttpServlet{
+@WebServlet(name = "dealEditServlet", urlPatterns = "/dealEdit")
+public class DealEditServlet extends HttpServlet {
 
     private DealService dealService = new DealServiceImpl();
+//    private CompanyService companyService = new CompanyServiceImpl();
+//    private StageService stageService = new StageServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        CompanyService companyService = new CompanyServiceImpl();
 
-        List<Company> companyList = null;
+        CompanyService companyService = new CompanyServiceImpl();
+        StageService stageService = new StageServiceImpl();
+
+        int idDeal = 1;
+        if (request.getParameter("idDeal") != null) {
+            idDeal = Integer.parseInt(request.getParameter("idDeal"));
+            System.out.println("id = " + request.getParameter("idDeal"));
+        } else {
+            System.out.println("id = null");
+        }
+        HttpSession session = request.getSession();
+
+        dealService = new DealServiceImpl();
+        companyService = new CompanyServiceImpl();
+
+        Deal deal = null;
+        Company company = null;
+        Stage stage = new Stage();
+        List<Stage> stages = null;
 
         try {
-            companyList = companyService.getAll();
+            deal = dealService.getById(idDeal);
+            company = companyService.getById(deal.getCompany().getId());
+            stage = stageService.getById(deal.getStage().getId());
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            stages = stageService.getAll();
         } catch (DAOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        session.setAttribute("companyList", companyList);
-        request.getRequestDispatcher("/pages/deal_add.jsp").forward(request, response);
-
+        session.setAttribute("stages", stages);
+        session.setAttribute("stage", stage);
+        session.setAttribute("company", company);
+        session.setAttribute("deal", deal);
+        request.getRequestDispatcher("/pages/deal_edit.jsp").forward(request, response);
     }
 
     @Override
@@ -73,28 +97,29 @@ public class DealCreateServlet extends HttpServlet{
         user.setlName(request.getParameter("responsibleUser"));
         deal.setResponsibleUser(user);
 
+        System.out.println("dealBudget " + request.getParameter("dealBudget"));
+        int budget;
+        if(request.getParameter("dealBudget")==null) {
+            budget = 0;
+        } else {
+            budget = new Integer(request.getParameter("dealBudget"));
+        }
+        deal.setBudget(budget);
+//        if (!request.getParameter("dealBudget").isEmpty()) {
+//            deal.setBudget(new Integer(request.getParameter("dealBudget")));
+//        }
+        Stage stage = new Stage();
+        stage.setTitle(request.getParameter("dealStage"));
+        deal.setStage(stage);
+
+//        List<Tag> tags = new ArrayList<>();
+//        Tag tag = new Tag();
+//        tag = request.getParameter("dealTag");
+//        if (!request.getParameter("dealTag").isEmpty()) {
+//            deal.setDealTag(tags);
+//        }
         deal.setCreateDate(new Date());
 
-        String noteContent = request.getParameter("noteDeal");
-        if (!noteContent.isEmpty()) {
-            List<Note> noteList = new ArrayList<>();
-            Note note = new Note();
-            note.setNoteText(request.getParameter("noteDeal"));
-
-            note.setDateCreate(new Date());
-            User creator = new User();
-            creator.setId(1); //TODO: change to user under which the logged in
-            note.setCreatedUser(creator);
-            noteList.add(note);
-            deal.setDealNote(noteList);
-        } else {
-            List<Note> noteList = new ArrayList<>();
-            deal.setDealNote(noteList);
-        }
-
-        if (!request.getParameter("dealBudget").isEmpty()) {
-            deal.setBudget(new Integer(request.getParameter("dealBudget")));
-        }
         return deal;
     }
     private Contact getContactFromRequest(HttpServletRequest request) {
@@ -108,6 +133,7 @@ public class DealCreateServlet extends HttpServlet{
     private Company getCompanyFromRequest(HttpServletRequest request) {
         Company company = new Company();
         company.setTitle(request.getParameter("companyDeal"));
+        System.out.println("company = " + company.getTitle());
         return company;
     }
     private File getFileFromRequest(HttpServletRequest request) {
