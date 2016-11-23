@@ -1,7 +1,7 @@
 package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.DAO.*;
-import com.becomejavasenior.DAO.Imp.DealDAOImpl;
+import com.becomejavasenior.DAO.Imp.*;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.factory.AbstractDAOFactory;
 import com.becomejavasenior.factory.PostgresDAOFactory;
@@ -11,11 +11,20 @@ import java.util.Date;
 import java.util.List;
 
 public class DealServiceImpl implements DealService {
-    private final CompanyDAO companyDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getCompanyDAO();
-    private final UserDAO userDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getUserDAO();
-    private final ContactDAO contactDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getContactDAO();
-    private final TaskDAO taskDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getTaskDAO();
-    private final DealDAO dealDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getDealDAO();
+//    private final CompanyDAO companyDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getCompanyDAO();
+//    private final UserDAO userDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getUserDAO();
+//    private final ContactDAO contactDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getContactDAO();
+//    private final TaskDAO taskDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getTaskDAO();
+//    private final DealDAO dealDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getDealDAO();
+//    private final StageDAO stageDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getStageDAO();
+    private final CompanyDAO companyDao = new CompanyDAOImpl();
+    private final UserDAO userDao = new UserDAOImpl();
+    private final ContactDAO contactDao = new ContactDAOImpl();
+    private final TaskDAO taskDao = new TaskDAOImpl();
+    private final DealDAO dealDao = new DealDAOImpl();
+    private final StageDAO stageDao = new StageDAOImpl();
+
+
 
     public Deal create (Deal deal) throws DAOException {
         return (Deal) dealDao.create(deal);
@@ -44,26 +53,36 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
-    public void createNewDeal(Deal deal, Contact contact2, Task task2, Company company, File file2) throws DAOException, ClassNotFoundException {
-        Contact contact = new Contact();
-        contact.setId(2);
-        contact.setlName("Ivanishenko");
+    public void createNewDeal(Deal deal, Contact contact, Task task2, Company company, File file2) throws DAOException, ClassNotFoundException {
+
+        contact = contactWithId(contact);
         deal.setPrimaryContact(contact);
 
         company = companyWithId(company);
         deal.setCompany(company);
 
-        Stage stage = new Stage();
-        stage.setId(1);
-        stage.setTitle("Stage");
+        Stage stage;
+        stage = (Stage) stageDao.getById(1);
         deal.setStage(stage);
 
-        deal.setDeleted(false);
         User user = responsibleUserWithId(deal.getResponsibleUser());
         deal.setResponsibleUser(user);
 
         dealDao.create(deal);
 
+    }
+
+// Необходимо править
+    public Contact contactWithId(Contact contact) throws ClassNotFoundException, DAOException {
+//        List<Contact> contacts = contactDao.getAll();
+//        for(int i = 0; i < contacts.size(); i++) {
+//            if(contacts.get(i).getlName().equals(contact.getlName())) {
+//                contact = contacts.get(i);
+//                break;
+//            }
+//        }
+        contact = (Contact) contactDao.getById(1);
+        return contact;
     }
 
     public User responsibleUserWithId(User user) throws ClassNotFoundException, DAOException {
@@ -76,7 +95,9 @@ public class DealServiceImpl implements DealService {
         }
         return user;
     }
+
     public Company companyWithId(Company company) throws ClassNotFoundException, DAOException {
+
         List<Company> companies = companyDao.getAll();
         for(int i = 0; i < companies.size(); i++) {
             if(companies.get(i).getTitle().equals(company.getTitle())) {

@@ -1,12 +1,19 @@
 package com.becomejavasenior.DAO.Imp;
 
+import com.becomejavasenior.DAO.AddressDAO;
 import com.becomejavasenior.DAO.CompanyDAO;
 import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.UserDAO;
+import com.becomejavasenior.DataBaseUtil;
+import com.becomejavasenior.bean.Address;
 import com.becomejavasenior.bean.Company;
+import com.becomejavasenior.bean.User;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyDAO<Company> {
@@ -49,8 +56,8 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
     public Company getEntity(ResultSet resultSet) throws DAOException{
 
         Company company = new Company();
-        AddressDAOImpl address = new AddressDAOImpl();
-        UserDAOImpl user = new UserDAOImpl();
+        AddressDAO<Address> addressDao = new AddressDAOImpl();
+        UserDAO<User> userDao = new UserDAOImpl();
 
         try{
             company.setId(resultSet.getInt("id"));
@@ -58,8 +65,8 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             company.setPhoneNumber(resultSet.getString("phone_number"));
             company.setEmail(resultSet.getString("email"));
             company.setWebsite(resultSet.getString("website"));
-//            company.setAddress(address.getById(resultSet.getInt("address_id")));
-            company.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
+            company.setAddress(addressDao.getById(resultSet.getInt("address_id")));
+            company.setResponsibleUser(userDao.getById(resultSet.getInt("responsible_user_id")));
             company.setDeleted(resultSet.getBoolean("is_deleted"));
 
         } catch (SQLException e){
@@ -92,6 +99,21 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
 
     @Override
     public List<Company> getByFilter(String query) {
-        return null;
+        List<Company> companyList = new ArrayList<Company>();
+
+        try {
+            Connection connection = DataBaseUtil.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                companyList.add(getEntity(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+
+        return companyList;
     }
 }

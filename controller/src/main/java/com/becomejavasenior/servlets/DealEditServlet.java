@@ -81,11 +81,12 @@ public class DealEditServlet extends HttpServlet {
         File attachedFile = getFileFromRequest(request);
 
         try {
-            dealService.createNewDeal(deal, contact, task, company, attachedFile);
+            dealService.update(deal);
+//            dealService.createNewDeal(deal, contact, task, company, attachedFile);
         } catch (DAOException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
         }
         response.sendRedirect("/deal");
     }

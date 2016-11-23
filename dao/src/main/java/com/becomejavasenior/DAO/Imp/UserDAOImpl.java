@@ -25,6 +25,7 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO<User> 
             preparedStatement.setBoolean(8, user.isNotification());
             preparedStatement.setString(9, user.getNote());
             preparedStatement.setDate(10, (Date) user.getDateCreate());
+//            preparedStatement.setInt(11, user.getLanguage().getId());
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,7 +54,25 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO<User> 
 
     @Override
     User getEntity(ResultSet resultSet) throws DAOException {
-        return null;
+        User user = new User();
+        try {
+            user.setId(resultSet.getInt("id"));
+            user.setlName(resultSet.getString("last_name"));
+            user.setfName(resultSet.getString("first_name"));
+            user.setPassword(resultSet.getString("password_hash"));
+            user.setEmail(resultSet.getString("email"));
+            user.setAdmin(resultSet.getBoolean("is_admin"));
+            user.setRights(resultSet.getInt("rights"));
+            user.setPhotoPath(resultSet.getString("photo_path"));
+            user.setNotification(resultSet.getBoolean("is_notification_enabled"));
+            user.setNote(resultSet.getString("note"));
+            user.setDateCreate(resultSet.getDate("creation_date_time"));
+//            user.setLanguage(resultSet.getInt("language_id"));
+
+        } catch (SQLException e) {
+            throw new DAOException("Can't get entity from Deal", e);
+        }
+        return user;
     }
 
     @Override
@@ -114,10 +133,10 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO<User> 
         return null;
     }
 
-    @Override
-    public User getById(Integer id) throws DAOException {
-        return super.getById(id);
-    }
+//    @Override
+//    public User getById(Integer id) throws DAOException {
+//        return super.getById(id);
+//    }
 
     @Override
     public User update(User entity) throws DAOException {

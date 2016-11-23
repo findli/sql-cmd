@@ -1,7 +1,6 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.DAOException;
-import com.becomejavasenior.DAO.DealDAO;
+import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.exceptions.DatabaseException;
@@ -66,9 +65,9 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
     @Override
     Deal getEntity(ResultSet resultSet) throws DAOException {
         Deal deal = new Deal();
-        CompanyDAOImpl company = new CompanyDAOImpl();
-        StageDAOImpl stage = new StageDAOImpl();
-        UserDAOImpl user = new UserDAOImpl();
+        CompanyDAO<Company> company = new CompanyDAOImpl();
+        StageDAO<Stage> stage = new StageDAOImpl();
+        UserDAO<User> user = new UserDAOImpl();
         try {
             deal.setId(resultSet.getInt("id"));
             deal.setCompany(company.getById(resultSet.getInt("company_id")));

@@ -171,4 +171,5 @@ public class Company implements Serializable {
     public void setDeals(List<Deal> deals) {
         this.deals = deals;
     }
+
 }

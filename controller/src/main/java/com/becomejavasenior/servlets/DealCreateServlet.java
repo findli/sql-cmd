@@ -74,12 +74,14 @@ public class DealCreateServlet extends HttpServlet{
         deal.setResponsibleUser(user);
 
         deal.setCreateDate(new Date());
+        deal.setDeleted(false);
 
         String noteContent = request.getParameter("noteDeal");
         if (!noteContent.isEmpty()) {
             List<Note> noteList = new ArrayList<>();
             Note note = new Note();
             note.setNoteText(request.getParameter("noteDeal"));
+            note.setDeleted(false);
 
             note.setDateCreate(new Date());
             User creator = new User();
@@ -108,6 +110,7 @@ public class DealCreateServlet extends HttpServlet{
     private Company getCompanyFromRequest(HttpServletRequest request) {
         Company company = new Company();
         company.setTitle(request.getParameter("companyDeal"));
+        System.out.println("company = " + company.getTitle());
         return company;
     }
     private File getFileFromRequest(HttpServletRequest request) {
