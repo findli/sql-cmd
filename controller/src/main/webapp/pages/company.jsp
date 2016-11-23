@@ -5,12 +5,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../style/bootstrap.css">
-    <link rel="stylesheet" href="../style/reset.css">
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="style/bootstrap.css">
+    <link rel="stylesheet" href="style/reset.css">
+    <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="../style/bootstrap-datetimepicker.min.css"/>
+
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="style/bootstrap-datetimepicker.min.css" />
 
     <title>Company List</title>
 </head>
@@ -36,10 +41,10 @@
     <div class="wrapper">
         <div id="navbar">
             <ul>
-                <li><a href="/index.jsp" target="_self">Home</a></li>
-                <li><a href="/deal" target="_self">Deals</a></li>
+                <li><a href="#" target="_self">Home</a></li>
+                <li><a href="#" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
-                <li><a href="/contact" target="_self">Contacts</a></li>
+                <li><a href="#" target="_self">Contacts</a></li>
                 <li><a href="#" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
                 <li><a href="#" target="_self">Settings</a></li>
@@ -65,12 +70,12 @@
                                 <th>эл. почта</th>
                             </tr>
                             </thead>
-                            <tbody id="t_company">
+                            <tbody>
                             <c:forEach var="company" items="${companyList}">
-                                <tr data-href="/companyDetail?idCompany=${company.getId()}">
-                                    <td><c:out value="${company.getTitle()}"/></td>
-                                    <td><c:out value="${company.getPhoneNumber()}"/></td>
-                                    <td><c:out value="${company.getEmail()}"/></td>
+                                <tr>
+                                    <td><c:out value="${company.title}"/></td>
+                                    <td><c:out value="${company.phoneNumber}"/></td>
+                                    <td><c:out value="${company.email}"/></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -82,8 +87,13 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
+        $('#datetimepicker2').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
+    });
+</script>
+<script src="../js/bootstrap.js"></script>
 </body>
-<script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
-<script type="text/javascript" src="../js/scriptCompany.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
 </html>
