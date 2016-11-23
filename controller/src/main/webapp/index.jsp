@@ -8,5 +8,6 @@
 <body>
 CRM System<br>
     <a href="/deal">Deal</a>
+    <a href="/company">Company</a>
 </body>
 </html>
