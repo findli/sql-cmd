@@ -73,9 +73,9 @@
                             <tbody>
                             <c:forEach var="company" items="${companyList}">
                                 <tr>
-                                    <td><c:out value="${company.getTitle()}"/></td>
-                                    <td><c:out value="${company.getPhoneNumber()}"/></td>
-                                    <td><c:out value="${company.getEmail()}"/></td>
+                                    <td><c:out value="${company.title}"/></td>
+                                    <td><c:out value="${company.phoneNumber}"/></td>
+                                    <td><c:out value="${company.email}"/></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
