@@ -5,11 +5,13 @@ import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DAO.Imp.CompanyDAOImpl;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.service.CompanyService;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
 public class CompanyServiceImpl implements CompanyService {
 
+    public static Logger log = Logger.getLogger(CompanyServiceImpl.class);
 
     private CompanyDAO<Company> companyDAO = new CompanyDAOImpl();
 
@@ -22,6 +24,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     public List<Company> getAll() throws DAOException, ClassNotFoundException {
+        log.trace("getAll() in CompanyServiceImpl");
         return companyDAO.getAll();
     }
 

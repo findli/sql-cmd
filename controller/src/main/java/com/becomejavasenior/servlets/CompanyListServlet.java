@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name="CompanyListServlet", urlPatterns = "/company")
+@WebServlet(name="companyList", urlPatterns = "/company")
 public class CompanyListServlet extends HttpServlet {
 
     public static Logger log = Logger.getLogger(CompanyListServlet.class);
@@ -24,15 +24,16 @@ public class CompanyListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        log.trace("run doGet() in CompanyListServlet");
         HttpSession session = req.getSession();
         CompanyService companyService = new CompanyServiceImpl();
 
         List<Company> companyList = null;
 
         try {
-
+            log.trace("call getAll() from serice in CompanyListServlet");
             companyList = companyService.getAll();
-
+            System.out.println(companyList);
         } catch (DAOException e) {
 
             log.error("DAOException in CompanyListServlet in Controller layer", e);
@@ -44,7 +45,7 @@ public class CompanyListServlet extends HttpServlet {
         }
 
         session.setAttribute("companyList", companyList);
-        resp.sendRedirect("/company.jsp");
+        resp.sendRedirect("/companyList.jsp");
     }
 
 }
