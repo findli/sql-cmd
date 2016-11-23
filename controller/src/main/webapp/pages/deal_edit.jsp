@@ -53,7 +53,7 @@
 
         <div class="wrapper__aboutCompany">
             <div class="forms">
-                <form class="form-horizontal" role="form" method="post" action="/dealEdit" id="dealForm"
+                <form class="form-horizontal" role="form" method="post" action="/dealEdit" id="dealForm2"
                       enctype="multipart/form-data">
 
                     <!--Add deal-->
@@ -63,7 +63,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" value="${deal.title}" id="dealName" name="dealName">
+                                <input class="form-control" type="text" value="${deal.getTitle()}" id="dealNewName" name="dealNewName">
                             </div>
                         </div>
 
@@ -109,7 +109,7 @@
 
                     </div>
 
-                    <!--Add contact-->
+                    <!--Edit contact-->
                     <div class="forms--nDeal">
                         <h2>Edit contact</h2><br>
 

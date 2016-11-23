@@ -92,13 +92,14 @@ public class DealEditServlet extends HttpServlet {
     }
     private Deal getDealFromRequest(HttpServletRequest request) {
         Deal deal = new Deal();
-        deal.setTitle(request.getParameter("dealName"));
+        deal.setTitle(request.getParameter("dealNewName"));
+        System.out.println("deal name = " + deal.getTitle());
 
         User user = new User();
         user.setlName(request.getParameter("responsibleUser"));
         deal.setResponsibleUser(user);
 
-        System.out.println("dealBudget " + request.getParameter("dealBudget"));
+        System.out.println("dealBudget = " + request.getParameter("dealBudget"));
         int budget;
         if(request.getParameter("dealBudget")==null) {
             budget = 0;
@@ -133,7 +134,7 @@ public class DealEditServlet extends HttpServlet {
     }
     private Company getCompanyFromRequest(HttpServletRequest request) {
         Company company = new Company();
-        company.setTitle(request.getParameter("companyDeal"));
+        company.setTitle(request.getParameter("editDealCompanyName"));
         System.out.println("company = " + company.getTitle());
         return company;
     }

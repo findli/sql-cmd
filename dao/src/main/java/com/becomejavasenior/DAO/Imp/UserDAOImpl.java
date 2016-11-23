@@ -86,11 +86,6 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO<User> 
     }
 
     @Override
-    public User create(User entity) throws DAOException {
-        return super.create(entity);
-    }
-
-    @Override
     public void delete(Integer id) throws DAOException {
         super.delete(id);
     }
@@ -133,13 +128,4 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO<User> 
         return null;
     }
 
-//    @Override
-//    public User getById(Integer id) throws DAOException {
-//        return super.getById(id);
-//    }
-
-    @Override
-    public User update(User entity) throws DAOException {
-        return super.update(entity);
-    }
 }
