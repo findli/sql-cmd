@@ -7,5 +7,6 @@
 </head>
 <body>
 CRM System
+    <a href="companyList.jsp">Company List</a>
 </body>
 </html>

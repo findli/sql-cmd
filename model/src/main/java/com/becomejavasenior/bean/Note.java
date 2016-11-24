@@ -11,7 +11,6 @@ public class Note implements Serializable {
     private String noteText;
     private User createtByUserId;
     private Date dateCreate;
-    private List<File> files;
 
     public Note() {
     }
@@ -48,13 +47,6 @@ public class Note implements Serializable {
         this.dateCreate = dateCreate;
     }
 
-    public List<File> getFiles() {
-        return files;
-    }
-
-    public void setFiles(List<File> files) {
-        this.files = files;
-    }
 
     @Override
     public boolean equals(Object o) {

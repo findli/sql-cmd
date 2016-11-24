@@ -3,6 +3,7 @@ package com.becomejavasenior.DAO.Imp;
 import com.becomejavasenior.DAO.AbstractDAO;
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DataBaseUtil;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 
 public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
+    public static Logger log = Logger.getLogger(AbstractDAOImpl.class);
 
     @Override
     public T create(T entity) throws DAOException{
@@ -142,15 +144,20 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     @Override
     public List<T> getAll() throws DAOException{
+
+        log.trace("Call getAll() in AbstractDAOImpl");
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
         List<T> listEntity = new ArrayList<>();
         try {
+            log.trace("Open connection");
             connection = DataBaseUtil.getConnection();
             String query = getAllQuery();
+            log.trace("Create statement");
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
+            log.trace("Get resultset");
 
             while (resultSet.next()) {
                 listEntity.add(getEntity(resultSet));
@@ -160,17 +167,20 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             throw new DAOException("Can't get all Entity", e);
         } finally {
             if (preparedStatement != null) try {
+                log.trace("close statement");
                 preparedStatement.close();
             } catch (SQLException logOrIgnore) {
                 logOrIgnore.printStackTrace();
             }
             if (connection != null) try {
+                log.trace("close connection");
                 connection.close();
             } catch (SQLException logOrIgnore) {
                 logOrIgnore.printStackTrace();
             }
         }
 
+        log.trace("return List entity");
         return listEntity;
     }
 

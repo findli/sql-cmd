@@ -3,6 +3,7 @@ package com.becomejavasenior.DAO.Imp;
 import com.becomejavasenior.DAO.CompanyDAO;
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.bean.Company;
+import org.apache.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +11,9 @@ import java.sql.SQLException;
 
 public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyDAO<Company>{
 
-    public void createStatement(PreparedStatement statement, Company company) {
+    public static Logger log = Logger.getLogger(CompanyDAOImpl.class);
+
+    public void createStatement(PreparedStatement statement, Company company) throws DAOException{
 
         try{
 
@@ -20,8 +23,8 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             statement.setString(4, company.getWebsite());
             statement.setInt(5, company.getAdress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
-            statement.setBoolean(7, company.isDeleted());
-
+            statement.setBoolean(7, company.getIsDeleted());
+            log.trace("Created statement in CompanyDAOImpl");
         } catch (SQLException e) {
 
             throw new DAOException("Can't create statement for Company", e);
@@ -30,7 +33,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
 
     }
 
-    public void updateStatement(PreparedStatement statement, Company company) {
+    public void updateStatement(PreparedStatement statement, Company company) throws DAOException{
 
         try{
 
@@ -40,8 +43,8 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             statement.setString(4, company.getWebsite());
             statement.setInt(5, company.getAdress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
-            statement.setBoolean(7, company.isDeleted());
-
+            statement.setBoolean(7, company.getIsDeleted());
+            log.trace("Updated statement in CompanyDAOImpl");
         } catch (SQLException e) {
 
             throw new DAOException("Can't update statement for Company", e);
@@ -49,7 +52,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
         }
     }
 
-    public Company getEntity(ResultSet resultSet) {
+    public Company getEntity(ResultSet resultSet) throws DAOException{
 
         Company company = new Company();
         AddressDAOImpl address = new AddressDAOImpl();
@@ -64,8 +67,8 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             company.setWebsite(resultSet.getString("website"));
             company.setAdress(address.getById(resultSet.getInt("address_id")));
             company.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
-            company.setDeleted(resultSet.getBoolean("is_deleted"));
-
+            company.setIsDeleted(resultSet.getBoolean("is_deleted"));
+            log.trace("Get entity in CompanyDAOImpl");
         } catch (SQLException e){
 
             throw new DAOException("Can't get entity from Company", e);
@@ -91,6 +94,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
     }
 
     public String getAllQuery() {
+        log.trace("getAllQuerry() in CompanyDAOImpl");
         return "SELECT * FROM company";
     }
 }

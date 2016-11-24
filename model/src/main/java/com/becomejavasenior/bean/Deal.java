@@ -12,10 +12,6 @@ public class Deal implements Serializable {
     private Stage stage;
     private User responsibleUser;
     private boolean isDeleted;
-    private List<Task> dealTask;
-    private List<Tag> dealTag;
-    private List<Contact> dealContact;
-    private List<Note> dealNote;
 
     public Deal(){
 
@@ -77,37 +73,6 @@ public class Deal implements Serializable {
         this.isDeleted = deleted;
     }
 
-    public List<Task> getDealTask() {
-        return dealTask;
-    }
-
-    public void setDealTask(List<Task> dealTask) {
-        this.dealTask = dealTask;
-    }
-
-    public List<Tag> getDealTag() {
-        return dealTag;
-    }
-
-    public void setDealTag(List<Tag> dealTag) {
-        this.dealTag = dealTag;
-    }
-
-    public List<Contact> getDealContact() {
-        return dealContact;
-    }
-
-    public void setDealContact(List<Contact> dealContact) {
-        this.dealContact = dealContact;
-    }
-
-    public List<Note> getDealNote() {
-        return dealNote;
-    }
-
-    public void setDealNote(List<Note> dealNote) {
-        this.dealNote = dealNote;
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -13,10 +13,8 @@ public class Company implements Serializable {
     private String website;
     private Adress adress;
     private User responsibleUser;
-    private List<Tag> tags;
-    private List<Note> notes;
-    private List<Task> tasks;
-    private List<Contact> contacts;
+    private Boolean isDeleted;
+
 
     public Company() {
     }
@@ -77,36 +75,12 @@ public class Company implements Serializable {
         this.responsibleUser = responsibleUser;
     }
 
-    public List<Tag> getTags() {
-        return tags;
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
-    }
-
-    public List<Note> getNotes() {
-        return notes;
-    }
-
-    public void setNotes(List<Note> notes) {
-        this.notes = notes;
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    public List<Contact> getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
+    public Boolean getIsDeleted() {
+        return isDeleted;
     }
 
     @Override
@@ -146,6 +120,7 @@ public class Company implements Serializable {
                 ", website='" + website + '\'' +
                 ", adress=" + adress +
                 ", responsibleUser=" + responsibleUser +
+                ", isDeleted=" + isDeleted +
                 '}';
     }
 }
