@@ -3,7 +3,6 @@ package com.becomejavasenior.bean;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 public class Note implements Serializable {
 
@@ -11,8 +10,18 @@ public class Note implements Serializable {
     private String noteText;
     private User createtByUserId;
     private Date dateCreate;
+    private boolean isDeleted;
+
 
     public Note() {
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     public int getId() {
@@ -46,7 +55,6 @@ public class Note implements Serializable {
     public void setDateCreate(Date dateCreate) {
         this.dateCreate = dateCreate;
     }
-
 
     @Override
     public boolean equals(Object o) {

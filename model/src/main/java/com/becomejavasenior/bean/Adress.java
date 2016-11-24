@@ -2,7 +2,7 @@ package com.becomejavasenior.bean;
 
 import java.io.Serializable;
 
-public class Address implements Serializable {
+public class Adress implements Serializable {
 
     private int id;
     private String country;
@@ -12,7 +12,7 @@ public class Address implements Serializable {
     private int zipcode;
     private String officeRoom;
 
-    public Address() {
+    public Adress() {
     }
 
     public int getId() {
@@ -76,7 +76,7 @@ public class Address implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Address adress = (Address) o;
+        Adress adress = (Adress) o;
 
         if (id != adress.id) return false;
         if (zipcode != adress.zipcode) return false;

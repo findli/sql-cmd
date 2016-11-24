@@ -31,7 +31,7 @@ public class CompanyListServlet extends HttpServlet {
         List<Company> companyList = null;
 
         try {
-            log.trace("call getAll() from serice in CompanyListServlet");
+            log.trace("call getAll() from service in CompanyListServlet");
             companyList = companyService.getAll();
             System.out.println(companyList);
         } catch (DAOException e) {

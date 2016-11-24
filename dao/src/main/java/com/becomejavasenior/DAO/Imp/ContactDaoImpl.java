@@ -1,11 +1,17 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.*;
+import com.becomejavasenior.DAO.CompanyDAO;
+import com.becomejavasenior.DAO.CompanyDao;
+import com.becomejavasenior.DAO.ContactDAO;
+import com.becomejavasenior.DAO.ContactDao;
+import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
+import com.becomejavasenior.DAO.UserDAO;
+import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.Contact;
 import com.becomejavasenior.bean.User;
-import com.becomejavasenior.factory.PostgresDaoFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -25,7 +31,7 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             preparedStatement.setInt(6, contact.getCompany().getId());
             preparedStatement.setInt(7, contact.getResponsibleUser().getId());
 //            preparedStatement.setDate(8, new Date(contact.getCreated().getTime()) );
-            preparedStatement.setBoolean(8, contact.isDeleted());
+            preparedStatement.setBoolean(8, contact.is_deleted());
             preparedStatement.setInt(9, contact.getId());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -44,16 +50,11 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             preparedStatement.setInt(6, contact.getCompany().getId());
             preparedStatement.setInt(7, contact.getResponsibleUser().getId());
 //            preparedStatement.setDate(8, new Date(contact.getUpdated().getTime()));
-            preparedStatement.setBoolean(8, contact.isDeleted());
+            preparedStatement.setBoolean(8, contact.is_deleted());
             preparedStatement.setInt(9, contact.getId());
-        } catch (SQLException e) {
+            } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public Contact getByName(String str) throws DaoException, ClassNotFoundException {
-        return null;
     }
 
     @Override
@@ -138,41 +139,6 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         }
 
         return contactList;
-    }
-
-    @Override
-    public List<Contact> getContactsForList(int id) {
-        List<Contact> contacts = new ArrayList<>();
-        Contact contact;
-        Company company;
-        User user;
-
-        try (Connection connection = PostgresDaoFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM crm_pallas.contact where company_id = ?")) {
-            statement.setInt(1,id);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                company = new Company();
-                contact = new Contact();
-                user = new User();
-                contact.setId(resultSet.getInt("id"));
-                contact.setfName(resultSet.getString("first_name"));
-                contact.setlName(resultSet.getString("last_name"));
-                company.setId(resultSet.getInt("company_id"));
-                contact.setCompany(company);
-                contact.setPosition(resultSet.getString("post"));
-                contact.setEmail(resultSet.getString("email"));
-                contact.setSkype(resultSet.getString("skype"));
-                user.setId(resultSet.getInt("responsible_user_id"));
-                contact.setResponsibleUser(user);
-                contact.setDeleted(resultSet.getBoolean("is_deleted"));
-                contacts.add(contact);
-            }
-        } catch (SQLException ex) {
-            throw new DatabaseException(ex);
-        }
-
-        return contacts;
     }
 
     // TODO Write queries to filter

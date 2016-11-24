@@ -1,18 +1,18 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.AddressDao;
-import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.bean.Address;
+import com.becomejavasenior.DAO.AddressDAO;
+import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.bean.Adress;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressDao<Address> {
+public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDAO<Adress> {
 
     @Override
-    public void createStatement(PreparedStatement statement, Address address) throws DaoException {
+    public void createStatement(PreparedStatement statement, Adress address) throws DAOException{
 
         try {
 
@@ -25,13 +25,13 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
 
         } catch (SQLException e) {
 
-            throw new DaoException("Can't create statement for Address", e);
+            throw new DAOException("Can't create statement for Address", e);
 
         }
     }
 
     @Override
-    public void updateStatement(PreparedStatement statement, Address address) throws DaoException {
+    public void updateStatement(PreparedStatement statement, Adress address) throws DAOException{
 
         try {
 
@@ -41,24 +41,18 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
             statement.setString(4, address.getBuildNum());
             statement.setInt(5, address.getZipcode());
             statement.setString(6, address.getOfficeRoom());
-            statement.setInt(7, address.getId());
 
         } catch (SQLException e) {
 
-            throw new DaoException("Can't update statement for Address", e);
+            throw new DAOException("Can't update statement for Address", e);
 
         }
     }
 
     @Override
-    public Address getByName(String str) throws DaoException, ClassNotFoundException {
-        return null;
-    }
+    public Adress getEntity(ResultSet resultSet) throws DAOException{
 
-    @Override
-    public Address getEntity(ResultSet resultSet) throws DaoException {
-
-        Address address = new Address();
+        Adress address = new Adress();
 
         try {
 
@@ -72,7 +66,7 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
 
         } catch (SQLException e){
 
-            throw new DaoException("Can't get entity for Address", e);
+            throw new DAOException("Can't get entity for Address", e);
 
         }
 
@@ -84,7 +78,7 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
     }
 
     public String getUpdateQuery() {
-        return "UPDATE crm_pallas.address SET country = ?, city = ?, street = ?, building_number = ?, zipcode = ?, office_room = ? WHERE id = ?";
+        return "UPDATE crm_pallas.address SET country = ?, city = ?, street = ?, building_number = ?, zipcode = ?, office_room = ?";
     }
 
     public String getDeleteQuery() {
@@ -100,7 +94,7 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
     }
 
     @Override
-    public List<Address> getByFilter(String query) {
+    public List<Adress> getByFilter(String query) {
         return null;
     }
 

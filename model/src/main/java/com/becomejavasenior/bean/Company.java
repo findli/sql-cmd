@@ -1,7 +1,6 @@
 package com.becomejavasenior.bean;
 
 import java.io.Serializable;
-import java.util.List;
 
 
 public class Company implements Serializable {
@@ -11,10 +10,9 @@ public class Company implements Serializable {
     private String phoneNumber;
     private String email;
     private String website;
-    private Adress adress;
+    private Adress address;
     private User responsibleUser;
     private Boolean isDeleted;
-
 
     public Company() {
     }
@@ -59,12 +57,17 @@ public class Company implements Serializable {
         this.website = website;
     }
 
-    public Adress getAdress() {
-        return adress;
+
+    public Adress getAddress() {
+        return address;
     }
 
-    public void setAdress(Adress adress) {
-        this.adress = adress;
+    public void setAddress(Adress address) {
+        this.address = address;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
     }
 
     public User getResponsibleUser() {
@@ -95,7 +98,8 @@ public class Company implements Serializable {
         if (phoneNumber != null ? !phoneNumber.equals(company.phoneNumber) : company.phoneNumber != null) return false;
         if (email != null ? !email.equals(company.email) : company.email != null) return false;
         if (website != null ? !website.equals(company.website) : company.website != null) return false;
-        return adress != null ? adress.equals(company.adress) : company.adress == null;
+
+        return address != null ? address.equals(company.address) : company.address == null;
 
     }
 
@@ -106,7 +110,7 @@ public class Company implements Serializable {
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (website != null ? website.hashCode() : 0);
-        result = 31 * result + (adress != null ? adress.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
     }
 
@@ -118,9 +122,12 @@ public class Company implements Serializable {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", website='" + website + '\'' +
-                ", adress=" + adress +
+                ", adress=" + address +
                 ", responsibleUser=" + responsibleUser +
                 ", isDeleted=" + isDeleted +
                 '}';
     }
+
 }
+
+

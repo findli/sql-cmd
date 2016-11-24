@@ -1,7 +1,6 @@
 package com.becomejavasenior.bean;
 
 import java.io.Serializable;
-import java.util.List;
 
 
 public class Contact implements Serializable {
@@ -15,7 +14,6 @@ public class Contact implements Serializable {
     private String email;
     private User responsibleUser;
     private boolean isDeleted;
-
 
     public Contact() {
     }
@@ -92,7 +90,6 @@ public class Contact implements Serializable {
         this.isDeleted = deleted;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -131,6 +128,7 @@ public class Contact implements Serializable {
                 ", skype='" + skype + '\'' +
                 ", email='" + email + '\'' +
                 ", company=" + company.getTitle() +
+                ", responsibleUser=" + responsibleUser.getfName() + " " + responsibleUser.getlName() + '\'' +
                 '}';
     }
 }

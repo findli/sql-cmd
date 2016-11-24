@@ -28,7 +28,7 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
     void createStatement(PreparedStatement preparedStatement, Note note) throws DaoException {
         try {
             preparedStatement.setString(1, note.getNoteText());
-            preparedStatement.setInt(2, note.getCreatedUser().getId());
+            preparedStatement.setInt(2, note.getCreatetByUserId().getId());
             preparedStatement.setTimestamp(3, new Timestamp(note.getDateCreate().getTime()));
             preparedStatement.setBoolean(4, note.isDeleted());
 
@@ -41,7 +41,7 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
     void updateStatement(PreparedStatement preparedStatement, Note note) throws DaoException {
         try {
             preparedStatement.setString(1, note.getNoteText());
-            preparedStatement.setInt(2, note.getCreatedUser().getId());
+            preparedStatement.setInt(2, note.getCreatetByUserId().getId());
             preparedStatement.setTimestamp(3, new Timestamp(note.getDateCreate().getTime()));
             preparedStatement.setBoolean(4, note.isDeleted());
 
@@ -99,7 +99,7 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
 
                 note.setId(resultSet.getInt("id"));
                 createdUser.setId(resultSet.getInt("created_by_user_id"));
-                note.setCreatedUser(createdUser);
+                note.setCreatetByUserId(createdUser);
                 note.setNoteText(resultSet.getString("note_text"));
                 note.setDateCreate(resultSet.getDate("creation_date_time"));
                 note.setDeleted(resultSet.getBoolean("is_deleted"));
