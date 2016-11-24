@@ -167,9 +167,8 @@
                                 </thead>
                                 <tbody id="t_deals">
                                 <c:forEach var="deal" items="${dealList}">
-                                    <%--<tr id="idElement?idDeal=${deal.id}" class="rowlink" onclick="window.location.href='/dealEdit'; return false">--%>
-                                    <tr data-href="/dealEdit?idDeal=${deal.getId()}">
-                                    <%--<tr>--%>
+                                    <tr class="rowlink" onclick="window.location.href='/dealEdit?idDeal=${deal.getId()}'; return false">
+                                    <%--<tr data-href="/dealEdit?idDeal=${deal.getId()}">--%>
                                         <td class="item"><c:out value="${deal.title}"/></td>
                                         <td><c:out value="${deal.getPrimaryContact().getlName()}"/></td>
                                         <td><c:out value="${deal.getCompany().getTitle()}"/></td>
