@@ -22,6 +22,7 @@ public class User implements Serializable {
     public User() {
     }
 
+<<<<<<< HEAD
     public int getId() {
         return id;
     }
@@ -29,6 +30,16 @@ public class User implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+=======
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
+
+    public boolean isAdmin() { return isAdmin; }
+
+    public boolean isNotification() { return isNotification; }
+>>>>>>> d80b510610f3099333cb46c2d4958fca80808ef8
 
     public String getfName() {
         return fName;

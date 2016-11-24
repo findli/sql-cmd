@@ -2,7 +2,11 @@ package com.becomejavasenior.bean;
 
 import java.io.Serializable;
 
+<<<<<<< HEAD:model/src/main/java/com/becomejavasenior/bean/Adress.java
 public class Adress implements Serializable {
+=======
+public class Address implements Serializable {
+>>>>>>> d80b510610f3099333cb46c2d4958fca80808ef8:model/src/main/java/com/becomejavasenior/bean/Address.java
 
     private int id;
     private String country;
@@ -13,10 +17,16 @@ public class Adress implements Serializable {
     private String officeRoom;
 
 
+<<<<<<< HEAD:model/src/main/java/com/becomejavasenior/bean/Adress.java
     public Adress() {
     }
 
 
+=======
+    public Address() {
+    }
+
+>>>>>>> d80b510610f3099333cb46c2d4958fca80808ef8:model/src/main/java/com/becomejavasenior/bean/Address.java
     public int getId() {
         return id;
     }
@@ -73,12 +83,16 @@ public class Adress implements Serializable {
         this.officeRoom = officeRoom;
     }
 
+<<<<<<< HEAD:model/src/main/java/com/becomejavasenior/bean/Adress.java
 
+=======
+>>>>>>> d80b510610f3099333cb46c2d4958fca80808ef8:model/src/main/java/com/becomejavasenior/bean/Address.java
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
+<<<<<<< HEAD:model/src/main/java/com/becomejavasenior/bean/Adress.java
         Adress adress = (Adress) o;
 
         if (id != adress.id) return false;
@@ -88,6 +102,17 @@ public class Adress implements Serializable {
         if (street != null ? !street.equals(adress.street) : adress.street != null) return false;
         if (buildNum != null ? !buildNum.equals(adress.buildNum) : adress.buildNum != null) return false;
         return officeRoom != null ? officeRoom.equals(adress.officeRoom) : adress.officeRoom == null;
+=======
+        Address address = (Address) o;
+
+        if (id != address.id) return false;
+        if (zipcode != address.zipcode) return false;
+        if (country != null ? !country.equals(address.country) : address.country != null) return false;
+        if (city != null ? !city.equals(address.city) : address.city != null) return false;
+        if (street != null ? !street.equals(address.street) : address.street != null) return false;
+        if (buildNum != null ? !buildNum.equals(address.buildNum) : address.buildNum != null) return false;
+        return officeRoom != null ? officeRoom.equals(address.officeRoom) : address.officeRoom == null;
+>>>>>>> d80b510610f3099333cb46c2d4958fca80808ef8:model/src/main/java/com/becomejavasenior/bean/Address.java
 
     }
 
@@ -106,7 +131,11 @@ public class Adress implements Serializable {
 
     @Override
     public String toString() {
+<<<<<<< HEAD:model/src/main/java/com/becomejavasenior/bean/Adress.java
         return "Adress{" +
+=======
+        return "Address{" +
+>>>>>>> d80b510610f3099333cb46c2d4958fca80808ef8:model/src/main/java/com/becomejavasenior/bean/Address.java
                 "id=" + id +
                 ", country='" + country + '\'' +
                 ", city='" + city + '\'' +

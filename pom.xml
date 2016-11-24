@@ -1,12 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>crm</groupId>
-  <artifactId>crm-system</artifactId>
-  <packaging>pom</packaging>
-  <version>1.0-SNAPSHOT</version>
-
-  <build>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>crm</groupId>
+    <artifactId>crm-system</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -17,18 +16,6 @@
                 </configuration>
             </plugin>
             <!--Heroku-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.3</version>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <goals><goal>copy-dependencies</goal></goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -51,16 +38,15 @@
                 </executions>
             </plugin>
         </plugins>
-  </build>
+    </build>
+    <modules>
+        <module>controller</module>
+        <module>dao</module>
+        <module>model</module>
+        <module>service</module>
+    </modules>
 
-  <modules>
-    <module>controller</module>
-    <module>dao</module>
-    <module>model</module>
-    <module>service</module>
-  </modules>
-
-  <name>CRM Maven Webapp</name>
+    <name>CRM Maven Webapp</name>
 
     <dependencies>
         <!-- Put here PostgreSQL connector dependency-->

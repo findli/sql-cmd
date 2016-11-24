@@ -22,10 +22,10 @@ public class CompanyListServlet extends HttpServlet {
     public static Logger log = Logger.getLogger(CompanyListServlet.class);
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         log.trace("run doGet() in CompanyListServlet");
-        HttpSession session = req.getSession();
+        HttpSession session = request.getSession();
         CompanyService companyService = new CompanyServiceImpl();
 
         List<Company> companyList = null;
@@ -45,10 +45,14 @@ public class CompanyListServlet extends HttpServlet {
         }
 
         session.setAttribute("companyList", companyList);
+<<<<<<< HEAD
         req.getRequestDispatcher("companyList.jsp").forward(req, resp);
         resp.sendRedirect("/companyList.jsp");
         req.setAttribute("companyList", companyList);
 
+=======
+        response.sendRedirect("/pages/companyList.jsp");
+>>>>>>> d80b510610f3099333cb46c2d4958fca80808ef8
     }
 
 }
