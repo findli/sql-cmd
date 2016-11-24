@@ -15,9 +15,15 @@ public class Contact implements Serializable {
     private String email;
     private User responsibleUser;
     private boolean isDeleted;
-
+    private List<Task> tasks;
+    private List<EventHistory> events;
+    private List<Phone> phoneNumbers;
 
     public Contact() {
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
     public int getId() {
@@ -92,6 +98,29 @@ public class Contact implements Serializable {
         this.isDeleted = deleted;
     }
 
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public List<EventHistory> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<EventHistory> events) {
+        this.events = events;
+    }
+
+    public List<Phone> getPhoneNumbers() {
+        return phoneNumbers;
+    }
+
+    public void setPhoneNumbers(List<Phone> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -126,11 +155,11 @@ public class Contact implements Serializable {
                 "id=" + id +
                 ", name='" + fName + '\'' +
                 ", Surname='" + lName + '\'' +
-                ", responsibleUser=" + responsibleUser.getfName() + " " + responsibleUser.getlName() + '\'' +
+//                ", responsibleUser=" + responsibleUser.getfName() + " " + responsibleUser.getlName() + '\'' +
                 ", position='" + position + '\'' +
                 ", skype='" + skype + '\'' +
                 ", email='" + email + '\'' +
-                ", company=" + company.getTitle() +
+//                ", company=" + company.getTitle() +
                 '}';
     }
 }

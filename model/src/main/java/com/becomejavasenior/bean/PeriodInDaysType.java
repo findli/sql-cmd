@@ -1,8 +1,10 @@
 package com.becomejavasenior.bean;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class PeriodInDaysType implements Serializable {
+
     private int id;
     private String title;
     private int daysInPeriod;
@@ -37,22 +39,16 @@ public class PeriodInDaysType implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (!(o instanceof PeriodInDaysType)) return false;
         PeriodInDaysType that = (PeriodInDaysType) o;
-
-        if (id != that.id) return false;
-        if (daysInPeriod != that.daysInPeriod) return false;
-        return title != null ? title.equals(that.title) : that.title == null;
-
+        return id == that.id &&
+                daysInPeriod == that.daysInPeriod &&
+                Objects.equals(title, that.title);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + daysInPeriod;
-        return result;
+        return Objects.hash(id, title, daysInPeriod);
     }
 
     @Override

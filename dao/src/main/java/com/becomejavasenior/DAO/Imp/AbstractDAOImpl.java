@@ -31,7 +31,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
                 createEntity = getById(generatedId);
             }
         } catch (SQLException e) {
-            throw new DAOException("Can't create Entity", e);
+            throw new DAOException("Can't create Entity " + entity, e);
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -143,9 +143,10 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
     abstract T getEntity(ResultSet resultSet) throws DAOException;
 
     @Override
-    public List<T> getAll() throws DAOException{
+    public List<T> getAll() throws DAOException, ClassNotFoundException {
 
         log.trace("Call getAll() in AbstractDAOImpl");
+
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
@@ -194,5 +195,6 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     abstract String getAllQuery();
 
+    public abstract List<T> getByFilter(String query);
 
 }

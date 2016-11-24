@@ -6,7 +6,8 @@
     <title></title>
 </head>
 <body>
-CRM System
-    <a href="/company">Company List</a>
+CRM System<br>
+    <a href="/deal">Deal</a>
+    <a href="/company">Company</a>
 </body>
 </html>

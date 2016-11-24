@@ -8,6 +8,7 @@ import com.becomejavasenior.bean.PeriodInDaysType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class PeriodInDaysTypeDAOImpl extends AbstractDAOImpl<PeriodInDaysType> implements PeriodInDaysTypeDAO<PeriodInDaysType> {
 
@@ -29,6 +30,11 @@ public class PeriodInDaysTypeDAOImpl extends AbstractDAOImpl<PeriodInDaysType> i
     @Override
     public String getAllQuery(){
         return "SELECT * FROM period_in_days_type";
+    }
+
+    @Override
+    public List<PeriodInDaysType> getByFilter(String query) {
+        return null;
     }
 
     @Override
