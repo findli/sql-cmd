@@ -11,11 +11,9 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
-    <link rel="stylesheet" href="../js/script.js">
+
+    <%--<script type="text/javascript" src="../js/bootstrap.js"></script>--%>
+    <%--<link rel="stylesheet" href="../js/script.js">--%>
     <%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>--%>
     <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
 
@@ -146,7 +144,7 @@
                     <div class="col-md-12">
                             <a href="/funnel" class="btn btn-primary">Funnel</a>
                             <a href="/deal" class="btn btn-primary">List</a>
-                            <a href="/dealCreate" class="btn btn-primary pull-center">Add deal</a>
+                            <a href="/pages/deal_add.jsp" class="btn btn-primary pull-center">Add deal</a>
                     </div>
 
                     <%--<input class="formAddBut" type="button" value="Add deal" align="right">--%>
@@ -167,8 +165,8 @@
                                 </thead>
                                 <tbody id="t_deals">
                                 <c:forEach var="deal" items="${dealList}">
-                                    <tr class="rowlink" onclick="window.location.href='/dealEdit?idDeal=${deal.getId()}'; return false">
-                                    <%--<tr data-href="/dealEdit?idDeal=${deal.getId()}">--%>
+                                    <%--<tr class="rowlink" onclick="window.location.href='/dealEdit?idDeal=${deal.getId()}'; return false">--%>
+                                    <tr data-href="/dealEdit?idDeal=${deal.getId()}">
                                         <td class="item"><c:out value="${deal.title}"/></td>
                                         <td><c:out value="${deal.getPrimaryContact().getlName()}"/></td>
                                         <td><c:out value="${deal.getCompany().getTitle()}"/></td>
@@ -193,11 +191,16 @@
 
     });
 </script>
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../js/bootstrap.js"></script>
 </body>
-<!-- <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script> -->
+
+<script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
+<script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+
 </html>

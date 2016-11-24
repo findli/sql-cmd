@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Deprecated
 @WebServlet(name = "dealCreateServlet", urlPatterns = "/dealCreate")
 @MultipartConfig(maxFileSize = 102400)
 public class DealCreateServlet extends HttpServlet{
@@ -27,20 +28,20 @@ public class DealCreateServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        CompanyService companyService = new CompanyServiceImpl();
-
-        List<Company> companyList = null;
-
-        try {
-            companyList = companyService.getAll();
-        } catch (DAOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        session.setAttribute("companyList", companyList);
+//        HttpSession session = request.getSession();
+//        CompanyService companyService = new CompanyServiceImpl();
+//
+//        List<Company> companyList = null;
+//
+//        try {
+//            companyList = companyService.getAll();
+//        } catch (DAOException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//
+//        session.setAttribute("companyList", companyList);
         request.getRequestDispatcher("/pages/deal_add.jsp").forward(request, response);
 
     }
