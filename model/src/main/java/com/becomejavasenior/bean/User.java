@@ -3,7 +3,6 @@ package com.becomejavasenior.bean;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 public class User implements Serializable {
 
@@ -19,26 +18,17 @@ public class User implements Serializable {
     private String note;
     private Date dateCreate;
     private Language language;
-    private List<Deal> deals;
-    private List<Task> tasks;
-    private List<Company> companies;
-    private List<LoginHistory> loginHistories;
-    private List<Contact> contacts;
-    private List<EventHistory> eventHistories;
-    private List<Note> notes;
-    private List<Phone> phones;
 
     public User() {
     }
 
+    public int getId() {
+        return id;
+    }
 
-    public int getId() { return id; }
-
-    public void setId(int id) { this.id = id; }
-
-    public boolean isAdmin() { return isAdmin; }
-
-    public boolean isNotification() { return isNotification; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getfName() {
         return fName;
@@ -126,78 +116,6 @@ public class User implements Serializable {
 
     public void setLanguage(Language language) {
         this.language = language;
-    }
-
-    public void setIsAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
-    }
-
-    public void setIsNotification(boolean isNotification) {
-        this.isNotification = isNotification;
-    }
-
-    public void setDeals(List<Deal> userDeals) {
-        this.deals = userDeals;
-    }
-
-    public void setTasks(List<Task> userTasks) {
-        this.tasks = userTasks;
-    }
-
-    public void setCompanies(List<Company> userCompanys) {
-        this.companies = userCompanys;
-    }
-
-    public void setLoginHistories(List<LoginHistory> userLoginHistory) {
-        this.loginHistories = userLoginHistory;
-    }
-
-    public void setContacts(List<Contact> userContacts) {
-        this.contacts = userContacts;
-    }
-
-    public void setEventHistories(List<EventHistory> userEventHistory) {
-        this.eventHistories = userEventHistory;
-    }
-
-    public void setNotes(List<Note> userNotes) {
-        this.notes = userNotes;
-    }
-
-    public List<Deal> getDeals() {
-        return deals;
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public List<Company> getCompanies() {
-        return companies;
-    }
-
-    public List<LoginHistory> getLoginHistories() {
-        return loginHistories;
-    }
-
-    public List<Contact> getContacts() {
-        return contacts;
-    }
-
-    public List<EventHistory> getEventHistories() {
-        return eventHistories;
-    }
-
-    public List<Note> getNotes() {
-        return notes;
-    }
-
-    public void setPhones(List<Phone> phones) {
-        this.phones = phones;
-    }
-
-    public List<Phone> getPhones() {
-        return phones;
     }
 
     @Override

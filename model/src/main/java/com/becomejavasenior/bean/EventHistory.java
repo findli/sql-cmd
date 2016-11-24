@@ -76,7 +76,6 @@ public class EventHistory implements Serializable{
         if (objectId != that.objectId) return false;
         if (eventObject != that.eventObject) return false;
         if (eventAction != that.eventAction) return false;
-        if (promotedUser != that.promotedUser) return false;
         return date != null ? date.equals(that.date) : that.date == null;
 
     }
@@ -88,7 +87,6 @@ public class EventHistory implements Serializable{
         result = 31 * result + (eventAction != null ? eventAction.hashCode() : 0);
         result = 31 * result + objectId;
         result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (promotedUser != null ? promotedUser.hashCode() : 0);
         return result;
     }
 
