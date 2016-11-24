@@ -145,7 +145,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
-        List<T> listEntity = new ArrayList<>();
+        List<T> listEntity = new ArrayList<T>();
         try {
             connection = DataBaseUtil.getConnection();
             String query = getAllQuery();
