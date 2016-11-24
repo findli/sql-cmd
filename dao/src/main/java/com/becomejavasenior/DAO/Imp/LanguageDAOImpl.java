@@ -8,6 +8,7 @@ import com.becomejavasenior.bean.Language;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class LanguageDAOImpl extends AbstractDAOImpl<Language> implements LanguageDAO<Language> {
 
@@ -29,6 +30,11 @@ public class LanguageDAOImpl extends AbstractDAOImpl<Language> implements Langua
     @Override
     public String getAllQuery() {
         return "SELECT * FROM language";
+    }
+
+    @Override
+    public List<Language> getByFilter(String query) {
+        return null;
     }
 
     @Override

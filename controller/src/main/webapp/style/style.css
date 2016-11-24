@@ -1,15 +1,9 @@
-<<<<<<< HEAD
-p, h3, h4, a, table, span {
-    font-family: "Helvetic Neue", Helvetica, Arial;
-    color: black;
-=======
 p, h2, h3, h4, a, table, span {
     font-family: "Helvetic Neue", Helvetica, Arial;
 }
 
 h2 {
     color: blue;
->>>>>>> alexander_palko
 }
 
 input {
@@ -29,14 +23,8 @@ body {
 .wrapper {
     width: 1140px;
     margin: 0 auto;
-<<<<<<< HEAD
-    min-height: 990px;
-    background: white;
-    overflow: hidden;
-=======
     height: 990px;
     background: white;
->>>>>>> alexander_palko
 }
 
 header {
@@ -146,8 +134,6 @@ Navigation
     width: 940px;
     float: left;
 }
-<<<<<<< HEAD
-=======
 /* ==========================================================================
 Forms List Contact Filter
 ========================================================================== */
@@ -176,26 +162,18 @@ Forms List Contact Filter
     height: 30px;
     width: 150px;
 }
->>>>>>> alexander_palko
 
 /* ==========================================================================
 Forms New company
 ========================================================================== */
 
 .forms--nCompany {
-<<<<<<< HEAD
-    width: 385px;
-    margin: 5px 0 0 35px;
-    float: left;
-    min-height: 250px
-=======
     width: 450px;
     margin: 5px 0 0 15px;
     float: left;
     min-height: 520px;
     border: 1px solid blue;
     padding: 0 5px;
->>>>>>> alexander_palko
 }
 
 .forms--nCompany input {
@@ -216,12 +194,8 @@ Forms New company
 
 .forms--nCompany select {
     margin: 8px 0 4px 13px;
-<<<<<<< HEAD
-    height: 24px;
-=======
     height: 30px;
     width: 80px;
->>>>>>> alexander_palko
 }
 
 #formPhone {
@@ -229,8 +203,6 @@ Forms New company
 }
 
 /* ==========================================================================
-<<<<<<< HEAD
-=======
 Forms New contact tasc
 ========================================================================== */
 
@@ -447,7 +419,6 @@ Forms New Deal Task
 }
 
 /* ==========================================================================
->>>>>>> alexander_palko
 Forms Users
 ========================================================================== */
 
@@ -456,11 +427,7 @@ Forms Users
     float: left;
     margin-left: 75px;
     margin-top: 13px;
-<<<<<<< HEAD
-    min-height: 250px;
-=======
     min-height: 400px;
->>>>>>> alexander_palko
 }
 
 .wrapper__users {
@@ -486,13 +453,10 @@ Forms Users
     height: 50px;
 }
 
-<<<<<<< HEAD
-=======
 .users__panel label {
     margin: 2px 5px 2px 25px;
 }
 
->>>>>>> alexander_palko
 .users__panel, .users__panel--body {
     border: 1px solid #000;
 }
@@ -502,13 +466,6 @@ Forms Users
 }
 
 .users__panel--body select {
-<<<<<<< HEAD
-    margin-left: 5px;
-}
-
-.users__panel--body input {
-    width: 130px;
-=======
     width: 120px;
     margin: 2px 5px 2px 25px;
 }
@@ -519,22 +476,15 @@ Forms Users
 
 .users__panel--body input {
     /*    width: 200px;*/
->>>>>>> alexander_palko
     margin-left: 20px;
     padding-left: 5px;
 }
 
 .formAddBut {
     float: right;
-<<<<<<< HEAD
-    margin-top: 10px;
-    height: 30px;
-    width: 135px;
-=======
     margin: 5px 5px 5px 5px;
     height: 30px;
     width: 110px;
->>>>>>> alexander_palko
     background: #1967c3;
     color: white;
     font-size: 16px;
@@ -558,11 +508,7 @@ Modal window
     bottom: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.8);
-<<<<<<< HEAD
-    z-index: 999;
-=======
     z-index: 99999;
->>>>>>> alexander_palko
     -webkit-transition: opacity 400ms ease-in;
     -moz-transition: opacity 400ms ease-in;
     transition: opacity 400ms ease-in;
@@ -624,11 +570,7 @@ Modal window
 }
 
 .modalInput {
-<<<<<<< HEAD
-    width: 238px;
-=======
     width: 255px;
->>>>>>> alexander_palko
     float: right;
 }
 
@@ -638,11 +580,7 @@ Modal window
 
 .modalDialog p {
     font-size: 15px;
-<<<<<<< HEAD
-    width: 459px;
-=======
     width: 450px;
->>>>>>> alexander_palko
     padding: 5px 20px 5px 7px;
 }
 
@@ -676,8 +614,6 @@ Forms Deals
     border: 1px solid #000;
 }
 
-<<<<<<< HEAD
-=======
 .wrapper__deals table {
     width: 100%; /* Ширина таблицы */
     border-collapse: collapse; /* Убираем двойные линии между ячейками */
@@ -688,7 +624,6 @@ Forms Deals
     color: #fff; /* Цвет текста при наведении */
 }
 
->>>>>>> alexander_palko
 .deal__panel {
     background: #75a9fb;
     height: 50px;
@@ -743,30 +678,18 @@ Modal window deal
     margin-bottom: 5px;
 }
 
-<<<<<<< HEAD
-.modalDeal .modalInput {
-    margin-right: 80px;
-}
-
-.modalDeal select {
-=======
 .modalDeal .modalInput{
     margin-right: 80px;
 }
 
 .modalDeal select{
->>>>>>> alexander_palko
     float: right;
     width: 258px;
     margin-right: 80px;
 
 }
 
-<<<<<<< HEAD
-.modalDeal span, .modalDeal p {
-=======
 .modalDeal span, .modalDeal p{
->>>>>>> alexander_palko
     margin-left: 10px;
 }
 
@@ -780,11 +703,7 @@ th {
     text-align: left;
 }
 
-<<<<<<< HEAD
-tr {
-=======
 tr{
->>>>>>> alexander_palko
     background: #cccccc;
 }
 
@@ -792,19 +711,11 @@ tr:nth-child(2n) {
     background: #fff;
 }
 
-<<<<<<< HEAD
-.modalDeal .modalBut {
-    display: none;
-}
-
-.modalDeal .cancel {
-=======
 .modalDeal .modalBut{
     display: none;
 }
 
 .modalDeal .cancel{
->>>>>>> alexander_palko
     display: inline-block;
 }
 
@@ -813,11 +724,7 @@ Forms task
 ========================================================================== */
 
 .form--action {
-<<<<<<< HEAD
-    width: 440px;
-=======
     width: 385px;
->>>>>>> alexander_palko
     margin-left: 75px;
     margin-top: 50px;
     float: left;
@@ -852,22 +759,14 @@ Forms task
 }
 
 .formActionText {
-<<<<<<< HEAD
-    display: block;
-=======
     height: 45px;
     display: table;
->>>>>>> alexander_palko
     margin: auto;
     border: 1px solid #000;
 }
 
 .actionBut {
-<<<<<<< HEAD
-    margin: 5px 0 10px 10px;
-=======
     margin: 5px 0 10px 35px;
->>>>>>> alexander_palko
     border-radius: 10px;
     font-size: 14px;
 }
@@ -890,24 +789,6 @@ Forms task
 }
 
 /* ==========================================================================
-<<<<<<< HEAD
-Modal window task
-========================================================================== */
-
-.modalTask textarea {
-    float: right;
-}
-
-.modalTask .fa-tasks {
-    font-size: 19px;
-    margin: 4px 0 0 4px;
-}
-
-.myCalendar {
-    width: 220px;
-    margin: 3px 0px 0px 8px;
-}
-=======
 Forms Filters
 ========================================================================== */
 
@@ -1077,4 +958,3 @@ Forms Deal
     margin: 8px 0 4px 13px;
     height: 24px;
 }
->>>>>>> alexander_palko
