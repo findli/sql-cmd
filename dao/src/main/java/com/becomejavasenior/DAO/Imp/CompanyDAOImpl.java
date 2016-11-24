@@ -5,7 +5,7 @@ import com.becomejavasenior.DAO.CompanyDAO;
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DAO.UserDAO;
 import com.becomejavasenior.DataBaseUtil;
-import com.becomejavasenior.bean.Address;
+import com.becomejavasenior.bean.Adress;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.User;
 
@@ -28,7 +28,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             statement.setString(4, company.getWebsite());
             statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
-            statement.setBoolean(7, company.isDeleted());
+            statement.setBoolean(7, company.getIsDeleted());
         } catch (SQLException e) {
             throw new DAOException("Can't create statement for Company", e);
         }
@@ -45,7 +45,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             statement.setString(4, company.getWebsite());
             statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
-            statement.setBoolean(7, company.isDeleted());
+            statement.setBoolean(7, company.getIsDeleted());
 
         } catch (SQLException e) {
             throw new DAOException("Can't update statement for Company", e);
@@ -56,7 +56,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
     public Company getEntity(ResultSet resultSet) throws DAOException{
 
         Company company = new Company();
-        AddressDAO<Address> addressDao = new AddressDAOImpl();
+        AddressDAO<Adress> addressDao = new AddressDAOImpl();
         UserDAO<User> userDao = new UserDAOImpl();
 
         try{
@@ -67,7 +67,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             company.setWebsite(resultSet.getString("website"));
             company.setAddress(addressDao.getById(resultSet.getInt("address_id")));
             company.setResponsibleUser(userDao.getById(resultSet.getInt("responsible_user_id")));
-            company.setDeleted(resultSet.getBoolean("is_deleted"));
+            company.setIsDeleted(resultSet.getBoolean("is_deleted"));
 
         } catch (SQLException e){
 

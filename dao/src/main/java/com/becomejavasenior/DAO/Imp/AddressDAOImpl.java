@@ -2,17 +2,17 @@ package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.AddressDAO;
 import com.becomejavasenior.DAO.DAOException;
-import com.becomejavasenior.bean.Address;
+import com.becomejavasenior.bean.Adress;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AddressDAOImpl extends AbstractDAOImpl<Address> implements AddressDAO<Address> {
+public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDAO<Adress> {
 
     @Override
-    public void createStatement(PreparedStatement statement, Address address) throws DAOException{
+    public void createStatement(PreparedStatement statement, Adress address) throws DAOException{
 
         try {
 
@@ -31,7 +31,7 @@ public class AddressDAOImpl extends AbstractDAOImpl<Address> implements AddressD
     }
 
     @Override
-    public void updateStatement(PreparedStatement statement, Address address) throws DAOException{
+    public void updateStatement(PreparedStatement statement, Adress address) throws DAOException{
 
         try {
 
@@ -50,9 +50,9 @@ public class AddressDAOImpl extends AbstractDAOImpl<Address> implements AddressD
     }
 
     @Override
-    public Address getEntity(ResultSet resultSet) throws DAOException{
+    public Adress getEntity(ResultSet resultSet) throws DAOException{
 
-        Address address = new Address();
+        Adress address = new Adress();
 
         try {
 
@@ -94,7 +94,7 @@ public class AddressDAOImpl extends AbstractDAOImpl<Address> implements AddressD
     }
 
     @Override
-    public List<Address> getByFilter(String query) {
+    public List<Adress> getByFilter(String query) {
         return null;
     }
 

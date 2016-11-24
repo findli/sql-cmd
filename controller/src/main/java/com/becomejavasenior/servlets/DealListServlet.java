@@ -2,17 +2,14 @@ package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.bean.Deal;
-import com.becomejavasenior.bean.Stage;
 import com.becomejavasenior.bean.TaskType;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.service.DealService;
-import com.becomejavasenior.service.StageService;
 import com.becomejavasenior.service.TaskTypeService;
-import com.becomejavasenior.service.UserService;
 import com.becomejavasenior.service.impl.DealServiceImpl;
-import com.becomejavasenior.service.impl.StageServiceImpl;
 import com.becomejavasenior.service.impl.TaskTypeServiceImpl;
 import com.becomejavasenior.service.impl.UserServiceImpl;
+import com.becomejavasenior.service.userService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +28,7 @@ public class DealListServlet extends HttpServlet {
         HttpSession session = request.getSession();
         DealService dealService = new DealServiceImpl();
         TaskTypeService taskTypesService = new TaskTypeServiceImpl();
-        UserService userService = new UserServiceImpl();
+        userService userService = new UserServiceImpl();
 
         List<Deal> dealList = dealService.getDealsForList();
         List<TaskType> taskTypeList = null;

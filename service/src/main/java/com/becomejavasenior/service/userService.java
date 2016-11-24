@@ -5,7 +5,7 @@ import com.becomejavasenior.bean.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface userService {
     User create(User t) throws DAOException;
     void update(User t) throws DAOException;
     List<User> getAll() throws DAOException, ClassNotFoundException;

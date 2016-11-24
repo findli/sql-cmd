@@ -19,10 +19,10 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO<User> 
             preparedStatement.setString(2, user.getlName());
             preparedStatement.setString(3, user.getPassword());
             preparedStatement.setString(4, user.getEmail());
-            preparedStatement.setBoolean(5, user.isAdmin());
+            preparedStatement.setBoolean(5, user.is_admin());
             preparedStatement.setInt(6, user.getRights());
             preparedStatement.setString(7, user.getPhotoPath());
-            preparedStatement.setBoolean(8, user.isNotification());
+            preparedStatement.setBoolean(8, user.is_notification());
             preparedStatement.setString(9, user.getNote());
             preparedStatement.setDate(10, (Date) user.getDateCreate());
 //            preparedStatement.setInt(11, user.getLanguage().getId());
