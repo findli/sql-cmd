@@ -12,7 +12,6 @@ public class Address implements Serializable {
     private int zipcode;
     private String officeRoom;
 
-
     public Address() {
     }
 
@@ -77,15 +76,15 @@ public class Address implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Address address = (Address) o;
+        Address adress = (Address) o;
 
-        if (id != address.id) return false;
-        if (zipcode != address.zipcode) return false;
-        if (country != null ? !country.equals(address.country) : address.country != null) return false;
-        if (city != null ? !city.equals(address.city) : address.city != null) return false;
-        if (street != null ? !street.equals(address.street) : address.street != null) return false;
-        if (buildNum != null ? !buildNum.equals(address.buildNum) : address.buildNum != null) return false;
-        return officeRoom != null ? officeRoom.equals(address.officeRoom) : address.officeRoom == null;
+        if (id != adress.id) return false;
+        if (zipcode != adress.zipcode) return false;
+        if (country != null ? !country.equals(adress.country) : adress.country != null) return false;
+        if (city != null ? !city.equals(adress.city) : adress.city != null) return false;
+        if (street != null ? !street.equals(adress.street) : adress.street != null) return false;
+        if (buildNum != null ? !buildNum.equals(adress.buildNum) : adress.buildNum != null) return false;
+        return officeRoom != null ? officeRoom.equals(adress.officeRoom) : adress.officeRoom == null;
 
     }
 
@@ -115,4 +114,3 @@ public class Address implements Serializable {
                 '}';
     }
 }
-
