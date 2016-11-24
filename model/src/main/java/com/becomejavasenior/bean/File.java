@@ -10,52 +10,6 @@ public class File {
     private String filePath;
     private byte fileSize;
     private Date dateCreate;
-    private Note note;
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public void setFileSize(byte fileSize) {
-        this.fileSize = fileSize;
-    }
-
-    public void setDateCreate(Date dateCreate) {
-        this.dateCreate = dateCreate;
-    }
-
-    public void setFileNote(Note fileNote) {
-        this.note = fileNote;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public byte getFileSize() {
-        return fileSize;
-    }
-
-    public Note getFileNote() {
-        return note;
-    }
-
-    public Date getDateCreate() {
-        return dateCreate;
-    }
-
 
 
     @Override
@@ -80,7 +34,6 @@ public class File {
         result = 31 * result + (filePath != null ? filePath.hashCode() : 0);
         result = 31 * result + (int) fileSize;
         result = 31 * result + (dateCreate != null ? dateCreate.hashCode() : 0);
-        result = 31 * result + (note != null ? note.hashCode() : 0);
         return result;
     }
 
@@ -93,7 +46,6 @@ public class File {
                 ", filePath='" + filePath + '\'' +
                 ", fileSize=" + fileSize +
                 ", dateCreate=" + dateCreate +
-                ", dateCreate=" + note +
                 '}';
     }
 }
