@@ -4,11 +4,11 @@ import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DAO.Imp.UserDAOImpl;
 import com.becomejavasenior.DAO.UserDAO;
 import com.becomejavasenior.bean.User;
-import com.becomejavasenior.service.userService;
+import com.becomejavasenior.service.UserService;
 
 import java.util.List;
 
-public class UserServiceImpl implements userService {
+public class UserServiceImpl implements UserService {
 
     private UserDAO<User> userDao = new UserDAOImpl();
 

@@ -9,7 +9,7 @@ import com.becomejavasenior.service.TaskTypeService;
 import com.becomejavasenior.service.impl.DealServiceImpl;
 import com.becomejavasenior.service.impl.TaskTypeServiceImpl;
 import com.becomejavasenior.service.impl.UserServiceImpl;
-import com.becomejavasenior.service.userService;
+import com.becomejavasenior.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,14 +28,14 @@ public class DealListServlet extends HttpServlet {
         HttpSession session = request.getSession();
         DealService dealService = new DealServiceImpl();
         TaskTypeService taskTypesService = new TaskTypeServiceImpl();
-        userService userService = new UserServiceImpl();
+        UserService UserService = new UserServiceImpl();
 
         List<Deal> dealList = dealService.getDealsForList();
         List<TaskType> taskTypeList = null;
         List<User> users = null;
         try {
             taskTypeList = taskTypesService.getAll();
-            users = userService.getAll();
+            users = UserService.getAll();
         } catch (DAOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
