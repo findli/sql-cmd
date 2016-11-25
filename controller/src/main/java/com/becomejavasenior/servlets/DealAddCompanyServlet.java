@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+@Deprecated
 @WebServlet(name="dealAddCompanyServlet", urlPatterns = "/deal_add_company")
 public class DealAddCompanyServlet extends HttpServlet {
 

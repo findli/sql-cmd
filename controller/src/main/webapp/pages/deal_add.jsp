@@ -7,12 +7,13 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../style/reset.css">
-    <link rel="stylesheet" href="../style/style.css">
+
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <%--  <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>--%>
     <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="../style/reset.css">
+    <link rel="stylesheet" href="../style/style.css">
     <title>Add deal</title>
 </head>
 <body>
@@ -48,11 +49,13 @@
         </div>
 
         <div class="wrapper__aboutCompany">
-            <div class="forms">
-                    <!--Add deal-->
-                    <div class="forms--nDeal">
-                        <form class="form-horizontal" role="form" method="post" action="/deal_add_deal" id="dealFormAddDeal"
-                            enctype="multipart/form-data">
+            <form class="form-horizontal" role="form" method="post" action="/dealCreate" id="dealCreate"
+                  enctype="multipart/form-data">
+                <div class="forms">
+                        <!--Add deal-->
+                        <div class="forms--nDeal">
+                            <%--<form class="form-horizontal" role="form" method="post" action="/deal_add_deal" id="dealFormAddDeal"--%>
+                                <%--enctype="multipart/form-data">--%>
                                   <h2>Add deal</h2>
 
                                   <div class="form-group">
@@ -109,13 +112,13 @@
                             <%--<select class="form-control" style="float: none; width: 250px" id="companyDeal" name="companyDeal">--%>
                             <%----%>
                             <%--</select>--%>
-                        </form>
+                        <%--</form>--%>
                     </div>
 
                     <!--Add contact-->
                     <div class="forms--nDeal--Contact">
-                        <form class="form-horizontal" role="form" method="post" action="/deal_add_contact" id="dealAddContact"
-                            enctype="multipart/form-data">
+                        <%--<form class="form-horizontal" role="form" method="post" action="/deal_add_contact" id="dealAddContact"--%>
+                            <%--enctype="multipart/form-data">--%>
                                   <h2>Add contact</h2>
                                   <div class="wrapper__users">
                                       <div class="users__panel">
@@ -148,7 +151,7 @@
 
                                   <input onclick="location.href='#modalAddContact'" class="formAddBut" type="button"
                                          value="Add contact">
-                        </form>
+                        <%--</form>--%>
                     </div>
                     <!--Modal window contact-->
                     <div id="modalAddContact" class="modalDialog">
@@ -191,8 +194,8 @@
 
                     <!--Add company-->
                     <div class="forms--nDeal">
-                        <form class="form-horizontal" role="form" method="post" action="/deal_add_company" id="dealAddCompany"
-                              enctype="multipart/form-data">
+                        <%--<form class="form-horizontal" role="form" method="post" action="/deal_add_company" id="dealAddCompany"--%>
+                              <%--enctype="multipart/form-data">--%>
                             <h2>Add company</h2>
 
                             <!-- Навигация -->
@@ -251,20 +254,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-sm-10">
-                                    <button>Применить</button>
-                                    <%--<a href="/deal" class="btn btn-primary">Применить</a>--%>
-                                    <%--<a href="#" class="btn btn-primary">Очистить</a>--%>
-                                </div>
-                            </div>
-                        </form>
+                        <%--</form>--%>
                     </div>
 
                     <!--Add task-->
                     <div class="forms--nDeal--Task">
-                        <form class="form-horizontal" role="form" method="post" action="/deal_add_task" id="dealAddTask"
-                              enctype="multipart/form-data">
+                        <%--<form class="form-horizontal" role="form" method="post" action="/deal_add_task" id="dealAddTask"--%>
+                              <%--enctype="multipart/form-data">--%>
                             <h2>Add task</h2>
 
                             <div class="form-group">
@@ -328,11 +324,10 @@
                                     <input class="formAddBut" type="button" value="Очистить">
                                 </div>
                             </div>
-
-                        </form>
+                        <%--</form>--%>
                     </div>
-
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -345,8 +340,8 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
-<script type="text/javascript" src="../js/script.js"></script>
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
 </html>

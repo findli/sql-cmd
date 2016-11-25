@@ -6,11 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../style/reset.css">
-    <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="../style/reset.css">
+    <link rel="stylesheet" href="../style/style.css">
 
     <!-- <script type="text/javascript" src="js/bootstrap.file-input.js"></script> -->
 
@@ -320,9 +320,9 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
-<script type="text/javascript" src="../js/script.js"></script>
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
 
 </html>

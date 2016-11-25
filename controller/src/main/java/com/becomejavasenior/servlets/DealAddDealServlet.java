@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Deprecated
 @WebServlet(name="dealAddDealServlet", urlPatterns = "/deal_add_deal")
 public class DealAddDealServlet extends HttpServlet {
 

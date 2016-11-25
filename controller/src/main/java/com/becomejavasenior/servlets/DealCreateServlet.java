@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Deprecated
 @WebServlet(name = "dealCreateServlet", urlPatterns = "/dealCreate")
 @MultipartConfig(maxFileSize = 102400)
 public class DealCreateServlet extends HttpServlet{
