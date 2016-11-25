@@ -6,6 +6,7 @@ import com.becomejavasenior.bean.TaskType;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.service.DealService;
 import com.becomejavasenior.service.TaskTypeService;
+import com.becomejavasenior.service.impl.UserService;
 import com.becomejavasenior.service.impl.DealServiceImpl;
 import com.becomejavasenior.service.impl.TaskTypeServiceImpl;
 import com.becomejavasenior.service.impl.UserServiceImpl;
