@@ -51,7 +51,8 @@
             </ul>
         </div>
         <div class="wrapper__aboutCompany">
-            Start page
+            Start page<br>
+            Start with deal or company
         </div>
     </div>
 </div>
