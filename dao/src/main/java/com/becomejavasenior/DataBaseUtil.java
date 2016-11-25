@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Properties;
@@ -62,7 +63,9 @@ public class DataBaseUtil {
     }
 
     public static Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        return DriverManager.getConnection(dbUrl);
+//        return dataSource.getConnection();
     }
 
     public static String getQuery(String name) {
