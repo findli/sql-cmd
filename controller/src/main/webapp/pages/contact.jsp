@@ -150,18 +150,7 @@
                             <a class="btn btn-primary btn-md" href="/contactAdd" role="button">Add contact</a>
                         </div>
                     </div>
-                    <%--<div class="col-sm-6">--%>
-                        <%--<input class="actionBut" type="button" value="Contact">--%>
-                        <%--<input class="actionBut" type="button" value="Company">--%>
-                        <%--<input class="actionBut" type="button" value="All">--%>
-                    <%--</div>--%>
-                    <%--<br><br><br>--%>
-                    <%--<div class="col-md-10">--%>
-                        <%--<a class="btn btn-primary btn-md" href="/contactAdd" role="button">Add contact</a>--%>
-                    <%--</div>--%>
-                    <%--<input class="formAddBut" type="button" value="Add contact">--%>
 
-                    <br><br><br>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <tr>
