@@ -9,7 +9,6 @@ import com.becomejavasenior.service.TaskTypeService;
 import com.becomejavasenior.service.impl.DealServiceImpl;
 import com.becomejavasenior.service.impl.TaskTypeServiceImpl;
 import com.becomejavasenior.service.impl.UserServiceImpl;
-import com.becomejavasenior.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

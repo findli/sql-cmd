@@ -4,7 +4,6 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.Imp.UserDaoImpl;
 import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.bean.User;
-import com.becomejavasenior.service.UserService;
 
 import java.util.List;
 
