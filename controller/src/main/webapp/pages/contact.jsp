@@ -35,10 +35,10 @@
     <div class="wrapper">
         <div id="navbar">
             <ul>
-                <li><a href="#" target="_self">Home</a></li>
+                <li><a href="/index.jsp" target="_self">Home</a></li>
                 <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
-                <li><a href="#" target="_self">Contacts</a></li>
+                <li><a href="/contact" target="_self">Contacts</a></li>
                 <li><a href="#" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
                 <li><a href="#" target="_self">Settings</a></li>
@@ -137,13 +137,29 @@
 
                 <div class="forms--lContact">
                     <h2>List contacts</h2>
-                    <div class="col-sm-6">
-                        <input class="actionBut" type="button" value="Contact">
-                        <input class="actionBut" type="button" value="Company">
-                        <input class="actionBut" type="button" value="All">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input class="actionBut" type="button" value="Contact">
+                            <input class="actionBut" type="button" value="Company">
+                            <input class="actionBut" type="button" value="All">
+                        </div>
+                        <div class="col-sm-3">
+
+                        </div>
+                        <div class="col-sm-3">
+                            <a class="btn btn-primary btn-md" href="/contactAdd" role="button">Add contact</a>
+                        </div>
                     </div>
-                    <br><br><br>
-                    <input class="formAddBut" type="button" value="Add contact">
+                    <%--<div class="col-sm-6">--%>
+                        <%--<input class="actionBut" type="button" value="Contact">--%>
+                        <%--<input class="actionBut" type="button" value="Company">--%>
+                        <%--<input class="actionBut" type="button" value="All">--%>
+                    <%--</div>--%>
+                    <%--<br><br><br>--%>
+                    <%--<div class="col-md-10">--%>
+                        <%--<a class="btn btn-primary btn-md" href="/contactAdd" role="button">Add contact</a>--%>
+                    <%--</div>--%>
+                    <%--<input class="formAddBut" type="button" value="Add contact">--%>
 
                     <br><br><br>
                     <div class="table-responsive">

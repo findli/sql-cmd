@@ -15,7 +15,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "addContactServlet", urlPatterns = "/addContact")
-public class AddContactServlet extends HttpServlet {
-
+@WebServlet(name = "ContactAddServlet", urlPatterns = "/contactAdd")
+public class ContactAddServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.sendRedirect("/pages/contact_add.jsp");
+    }
 }

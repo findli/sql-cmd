@@ -1,6 +1,5 @@
 package com.becomejavasenior.servlets;
 
-
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.service.CompanyService;
@@ -33,7 +32,6 @@ public class CompanyListServlet extends HttpServlet {
         try {
             log.trace("call getAll() from serice in CompanyListServlet");
             companyList = companyService.getAll();
-            System.out.println(companyList);
         } catch (DAOException e) {
 
             log.error("DAOException in CompanyListServlet in Controller layer", e);
