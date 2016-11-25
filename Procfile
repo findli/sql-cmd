@@ -1,1 +1,1 @@
-web:    java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT /Users/alpo123/Documents/job_environment/Java-spring/crm-pallas/crm-pallas2/controller/target/controller-1.0-SNAPSHOT.war
+web: java $JAVA_OPTS -jar controller/target/dependency/webapp-runner.jar --port $PORT controller/target/*.war
