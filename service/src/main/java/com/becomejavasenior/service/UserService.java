@@ -1,4 +1,4 @@
-package com.becomejavasenior.service.impl;
+package com.becomejavasenior.service;
 
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.bean.User;
