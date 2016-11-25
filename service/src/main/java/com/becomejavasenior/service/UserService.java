@@ -11,4 +11,5 @@ public interface UserService {
     List<User> getAll() throws DAOException, ClassNotFoundException;
     User getById(int id) throws DAOException;
     void delete(int id) throws DAOException;
+
 }
