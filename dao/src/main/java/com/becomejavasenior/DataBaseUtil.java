@@ -18,7 +18,7 @@ public class DataBaseUtil {
     private static final String PROPERTIES_FILE = "database.properties";
 
     static {
-        if(Objects.equals(System.getenv("DEPLOYMENT_ENVIRONMENT"),"prodaction")) {
+        if(Objects.equals(System.getenv("DEPLOYMENT_ENVIRONMENT"),"production")) {
             URI dbUri = null;
             try {
                 dbUri = new URI(System.getenv("JDBC_DATABASE_URL"));
