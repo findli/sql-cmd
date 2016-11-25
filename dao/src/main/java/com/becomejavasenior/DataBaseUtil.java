@@ -17,7 +17,7 @@ public class DataBaseUtil {
     private static BasicDataSource dataSource;
     private static final String PROPERTIES_FILE = "database.properties";
 
-    static {
+    static {/*
         if(Objects.equals(System.getenv("DEPLOYMENT_ENVIRONMENT"),"prodaction")) {
             URI dbUri = null;
             try {
@@ -59,7 +59,7 @@ public class DataBaseUtil {
             dataSource.setMaxIdle(Integer.parseInt(properties.getProperty("db.maxidle")));
             dataSource.setDefaultTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             dataSource.setDefaultAutoCommit(true);
-        }
+        }*/
     }
 
     public static Connection getConnection() throws SQLException {
