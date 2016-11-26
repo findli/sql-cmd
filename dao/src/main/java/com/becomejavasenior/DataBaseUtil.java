@@ -21,7 +21,7 @@ public class DataBaseUtil {
         if(Objects.equals(System.getenv("DEPLOYMENT_ENVIRONMENT"),"production")) {
             URI dbUri = null;
             try {
-                dbUri = new URI(System.getenv("JDBC_DATABASE_URL"));
+                dbUri = new URI(System.getenv("DATABASE_URL"));
             } catch (URISyntaxException e) {
                 throw new DatabaseException("DATABASE_URL can't be loaded.", e);
             }
