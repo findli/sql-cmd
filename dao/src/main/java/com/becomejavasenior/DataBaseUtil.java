@@ -9,8 +9,8 @@ import java.sql.SQLException;
 public class DataBaseUtil {
     private static BasicDataSource dataSource;
     private static final String PROPERTIES_FILE = "database.properties";
-/*
-    static {
+
+ /*   static {
         if(Objects.equals(System.getenv("DEPLOYMENT_ENVIRONMENT"),"production")) {
             URI dbUri = null;
             try {
