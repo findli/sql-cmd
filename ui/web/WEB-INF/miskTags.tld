@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+    <tlib-version>1.0</tlib-version>
+    <short-name>miscTags</short-name>
+    <uri>http://ya.local/sqlCmd/miskTags</uri>
+    <tag>
+        <name>simpleTag</name>
+        <tag-class>JSS.w07_p02.tag.SimpleTag</tag-class>
+        <!--????? ?????????? ????? ????  ? ???? - scriptless ?????-->
+        <body-content>scriptless</body-content>
+    </tag>
+    <tag>
+        <name>iterationTag</name>
+        <tag-class>JSS.w07_p02.tag.IterationTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>begin</name>
+        </attribute>
+        <attribute>
+            <name>end</name>
+            <required>true</required>
+            <!--EL-expression is allowed-->
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>var</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>photoTag</name>
+        <tag-class>JSS.w07_p02.tag.PhotoTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>id</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+
+    <!-- Invoke 'Generate' action to add tags or functions -->
+
+
+</taglib>

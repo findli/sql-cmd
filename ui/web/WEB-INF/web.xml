@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <session-config>
+        <session-timeout>1</session-timeout>
+        <tracking-mode>COOKIE</tracking-mode>
+        <tracking-mode>URL</tracking-mode>
+        <cookie-config>
+            <name>SESSION_ID</name>
+            <domain>localhost</domain>
+        </cookie-config>
+    </session-config>
+
+    <context-param>
+        <param-name>count</param-name>
+        <param-value>100</param-value>
+    </context-param>
+    <!-- site specific from web.xml-->
+    <context-param>
+        <param-name>db_name</param-name>
+        <param-value>salesdept</param-value>
+    </context-param>
+
+    <welcome-file-list>
+        <welcome-file>/w06_p02/SessionClientCheckIn.jsp</welcome-file>
+    </welcome-file-list>
+    <!--<servlet>
+        ...
+        <multipart-config>
+            <location>/tmp</location>
+            <max-file-size>16*1024*1024</max-file-size>
+        </multipart-config>
+    </servlet>-->
+    <servlet>
+        <servlet-name>SessionJSP</servlet-name>
+        <jsp-file>/w06_p02/SessionClientCheckIn.jsp</jsp-file>
+        <!-- page specific from web.xml-->
+        <init-param>
+            <param-name>db_name</param-name>
+            <param-value>salesdept</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SessionJSP</servlet-name>
+        <url-pattern>/sessionjsp</url-pattern>
+    </servlet-mapping>
+    <!--постоянный сервлет-->
+    <!--loadOnStartup - все же не гарантирует загрузку при старте контейнера-->
+    <!--or @WebServlet(value="/my", loadOnStartup=1)-->
+    <servlet>
+        <description>I'm permanent</description>
+        <display-name>SM</display-name>
+        <servlet-name>SM</servlet-name>
+        <servlet-class>JSS.w05p.SendMessage</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SM</servlet-name>
+        <url-pattern>/sm1</url-pattern>
+    </servlet-mapping>
+    <!--постоянный сервлет-->
+
+    <servlet>
+        <servlet-name>Test</servlet-name>
+        <servlet-class>ya.example.Test</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Test</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ClockServlet</servlet-name>
+        <servlet-class>JSS.w05.ClockServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ClockServlet</servlet-name>
+        <url-pattern>/clock/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClockServlet</servlet-name>
+        <url-pattern>/clock/letter*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SendMessage</servlet-name>
+        <servlet-class>JSS.w05p.SendMessage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SendMessage</servlet-name>
+        <url-pattern>/form/send-message</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProcessMessage</servlet-name>
+        <servlet-class>JSS.w05p.ProcessMessage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProcessMessage</servlet-name>
+        <url-pattern>/form/process-message</url-pattern>
+    </servlet-mapping>
+
+</web-app>

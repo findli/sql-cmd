@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--свойства ддолжны идти вначале-->
+        <!--<property name="connection.url">jdbc:mysql://127.0.0.1:3306/java_jss_salesdept</property>-->
+        <property name="connection.url">jdbc:mysql://127.0.0.1:3306/hibernate_test</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <property name="connection.pool_size">10</property>
+
+        <property name="connection.username">root</property>
+        <property name="connection.password">123</property>
+
+        <!-- DB schema will be updated if needed -->
+        <!--
+        validate: validate the schema, makes no changes to the database.
+        update: update the schema.
+        create: creates the schema, destroying previous data.
+        create-drop: drop the schema at the end of the session.
+        -->
+        <!--<property name="hbm2ddl.auto">create</property>-->
+        <property name="hbm2ddl.auto">create</property>
+        <property name="globally_quoted_identifiers">true</property>
+        <property name="show_sql">true</property>
+
+        <!--now work!-->
+        <property name="hibernate.connection.autocommit">true</property>
+        <property name="connection.autocommit">true</property>
+
+        <!--entity used to generate db table-->
+        <mapping class="JSS.w_12_2.orm.hibernate_test.User"/>
+
+        <!--<mapping class="JSS.w_12_1.orm.Customer"/>-->
+        <!--<mapping class="JSS.w_12_1.orm.Product"/>-->
+        <!--<mapping class="JSS.w_12_1.orm.Order"/>-->
+        <!--<mapping resource="Customers.hbm.xml"/>-->
+    </session-factory>
+</hibernate-configuration>

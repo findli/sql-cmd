@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="JSS.w_12_2.orm.personnel_ya.Company" table="company" schema="java_jss_crm-pallas">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="name">
+            <column name="name" sql-type="varchar(255)"/>
+        </property>
+        <property name="responsibleUser">
+            <column name="responsible_user" sql-type="int(11)"/>
+        </property>
+        <property name="phone">
+            <column name="phone" sql-type="varchar(11)" length="11" not-null="true"/>
+        </property>
+        <property name="email">
+            <column name="email" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="web">
+            <column name="web" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="address">
+            <column name="address" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="description">
+            <column name="description" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <set name="filesById" inverse="true">
+            <key>
+                <column name="company_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="JSS.w_12_2.orm.personnel_ya.File"/>
+        </set>
+        <set name="tagsById" inverse="true">
+            <key>
+                <column name="company_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="JSS.w_12_2.orm.personnel_ya.Tag"/>
+        </set>
+    </class>
+</hibernate-mapping>
