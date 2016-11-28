@@ -181,7 +181,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Address </label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control" placeholder="Address" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>
+                                        <textarea class="form-control" placeholder="Address" name="editDealCompanyAddress"></textarea>
                                     </div>
                                 </div>
 
