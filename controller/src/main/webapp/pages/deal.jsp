@@ -155,7 +155,7 @@
 
                     <div class="wrapper__deals">
                         <form action="/dealEdit" method="post">
-                            <table class="table table-striped">
+                            <table class="table table-bordered">
                                 <thead>
                                 <tr>
                                     <th>Название сделки</th>

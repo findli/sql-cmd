@@ -157,7 +157,7 @@
 
                     <div class="wrapper__deals">
                         <form action="/contactEdit" method="post">
-                            <table class="table table-striped">
+                            <table class="table table-bordered">
                                 <thead>
                                 <tr>
                                     <th>Имя</th>

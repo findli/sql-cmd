@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
 
-    <!-- <script type="text/javascript" src="js/bootstrap.file-input.js"></script> -->
 
     <title>Edit deal</title>
 </head>

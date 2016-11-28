@@ -3,17 +3,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="style/reset.css">
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <%--<link rel="stylesheet" href="../style/style.css">--%>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="js/moment-with-locales.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+    <%--<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>--%>
+    <!-- <script type="text/javascript" src="js/bootstrap.file-input.js"></script> -->
 
-    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css" />
+    <%--<link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />--%>
+    <link rel="stylesheet" href="../style/reset.css">
+    <link rel="stylesheet" href="../style/style.css">
+
     <title>Edit contact</title>
 </head>
 <body>
@@ -50,7 +50,7 @@
 
         <div class="wrapper__aboutCompany">
             <div class="forms">
-                <form class="form-horizontal" role="form" method="post" action="/dealCreate" id="dealForm"
+                <form class="form-horizontal" role="form" method="post" action="/contactAdd" id="contactForm"
                       enctype="multipart/form-data">
 
                     <!--Add contact-->
@@ -124,7 +124,7 @@
 
                     <!--Add company-->
                     <div class="forms--eContact">
-                        <h2>Edit company</h2><br><br>
+                        <h2>Edit company</h2><br>
                         <!-- <div role="tabpanel" class="tab-pane active" id="contact1"> -->
                         <!-- Навигация -->
                         <ul class="nav nav-tabs" role="tablist">
@@ -154,12 +154,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <select class="col-sm-3 form-control" style="width: 100px">
+                                    <select class="col-sm-4 form-control" style="width: 100px">
                                         <option>Work</option>
                                         <option>Mobile</option>
                                         <option>Home</option>
                                     </select>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-8">
                                         <input class="form-control" type="text" name="formPhone" placeholder="Number">
                                     </div>
                                 </div>
@@ -281,12 +281,15 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
-    });
-</script>
+<%--<script type="text/javascript">--%>
+    <%--$(function () {--%>
+        <%--$('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
+    <%--});--%>
+<%--</script>--%>
 </body>
-<!-- <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
 </html>
