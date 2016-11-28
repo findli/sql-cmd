@@ -1,4 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,12 +100,14 @@
                         </div>
                         <hr>
                         <div class="form-group">
-                            <label class="control-label col-sm-4">Менеджер:</label>
-                            <select class="col-sm-5 form-control">
-                                <option value="0">Менеджер 1</option>
-                                <option value="1">Менеджер 2</option>
-                                <option value="2">Менеджер 3</option>
-                            </select>
+                            <label class="col-sm-3 control-label">Responsible </label>
+                            <div class="col-sm-9">
+                                <select class="form-control">
+                                    <c:forEach var="user" items="${users}">
+                                        <option><c:out value="${user.lName}"/></option>
+                                    </c:forEach>
+                                </select>
+                            </div>
                         </div>
                         <hr>
                         <div class="form-group">
@@ -151,35 +155,62 @@
                         </div>
                     </div>
 
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <tr>
-                                <th>Имя</th>
-                                <th>Компания</th>
-                                <th>Телефон</th>
-                                <th>Email</th>
-                            </tr>
-                            <tr>
-                                <td>Иван Петров</td>
-                                <td>БМВ Бавария</td>
-                                <td>(067) 485-85-03</td>
-                                <td>ivan@google.com</td>
-                            </tr>
-                            <tr>
-                                <td>Елена Бабич</td>
-                                <td>Митсубиси</td>
-                                <td>(067) 444-67-34</td>
-                                <td>elena@google.com</td>
-                            </tr>
-                            <tr>
-                                <td>Дмитрий Агафонов</td>
-                                <td>Митсубиси Электрик</td>
-                                <td>(067) 454-77-84</td>
-                                <td>dmitry@google.com</td>
-                            </tr>
+                    <div class="wrapper__deals">
+                        <form action="/contactEdit" method="post">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Имя</th>
+                                    <th>Компания</th>
+                                    <th>Телефон</th>
+                                    <th>Email</th>
+                                </tr>
+                                </thead>
+                                <tbody id="t_contacts">
+                                <c:forEach var="contact" items="${contactList}">
+                                    <%--<tr class="rowlink" onclick="window.location.href='/dealEdit?idDeal=${deal.getId()}'; return false">--%>
+                                    <tr data-href="/contactEdit?idContact=${contact.getId()}">
+                                        <td class="item"><c:out value="${contact.getlName()}"/></td>
+                                        <td><c:out value="${contact.getCompany().getTitle()}"/></td>
+                                        <td><c:out value="${contact.getlName()}"/></td>
+                                        <td><c:out value="${contact.getEmail()}"/></td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
 
-                        </table>
+                            </table>
+                        </form>
                     </div>
+
+                    <%--<div class="table-responsive">--%>
+                        <%--<table class="table table-striped">--%>
+                            <%--<tr>--%>
+                                <%--<th>Имя</th>--%>
+                                <%--<th>Компания</th>--%>
+                                <%--<th>Телефон</th>--%>
+                                <%--<th>Email</th>--%>
+                            <%--</tr>--%>
+                            <%--<tr>--%>
+                                <%--<td>Иван Петров</td>--%>
+                                <%--<td>БМВ Бавария</td>--%>
+                                <%--<td>(067) 485-85-03</td>--%>
+                                <%--<td>ivan@google.com</td>--%>
+                            <%--</tr>--%>
+                            <%--<tr>--%>
+                                <%--<td>Елена Бабич</td>--%>
+                                <%--<td>Митсубиси</td>--%>
+                                <%--<td>(067) 444-67-34</td>--%>
+                                <%--<td>elena@google.com</td>--%>
+                            <%--</tr>--%>
+                            <%--<tr>--%>
+                                <%--<td>Дмитрий Агафонов</td>--%>
+                                <%--<td>Митсубиси Электрик</td>--%>
+                                <%--<td>(067) 454-77-84</td>--%>
+                                <%--<td>dmitry@google.com</td>--%>
+                            <%--</tr>--%>
+
+                        <%--</table>--%>
+                    <%--</div>--%>
                 </div>
             </div>
         </div>
