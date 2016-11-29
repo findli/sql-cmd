@@ -143,9 +143,9 @@
                     <h2>List contacts</h2>
                     <div class="row">
                         <div class="col-sm-6">
-                            <input class="actionBut" type="button" value="Contact">
-                            <input class="actionBut" type="button" value="Company">
-                            <input class="actionBut" type="button" value="All">
+                            <a class="btn btn-info btn-sm" href="#" role="button">Contact</a>
+                            <a class="btn btn-info btn-sm" href="/company" role="button">Company</a>
+                            <a class="btn btn-info btn-sm" href="#" role="button">All</a>
                         </div>
                         <div class="col-sm-3">
 
@@ -154,6 +154,7 @@
                             <a class="btn btn-primary btn-md" href="/contactAdd" role="button">Add contact</a>
                         </div>
                     </div>
+                    <br>
 
                     <div class="wrapper__deals">
                         <form action="/contactEdit" method="post">
