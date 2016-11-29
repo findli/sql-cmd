@@ -1,23 +1,16 @@
 package com.becomejavasenior;
 
-import com.becomejavasenior.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Objects;
-import java.util.Properties;
 
 public class DataBaseUtil {
     private static BasicDataSource dataSource;
     private static final String PROPERTIES_FILE = "database.properties";
 
-    static {
+   /* static {
         if(Objects.equals(System.getenv("DEPLOYMENT_ENVIRONMENT"),"production")) {
             URI dbUri = null;
             try {
@@ -60,13 +53,37 @@ public class DataBaseUtil {
             dataSource.setDefaultTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             dataSource.setDefaultAutoCommit(true);
         }
-    }
+    }*/
 
-    public static Connection getConnection() throws SQLException {
+/*    public static Connection getConnection() throws SQLException {
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         return DriverManager.getConnection(dbUrl);
     }
 
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection("database.properties");//dataSource.getConnection();
+    }*/
+
+    public static Connection getConnection() throws SQLException {
+      /*  Properties props = new Properties();
+
+        FileInputStream fileInputStream;
+        Connection con = null;
+        try {
+            fileInputStream = new FileInputStream("db.properties");
+            props.load(fileInputStream);
+
+            Class.forName(props.getProperty("org.postgresql.Driver"));
+
+            con = DriverManager.getConnection(props.getProperty("url"),
+                    props.getProperty("username"),
+                    props.getProperty("password"));
+        } catch (IOException | ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }*/
+
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/crm_pallas","postgres", "root");
+    }
     public static String getQuery(String name) {
         return name;
     }
