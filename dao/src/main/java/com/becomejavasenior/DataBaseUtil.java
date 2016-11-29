@@ -81,7 +81,11 @@ public class DataBaseUtil {
         } catch (IOException | ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }*/
+      try {
+          Class.forName("org.postgresql.Driver");
+      } catch (ClassNotFoundException e){
 
+      }
         return DriverManager.getConnection("jdbc:postgresql://localhost:5432/crm_pallas","postgres", "root");
     }
     public static String getQuery(String name) {
