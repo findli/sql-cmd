@@ -1,7 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.PeriodInDaysTypeDao;
 import com.becomejavasenior.DAO.TaskDao;
 import com.becomejavasenior.DAO.TaskTypeDao;
@@ -12,7 +12,6 @@ import com.becomejavasenior.bean.TaskType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.List;
 
 public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> {
@@ -48,7 +47,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
     }
 
     @Override
-    public void createStatement(PreparedStatement preparedStatement, Task task) throws DAOException {
+    public void createStatement(PreparedStatement preparedStatement, Task task) throws DaoException {
 //        Date sqlDate = new Date(task.getDeadlineDate().getTime());
 
 //        Time sqlTime = new Time(task.getTime().getTime());
@@ -65,12 +64,12 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             preparedStatement.setBoolean(9, task.isFinished());
             preparedStatement.setBoolean(10, task.isDeleted());
         } catch (SQLException e) {
-            throw new DAOException("Can't create statement for Task", e);
+            throw new DaoException("Can't create statement for Task", e);
         }
     }
 
     @Override
-    public void updateStatement(PreparedStatement preparedStatement, Task task) throws DAOException {
+    public void updateStatement(PreparedStatement preparedStatement, Task task) throws DaoException {
 //        Date sqlDate = new Date(task.getDeadlineDate().getTime());
 //        Time sqlTime = new Time(task.getTime().getTime());
         try {
@@ -85,12 +84,12 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             preparedStatement.setBoolean(9, task.isFinished());
             preparedStatement.setBoolean(10, task.isDeleted());
         } catch (SQLException e) {
-            throw new DAOException("Can't update statement for Task", e);
+            throw new DaoException("Can't update statement for Task", e);
         }
     }
 
     @Override
-    public Task getEntity(ResultSet resultSet) throws DAOException {
+    public Task getEntity(ResultSet resultSet) throws DaoException {
         Task task = new Task();
         TaskTypeDao<TaskType> taskType = new TaskTypeDaoImpl();
         PeriodInDaysTypeDao<PeriodInDaysType> periodInDaysType = new PeriodInDaysTypeDaoImpl();
@@ -108,7 +107,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             task.setFinished(resultSet.getBoolean("is_finished"));
             task.setDeleted(resultSet.getBoolean("is_deleted"));
         } catch (SQLException e) {
-            throw new DAOException("Can't get entity from Task", e);
+            throw new DaoException("Can't get entity from Task", e);
         }
         return task;
     }

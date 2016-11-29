@@ -1,7 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.AddressDao;
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Address;
 
 import java.sql.PreparedStatement;
@@ -12,7 +12,7 @@ import java.util.List;
 public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressDao<Address> {
 
     @Override
-    public void createStatement(PreparedStatement statement, Address address) throws DAOException{
+    public void createStatement(PreparedStatement statement, Address address) throws DaoException {
 
         try {
 
@@ -25,13 +25,13 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
 
         } catch (SQLException e) {
 
-            throw new DAOException("Can't create statement for Address", e);
+            throw new DaoException("Can't create statement for Address", e);
 
         }
     }
 
     @Override
-    public void updateStatement(PreparedStatement statement, Address address) throws DAOException{
+    public void updateStatement(PreparedStatement statement, Address address) throws DaoException {
 
         try {
 
@@ -44,13 +44,13 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
 
         } catch (SQLException e) {
 
-            throw new DAOException("Can't update statement for Address", e);
+            throw new DaoException("Can't update statement for Address", e);
 
         }
     }
 
     @Override
-    public Address getEntity(ResultSet resultSet) throws DAOException{
+    public Address getEntity(ResultSet resultSet) throws DaoException {
 
         Address address = new Address();
 
@@ -66,7 +66,7 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
 
         } catch (SQLException e){
 
-            throw new DAOException("Can't get entity for Address", e);
+            throw new DaoException("Can't get entity for Address", e);
 
         }
 

@@ -1,7 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.PeriodInDaysTypeDao;
 import com.becomejavasenior.bean.PeriodInDaysType;
 
@@ -43,27 +43,27 @@ public class PeriodInDaysTypeDaoImpl extends AbstractDaoImpl<PeriodInDaysType> i
     }
 
     @Override
-    public void createStatement(PreparedStatement preparedStatement, PeriodInDaysType periodInDaysType) throws DAOException{
+    public void createStatement(PreparedStatement preparedStatement, PeriodInDaysType periodInDaysType) throws DaoException {
         try {
             preparedStatement.setString(1, periodInDaysType.getTitle());
             preparedStatement.setInt(2, periodInDaysType.getDaysInPeriod());
         } catch (SQLException e){
-            throw new DAOException("Can't create statement for PeriodInDaysType", e);
+            throw new DaoException("Can't create statement for PeriodInDaysType", e);
         }
     }
 
     @Override
-    public void updateStatement(PreparedStatement preparedStatement, PeriodInDaysType periodInDaysType) throws DAOException{
+    public void updateStatement(PreparedStatement preparedStatement, PeriodInDaysType periodInDaysType) throws DaoException {
         try {
             preparedStatement.setString(1, periodInDaysType.getTitle());
             preparedStatement.setInt(2, periodInDaysType.getDaysInPeriod());
         } catch (SQLException e){
-            throw new DAOException("Can't update statement for PeriodInDaysType", e);
+            throw new DaoException("Can't update statement for PeriodInDaysType", e);
         }
     }
 
     @Override
-    public PeriodInDaysType getEntity(ResultSet resultSet) throws DAOException{
+    public PeriodInDaysType getEntity(ResultSet resultSet) throws DaoException {
         PeriodInDaysType periodInDaysType = new PeriodInDaysType();
         try {
             periodInDaysType.setId(resultSet.getInt("id"));
@@ -71,7 +71,7 @@ public class PeriodInDaysTypeDaoImpl extends AbstractDaoImpl<PeriodInDaysType> i
             periodInDaysType.setDaysInPeriod(resultSet.getInt("daysInPeriod"));
 
         } catch (SQLException e){
-            throw new DAOException("Can't get entity from PeriodInDaysType", e);
+            throw new DaoException("Can't get entity from PeriodInDaysType", e);
         }
         return periodInDaysType;
     }

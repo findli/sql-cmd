@@ -1,6 +1,6 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.TaskDao;
 import com.becomejavasenior.bean.User;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UserDaoImpl extends AbstractDaoImpl<User> implements TaskDao<User> {
     @Override
-    void createStatement(PreparedStatement preparedStatement, User entity) throws DAOException {
+    void createStatement(PreparedStatement preparedStatement, User entity) throws DaoException {
 
     }
 
@@ -35,7 +35,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements TaskDao<User> 
     }
 
     @Override
-    User getEntity(ResultSet resultSet) throws DAOException {
+    User getEntity(ResultSet resultSet) throws DaoException {
         return null;
     }
 
@@ -45,22 +45,22 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements TaskDao<User> 
     }
 
     @Override
-    void updateStatement(PreparedStatement preparedStatement, User entity) throws DAOException {
+    void updateStatement(PreparedStatement preparedStatement, User entity) throws DaoException {
 
     }
 
     @Override
-    public User create(User entity) throws DAOException {
+    public User create(User entity) throws DaoException {
         return super.create(entity);
     }
 
     @Override
-    public void delete(Integer id) throws DAOException {
+    public void delete(Integer id) throws DaoException {
         super.delete(id);
     }
 
     @Override
-    public List<User> getAll() throws DAOException {
+    public List<User> getAll() throws DaoException {
         return super.getAll();
     }
 
@@ -70,12 +70,12 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements TaskDao<User> 
     }
 
     @Override
-    public User getById(Integer id) throws DAOException {
+    public User getById(Integer id) throws DaoException {
         return super.getById(id);
     }
 
     @Override
-    public User update(User entity) throws DAOException {
+    public User update(User entity) throws DaoException {
         return super.update(entity);
     }
 }

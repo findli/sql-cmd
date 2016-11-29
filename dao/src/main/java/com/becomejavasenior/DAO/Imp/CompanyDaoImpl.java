@@ -1,20 +1,18 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.AbstractDao;
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.CompanyDao;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Company;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Logger;
 
-public class CompanyDaoJdbcImpl extends AbstractDaoImpl<Company> implements AbstractDao<Company> {
+public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyDao<Company> {
 
-    public static Logger log = Logger.getLogger(CompanyDaoJdbcImpl.class.getName());
-
-    public void createStatement(PreparedStatement statement, Company company) throws DAOException {
+    @Override
+    public void createStatement(PreparedStatement statement, Company company) throws DaoException {
 
         try{
 
@@ -28,13 +26,14 @@ public class CompanyDaoJdbcImpl extends AbstractDaoImpl<Company> implements Abst
 
         } catch (SQLException e) {
 
-            throw new DAOException("Can't create statement for Company", e);
+            throw new DaoException("Can't create statement for Company", e);
 
         }
 
     }
 
-    public void updateStatement(PreparedStatement statement, Company company) throws DAOException {
+    @Override
+    public void updateStatement(PreparedStatement statement, Company company) throws DaoException {
 
         try{
 
@@ -48,16 +47,17 @@ public class CompanyDaoJdbcImpl extends AbstractDaoImpl<Company> implements Abst
 
         } catch (SQLException e) {
 
-            throw new DAOException("Can't update statement for Company", e);
+            throw new DaoException("Can't update statement for Company", e);
 
         }
     }
 
-    public Company getEntity(ResultSet resultSet) throws DAOException {
+    @Override
+    public Company getEntity(ResultSet resultSet) throws DaoException {
 
         Company company = new Company();
-        AddressDaoJdbcImpl address = new AddressDaoJdbcImpl();
-//        UserDaoJdbcImpl user = new UserDaoJdbcImpl();
+        AddressDaoImpl address = new AddressDaoImpl();
+        UserDaoImpl user = new UserDaoImpl();
 
         try{
 
@@ -66,13 +66,13 @@ public class CompanyDaoJdbcImpl extends AbstractDaoImpl<Company> implements Abst
             company.setPhoneNumber(resultSet.getString("phone_number"));
             company.setEmail(resultSet.getString("email"));
             company.setWebsite(resultSet.getString("website"));
-            company.setAddress(address.getById(resultSet.getInt("address_id")));
-//            company.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
+//            company.setAddress(address.getById(resultSet.getInt("address_id")));
+            company.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
             company.setDeleted(resultSet.getBoolean("is_deleted"));
 
         } catch (SQLException e){
 
-            throw new DAOException("Can't get entity from Company", e);
+            throw new DaoException("Can't get entity from Company", e);
 
         }
         return company;
