@@ -2,8 +2,11 @@ package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.bean.Contact;
+import com.becomejavasenior.bean.User;
 import com.becomejavasenior.service.ContactService;
+import com.becomejavasenior.service.UserService;
 import com.becomejavasenior.service.impl.ContactServiceImpl;
+import com.becomejavasenior.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,12 +24,15 @@ public class ContactListServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ContactService contactService = new ContactServiceImpl();
+        UserService userService = new UserServiceImpl();
 
         List<Contact> contactList = null;
+        List<User> users = null;
         HttpSession session = req.getSession();
 
         try {
             contactList = contactService.getAll();
+            users = userService.getAll();
         } catch (DAOException e) {
 
         } catch (ClassNotFoundException e){
@@ -34,6 +40,7 @@ public class ContactListServlet extends HttpServlet{
         }
 
         session.setAttribute("contactList", contactList);
+        session.setAttribute("users", users);
         resp.sendRedirect("/pages/contact_list.jsp");
     }
 

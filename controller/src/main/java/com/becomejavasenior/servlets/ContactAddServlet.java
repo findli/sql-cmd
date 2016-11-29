@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "addContactServlet", urlPatterns = "/addContact")
-public class AddContactServlet extends HttpServlet {
+@WebServlet(name = "ContactAddServlet", urlPatterns = "/contact_add")
+public class ContactAddServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
