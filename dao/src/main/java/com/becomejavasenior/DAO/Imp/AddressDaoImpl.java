@@ -60,7 +60,7 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
             address.setCountry(resultSet.getString("country"));
             address.setCity(resultSet.getString("city"));
             address.setStreet(resultSet.getString("street"));
-            address.setBuildNum(resultSet.getString("build_number"));
+            address.setBuildNum(resultSet.getString("building_number"));
             address.setZipcode(resultSet.getInt("zipcode"));
             address.setOfficeRoom(resultSet.getString("office_room"));
 
@@ -74,23 +74,23 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
     }
 
     public String getCreateQuery() {
-        return "INSERT INTO address (country, city, street, building_number, zipcode, office_room) VALUES (?, ?, ?, ?, ?, ?)";
+        return "INSERT INTO crm_pallas.address (country, city, street, building_number, zipcode, office_room) VALUES (?, ?, ?, ?, ?, ?)";
     }
 
     public String getUpdateQuery() {
-        return "UPDATE address SET country = ?, city = ?, street = ?, building_number = ?, zipcode = ?, office_room = ?";
+        return "UPDATE crm_pallas.address SET country = ?, city = ?, street = ?, building_number = ?, zipcode = ?, office_room = ?";
     }
 
     public String getDeleteQuery() {
-        return "DELETE FROM address WHERE id = ?";
+        return "DELETE FROM crm_pallas.address WHERE id = ?";
     }
 
     public String getByIdQuery() {
-        return "SELECT * FROM address WHERE id = ?";
+        return "SELECT * FROM crm_pallas.address WHERE id = ?";
     }
 
     public String getAllQuery() {
-        return "SELECT * FROM address";
+        return "SELECT * FROM crm_pallas.address";
     }
 
     @Override

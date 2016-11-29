@@ -12,5 +12,5 @@ public interface AbstractDao<T> {
 
     T getById(Integer id) throws DaoException;
 
-    List<T> getAll() throws DaoException;
+    List<T> getAll() throws DaoException, ClassNotFoundException;
 }

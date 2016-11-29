@@ -1,14 +1,19 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.AbstractDao;
+
+
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DataBaseUtil;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
+
+    public static Logger log = Logger.getLogger(AbstractDaoImpl.class);
 
     @Override
     public T create(T entity) throws DaoException {
@@ -24,11 +29,14 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                Integer generatedId = resultSet.getInt(1);
+                Integer generatedId = resultSet.getInt(7);
+                System.out.println("generated id" + generatedId);
                 createEntity = getById(generatedId);
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't create Entity", e);
+
+            throw new DaoException("Can't create Entity " + entity, e);
+
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -140,16 +148,22 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     abstract T getEntity(ResultSet resultSet) throws DaoException;
 
     @Override
-    public List<T> getAll() throws DaoException {
+
+    public List<T> getAll() throws DaoException, ClassNotFoundException {
+        log.trace("Call getAll() in AbstractDaoImpl");
+
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
-        List<T> listEntity = new ArrayList<T>();
+        List<T> listEntity = new ArrayList<>();
         try {
+            log.trace("Open connection");
             connection = DataBaseUtil.getConnection();
             String query = getAllQuery();
+            log.trace("Create statement");
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
+            log.trace("Get resultset");
 
             while (resultSet.next()) {
                 listEntity.add(getEntity(resultSet));
@@ -159,17 +173,20 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
             throw new DaoException("Can't get all Entity", e);
         } finally {
             if (preparedStatement != null) try {
+                log.trace("close statement");
                 preparedStatement.close();
             } catch (SQLException logOrIgnore) {
                 logOrIgnore.printStackTrace();
             }
             if (connection != null) try {
+                log.trace("close connection");
                 connection.close();
             } catch (SQLException logOrIgnore) {
                 logOrIgnore.printStackTrace();
             }
         }
 
+        log.trace("return List entity");
         return listEntity;
     }
 

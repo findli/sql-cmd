@@ -1,6 +1,5 @@
 package com.becomejavasenior.DAO.Imp;
 
-
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.PeriodInDaysTypeDao;
 import com.becomejavasenior.DAO.TaskDao;
@@ -93,7 +92,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
         Task task = new Task();
         TaskTypeDao<TaskType> taskType = new TaskTypeDaoImpl();
         PeriodInDaysTypeDao<PeriodInDaysType> periodInDaysType = new PeriodInDaysTypeDaoImpl();
-//        UserDAO<User> user = new UserDAOImpl();
+//        UserDao<User> user = new UserDaoImpl();
         try {
             task.setId(resultSet.getInt("id"));
             task.setTitle(resultSet.getString("title"));

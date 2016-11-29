@@ -3,7 +3,6 @@ package com.becomejavasenior.bean;
 import java.io.Serializable;
 import java.util.List;
 
-
 public class Company implements Serializable {
 
     private int id;
@@ -22,6 +21,7 @@ public class Company implements Serializable {
 
     public Company() {
     }
+
 
     public int getId() {
         return id;
@@ -69,6 +69,10 @@ public class Company implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
     }
 
     public User getResponsibleUser() {
@@ -166,4 +170,6 @@ public class Company implements Serializable {
     public void setDeals(List<Deal> deals) {
         this.deals = deals;
     }
+
 }
+

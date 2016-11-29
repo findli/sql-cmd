@@ -1,3 +1,45 @@
+function add_contact() {
+    var msg = $('#add_contact_form').serialize();
+    alert(msg);
+    $.ajax({
+        type: 'POST',
+//      dataType: "json",
+        url: '/addContact',
+        data: msg,
+        success: function(data) {
+            $('.forms--nDeal--Contact').html(data);
+        },
+        error:  function(xhr, str){
+            alert('Возникла ошибка: ' + xhr.responseCode);
+        }
+    });
+
+}
+//
+//$(function () {
+//    $('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
+//});
+//
+//$(function () {
+//    $('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
+//    $('#datetimepicker2').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
+//
+//});
+
+jQuery( function($) {
+    $('tbody tr[data-href]').addClass('clickable').click( function() {
+        //alert('alert');
+        window.location = $(this).attr('data-href');
+    });
+});
+
+$(function(){
+    $('#t_deals').on('click', '.rowlink', function(){
+        //alert($(this).find('.item').html());
+        //alert('idDeal');
+    });
+});
+
 //Accordion
 $(document).ready(function () {
     var previousId = null;

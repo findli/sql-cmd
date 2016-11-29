@@ -28,5 +28,4 @@ public class DaoException extends Exception {
         log.error(errorMsg, exception);
 
     }
-
 }

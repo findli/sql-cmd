@@ -1,35 +1,35 @@
 package com.becomejavasenior.DAO.Imp;
 
-
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.TaskTypeDao;
 import com.becomejavasenior.bean.TaskType;
+import com.becomejavasenior.exceptions.DatabaseException;
+import com.becomejavasenior.factory.PostgresDAOFactory;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTypeDao<TaskType> {
 
     @Override
     public String getCreateQuery(){
-        return "INSERT INTO task_type (title) VALUES(?)";
+        return "INSERT INTO crm_pallas.task_type (title) VALUES(?)";
     }
 
     @Override
     public String getUpdateQuery(){
-        return "UPDATE task_type SET title = ?";
+        return "UPDATE crm_pallas.task_type SET title = ?";
     }
 
     @Override
     public String getDeleteQuery(){
-        return "DELETE FROM task_type WHERE id = ?";
+        return "DELETE FROM crm_pallas.task_type WHERE id = ?";
     }
 
     @Override
     public String getAllQuery(){
-        return "SELECT * FROM task_type";
+        return "SELECT * FROM crm_pallas.task_type";
     }
 
     @Override
@@ -39,7 +39,7 @@ public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTy
 
     @Override
     public String getByIdQuery(){
-        return "SELECT * FROM task_type WHERE id = ?";
+        return "SELECT * FROM crm_pallas.task_type WHERE id = ?";
     }
 
     @Override
@@ -72,4 +72,27 @@ public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTy
         }
         return taskType;
     }
+
+    @Override
+    public List<TaskType> getAll() throws DaoException, ClassNotFoundException {
+        List<TaskType> taskTypes = new ArrayList<>();
+        TaskType taskType;
+
+        try (Connection connection = PostgresDAOFactory.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(getAllQuery())) {
+            while (resultSet.next()) {
+                taskType = new TaskType();
+                taskType.setId(resultSet.getInt("id"));
+                taskType.setType(resultSet.getString("title"));
+
+                taskTypes.add(taskType);
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex);
+        }
+
+        return taskTypes;
+    }
+
 }

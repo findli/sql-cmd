@@ -1,6 +1,7 @@
 package com.becomejavasenior.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class Deal implements Serializable {
@@ -16,9 +17,59 @@ public class Deal implements Serializable {
     private List<Tag> dealTag;
     private List<Contact> dealContact;
     private List<Note> dealNote;
+    private Contact primaryContact;
+    private Date createDate;
 
     public Deal(){
 
+    }
+
+    public List<Contact> getDealContact() {
+        return dealContact;
+    }
+
+    public void setDealContact(List<Contact> dealContact) {
+        this.dealContact = dealContact;
+    }
+
+    public List<Note> getDealNote() {
+        return dealNote;
+    }
+
+    public void setDealNote(List<Note> dealNote) {
+        this.dealNote = dealNote;
+    }
+
+    public List<Tag> getDealTag() {
+        return dealTag;
+    }
+
+    public void setDealTag(List<Tag> dealTag) {
+        this.dealTag = dealTag;
+    }
+
+    public List<Task> getDealTask() {
+        return dealTask;
+    }
+
+    public void setDealTask(List<Task> dealTask) {
+        this.dealTask = dealTask;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Contact getPrimaryContact() {
+        return primaryContact;
+    }
+
+    public void setPrimaryContact(Contact primaryContact) {
+        this.primaryContact = primaryContact;
     }
 
     public int getId() {
@@ -73,41 +124,10 @@ public class Deal implements Serializable {
         return isDeleted;
     }
 
-    public void setIsDeleted(boolean deleted) {
-        this.isDeleted = deleted;
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
-    public List<Task> getDealTask() {
-        return dealTask;
-    }
-
-    public void setDealTask(List<Task> dealTask) {
-        this.dealTask = dealTask;
-    }
-
-    public List<Tag> getDealTag() {
-        return dealTag;
-    }
-
-    public void setDealTag(List<Tag> dealTag) {
-        this.dealTag = dealTag;
-    }
-
-    public List<Contact> getDealContact() {
-        return dealContact;
-    }
-
-    public void setDealContact(List<Contact> dealContact) {
-        this.dealContact = dealContact;
-    }
-
-    public List<Note> getDealNote() {
-        return dealNote;
-    }
-
-    public void setDealNote(List<Note> dealNote) {
-        this.dealNote = dealNote;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -148,8 +168,8 @@ public class Deal implements Serializable {
                 ", stage=" + stage +
                 ", responsible_user=" + responsibleUser +
                 ", isDeleted=" + isDeleted +
+                ", primary_contact_id=" + primaryContact +
                 '}';
     }
-
 }
 
