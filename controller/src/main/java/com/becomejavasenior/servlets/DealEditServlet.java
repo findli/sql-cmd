@@ -26,6 +26,8 @@ public class DealEditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        HttpSession session = request.getSession();
+
         CompanyService companyService = new CompanyServiceImpl();
         StageService stageService = new StageServiceImpl();
 
@@ -36,14 +38,14 @@ public class DealEditServlet extends HttpServlet {
         } else {
             System.out.println("id = null");
         }
-        HttpSession session = request.getSession();
+
 
         dealService = new DealServiceImpl();
         companyService = new CompanyServiceImpl();
 
         Deal deal = null;
         Company company = null;
-        Stage stage = new Stage();
+        Stage stage = null;
         List<Stage> stages = null;
 
         try {

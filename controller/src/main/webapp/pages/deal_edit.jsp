@@ -241,28 +241,29 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Phone </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Phone" id="editDealCompanyPhone" name="editDealCompanyPhone">
+                                <input class="form-control" type="text" value = "${company.getPhoneNumber()}" placeholder="Phone" id="editDealCompanyPhone" name="editDealCompanyPhone">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">email </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="email" id="editDealCompanyEmail" name="editDealCompanyEmail">
+                                <input class="form-control" type="text" value="${company.getEmail()}" placeholder="email" id="editDealCompanyEmail" name="editDealCompanyEmail">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Web </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Url" id="editDealCompanyWeb" name="editDealCompanyWeb">
+                                <input class="form-control" type="text" value="${company.getWebsite()}" placeholder="Url" id="editDealCompanyWeb" name="editDealCompanyWeb">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Address </label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" placeholder="Address" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>
+                                <textarea class="form-control" value="${company.getAddress()}"
+                                          placeholder="хз пока не получилось" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>
                             </div>
                         </div>
 
@@ -318,9 +319,9 @@
 
 </body>
 
-<script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
 

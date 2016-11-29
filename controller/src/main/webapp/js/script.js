@@ -6,15 +6,20 @@ function add_contact() {
 //      dataType: "json",
         url: '/addContact',
         data: msg,
-        success: function(data) {
-            $('.forms--nDeal--Contact').html(data);
-        },
-        error:  function(xhr, str){
-            alert('Возникла ошибка: ' + xhr.responseCode);
-        }
+        success: funcSuccess,
+        error:  funcError
     });
 
 }
+
+function funcError(xhr, str) {
+    alert('Возникла ошибка: ' + xhr.responseCode);
+}
+
+function funcSuccess(data) {
+    $('.forms--nDeal--Contact').html(data);
+}
+
 //
 //$(function () {
 //    $('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
