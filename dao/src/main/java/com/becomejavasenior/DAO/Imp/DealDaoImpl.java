@@ -54,8 +54,9 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             preparedStatement.setInt(4, deal.getStage().getId());
             preparedStatement.setInt(5, deal.getResponsibleUser().getId());
             preparedStatement.setBoolean(6, deal.isDeleted());
-            preparedStatement.setInt(7, deal.getPrimaryContact().getId());
-            preparedStatement.setTimestamp(8, new Timestamp(deal.getCreateDate().getTime()));
+            preparedStatement.setInt(7, deal.getId());
+//            preparedStatement.setInt(7, deal.getPrimaryContact().getId());
+//            preparedStatement.setTimestamp(8, new Timestamp(deal.getCreateDate().getTime()));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,8 +106,8 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
 
     @Override
     String getUpdateQuery() {
-        return DataBaseUtil.getQuery("UPDATE crm_pallas.deal SET company_id = ?, stage_id = ?, " +
-                "responsible_user_id = ?, title = ?, budget =?, is_deleted = ? WHERE id = ?");
+        return DataBaseUtil.getQuery("UPDATE crm_pallas.deal SET title = ?, company_id = ?, " +
+                "budget = ?, stage_id = ?, responsible_user_id =?, is_deleted = ? WHERE id = ?");
     }
 
     @Override

@@ -1,3 +1,31 @@
+$(function(){
+    $('#bttNewDeal').click(function(){
+
+        var idDeal = $('#idDeal').val();
+        var newDeal = $('#dealNewName').val();
+        var newUser = $('#responsibleUser').val();
+        var newBudget = $('#dealBudget').val();
+        var newStage = $('#stageDeal').val();
+
+        $.ajax({
+            type: 'POST',
+            data: {
+                idDeal : idDeal,
+                newDeal : newDeal,
+                newUser : newUser,
+                newBudget : newBudget,
+                newStage : newStage,
+                action : 'editDealDeal'
+            },
+            url: '/dealEdit2',
+            success: function(result) {
+                // alert(result);
+            $('#result1').html(result);
+        }
+    })
+    });
+});
+
 function add_contact() {
     var msg = $('#add_contact_form').serialize();
     alert(msg);

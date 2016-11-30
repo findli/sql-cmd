@@ -64,6 +64,7 @@ public class DealEditServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        session.setAttribute("idDeal", idDeal);
         session.setAttribute("stages", stages);
         session.setAttribute("stage", stage);
         session.setAttribute("company", company);
@@ -90,12 +91,15 @@ public class DealEditServlet extends HttpServlet {
 //        } catch (ClassNotFoundException e) {
 //            e.printStackTrace();
         }
-        response.sendRedirect("/deal");
+        request.getRequestDispatcher("/deal").forward(request, response);
+//        response.sendRedirect("/deal");
     }
     private Deal getDealFromRequest(HttpServletRequest request) {
+
         Deal deal = new Deal();
         deal.setTitle(request.getParameter("dealNewName"));
         System.out.println("deal name = " + deal.getTitle());
+        deal.setTitle("best");
 
         User user = new User();
         user.setlName(request.getParameter("responsibleUser"));

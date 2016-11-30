@@ -28,8 +28,8 @@ public class DealServiceImpl implements DealService {
         return (Deal) dealDao.create(deal);
     }
 
-    public void update(Deal deal) throws DaoException {
-        dealDao.update(deal);
+    public Deal update(Deal deal) throws DaoException {
+        return (Deal) dealDao.update(deal);
     }
 
     public Deal getById(int id) throws DaoException {

@@ -12,6 +12,27 @@
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
 
+    <%--<script type="text/javascript">--%>
+        <%--$(function(){--%>
+            <%--$('#bttNewDeal').click(function(){--%>
+
+                <%--var newDeal = $('#dealNewName').val();--%>
+                <%--$.ajax({--%>
+                    <%--type: 'POST',--%>
+                    <%--data: {--%>
+                        <%--newDeal : newDeal,--%>
+                        <%--action : 'editDealDeal',--%>
+                        <%--idDeal : ${idDeal}--%>
+                    <%--},--%>
+                    <%--url: '/dealEdit2',--%>
+                    <%--success: function(result) {--%>
+                        <%--$('#result1').html(result);--%>
+                    <%--}--%>
+                <%--})--%>
+            <%--});--%>
+        <%--});--%>
+    <%--</script>--%>
+
 
     <title>Edit deal</title>
 </head>
@@ -49,64 +70,77 @@
 
         <div class="wrapper__aboutCompany">
             <div class="forms">
-                <form class="form-horizontal" role="form" method="post" action="/dealEdit" id="dealForm2"
-                      enctype="multipart/form-data">
+                <%--<form class="form-horizontal" role="form" method="post" action="/dealEdit" id="dealForm2"--%>
+                      <%--enctype="multipart/form-data">--%>
 
                     <!--Add deal-->
                     <div class="forms--nDeal">
-                        <h2>Edit deal</h2><br>
+                        <fieldset>
+                            <form class="form-horizontal">
+                            <h2>Edit deal</h2><br>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Name </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" value="${deal.getTitle()}" id="dealNewName" name="dealNewName">
+                            <div class="form-group">
+                                <%--<span id="idDeal"></span>--%>
+                                <label class="col-sm-3 control-label">Name </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" value="${deal.getTitle()}" id="dealNewName" name="dealNewName">
+                                    <span id="result1" style="color:red"></span>
+                                </div>
+
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Tag </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag" id="dealTag" name="dealTag">
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Tag </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" placeholder="Tag" id="dealTag" name="dealTag">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Responsible </label>
-                            <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
-                                <c:forEach var="user" items="${users}">
-                                    <option><c:out value="${user.lName}"/></option>
-                                </c:forEach>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Budget </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" value="${deal.budget}" id="dealBudget" name="dealBudget">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Responsible </label>
+                                <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
+                                    <c:forEach var="user" items="${users}">
+                                        <option><c:out value="${user.lName}"/></option>
+                                    </c:forEach>
+                                </select>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Stage </label>
-                            <select class="col-sm-9 form-control" id="stageDeal" name="stageDeal">
-                                <c:forEach var="stage" items="${stages}">
-                                    <option><c:out value="${stage.title}"/></option>
-                                </c:forEach>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <%--<input class="formAddBut" type="button" value="Применить">--%>
-                                <%--<input class="formAddBut" type="button" value="Очистить">--%>
-                                <button>Применить</button>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Budget </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" value="${deal.budget}" id="dealBudget" name="dealBudget">
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Stage </label>
+                                <select class="col-sm-9 form-control" id="stageDeal" name="stageDeal">
+                                    <c:forEach var="stage" items="${stages}">
+                                        <option><c:out value="${stage.title}"/></option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <%--<input class="formAddBut" type="button" value="Применить">--%>
+                                    <%--<input class="formAddBut" type="button" value="Очистить">--%>
+                                    <%--<input type="button" value="Применить" id="bttNewDeal">--%>
+                                        <input type="hidden" id="idDeal" value="${deal.getId()}" />
+                                        <button type="button" class="btn btn-success" id="bttNewDeal">Применить</button>
+                                </div>
+                            </div>
+
+                        </form>
+                        </fieldset>
 
                     </div>
 
                     <!--Edit contact-->
                     <div class="forms--nDeal">
+                        <form>
                         <h2>Edit contact</h2><br>
 
                         <!-- Навигация -->
@@ -223,12 +257,14 @@
                             </div>
 
                         </div>
+                        </form>
 
                     </div>
                     <!--End-->
 
                     <!--Edit company-->
                     <div class="forms--nDeal">
+                        <form>
                         <h2>Edit company</h2><br>
 
                         <div class="form-group">
@@ -266,11 +302,13 @@
                                           placeholder="хз пока не получилось" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>
                             </div>
                         </div>
+                        </form>
 
                     </div>
 
                     <!--Add task-->
                     <div class="forms--nDeal--Task">
+                        <form>
                         <h2>Edit task</h2><br>
 
                         <!-- Навигация -->
@@ -302,10 +340,11 @@
                             </div>
 
                         </div>
+                        </form>
 
                     </div>
 
-                </form>
+                <%--</form>--%>
 
             </div>
         </div>
