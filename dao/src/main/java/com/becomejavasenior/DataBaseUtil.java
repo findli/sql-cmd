@@ -81,6 +81,7 @@ public class DataBaseUtil {
         } catch (IOException | ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }*/
+
         try {
         Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
