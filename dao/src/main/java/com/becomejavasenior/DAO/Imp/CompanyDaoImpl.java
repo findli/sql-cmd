@@ -59,6 +59,11 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
     }
 
     @Override
+    public Company getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
     public Company getEntity(ResultSet resultSet) throws DaoException {
 
         Company company = new Company();

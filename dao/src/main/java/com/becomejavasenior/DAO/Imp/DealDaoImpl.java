@@ -65,6 +65,11 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
     }
 
     @Override
+    public Deal getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
     Deal getEntity(ResultSet resultSet) throws DaoException {
         Deal deal = new Deal();
         CompanyDao<Company> company = new CompanyDaoImpl();

@@ -50,6 +50,11 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
     }
 
     @Override
+    public Address getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
     public Address getEntity(ResultSet resultSet) throws DaoException {
 
         Address address = new Address();

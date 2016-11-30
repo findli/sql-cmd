@@ -68,6 +68,11 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
     }
 
     @Override
+    public Note getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
     public List<Note> getAll() throws DaoException, ClassNotFoundException {
         List<Note> notes = new ArrayList<>();
         Note note;

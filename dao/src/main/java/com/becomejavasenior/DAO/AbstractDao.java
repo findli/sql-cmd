@@ -12,5 +12,7 @@ public interface AbstractDao<T> {
 
     T getById(Integer id) throws DaoException;
 
+    T getByName(String str) throws DaoException, ClassNotFoundException;
+
     List<T> getAll() throws DaoException, ClassNotFoundException;
 }

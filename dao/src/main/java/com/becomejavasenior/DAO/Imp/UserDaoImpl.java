@@ -53,6 +53,11 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     }
 
     @Override
+    public User getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
     User getEntity(ResultSet resultSet) throws DaoException {
         User user = new User();
         try {

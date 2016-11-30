@@ -19,6 +19,7 @@ import java.util.List;
 
 @WebServlet(name = "dealEdit2Servlet", urlPatterns = "/dealEdit2")
 public class DealEdit2Servlet extends HttpServlet {
+    DealService dealService = new DealServiceImpl();
     String str;
     Deal deal;
 
@@ -29,14 +30,23 @@ public class DealEdit2Servlet extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action.equals("editDealDeal")) {
+            deal = new Deal();
+            int id = Integer.parseInt(request.getParameter("idDeal"));
+            try {
+                deal = dealService.getById(id);
+            } catch (DaoException e) {
+                e.printStackTrace();
+            }
+
             str = getNameFromRequest(request) + " \n";
-//            try {
-//                str+= getStageFromRequest(request) + " \n";
-//            } catch (DaoException e) {
-//                e.printStackTrace();
-//            } catch (ClassNotFoundException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                str += getStageFromRequest(request) + " \n";
+                str += getBudgetFromRequest(request) + " \n";
+            } catch (DaoException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             out.print(str);
 
         } else if (action.equals("demo2")){
@@ -45,16 +55,21 @@ public class DealEdit2Servlet extends HttpServlet {
 //            out.print(number1 + number2);
         }
     }
-    public String getNameFromRequest(HttpServletRequest request) {
-        DealService dealService = new DealServiceImpl();
-        String dealNewName = request.getParameter("newDeal");
-        deal = new Deal();
-        int id = Integer.parseInt(request.getParameter("idDeal"));
+    public String getBudgetFromRequest(HttpServletRequest request) {
+        int dealNewBudget = Integer.valueOf(request.getParameter("newBudget"));
+        deal.setBudget(dealNewBudget);
         try {
-            deal = dealService.getById(id);
+            deal = dealService.update(deal);
         } catch (DaoException e) {
             e.printStackTrace();
         }
+        return "new Budget = " + deal.getBudget();
+    }
+
+    public String getNameFromRequest(HttpServletRequest request) {
+
+        String dealNewName = request.getParameter("newDeal");
+
 
         deal.setTitle(dealNewName);
 
@@ -66,37 +81,20 @@ public class DealEdit2Servlet extends HttpServlet {
 
         return "new name = " + deal.getTitle();
     }
-//    public Stage stageByName(String str) throws ClassNotFoundException, DaoException {
-//        StageService stageService = new StageServiceImpl();
-//        List<Stage> stages = stageService.getAll();
-//        int id = 0;
-//        for (int i = 0; i < stages.size(); ++i) {
-//            if (stages.get(i).getTitle().equals(str)) {
-//                id = stages.get(i).getId();
-//                break;
-//            }
-//        }
-//        return stages.get(id);
-//    }
-//    public String getStageFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
-//        DealService dealService = new DealServiceImpl();
-//        String dealNewStage = request.getParameter("newStage");
-//        Stage stage = new Stage();
-//        int id = Integer.parseInt(request.getParameter("idDeal"));
-//        try {
-//            stage = dealService.getById(id).getStage();
-//        } catch (DaoException e) {
-//            e.printStackTrace();
-//        }
-//
-//        deal.setStage(stageByName(dealNewStage));
-//
-//        try {
-//            deal = dealService.update(deal);
-//        } catch (DaoException e) {
-//            e.printStackTrace();
-//        }
-//        return "new stage = " + deal.getStage().getTitle();
-//    }
+
+    public String getStageFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
+        DealService dealService = new DealServiceImpl();
+        StageService stageService = new StageServiceImpl();
+        String dealNewStage = request.getParameter("newStage");
+        Stage stage = stageService.getByName(dealNewStage);
+        deal.setStage(stage);
+
+        try {
+            deal = dealService.update(deal);
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
+        return "new stage = " + deal.getStage().getTitle();
+    }
 
 }

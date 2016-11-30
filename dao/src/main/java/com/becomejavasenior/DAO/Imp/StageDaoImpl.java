@@ -68,6 +68,19 @@ public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomeja
     }
 
     @Override
+    public Stage getByName(String str) throws DaoException, ClassNotFoundException {
+        Stage stage = new Stage();
+        List<Stage> stages = getAll();
+        for (int i = 0; i < stages.size(); ++i) {
+            if(stages.get(i).getTitle().equals(str)) {
+                stage = stages.get(i);
+                break;
+            }
+        }
+        return stage;
+    }
+
+    @Override
     public Stage getEntity(ResultSet resultSet){
         Stage stage = new Stage();
         try {

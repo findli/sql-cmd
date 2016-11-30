@@ -84,7 +84,7 @@
                                 <label class="col-sm-3 control-label">Name </label>
                                 <div class="col-sm-9">
                                     <input class="form-control" type="text" value="${deal.getTitle()}" id="dealNewName" name="dealNewName">
-                                    <span id="result1" style="color:red"></span>
+
                                 </div>
 
                             </div>
@@ -132,6 +132,7 @@
                                         <button type="button" class="btn btn-success" id="bttNewDeal">Применить</button>
                                 </div>
                             </div>
+                            <span id="result1" style="color:red"></span>
 
                         </form>
                         </fieldset>
@@ -140,7 +141,7 @@
 
                     <!--Edit contact-->
                     <div class="forms--nDeal">
-                        <form>
+                        <form class="form-horizontal">
                         <h2>Edit contact</h2><br>
 
                         <!-- Навигация -->
@@ -264,7 +265,7 @@
 
                     <!--Edit company-->
                     <div class="forms--nDeal">
-                        <form>
+                        <form class="form-horizontal">
                         <h2>Edit company</h2><br>
 
                         <div class="form-group">
@@ -308,7 +309,7 @@
 
                     <!--Add task-->
                     <div class="forms--nDeal--Task">
-                        <form>
+                        <form class="form-horizontal">
                         <h2>Edit task</h2><br>
 
                         <!-- Навигация -->

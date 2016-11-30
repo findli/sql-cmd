@@ -62,6 +62,11 @@ public class LanguageDaoImpl extends AbstractDaoImpl<Language> implements Langua
     }
 
     @Override
+    public Language getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
     public Language getEntity(ResultSet resultSet) throws DaoException{
         Language language = new Language();
         try {

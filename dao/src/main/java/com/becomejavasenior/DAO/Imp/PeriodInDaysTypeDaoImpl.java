@@ -74,4 +74,9 @@ public class PeriodInDaysTypeDaoImpl extends AbstractDaoImpl<PeriodInDaysType> i
         }
         return periodInDaysType;
     }
+
+    @Override
+    public PeriodInDaysType getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
 }
