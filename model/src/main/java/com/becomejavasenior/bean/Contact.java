@@ -84,7 +84,7 @@ public class Contact implements Serializable {
         this.responsibleUser = responsibleUser;
     }
 
-    public boolean is_deleted() {
+    public boolean getDeleted() {
         return isDeleted;
     }
 

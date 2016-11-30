@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: ru.javajoy.jps.w11.Panels
+Main-Class: ru.javajoy.jps.w11.GameReverse
+

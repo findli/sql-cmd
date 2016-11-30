@@ -1,0 +1,1 @@
+select * from az_trainingdiary.files inner join az_trainingdiary.files_id_exercise on fk_files_id_files = id_files where fk_exercise_id_exercise = 2;

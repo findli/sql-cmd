@@ -3,13 +3,12 @@ package com.becomejavasenior.bean;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 public class Note implements Serializable {
 
     private int id;
     private String noteText;
-    private User createtByUserId;
+    private User createdByUserId;
     private Date dateCreate;
 
     public Note() {
@@ -31,12 +30,12 @@ public class Note implements Serializable {
         this.noteText = noteText;
     }
 
-    public User getCreatetByUserId() {
-        return createtByUserId;
+    public User getCreatedByUserId() {
+        return createdByUserId;
     }
 
-    public void setCreatetByUserId(User createtByUserId) {
-        this.createtByUserId = createtByUserId;
+    public void setCreatedByUserId(User createdByUserId) {
+        this.createdByUserId = createdByUserId;
     }
 
     public Date getDateCreate() {
@@ -57,7 +56,7 @@ public class Note implements Serializable {
 
         if (id != note.id) return false;
         if (noteText != null ? !noteText.equals(note.noteText) : note.noteText != null) return false;
-        if (createtByUserId != null ? !createtByUserId.equals(note.createtByUserId) : note.createtByUserId != null)
+        if (createdByUserId != null ? !createdByUserId.equals(note.createdByUserId) : note.createdByUserId != null)
             return false;
         return dateCreate != null ? dateCreate.equals(note.dateCreate) : note.dateCreate == null;
 
@@ -67,7 +66,7 @@ public class Note implements Serializable {
     public int hashCode() {
         int result = id;
         result = 31 * result + (noteText != null ? noteText.hashCode() : 0);
-        result = 31 * result + (createtByUserId != null ? createtByUserId.hashCode() : 0);
+        result = 31 * result + (createdByUserId != null ? createdByUserId.hashCode() : 0);
         result = 31 * result + (dateCreate != null ? dateCreate.hashCode() : 0);
         return result;
     }
@@ -77,7 +76,7 @@ public class Note implements Serializable {
         return "Note{" +
                 "id=" + id +
                 ", noteText='" + noteText + '\'' +
-                ", createtByUserId=" + createtByUserId +
+                ", createdByUserId=" + createdByUserId +
                 ", dateCreate=" + dateCreate +
                 '}';
     }

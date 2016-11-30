@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:soap="http://cxf.apache.org/bindings/soap" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+http://cxf.apache.org/bindings/soap http://cxf.apache.org/schemas/configuration/soap.xsd
+http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+
+    <!-- JAX-WS -->
+
+<jaxws:endpoint
+        id="IHelloService"
+        implementor="JSS.w09_p01.ws.hello.HelloService"
+        address="/hello" >
+</jaxws:endpoint>
+
+<jaxws:endpoint
+        id="ICardValidator"
+        implementor="JSS.w09_p01.ws.validator.CardValidator"
+        address="/validate" >
+    <jaxws:features>
+        <bean class="org.apache.cxf.feature.LoggingFeature"/>
+    </jaxws:features>
+</jaxws:endpoint>
+
+    <!-- JAX-RS -->
+
+    <!--<bean id="HelloResource" class="JSS.w10.rs.HelloResource"/>-->
+
+    <jaxrs:server id="rsService" address="/rs">
+
+        <jaxrs:serviceBeans>
+            <!--<ref bean="HelloResource"/>-->
+            <bean class="JSS.w10.rs.HelloResource"/>
+            <bean class="JSS.w10.rs.bookstore.resources.BookListResource"/>
+            <bean class="JSS.w10.rs.bookstore.resources.BookResource"/>
+        </jaxrs:serviceBeans>
+
+        <jaxrs:providers>
+            <bean class="JSS.w10.rs.bookstore.resources.BookHtmlProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+
+
+</beans>

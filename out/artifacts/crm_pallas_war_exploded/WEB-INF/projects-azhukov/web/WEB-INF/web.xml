@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+    <servlet>
+        <servlet-name>MyCalendar</servlet-name>
+        <servlet-class>ru.javajoy.jss.w5.MyCalendar</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MyCalendar</servlet-name>
+        <url-pattern>/calendar</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MyCalendar</servlet-name>
+        <url-pattern>/mycalendar</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SendMessage</servlet-name>
+        <servlet-class>ru.javajoy.jss.w5.SendMessage</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SendMessage</servlet-name>
+        <url-pattern>/sm</url-pattern>
+    </servlet-mapping>
+
+</web-app>

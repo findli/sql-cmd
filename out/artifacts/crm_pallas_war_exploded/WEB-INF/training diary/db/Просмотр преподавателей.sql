@@ -1,0 +1,1 @@
+select id_profile, first_name, second_name, photo from az_trainingdiary.profile inner join az_trainingdiary.entry on fk_id_profile = id_profile where role = 2;

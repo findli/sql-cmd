@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+           version="3.0">
+    <!--<description>cxf</description>-->
+    <!--<display-name>cxf</display-name>-->
+    <servlet>
+        <description>Apache CXF Endpoint</description>
+        <display-name>cxf</display-name>
+        <servlet-name>cxf</servlet-name>
+        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cxf</servlet-name>
+        <url-pattern>/services/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cxf</servlet-name>
+        <url-pattern>/resources/*</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>/JSS/w06_p02/SessionClientCheckIn.jsp</welcome-file>
+    </welcome-file-list>
+
+    <context-param>
+        <param-name>db_name</param-name>
+        <param-value>salesdept</param-value>
+    </context-param>
+
+    <session-config>
+        <session-timeout>60</session-timeout>
+        <!--<tracking-mode>COOKIE</tracking-mode>-->
+        <!--<tracking-mode>URL</tracking-mode>-->
+        <!--<cookie-config>-->
+            <!--<name>SESSION_ID</name>-->
+            <!--<domain>localhost</domain>-->
+        <!--</cookie-config>-->
+    </session-config>
+
+
+
+    <servlet>
+        <servlet-name>ClockServlet</servlet-name>
+        <servlet-class>JSS.w05.ClockServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ClockServlet</servlet-name>
+        <url-pattern>/clock/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SendMessage</servlet-name>
+        <servlet-class>JSS.w05_p01.SendMessage</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SendMessage</servlet-name>
+        <url-pattern>/sm</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProcessMessage</servlet-name>
+        <servlet-class>JSS.w05_p01.ProcessMessage</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ProcessMessage</servlet-name>
+        <url-pattern>/pm</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ProcessMessage</servlet-name>
+        <url-pattern>/processmessage</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>SessionJSP</servlet-name>
+        <jsp-file>/JSS/w06_p02/SessionClientCheckIn.jsp</jsp-file>
+        <init-param>
+            <param-name>db_name</param-name>
+            <param-value>salesdept</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SessionJSP</servlet-name>
+        <url-pattern>/sessionjsp</url-pattern>
+    </servlet-mapping>
+
+</web-app>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+    <tlib-version>1.0</tlib-version>
+    <short-name>miscFunctions</short-name>
+    <uri>http://javajoy.net/JSS/miscFunctions</uri>
+
+
+    <function>
+        <name>map2String</name>
+        <function-class>JSS.w07_p01.tag.Util</function-class>
+        <function-signature>
+            java.lang.String map2String(java.util.Map,java.lang.String,java.lang.String)
+        </function-signature>
+    </function>
+
+    <function>
+        <name>concat</name>
+        <function-class>JSS.w07_p01.tag.Util</function-class>
+        <function-signature>
+            java.lang.String concat(java.lang.String,java.lang.String)
+        </function-signature>
+    </function>
+
+
+    <!-- Invoke 'Generate' action to add tags or functions -->
+
+
+</taglib>

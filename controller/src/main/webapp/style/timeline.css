@@ -333,8 +333,8 @@ header h1 {
     }
     .cd-timeline-content .cd-date {
         position: absolute;
-        width: 100%;
-        left: 118%;
+        width: 37%;
+        left: 116%;
         top: 6px;
         font-size: 16px;
         font-size: 1rem;

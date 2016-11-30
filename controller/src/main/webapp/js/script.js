@@ -48,10 +48,12 @@ $(function () {
         years: "2000-2099",
         format: "DD.MM.YYYY",
         onClick: function (date) {
-            console.log(date);
+         /*   console.log(date);*/
+            document.getElementById("hiddenDate").value = date;
         }
     });
 });
+
 
 
 $('.container').clockpicker().find('input').change(function () {
@@ -71,7 +73,43 @@ $('.clockpicker').clockpicker({
 $(".cancel").click(function () {
     $('.modalInput').val("");
     $('.modalTextArea').val("");
-})
+});
+
+/*$(function () {
+    if($('#actionButNote').attr("checked") == 'checked'){
+        console.log("check");
+        $('#noteBlock').css('display', 'block');
+    } else {
+        console.log("uncheck")
+        $('#noteBlock').css('display', 'none');
+    }
+});*/
+
+$(function () {
+    $("#actionButDeal").on("click", function () {
+        if ($(this).is(":checked")) {
+            console.log("check");
+            $('.taskBlock').css('display', 'block');
+        }
+        else {
+            console.log("uncheck");
+            $('.taskBlock').css('display', 'none');
+        }
+    });
+    $("#actionButNote").on("click", function () {
+        if ($(this).is(":checked")) {
+            console.log("check");
+            $('.noteBlock').css('display', 'block');
+        }
+        else {
+            console.log("uncheck");
+            $('.noteBlock').css('display', 'none');
+        }
+    });
+ /*   $(".actionBut").on('click', function () {
+        $(this).prev('input').prev('textarea').css("disabled", 'false')
+    })*/
+});
 
 
 

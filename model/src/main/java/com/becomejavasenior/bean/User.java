@@ -62,7 +62,7 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public boolean is_admin() {
+    public boolean getAdmin() {
         return isAdmin;
     }
 
@@ -86,7 +86,7 @@ public class User implements Serializable {
         this.photoPath = photoPath;
     }
 
-    public boolean is_notification() {
+    public boolean getNotification() {
         return isNotification;
     }
 

@@ -5,13 +5,19 @@
 <web-app>
     <display-name>CRM Web Application</display-name>
 
+  <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 
-<!--    <welcome-file-list>
-        <welcome-file>company.jsp</welcome-file>
-    </welcome-file-list>-->
-    <servlet>
+
+<!--    <servlet>
         <servlet-name>ServletCompany</servlet-name>
         <servlet-class>com.becomejavasenior.ServletCompany</servlet-class>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ServletCompany</servlet-name>
+        <url-pattern>/company</url-pattern>
+    </servlet-mapping>-->
 
 </web-app>
