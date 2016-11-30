@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-
     <title>Company List</title>
 </head>
 <body>
@@ -59,8 +58,8 @@
 
 </body>
 
-<script title="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-<script title="text/javascript" src="../js/script.js"></script>
-<script title="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script title="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
+<script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 </html>
