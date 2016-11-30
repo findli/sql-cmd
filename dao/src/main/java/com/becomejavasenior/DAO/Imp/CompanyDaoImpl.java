@@ -29,6 +29,7 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.isDeleted());
+            statement.setInt(8, company.getAddress().getId());
         } catch (SQLException e) {
 
             throw new DaoException("Can't create statement for Company", e);
@@ -48,6 +49,7 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.isDeleted());
+            statement.setInt(8, company.getAddress().getId());
 
         } catch (SQLException e) {
 
