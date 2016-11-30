@@ -1,9 +1,11 @@
 package com.becomejavasenior.service.impl;
 
-import com.becomejavasenior.DAO.CompanyDao;
-import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.Imp.CompanyDaoImpl;
+import com.becomejavasenior.DAO.CompanyDAO;
+import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.Imp.CompanyDAOImpl;
+import com.becomejavasenior.bean.Adress;
 import com.becomejavasenior.bean.Company;
+import com.becomejavasenior.bean.User;
 import com.becomejavasenior.service.CompanyService;
 import org.apache.log4j.Logger;
 
@@ -13,37 +15,40 @@ public class CompanyServiceImpl implements CompanyService {
 
     public static Logger log = Logger.getLogger(CompanyServiceImpl.class);
 
-    private CompanyDao<Company> companyDAO = new CompanyDaoImpl();
+    private CompanyDAO<Company> companyDAO = new CompanyDAOImpl();
 
     @Override
-    public Company create(Company company) throws DaoException {
+    public Company create(Company company) throws DAOException {
         return companyDAO.create(company);
     }
 
     @Override
-    public void delete(int id) throws DaoException {
+    public void delete(int id) throws DAOException {
         companyDAO.delete(id);
     }
 
     @Override
-    public List<Company> getAll() throws DaoException, ClassNotFoundException {
+    public void createNewCompany(Company company, User user, Adress adress) {
+
+    }
+
+    @Override
+    public List<Company> getAll() throws DAOException, ClassNotFoundException {
         log.trace("getAll() in CompanyServiceImpl");
         return companyDAO.getAll();
     }
 
     @Override
-    public Company getById(int id) throws DaoException {
+    public Company getById(int id) throws DAOException {
         return companyDAO.getById(id);
     }
 
     @Override
-    public Company update(Company company) throws DaoException {
-        return companyDAO.update(company);
+    public void update(Company company) throws DAOException {
+        companyDAO.update(company);
     }
 
-    @Override
-    public Company getByName(String str) throws DaoException, ClassNotFoundException {
-        return companyDAO.getByName(str);
+    public void createNewCompany(){
+
     }
 }
-

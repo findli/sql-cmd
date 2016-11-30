@@ -1,6 +1,7 @@
 package com.becomejavasenior.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 public class Company implements Serializable {
@@ -14,7 +15,17 @@ public class Company implements Serializable {
     private User responsibleUser;
     private Boolean isDeleted;
 
+    private List<Note> companyNote;
+
     public Company() {
+    }
+
+    public List<Note> getCompanyNote() {
+        return companyNote;
+    }
+
+    public void setCompanyNote(List<Note> companyNote) {
+        this.companyNote = companyNote;
     }
 
     public int getId() {
@@ -80,6 +91,10 @@ public class Company implements Serializable {
 
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 
     public Boolean getIsDeleted() {

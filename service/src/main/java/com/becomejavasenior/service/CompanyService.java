@@ -1,21 +1,25 @@
 package com.becomejavasenior.service;
 
-import com.becomejavasenior.DAO.DaoException;
+import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.bean.Adress;
 import com.becomejavasenior.bean.Company;
+import com.becomejavasenior.bean.User;
 
 import java.util.List;
 
 public interface CompanyService {
 
-    Company create(Company t) throws DaoException;
+    Company create(Company t) throws DAOException;
 
-    Company update(Company t) throws DaoException;
+    void update(Company t) throws DAOException;
 
-    List<Company> getAll() throws DaoException, ClassNotFoundException;
+    List<Company> getAll() throws DAOException, ClassNotFoundException;
 
-    Company getById(int id) throws DaoException;
+    Company getById(int id) throws DAOException;
 
-    void delete(int id) throws DaoException;
+    void delete(int id) throws DAOException;
 
-    Company getByName(String str) throws DaoException, ClassNotFoundException;
+    void createNewCompany(Company company, User user, Adress adress);
+
 }
+
