@@ -1,16 +1,23 @@
 package com.becomejavasenior;
 
+import com.becomejavasenior.DAO.DatabaseException;
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Objects;
+import java.util.Properties;
 
 public class DataBaseUtil {
     private static BasicDataSource dataSource;
     private static final String PROPERTIES_FILE = "database.properties";
 
-   /* static {
+  /*  static {
         if(Objects.equals(System.getenv("DEPLOYMENT_ENVIRONMENT"),"production")) {
             URI dbUri = null;
             try {
@@ -87,7 +94,7 @@ public class DataBaseUtil {
         } catch (ClassNotFoundException e) {
 
         }
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/crm_pallas","postgres", "1111");
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/crm_pallas","postgres", "root");
     }
     public static String getQuery(String name) {
         return name;

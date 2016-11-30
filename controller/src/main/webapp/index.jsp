@@ -11,12 +11,6 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
-    <link rel="stylesheet" href="../style/bootstrap-datetimepicker.min.css" />
-
     <title>Company List</title>
 </head>
 <body>
@@ -51,12 +45,21 @@
             </ul>
         </div>
         <div class="wrapper__aboutCompany">
-            Start page
+            <p class="text-primary">Start page</p><br>
+
+            <p class="text-success">Start with <a class="btn btn-link" href="/deal" role="button">Deal</a>
+                or <a class="btn btn-link" href="/company" role="button">Company</a> or
+                <a class="btn btn-link" href="/contact" role="button">Contacts</a></p>
+
+
         </div>
     </div>
 </div>
 
-<script src="../js/bootstrap.js"></script>
 </body>
+
+<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
+<script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 </html>
