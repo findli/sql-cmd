@@ -1,7 +1,9 @@
 package com.becomejavasenior.service;
 
 import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.bean.Adress;
 import com.becomejavasenior.bean.Company;
+import com.becomejavasenior.bean.User;
 
 import java.util.List;
 
@@ -16,5 +18,8 @@ public interface CompanyService {
     Company getById(int id) throws DAOException;
 
     void delete(int id) throws DAOException;
+
+    void createNewCompany(Company company, User user, Adress adress);
+
 }
 

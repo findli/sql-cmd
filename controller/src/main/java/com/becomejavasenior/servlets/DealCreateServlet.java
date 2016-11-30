@@ -86,7 +86,7 @@ public class DealCreateServlet extends HttpServlet{
             note.setDateCreate(new Date());
             User creator = new User();
             creator.setId(1); //TODO: change to user under which the logged in
-            note.setCreatetByUserId(creator);
+            note.setCreatedUser(creator);
             noteList.add(note);
             deal.setDealNote(noteList);
         } else {

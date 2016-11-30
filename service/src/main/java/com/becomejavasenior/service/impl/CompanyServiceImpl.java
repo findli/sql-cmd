@@ -3,7 +3,9 @@ package com.becomejavasenior.service.impl;
 import com.becomejavasenior.DAO.CompanyDAO;
 import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DAO.Imp.CompanyDAOImpl;
+import com.becomejavasenior.bean.Adress;
 import com.becomejavasenior.bean.Company;
+import com.becomejavasenior.bean.User;
 import com.becomejavasenior.service.CompanyService;
 import org.apache.log4j.Logger;
 
@@ -26,6 +28,11 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    public void createNewCompany(Company company, User user, Adress adress) {
+
+    }
+
+    @Override
     public List<Company> getAll() throws DAOException, ClassNotFoundException {
         log.trace("getAll() in CompanyServiceImpl");
         return companyDAO.getAll();
@@ -39,5 +46,9 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public void update(Company company) throws DAOException {
         companyDAO.update(company);
+    }
+
+    public void createNewCompany(){
+
     }
 }
