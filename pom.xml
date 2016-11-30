@@ -13,6 +13,7 @@
         <module>test-module</module>
         <module>ui</module>
         <module>mvn-hbm</module>
+        <module>spring-test</module>
     </modules>
 
     <dependencies>
