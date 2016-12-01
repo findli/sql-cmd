@@ -33,16 +33,16 @@
             rowOldHtml = rowElement.innerHTML;
 
             rowElement.innerHTML =
-                    '<div class="td"><input type="text" name="date" value="'+getValue(id,1)+'" size="10"></div>' +
-                    '<div class="td"><input type="text" name="description" value="'+getValue(id,2)+'" size="35"></div>' +
-                    '<div class="td"><input type="text" name="qty" value="'+getValue(id,3)+'" size="4"></div>' +
-                    '<div class="td"><input type="text" name="amount" value="'+getValue(id,4)+'" size="6"></div>' +
-                    '<div class="td"><input type="text" name="customer" value="'+getValue(id,5)+'" size="15"></div>' +
-                    '<div class="td"><input type="text" name="phone" value="'+getValue(id,6)+'" size="8"></div>' +
+                    '<div class="td"><input title="text" name="date" value="'+getValue(id,1)+'" size="10"></div>' +
+                    '<div class="td"><input title="text" name="description" value="'+getValue(id,2)+'" size="35"></div>' +
+                    '<div class="td"><input title="text" name="qty" value="'+getValue(id,3)+'" size="4"></div>' +
+                    '<div class="td"><input title="text" name="amount" value="'+getValue(id,4)+'" size="6"></div>' +
+                    '<div class="td"><input title="text" name="customer" value="'+getValue(id,5)+'" size="15"></div>' +
+                    '<div class="td"><input title="text" name="phone" value="'+getValue(id,6)+'" size="8"></div>' +
                     '<div class="td" width="100px">' +
-                        '<input type="hidden" name="id" value="'+id+'">' +
-                        '<input type="submit" name="editForm" value="Apply">' +
-                        '<input type="button" value="Discard" onclick="discardEdit()">' +
+                        '<input title="hidden" name="id" value="'+id+'">' +
+                        '<input title="submit" name="editForm" value="Apply">' +
+                        '<input title="button" value="Discard" onclick="discardEdit()">' +
                     '</div>'
 
         }
@@ -104,7 +104,7 @@
                 <div class="td" id="${order.id}_5">${order.customer.name}</div>
                 <div class="td" id="${order.id}_6">${order.customer.phone}</div>
                 <div class="td" id="${order.id}_7">
-                    <input type="button" value="Edit" onclick="showEditControls(${order.id});">
+                    <input title="button" value="Edit" onclick="showEditControls(${order.id});">
                 </div>
             </form>
         </c:forEach>
@@ -122,7 +122,7 @@
                 <option value="name" ${ordering=='name'? "selected" : ""}>Customer</option>
             </select>
         </label>
-        <input type="submit" name="orderingForm" value="Apply">
+        <input title="submit" name="orderingForm" value="Apply">
     </form>
 
 </body>

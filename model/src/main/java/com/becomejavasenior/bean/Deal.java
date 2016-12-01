@@ -133,7 +133,9 @@ public class Deal implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Deal deal = (Deal) o;
+
         if (id != deal.id) return false;
         if (budget != deal.budget) return false;
         if (isDeleted != deal.isDeleted) return false;
@@ -141,6 +143,7 @@ public class Deal implements Serializable {
         if (!company.equals(deal.company)) return false;
         if (!stage.equals(deal.stage)) return false;
         return responsibleUser.equals(deal.responsibleUser);
+
     }
 
     @Override

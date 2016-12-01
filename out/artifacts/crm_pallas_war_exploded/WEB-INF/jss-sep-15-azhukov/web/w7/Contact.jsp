@@ -38,9 +38,9 @@
 <form method="post">
     <H4> Filter </H4>
     By name
-    <input type="text" name="name" value="${param.name}">
+    <input title="text" name="name" value="${param.name}">
     <p></p>
-    <input type="submit" value="Ok">
+    <input title="submit" value="Ok">
 </form>
 </body>
 </html>

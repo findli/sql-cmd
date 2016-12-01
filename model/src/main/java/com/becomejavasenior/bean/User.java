@@ -22,13 +22,14 @@ public class User implements Serializable {
     public User() {
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
+
+    public boolean isAdmin() { return isAdmin; }
+
+    public boolean isNotification() { return isNotification; }
 
     public String getfName() {
         return fName;
@@ -62,7 +63,7 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public boolean getAdmin() {
+    public boolean is_admin() {
         return isAdmin;
     }
 
@@ -86,7 +87,7 @@ public class User implements Serializable {
         this.photoPath = photoPath;
     }
 
-    public boolean getNotification() {
+    public boolean is_notification() {
         return isNotification;
     }
 

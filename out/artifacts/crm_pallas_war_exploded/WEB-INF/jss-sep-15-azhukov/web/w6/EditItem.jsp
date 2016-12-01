@@ -90,23 +90,23 @@
 
 <form method="post">
     <p><b>New name contact</b>
-        <input type="hidden" name="idContact" value="<%=idContact%>"> <%-- CK : We need to receive idContact with the request too  --%>
-        <input type="text" size="30" name="contactName" value="<%=contactName %>"></p>
+        <input title="hidden" name="idContact" value="<%=idContact%>"> <%-- CK : We need to receive idContact with the request too  --%>
+        <input title="text" size="30" name="contactName" value="<%=contactName %>"></p>
 
     <p><b>New phone work</b>
-        <input type="text" size="30" name="phone_work" value="<%=phone_work %>"></p>
+        <input title="text" size="30" name="phone_work" value="<%=phone_work %>"></p>
 
     <p><b>New phone home</b>
-        <input type="text" size="30" name="phone_home" value="<%=phone_home %>"></p>
+        <input title="text" size="30" name="phone_home" value="<%=phone_home %>"></p>
 
     <p><b>New e-mail</b>
-        <input type="text" size="30" name="e_mail" value="<%=e_mail %>"></p>
+        <input title="text" size="30" name="e_mail" value="<%=e_mail %>"></p>
 
     <p><b>New meetDate</b>
-        <input type="//text" size="30" name="meetDate" value="<%=meetDate %>"></p>
+        <input title="//text" size="30" name="meetDate" value="<%=meetDate %>"></p>
     </p>
     <p></p>
-    <input type="submit" name="formEditSubmit" value="Ok"> <%-- CK : This i sused to regognize the request from this particular form--%>
+    <input title="submit" name="formEditSubmit" value="Ok"> <%-- CK : This i sused to regognize the request from this particular form--%>
 </form>
 </body>
 </html>

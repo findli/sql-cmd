@@ -26,20 +26,20 @@
   <table border="0">
     <tr>
       <td>Product: </td>
-      <td><input type="text" name="description" size="50"/></td>
+      <td><input title="text" name="description" size="50"/></td>
     </tr>
     <tr>
       <td>Price: </td>
-      <td><input type="text" name="price" size="10"/></td>
+      <td><input title="text" name="price" size="10"/></td>
     </tr>
     <tr>
       <td>Manual file: </td>
-      <td><input type="file" name="manual" size="50"/></td>
+      <td><input title="file" name="manual" size="50"/></td>
 
     </tr>
     <tr>
       <td colspan="2">
-        <input type="submit" value="Add">
+        <input title="submit" value="Add">
       </td>
     </tr>
     <tr>

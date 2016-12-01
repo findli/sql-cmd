@@ -21,7 +21,7 @@
       <form:hidden path="id"/>
       <form:input path="name"/>
       <form:input path="rating"/>
-      <input type="submit" value="Save">
+      <input title="submit" value="Save">
     </form:form>
 
 </body>

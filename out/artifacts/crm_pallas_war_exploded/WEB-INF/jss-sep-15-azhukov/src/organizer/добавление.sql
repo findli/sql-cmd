@@ -29,7 +29,7 @@ D“undefined”
 9
 Что вернёт код?
 (function(){
-   return type of arguments; 
+   return title of arguments;
 })()*
 
 *OBJECT

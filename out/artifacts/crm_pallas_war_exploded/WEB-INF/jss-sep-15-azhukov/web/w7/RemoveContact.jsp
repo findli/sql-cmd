@@ -16,8 +16,8 @@ Do you want remove all info about ${contactBean.getPerson(param.idContact)} ?
 </c:if>
 </body>
 <form method="post">
-    <input type="submit" name="formatOkSubmit" value="Ok"><b></b>
-    <input type="button" value="Back" onclick="HomeButton()">
+    <input title="submit" name="formatOkSubmit" value="Ok"><b></b>
+    <input title="button" value="Back" onclick="HomeButton()">
     <script>
         function HomeButton() {
             location.href = "http://localhost:8080/jss/w7/Contact.jsp";

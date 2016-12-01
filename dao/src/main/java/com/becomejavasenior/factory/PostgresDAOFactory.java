@@ -2,6 +2,7 @@ package com.becomejavasenior.factory;
 
 import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DAO.Imp.*;
+import com.becomejavasenior.DAO.StageDao;
 import com.becomejavasenior.DataBaseUtil;
 
 import java.sql.Connection;
@@ -53,4 +54,8 @@ public class PostgresDAOFactory extends AbstractDAOFactory {
         return new TaskTypeDaoImpl();
     }
 
+    @Override
+    public AddressDao getAddressDAO() {
+        return new AddressDaoImpl();
+    }
 }

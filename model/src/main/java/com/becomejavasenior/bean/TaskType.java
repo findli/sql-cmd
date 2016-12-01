@@ -1,8 +1,10 @@
 package com.becomejavasenior.bean;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class TaskType implements Serializable {
+
     private int id;
     private String title;
 
@@ -28,20 +30,15 @@ public class TaskType implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (!(o instanceof TaskType)) return false;
         TaskType taskType = (TaskType) o;
-
-        if (id != taskType.id) return false;
-        return title != null ? title.equals(taskType.title) : taskType.title == null;
-
+        return id == taskType.id &&
+                Objects.equals(title, taskType.title);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        return result;
+        return Objects.hash(id, title);
     }
 
     @Override

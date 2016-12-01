@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://validator.ws.w09_p01.JSS/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://JSS.javajoy.net" name="CardValidator" targetNamespace="http://validator.ws.w09_p01.JSS/">
   <wsdl:import location="http://localhost:8080/JSS-15-09/services/validate?wsdl=ICardValidator.wsdl" namespace="http://JSS.javajoy.net">
     </wsdl:import>
-  <wsdl:binding name="CardValidatorSoapBinding" type="ns1:ICardValidator">
+  <wsdl:binding name="CardValidatorSoapBinding" title="ns1:ICardValidator">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <wsdl:operation name="validateCard">
       <soap:operation soapAction="" style="document"/>

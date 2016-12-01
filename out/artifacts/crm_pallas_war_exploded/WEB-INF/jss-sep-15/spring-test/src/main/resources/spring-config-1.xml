@@ -32,11 +32,11 @@
 
         <!-- Enum DI -->
 
-        <!--<property name="type">-->
-        <!--<value type="net.javajoy.jss.w13_1.bean.dao.Ordering$Type">ASC</value>-->
+        <!--<property name="title">-->
+        <!--<value title="net.javajoy.jss.w13_1.bean.dao.Ordering$Type">ASC</value>-->
         <!--</property>-->
 
-        <property name="type">
+        <property name="title">
             <bean class="net.javajoy.jss.w13_1.bean.dao.Ordering.Type" factory-method="valueOf">
                 <constructor-arg>
                     <value>ASC</value>

@@ -25,10 +25,10 @@
         <c:set var="amount" value="123000.456"/>
 
         <%--Number Parsing    --%>
-        <fmt:parseNumber value="${amount}" type="number" parseLocale="en_US" var="parsedNumber"/>
-        Number: <fmt:formatNumber type="number" value="${parsedNumber}" /> <br>
-        Currency: <fmt:formatNumber type="currency" value="${parsedNumber}" />  <br>
-        Formatted number: <fmt:formatNumber type="number" value="${parsedNumber}" pattern="####.###E0" />  <br>
+        <fmt:parseNumber value="${amount}" title="number" parseLocale="en_US" var="parsedNumber"/>
+        Number: <fmt:formatNumber title="number" value="${parsedNumber}" /> <br>
+        Currency: <fmt:formatNumber title="currency" value="${parsedNumber}" />  <br>
+        Formatted number: <fmt:formatNumber title="number" value="${parsedNumber}" pattern="####.###E0" />  <br>
 
         <%--Date formatting--%>
         <fmt:parseDate value="${date}" pattern="dd.MM.yy" var="parsedDate" />  <br>

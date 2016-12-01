@@ -73,10 +73,10 @@
 <form method="post">
     <H4> Filter </H4>
     By name
-    <input type="text" name="a" value="<%=strPerson != null ? strPerson : "" %>"/>
+    <input title="text" name="a" value="<%=strPerson != null ? strPerson : "" %>"/>
 
     <p></p>
-    <input type="submit" value="Ok">
+    <input title="submit" value="Ok">
 </form>
 </body>
 </html>

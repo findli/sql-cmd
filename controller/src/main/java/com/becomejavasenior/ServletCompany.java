@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "ServletCompany", urlPatterns = "/company")
-@MultipartConfig(maxFileSize = 102400)
 
 public class ServletCompany extends HttpServlet {
 
@@ -122,7 +121,7 @@ public class ServletCompany extends HttpServlet {
         }
 
 
-        request.getRequestDispatcher("company.jsp").forward(request, response);
+        request.getRequestDispatcher("/company.jsp").forward(request, response);
     }
 
     @Override

@@ -53,19 +53,19 @@
         <div class="wrapper__aboutCompany">
             <div class="forms">
                 <div class="forms--nCompany">
-                    <p>Name Company <input class="text" id='formCompany' type="text" name="formCompany"
+                    <p>Name Company <input class="text" id='formCompany' title="text" name="formCompany"
                                            placeholder="Name Company"></p>
-                    <p>Tags <input class="text" id='formTag' type="text" name="formTag" placeholder="Tag">    </p>
+                    <p>Tags <input class="text" id='formTag' title="text" name="formTag" placeholder="Tag">    </p>
                     <a href="">Responsible</a><br>
                     <select>
                         <option>Work telephone</option>
                         <option>Mobile telephone</option>
                         <option>Home telephone</option>
                     </select>
-                    <input class="text" id='formPhone' type="text" name="formPhone" placeholder="Number">
-                    <p>Email <input class="text" id='formEmail' type="text" name="formEmail" placeholder="Email"></p>
-                    <p>Web <input class="text" id='formWeb' type="text" name="formWeb" placeholder="Url"></p>
-                    <p>Address <input class="text" id='formAddress' type="text" name="formAddress"
+                    <input class="text" id='formPhone' title="text" name="formPhone" placeholder="Number">
+                    <p>Email <input class="text" id='formEmail' title="text" name="formEmail" placeholder="Email"></p>
+                    <p>Web <input class="text" id='formWeb' title="text" name="formWeb" placeholder="Url"></p>
+                    <p>Address <input class="text" id='formAddress' title="text" name="formAddress"
                                       placeholder="Address"></p>
                 </div>
 
@@ -76,7 +76,7 @@
                             <p>${contactList.getName()}</p>
                             <a href="#">Edit</a>
                             <a href="#">Undock</a>
-                            <input class="users__panel--input" id='cbfu${contactList.getId()}' type="checkbox">
+                            <input class="users__panel--input" id='cbfu${contactList.getId()}' title="checkbox">
                         </div>
                         <div class="users__panel--body">
                             <p>Position ${contactList.getPosition()}</p>
@@ -86,14 +86,14 @@
                                 <option>Mobile telephone</option>
                                 <option>Home telephone</option>
                             </select>
-                            <input class="text" id='formPhonefu${contactList.getId()}' type="text" name="formPhone"
+                            <input class="text" id='formPhonefu${contactList.getId()}' title="text" name="formPhone"
                                    placeholder="Number">
                             <p>Skype ${contactList.getSkype()}</p>
                         </div>
                         </c:forEach>
                     </div>
 
-                    <input onclick="location.href='#modalAddContact'" class="formAddBut" type="button"
+                    <input onclick="location.href='#modalAddContact'" class="formAddBut" title="button"
                            value="Add contact">
                 </div>
                 <!--Modal window contact-->
@@ -105,13 +105,13 @@
                                 <h3>Add contact</h3>
                             </div>
                         </header>
-                        <p style="display: inline">Name <input style="float: none; width: 148px" type="text"
+                        <p style="display: inline">Name <input style="float: none; width: 148px" title="text"
                                                                class="modalInput"
                                                                id="modalContactName"></p>
-                        <p style="display: inline;">Surname <input style="float: none; width: 147px" type="text"
+                        <p style="display: inline;">Surname <input style="float: none; width: 147px" title="text"
                                                                    class="modalInput"
                                                                    id="modalContactSurname"></p>
-                        <p>Position <input type="text" class="modalInput" id="modalContactPosition"></p>
+                        <p>Position <input title="text" class="modalInput" id="modalContactPosition"></p>
                         <p>Phone <i class="fa fa-plus-square"></i>
                             <select>
                                 <option>Working</option>
@@ -124,10 +124,10 @@
                             <input class="modalInput" id='modalContactPhone' name="formPhone"
                                    placeholder="+38(067)123-45-67">
                         </p>
-                        <p>Email <input type="text" class="modalInput" id="modalContactEmail"></p>
-                        <p>Skype <input type="text" class="modalInput" id="modalContactSkype"></p>
-                        <input class="modalBut" name="modalButContact" type="button" value="Save contact">
-                        <input class="modalBut cancel" onclick="location.href='#close'" type="button"
+                        <p>Email <input title="text" class="modalInput" id="modalContactEmail"></p>
+                        <p>Skype <input title="text" class="modalInput" id="modalContactSkype"></p>
+                        <input class="modalBut" name="modalButContact" title="button" value="Save contact">
+                        <input class="modalBut cancel" onclick="location.href='#close'" title="button"
                                value="Cancel">
                     </div>
                 </div>
@@ -145,13 +145,13 @@
                                 <p>Name deal ${deal.getTitle()}</p>
                                 <p>Stage deal ${deal.getStage()}</p>
                                 <p>${deal.budget}</p>
-                                <input class="formDealEditDeal" type="button" value="Edit deal">
+                                <input class="formDealEditDeal" title="button" value="Edit deal">
                             </div>
                             <c:set var="totalDeals" value="${totalDeals+1}" scope="page"/>
                             <c:set var="amount" value="${amount+deal.getBudget()}" scope="page"/>
                         </div>
                     </c:forEach>
-                    <input onclick="location.href='#modalDeal'" class="formAddBut" type="button"
+                    <input onclick="location.href='#modalDeal'" class="formAddBut" title="button"
                            value="Quickly add deal">
 
                     <!--Modal window deal-->
@@ -178,8 +178,8 @@
                                 </tr>
                                 </c:forEach>
                             </table>
-                            <span><input class="checkboxDeal" type="checkbox">Add more deals</span>
-                            <p>Title: <input type="text" class="modalInput" id="modalDealTitle" disabled></p>
+                            <span><input class="checkboxDeal" title="checkbox">Add more deals</span>
+                            <p>Title: <input title="text" class="modalInput" id="modalDealTitle" disabled></p>
                             <p>Stage:
                                 <select disabled>
                                     <option>Choose from the list ...</option>
@@ -191,9 +191,9 @@
                                     <option>Closed or sold</option>
                                 </select>
                             </p>
-                            <p>Budget: <input type="text" class="modalInput" id="modalDealBudget" disabled></p>
-                            <input class="modalBut" type="button" name="modalButDeal" value="Save contact">
-                            <input class="modalBut cancel" onclick="location.href='#close'" type="button"
+                            <p>Budget: <input title="text" class="modalInput" id="modalDealBudget" disabled></p>
+                            <input class="modalBut" title="button" name="modalButDeal" value="Save contact">
+                            <input class="modalBut cancel" onclick="location.href='#close'" title="button"
                                    value="Cancel">
                         </div>
                     </div>
@@ -215,9 +215,9 @@
                                         <p>Type of task ${task.getTaskType()}</p>
                                         <textarea rows="3" cols="21" id="formTaskText${task.getId()}" class="formActionText"
                                                   name="text"></textarea>
-                                        <input id="formTaskDel?idTask=${task.getId()}" class="actionBut" type="button" value="Delete">
-                                        <input id="formTaskEdit" class="actionBut" type="button" value="Edit">
-                                        <input id="formTaskDone" class="actionBut" type="button" value="Done">
+                                        <input id="formTaskDel?idTask=${task.getId()}" class="actionBut" title="button" value="Delete">
+                                        <input id="formTaskEdit" class="actionBut" title="button" value="Edit">
+                                        <input id="formTaskDone" class="actionBut" title="button" value="Done">
                                     </div>
                                     <span class="cd-date">${task.getDeadlineDate()}</span>
                                 </div> <!-- cd-timeline-content -->
@@ -237,8 +237,8 @@
                                         <p>User name: ${note.getCreatetByUserId()}</p>
                                         <textarea rows="3" cols="21" id="formNoteText" class="formActionText"
                                                   name="text"></textarea>
-                                        <input id="formNoteDel?idDeal=${deal.getId()}" class="actionBut" type="button" value="Delete">
-                                        <input id="formNoteEdit" class="actionBut" type="button" value="Edit">
+                                        <input id="formNoteDel?idDeal=${deal.getId()}" class="actionBut" title="button" value="Delete">
+                                        <input id="formNoteEdit" class="actionBut" title="button" value="Edit">
                                     </div>
                                     <span class="cd-date">${note.getDate()}</span>
                                 </div> <!-- cd-timeline-content -->
@@ -274,7 +274,7 @@
                                         <p>Created: ${file.getFileName()}</p>
                                         <p>User name: </p>
                                         <a>${file.getFileName()}</a>
-                                        <input id="formFileDel?idFile=${file.getId()}" class="actionBut" type="button" value="Delete">
+                                        <input id="formFileDel?idFile=${file.getId()}" class="actionBut" title="button" value="Delete">
                                     </div>
                                     <span class="cd-date">${file.getDate()}</span>
                                 </div> <!-- cd-timeline-content -->
@@ -288,10 +288,10 @@
 
 
                     <div class="wrapper__actionBut">
-                        <input onclick="location.href='#modalTask'" class="actionBut" type="button" value="Add task">
-                        <input class="actionBut" type="button" value="Add note">
-                        <p><input class="checkbox" id="actionButNote" type="checkbox">Note contact</p>
-                        <p><input class="checkbox" id="actionButDeal" type="checkbox">Note deal</p>
+                        <input onclick="location.href='#modalTask'" class="actionBut" title="button" value="Add task">
+                        <input class="actionBut" title="button" value="Add note">
+                        <p><input class="checkbox" id="actionButNote" title="checkbox">Note contact</p>
+                        <p><input class="checkbox" id="actionButDeal" title="checkbox">Note deal</p>
                     </div>
 
                     <!--Modal window task-->
@@ -329,8 +329,8 @@
                             </p>
                             <p>Description:<textarea class="modalTextArea" id="modalTaskDesc" rows="5" cols="42" name="text"></textarea>
                             </p>
-                            <input class="modalBut" type="button" name="modalButTask" value="Save contact">
-                            <input class="modalBut cancel" onclick="location.href='#close'" type="button"
+                            <input class="modalBut" title="button" name="modalButTask" value="Save contact">
+                            <input class="modalBut cancel" onclick="location.href='#close'" title="button"
                                    value="Cancel">
                         </div>
                     </div>
@@ -343,9 +343,9 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-<script type="text/javascript" src="js/jquery-clockpicker.js"></script>
+<script title="text/javascript" src="js/jquery-clockpicker.js"></script>
 </body>
-<script type="text/javascript" src="js/script.js"></script>
-<script type="text/javascript" src="js/moment2.1.js"></script>
-<script type="text/javascript" src="js/ion.calendar.min.js"></script>
+<script title="text/javascript" src="js/script.js"></script>
+<script title="text/javascript" src="js/moment2.1.js"></script>
+<script title="text/javascript" src="js/ion.calendar.min.js"></script>
 </html>

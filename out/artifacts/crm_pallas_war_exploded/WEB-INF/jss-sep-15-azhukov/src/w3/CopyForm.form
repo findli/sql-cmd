@@ -9,7 +9,7 @@
       <minimumSize width="380" height="170"/>
       <preferredSize width="380" height="170"/>
     </properties>
-    <border type="none"/>
+    <border title="none"/>
     <children>
       <component id="2a0ee" class="javax.swing.JTextField" binding="copyFrom">
         <constraints>

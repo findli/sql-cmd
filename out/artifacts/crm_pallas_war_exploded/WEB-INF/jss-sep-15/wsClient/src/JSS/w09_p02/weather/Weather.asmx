@@ -8,107 +8,107 @@
       <s:element name="GetWeatherInformationResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetWeatherInformationResult" type="tns:ArrayOfWeatherDescription" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetWeatherInformationResult" title="tns:ArrayOfWeatherDescription" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:complexType name="ArrayOfWeatherDescription">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="WeatherDescription" type="tns:WeatherDescription" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="WeatherDescription" title="tns:WeatherDescription" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="WeatherDescription">
         <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="WeatherID" type="s:short" />
-          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="PictureURL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WeatherID" title="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PictureURL" title="s:string" />
         </s:sequence>
       </s:complexType>
       <s:element name="GetCityForecastByZIP">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ZIP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ZIP" title="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="GetCityForecastByZIPResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetCityForecastByZIPResult" type="tns:ForecastReturn" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetCityForecastByZIPResult" title="tns:ForecastReturn" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:complexType name="ForecastReturn">
         <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
-          <s:element minOccurs="0" maxOccurs="1" name="ResponseText" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="WeatherStationCity" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="ForecastResult" type="tns:ArrayOfForecast" />
+          <s:element minOccurs="1" maxOccurs="1" name="Success" title="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResponseText" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WeatherStationCity" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ForecastResult" title="tns:ArrayOfForecast" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="ArrayOfForecast">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Forecast" nillable="true" type="tns:Forecast" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Forecast" nillable="true" title="tns:Forecast" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="Forecast">
         <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
-          <s:element minOccurs="1" maxOccurs="1" name="WeatherID" type="s:short" />
-          <s:element minOccurs="0" maxOccurs="1" name="Desciption" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="Temperatures" type="tns:temp" />
-          <s:element minOccurs="1" maxOccurs="1" name="ProbabilityOfPrecipiation" type="tns:POP" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" title="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="WeatherID" title="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desciption" title="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Temperatures" title="tns:temp" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProbabilityOfPrecipiation" title="tns:POP" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="temp">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="MorningLow" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="DaytimeHigh" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MorningLow" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DaytimeHigh" title="s:string" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="POP">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="Nighttime" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Daytime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nighttime" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Daytime" title="s:string" />
         </s:sequence>
       </s:complexType>
       <s:element name="GetCityWeatherByZIP">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ZIP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ZIP" title="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="GetCityWeatherByZIPResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="GetCityWeatherByZIPResult" type="tns:WeatherReturn" />
+            <s:element minOccurs="1" maxOccurs="1" name="GetCityWeatherByZIPResult" title="tns:WeatherReturn" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:complexType name="WeatherReturn">
         <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
-          <s:element minOccurs="0" maxOccurs="1" name="ResponseText" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="WeatherStationCity" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="WeatherID" type="s:short" />
-          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Temperature" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="RelativeHumidity" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Wind" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Pressure" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Visibility" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="WindChill" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Success" title="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResponseText" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WeatherStationCity" title="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WeatherID" title="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Temperature" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RelativeHumidity" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Wind" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Pressure" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Visibility" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WindChill" title="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remarks" title="s:string" />
         </s:sequence>
       </s:complexType>
-      <s:element name="ArrayOfWeatherDescription" nillable="true" type="tns:ArrayOfWeatherDescription" />
-      <s:element name="ForecastReturn" nillable="true" type="tns:ForecastReturn" />
-      <s:element name="WeatherReturn" type="tns:WeatherReturn" />
+      <s:element name="ArrayOfWeatherDescription" nillable="true" title="tns:ArrayOfWeatherDescription" />
+      <s:element name="ForecastReturn" nillable="true" title="tns:ForecastReturn" />
+      <s:element name="WeatherReturn" title="tns:WeatherReturn" />
     </s:schema>
   </wsdl:types>
   <wsdl:message name="GetWeatherInformationSoapIn">
@@ -134,13 +134,13 @@
     <wsdl:part name="Body" element="tns:ArrayOfWeatherDescription" />
   </wsdl:message>
   <wsdl:message name="GetCityForecastByZIPHttpGetIn">
-    <wsdl:part name="ZIP" type="s:string" />
+    <wsdl:part name="ZIP" title="s:string" />
   </wsdl:message>
   <wsdl:message name="GetCityForecastByZIPHttpGetOut">
     <wsdl:part name="Body" element="tns:ForecastReturn" />
   </wsdl:message>
   <wsdl:message name="GetCityWeatherByZIPHttpGetIn">
-    <wsdl:part name="ZIP" type="s:string" />
+    <wsdl:part name="ZIP" title="s:string" />
   </wsdl:message>
   <wsdl:message name="GetCityWeatherByZIPHttpGetOut">
     <wsdl:part name="Body" element="tns:WeatherReturn" />
@@ -150,13 +150,13 @@
     <wsdl:part name="Body" element="tns:ArrayOfWeatherDescription" />
   </wsdl:message>
   <wsdl:message name="GetCityForecastByZIPHttpPostIn">
-    <wsdl:part name="ZIP" type="s:string" />
+    <wsdl:part name="ZIP" title="s:string" />
   </wsdl:message>
   <wsdl:message name="GetCityForecastByZIPHttpPostOut">
     <wsdl:part name="Body" element="tns:ForecastReturn" />
   </wsdl:message>
   <wsdl:message name="GetCityWeatherByZIPHttpPostIn">
-    <wsdl:part name="ZIP" type="s:string" />
+    <wsdl:part name="ZIP" title="s:string" />
   </wsdl:message>
   <wsdl:message name="GetCityWeatherByZIPHttpPostOut">
     <wsdl:part name="Body" element="tns:WeatherReturn" />
@@ -212,7 +212,7 @@
       <wsdl:output message="tns:GetCityWeatherByZIPHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="WeatherSoap" type="tns:WeatherSoap">
+  <wsdl:binding name="WeatherSoap" title="tns:WeatherSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetWeatherInformation">
       <soap:operation soapAction="http://ws.cdyne.com/WeatherWS/GetWeatherInformation" style="document" />
@@ -242,7 +242,7 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="WeatherSoap12" type="tns:WeatherSoap">
+  <wsdl:binding name="WeatherSoap12" title="tns:WeatherSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetWeatherInformation">
       <soap12:operation soapAction="http://ws.cdyne.com/WeatherWS/GetWeatherInformation" style="document" />
@@ -272,7 +272,7 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="WeatherHttpGet" type="tns:WeatherHttpGet">
+  <wsdl:binding name="WeatherHttpGet" title="tns:WeatherHttpGet">
     <http:binding verb="GET" />
     <wsdl:operation name="GetWeatherInformation">
       <http:operation location="/GetWeatherInformation" />
@@ -302,12 +302,12 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="WeatherHttpPost" type="tns:WeatherHttpPost">
+  <wsdl:binding name="WeatherHttpPost" title="tns:WeatherHttpPost">
     <http:binding verb="POST" />
     <wsdl:operation name="GetWeatherInformation">
       <http:operation location="/GetWeatherInformation" />
       <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
+        <mime:content title="application/x-www-form-urlencoded" />
       </wsdl:input>
       <wsdl:output>
         <mime:mimeXml part="Body" />
@@ -316,7 +316,7 @@
     <wsdl:operation name="GetCityForecastByZIP">
       <http:operation location="/GetCityForecastByZIP" />
       <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
+        <mime:content title="application/x-www-form-urlencoded" />
       </wsdl:input>
       <wsdl:output>
         <mime:mimeXml part="Body" />
@@ -325,7 +325,7 @@
     <wsdl:operation name="GetCityWeatherByZIP">
       <http:operation location="/GetCityWeatherByZIP" />
       <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
+        <mime:content title="application/x-www-form-urlencoded" />
       </wsdl:input>
       <wsdl:output>
         <mime:mimeXml part="Body" />

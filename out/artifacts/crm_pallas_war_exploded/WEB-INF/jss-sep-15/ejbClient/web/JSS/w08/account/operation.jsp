@@ -31,7 +31,7 @@
 
 <hr/>
 <form action="" method="post">
-    Amount: <input type="text" name="amount"/><br>
+    Amount: <input title="text" name="amount"/><br>
     Operation:
     <select name="operation" required>
         <option selected disabled> Select... </option>
@@ -41,7 +41,7 @@
     </select>
 
     <br>
-    <input type="submit" value="submit"/>
+    <input title="submit" value="submit"/>
 </form>
 
 

@@ -1,15 +1,20 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DAO.AddressDao;
 import com.becomejavasenior.DAO.CompanyDao;
+import com.becomejavasenior.DAO.DaoException;
+import com.becomejavasenior.DAO.UserDao;
+import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Address;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.User;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyDao<Company> {
 
@@ -23,9 +28,12 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             statement.setString(4, company.getWebsite());
             statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
-            statement.setBoolean(7, company.getDeleted());
+            statement.setBoolean(7, company.isDeleted());
+            statement.setInt(8, company.getAddress().getId());
         } catch (SQLException e) {
+
             throw new DaoException("Can't create statement for Company", e);
+
         }
     }
 
@@ -40,11 +48,19 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             statement.setString(4, company.getWebsite());
             statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
-            statement.setBoolean(7, company.getDeleted());
+            statement.setBoolean(7, company.isDeleted());
+            statement.setInt(8, company.getAddress().getId());
 
         } catch (SQLException e) {
+
             throw new DaoException("Can't update statement for Company", e);
+
         }
+    }
+
+    @Override
+    public Company getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
     }
 
     @Override
@@ -85,17 +101,14 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
     }
 
     public String getByIdQuery() {
-        return "SELECT * FROM crm_pallas.company_tag\n" +
-                "JOIN crm_pallas.company ON crm_pallas.company_tag.company_id = crm_pallas.company.id\n" +
-                "JOIN crm_pallas.tag ON crm_pallas.company_tag.tag_id = crm_pallas.tag.id\n" +
-                "WHERE company.id = ?";
+        return "SELECT * FROM crm_pallas.company WHERE id = ?";
     }
 
     public String getAllQuery() {
         return "SELECT * FROM crm_pallas.company";
     }
 
-/*    @Override
+    @Override
     public List<Company> getByFilter(String query) {
         List<Company> companyList = new ArrayList<Company>();
 
@@ -113,5 +126,5 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
         }
 
         return companyList;
-    }*/
+    }
 }

@@ -20,7 +20,7 @@
     <form:form modelAttribute="customerAttribute" method="POST" action="${saveUrl}">
         <form:input path="name"/>
         <form:input path="rating"/>
-        <input type="submit" value="Save">
+        <input title="submit" value="Save">
     </form:form>
 
 </body>

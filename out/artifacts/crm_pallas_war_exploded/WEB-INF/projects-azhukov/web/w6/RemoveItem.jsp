@@ -41,9 +41,9 @@
 %>
 
 <form>
-    <input type="hidden" name="id" value="<%=id%>">
-    <input type="submit" name="formatOkSubmit" value="Ok"><b></b>
-    <input type="button" value="Back" onclick="HomeButton()">
+    <input title="hidden" name="id" value="<%=id%>">
+    <input title="submit" name="formatOkSubmit" value="Ok"><b></b>
+    <input title="button" value="Back" onclick="HomeButton()">
     <script>
         function HomeButton() {
             location.href = "/jss/w6/Demo.jsp";

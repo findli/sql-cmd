@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Created by .ignore support plugin (hsz.mobi)
 ### Maven template
 target/
@@ -18,6 +19,8 @@ controller/controller.iml
 dao/dao.iml
 model/model.iml
 =======
+=======
+>>>>>>> develop
 # Created by .ignore support plugin (hsz.mobi)
 ### Maven template
 target/
@@ -30,14 +33,28 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
-#.gitignore
 .idea/
 .git
 controller/controller.iml
 dao/dao.iml
 model/model.iml
-<<<<<<< HEAD
+service/service.iml
 crm-system.iml
+<<<<<<< HEAD
 =======
 >>>>>>> d45dc0c76d2a132e406cece5fddc0c6661b025d8
 >>>>>>> origin
+=======
+
+crm-pallas.iml
+.DS_Store
+
+untitled/
+*.iml
+/src
+/out
+
+controller.iml
+/lib
+/web
+>>>>>>> develop

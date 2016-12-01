@@ -1,7 +1,7 @@
 package com.becomejavasenior.bean;
 
 import java.io.Serializable;
-
+import java.util.List;
 
 public class Company implements Serializable {
 
@@ -13,11 +13,15 @@ public class Company implements Serializable {
     private Address address;
     private User responsibleUser;
     private Boolean isDeleted;
-
-
+    private List<Tag> tags;
+    private List<Note> notes;
+    private List<Task> tasks;
+    private List<Contact> contacts;
+    private List<Deal> deals;
 
     public Company() {
     }
+
 
     public int getId() {
         return id;
@@ -67,6 +71,10 @@ public class Company implements Serializable {
         this.address = address;
     }
 
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
     public User getResponsibleUser() {
         return responsibleUser;
     }
@@ -75,12 +83,44 @@ public class Company implements Serializable {
         this.responsibleUser = responsibleUser;
     }
 
-    public void setDeleted(Boolean isDeleted) {
-        this.isDeleted = isDeleted;
+    public Boolean isDeleted() {
+        return isDeleted;
     }
 
-    public Boolean getDeleted() {
-        return isDeleted;
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
     }
 
     @Override
@@ -120,9 +160,15 @@ public class Company implements Serializable {
                 ", website='" + website + '\'' +
                 ", address=" + address +
                 ", responsibleUser=" + responsibleUser +
-                ", isDeleted=" + isDeleted +
                 '}';
     }
 
+    public List<Deal> getDeals() {
+        return deals;
+    }
+
+    public void setDeals(List<Deal> deals) {
+        this.deals = deals;
+    }
 
 }

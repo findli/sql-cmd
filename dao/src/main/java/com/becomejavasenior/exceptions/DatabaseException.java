@@ -1,8 +1,5 @@
 package com.becomejavasenior.exceptions;
 
-/**
- * Created by Artem on 20.11.2016.
- */
 public class DatabaseException extends RuntimeException {
 
     public DatabaseException(String message) {

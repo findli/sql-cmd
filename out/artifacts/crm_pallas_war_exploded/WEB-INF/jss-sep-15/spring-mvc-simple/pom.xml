@@ -55,7 +55,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
-			<type>jar</type>
+			<title>jar</title>
 			<scope>compile</scope>
 		</dependency>
 
@@ -63,7 +63,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
-			<type>jar</type>
+			<title>jar</title>
 			<scope>test</scope>
 		</dependency>
 

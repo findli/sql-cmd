@@ -22,9 +22,9 @@ test login: artem; password: 1234;<p></p>
 </c:if>
 
 <form method="post">
-    Login <input type="text" size="20" name="login"> <p></p>
-    Password <input type="text" size="20" name="password"> <p></p>
-    <input type="submit" name="sub" value="Ok">
+    Login <input title="text" size="20" name="login"> <p></p>
+    Password <input title="text" size="20" name="password"> <p></p>
+    <input title="submit" name="sub" value="Ok">
 </form>
 </body>
 </html>

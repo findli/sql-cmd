@@ -15,15 +15,15 @@
   <table border="0">
     <tr>
       <td>name file: </td>
-      <td><input type="text" name="description" size="50"/></td>
+      <td><input title="text" name="description" size="50"/></td>
     </tr>
     <tr>
       <td>Add file: </td>
-      <td><input type="file" name="manual" size="50"/></td>
+      <td><input title="file" name="manual" size="50"/></td>
     </tr>
     <tr>
       <td colspan="2">
-        <input type="submit" value="Add">
+        <input title="submit" value="Add">
       </td>
     </tr>
     <tr>

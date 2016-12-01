@@ -26,7 +26,7 @@
                 </option>
             </select>
             <fmt:message key="apply" var="applyString" />
-            <input type="submit" name="localeSubmit" value="${applyString}"/>
+            <input title="submit" name="localeSubmit" value="${applyString}"/>
         </form>
         <p/>
 

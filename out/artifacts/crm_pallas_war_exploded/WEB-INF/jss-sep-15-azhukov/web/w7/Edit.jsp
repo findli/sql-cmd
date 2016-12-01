@@ -29,15 +29,15 @@
 
 <form method="post">
     <p><b>Correct item</b>
-        <input type="text" size="30" name="item" value="${resultItem}"></p>
+        <input title="text" size="30" name="item" value="${resultItem}"></p>
     <a href='/jss/w7/Detail.jsp?idContact=${param.idContact}'>&lt;&lt;Back</a><br>
-    <input type="button" value="Home" onclick="HomeButton()">
+    <input title="button" value="Home" onclick="HomeButton()">
     <script>
         function HomeButton() {
             location.href = "/jss/w7/Contact.jsp";
         }
     </script>
-    <input type="submit" name="sub" value="Ok">
+    <input title="submit" name="sub" value="Ok">
 </form>
 </body>
 </html>

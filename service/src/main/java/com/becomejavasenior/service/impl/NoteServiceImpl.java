@@ -40,7 +40,7 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public List<Note> getNotesForList() {
-        return noteDao.getFilesForNote();
+        return noteDao.getNotesForList();
     }
 
     @Override

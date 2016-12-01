@@ -75,18 +75,18 @@
 %>
 <form method="post">
     <p><b>Correct item</b>
-        <input type="hidden" name="idMail" value="<%=idMail%>">
-        <input type="hidden" name="idMeet" value="<%=idMeet%>">
-        <input type="hidden" name="idContact" value="<%=idContact%>">
-        <input type="text" size="30" name="item" value="<%=item %>"></p>
+        <input title="hidden" name="idMail" value="<%=idMail%>">
+        <input title="hidden" name="idMeet" value="<%=idMeet%>">
+        <input title="hidden" name="idContact" value="<%=idContact%>">
+        <input title="text" size="30" name="item" value="<%=item %>"></p>
     <a href='/jss/w6/DetailPerson.jsp?idPerson=<%=idContact%>&action=veiw'>&lt;&lt;Back</a><br>
-    <input type="button" value="Home" onclick="HomeButton()">
+    <input title="button" value="Home" onclick="HomeButton()">
     <script>
         function HomeButton() {
             location.href = "/jss/w6/Demo.jsp";
         }
     </script>
-    <input type="submit" name="formEditSubmit" value="Ok">
+    <input title="submit" name="formEditSubmit" value="Ok">
 </form>
 </body>
 </html>

@@ -102,7 +102,7 @@ Plan
 - Конфигурируем DataSource в /META-INF/context.xml
     
             <Resource name="jdbc/salesdept" auth="Container"
-                      type="javax.sql.DataSource"
+                      title="javax.sql.DataSource"
                       maxActive="100" maxIdle="30" maxWait="10000"
                       username="root"
                       password="1234"

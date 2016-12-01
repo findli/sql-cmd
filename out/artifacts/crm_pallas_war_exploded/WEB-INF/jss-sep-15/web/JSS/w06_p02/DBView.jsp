@@ -44,13 +44,13 @@
 <h3> Filter </h3>
 <form method="post" accept-charset="UTF-8">
     <table >
-        <tr> <td>Product </td> <td> <input type="text" name="filterDescr" size="25" value="<%=filterDescr%>"> </td> </tr>
-        <tr> <td>Min price</td> <td> <input type="text" name="filterPriceMin" size="5" value="<%=filterPriceMin%>"> </td> </tr>
-        <tr> <td>Max price</td> <td> <input type="text" name="filterPriceMax" size="5" value="<%=filterPriceMax%>"> </td> </tr>
+        <tr> <td>Product </td> <td> <input title="text" name="filterDescr" size="25" value="<%=filterDescr%>"> </td> </tr>
+        <tr> <td>Min price</td> <td> <input title="text" name="filterPriceMin" size="5" value="<%=filterPriceMin%>"> </td> </tr>
+        <tr> <td>Max price</td> <td> <input title="text" name="filterPriceMax" size="5" value="<%=filterPriceMax%>"> </td> </tr>
     </table>
     <p/>
-    <input type="submit" value="Set Filter">
-    <input type="reset" value="Cancel">
+    <input title="submit" value="Set Filter">
+    <input title="reset" value="Cancel">
 </form>
 
 
@@ -112,7 +112,7 @@
 
     if (request.getParameter("action") != null && request.getParameter("action").equals("edit") ) {
         // Edit form with submit name="update"
-        // and <input type="hidden" name="id" value="actual_id">
+        // and <input title="hidden" name="id" value="actual_id">
 
     }
 %>

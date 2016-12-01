@@ -12,11 +12,11 @@
             <local-home>JSS.w08.converter.LocalConverterHome</local-home>
             <local>JSS.w08.converter.LocalConverter</local>
             <ejb-class>JSS.w08.converter.ConverterBean</ejb-class>
-            <session-type>Stateless</session-type>
-            <transaction-type>Container</transaction-type>
+            <session-title>Stateless</session-title>
+            <transaction-title>Container</transaction-title>
             <ejb-ref>
                 <ejb-ref-name>ConverterEJB</ejb-ref-name>
-                <ejb-ref-type>Session</ejb-ref-type>
+                <ejb-ref-title>Session</ejb-ref-title>
                 <home>JSS.w08.converter.ConverterHome</home>
                 <remote>JSS.w08.converter.Converter</remote>
                 <ejb-link>ConverterBean</ejb-link>
@@ -27,11 +27,11 @@
             <home>JSS.w08.account.AccountHome</home>
             <remote>JSS.w08.account.Account</remote>
             <ejb-class>JSS.w08.account.AccountBean</ejb-class>
-            <session-type>Stateful</session-type>
-            <transaction-type>Container</transaction-type>
+            <session-title>Stateful</session-title>
+            <transaction-title>Container</transaction-title>
             <ejb-ref>
                 <ejb-ref-name>AccountEJB1</ejb-ref-name>
-                <ejb-ref-type>Session</ejb-ref-type>
+                <ejb-ref-title>Session</ejb-ref-title>
                 <home>JSS.w08.account.AccountHome</home>
                 <remote>JSS.w08.account.Account</remote>
                 <ejb-link>AccountEJB</ejb-link>

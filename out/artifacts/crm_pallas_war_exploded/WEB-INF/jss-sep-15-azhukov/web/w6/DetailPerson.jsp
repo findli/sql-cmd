@@ -59,17 +59,17 @@
 
 <form method="post">
     Date from
-    <input type="text" name="df" <%=strDateFrom != null ? strDateFrom : "" %> />
+    <input title="text" name="df" <%=strDateFrom != null ? strDateFrom : "" %> />
     to
-    <input type="text" name="dt" <%=strDateTo != null ? strDateTo : "" %>
+    <input title="text" name="dt" <%=strDateTo != null ? strDateTo : "" %>
     <p></p>
-    <input type="button" value="Home" onclick="HomeButton()">
+    <input title="button" value="Home" onclick="HomeButton()">
     <script>
         function HomeButton() {
             location.href = "/jss/w6/Demo.jsp";
         }
     </script>
-    <input type="submit" value="Ok">
+    <input title="submit" value="Ok">
 </form>
 </body>
 </html>

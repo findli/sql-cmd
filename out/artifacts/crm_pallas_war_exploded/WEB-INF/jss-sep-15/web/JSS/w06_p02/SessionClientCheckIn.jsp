@@ -64,8 +64,8 @@
         <option value="bisque" style="background-color: bisque">Bisque</option>
         <option value="lightgreen" style="background-color: lightgreen">Lightgreen</option>
     </select> <br>
-    <input type="submit" value="Save">
-    <input type="reset" value="Discard">
+    <input title="submit" value="Save">
+    <input title="reset" value="Discard">
 
 </form>
 </body>

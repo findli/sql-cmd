@@ -54,7 +54,17 @@ public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao {
     }
 
     @Override
+    public List<File> getByFilter(String query) {
+        return null;
+    }
+
+    @Override
     public List<File> getFilesForList() {
         return getFilesForList();
+    }
+
+    @Override
+    public File getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
     }
 }

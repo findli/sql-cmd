@@ -2,16 +2,23 @@ package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DAO.Imp.*;
+import com.becomejavasenior.DAO.StageDao;
 import com.becomejavasenior.bean.*;
-
 import com.becomejavasenior.service.DealService;
 
 import java.util.List;
 
 public class DealServiceImpl implements DealService {
+    //    private final CompanyDao companyDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getCompanyDAO();
+//    private final UserDao userDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getUserDAO();
+//    private final ContactDao contactDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getContactDAO();
+//    private final TaskDao taskDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getTaskDAO();
+//    private final DealDao dealDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getDealDAO();
+//    private final StageDao stageDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getStageDAO();
     private final CompanyDao companyDao = new CompanyDaoImpl();
     private final UserDao userDao = new UserDaoImpl();
     private final ContactDao contactDao = new ContactDaoImpl();
+    private final TaskDao taskDao = new TaskDaoImpl();
     private final DealDao dealDao = new DealDaoImpl();
     private final StageDao stageDao = new StageDaoImpl();
 
@@ -21,8 +28,8 @@ public class DealServiceImpl implements DealService {
         return (Deal) dealDao.create(deal);
     }
 
-    public void update(Deal deal) throws DaoException {
-        dealDao.update(deal);
+    public Deal update(Deal deal) throws DaoException {
+        return (Deal) dealDao.update(deal);
     }
 
     public Deal getById(int id) throws DaoException {
@@ -58,27 +65,6 @@ public class DealServiceImpl implements DealService {
 
         User user = responsibleUserWithId(deal.getResponsibleUser());
         deal.setResponsibleUser(user);
-
-        dealDao.create(deal);
-
-    }
-
-    @Override
-    public void createNewDeal(Deal deal, User user2, Stage stage2, Company company2) throws DaoException, ClassNotFoundException {
-
-        Stage stage;
-        stage = (Stage) stageDao.getById(1);
-        deal.setStage(stage);
-
-        User user;
-        user = (User) userDao.getById(1);
-        deal.setResponsibleUser(user);
-
-        Company company;
-        company = (Company) companyDao.getById(1);
-        deal.setCompany(company);
-
-
 
         dealDao.create(deal);
 

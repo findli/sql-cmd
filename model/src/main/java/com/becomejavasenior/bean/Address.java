@@ -16,7 +16,6 @@ public class Address implements Serializable {
     public Address() {
     }
 
-
     public int getId() {
         return id;
     }
@@ -72,7 +71,6 @@ public class Address implements Serializable {
     public void setOfficeRoom(String officeRoom) {
         this.officeRoom = officeRoom;
     }
-
 
     @Override
     public boolean equals(Object o) {

@@ -25,7 +25,7 @@
     Page content
 
     <form action="/social/auth/LogoutServlet" method="post">
-        <input type="submit" value="Logout" >
+        <input title="submit" value="Logout" >
     </form>
 </body>
 </html>

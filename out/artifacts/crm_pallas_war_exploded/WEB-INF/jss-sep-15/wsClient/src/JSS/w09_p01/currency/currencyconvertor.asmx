@@ -5,8 +5,8 @@
       <s:element name="ConversionRate">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="FromCurrency" type="tns:Currency" />
-            <s:element minOccurs="1" maxOccurs="1" name="ToCurrency" type="tns:Currency" />
+            <s:element minOccurs="1" maxOccurs="1" name="FromCurrency" title="tns:Currency" />
+            <s:element minOccurs="1" maxOccurs="1" name="ToCurrency" title="tns:Currency" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -168,11 +168,11 @@
       <s:element name="ConversionRateResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="ConversionRateResult" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="ConversionRateResult" title="s:double" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="double" type="s:double" />
+      <s:element name="double" title="s:double" />
     </s:schema>
   </wsdl:types>
   <wsdl:message name="ConversionRateSoapIn">
@@ -182,15 +182,15 @@
     <wsdl:part name="parameters" element="tns:ConversionRateResponse" />
   </wsdl:message>
   <wsdl:message name="ConversionRateHttpGetIn">
-    <wsdl:part name="FromCurrency" type="s:string" />
-    <wsdl:part name="ToCurrency" type="s:string" />
+    <wsdl:part name="FromCurrency" title="s:string" />
+    <wsdl:part name="ToCurrency" title="s:string" />
   </wsdl:message>
   <wsdl:message name="ConversionRateHttpGetOut">
     <wsdl:part name="Body" element="tns:double" />
   </wsdl:message>
   <wsdl:message name="ConversionRateHttpPostIn">
-    <wsdl:part name="FromCurrency" type="s:string" />
-    <wsdl:part name="ToCurrency" type="s:string" />
+    <wsdl:part name="FromCurrency" title="s:string" />
+    <wsdl:part name="ToCurrency" title="s:string" />
   </wsdl:message>
   <wsdl:message name="ConversionRateHttpPostOut">
     <wsdl:part name="Body" element="tns:double" />
@@ -216,7 +216,7 @@
       <wsdl:output message="tns:ConversionRateHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="CurrencyConvertorSoap" type="tns:CurrencyConvertorSoap">
+  <wsdl:binding name="CurrencyConvertorSoap" title="tns:CurrencyConvertorSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ConversionRate">
       <soap:operation soapAction="http://www.webserviceX.NET/ConversionRate" style="document" />
@@ -228,7 +228,7 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="CurrencyConvertorSoap12" type="tns:CurrencyConvertorSoap">
+  <wsdl:binding name="CurrencyConvertorSoap12" title="tns:CurrencyConvertorSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ConversionRate">
       <soap12:operation soapAction="http://www.webserviceX.NET/ConversionRate" style="document" />
@@ -240,7 +240,7 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="CurrencyConvertorHttpGet" type="tns:CurrencyConvertorHttpGet">
+  <wsdl:binding name="CurrencyConvertorHttpGet" title="tns:CurrencyConvertorHttpGet">
     <http:binding verb="GET" />
     <wsdl:operation name="ConversionRate">
       <http:operation location="/ConversionRate" />
@@ -252,12 +252,12 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="CurrencyConvertorHttpPost" type="tns:CurrencyConvertorHttpPost">
+  <wsdl:binding name="CurrencyConvertorHttpPost" title="tns:CurrencyConvertorHttpPost">
     <http:binding verb="POST" />
     <wsdl:operation name="ConversionRate">
       <http:operation location="/ConversionRate" />
       <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
+        <mime:content title="application/x-www-form-urlencoded" />
       </wsdl:input>
       <wsdl:output>
         <mime:mimeXml part="Body" />

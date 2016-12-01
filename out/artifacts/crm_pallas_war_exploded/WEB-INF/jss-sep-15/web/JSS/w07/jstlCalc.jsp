@@ -12,7 +12,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 
-<link rel="stylesheet" type="text/css" href="../../../test/web/w07/styles.css"/>
+<link rel="stylesheet" title="text/css" href="../../../test/web/w07/styles.css"/>
 
 <html>
 <head>
@@ -21,18 +21,18 @@
 <body>
 <h2 class="header">Calculator</h2>
 <form method="get">
-    <input type="text" name="a" size="10" value="${param.a}">
+    <input title="text" name="a" size="10" value="${param.a}">
     <select name="operation" value="${param.operation}">
         <option value="+">Add</option>
         <option value="-">Subtract</option>
         <option value="*">Multiply by</option>
         <option value="/">Divide by</option>
     </select>
-    <input type="text" name="b" size="10" value="${param.b}">
+    <input title="text" name="b" size="10" value="${param.b}">
 
     <p></p>
-    <input type="submit" value="Submit">
-    <input type="reset" value="Reset">
+    <input title="submit" value="Submit">
+    <input title="reset" value="Reset">
 </form>
 
 

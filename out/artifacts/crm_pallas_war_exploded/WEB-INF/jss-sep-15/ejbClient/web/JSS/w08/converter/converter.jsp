@@ -66,7 +66,7 @@
 
         // Get remote or local interface
         // can look for it either in "java:app/ejbs_ejb" or in "java:module"
-        // can use ordinary type cast or PortableRemoteObject.narrow()
+        // can use ordinary title cast or PortableRemoteObject.narrow()
         ConverterHome converterHome = (ConverterHome) PortableRemoteObject
                 .narrow(initialContext.lookup("java:module/ConverterEJB!JSS.w08.converter.ConverterHome"), ConverterHome.class);
 //        ConverterHome converterHome = (ConverterHome) initialContext.lookup("java:app/ejbs_ejb/ConverterEJB!JSS.w08.converter.ConverterHome");

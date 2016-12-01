@@ -1,11 +1,10 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.ContactDao;
+import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.Contact;
 import com.becomejavasenior.bean.User;
-import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDAOFactory;
 
 import java.sql.*;
@@ -13,11 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactDao<Contact> {
-
-    private static final String SELECT_DEALS_FOR_LIST = "SELECT *"+
-            "FROM crm_pallas.contact \n" +
-    "JOIN crm_pallas.company on crm_pallas.contact.company_id = crm_pallas.company.id \n"+
-    "JOIN crm_pallas.user ON crm_pallas.contact.responsible_user_id = crm_pallas.user.id \n";
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Contact contact) {
@@ -30,8 +24,9 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             preparedStatement.setString(5, contact.getSkype());
             preparedStatement.setInt(6, contact.getCompany().getId());
             preparedStatement.setInt(7, contact.getResponsibleUser().getId());
-            preparedStatement.setBoolean(8, contact.getDeleted());
 //            preparedStatement.setDate(8, new Date(contact.getCreated().getTime()) );
+            preparedStatement.setBoolean(8, contact.isDeleted());
+            preparedStatement.setInt(9, contact.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -49,37 +44,47 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             preparedStatement.setInt(6, contact.getCompany().getId());
             preparedStatement.setInt(7, contact.getResponsibleUser().getId());
 //            preparedStatement.setDate(8, new Date(contact.getUpdated().getTime()));
-//            preparedStatement.setBoolean(9, contact.isDeleted());
-            preparedStatement.setInt(10, contact.getId());
+            preparedStatement.setBoolean(8, contact.isDeleted());
+            preparedStatement.setInt(9, contact.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    Contact getEntity(ResultSet resultSet) {
+    public Contact getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    Contact getEntity(ResultSet resultSet) throws DaoException {
         Contact contact = new Contact();
         Company company;
-//        CompanyDao<Company> companyDao = new CompanyDaoImpl();
+        User user;
+        CompanyDao<Company> companyDao = new CompanyDaoImpl();
+        UserDao<User> userDAO = new UserDaoImpl();
+
         List<String> taskList = new ArrayList<String>();
         List<String> eventHistoryList = new ArrayList<String>();
         List<String> phoneList = new ArrayList<String>();
 
         try {
-            contact.setId(resultSet.getInt("contact_id"));
-            contact.setfName(resultSet.getString("fName"));
-            contact.setlName(resultSet.getString("lName"));
-            contact.setPosition(resultSet.getString("position"));
+            contact.setId(resultSet.getInt("id"));
+            contact.setfName(resultSet.getString("first_name"));
+            contact.setlName(resultSet.getString("last_name"));
+            contact.setPosition(resultSet.getString("post"));
             contact.setSkype(resultSet.getString("skype"));
             contact.setEmail(resultSet.getString("email"));
-            contact.setDeleted(resultSet.getBoolean("deleted"));
-//            company = companyDao.getById(resultSet.getInt("company_id"));
-//            contact.setCompany(company);
-            taskList.add(resultSet.getString("tasks"));
+            contact.setDeleted(resultSet.getBoolean("is_deleted"));
+            contact.setCompany(companyDao.getById(resultSet.getInt("company_id")));
+            contact.setResponsibleUser(userDAO.getById(resultSet.getInt("responsible_user_id")));
+
+
+//            taskList.add(resultSet.getString("tasks"));
 //            contact.setTasks(taskList);
-            phoneList.add(resultSet.getString("phoneNumbers"));
+//            phoneList.add(resultSet.getString("phoneNumbers"));
 //            contact.setPhoneNumbers(phoneList);
-            eventHistoryList.add(resultSet.getString("events"));
+//            eventHistoryList.add(resultSet.getString("events"));
 //            contact.setEvents(eventHistoryList);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,31 +93,25 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         return contact;
     }
 
-   /* @Override
-    String getCreateQuery() {
-        return DataBaseUtil.getQuery("INSERT INTO crm_pallas.contact (fName, lName, email, position, skype, company_id, responsible_id, created) values (?,?,?,?,?,?,?,?)");
-    }*/
-
     @Override
     String getCreateQuery() {
         return DataBaseUtil.getQuery("INSERT INTO crm_pallas.contact (first_name, last_name, email, post, skype, company_id, responsible_user_id, is_deleted) values (?,?,?,?,?,?,?,?)");
     }
 
-
     @Override
     String getUpdateQuery() {
-        return DataBaseUtil.getQuery("UPDATE crm_pallas.contact SET fName = ?, lName = ?, email = ?, position = ?, skype =?, company_id = ? " +
-                "responsible_id = ?, updated = ?, deleted = ? WHERE contact_id = ?");
+        return DataBaseUtil.getQuery("UPDATE crm_pallas.contact SET first_name = ?, last_name = ?, email = ?, post = ?, skype =?, company_id = ? " +
+                "responsible_user_id = ?, is_deleted = ? WHERE id = ?");
     }
 
     @Override
     String getDeleteQuery() {
-        return DataBaseUtil.getQuery("DELETE FROM crm_pallas.contact WHERE contact_id = ?");
+        return DataBaseUtil.getQuery("DELETE FROM crm_pallas.contact WHERE id = ?");
     }
 
     @Override
     String getByIdQuery() {
-        return DataBaseUtil.getQuery("SELECT * FROM crm_pallas.contact WHERE contact_id=?");
+        return DataBaseUtil.getQuery("SELECT * FROM crm_pallas.contact WHERE id=?");
     }
 
     @Override
@@ -120,7 +119,7 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         return DataBaseUtil.getQuery("SELECT * FROM crm_pallas.contact");
     }
 
-/*    @Override
+    @Override
     public List<Contact> getByFilter(String query) {
 
         List<Contact> contactList = new ArrayList<Contact>();
@@ -134,12 +133,12 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (DaoException e) {
+            e.printStackTrace();
         }
 
         return contactList;
-    }*/
-
-    // TODO Write queries to filter
+    }
 
     @Override
     public List<Contact> getContactsForList() {
@@ -175,4 +174,6 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
 
         return contacts;
     }
+
+    // TODO Write queries to filter
 }

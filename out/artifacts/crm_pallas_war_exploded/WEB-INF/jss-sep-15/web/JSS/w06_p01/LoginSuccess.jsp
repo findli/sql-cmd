@@ -30,7 +30,7 @@
     %>
 
     <form action="/JSS-15-09/LogoutServlet" method="post">
-        <input type="submit" value="Logout" >
+        <input title="submit" value="Logout" >
     </form>
 </body>
 </html>

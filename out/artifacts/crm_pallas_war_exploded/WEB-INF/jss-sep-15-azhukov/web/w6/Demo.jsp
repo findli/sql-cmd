@@ -68,12 +68,12 @@
 <form method="post">
     <H4> Filter </H4>
     By name
-    <%--<input type="text" name="a" <%=strPerson != null ? strPerson : "" %>--%>
+    <%--<input title="text" name="a" <%=strPerson != null ? strPerson : "" %>--%>
     <%--CK: consider the difference : --%>
-    <input type="text" name="a" value="<%=strPerson != null ? strPerson : "" %>"/>
+    <input title="text" name="a" value="<%=strPerson != null ? strPerson : "" %>"/>
 
     <p></p>
-    <input type="submit" value="Ok">
+    <input title="submit" value="Ok">
     <button idContact='editTd'>Edit</button>
 </form>
 <%--
@@ -97,12 +97,12 @@
     </tr>
 </table>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.js">
+<script title="text/javascript" src="http://code.jquery.com/jquery-1.7.js">
   //  $(function () {
         $('#1 td').click(function () {
             varName val = $(this).html();	//получаем значение ячейки
             //формируем код текстового поля
-            varName code = '<input type="text" idContact="edit" value="' + val + '" />';
+            varName code = '<input title="text" idContact="edit" value="' + val + '" />';
             //удаляем содержимое ячейки, вставляем в нее сформированное поле
             $(this).empty().append(code);
             //устанавливаем фокус на свеженарисованное поле
@@ -114,7 +114,7 @@
         $('td').click(function () {
             varName val = $(this).html();	//получаем значение ячейки
             //формируем код текстового поля
-            varName code = '<input type="text" idContact="edit" value="' + val + '" />';
+            varName code = '<input title="text" idContact="edit" value="' + val + '" />';
             //удаляем содержимое ячейки, вставляем в нее сформированное поле
             $(this).empty().append(code);
             //устанавливаем фокус на свеженарисованное поле
@@ -144,7 +144,7 @@
      });
      });*/
 </script>
-<script type="text/javascript">
+<script title="text/javascript">
     if (window.jQuery) alert("jQuery подключен");
     else alert("jQuery не подключен");
 </script>--%>

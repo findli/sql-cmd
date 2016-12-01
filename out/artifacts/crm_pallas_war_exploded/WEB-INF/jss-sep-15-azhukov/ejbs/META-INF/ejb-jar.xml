@@ -8,8 +8,8 @@
         <session>
             <ejb-name>CalculatorEJB</ejb-name>
             <ejb-class>ex.CalculatorBean</ejb-class>
-            <session-type>Stateless</session-type>
-            <transaction-type>Container</transaction-type>
+            <session-title>Stateless</session-title>
+            <transaction-title>Container</transaction-title>
         </session>
     </enterprise-beans>
 </ejb-jar>

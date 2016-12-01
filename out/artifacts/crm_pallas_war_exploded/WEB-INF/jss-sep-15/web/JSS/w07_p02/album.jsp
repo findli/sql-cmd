@@ -44,8 +44,8 @@
     </table>
     <p>
     <form action="/JSS-15-09/uploadPhoto" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/jpeg"> <br>
-        <input type="submit" value="Upload">
+        <input title="file" name="file" accept="image/jpeg"> <br>
+        <input title="submit" value="Upload">
     </form>
 
 

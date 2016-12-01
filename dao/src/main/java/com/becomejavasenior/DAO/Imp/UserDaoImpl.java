@@ -19,10 +19,10 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
             preparedStatement.setString(2, user.getlName());
             preparedStatement.setString(3, user.getPassword());
             preparedStatement.setString(4, user.getEmail());
-            preparedStatement.setBoolean(5, user.getAdmin());
+            preparedStatement.setBoolean(5, user.isAdmin());
             preparedStatement.setInt(6, user.getRights());
             preparedStatement.setString(7, user.getPhotoPath());
-            preparedStatement.setBoolean(8, user.getNotification());
+            preparedStatement.setBoolean(8, user.isNotification());
             preparedStatement.setString(9, user.getNote());
             preparedStatement.setDate(10, (Date) user.getDateCreate());
 //            preparedStatement.setInt(11, user.getLanguage().getId());
@@ -50,6 +50,11 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     @Override
     String getDeleteQuery() {
         return "DELETE FROM crm_pallas.user WHERE id = ?";
+    }
+
+    @Override
+    public User getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
     }
 
     @Override
@@ -123,9 +128,9 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
         return users;
     }
 
-/*    @Override
+    @Override
     public List<User> getByFilter(String query) {
         return null;
-    }*/
+    }
 
 }
