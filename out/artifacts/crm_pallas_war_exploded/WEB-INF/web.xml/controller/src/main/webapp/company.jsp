@@ -164,7 +164,7 @@
                                 </div>
                             </header>
                             <table border="1">
-                                <caption>Current deals with main.java.com.becomejavasenior.ServletCompany:</caption>
+                                <caption>Current deals with main.java.com.becomejavasenior.servlets.ServletCompany:</caption>
                                 <tr>
                                     <th>deal(s)</th>
                                     <th style="width: 60px">6500</th>
@@ -256,7 +256,7 @@
                                     <h4>Action</h4>
                                     <p>Activiity;</p>
                                     <p>User name:</p>
-                                    <p>Name main.java.com.becomejavasenior.ServletCompany:</p>
+                                    <p>Name main.java.com.becomejavasenior.servlets.ServletCompany:</p>
                                     <p>Name entity:</p>
                                 </div>
                                 <span class="cd-date"></span>

@@ -1,4 +1,4 @@
-package com.becomejavasenior;
+package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;

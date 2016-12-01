@@ -5,7 +5,7 @@ import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.Contact;
 import com.becomejavasenior.bean.User;
-import com.becomejavasenior.factory.PostgresDAOFactory;
+import com.becomejavasenior.factory.PostgresDaoFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -147,7 +147,7 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         Company company;
         User user;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM crm_pallas.contact where company_id = 1")) {
 
             ResultSet resultSet = statement.executeQuery();

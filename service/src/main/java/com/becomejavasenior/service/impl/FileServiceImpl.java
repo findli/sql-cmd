@@ -6,7 +6,7 @@ import com.becomejavasenior.DAO.Imp.FileDaoImpl;
 import com.becomejavasenior.bean.File;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDAOFactory;
+import com.becomejavasenior.factory.PostgresDaoFactory;
 import com.becomejavasenior.service.FileService;
 
 import java.sql.Connection;
@@ -57,7 +57,7 @@ public class FileServiceImpl implements FileService {
         File file;
         User user;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT crm_pallas.file.id " +
                      "crm_pallas.file.file_name, \n" +
                      "crm_pallas.file.creation_date_time,\n" +

@@ -5,7 +5,7 @@ import com.becomejavasenior.bean.PeriodInDaysType;
 import com.becomejavasenior.bean.Task;
 import com.becomejavasenior.bean.TaskType;
 import com.becomejavasenior.bean.User;
-import com.becomejavasenior.factory.PostgresDAOFactory;
+import com.becomejavasenior.factory.PostgresDaoFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -124,7 +124,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
         TaskType taskType;
         User responsibleUser;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT crm_pallas.task.id,crm_pallas.task.title, crm_pallas.task_type.title as typeTytle," +
                      "crm_pallas.task.description, crm_pallas.task.deadline_date as deadlineDate,\n" +
                      "crm_pallas.user.last_name as lName FROM crm_pallas.task\n" +

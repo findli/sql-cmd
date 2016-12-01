@@ -9,12 +9,12 @@ import com.becomejavasenior.service.DealService;
 import java.util.List;
 
 public class DealServiceImpl implements DealService {
-    //    private final CompanyDao companyDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getCompanyDAO();
-//    private final UserDao userDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getUserDAO();
-//    private final ContactDao contactDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getContactDAO();
-//    private final TaskDao taskDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getTaskDAO();
-//    private final DealDao dealDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getDealDAO();
-//    private final StageDao stageDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getStageDAO();
+    //    private final CompanyDao companyDao = PostgresDaoFactory.getDAOFactory(AbstractDaoFactory.POSTGRESQL).getCompanyDAO();
+//    private final UserDao userDao = PostgresDaoFactory.getDAOFactory(AbstractDaoFactory.POSTGRESQL).getUserDAO();
+//    private final ContactDao contactDao = PostgresDaoFactory.getDAOFactory(AbstractDaoFactory.POSTGRESQL).getContactDAO();
+//    private final TaskDao taskDao = PostgresDaoFactory.getDAOFactory(AbstractDaoFactory.POSTGRESQL).getTaskDAO();
+//    private final DealDao dealDao = PostgresDaoFactory.getDAOFactory(AbstractDaoFactory.POSTGRESQL).getDealDAO();
+//    private final StageDao stageDao = PostgresDaoFactory.getDAOFactory(AbstractDaoFactory.POSTGRESQL).getStageDAO();
     private final CompanyDao companyDao = new CompanyDaoImpl();
     private final UserDao userDao = new UserDaoImpl();
     private final ContactDao contactDao = new ContactDaoImpl();

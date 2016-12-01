@@ -6,7 +6,7 @@ import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Note;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDAOFactory;
+import com.becomejavasenior.factory.PostgresDaoFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -78,7 +78,7 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         Note note;
         User createdUser;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 
@@ -119,7 +119,7 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         User user;
         Note note;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT crm_pallas.note.id as noteId, crm_pallas.note.note_text,\n" +
                      "crm_pallas.user.last_name as lName,\n" +
                      "crm_pallas.note.creation_date_time as createDateNote,\n" +

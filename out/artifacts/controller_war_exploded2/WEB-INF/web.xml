@@ -11,7 +11,7 @@
 
 <!--    <servlet>
         <servlet-name>ServletCompany</servlet-name>
-        <servlet-class>com.becomejavasenior.ServletCompany</servlet-class>
+        <servlet-class>com.becomejavasenior.servlets.ServletCompany</servlet-class>
     </servlet>
 
     <servlet-mapping>
