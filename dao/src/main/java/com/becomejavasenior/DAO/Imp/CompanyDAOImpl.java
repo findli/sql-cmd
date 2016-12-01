@@ -2,10 +2,10 @@ package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.AddressDAO;
 import com.becomejavasenior.DAO.CompanyDAO;
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.UserDAO;
 import com.becomejavasenior.DataBaseUtil;
-import com.becomejavasenior.bean.Adress;
+import com.becomejavasenior.bean.Address;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.User;
 
@@ -19,7 +19,7 @@ import java.util.List;
 public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyDAO<Company> {
 
     @Override
-    public void createStatement(PreparedStatement statement, Company company) throws DAOException{
+    public void createStatement(PreparedStatement statement, Company company) throws DaoException {
 
         try{
             statement.setString(1, company.getTitle());
@@ -30,12 +30,12 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.getIsDeleted());
         } catch (SQLException e) {
-            throw new DAOException("Can't create statement for Company", e);
+            throw new DaoException("Can't create statement for Company", e);
         }
     }
 
     @Override
-    public void updateStatement(PreparedStatement statement, Company company) throws DAOException{
+    public void updateStatement(PreparedStatement statement, Company company) throws DaoException {
 
         try{
 
@@ -48,15 +48,15 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             statement.setBoolean(7, company.getIsDeleted());
 
         } catch (SQLException e) {
-            throw new DAOException("Can't update statement for Company", e);
+            throw new DaoException("Can't update statement for Company", e);
         }
     }
 
     @Override
-    public Company getEntity(ResultSet resultSet) throws DAOException{
+    public Company getEntity(ResultSet resultSet) throws DaoException {
 
         Company company = new Company();
-        AddressDAO<Adress> addressDao = new AddressDAOImpl();
+        AddressDAO<Address> addressDao = new AddressDAOImpl();
         UserDAO<User> userDao = new UserDAOImpl();
 
         try{
@@ -71,7 +71,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
 
         } catch (SQLException e){
 
-            throw new DAOException("Can't get entity from Company", e);
+            throw new DaoException("Can't get entity from Company", e);
 
         }
         return company;
@@ -110,7 +110,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             e.printStackTrace();
         }
 

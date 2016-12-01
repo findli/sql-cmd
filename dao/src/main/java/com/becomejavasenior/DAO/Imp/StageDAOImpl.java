@@ -2,7 +2,7 @@ package com.becomejavasenior.DAO.Imp;
 
 import java.sql.*;
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.StageDAO;
 import com.becomejavasenior.bean.Stage;
 import com.becomejavasenior.exceptions.DatabaseException;
@@ -103,7 +103,7 @@ public class StageDAOImpl extends AbstractDAOImpl<Stage> implements StageDAO<Sta
     }
 
     @Override
-    public List<Stage> getAll() throws DAOException, ClassNotFoundException {
+    public List<Stage> getAll() throws DaoException, ClassNotFoundException {
         List<Stage> stages = new ArrayList<>();
         Stage stage;
 

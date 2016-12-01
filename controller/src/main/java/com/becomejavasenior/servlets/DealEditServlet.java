@@ -1,6 +1,6 @@
 package com.becomejavasenior.servlets;
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
 import com.becomejavasenior.service.impl.*;
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -50,13 +49,13 @@ public class DealEditServlet extends HttpServlet {
             deal = dealService.getById(idDeal);
             company = companyService.getById(deal.getCompany().getId());
             stage = stageService.getById(deal.getStage().getId());
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             e.printStackTrace();
         }
 
         try {
             stages = stageService.getAll();
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -83,7 +82,7 @@ public class DealEditServlet extends HttpServlet {
         try {
             dealService.update(deal);
 //            dealService.createNewDeal(deal, contact, task, company, attachedFile);
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             e.printStackTrace();
 //        } catch (ClassNotFoundException e) {
 //            e.printStackTrace();

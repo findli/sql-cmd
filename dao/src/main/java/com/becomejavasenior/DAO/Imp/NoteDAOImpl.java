@@ -1,6 +1,6 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.NoteDAO;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Note;
@@ -15,7 +15,7 @@ import java.util.List;
 public class NoteDAOImpl extends AbstractDAOImpl<Note> implements NoteDAO<Note> {
 
     @Override
-    void createStatement(PreparedStatement preparedStatement, Note note) throws DAOException {
+    void createStatement(PreparedStatement preparedStatement, Note note) throws DaoException {
         try {
             preparedStatement.setString(1, note.getNoteText());
             preparedStatement.setInt(2, note.getCreatedUser().getId());
@@ -28,7 +28,7 @@ public class NoteDAOImpl extends AbstractDAOImpl<Note> implements NoteDAO<Note> 
     }
 
     @Override
-    void updateStatement(PreparedStatement preparedStatement, Note note) throws DAOException {
+    void updateStatement(PreparedStatement preparedStatement, Note note) throws DaoException {
         try {
             preparedStatement.setString(1, note.getNoteText());
             preparedStatement.setInt(2, note.getCreatedUser().getId());
@@ -68,7 +68,7 @@ public class NoteDAOImpl extends AbstractDAOImpl<Note> implements NoteDAO<Note> 
     }
 
     @Override
-    public List<Note> getAll() throws DAOException, ClassNotFoundException {
+    public List<Note> getAll() throws DaoException, ClassNotFoundException {
         List<Note> notes = new ArrayList<>();
         Note note;
         User createdUser;
@@ -104,7 +104,7 @@ public class NoteDAOImpl extends AbstractDAOImpl<Note> implements NoteDAO<Note> 
     }
 
     @Override
-    Note getEntity(ResultSet resultSet) throws DAOException {
+    Note getEntity(ResultSet resultSet) throws DaoException {
         return null;
     }
 

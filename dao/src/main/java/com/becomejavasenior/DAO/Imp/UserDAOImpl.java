@@ -1,6 +1,6 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.UserDAO;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.exceptions.DatabaseException;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO<User> {
     @Override
-    void createStatement(PreparedStatement preparedStatement, User user) throws DAOException {
+    void createStatement(PreparedStatement preparedStatement, User user) throws DaoException {
         try {
 
             preparedStatement.setString(1, user.getfName());
@@ -53,7 +53,7 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO<User> 
     }
 
     @Override
-    User getEntity(ResultSet resultSet) throws DAOException {
+    User getEntity(ResultSet resultSet) throws DaoException {
         User user = new User();
         try {
             user.setId(resultSet.getInt("id"));
@@ -70,7 +70,7 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO<User> 
 //            user.setLanguage(resultSet.getInt("language_id"));
 
         } catch (SQLException e) {
-            throw new DAOException("Can't get entity from Deal", e);
+            throw new DaoException("Can't get entity from Deal", e);
         }
         return user;
     }
@@ -81,17 +81,17 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO<User> 
     }
 
     @Override
-    void updateStatement(PreparedStatement preparedStatement, User entity) throws DAOException {
+    void updateStatement(PreparedStatement preparedStatement, User entity) throws DaoException {
 
     }
 
     @Override
-    public void delete(Integer id) throws DAOException {
+    public void delete(Integer id) throws DaoException {
         super.delete(id);
     }
 
     @Override
-    public List<User> getAll() throws DAOException, ClassNotFoundException {
+    public List<User> getAll() throws DaoException, ClassNotFoundException {
         List<User> users = new ArrayList<>();
         User user;
         try (Connection connection = PostgresDAOFactory.getConnection();

@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface AbstractDAO<T> {
 
-    T create(T entity) throws DAOException;
+    T create(T entity) throws DaoException;
 
-    T update(T entity) throws DAOException;
+    T update(T entity) throws DaoException;
 
-    void delete(Integer id) throws DAOException;
+    void delete(Integer id) throws DaoException;
 
-    T getById(Integer id) throws DAOException;
+    T getById(Integer id) throws DaoException;
 
-    List<T> getAll() throws DAOException, ClassNotFoundException;
+    List<T> getAll() throws DaoException, ClassNotFoundException;
 }

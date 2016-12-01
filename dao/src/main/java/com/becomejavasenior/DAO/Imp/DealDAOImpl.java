@@ -27,7 +27,7 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
             "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id\n";
 
     @Override
-    void createStatement(PreparedStatement preparedStatement, Deal deal) throws DAOException {
+    void createStatement(PreparedStatement preparedStatement, Deal deal) throws DaoException {
         try {
             preparedStatement.setString(1, deal.getTitle());
             preparedStatement.setInt(2, deal.getCompany().getId());
@@ -45,7 +45,7 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
     }
 
     @Override
-    void updateStatement(PreparedStatement preparedStatement, Deal deal) throws DAOException {
+    void updateStatement(PreparedStatement preparedStatement, Deal deal) throws DaoException {
         try {
             preparedStatement.setString(1, deal.getTitle());
             preparedStatement.setInt(2, deal.getCompany().getId());
@@ -63,7 +63,7 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
     }
 
     @Override
-    Deal getEntity(ResultSet resultSet) throws DAOException {
+    Deal getEntity(ResultSet resultSet) throws DaoException {
         Deal deal = new Deal();
         CompanyDAO<Company> company = new CompanyDAOImpl();
         StageDAO<Stage> stage = new StageDAOImpl();
@@ -77,7 +77,7 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
             deal.setBudget(resultSet.getInt("budget"));
             deal.setDeleted(resultSet.getBoolean("is_deleted"));
         } catch (SQLException e) {
-            throw new DAOException("Can't get entity from Deal", e);
+            throw new DaoException("Can't get entity from Deal", e);
         }
         return deal;
     }
@@ -121,14 +121,14 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             e.printStackTrace();
         }
         return dealList;
     }
 
     @Override
-    public List<Deal> getAll() throws DAOException, ClassNotFoundException {
+    public List<Deal> getAll() throws DaoException, ClassNotFoundException {
         List<Deal> deals = new ArrayList<>();
         Deal deal;
         User responsibleUser;

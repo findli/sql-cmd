@@ -2,7 +2,7 @@ package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.CompanyDAO;
 import com.becomejavasenior.DAO.ContactDAO;
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.UserDAO;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Company;
@@ -54,7 +54,7 @@ public class ContactDAOImpl extends AbstractDAOImpl<Contact> implements ContactD
     }
 
     @Override
-    Contact getEntity(ResultSet resultSet) throws DAOException {
+    Contact getEntity(ResultSet resultSet) throws DaoException {
         Contact contact = new Contact();
         Company company;
         User user;
@@ -130,7 +130,7 @@ public class ContactDAOImpl extends AbstractDAOImpl<Contact> implements ContactD
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             e.printStackTrace();
         }
 

@@ -1,6 +1,6 @@
 package com.becomejavasenior.servlets;
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.CompanyService;
 import com.becomejavasenior.service.DealService;
@@ -34,7 +34,7 @@ public class DealCreateServlet extends HttpServlet{
 
         try {
             companyList = companyService.getAll();
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -58,7 +58,7 @@ public class DealCreateServlet extends HttpServlet{
 
         try {
             dealService.createNewDeal(deal, contact, task, company, attachedFile);
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

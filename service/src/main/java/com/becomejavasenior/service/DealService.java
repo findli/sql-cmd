@@ -1,17 +1,17 @@
 package com.becomejavasenior.service;
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 
 import java.util.List;
 
 public interface DealService {
-    Deal create(Deal t) throws DAOException;
-    void update(Deal t) throws DAOException;
-    List<Deal> getAll() throws DAOException, ClassNotFoundException;
-    Deal getById(int id) throws DAOException;
-    void delete(int id) throws DAOException;
+    Deal create(Deal t) throws DaoException;
+    void update(Deal t) throws DaoException;
+    List<Deal> getAll() throws DaoException, ClassNotFoundException;
+    Deal getById(int id) throws DaoException;
+    void delete(int id) throws DaoException;
     List<Deal> getDealsForList();
-    public void createNewDeal(Deal deal, Contact contact, Task task, Company company, File file) throws DAOException, ClassNotFoundException;
+    public void createNewDeal(Deal deal, Contact contact, Task task, Company company, File file) throws DaoException, ClassNotFoundException;
 
 }

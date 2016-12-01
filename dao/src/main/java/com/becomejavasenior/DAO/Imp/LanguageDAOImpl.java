@@ -1,7 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.LanguageDAO;
 import com.becomejavasenior.bean.Language;
 
@@ -43,27 +43,27 @@ public class LanguageDAOImpl extends AbstractDAOImpl<Language> implements Langua
     }
 
     @Override
-    public void createStatement(PreparedStatement preparedStatement, Language language) throws DAOException {
+    public void createStatement(PreparedStatement preparedStatement, Language language) throws DaoException {
         try {
             preparedStatement.setString(1, language.getTitle());
             preparedStatement.setString(2, language.getShortTitle());
         } catch (SQLException e){
-            throw new DAOException("Can't create statement for Language", e);
+            throw new DaoException("Can't create statement for Language", e);
         }
     }
 
     @Override
-    public void updateStatement(PreparedStatement preparedStatement, Language language) throws DAOException {
+    public void updateStatement(PreparedStatement preparedStatement, Language language) throws DaoException {
         try {
             preparedStatement.setString(1, language.getTitle());
             preparedStatement.setString(2, language.getShortTitle());
         } catch (SQLException e){
-            throw new DAOException("Can't update statement for Language", e);
+            throw new DaoException("Can't update statement for Language", e);
         }
     }
 
     @Override
-    public Language getEntity(ResultSet resultSet) throws DAOException{
+    public Language getEntity(ResultSet resultSet) throws DaoException {
         Language language = new Language();
         try {
             language.setId(resultSet.getInt("id"));
@@ -71,7 +71,7 @@ public class LanguageDAOImpl extends AbstractDAOImpl<Language> implements Langua
             language.setShortTitle(resultSet.getString("short_title"));
 
         } catch (SQLException e){
-            throw new DAOException("Can't get entity from Language", e);
+            throw new DaoException("Can't get entity from Language", e);
         }
         return language;
     }

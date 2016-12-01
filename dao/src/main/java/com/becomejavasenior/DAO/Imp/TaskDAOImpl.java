@@ -1,7 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.PeriodInDaysTypeDAO;
 import com.becomejavasenior.DAO.TaskDAO;
 import com.becomejavasenior.DAO.TaskTypeDAO;
@@ -47,7 +47,7 @@ public class TaskDAOImpl extends AbstractDAOImpl<Task> implements TaskDAO<Task> 
     }
 
     @Override
-    public void createStatement(PreparedStatement preparedStatement, Task task) throws DAOException {
+    public void createStatement(PreparedStatement preparedStatement, Task task) throws DaoException {
 //        Date sqlDate = new Date(task.getDeadlineDate().getTime());
 
 //        Time sqlTime = new Time(task.getTime().getTime());
@@ -64,12 +64,12 @@ public class TaskDAOImpl extends AbstractDAOImpl<Task> implements TaskDAO<Task> 
             preparedStatement.setBoolean(9, task.isFinished());
             preparedStatement.setBoolean(10, task.isDeleted());
         } catch (SQLException e) {
-            throw new DAOException("Can't create statement for Task", e);
+            throw new DaoException("Can't create statement for Task", e);
         }
     }
 
     @Override
-    public void updateStatement(PreparedStatement preparedStatement, Task task) throws DAOException {
+    public void updateStatement(PreparedStatement preparedStatement, Task task) throws DaoException {
 //        Date sqlDate = new Date(task.getDeadlineDate().getTime());
 //        Time sqlTime = new Time(task.getTime().getTime());
         try {
@@ -84,12 +84,12 @@ public class TaskDAOImpl extends AbstractDAOImpl<Task> implements TaskDAO<Task> 
             preparedStatement.setBoolean(9, task.isFinished());
             preparedStatement.setBoolean(10, task.isDeleted());
         } catch (SQLException e) {
-            throw new DAOException("Can't update statement for Task", e);
+            throw new DaoException("Can't update statement for Task", e);
         }
     }
 
     @Override
-    public Task getEntity(ResultSet resultSet) throws DAOException {
+    public Task getEntity(ResultSet resultSet) throws DaoException {
         Task task = new Task();
         TaskTypeDAO<TaskType> taskType = new TaskTypeDAOImpl();
         PeriodInDaysTypeDAO<PeriodInDaysType> periodInDaysType = new PeriodInDaysTypeDAOImpl();
@@ -107,7 +107,7 @@ public class TaskDAOImpl extends AbstractDAOImpl<Task> implements TaskDAO<Task> 
             task.setFinished(resultSet.getBoolean("is_finished"));
             task.setDeleted(resultSet.getBoolean("is_deleted"));
         } catch (SQLException e) {
-            throw new DAOException("Can't get entity from Task", e);
+            throw new DaoException("Can't get entity from Task", e);
         }
         return task;
     }
