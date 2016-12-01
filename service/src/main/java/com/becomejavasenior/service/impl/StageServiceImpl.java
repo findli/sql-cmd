@@ -37,4 +37,9 @@ public class StageServiceImpl implements StageService {
     public void update(Stage stage) throws DaoException {
         stageDAO.update(stage);
     }
+
+    @Override
+    public Stage getByName(String str) throws DaoException, ClassNotFoundException {
+        return stageDAO.getByName(str);
+    }
 }

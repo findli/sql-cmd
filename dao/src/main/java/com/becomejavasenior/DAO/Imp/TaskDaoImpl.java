@@ -88,6 +88,11 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
     }
 
     @Override
+    public Task getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
     public Task getEntity(ResultSet resultSet) throws DaoException {
         Task task = new Task();
         TaskTypeDao<TaskType> taskType = new TaskTypeDaoImpl();

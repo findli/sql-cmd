@@ -54,6 +54,11 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
     }
 
     @Override
+    public Contact getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
     Contact getEntity(ResultSet resultSet) throws DaoException {
         Contact contact = new Contact();
         Company company;

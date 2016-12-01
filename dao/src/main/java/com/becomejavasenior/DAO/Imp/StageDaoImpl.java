@@ -30,7 +30,7 @@ public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomeja
 
     @Override
     public String getAllQuery(){
-        return "SELECT * FROM crm_pallas.stage";
+        return "SELECT * FROM crm_pallas.stage ORDER BY id";
     }
 
     @Override
@@ -65,6 +65,19 @@ public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomeja
         } catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Stage getByName(String str) throws DaoException, ClassNotFoundException {
+        Stage stage = new Stage();
+        List<Stage> stages = getAll();
+        for (int i = 0; i < stages.size(); ++i) {
+            if(stages.get(i).getTitle().equals(str)) {
+                stage = stages.get(i);
+                break;
+            }
+        }
+        return stage;
     }
 
     @Override
