@@ -37,7 +37,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public void update(Company company) throws DaoException {
-        companyDAO.update(company);
+    public Company update(Company company) throws DaoException {
+        return companyDAO.update(company);
     }
 }

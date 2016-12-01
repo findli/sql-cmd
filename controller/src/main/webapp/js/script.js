@@ -1,5 +1,5 @@
 $(function(){
-    $('#bttNewDeal').click(function(){
+    $('#bttEditDeal').click(function(){
 
         var idDeal = $('#idDeal').val();
         var newDeal = $('#dealNewName').val();
@@ -20,9 +20,32 @@ $(function(){
             url: '/dealEdit2',
             success: function(result) {
                 // alert(result);
-            $('#result1').html(result);
-        }
-    })
+                $('#result1').html(result);
+            }
+        })
+    });
+    $('#bttEditCompany').click(function(){
+
+        var idDeal = $('#idDeal').val();
+        var newCompany = $('#companyNewName').val();
+        var newPhone = $('#companyNewPhone').val();
+        var newEmail = $('#companyNewEmail').val();
+        var newWeb = $('#companyNewWeb').val();
+        $.ajax({
+            type:'POST',
+            data: {
+                idDeal : idDeal,
+                newCompany : newCompany,
+                newPhone : newPhone,
+                newEmail : newEmail,
+                newWeb : newWeb,
+                action: 'editDealCompany'
+            },
+            url: '/dealEdit2',
+            success: function(result) {
+                $('#result2').html(result);
+            }
+        });
     });
 });
 

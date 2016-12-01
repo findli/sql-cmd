@@ -9,7 +9,7 @@ public interface CompanyService {
 
     Company create(Company t) throws DaoException;
 
-    void update(Company t) throws DaoException;
+    Company update(Company t) throws DaoException;
 
     List<Company> getAll() throws DaoException, ClassNotFoundException;
 

@@ -127,11 +127,8 @@
 
                             <div class="form-group">
                                 <div class="col-sm-10">
-                                    <%--<input class="formAddBut" type="button" value="Применить">--%>
-                                    <%--<input class="formAddBut" type="button" value="Очистить">--%>
-                                    <%--<input type="button" value="Применить" id="bttNewDeal">--%>
                                         <input type="hidden" id="idDeal" value="${deal.getId()}" />
-                                        <button type="button" class="btn btn-success" id="bttNewDeal">Применить</button>
+                                        <button type="button" class="btn btn-success" id="bttEditDeal">Применить</button>
                                 </div>
                             </div>
                             <span id="result1" style="color:red"></span>
@@ -144,122 +141,122 @@
                     <!--Edit contact-->
                     <div class="forms--nDeal">
                         <form class="form-horizontal">
-                        <h2>Edit contact</h2><br>
+                            <h2>Edit contact</h2><p style="color: #2b669a">не реализовано</p><br>
 
-                        <!-- Навигация -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="active"><a href="#contact1" aria-controls="contact1" role="tab" data-toggle="tab">Contact 1</a></li>
-                            <li><a href="#contact2" aria-controls="contact2" role="tab" data-toggle="tab">Contact 2</a></li>
-                        </ul>
+                            <!-- Навигация -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="active"><a href="#contact1" aria-controls="contact1" role="tab" data-toggle="tab">Contact 1</a></li>
+                                <li><a href="#contact2" aria-controls="contact2" role="tab" data-toggle="tab">Contact 2</a></li>
+                            </ul>
 
-                        <!-- Содержимое вкладок -->
-                        <div class="tab-content">
-                            <br>
-                            <div role="tabpanel" class="tab-pane active" id="contact1">
+                            <!-- Содержимое вкладок -->
+                            <div class="tab-content">
+                                <br>
+                                <div role="tabpanel" class="tab-pane active" id="contact1">
 
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Name </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Name">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Name </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Name">
+                                        </div>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Company </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Company">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Position </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Position">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select class="col-sm-3 form-control" style="width: 100px">
+                                            <option>Work</option>
+                                            <option>Mobile</option>
+                                            <option>Home</option>
+                                        </select>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" name="formPhone" placeholder="Number">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Email </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Email">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Skype </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Skype">
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Company </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Company">
+                                <div role="tabpanel" class="tab-pane" id="contact2">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Name </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Name">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Company </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Company">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Position </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Position">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select class="col-sm-3 form-control" style="width: 100px">
+                                            <option>Work</option>
+                                            <option>Mobile</option>
+                                            <option>Home</option>
+                                        </select>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" name="formPhone" placeholder="Number">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Email </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Email">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Skype </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Skype">
+                                        </div>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Position </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Position">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <select class="col-sm-3 form-control" style="width: 100px">
-                                        <option>Work</option>
-                                        <option>Mobile</option>
-                                        <option>Home</option>
-                                    </select>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="formPhone" placeholder="Number">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Email </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Email">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Skype </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Skype">
+                                    <div class="col-sm-10">
+                                        <input class="formAddBut" type="button" value="Добавить">
+                                        <input class="formAddBut" type="button" value="Открепить">
                                     </div>
                                 </div>
 
                             </div>
-
-                            <div role="tabpanel" class="tab-pane" id="contact2">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Name </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Name">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Company </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Company">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Position </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Position">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <select class="col-sm-3 form-control" style="width: 100px">
-                                        <option>Work</option>
-                                        <option>Mobile</option>
-                                        <option>Home</option>
-                                    </select>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="formPhone" placeholder="Number">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Email </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Email">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Skype </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Skype">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-10">
-                                    <input class="formAddBut" type="button" value="Добавить">
-                                    <input class="formAddBut" type="button" value="Открепить">
-                                </div>
-                            </div>
-
-                        </div>
                         </form>
 
                     </div>
@@ -268,81 +265,90 @@
                     <!--Edit company-->
                     <div class="forms--nDeal">
                         <form class="form-horizontal">
-                        <h2>Edit company</h2><br>
+                            <h2>Edit company</h2><br>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Name </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" value="${company.title}" id="editDealCompanyName" name="editDealCompanyName">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Name </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" value="${company.title}" id="companyNewName" name="companyNewName">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Phone </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" value = "${company.getPhoneNumber()}" placeholder="Phone" id="editDealCompanyPhone" name="editDealCompanyPhone">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Phone </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" value = "${company.getPhoneNumber()}" placeholder="Phone" id="companyNewPhone" name="companyNewPhone">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">email </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" value="${company.getEmail()}" placeholder="email" id="editDealCompanyEmail" name="editDealCompanyEmail">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">email </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" value="${company.getEmail()}" placeholder="email" id="companyNewEmail" name="companyNewEmail">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Web </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" value="${company.getWebsite()}" placeholder="Url" id="editDealCompanyWeb" name="editDealCompanyWeb">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Web </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" value="${company.getWebsite()}" placeholder="Url" id="companyNewWeb" name="companyNewWeb">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Address </label>
-                            <div class="col-sm-9">
-                                <textarea class="form-control" value="${company.getAddress()}"
-                                          placeholder="хз пока не получилось" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Address </label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" value="${company.getAddress()}"
+                                              placeholder="хз пока не получилось" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <%--<input type="hidden" id="idDeal" value="${deal.getId()}" />--%>
+                                    <button type="button" class="btn btn-success" id="bttEditCompany">Применить</button>
+                                </div>
+                            </div>
+                            <span id="result2" style="color:red"></span>
+
                         </form>
 
                     </div>
 
-                    <!--Add task-->
+                        <!--Add task-->
                     <div class="forms--nDeal--Task">
                         <form class="form-horizontal">
-                        <h2>Edit task</h2><br>
+                            <h2>Edit task</h2> <p style="color: #2b669a">не реализовано</p><br>
 
-                        <!-- Навигация -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="active"><a href="#task" aria-controls="task" role="tab" data-toggle="tab">Task</a></li>
-                            <li><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">Comment</a></li>
-                            <li><a href="#action" aria-controls="action" role="tab" data-toggle="tab">Action</a></li>
-                            <li><a href="#file" aria-controls="file" role="tab" data-toggle="tab">File</a></li>
-                        </ul>
+                            <!-- Навигация -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="active"><a href="#task" aria-controls="task" role="tab" data-toggle="tab">Task</a></li>
+                                <li><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">Comment</a></li>
+                                <li><a href="#action" aria-controls="action" role="tab" data-toggle="tab">Action</a></li>
+                                <li><a href="#file" aria-controls="file" role="tab" data-toggle="tab">File</a></li>
+                            </ul>
 
-                        <!-- Содержимое вкладок -->
-                        <div class="tab-content">
-                            <br>
-                            <div role="tabpanel" class="tab-pane active" id="task">
-                                Task
+                            <!-- Содержимое вкладок -->
+                            <div class="tab-content">
+                                <br>
+                                <div role="tabpanel" class="tab-pane active" id="task">
+                                    Task
+
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane" id="comment">
+                                    Comment
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane" id="action">
+                                    Action
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane" id="file">
+                                    File
+                                </div>
 
                             </div>
-
-                            <div role="tabpanel" class="tab-pane" id="comment">
-                                Comment
-                            </div>
-
-                            <div role="tabpanel" class="tab-pane" id="action">
-                                Action
-                            </div>
-
-                            <div role="tabpanel" class="tab-pane" id="file">
-                                File
-                            </div>
-
-                        </div>
                         </form>
 
                     </div>
