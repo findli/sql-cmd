@@ -1,16 +1,17 @@
 package com.becomejavasenior.DAO.Imp;
 
+
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.TaskTypeDao;
+import com.becomejavasenior.DAO.TaskTypeDAO;
 import com.becomejavasenior.bean.TaskType;
 import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDaoFactory;
+import com.becomejavasenior.factory.PostgresDAOFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTypeDao<TaskType> {
+public class TaskTypeDAOImpl extends AbstractDAOImpl<TaskType> implements TaskTypeDAO<TaskType> {
 
     @Override
     public String getCreateQuery(){
@@ -61,11 +62,6 @@ public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTy
     }
 
     @Override
-    public TaskType getByName(String str) throws DaoException, ClassNotFoundException {
-        return null;
-    }
-
-    @Override
     public TaskType getEntity(ResultSet resultSet) throws DaoException {
         TaskType taskType = new TaskType();
         try {
@@ -83,7 +79,7 @@ public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTy
         List<TaskType> taskTypes = new ArrayList<>();
         TaskType taskType;
 
-        try (Connection connection = PostgresDaoFactory.getConnection();
+        try (Connection connection = PostgresDAOFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
             while (resultSet.next()) {

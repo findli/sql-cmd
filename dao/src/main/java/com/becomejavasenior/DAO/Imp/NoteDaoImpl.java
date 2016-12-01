@@ -1,28 +1,18 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.NoteDao;
+import com.becomejavasenior.DAO.NoteDAO;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Note;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDaoFactory;
+import com.becomejavasenior.factory.PostgresDAOFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> {
-
-    private static final String SELECT_DEALS_FOR_LIST= "SELECT crm_pallas.note.id as noteId,\n" +
-            "crm_pallas.note.note_text,\n" +
-            "crm_pallas.user.last_name as lName,\n" +
-            "crm_pallas.note.creation_date_time as createDateNote\n" +
-            "FROM crm_pallas.note\n" +
-            "JOIN crm_pallas.user ON crm_pallas.note.created_by_user_id = crm_pallas.user.id\n" +
-            "JOIN crm_pallas.company_note on crm_pallas.note.id = crm_pallas.company_note.note_id\n" +
-            "JOIN crm_pallas.company on crm_pallas.company_note.company_id = crm_pallas.company.id \n" +
-            "WHERE crm_pallas.company.id = ?";
+public class NoteDAOImpl extends AbstractDAOImpl<Note> implements NoteDAO<Note> {
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Note note) throws DaoException {
@@ -78,17 +68,12 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
     }
 
     @Override
-    public Note getByName(String str) throws DaoException, ClassNotFoundException {
-        return null;
-    }
-
-    @Override
     public List<Note> getAll() throws DaoException, ClassNotFoundException {
         List<Note> notes = new ArrayList<>();
         Note note;
         User createdUser;
 
-        try (Connection connection = PostgresDaoFactory.getConnection();
+        try (Connection connection = PostgresDAOFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 
@@ -121,32 +106,6 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
     @Override
     Note getEntity(ResultSet resultSet) throws DaoException {
         return null;
-    }
-
-    @Override
-    public List<Note> getNotesForList(int id) {
-        List<Note> notes = new ArrayList<>();
-        User user;
-        Note note;
-
-        try (Connection connection = PostgresDaoFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST)) {
-            statement.setInt(1,id);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                user = new User();
-                note = new Note();
-                note.setId(resultSet.getInt("noteId"));
-                note.setNoteText(resultSet.getString("note_text"));
-                user.setlName(resultSet.getString("lName"));
-                note.setCreatedUser(user);
-                note.setDateCreate(resultSet.getDate("createDateNote"));
-                notes.add(note);
-            }
-        } catch (SQLException ex) {
-            throw new DatabaseException(ex);
-        }
-        return notes;
     }
 
 }

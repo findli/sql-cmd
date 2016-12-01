@@ -1,32 +1,16 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.*;
-import com.becomejavasenior.DAO.StageDao;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDaoFactory;
+import com.becomejavasenior.factory.PostgresDAOFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> {
-
-    private static final String SELECT_DEALS_FOR_LIST_BY_ID = "SELECT\n" +
-            "  crm_pallas.deal.id AS dealId,\n" +
-            "  crm_pallas.deal.title,\n" +
-            "  crm_pallas.deal.budget,\n" +
-            "  crm_pallas.stage.title AS stage,\n" +
-            "  crm_pallas.contact.id AS contactId,\n" +
-            "  crm_pallas.contact.last_name AS contact,\n" +
-            "  crm_pallas.company.id AS companyId,\n" +
-            "  crm_pallas.company.title AS company\n" +
-            "FROM crm_pallas.deal\n" +
-            "  JOIN crm_pallas.stage ON crm_pallas.deal.stage_id = crm_pallas.stage.id\n" +
-            "  JOIN crm_pallas.contact ON crm_pallas.deal.primary_contact_id = crm_pallas.contact.id\n" +
-            "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id\n " +
-            "WHERE crm_pallas.company.id= ?";
+public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> {
 
     private static final String SELECT_DEALS_FOR_LIST = "SELECT\n" +
             "  crm_pallas.deal.id AS dealId,\n" +
@@ -40,7 +24,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             "FROM crm_pallas.deal\n" +
             "  JOIN crm_pallas.stage ON crm_pallas.deal.stage_id = crm_pallas.stage.id\n" +
             "  JOIN crm_pallas.contact ON crm_pallas.deal.primary_contact_id = crm_pallas.contact.id\n" +
-            "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id ORDER BY dealId DESC\n";
+            "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id\n";
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Deal deal) throws DaoException {
@@ -69,9 +53,8 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             preparedStatement.setInt(4, deal.getStage().getId());
             preparedStatement.setInt(5, deal.getResponsibleUser().getId());
             preparedStatement.setBoolean(6, deal.isDeleted());
-            preparedStatement.setInt(7, deal.getId());
-//            preparedStatement.setInt(7, deal.getPrimaryContact().getId());
-//            preparedStatement.setTimestamp(8, new Timestamp(deal.getCreateDate().getTime()));
+            preparedStatement.setInt(7, deal.getPrimaryContact().getId());
+            preparedStatement.setTimestamp(8, new Timestamp(deal.getCreateDate().getTime()));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -80,16 +63,11 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
     }
 
     @Override
-    public Deal getByName(String str) throws DaoException, ClassNotFoundException {
-        return null;
-    }
-
-    @Override
     Deal getEntity(ResultSet resultSet) throws DaoException {
         Deal deal = new Deal();
-        CompanyDao<Company> company = new CompanyDaoImpl();
-        StageDao<Stage> stage = new StageDaoImpl();
-        UserDao<User> user = new UserDaoImpl();
+        CompanyDAO<Company> company = new CompanyDAOImpl();
+        StageDAO<Stage> stage = new StageDAOImpl();
+        UserDAO<User> user = new UserDAOImpl();
         try {
             deal.setId(resultSet.getInt("id"));
             deal.setCompany(company.getById(resultSet.getInt("company_id")));
@@ -126,8 +104,8 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
 
     @Override
     String getUpdateQuery() {
-        return DataBaseUtil.getQuery("UPDATE crm_pallas.deal SET title = ?, company_id = ?, " +
-                "budget = ?, stage_id = ?, responsible_user_id =?, is_deleted = ? WHERE id = ?");
+        return DataBaseUtil.getQuery("UPDATE crm_pallas.deal SET company_id = ?, stage_id = ?, " +
+                "responsible_user_id = ?, title = ?, budget =?, is_deleted = ? WHERE id = ?");
     }
 
     @Override
@@ -157,7 +135,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         Company company;
         Contact contact;
 
-        try (Connection connection = PostgresDaoFactory.getConnection();
+        try (Connection connection = PostgresDAOFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 
@@ -193,49 +171,6 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
     }
 
     @Override
-    public List<Deal> getDealsForList(int id) {
-        List<Deal> deals = new ArrayList<>();
-        Deal deal;
-        Contact contact;
-        Company company;
-        Stage stage;
-
-        try (Connection connection = PostgresDaoFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST_BY_ID)) {
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-
-                deal = new Deal();
-                company = new Company();
-                contact = new Contact();
-                stage = new Stage();
-
-                deal.setId(resultSet.getInt("dealId"));
-                deal.setTitle(resultSet.getString("title"));
-                deal.setBudget(resultSet.getInt("budget"));
-                stage.setTitle(resultSet.getString("stage"));
-                deal.setStage(stage);
-                contact.setId(resultSet.getInt("contactId"));
-                contact.setlName(resultSet.getString("contact"));
-
-                company.setId(resultSet.getInt("companyId"));
-                company.setTitle(resultSet.getString("company"));
-                contact.setCompany(company);
-                deal.setPrimaryContact(contact);
-                deal.setCompany(company);
-
-                deals.add(deal);
-            }
-        } catch (SQLException ex) {
-            throw new DatabaseException(ex);
-        }
-
-        return deals;
-    }
-
-    @Override
     public List<Deal> getDealsForList() {
         List<Deal> deals = new ArrayList<>();
         Deal deal;
@@ -243,7 +178,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         Company company;
         Stage stage;
 
-        try (Connection connection = PostgresDaoFactory.getConnection();
+        try (Connection connection = PostgresDAOFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST)) {
 
             ResultSet resultSet = statement.executeQuery();

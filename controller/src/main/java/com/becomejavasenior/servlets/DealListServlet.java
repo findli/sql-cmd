@@ -1,6 +1,6 @@
 package com.becomejavasenior.servlets;
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Deal;
 import com.becomejavasenior.bean.TaskType;
 import com.becomejavasenior.bean.User;
@@ -36,7 +36,7 @@ public class DealListServlet extends HttpServlet {
         try {
             taskTypeList = taskTypesService.getAll();
             users = UserService.getAll();
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

@@ -11,5 +11,4 @@ public interface StageService {
     List<Stage> getAll() throws DaoException, ClassNotFoundException;
     Stage getById(int id) throws DaoException;
     void delete(int id) throws DaoException;
-    Stage getByName(String str) throws DaoException, ClassNotFoundException;
 }

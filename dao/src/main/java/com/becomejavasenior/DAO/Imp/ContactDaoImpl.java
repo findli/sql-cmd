@@ -1,13 +1,9 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.CompanyDAO;
-import com.becomejavasenior.DAO.CompanyDao;
 import com.becomejavasenior.DAO.ContactDAO;
-import com.becomejavasenior.DAO.ContactDao;
-import com.becomejavasenior.DAO.DAOException;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.UserDAO;
-import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.Contact;
@@ -17,7 +13,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactDao<Contact> {
+public class ContactDAOImpl extends AbstractDAOImpl<Contact> implements ContactDAO<Contact> {
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Contact contact) {
@@ -52,7 +48,7 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
 //            preparedStatement.setDate(8, new Date(contact.getUpdated().getTime()));
             preparedStatement.setBoolean(8, contact.is_deleted());
             preparedStatement.setInt(9, contact.getId());
-            } catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -62,8 +58,8 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         Contact contact = new Contact();
         Company company;
         User user;
-        CompanyDao<Company> companyDao = new CompanyDaoImpl();
-        UserDao<User> userDAO = new UserDaoImpl();
+        CompanyDAO<Company> companyDao = new CompanyDAOImpl();
+        UserDAO<User> userDAO = new UserDAOImpl();
 
         List<String> taskList = new ArrayList<String>();
         List<String> eventHistoryList = new ArrayList<String>();

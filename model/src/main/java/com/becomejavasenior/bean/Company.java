@@ -11,7 +11,7 @@ public class Company implements Serializable {
     private String phoneNumber;
     private String email;
     private String website;
-    private Adress address;
+    private Address address;
     private User responsibleUser;
     private Boolean isDeleted;
 
@@ -69,11 +69,11 @@ public class Company implements Serializable {
     }
 
 
-    public Adress getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(Adress address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 

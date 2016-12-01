@@ -1,16 +1,16 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.UserDao;
+import com.becomejavasenior.DAO.UserDAO;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDaoFactory;
+import com.becomejavasenior.factory.PostgresDAOFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> {
+public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO<User> {
     @Override
     void createStatement(PreparedStatement preparedStatement, User user) throws DaoException {
         try {
@@ -50,19 +50,6 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     @Override
     String getDeleteQuery() {
         return "DELETE FROM crm_pallas.user WHERE id = ?";
-    }
-
-    @Override
-    public User getByName(String str) throws DaoException, ClassNotFoundException {
-        User user = new User();
-        List<User> users = getAll();
-        for (int i = 0; i < users.size(); ++i) {
-            if(users.get(i).getlName().equals(str)) {
-                user = users.get(i);
-                break;
-            }
-        }
-        return user;
     }
 
     @Override
@@ -107,7 +94,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     public List<User> getAll() throws DaoException, ClassNotFoundException {
         List<User> users = new ArrayList<>();
         User user;
-        try (Connection connection = PostgresDaoFactory.getConnection();
+        try (Connection connection = PostgresDAOFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 

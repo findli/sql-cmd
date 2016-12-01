@@ -1,6 +1,6 @@
 package com.becomejavasenior.servlets;
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Contact;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.service.ContactService;
@@ -33,7 +33,7 @@ public class ContactListServlet extends HttpServlet{
         try {
             contactList = contactService.getAll();
             users = userService.getAll();
-        } catch (DAOException e) {
+        } catch (DaoException e) {
 
         } catch (ClassNotFoundException e){
 

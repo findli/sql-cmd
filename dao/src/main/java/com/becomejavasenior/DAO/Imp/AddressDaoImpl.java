@@ -1,18 +1,18 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.AddressDAO;
-import com.becomejavasenior.DAO.DAOException;
-import com.becomejavasenior.bean.Adress;
+import com.becomejavasenior.DAO.DaoException;
+import com.becomejavasenior.bean.Address;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDAO<Adress> {
+public class AddressDAOImpl extends AbstractDAOImpl<Address> implements AddressDAO<Address> {
 
     @Override
-    public void createStatement(PreparedStatement statement, Adress address) throws DAOException{
+    public void createStatement(PreparedStatement statement, Address address) throws DaoException {
 
         try {
 
@@ -25,13 +25,13 @@ public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDA
 
         } catch (SQLException e) {
 
-            throw new DAOException("Can't create statement for Address", e);
+            throw new DaoException("Can't create statement for Address", e);
 
         }
     }
 
     @Override
-    public void updateStatement(PreparedStatement statement, Adress address) throws DAOException{
+    public void updateStatement(PreparedStatement statement, Address address) throws DaoException {
 
         try {
 
@@ -44,15 +44,15 @@ public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDA
 
         } catch (SQLException e) {
 
-            throw new DAOException("Can't update statement for Address", e);
+            throw new DaoException("Can't update statement for Address", e);
 
         }
     }
 
     @Override
-    public Adress getEntity(ResultSet resultSet) throws DAOException{
+    public Address getEntity(ResultSet resultSet) throws DaoException {
 
-        Adress address = new Adress();
+        Address address = new Address();
 
         try {
 
@@ -66,7 +66,7 @@ public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDA
 
         } catch (SQLException e){
 
-            throw new DAOException("Can't get entity for Address", e);
+            throw new DaoException("Can't get entity for Address", e);
 
         }
 
@@ -94,7 +94,7 @@ public class AddressDAOImpl extends AbstractDAOImpl<Adress> implements AddressDA
     }
 
     @Override
-    public List<Adress> getByFilter(String query) {
+    public List<Address> getByFilter(String query) {
         return null;
     }
 

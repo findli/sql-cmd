@@ -1,8 +1,8 @@
 package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.Imp.StageDaoImpl;
-import com.becomejavasenior.DAO.StageDao;
+import com.becomejavasenior.DAO.Imp.StageDAOImpl;
+import com.becomejavasenior.DAO.StageDAO;
 import com.becomejavasenior.bean.Stage;
 import com.becomejavasenior.service.StageService;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class StageServiceImpl implements StageService {
 
-    private StageDao<Stage> stageDAO = new StageDaoImpl();
+    private StageDAO<Stage> stageDAO = new StageDAOImpl();
 
     @Override
     public Stage create(Stage stage) throws DaoException {
@@ -21,11 +21,6 @@ public class StageServiceImpl implements StageService {
     public void delete(int id) throws DaoException {
         stageDAO.delete(id);
 
-    }
-
-    @Override
-    public Stage getByName(String str) throws DaoException, ClassNotFoundException {
-        return stageDAO.getByName(str);
     }
 
     @Override

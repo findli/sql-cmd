@@ -1,5 +1,6 @@
 package com.becomejavasenior.servlets;
 
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.CompanyService;
 import com.becomejavasenior.service.impl.CompanyServiceImpl;
@@ -21,32 +22,22 @@ public class CompanyAddServlet extends HttpServlet {
     private CompanyService companyService = new CompanyServiceImpl();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        HttpSession session = req.getSession();
-        CompanyService companyService = new CompanyServiceImpl();
-
-
-        resp.sendRedirect("/pages/company_add.jsp");
-    }
-
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        ContactService contactService = new ContactServiceImpl();
+        CompanyService companyService = new CompanyServiceImpl();
 
-        List<Contact> contactList = null;
+        List<Company> companyList = null;
 
         try {
-            contactList = contactService.getAll();
+            companyList = companyService.getAll();
         } catch (DaoException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        session.setAttribute("contactList", contactList);
-        request.getRequestDispatcher("/pages/deal_add.jsp").forward(request, response);
+        session.setAttribute("contactList", companyList);
+        request.getRequestDispatcher("/pages/company_add.jsp").forward(request, response);
 
     }
 
@@ -56,11 +47,12 @@ public class CompanyAddServlet extends HttpServlet {
         response.setContentType("text/html");
 
         Company company = getCompanyFromRequest(request);
-        Adress address = getAddressFromRequest(request);
+        Address address = getAddressFromRequest(request);
+        Task task = getTaskFromRequest(request);
 
-        companyService.createNewCompany(company, user, address);
+        companyService.createNewCompany(company, address, task);
 
-        response.sendRedirect("/deal");
+        response.sendRedirect("/company");
     }
 
     private Company getCompanyFromRequest(HttpServletRequest request) {
@@ -88,53 +80,33 @@ public class CompanyAddServlet extends HttpServlet {
             List<Note> noteList = new ArrayList<>();
             company.setCompanyNote(noteList);
         }
+
+        if (!request.getParameter("companyPhone_number").isEmpty()){
+            company.setPhoneNumber(new String(request.getParameter("companyPhone_number")));
+        }
+
+        if (!request.getParameter("companyEmail").isEmpty()){
+            company.setEmail(new String(request.getParameter("companyEmail")));
+        }
+
+        if (!request.getParameter("companyWebsite").isEmpty()){
+            company.setWebsite(new String(request.getParameter("companyWebsilte")));
+        }
+
+        company.setDeleted(false);
+
         return company;
     }
 
-    private Deal getDealFromRequest(HttpServletRequest request) {
-        Deal deal = new Deal();
-        deal.setTitle(request.getParameter("dealName"));
-
-        User user = new User();
-        user.setlName(request.getParameter("responsibleUser"));
-        deal.setResponsibleUser(user);
-
-        deal.setCreateDate(new Date());
-        deal.setDeleted(false);
-
-        String noteContent = request.getParameter("noteDeal");
-        if (!noteContent.isEmpty()) {
-            List<Note> noteList = new ArrayList<>();
-            Note note = new Note();
-            note.setNoteText(request.getParameter("noteDeal"));
-            note.setDeleted(false);
-
-            note.setDateCreate(new Date());
-            User creator = new User();
-            creator.setId(1); //TODO: change to user under which the logged in
-            note.setCreatedUser(creator);
-            noteList.add(note);
-            deal.setDealNote(noteList);
-        } else {
-            List<Note> noteList = new ArrayList<>();
-            deal.setDealNote(noteList);
-        }
-
-        if (!request.getParameter("dealBudget").isEmpty()) {
-            deal.setBudget(new Integer(request.getParameter("dealBudget")));
-        }
-        return deal;
-    }
-    private Contact getContactFromRequest(HttpServletRequest request) {
-        Contact contact = new Contact();
-        return contact;
-    }
     private Task getTaskFromRequest(HttpServletRequest request) {
         Task task = new Task();
         return task;
     }
-    private File getFileFromRequest(HttpServletRequest request) {
-        File attachedFile = new File();
-        return attachedFile;
+
+    private Address getAddressFromRequest(HttpServletRequest request){
+        Address address = new Address();
+        return address;
     }
+
+
 }

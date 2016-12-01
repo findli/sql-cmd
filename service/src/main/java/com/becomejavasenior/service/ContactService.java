@@ -1,19 +1,19 @@
 package com.becomejavasenior.service;
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Contact;
 
 import java.util.List;
 
 public interface ContactService {
 
-    Contact create(Contact t) throws DAOException;
+    Contact create(Contact t) throws DaoException;
 
-    void update(Contact t) throws DAOException;
+    void update(Contact t) throws DaoException;
 
-    List<Contact> getAll() throws DAOException, ClassNotFoundException;
+    List<Contact> getAll() throws DaoException, ClassNotFoundException;
 
-    Contact getById(int id) throws DAOException;
+    Contact getById(int id) throws DaoException;
 
-    void delete(int id) throws DAOException;
+    void delete(int id) throws DaoException;
 }

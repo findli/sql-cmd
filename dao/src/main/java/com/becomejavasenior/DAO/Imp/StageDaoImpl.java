@@ -3,15 +3,16 @@ package com.becomejavasenior.DAO.Imp;
 import java.sql.*;
 
 import com.becomejavasenior.DAO.DaoException;
+import com.becomejavasenior.DAO.StageDAO;
 import com.becomejavasenior.bean.Stage;
 import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDaoFactory;
+import com.becomejavasenior.factory.PostgresDAOFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomejavasenior.DAO.StageDao<Stage> {
+public class StageDAOImpl extends AbstractDAOImpl<Stage> implements StageDAO<Stage> {
 
     @Override
     public String getCreateQuery(){
@@ -68,19 +69,6 @@ public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomeja
     }
 
     @Override
-    public Stage getByName(String str) throws DaoException, ClassNotFoundException {
-        Stage stage = new Stage();
-        List<Stage> stages = getAll();
-        for (int i = 0; i < stages.size(); ++i) {
-            if(stages.get(i).getTitle().equals(str)) {
-                stage = stages.get(i);
-                break;
-            }
-        }
-        return stage;
-    }
-
-    @Override
     public Stage getEntity(ResultSet resultSet){
         Stage stage = new Stage();
         try {
@@ -119,7 +107,7 @@ public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomeja
         List<Stage> stages = new ArrayList<>();
         Stage stage;
 
-        try (Connection connection = PostgresDaoFactory.getConnection();
+        try (Connection connection = PostgresDAOFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 
@@ -137,3 +125,4 @@ public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomeja
         return stages;
     }
 }
+
