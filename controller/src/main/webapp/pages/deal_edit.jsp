@@ -141,7 +141,7 @@
                     <!--Edit contact-->
                     <div class="forms--nDeal">
                         <form class="form-horizontal">
-                            <h2>Edit contact</h2><p style="color: #2b669a">не реализовано</p><br>
+                            <h2>Edit contact</h2><br>
 
                             <!-- Навигация -->
                             <ul class="nav nav-tabs" role="tablist">
@@ -318,7 +318,7 @@
                         <!--Add task-->
                     <div class="forms--nDeal--Task">
                         <form class="form-horizontal">
-                            <h2>Edit task</h2> <p style="color: #2b669a">не реализовано</p><br>
+                            <h2>Edit task</h2><br>
 
                             <!-- Навигация -->
                             <ul class="nav nav-tabs" role="tablist">
