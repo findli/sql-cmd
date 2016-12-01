@@ -1,1 +1,0 @@
-select * from az_trainingdiary.payment where id_student = 3;

@@ -1,1 +1,0 @@
-select date, task, status, materials from az_trainingdiary.exercises where fk_id_profile = 3;
