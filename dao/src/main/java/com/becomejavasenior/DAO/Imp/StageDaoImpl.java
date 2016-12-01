@@ -30,7 +30,7 @@ public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomeja
 
     @Override
     public String getAllQuery(){
-        return "SELECT * FROM crm_pallas.stage";
+        return "SELECT * FROM crm_pallas.stage ORDER BY id";
     }
 
     @Override

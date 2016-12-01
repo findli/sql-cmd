@@ -93,13 +93,14 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Tag </label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" type="text" placeholder="Tag" id="dealTag" name="dealTag">
+                                    <input class="form-control" type="text" placeholder="Tag не реализовано" id="dealTag" name="dealTag">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Responsible </label>
                                 <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
+                                    <option>${responsibleUser}</option>
                                     <c:forEach var="user" items="${users}">
                                         <option><c:out value="${user.lName}"/></option>
                                     </c:forEach>
@@ -116,6 +117,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Stage </label>
                                 <select class="col-sm-9 form-control" id="stageDeal" name="stageDeal">
+                                    <option>${stageTitle}</option>
                                     <c:forEach var="stage" items="${stages}">
                                         <option><c:out value="${stage.title}"/></option>
                                     </c:forEach>

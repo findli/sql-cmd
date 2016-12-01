@@ -25,7 +25,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             "FROM crm_pallas.deal\n" +
             "  JOIN crm_pallas.stage ON crm_pallas.deal.stage_id = crm_pallas.stage.id\n" +
             "  JOIN crm_pallas.contact ON crm_pallas.deal.primary_contact_id = crm_pallas.contact.id\n" +
-            "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id\n";
+            "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id ORDER BY dealId DESC\n";
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Deal deal) throws DaoException {

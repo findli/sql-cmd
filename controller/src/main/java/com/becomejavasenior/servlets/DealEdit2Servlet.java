@@ -3,10 +3,13 @@ package com.becomejavasenior.servlets;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Deal;
 import com.becomejavasenior.bean.Stage;
+import com.becomejavasenior.bean.User;
 import com.becomejavasenior.service.DealService;
 import com.becomejavasenior.service.StageService;
+import com.becomejavasenior.service.UserService;
 import com.becomejavasenior.service.impl.DealServiceImpl;
 import com.becomejavasenior.service.impl.StageServiceImpl;
+import com.becomejavasenior.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 @WebServlet(name = "dealEdit2Servlet", urlPatterns = "/dealEdit2")
 public class DealEdit2Servlet extends HttpServlet {
@@ -42,6 +44,7 @@ public class DealEdit2Servlet extends HttpServlet {
             try {
                 str += getStageFromRequest(request) + " \n";
                 str += getBudgetFromRequest(request) + " \n";
+                str += getUserFromRequest(request) + " \n";
             } catch (DaoException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
@@ -49,12 +52,13 @@ public class DealEdit2Servlet extends HttpServlet {
             }
             out.print(str);
 
-        } else if (action.equals("demo2")){
+        } else if (action.equals("demo2")) {
 //            int number1 = Integer.parseInt(request.getParameter("number1"));
 //            int number2 = Integer.parseInt(request.getParameter("number2"));
 //            out.print(number1 + number2);
         }
     }
+
     public String getBudgetFromRequest(HttpServletRequest request) {
         int dealNewBudget = Integer.valueOf(request.getParameter("newBudget"));
         deal.setBudget(dealNewBudget);
@@ -69,8 +73,6 @@ public class DealEdit2Servlet extends HttpServlet {
     public String getNameFromRequest(HttpServletRequest request) {
 
         String dealNewName = request.getParameter("newDeal");
-
-
         deal.setTitle(dealNewName);
 
         try {
@@ -83,7 +85,7 @@ public class DealEdit2Servlet extends HttpServlet {
     }
 
     public String getStageFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
-        DealService dealService = new DealServiceImpl();
+
         StageService stageService = new StageServiceImpl();
         String dealNewStage = request.getParameter("newStage");
         Stage stage = stageService.getByName(dealNewStage);
@@ -97,4 +99,18 @@ public class DealEdit2Servlet extends HttpServlet {
         return "new stage = " + deal.getStage().getTitle();
     }
 
+    public String getUserFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
+
+        UserService userService = new UserServiceImpl();
+        String dealNewUser = request.getParameter("newUser");
+        User user = userService.getByName(dealNewUser);
+        deal.setResponsibleUser(user);
+
+        try {
+            deal = dealService.update(deal);
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
+        return "new User = " + deal.getResponsibleUser().getlName();
+    }
 }

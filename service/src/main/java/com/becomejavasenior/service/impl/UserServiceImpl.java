@@ -36,4 +36,9 @@ public class UserServiceImpl implements UserService {
     public void update(User user) throws DaoException {
         userDao.update(user);
     }
+
+    @Override
+    public User getByName(String str) throws DaoException, ClassNotFoundException {
+        return userDao.getByName(str);
+    }
 }

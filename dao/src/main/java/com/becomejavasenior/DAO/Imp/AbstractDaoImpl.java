@@ -30,7 +30,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
                 Integer generatedId = resultSet.getInt(1);
-                System.out.println("generated id" + generatedId);
+                System.out.println("generated id = " + generatedId);
                 createEntity = getById(generatedId);
             }
         } catch (SQLException e) {
