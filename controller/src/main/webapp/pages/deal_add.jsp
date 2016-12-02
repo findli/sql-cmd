@@ -331,11 +331,11 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
-    });
-</script>
+<%--<script type="text/javascript">--%>
+    <%--$(function () {--%>
+        <%--$('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
+    <%--});--%>
+<%--</script>--%>
 
 </body>
 
