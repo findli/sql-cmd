@@ -1,9 +1,5 @@
 package com.becomejavasenior.servlets;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> c76e1d9fdd648058b7febca7233f40af4d978142
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.service.CompanyService;
@@ -19,35 +15,36 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name="companyList", urlPatterns = "/company")
-public class CompanyListServlet extends HttpServlet {
+@Deprecated
+@WebServlet(name="dealAddCompanyServlet", urlPatterns = "/deal_add_company")
+public class DealAddCompanyServlet extends HttpServlet {
 
-    public static Logger log = Logger.getLogger(CompanyListServlet.class);
+    public static Logger log = Logger.getLogger(DealAddDealServlet.class);
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.trace("run doGet() in DealAddCompanyServlet");
 
-        log.trace("run doGet() in CompanyListServlet");
-        HttpSession session = req.getSession();
+        HttpSession session = request.getSession();
         CompanyService companyService = new CompanyServiceImpl();
 
         List<Company> companyList = null;
 
         try {
-            log.trace("call getAll() from service in CompanyListServlet");
             companyList = companyService.getAll();
         } catch (DaoException e) {
-
-            log.error("DaoException in CompanyListServlet in Controller layer", e);
-
+            e.printStackTrace();
         } catch (ClassNotFoundException e) {
-
-            log.error("ClassNotFoundException in CompanyListServlet in Controller layer", e);
-
+            e.printStackTrace();
         }
 
         session.setAttribute("companyList", companyList);
-        req.getRequestDispatcher("pages/companyList.jsp").forward(req, resp);
+        request.getRequestDispatcher("/pages/deal_add.jsp").forward(request, response);
     }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.trace("run doPost() in DealAddCompanyServlet");
+        response.sendRedirect("/pages/deal_add.jsp");
+    }
 }

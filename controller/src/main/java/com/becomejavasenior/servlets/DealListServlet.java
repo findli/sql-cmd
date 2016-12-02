@@ -1,6 +1,7 @@
 package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.DAO.DaoException;
+<<<<<<< HEAD
 import com.becomejavasenior.bean.Deal;
 import com.becomejavasenior.bean.TaskType;
 import com.becomejavasenior.bean.User;
@@ -10,6 +11,11 @@ import com.becomejavasenior.service.UserService;
 import com.becomejavasenior.service.impl.DealServiceImpl;
 import com.becomejavasenior.service.impl.TaskTypeServiceImpl;
 import com.becomejavasenior.service.impl.UserServiceImpl;
+=======
+import com.becomejavasenior.bean.*;
+import com.becomejavasenior.service.*;
+import com.becomejavasenior.service.impl.*;
+>>>>>>> c76e1d9fdd648058b7febca7233f40af4d978142
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,20 +34,25 @@ public class DealListServlet extends HttpServlet {
         HttpSession session = request.getSession();
         DealService dealService = new DealServiceImpl();
         TaskTypeService taskTypesService = new TaskTypeServiceImpl();
-        UserService UserService = new UserServiceImpl();
+        UserService userService = new UserServiceImpl();
+        CompanyService companyService = new CompanyServiceImpl();
 
         List<Deal> dealList = dealService.getDealsForList();
         List<TaskType> taskTypeList = null;
         List<User> users = null;
+        List<Company> companyList = null;
         try {
             taskTypeList = taskTypesService.getAll();
-            users = UserService.getAll();
+            users = userService.getAll();
+            companyList = companyService.getAll();
+
         } catch (DaoException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
+        session.setAttribute("companyList", companyList);
         session.setAttribute("users", users);
         session.setAttribute("taskTypeList", taskTypeList);
         session.setAttribute("dealList", dealList);

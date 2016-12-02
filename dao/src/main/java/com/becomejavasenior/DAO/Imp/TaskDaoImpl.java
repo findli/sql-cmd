@@ -1,10 +1,9 @@
 package com.becomejavasenior.DAO.Imp;
 
-
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.PeriodInDaysTypeDAO;
-import com.becomejavasenior.DAO.TaskDAO;
-import com.becomejavasenior.DAO.TaskTypeDAO;
+import com.becomejavasenior.DAO.PeriodInDaysTypeDao;
+import com.becomejavasenior.DAO.TaskDao;
+import com.becomejavasenior.DAO.TaskTypeDao;
 import com.becomejavasenior.bean.PeriodInDaysType;
 import com.becomejavasenior.bean.Task;
 import com.becomejavasenior.bean.TaskType;
@@ -14,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class TaskDAOImpl extends AbstractDAOImpl<Task> implements TaskDAO<Task> {
+public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> {
 
     @Override
     public String getCreateQuery() {
@@ -89,11 +88,16 @@ public class TaskDAOImpl extends AbstractDAOImpl<Task> implements TaskDAO<Task> 
     }
 
     @Override
+    public Task getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
     public Task getEntity(ResultSet resultSet) throws DaoException {
         Task task = new Task();
-        TaskTypeDAO<TaskType> taskType = new TaskTypeDAOImpl();
-        PeriodInDaysTypeDAO<PeriodInDaysType> periodInDaysType = new PeriodInDaysTypeDAOImpl();
-//        UserDAO<User> user = new UserDAOImpl();
+        TaskTypeDao<TaskType> taskType = new TaskTypeDaoImpl();
+        PeriodInDaysTypeDao<PeriodInDaysType> periodInDaysType = new PeriodInDaysTypeDaoImpl();
+//        UserDao<User> user = new UserDaoImpl();
         try {
             task.setId(resultSet.getInt("id"));
             task.setTitle(resultSet.getString("title"));

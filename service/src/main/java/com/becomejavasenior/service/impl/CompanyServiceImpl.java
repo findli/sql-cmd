@@ -1,10 +1,8 @@
 package com.becomejavasenior.service.impl;
 
-import com.becomejavasenior.DAO.*;
-import com.becomejavasenior.DAO.Imp.AddressDAOImpl;
-import com.becomejavasenior.DAO.Imp.CompanyDAOImpl;
-import com.becomejavasenior.DAO.Imp.TaskDAOImpl;
-import com.becomejavasenior.DAO.Imp.UserDAOImpl;
+import com.becomejavasenior.DAO.CompanyDao;
+import com.becomejavasenior.DAO.DaoException;
+import com.becomejavasenior.DAO.Imp.CompanyDaoImpl;
 import com.becomejavasenior.bean.Address;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.Task;
@@ -17,12 +15,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     public static Logger log = Logger.getLogger(CompanyServiceImpl.class);
 
-    private final CompanyDAO companyDao = new CompanyDAOImpl();
-    private final AddressDAO addressDao = new AddressDAOImpl();
-    private final UserDAO userDao = new UserDAOImpl();
-    private final TaskDAO taskDao = new TaskDAOImpl();
-
-    private CompanyDAO<Company> companyDAO = new CompanyDAOImpl();
+    private CompanyDao<Company> companyDAO = new CompanyDaoImpl();
 
     @Override
     public Company create(Company company) throws DaoException {
@@ -32,15 +25,6 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public void delete(int id) throws DaoException {
         companyDAO.delete(id);
-    }
-
-    @Override
-    public void createNewCompany(Company company, Address address, Task task) {
-
-        address = addressWithId(address);
-        company.setAddress(address);
-
-
     }
 
     @Override
@@ -55,8 +39,9 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public void update(Company company) throws DaoException {
-        companyDAO.update(company);
+
+    public Company update(Company company) throws DaoException {
+        return companyDAO.update(company);
     }
 
     public Address addressWithId(Address address) {

@@ -3,7 +3,6 @@ package com.becomejavasenior.DAO.Imp;
 import java.sql.*;
 
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.StageDAO;
 import com.becomejavasenior.bean.Stage;
 import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDAOFactory;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class StageDAOImpl extends AbstractDAOImpl<Stage> implements StageDAO<Stage> {
+public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomejavasenior.DAO.StageDao<Stage> {
 
     @Override
     public String getCreateQuery(){
@@ -31,7 +30,7 @@ public class StageDAOImpl extends AbstractDAOImpl<Stage> implements StageDAO<Sta
 
     @Override
     public String getAllQuery(){
-        return "SELECT * FROM crm_pallas.stage";
+        return "SELECT * FROM crm_pallas.stage ORDER BY id";
     }
 
     @Override
@@ -66,6 +65,19 @@ public class StageDAOImpl extends AbstractDAOImpl<Stage> implements StageDAO<Sta
         } catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Stage getByName(String str) throws DaoException, ClassNotFoundException {
+        Stage stage = new Stage();
+        List<Stage> stages = getAll();
+        for (int i = 0; i < stages.size(); ++i) {
+            if(stages.get(i).getTitle().equals(str)) {
+                stage = stages.get(i);
+                break;
+            }
+        }
+        return stage;
     }
 
     @Override

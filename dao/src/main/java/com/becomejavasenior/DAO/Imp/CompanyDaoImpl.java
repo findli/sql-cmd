@@ -1,9 +1,9 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.AddressDAO;
-import com.becomejavasenior.DAO.CompanyDAO;
+import com.becomejavasenior.DAO.AddressDao;
+import com.becomejavasenior.DAO.CompanyDao;
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.UserDAO;
+import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Address;
 import com.becomejavasenior.bean.Company;
@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyDAO<Company> {
+public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyDao<Company> {
 
     @Override
     public void createStatement(PreparedStatement statement, Company company) throws DaoException {
@@ -28,10 +28,13 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             statement.setString(4, company.getWebsite());
             statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
-            statement.setBoolean(7, company.getIsDeleted());
+            statement.setBoolean(7, company.isDeleted());
+
         } catch (SQLException e) {
+
             throw new DaoException("Can't create statement for Company", e);
-        }
+
+       }
     }
 
     @Override
@@ -45,19 +48,28 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
             statement.setString(4, company.getWebsite());
             statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
-            statement.setBoolean(7, company.getIsDeleted());
+            statement.setBoolean(7, company.isDeleted());
+            statement.setInt(8, company.getId());
+
 
         } catch (SQLException e) {
+
             throw new DaoException("Can't update statement for Company", e);
+
         }
+    }
+
+    @Override
+    public Company getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
     }
 
     @Override
     public Company getEntity(ResultSet resultSet) throws DaoException {
 
         Company company = new Company();
-        AddressDAO<Address> addressDao = new AddressDAOImpl();
-        UserDAO<User> userDao = new UserDAOImpl();
+        AddressDao<Address> addressDao = new AddressDaoImpl();
+        UserDao<User> userDao = new UserDaoImpl();
 
         try{
             company.setId(resultSet.getInt("id"));
@@ -72,7 +84,6 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
         } catch (SQLException e){
 
             throw new DaoException("Can't get entity from Company", e);
-
         }
         return company;
     }
@@ -82,7 +93,7 @@ public class CompanyDAOImpl extends AbstractDAOImpl<Company> implements CompanyD
     }
 
     public String getUpdateQuery() {
-        return "UPDATE crm_pallas.company SET title = ?, phone_number = ?, email = ?, website = ?, address_id = ?, responsible_user_id = ?, is_deleted = ?";
+        return "UPDATE crm_pallas.company SET title = ?, phone_number = ?, email = ?, website = ?, address_id = ?, responsible_user_id = ?, is_deleted = ? WHERE id = ?";
     }
 
     public String getDeleteQuery() {

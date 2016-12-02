@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface DealService {
     Deal create(Deal t) throws DaoException;
-    void update(Deal t) throws DaoException;
+    Deal update(Deal t) throws DaoException;
     List<Deal> getAll() throws DaoException, ClassNotFoundException;
     Deal getById(int id) throws DaoException;
     void delete(int id) throws DaoException;

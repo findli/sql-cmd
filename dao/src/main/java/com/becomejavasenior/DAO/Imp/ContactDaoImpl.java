@@ -1,9 +1,11 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.CompanyDAO;
-import com.becomejavasenior.DAO.ContactDAO;
+import com.becomejavasenior.bean.Contact;
+
+import com.becomejavasenior.DAO.CompanyDao;
+import com.becomejavasenior.DAO.ContactDao;
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.UserDAO;
+import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.Contact;
@@ -13,7 +15,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactDAOImpl extends AbstractDAOImpl<Contact> implements ContactDAO<Contact> {
+public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactDao<Contact> {
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Contact contact) {
@@ -54,12 +56,17 @@ public class ContactDAOImpl extends AbstractDAOImpl<Contact> implements ContactD
     }
 
     @Override
+    public Contact getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
     Contact getEntity(ResultSet resultSet) throws DaoException {
         Contact contact = new Contact();
         Company company;
         User user;
-        CompanyDAO<Company> companyDao = new CompanyDAOImpl();
-        UserDAO<User> userDAO = new UserDAOImpl();
+        CompanyDao<Company> companyDao = new CompanyDaoImpl<Company>();
+        UserDao<User> userDAO = new UserDaoImpl();
 
         List<String> taskList = new ArrayList<String>();
         List<String> eventHistoryList = new ArrayList<String>();

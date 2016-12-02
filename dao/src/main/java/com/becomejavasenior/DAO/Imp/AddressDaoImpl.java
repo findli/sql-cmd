@@ -1,6 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.AddressDAO;
+
+import com.becomejavasenior.DAO.AddressDao;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Address;
 
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AddressDAOImpl extends AbstractDAOImpl<Address> implements AddressDAO<Address> {
+public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressDao<Address> {
 
     @Override
     public void createStatement(PreparedStatement statement, Address address) throws DaoException {
@@ -50,7 +51,12 @@ public class AddressDAOImpl extends AbstractDAOImpl<Address> implements AddressD
     }
 
     @Override
-    public Address getEntity(ResultSet resultSet) throws DaoException {
+    public Address getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+   public Address getEntity(ResultSet resultSet) throws DaoException {
 
         Address address = new Address();
 

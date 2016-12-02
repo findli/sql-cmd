@@ -2,7 +2,7 @@ package com.becomejavasenior.DAO.Imp;
 
 
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.PeriodInDaysTypeDAO;
+import com.becomejavasenior.DAO.PeriodInDaysTypeDao;
 import com.becomejavasenior.bean.PeriodInDaysType;
 
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class PeriodInDaysTypeDAOImpl extends AbstractDAOImpl<PeriodInDaysType> implements PeriodInDaysTypeDAO<PeriodInDaysType> {
+public class PeriodInDaysTypeDaoImpl extends AbstractDaoImpl<PeriodInDaysType> implements PeriodInDaysTypeDao<PeriodInDaysType> {
 
     @Override
     public String getCreateQuery(){
@@ -74,5 +74,10 @@ public class PeriodInDaysTypeDAOImpl extends AbstractDAOImpl<PeriodInDaysType> i
             throw new DaoException("Can't get entity from PeriodInDaysType", e);
         }
         return periodInDaysType;
+    }
+
+    @Override
+    public PeriodInDaysType getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
     }
 }
