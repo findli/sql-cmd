@@ -65,7 +65,7 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         Contact contact = new Contact();
         Company company;
         User user;
-        CompanyDao<Company> companyDao = new CompanyDaoImpl<Company>();
+        CompanyDao<Company> companyDao = new CompanyDaoImpl();
         UserDao<User> userDAO = new UserDaoImpl();
 
         List<String> taskList = new ArrayList<String>();

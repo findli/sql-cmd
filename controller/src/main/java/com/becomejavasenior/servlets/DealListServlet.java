@@ -1,21 +1,9 @@
 package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.DAO.DaoException;
-<<<<<<< HEAD
-import com.becomejavasenior.bean.Deal;
-import com.becomejavasenior.bean.TaskType;
-import com.becomejavasenior.bean.User;
-import com.becomejavasenior.service.DealService;
-import com.becomejavasenior.service.TaskTypeService;
-import com.becomejavasenior.service.UserService;
-import com.becomejavasenior.service.impl.DealServiceImpl;
-import com.becomejavasenior.service.impl.TaskTypeServiceImpl;
-import com.becomejavasenior.service.impl.UserServiceImpl;
-=======
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
 import com.becomejavasenior.service.impl.*;
->>>>>>> c76e1d9fdd648058b7febca7233f40af4d978142
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
