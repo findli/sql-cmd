@@ -276,7 +276,7 @@
                                     <%--<textarea class="form-control" value="${company.getAddress()}"--%>
                                               <%--placeholder="хз пока не получилось" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>--%>
                                         <input onclick="location.href='#modalAddAddress'" class="formAddBut" type="button"
-                                               value="Edit contact">
+                                               value="Edit address">
                                 </div>
                             </div>
 
