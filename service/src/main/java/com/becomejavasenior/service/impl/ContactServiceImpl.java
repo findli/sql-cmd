@@ -10,7 +10,8 @@ import org.apache.log4j.Logger;
 import java.util.List;
 
 public class ContactServiceImpl implements ContactService {
-    public static Logger log = Logger.getLogger(CompanyServiceImpl.class);
+
+    public static Logger log = Logger.getLogger(ContactServiceImpl.class);
 
     private ContactDao<Contact> contactDAO = new ContactDaoImpl();
 

@@ -16,5 +16,7 @@ public interface CompanyService {
     Company getById(int id) throws DaoException;
 
     void delete(int id) throws DaoException;
+
+    Company getByName(String str) throws DaoException, ClassNotFoundException;
 }
 

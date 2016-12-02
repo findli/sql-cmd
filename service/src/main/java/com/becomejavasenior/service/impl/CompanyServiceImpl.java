@@ -40,4 +40,9 @@ public class CompanyServiceImpl implements CompanyService {
     public Company update(Company company) throws DaoException {
         return companyDAO.update(company);
     }
+
+    @Override
+    public Company getByName(String str) throws DaoException, ClassNotFoundException {
+        return companyDAO.getByName(str);
+    }
 }
