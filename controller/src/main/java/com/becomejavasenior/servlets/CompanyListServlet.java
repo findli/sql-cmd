@@ -1,9 +1,5 @@
 package com.becomejavasenior.servlets;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> c76e1d9fdd648058b7febca7233f40af4d978142
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.service.CompanyService;

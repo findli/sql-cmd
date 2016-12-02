@@ -79,7 +79,7 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             company.setWebsite(resultSet.getString("website"));
             company.setAddress(addressDao.getById(resultSet.getInt("address_id")));
             company.setResponsibleUser(userDao.getById(resultSet.getInt("responsible_user_id")));
-            company.setIsDeleted(resultSet.getBoolean("is_deleted"));
+            company.setDeleted(resultSet.getBoolean("is_deleted"));
 
         } catch (SQLException e){
 

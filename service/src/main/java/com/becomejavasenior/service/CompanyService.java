@@ -18,5 +18,6 @@ public interface CompanyService {
 
     void delete(int id) throws DaoException;
 
+    Company getByName(String str) throws DaoException, ClassNotFoundException;
 }
 

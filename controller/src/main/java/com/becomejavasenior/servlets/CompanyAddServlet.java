@@ -50,7 +50,7 @@ public class CompanyAddServlet extends HttpServlet {
         Address address = getAddressFromRequest(request);
         Task task = getTaskFromRequest(request);
 
-        companyService.createNewCompany(company, address, task);
+      //  companyService.createNewCompany(company, address, task);
 
         response.sendRedirect("/company");
     }
@@ -75,10 +75,10 @@ public class CompanyAddServlet extends HttpServlet {
             creator.setId(1); //TODO: change to user under which the logged in
             note.setCreatedUser(creator);
             noteList.add(note);
-            company.setCompanyNote(noteList);
+        //    company.setCompanyNote(noteList);
         } else {
             List<Note> noteList = new ArrayList<>();
-            company.setCompanyNote(noteList);
+         //   company.setCompanyNote(noteList);
         }
 
         if (!request.getParameter("companyPhone_number").isEmpty()){
