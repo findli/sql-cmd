@@ -85,10 +85,10 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">От: </label>
                             <div class="col-sm-9">
-                                <div class="input-group date" id="datetimepicker1">
+                                <div class="input-group date" id="datetimepicker8">
                                     <input type="text" class="form-control" />
                                         <span class="input-group-addon">
-                                            <span class="glyphicon-calendar glyphicon"></span>
+                                            <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">До: </label>
                             <div class="col-sm-9">
-                                <div class="input-group date" id="datetimepicker2">
+                                <div class="input-group date" id="datetimepicker9">
                                     <input type="text" class="form-control" />
                                         <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
@@ -186,11 +186,26 @@
         </div>
     </div>
 </div>
+<%--<script type="text/javascript">--%>
+    <%--$(function () {--%>
+        <%--$('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
+        <%--$('#datetimepicker2').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
+
+    <%--});--%>
+<%--</script>--%>
 <script type="text/javascript">
     $(function () {
-        $('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
-        $('#datetimepicker2').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
-
+        //Инициализация datetimepicker8 и datetimepicker9
+        $("#datetimepicker8").datetimepicker();
+        $("#datetimepicker9").datetimepicker();
+        //При изменении даты в 8 datetimepicker, она устанавливается как минимальная для 9 datetimepicker
+        $("#datetimepicker8").on("dp.change",function (e) {
+            $("#datetimepicker9").data("DateTimePicker").setMinDate(e.date);
+        });
+        //При изменении даты в 9 datetimepicker, она устанавливается как максимальная для 8 datetimepicker
+        $("#datetimepicker9").on("dp.change",function (e) {
+            $("#datetimepicker8").data("DateTimePicker").setMaxDate(e.date);
+        });
     });
 </script>
 

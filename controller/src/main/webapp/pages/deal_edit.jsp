@@ -293,7 +293,7 @@
                                 <div>
                                     <header>
                                         <div class="wrapper__modal1Title">
-                                            <div><i class="fa fa-user"></i></div>
+                                            <div><i class="fa fa-industry"></i></div>
                                             <h3>Edit address</h3>
                                         </div>
                                     </header>

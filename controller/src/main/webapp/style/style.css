@@ -93,7 +93,7 @@ header {
     margin: 15px 0px 0px 15px;
 }
 
-.header__user--photo .fa-user {
+.header__user--photo .fa-user .fa-industry {
     color: white;
     margin: 7px 0 0 10px;
     font-size: 25px;
