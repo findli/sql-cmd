@@ -1,6 +1,8 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.AbstractDAO;
+
+import com.becomejavasenior.DAO.AbstractDao;
+
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DataBaseUtil;
 import org.apache.log4j.Logger;
@@ -9,9 +11,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
+public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 
-    public static Logger log = Logger.getLogger(AbstractDAOImpl.class);
+    public static Logger log = Logger.getLogger(AbstractDaoImpl.class);
 
     @Override
     public T create(T entity) throws DaoException {
@@ -28,10 +30,13 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
                 Integer generatedId = resultSet.getInt(1);
+                System.out.println("generated id = " + generatedId);
                 createEntity = getById(generatedId);
             }
         } catch (SQLException e) {
+
             throw new DaoException("Can't create Entity " + entity, e);
+
         } finally {
             if (preparedStatement != null) try {
                 preparedStatement.close();
@@ -144,8 +149,7 @@ public abstract class AbstractDAOImpl<T> implements AbstractDAO<T> {
 
     @Override
     public List<T> getAll() throws DaoException, ClassNotFoundException {
-
-        log.trace("Call getAll() in AbstractDAOImpl");
+        log.trace("Call getAll() in AbstractDaoImpl");
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;

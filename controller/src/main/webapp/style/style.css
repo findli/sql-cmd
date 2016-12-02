@@ -93,7 +93,7 @@ header {
     margin: 15px 0px 0px 15px;
 }
 
-.header__user--photo .fa-user .fa-industry {
+.header__user--photo .fa-user {
     color: white;
     margin: 7px 0 0 10px;
     font-size: 25px;
@@ -714,21 +714,21 @@ Modal window deal
 }
 
 /*th, td {*/
-/*border: 2px solid #000;*/
-/*padding: 2px 0 2px 0;*/
+    /*border: 2px solid #000;*/
+    /*padding: 2px 0 2px 0;*/
 /*}*/
 
 /*th {*/
-/*background: #cccccc;*/
-/*text-align: left;*/
+    /*background: #cccccc;*/
+    /*text-align: left;*/
 /*}*/
 
 /*tr{*/
-/*background: #cccccc;*/
+    /*background: #cccccc;*/
 /*}*/
 
 /*tr:nth-child(2n) {*/
-/*background: #fff;*/
+    /*background: #fff;*/
 /*}*/
 
 .modalDeal .modalBut{

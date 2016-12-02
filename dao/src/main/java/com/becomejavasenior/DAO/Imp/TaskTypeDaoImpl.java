@@ -1,8 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
-
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.TaskTypeDAO;
+import com.becomejavasenior.DAO.TaskTypeDao;
 import com.becomejavasenior.bean.TaskType;
 import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDAOFactory;
@@ -11,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskTypeDAOImpl extends AbstractDAOImpl<TaskType> implements TaskTypeDAO<TaskType> {
+public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTypeDao<TaskType> {
 
     @Override
     public String getCreateQuery(){
@@ -59,6 +58,11 @@ public class TaskTypeDAOImpl extends AbstractDAOImpl<TaskType> implements TaskTy
         } catch (SQLException e){
             throw new DaoException("Can't update statement for TaskType", e);
         }
+    }
+
+    @Override
+    public TaskType getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
     }
 
     @Override

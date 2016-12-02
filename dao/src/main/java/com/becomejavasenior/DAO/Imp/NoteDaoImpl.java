@@ -1,7 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.NoteDAO;
+import com.becomejavasenior.DAO.NoteDao;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Note;
 import com.becomejavasenior.bean.User;
@@ -12,7 +12,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoteDAOImpl extends AbstractDAOImpl<Note> implements NoteDAO<Note> {
+public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> {
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Note note) throws DaoException {
@@ -65,6 +65,11 @@ public class NoteDAOImpl extends AbstractDAOImpl<Note> implements NoteDAO<Note> 
     String getUpdateQuery() {
         return DataBaseUtil.getQuery("UPDATE crm_pallas.note SET note_text = ?, created_by_user_id = ?, " +
                 "creation_date_time = ? WHERE id = ?");
+    }
+
+    @Override
+    public Note getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
     }
 
     @Override

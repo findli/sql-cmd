@@ -5,6 +5,7 @@ import com.becomejavasenior.bean.Contact;
 
 import java.util.List;
 
+
 public interface ContactService {
 
     Contact create(Contact t) throws DaoException;

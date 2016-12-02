@@ -1,8 +1,8 @@
 package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.Imp.UserDAOImpl;
-import com.becomejavasenior.DAO.UserDAO;
+import com.becomejavasenior.DAO.Imp.UserDaoImpl;
+import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.service.UserService;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    private UserDAO<User> userDao = new UserDAOImpl();
+    private UserDao<User> userDao = new UserDaoImpl();
 
     @Override
     public User create(User user) throws DaoException {
@@ -35,5 +35,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(User user) throws DaoException {
         userDao.update(user);
+    }
+
+    @Override
+    public User getByName(String str) throws DaoException, ClassNotFoundException {
+        return userDao.getByName(str);
     }
 }

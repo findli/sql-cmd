@@ -1,6 +1,7 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.*;
+import com.becomejavasenior.DAO.StageDao;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.exceptions.DatabaseException;
@@ -10,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> {
+public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> {
 
     private static final String SELECT_DEALS_FOR_LIST = "SELECT\n" +
             "  crm_pallas.deal.id AS dealId,\n" +
@@ -24,7 +25,7 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
             "FROM crm_pallas.deal\n" +
             "  JOIN crm_pallas.stage ON crm_pallas.deal.stage_id = crm_pallas.stage.id\n" +
             "  JOIN crm_pallas.contact ON crm_pallas.deal.primary_contact_id = crm_pallas.contact.id\n" +
-            "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id\n";
+            "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id ORDER BY dealId DESC\n";
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Deal deal) throws DaoException {
@@ -53,8 +54,9 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
             preparedStatement.setInt(4, deal.getStage().getId());
             preparedStatement.setInt(5, deal.getResponsibleUser().getId());
             preparedStatement.setBoolean(6, deal.isDeleted());
-            preparedStatement.setInt(7, deal.getPrimaryContact().getId());
-            preparedStatement.setTimestamp(8, new Timestamp(deal.getCreateDate().getTime()));
+            preparedStatement.setInt(7, deal.getId());
+//            preparedStatement.setInt(7, deal.getPrimaryContact().getId());
+//            preparedStatement.setTimestamp(8, new Timestamp(deal.getCreateDate().getTime()));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,11 +65,16 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
     }
 
     @Override
+    public Deal getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
     Deal getEntity(ResultSet resultSet) throws DaoException {
         Deal deal = new Deal();
-        CompanyDAO<Company> company = new CompanyDAOImpl();
-        StageDAO<Stage> stage = new StageDAOImpl();
-        UserDAO<User> user = new UserDAOImpl();
+        CompanyDao<Company> company = new CompanyDaoImpl();
+        StageDao<Stage> stage = new StageDaoImpl();
+        UserDao<User> user = new UserDaoImpl();
         try {
             deal.setId(resultSet.getInt("id"));
             deal.setCompany(company.getById(resultSet.getInt("company_id")));
@@ -104,8 +111,8 @@ public class DealDAOImpl extends AbstractDAOImpl<Deal> implements DealDAO<Deal> 
 
     @Override
     String getUpdateQuery() {
-        return DataBaseUtil.getQuery("UPDATE crm_pallas.deal SET company_id = ?, stage_id = ?, " +
-                "responsible_user_id = ?, title = ?, budget =?, is_deleted = ? WHERE id = ?");
+        return DataBaseUtil.getQuery("UPDATE crm_pallas.deal SET title = ?, company_id = ?, " +
+                "budget = ?, stage_id = ?, responsible_user_id =?, is_deleted = ? WHERE id = ?");
     }
 
     @Override

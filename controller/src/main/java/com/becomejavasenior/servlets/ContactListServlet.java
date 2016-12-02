@@ -17,31 +17,32 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "contactlistservlet", urlPatterns = "/contact")
-public class ContactListServlet extends HttpServlet{
-
+@WebServlet(name = "contactListServlet", urlPatterns = "/contact")
+public class ContactListServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ContactService contactService = new ContactServiceImpl();
         UserService userService = new UserServiceImpl();
 
+        HttpSession session = request.getSession();
         List<Contact> contactList = null;
         List<User> users = null;
-        HttpSession session = req.getSession();
 
         try {
             contactList = contactService.getAll();
             users = userService.getAll();
         } catch (DaoException e) {
-
-        } catch (ClassNotFoundException e){
-
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
-        session.setAttribute("contactList", contactList);
         session.setAttribute("users", users);
-        resp.sendRedirect("/pages/contact_list.jsp");
+        session.setAttribute("contactList", contactList);
+
+        response.sendRedirect("/pages/contact.jsp");
+
     }
 
     @Override

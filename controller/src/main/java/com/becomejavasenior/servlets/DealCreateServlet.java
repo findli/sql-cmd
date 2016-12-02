@@ -6,6 +6,7 @@ import com.becomejavasenior.service.CompanyService;
 import com.becomejavasenior.service.ContactService;
 import com.becomejavasenior.service.DealService;
 import com.becomejavasenior.service.impl.CompanyServiceImpl;
+import com.becomejavasenior.service.impl.ContactServiceImpl;
 import com.becomejavasenior.service.impl.DealServiceImpl;
 
 import javax.servlet.ServletException;
@@ -29,19 +30,20 @@ public class DealCreateServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        CompanyService companyService = new CompanyServiceImpl();
+        ContactService contactService = new ContactServiceImpl();
 
-        List<Company> companyList = null;
+        List<Contact> contactList = null;
 
         try {
-            companyList = companyService.getAll();
+
+            contactList = contactService.getAll();
         } catch (DaoException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        session.setAttribute("companyList", companyList);
+        session.setAttribute("contactList", contactList);
         request.getRequestDispatcher("/pages/deal_add.jsp").forward(request, response);
 
     }

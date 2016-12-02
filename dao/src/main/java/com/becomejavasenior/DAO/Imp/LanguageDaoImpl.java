@@ -2,15 +2,14 @@ package com.becomejavasenior.DAO.Imp;
 
 
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.LanguageDAO;
+import com.becomejavasenior.DAO.LanguageDao;
 import com.becomejavasenior.bean.Language;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class LanguageDAOImpl extends AbstractDAOImpl<Language> implements LanguageDAO<Language> {
+public class LanguageDaoImpl extends AbstractDaoImpl<Language> implements LanguageDao<Language> {
 
     @Override
     public String getCreateQuery() {
@@ -63,7 +62,12 @@ public class LanguageDAOImpl extends AbstractDAOImpl<Language> implements Langua
     }
 
     @Override
-    public Language getEntity(ResultSet resultSet) throws DaoException {
+    public Language getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public Language getEntity(ResultSet resultSet) throws DaoException{
         Language language = new Language();
         try {
             language.setId(resultSet.getInt("id"));

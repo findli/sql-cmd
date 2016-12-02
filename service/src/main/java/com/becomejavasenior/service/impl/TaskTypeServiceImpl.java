@@ -1,8 +1,8 @@
 package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.Imp.TaskTypeDAOImpl;
-import com.becomejavasenior.DAO.TaskTypeDAO;
+import com.becomejavasenior.DAO.Imp.TaskTypeDaoImpl;
+import com.becomejavasenior.DAO.TaskTypeDao;
 import com.becomejavasenior.bean.TaskType;
 import com.becomejavasenior.service.TaskTypeService;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TaskTypeServiceImpl implements TaskTypeService {
 
-    private TaskTypeDAO<TaskType> taskTypeDao = new TaskTypeDAOImpl();
+    private TaskTypeDao<TaskType> taskTypeDao = new TaskTypeDaoImpl();
 
     @Override
     public TaskType create(TaskType taskType) throws DaoException {

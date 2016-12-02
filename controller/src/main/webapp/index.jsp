@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-    <title>Company List</title>
+    <title>Home</title>
 </head>
 <body>
 <header>
@@ -20,7 +20,7 @@
             <p>Logo</p>
         </div>
         <div class="header__title">
-            <h3>Company List</h3>
+            <h3>Home</h3>
             <div class="header__user">
                 <div class="header__user--photo">
                     <i class="fa fa-user"></i>

@@ -52,82 +52,82 @@
             <div class="forms">
 
                 <!--Add contact-->
-                <div class="forms--nCompany">
-                    <form class="form-horizontal">
-                        <h2>Contact</h2>
+                    <div class="forms--nCompany">
+                        <form class="form-horizontal">
+                            <h2>Contact</h2>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Name </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Name">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Name </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" placeholder="Name">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Tags </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Tags </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" placeholder="Tag">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <a href="#">Responsible</a><br>
-                        </div>
-
-                        <div class="form-group">
-                            <select class="col-sm-3 form-control">
-                                <option>Work</option>
-                                <option>Mobile</option>
-                                <option>Home</option>
-                            </select>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" name="formPhone" placeholder="Number">
+                            <div class="form-group">
+                                <a href="#">Responsible</a><br>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Email </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Email">
+                            <div class="form-group">
+                                <select class="col-sm-3 form-control">
+                                    <option>Work</option>
+                                    <option>Mobile</option>
+                                    <option>Home</option>
+                                </select>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" name="formPhone" placeholder="Number">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Skype </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Skype">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Email </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" placeholder="Email">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Address </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Address">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Skype </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" placeholder="Skype">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Comment </label>
-                            <div class="col-sm-9">
-                                <textarea class="form-control" placeholder="Message"></textarea>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Address </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" placeholder="Address">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Add files </label>
-                            <div class="col-sm-9">
-                                <input type="file" type="Search for a file to add">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Comment </label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" placeholder="Message"></textarea>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <input class="formAddBut" type="button" value="Применить">
-                                <input class="formAddBut" type="button" value="Очистить">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Add files </label>
+                                <div class="col-sm-9">
+                                    <input type="file" title="Search for a file to add">
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <input class="formAddBut" type="button" value="Применить">
+                                    <input class="formAddBut" type="button" value="Очистить">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
 
                 <!--Add company-->
                 <div class="forms--nCompany">
@@ -314,9 +314,10 @@
 
 </body>
 
-<script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
 </html>
