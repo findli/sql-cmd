@@ -17,7 +17,7 @@ $(function(){
                 newStage : newStage,
                 action : 'editDealDeal'
             },
-            url: '/dealEdit2',
+            url: '/dealEdit',
             success: function(result) {
                 // alert(result);
                 $('#result1').html(result);
@@ -31,6 +31,12 @@ $(function(){
         var newPhone = $('#companyNewPhone').val();
         var newEmail = $('#companyNewEmail').val();
         var newWeb = $('#companyNewWeb').val();
+        var country = $('#AddressCountry').val();
+        var city = $('#AddressCity').val();
+        var street = $('#AddressStreet').val();
+        var zipcode = $('#AddressZipcode').val();
+        var building = $('#AddressBuilding').val();
+        var room = $('#AddressRoom').val();
         $.ajax({
             type:'POST',
             data: {
@@ -39,16 +45,22 @@ $(function(){
                 newPhone : newPhone,
                 newEmail : newEmail,
                 newWeb : newWeb,
+                country : country,
+                city : city,
+                street : street,
+                zipcode : zipcode,
+                building : building,
+                room : room,
                 action: 'editDealCompany'
             },
-            url: '/dealEdit2',
+            url: '/dealEdit',
             success: function(result) {
                 $('#result2').html(result);
             }
         });
     });
 });
-
+/*
 function add_contact() {
     var msg = $('#add_contact_form').serialize();
     alert(msg);
@@ -62,6 +74,7 @@ function add_contact() {
     });
 
 }
+*/
 
 function funcError(xhr, str) {
     alert('Возникла ошибка: ' + xhr.responseCode);

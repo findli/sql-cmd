@@ -11,29 +11,6 @@
     <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
-
-    <%--<script type="text/javascript">--%>
-        <%--$(function(){--%>
-            <%--$('#bttNewDeal').click(function(){--%>
-
-                <%--var newDeal = $('#dealNewName').val();--%>
-                <%--$.ajax({--%>
-                    <%--type: 'POST',--%>
-                    <%--data: {--%>
-                        <%--newDeal : newDeal,--%>
-                        <%--action : 'editDealDeal',--%>
-                        <%--idDeal : ${idDeal}--%>
-                    <%--},--%>
-                    <%--url: '/dealEdit2',--%>
-                    <%--success: function(result) {--%>
-                        <%--$('#result1').html(result);--%>
-                    <%--}--%>
-                <%--})--%>
-            <%--});--%>
-        <%--});--%>
-    <%--</script>--%>
-
-
     <title>Edit deal</title>
 </head>
 <body>
@@ -70,8 +47,6 @@
 
         <div class="wrapper__aboutCompany">
             <div class="forms">
-                <%--<form class="form-horizontal" role="form" method="post" action="/dealEdit" id="dealForm2"--%>
-                      <%--enctype="multipart/form-data">--%>
 
                     <!--Add deal-->
                     <div class="forms--nDeal">
@@ -298,8 +273,10 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Address </label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" value="${company.getAddress()}"
-                                              placeholder="хз пока не получилось" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>
+                                    <%--<textarea class="form-control" value="${company.getAddress()}"--%>
+                                              <%--placeholder="хз пока не получилось" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>--%>
+                                        <input onclick="location.href='#modalAddAddress'" class="formAddBut" type="button"
+                                               value="Edit contact">
                                 </div>
                             </div>
 
@@ -310,10 +287,34 @@
                                 </div>
                             </div>
                             <span id="result2" style="color:red"></span>
+                            <!--Modal window contact-->
+                            <div id="modalAddAddress" class="modalDialog">
+                                <%--<form id="add_address_form">--%>
+                                <div>
+                                    <header>
+                                        <div class="wrapper__modal1Title">
+                                            <div><i class="fa fa-user"></i></div>
+                                            <h3>Edit address</h3>
+                                        </div>
+                                    </header>
+                                    <p>Country <input type="text" class="modalInput" id="AddressCountry" value="${address.getCountry()}"></p>
+                                    <p>City <input  type="text" class="modalInput" id="AddressCity" value="${address.getCity()}"></p>
+                                    <p>Street <input type="text" class="modalInput" id="AddressStreet" value="${address.getStreet()}"></p>
+                                    <p>zip code <input type="text" class="modalInput" id="AddressZipcode" value="${address.getZipcode()}"></p>
+                                    <p>Building number <input type="text" class="modalInput" id="AddressBuilding" value="${address.getBuildNum()}"></p>
+                                    <p>office room <input type="text" class="modalInput" id="AddressRoom" value="${address.getOfficeRoom()}"></p>
+                                    <%--<input class="modalBut" type="button" value="Save contact" onclick="add_contact();">--%>
+                                    <input class="modalBut" onclick="location.href='#close'" type="button"
+                                           value="Save">
+                                </div>
+                                <%--</form>--%>
+                            </div>
+                            <!--End-->
 
                         </form>
 
                     </div>
+
 
                         <!--Add task-->
                     <div class="forms--nDeal--Task">
@@ -352,8 +353,6 @@
                         </form>
 
                     </div>
-
-                <%--</form>--%>
 
             </div>
         </div>
