@@ -290,7 +290,7 @@
                             <!--Modal window contact-->
                             <div id="modalAddAddress" class="modalDialog">
                                 <%--<form id="add_address_form">--%>
-                                <div>
+                                <div style="height: 300px;">
                                     <header>
                                         <div class="wrapper__modal1Title">
                                             <div><i class="fa fa-industry"></i></div>
