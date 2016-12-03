@@ -4,6 +4,7 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
 import com.becomejavasenior.service.impl.*;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +20,9 @@ import java.util.List;
 
 @WebServlet(name = "dealEditServlet", urlPatterns = "/dealEdit")
 public class DealEditServlet extends HttpServlet {
+
+    public static Logger log = Logger.getLogger(DealEditServlet.class);
+
     DealService dealService = new DealServiceImpl();
     CompanyService companyService = new CompanyServiceImpl();
     AddressService addressService = new AddressServiceImpl();
@@ -104,6 +108,8 @@ public class DealEditServlet extends HttpServlet {
         }
 
         if (action.equals("editDealDeal")) {
+
+            log.trace("editDealDeal");
 
             str = getNameDealFromRequest(request) + "; \n";
             try {
