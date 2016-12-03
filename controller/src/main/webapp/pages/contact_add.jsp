@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <%--  <script title="text/javascript" src="../js/jquery-1.11.1.min.js"></script>--%>
+    <%--  <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>--%>
     <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
@@ -59,14 +59,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Name">
+                                <input class="form-control" type="text" placeholder="Name">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tags </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Tag">
+                                <input class="form-control" type="text" placeholder="Tag">
                             </div>
                         </div>
 
@@ -81,28 +81,28 @@
                                 <option>Home</option>
                             </select>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" name="formPhone" placeholder="Number">
+                                <input class="form-control" type="text" name="formPhone" placeholder="Number">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Email </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Email">
+                                <input class="form-control" type="text" placeholder="Email">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Skype </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Skype">
+                                <input class="form-control" type="text" placeholder="Skype">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Address </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Address">
+                                <input class="form-control" type="text" placeholder="Address">
                             </div>
                         </div>
 
@@ -116,14 +116,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Add files </label>
                             <div class="col-sm-9">
-                                <input title="file" title="Search for a file to add">
+                                <input type="file" type="Search for a file to add">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-10">
-                                <input class="formAddBut" title="button" value="Применить">
-                                <input class="formAddBut" title="button" value="Очистить">
+                                <input class="formAddBut" type="button" value="Применить">
+                                <input class="formAddBut" type="button" value="Очистить">
                             </div>
                         </div>
                     </form>
@@ -137,14 +137,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Name company">
+                                <input class="form-control" type="text" placeholder="Name company">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tags </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Tag">
+                                <input class="form-control" type="text" placeholder="Tag">
                             </div>
                         </div>
 
@@ -155,35 +155,35 @@
                                 <option>Home</option>
                             </select>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" name="formPhone" placeholder="Number">
+                                <input class="form-control" type="text" name="formPhone" placeholder="Number">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Email </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Email">
+                                <input class="form-control" type="text" placeholder="Email">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Web </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Url">
+                                <input class="form-control" type="text" placeholder="Url">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Address </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Address">
+                                <input class="form-control" type="text" placeholder="Address">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-10">
-                                <input class="formAddBut" title="button" value="Применить">
-                                <input class="formAddBut" title="button" value="Очистить">
+                                <input class="formAddBut" type="button" value="Применить">
+                                <input class="formAddBut" type="button" value="Очистить">
                             </div>
                         </div>
                     </form>
@@ -212,8 +212,8 @@
                             <label class="col-sm-4 control-label">Date and time </label>
                             <div class="col-sm-8">
                                 <div class="input-group date" id="datetimepicker">
-                                    <input title="text" class="form-control" />
-                                        <span class="input-group-addon">
+                                    <input type="text" class="form-control" />
+                                    <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
                                         </span>
                                 </div>
@@ -235,7 +235,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Task title </label>
+                            <label class="col-sm-3 control-label">Task type </label>
                             <div class="col-sm-9">
                                 <select class="form-control">
                                     <option>Follow-up</option>
@@ -254,8 +254,8 @@
 
                         <div class="form-group">
                             <div class="col-sm-10">
-                                <input class="formAddBut" title="button" value="Применить">
-                                <input class="formAddBut" title="button" value="Очистить">
+                                <input class="formAddBut" type="button" value="Применить">
+                                <input class="formAddBut" type="button" value="Очистить">
                             </div>
                         </div>
 
@@ -270,7 +270,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Name deal">
+                                <input class="form-control" type="text" placeholder="Name deal">
                             </div>
                         </div>
 
@@ -288,14 +288,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Budget </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="$">
+                                <input class="form-control" type="text" placeholder="$">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-10">
-                                <input class="formAddBut" title="button" value="Применить">
-                                <input class="formAddBut" title="button" value="Очистить">
+                                <input class="formAddBut" type="button" value="Применить">
+                                <input class="formAddBut" type="button" value="Очистить">
                             </div>
                         </div>
                     </form>
@@ -306,7 +306,7 @@
         </div>
     </div>
 </div>
-<script title="text/javascript">
+<script type="text/javascript">
     $(function () {
         $('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
     });
@@ -315,8 +315,8 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
-<script title="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script title="text/javascript" src="../js/bootstrap.min.js"></script>
-<script title="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
-<script title="text/javascript" src="../js/script.js"></script>
+<script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
 </html>

@@ -6,7 +6,7 @@ import java.util.Objects;
 public class TaskType implements Serializable {
 
     private int id;
-    private String title;
+    private String type;
 
     public TaskType() {
     }
@@ -19,12 +19,12 @@ public class TaskType implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getType() {
+        return type;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
@@ -33,19 +33,19 @@ public class TaskType implements Serializable {
         if (!(o instanceof TaskType)) return false;
         TaskType taskType = (TaskType) o;
         return id == taskType.id &&
-                Objects.equals(title, taskType.title);
+                Objects.equals(type, taskType.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title);
+        return Objects.hash(id, type);
     }
 
     @Override
     public String toString() {
         return "TaskType{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 }

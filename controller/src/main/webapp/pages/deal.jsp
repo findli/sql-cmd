@@ -13,12 +13,6 @@
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
 
-
-    <%--<script type="text/javascript" src="../js/bootstrap.js"></script>--%>
-    <%--<link rel="stylesheet" href="../js/script.js">--%>
-    <%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>--%>
-
-
     <title>Deal</title>
 </head>
 <body>
@@ -117,7 +111,7 @@
                             </div>
                         </div>
 
-                      <%--  <div class="form-group">
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">Task type</label>
                             <div class="col-sm-9">
                                 <select class="form-control">
@@ -126,7 +120,7 @@
                                     </c:forEach>
                                 </select>
                             </div>
-                        </div>--%>
+                        </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tags </label>
@@ -193,28 +187,28 @@
 
 <%--});--%>
 <%--</script>--%>
-<script type="text/javascript">
-    $(function () {
-        //Инициализация datetimepicker8 и datetimepicker9
-        $("#datetimepicker8").datetimepicker();
-        $("#datetimepicker9").datetimepicker();
-        //При изменении даты в 8 datetimepicker, она устанавливается как минимальная для 9 datetimepicker
-        $("#datetimepicker8").on("dp.change",function (e) {
-            $("#datetimepicker9").data("DateTimePicker").setMinDate(e.date);
-        });
-        //При изменении даты в 9 datetimepicker, она устанавливается как максимальная для 8 datetimepicker
-        $("#datetimepicker9").on("dp.change",function (e) {
-            $("#datetimepicker8").data("DateTimePicker").setMaxDate(e.date);
-        });
-    });
-</script>
+<%--<script type="text/javascript">--%>
+<%--$(function () {--%>
+<%--//Инициализация datetimepicker8 и datetimepicker9--%>
+<%--$("#datetimepicker8").datetimepicker();--%>
+<%--$("#datetimepicker9").datetimepicker();--%>
+<%--//При изменении даты в 8 datetimepicker, она устанавливается как минимальная для 9 datetimepicker--%>
+<%--$("#datetimepicker8").on("dp.change",function (e) {--%>
+<%--$("#datetimepicker9").data("DateTimePicker").setMinDate(e.date);--%>
+<%--});--%>
+<%--//При изменении даты в 9 datetimepicker, она устанавливается как максимальная для 8 datetimepicker--%>
+<%--$("#datetimepicker9").on("dp.change",function (e) {--%>
+<%--$("#datetimepicker8").data("DateTimePicker").setMaxDate(e.date);--%>
+<%--});--%>
+<%--});--%>
+<%--</script>--%>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>

@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-    <script title="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-    <script title="text/javascript" src="../js/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
     <title>Contact</title>
 </head>
 <body>
@@ -54,16 +54,16 @@
                     <form class="form-horizontal">
                         <h2>Фильтры</h2><br>
                         <div class="radio">
-                            <label><input title="radio" name="optradio" value="0" checked> Полный список контактов</label>
+                            <label><input type="radio" name="optradio" value="0" checked> Полный список контактов</label>
                         </div>
                         <div class="radio">
-                            <label><input title="radio" name="optradio" value="1"> Контакты без задач</label>
+                            <label><input type="radio" name="optradio" value="1"> Контакты без задач</label>
                         </div>
                         <div class="radio">
-                            <label><input title="radio" name="optradio" value="2"> Контакты с просроченными задачами</label>
+                            <label><input type="radio" name="optradio" value="2"> Контакты с просроченными задачами</label>
                         </div>
                         <div class="radio">
-                            <label><input title="radio" name="optradio" value="3"> Удаленные</label>
+                            <label><input type="radio" name="optradio" value="3"> Удаленные</label>
                         </div>
                         <!-- </div> -->
                         <hr>
@@ -82,21 +82,21 @@
                         </div>
 
                         <div class="form-group">
-                            <input class="actionBut" title="button" value="Созданные">
-                            <input class="actionBut" title="button" value="Изменённые">
+                            <input class="actionBut" type="button" value="Созданные">
+                            <input class="actionBut" type="button" value="Изменённые">
                         </div>
 
                         <hr>
                         <label>Этапы:</label>
                         <div class="checkbox">
-                            <label><input title="checkbox" value="check1">Без сделок</label>
-                            <label><input title="checkbox" value="check2">Без открытых сделок</label>
-                            <label><input title="checkbox" value="check3">Первичный контакт</label>
-                            <label><input title="checkbox" value="check4">Переговоры</label>
-                            <label><input title="checkbox" value="check5">Принимают решение</label>
-                            <label><input title="checkbox" value="check6">Согласование договора</label>
-                            <label><input title="checkbox" value="check7">Успешно реализован</label>
-                            <label><input title="checkbox" value="check8">Закрыто и не реализовано</label>
+                            <label><input type="checkbox" value="check1">Без сделок</label>
+                            <label><input type="checkbox" value="check2">Без открытых сделок</label>
+                            <label><input type="checkbox" value="check3">Первичный контакт</label>
+                            <label><input type="checkbox" value="check4">Переговоры</label>
+                            <label><input type="checkbox" value="check5">Принимают решение</label>
+                            <label><input type="checkbox" value="check6">Согласование договора</label>
+                            <label><input type="checkbox" value="check7">Успешно реализован</label>
+                            <label><input type="checkbox" value="check8">Закрыто и не реализовано</label>
                         </div>
                         <hr>
                         <div class="form-group">
@@ -133,8 +133,8 @@
                             </select>
                         </div>
                         <hr>
-                        <input class="formAddBut" title="button" value="Применить">
-                        <input class="formAddBut" title="button" value="Очистить">
+                        <input class="formAddBut" type="button" value="Применить">
+                        <input class="formAddBut" type="button" value="Очистить">
 
                     </form>
                 </div>
@@ -224,5 +224,5 @@
 <script src="../js/bootstrap.js"></script>
 </body>
 <!-- <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script> -->
-<script title="text/javascript" src="../js/script.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
 </html>

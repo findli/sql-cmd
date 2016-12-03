@@ -45,7 +45,7 @@ public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTy
     @Override
     public void createStatement(PreparedStatement preparedStatement, TaskType taskType) throws DaoException {
         try {
-            preparedStatement.setString(1, taskType.getTitle());
+            preparedStatement.setString(1, taskType.getType());
         } catch (SQLException e){
             throw new DaoException("Can't create statement for Task", e);
         }
@@ -54,7 +54,7 @@ public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTy
     @Override
     public void updateStatement(PreparedStatement preparedStatement, TaskType taskType) throws DaoException {
         try {
-            preparedStatement.setString(1, taskType.getTitle());
+            preparedStatement.setString(1, taskType.getType());
         } catch (SQLException e){
             throw new DaoException("Can't update statement for TaskType", e);
         }
@@ -70,7 +70,7 @@ public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTy
         TaskType taskType = new TaskType();
         try {
             taskType.setId(resultSet.getInt("id"));
-            taskType.setTitle(resultSet.getString("title"));
+            taskType.setType(resultSet.getString("title"));
 
         } catch (SQLException e){
             throw new DaoException("Can't get entity from Company", e);
@@ -89,7 +89,7 @@ public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTy
             while (resultSet.next()) {
                 taskType = new TaskType();
                 taskType.setId(resultSet.getInt("id"));
-                taskType.setTitle(resultSet.getString("title"));
+                taskType.setType(resultSet.getString("title"));
 
                 taskTypes.add(taskType);
             }

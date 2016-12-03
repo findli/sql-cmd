@@ -53,25 +53,25 @@
                         <h2>Фильтры</h2><br>
 
                         <div class="radio">
-                            <label><input title="radio" name="optradio2" value="0" checked> Открытые сделки</label>
+                            <label><input type="radio" name="optradio2" value="0" checked> Открытые сделки</label>
                         </div>
                         <div class="radio">
-                            <label><input title="radio" name="optradio2" value="1"> Только мои сделки</label>
+                            <label><input type="radio" name="optradio2" value="1"> Только мои сделки</label>
                         </div>
                         <div class="radio">
-                            <label><input title="radio" name="optradio2" value="2"> Успешно завершённые</label>
+                            <label><input type="radio" name="optradio2" value="2"> Успешно завершённые</label>
                         </div>
                         <div class="radio">
-                            <label><input title="radio" name="optradio2" value="3"> Не реализованные</label>
+                            <label><input type="radio" name="optradio2" value="3"> Не реализованные</label>
                         </div>
                         <div class="radio">
-                            <label><input title="radio" name="optradio2" value="4"> Сделки без задач</label>
+                            <label><input type="radio" name="optradio2" value="4"> Сделки без задач</label>
                         </div>
                         <div class="radio">
-                            <label><input title="radio" name="optradio2" value="5"> С просроченными задачами</label>
+                            <label><input type="radio" name="optradio2" value="5"> С просроченными задачами</label>
                         </div>
                         <div class="radio">
-                            <label><input title="radio" name="optradio2" value="6"> Удалённые</label>
+                            <label><input type="radio" name="optradio2" value="6"> Удалённые</label>
                         </div>
 
                         <hr>
@@ -80,8 +80,8 @@
                             <label class="col-sm-3 control-label">От: </label>
                             <div class="col-sm-9">
                                 <div class="input-group date" id="datetimepicker1">
-                                    <input title="text" class="form-control" />
-                                        <span class="input-group-addon">
+                                    <input type="text" class="form-control" />
+                                    <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
                                         </span>
                                 </div>
@@ -92,8 +92,8 @@
                             <label class="col-sm-3 control-label">До: </label>
                             <div class="col-sm-9">
                                 <div class="input-group date" id="datetimepicker2">
-                                    <input title="text" class="form-control" />
-                                        <span class="input-group-addon">
+                                    <input type="text" class="form-control" />
+                                    <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
                                         </span>
                                 </div>
@@ -112,11 +112,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Task title</label>
+                            <label class="col-sm-3 control-label">Task type</label>
                             <div class="col-sm-9">
                                 <select class="form-control">
                                     <c:forEach var="taskType" items="${taskTypeList}">
-                                        <option><c:out value="${taskType.title}"/></option>
+                                        <option><c:out value="${taskType.type}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -125,13 +125,13 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tags </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Tag">
+                                <input class="form-control" type="text" placeholder="Tag">
                             </div>
                         </div>
                         <br>
                         <hr>
-                        <input class="formAddBut" title="button" value="Применить">
-                        <input class="formAddBut" title="button" value="Очистить">
+                        <input class="formAddBut" type="button" value="Применить">
+                        <input class="formAddBut" type="button" value="Очистить">
                     </form>
                 </div>
 
@@ -193,7 +193,7 @@
         </div>
     </div>
 </div>
-<script title="text/javascript">
+<script type="text/javascript">
     $(function () {
         $('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
         $('#datetimepicker2').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
@@ -207,10 +207,10 @@
 </body>
 
 <script src="../js/bootstrap.js"></script>
-<%--<script title="text/javascript" src="../js/jquery-1.11.1.min.js"></script>--%>
-<script title="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script title="text/javascript" src="../js/bootstrap.min.js"></script>
-<script title="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+<%--<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>--%>
+<script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
 <%--<!-- <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script> -->--%>
-<script title="text/javascript" src="../js/script.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
 </html>

@@ -47,85 +47,76 @@
 
         <div class="wrapper__aboutCompany">
             <div class="forms">
-                <form class="form-horizontal" role="form" method="post" action="/dealEdit" id="dealForm2"
-                      enctype="multipart/form-data">
 
-                    <!--Add deal-->
-                    <div class="forms--nDeal">
-                        <h2>Edit deal</h2><br>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Name </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" title="text" value="${deal.getTitle()}" id="dealNewName" name="dealNewName">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Tag </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Tag" id="dealTag" name="dealTag">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Responsible </label>
-                            <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
-                                <c:forEach var="user" items="${users}">
-                                    <option><c:out value="${user.lName}"/></option>
-                                </c:forEach>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Budget </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" title="text" value="${deal.budget}" id="dealBudget" name="dealBudget">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Stage </label>
-                            <select class="col-sm-9 form-control" id="stageDeal" name="stageDeal">
-                                <c:forEach var="stage" items="${stages}">
-                                    <option><c:out value="${stage.title}"/></option>
-                                </c:forEach>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <%--<input class="formAddBut" title="button" value="Применить">--%>
-                                <%--<input class="formAddBut" title="button" value="Очистить">--%>
-                                <button>Применить</button>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!--Edit contact-->
-                    <div class="forms--nDeal">
-                        <h2>Edit contact</h2><br>
+                <!--Add deal-->
+                <div class="forms--nDeal">
+                    <fieldset>
                         <form class="form-horizontal">
-                            <h2>Edit contact</h2><br>
+                            <h2>Edit deal</h2><br>
 
-                            <!-- Навигация -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="active"><a href="#contact1" aria-controls="contact1" role="tab" data-toggle="tab">Contact 1</a></li>
-                                <li><a href="#contact2" aria-controls="contact2" role="tab" data-toggle="tab">Contact 2</a></li>
-                            </ul>
+                            <div class="form-group">
+                                <%--<span id="idDeal"></span>--%>
+                                <label class="col-sm-3 control-label">Name </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" value="${deal.getTitle()}" id="dealNewName" name="dealNewName">
 
-                            <!-- Содержимое вкладок -->
-                            <div class="tab-content">
-                                <br>
-                                <div role="tabpanel" class="tab-pane active" id="contact1">
+                                </div>
 
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Name </label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" type="text" placeholder="Name">
-                                        </div>
-                                    </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Tag </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" placeholder="Tag не реализовано" id="dealTag" name="dealTag">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Responsible </label>
+                                <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
+                                    <option>${responsibleUser}</option>
+                                    <c:forEach var="user" items="${users}">
+                                        <option><c:out value="${user.lName}"/></option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Budget </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" value="${deal.budget}" id="dealBudget" name="dealBudget">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Stage </label>
+                                <select class="col-sm-9 form-control" id="stageDeal" name="stageDeal">
+                                    <option>${stageTitle}</option>
+                                    <c:forEach var="stage" items="${stages}">
+                                        <option><c:out value="${stage.title}"/></option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <input type="hidden" id="idDeal" value="${deal.getId()}" />
+                                    <button type="button" class="btn btn-success" id="bttEditDeal">Применить</button>
+                                </div>
+                            </div>
+                            <span id="result1" style="color:red"></span>
+
+                        </form>
+                    </fieldset>
+
+                </div>
+
+                <!--Edit contact-->
+                <div class="forms--nDeal">
+                    <form class="form-horizontal">
+                        <h2>Edit contact</h2><br>
 
                         <!-- Навигация -->
                         <ul class="nav nav-tabs" role="tablist">
@@ -141,21 +132,21 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Name </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" title="text" placeholder="Name">
+                                        <input class="form-control" type="text" placeholder="Name">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Company </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" title="text" placeholder="Company">
+                                        <input class="form-control" type="text" placeholder="Company">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Position </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" title="text" placeholder="Position">
+                                        <input class="form-control" type="text" placeholder="Position">
                                     </div>
                                 </div>
 
@@ -166,21 +157,21 @@
                                         <option>Home</option>
                                     </select>
                                     <div class="col-sm-9">
-                                        <input class="form-control" title="text" name="formPhone" placeholder="Number">
+                                        <input class="form-control" type="text" name="formPhone" placeholder="Number">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Email </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" title="text" placeholder="Email">
+                                        <input class="form-control" type="text" placeholder="Email">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Skype </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" title="text" placeholder="Skype">
+                                        <input class="form-control" type="text" placeholder="Skype">
                                     </div>
                                 </div>
 
@@ -190,21 +181,21 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Name </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" title="text" placeholder="Name">
+                                        <input class="form-control" type="text" placeholder="Name">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Company </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" title="text" placeholder="Company">
+                                        <input class="form-control" type="text" placeholder="Company">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Position </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" title="text" placeholder="Position">
+                                        <input class="form-control" type="text" placeholder="Position">
                                     </div>
                                 </div>
 
@@ -215,87 +206,119 @@
                                         <option>Home</option>
                                     </select>
                                     <div class="col-sm-9">
-                                        <input class="form-control" title="text" name="formPhone" placeholder="Number">
+                                        <input class="form-control" type="text" name="formPhone" placeholder="Number">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Email </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" title="text" placeholder="Email">
+                                        <input class="form-control" type="text" placeholder="Email">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Skype </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" title="text" placeholder="Skype">
+                                        <input class="form-control" type="text" placeholder="Skype">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-10">
-                                    <input class="formAddBut" title="button" value="Добавить">
-                                    <input class="formAddBut" title="button" value="Открепить">
+                                    <input class="formAddBut" type="button" value="Добавить">
+                                    <input class="formAddBut" type="button" value="Открепить">
                                 </div>
                             </div>
 
                         </div>
+                    </form>
 
-                    </div>
-                    <!--End-->
+                </div>
+                <!--End-->
 
-                    <!--Edit company-->
-                    <div class="forms--nDeal">
+                <!--Edit company-->
+                <div class="forms--nDeal">
+                    <form class="form-horizontal">
                         <h2>Edit company</h2><br>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" value="${company.title}" id="editDealCompanyName" name="editDealCompanyName">
+                                <input class="form-control" type="text" value="${company.title}" id="companyNewName" name="companyNewName">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Phone </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Phone" id="editDealCompanyPhone" name="editDealCompanyPhone">
+                                <input class="form-control" type="text" value = "${company.getPhoneNumber()}" placeholder="Phone" id="companyNewPhone" name="companyNewPhone">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">email </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="email" id="editDealCompanyEmail" name="editDealCompanyEmail">
+                                <input class="form-control" type="text" value="${company.getEmail()}" placeholder="email" id="companyNewEmail" name="companyNewEmail">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Web </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Url" id="editDealCompanyWeb" name="editDealCompanyWeb">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Address </label>
-                                <div class="col-sm-9">
-                                    <%--<textarea class="form-control" value="${company.getAddress()}"--%>
-                                              <%--placeholder="хз пока не получилось" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>--%>
-                                        <input onclick="location.href='#modalAddAddress'" class="formAddBut" type="button"
-                                               value="Edit contact">
-                                </div>
+                                <input class="form-control" type="text" value="${company.getWebsite()}" placeholder="Url" id="companyNewWeb" name="companyNewWeb">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Address </label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" placeholder="Address" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>
+                                <%--<textarea class="form-control" value="${company.getAddress()}"--%>
+                                <%--placeholder="хз пока не получилось" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>--%>
+                                <input onclick="location.href='#modalAddAddress'" class="formAddBut" type="button"
+                                       value="Edit address">
                             </div>
                         </div>
 
-                    </div>
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <%--<input type="hidden" id="idDeal" value="${deal.getId()}" />--%>
+                                <button type="button" class="btn btn-success" id="bttEditCompany">Применить</button>
+                            </div>
+                        </div>
+                        <span id="result2" style="color:red"></span>
+                        <!--Modal window contact-->
+                        <div id="modalAddAddress" class="modalDialog">
+                            <%--<form id="add_address_form">--%>
+                            <div style="height: 300px;">
+                                <header>
+                                    <div class="wrapper__modal1Title">
+                                        <div><i class="fa fa-industry"></i></div>
+                                        <h3>Edit address</h3>
+                                    </div>
+                                </header>
+                                <p>Country <input type="text" class="modalInput" id="AddressCountry" value="${address.getCountry()}"></p>
+                                <p>City <input  type="text" class="modalInput" id="AddressCity" value="${address.getCity()}"></p>
+                                <p>Street <input type="text" class="modalInput" id="AddressStreet" value="${address.getStreet()}"></p>
+                                <p>zip code <input type="text" class="modalInput" id="AddressZipcode" value="${address.getZipcode()}"></p>
+                                <p>Building number <input type="text" class="modalInput" id="AddressBuilding" value="${address.getBuildNum()}"></p>
+                                <p>office room <input type="text" class="modalInput" id="AddressRoom" value="${address.getOfficeRoom()}"></p>
+                                <%--<input class="modalBut" type="button" value="Save contact" onclick="add_contact();">--%>
+                                <input class="modalBut" onclick="location.href='#close'" type="button"
+                                       value="Save">
+                            </div>
+                            <%--</form>--%>
+                        </div>
+                        <!--End-->
 
-                    <!--Add task-->
-                    <div class="forms--nDeal--Task">
+                    </form>
+
+                </div>
+
+
+                <!--Add task-->
+                <div class="forms--nDeal--Task">
+                    <form class="form-horizontal">
                         <h2>Edit task</h2><br>
 
                         <!-- Навигация -->
@@ -311,56 +334,7 @@
                             <br>
                             <div role="tabpanel" class="tab-pane active" id="task">
                                 Task
-                            <span id="result2" style="color:red"></span>
-                            <!--Modal window contact-->
-                            <div id="modalAddAddress" class="modalDialog">
-                                <%--<form id="add_address_form">--%>
-                                <div>
-                                    <header>
-                                        <div class="wrapper__modal1Title">
-                                            <div><i class="fa fa-industry"></i></div>
-                                            <h3>Edit address</h3>
-                                        </div>
-                                    </header>
-                                    <p>Country <input type="text" class="modalInput" id="AddressCountry" value="${address.getCountry()}"></p>
-                                    <p>City <input  type="text" class="modalInput" id="AddressCity" value="${address.getCity()}"></p>
-                                    <p>Street <input type="text" class="modalInput" id="AddressStreet" value="${address.getStreet()}"></p>
-                                    <p>zip code <input type="text" class="modalInput" id="AddressZipcode" value="${address.getZipcode()}"></p>
-                                    <p>Building number <input type="text" class="modalInput" id="AddressBuilding" value="${address.getBuildNum()}"></p>
-                                    <p>office room <input type="text" class="modalInput" id="AddressRoom" value="${address.getOfficeRoom()}"></p>
-                                    <%--<input class="modalBut" type="button" value="Save contact" onclick="add_contact();">--%>
-                                    <input class="modalBut" onclick="location.href='#close'" type="button"
-                                           value="Save">
-                                </div>
-                                <%--</form>--%>
-                            </div>
-                            <!--End-->
 
-                        </form>
-
-                    </div>
-
-
-                        <!--Add task-->
-                    <div class="forms--nDeal--Task">
-                        <form class="form-horizontal">
-                            <h2>Edit task</h2><br>
-
-                            <!-- Навигация -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="active"><a href="#task" aria-controls="task" role="tab" data-toggle="tab">Task</a></li>
-                                <li><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">Comment</a></li>
-                                <li><a href="#action" aria-controls="action" role="tab" data-toggle="tab">Action</a></li>
-                                <li><a href="#file" aria-controls="file" role="tab" data-toggle="tab">File</a></li>
-                            </ul>
-
-                            <!-- Содержимое вкладок -->
-                            <div class="tab-content">
-                                <br>
-                                <div role="tabpanel" class="tab-pane active" id="task">
-                                    Task
-
-                                </div>
                             </div>
 
                             <div role="tabpanel" class="tab-pane" id="comment">
@@ -376,14 +350,15 @@
                             </div>
 
                         </div>
+                    </form>
 
-                    </div>
-                </form>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
-<script title="text/javascript">
+<script type="text/javascript">
     $(function () {
         $('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
     });
@@ -391,10 +366,10 @@
 
 </body>
 
-<script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
-<script title="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script title="text/javascript" src="../js/bootstrap.min.js"></script>
-<script title="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
-<script title="text/javascript" src="../js/script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
 
 </html>

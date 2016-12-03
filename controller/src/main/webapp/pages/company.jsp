@@ -84,17 +84,6 @@
 </div>
 
 </body>
-
-<script title="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script title="text/javascript" src="../js/bootstrap.min.js"></script>
-<script title="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
-<%--<script title="text/javascript">--%>
-<%--$(function () {--%>
-<%--$('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
-<%--$('#datetimepicker2').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
-<%--});--%>
-<%--</script>--%>
-<script src="../js/bootstrap.js"></script>
 <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
-<script title="text/javascript" src="../js/script.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
 </html>

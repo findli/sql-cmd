@@ -7,8 +7,8 @@
     <%--<link rel="stylesheet" href="../style/style.css">--%>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <%--<script title="text/javascript" src="../js/jquery-1.11.1.min.js"></script>--%>
-    <!-- <script title="text/javascript" src="js/bootstrap.file-input.js"></script> -->
+    <%--<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>--%>
+    <!-- <script type="text/javascript" src="js/bootstrap.file-input.js"></script> -->
 
     <%--<link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />--%>
     <link rel="stylesheet" href="../style/reset.css">
@@ -60,14 +60,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Name" id="contactName" name="contactName">
+                                <input class="form-control" type="text" placeholder="Name" id="contactName" name="contactName">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tag </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Tag" id="contactTag" name="contactTag">
+                                <input class="form-control" type="text" placeholder="Tag" id="contactTag" name="contactTag">
                             </div>
                         </div>
 
@@ -83,7 +83,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Position </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Position" id="contactPosition" name="contactPosition">
+                                <input class="form-control" type="text" placeholder="Position" id="contactPosition" name="contactPosition">
                             </div>
                         </div>
 
@@ -94,7 +94,7 @@
                                 <option>Home</option>
                             </select>
                             <div class="col-sm-8">
-                                <input class="form-control" title="text" name="formPhone"
+                                <input class="form-control" type="text" name="formPhone"
                                        placeholder="Number">
                             </div>
                         </div>
@@ -102,21 +102,21 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Email </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Email" id="email" name="email">
+                                <input class="form-control" type="text" placeholder="Email" id="email" name="email">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Skype </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Skype" id="skype" name="skype">
+                                <input class="form-control" type="text" placeholder="Skype" id="skype" name="skype">
                             </div>
                         </div>
 
 
                         <div class="form-group">
                             <div class="col-sm-5">
-                                <button title="button" class="btn btn-success">Применить</button>
+                                <button type="button" class="btn btn-success">Применить</button>
                             </div>
                         </div>
 
@@ -149,7 +149,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Name </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" title="text" placeholder="Name company">
+                                        <input class="form-control" type="text" placeholder="Name company">
                                     </div>
                                 </div>
 
@@ -160,21 +160,21 @@
                                         <option>Home</option>
                                     </select>
                                     <div class="col-sm-8">
-                                        <input class="form-control" title="text" name="formPhone" placeholder="Number">
+                                        <input class="form-control" type="text" name="formPhone" placeholder="Number">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Email </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" title="text" placeholder="Email">
+                                        <input class="form-control" type="text" placeholder="Email">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Web </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" title="text" placeholder="Url">
+                                        <input class="form-control" type="text" placeholder="Url">
                                     </div>
                                 </div>
 
@@ -186,8 +186,8 @@
                                 </div>
 
                                 <div class="col-sm-10">
-                                    <button title="button" class="btn btn-success">Применить</button>
-                                    <button title="button" class="btn btn-danger">Отмена</button>
+                                    <button type="button" class="btn btn-success">Применить</button>
+                                    <button type="button" class="btn btn-danger">Отмена</button>
                                 </div>
 
                             </div>
@@ -205,28 +205,28 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Name" id="editDealCompanyName" name="editDealCompanyName">
+                                <input class="form-control" type="text" placeholder="Name" id="editDealCompanyName" name="editDealCompanyName">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Phone </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Tag" id="editDealCompanyPhone" name="editDealCompanyPhone">
+                                <input class="form-control" type="text" placeholder="Tag" id="editDealCompanyPhone" name="editDealCompanyPhone">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">email </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Tag" id="editDealCompanyEmail" name="editDealCompanyEmail">
+                                <input class="form-control" type="text" placeholder="Tag" id="editDealCompanyEmail" name="editDealCompanyEmail">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Web </label>
                             <div class="col-sm-9">
-                                <input class="form-control" title="text" placeholder="Tag" id="editDealCompanyWeb" name="editDealCompanyWeb">
+                                <input class="form-control" type="text" placeholder="Tag" id="editDealCompanyWeb" name="editDealCompanyWeb">
                             </div>
                         </div>
 
@@ -281,15 +281,15 @@
         </div>
     </div>
 </div>
-<%--<script title="text/javascript">--%>
-    <%--$(function () {--%>
-        <%--$('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
-    <%--});--%>
+<%--<script type="text/javascript">--%>
+<%--$(function () {--%>
+<%--$('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
+<%--});--%>
 <%--</script>--%>
 </body>
 <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
-<script title="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script title="text/javascript" src="../js/bootstrap.min.js"></script>
-<script title="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
-<script title="text/javascript" src="../js/script.js"></script>
+<script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
 </html>
