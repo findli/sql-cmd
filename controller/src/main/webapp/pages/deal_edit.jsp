@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
-
-
     <title>Edit deal</title>
 </head>
 <body>
@@ -108,6 +106,26 @@
                     <!--Edit contact-->
                     <div class="forms--nDeal">
                         <h2>Edit contact</h2><br>
+                        <form class="form-horizontal">
+                            <h2>Edit contact</h2><br>
+
+                            <!-- Навигация -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="active"><a href="#contact1" aria-controls="contact1" role="tab" data-toggle="tab">Contact 1</a></li>
+                                <li><a href="#contact2" aria-controls="contact2" role="tab" data-toggle="tab">Contact 2</a></li>
+                            </ul>
+
+                            <!-- Содержимое вкладок -->
+                            <div class="tab-content">
+                                <br>
+                                <div role="tabpanel" class="tab-pane active" id="contact1">
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Name </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Name">
+                                        </div>
+                                    </div>
 
                         <!-- Навигация -->
                         <ul class="nav nav-tabs" role="tablist">
@@ -256,6 +274,14 @@
                             <label class="col-sm-3 control-label">Web </label>
                             <div class="col-sm-9">
                                 <input class="form-control" title="text" placeholder="Url" id="editDealCompanyWeb" name="editDealCompanyWeb">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Address </label>
+                                <div class="col-sm-9">
+                                    <%--<textarea class="form-control" value="${company.getAddress()}"--%>
+                                              <%--placeholder="хз пока не получилось" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>--%>
+                                        <input onclick="location.href='#modalAddAddress'" class="formAddBut" type="button"
+                                               value="Edit contact">
+                                </div>
                             </div>
                         </div>
 
@@ -285,7 +311,56 @@
                             <br>
                             <div role="tabpanel" class="tab-pane active" id="task">
                                 Task
+                            <span id="result2" style="color:red"></span>
+                            <!--Modal window contact-->
+                            <div id="modalAddAddress" class="modalDialog">
+                                <%--<form id="add_address_form">--%>
+                                <div>
+                                    <header>
+                                        <div class="wrapper__modal1Title">
+                                            <div><i class="fa fa-industry"></i></div>
+                                            <h3>Edit address</h3>
+                                        </div>
+                                    </header>
+                                    <p>Country <input type="text" class="modalInput" id="AddressCountry" value="${address.getCountry()}"></p>
+                                    <p>City <input  type="text" class="modalInput" id="AddressCity" value="${address.getCity()}"></p>
+                                    <p>Street <input type="text" class="modalInput" id="AddressStreet" value="${address.getStreet()}"></p>
+                                    <p>zip code <input type="text" class="modalInput" id="AddressZipcode" value="${address.getZipcode()}"></p>
+                                    <p>Building number <input type="text" class="modalInput" id="AddressBuilding" value="${address.getBuildNum()}"></p>
+                                    <p>office room <input type="text" class="modalInput" id="AddressRoom" value="${address.getOfficeRoom()}"></p>
+                                    <%--<input class="modalBut" type="button" value="Save contact" onclick="add_contact();">--%>
+                                    <input class="modalBut" onclick="location.href='#close'" type="button"
+                                           value="Save">
+                                </div>
+                                <%--</form>--%>
+                            </div>
+                            <!--End-->
 
+                        </form>
+
+                    </div>
+
+
+                        <!--Add task-->
+                    <div class="forms--nDeal--Task">
+                        <form class="form-horizontal">
+                            <h2>Edit task</h2><br>
+
+                            <!-- Навигация -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="active"><a href="#task" aria-controls="task" role="tab" data-toggle="tab">Task</a></li>
+                                <li><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">Comment</a></li>
+                                <li><a href="#action" aria-controls="action" role="tab" data-toggle="tab">Action</a></li>
+                                <li><a href="#file" aria-controls="file" role="tab" data-toggle="tab">File</a></li>
+                            </ul>
+
+                            <!-- Содержимое вкладок -->
+                            <div class="tab-content">
+                                <br>
+                                <div role="tabpanel" class="tab-pane active" id="task">
+                                    Task
+
+                                </div>
                             </div>
 
                             <div role="tabpanel" class="tab-pane" id="comment">
@@ -303,9 +378,7 @@
                         </div>
 
                     </div>
-
                 </form>
-
             </div>
         </div>
     </div>

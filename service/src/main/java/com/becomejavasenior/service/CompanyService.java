@@ -9,11 +9,13 @@ public interface CompanyService {
 
     Company create(Company t) throws DaoException;
 
-    void update(Company t) throws DaoException;
+    Company update(Company t) throws DaoException;
 
     List<Company> getAll() throws DaoException, ClassNotFoundException;
 
     Company getById(int id) throws DaoException;
 
     void delete(int id) throws DaoException;
+
+    Company getByName(String str) throws DaoException, ClassNotFoundException;
 }

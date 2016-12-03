@@ -54,7 +54,15 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
 
     @Override
     public User getByName(String str) throws DaoException, ClassNotFoundException {
-        return null;
+        User user = new User();
+        List<User> users = getAll();
+        for (int i = 0; i < users.size(); ++i) {
+            if(users.get(i).getlName().equals(str)) {
+                user = users.get(i);
+                break;
+            }
+        }
+        return user;
     }
 
     @Override

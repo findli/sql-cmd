@@ -24,6 +24,11 @@ public class StageServiceImpl implements StageService {
     }
 
     @Override
+    public Stage getByName(String str) throws DaoException, ClassNotFoundException {
+        return stageDAO.getByName(str);
+    }
+
+    @Override
     public List<Stage> getAll() throws DaoException, ClassNotFoundException {
         return stageDAO.getAll();
     }
