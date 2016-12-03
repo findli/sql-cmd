@@ -13,12 +13,6 @@
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
 
-
-    <%--<script type="text/javascript" src="../js/bootstrap.js"></script>--%>
-    <%--<link rel="stylesheet" href="../js/script.js">--%>
-    <%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>--%>
-
-
     <title>Deal</title>
 </head>
 <body>
