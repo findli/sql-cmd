@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Properties;
@@ -34,6 +33,7 @@ public class DataBaseUtil {
             dataSource.setUsername(username);
             dataSource.setPassword(password);
         } else {
+
             Properties properties = new Properties();
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             InputStream propertiesFile = classLoader.getResourceAsStream(PROPERTIES_FILE);
@@ -47,16 +47,15 @@ public class DataBaseUtil {
             } catch (IOException e) {
                 throw new DatabaseException("Properties file '" + PROPERTIES_FILE + "' can't be loaded.", e);
             }
-
             dataSource = new BasicDataSource();
-            dataSource.setDriverClassName(properties.getProperty("db.driver"));
-            dataSource.setUrl(properties.getProperty("db.url"));
-            dataSource.setUsername(properties.getProperty("db.user"));
-            dataSource.setPassword(properties.getProperty("db.password"));
-            dataSource.setInitialSize(Integer.parseInt(properties.getProperty("db.initsize")));
-            dataSource.setMaxTotal(Integer.parseInt(properties.getProperty("db.maxtotal")));
-            dataSource.setMaxWaitMillis(Long.parseLong(properties.getProperty("db.maxwait")));
-            dataSource.setMaxIdle(Integer.parseInt(properties.getProperty("db.maxidle")));
+            dataSource.setDriverClassName(properties.getProperty("db.driver"));/*("org.postgresql.Driver"); */
+            dataSource.setUrl(properties.getProperty("db.url"));/*("jdbc:postgresql://localhost:5432/crm_pallas");//*/
+            dataSource.setUsername(properties.getProperty("db.user"));/*;/("postgres");/*/
+            dataSource.setPassword(properties.getProperty("db.password"));/*/("root");/*/
+            dataSource.setInitialSize(10);//(Integer.parseInt(properties.getProperty("db.initsize")));
+            dataSource.setMaxTotal(100);//(Integer.parseInt(properties.getProperty("db.maxtotal")));
+            dataSource.setMaxWaitMillis(30000);//(Long.parseLong(properties.getProperty("db.maxwait")));
+            dataSource.setMaxIdle(100);//(Integer.parseInt(properties.getProperty("db.maxidle")));
             dataSource.setDefaultTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             dataSource.setDefaultAutoCommit(true);
         }
