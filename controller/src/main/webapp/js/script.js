@@ -60,39 +60,29 @@ $(function(){
         });
     });
 });
-/*
- function add_contact() {
- var msg = $('#add_contact_form').serialize();
- alert(msg);
- $.ajax({
- type: 'POST',
- //      dataType: "json",
- url: '/addContact',
- data: msg,
- success: funcSuccess,
- error:  funcError
- });
- }
- */
-
-/*function funcError(xhr, str) {
-    alert('Возникла ошибка: ' + xhr.responseCode);
-}
-
-function funcSuccess(data) {
-    $('.forms--nDeal--Contact').html(data);
-}*/
-
+// $(function () {
+//     $('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
+//     $('#datetimepicker2').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
 //
-//$(function () {
-//    $('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
-//});
-//
-//$(function () {
-//    $('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
-//    $('#datetimepicker2').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
-//
-//});
+// });
+$(function () {
+    //Инициализация datetimepicker8 и datetimepicker9
+    $("#datetimepicker8").datetimepicker();
+    $("#datetimepicker9").datetimepicker();
+    //При изменении даты в 8 datetimepicker, она устанавливается как минимальная для 9 datetimepicker
+    $("#datetimepicker8").on("dp.change",function (e) {
+        $("#datetimepicker9").data("DateTimePicker").setMinDate(e.date);
+    });
+    //При изменении даты в 9 datetimepicker, она устанавливается как максимальная для 8 datetimepicker
+    $("#datetimepicker9").on("dp.change",function (e) {
+        $("#datetimepicker8").data("DateTimePicker").setMaxDate(e.date);
+    });
+    $('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
+});
+// $(function () {
+//     $('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
+// });
+
 
 jQuery( function($) {
     $('tbody tr[data-href]').addClass('clickable').click( function() {
@@ -107,8 +97,3 @@ $(function(){
         //alert('idDeal');
     });
 });
-$(function () {
-     $('#datetimepicker8').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
-     $('#datetimepicker9').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
-
- });

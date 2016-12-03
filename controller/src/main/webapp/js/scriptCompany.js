@@ -42,43 +42,24 @@ $(function () {
     })
 });
 
-$(function () {
-    $("#myCalendar-1").ionCalendar({
-        sundayFirst: false,
-        years: "2000-2099",
-        format: "DD.MM.YYYY",
-        onClick: function (date) {
-            /*   console.log(date);*/
-            document.getElementById("hiddenDate").value = date;
-        }
-    });
-});
-
-
-
-$('.container').clockpicker().find('input').change(function () {
-    console.log(this.value);
-});
-
-$('.clockpicker').clockpicker({
-    autoclose: true,
-    donetext: 'Done'
-});
-
-/*console.log($('.action__task note').closest('.cd-timeline-block'));*/
 
 
 /*reset forms*/
 
-$(".cancel").click(function () {
+/*$(".cancel").click(function () {
     $('.modalInput').val("");
     $('.modalTextArea').val("");
+});*/
+
+jQuery( function($) {
+    $('tbody tr[data-href]').addClass('clickable').click( function() {
+        //alert('alert');
+        window.location = $(this).attr('data-href');
+    });
 });
 
 $(function(){
     $('#t_company').on('click', '.rowlink', function(){
-        //alert($(this).find('.item').html());
-        //alert('idDeal');
     });
 });
 
