@@ -9,10 +9,20 @@ public class Note implements Serializable {
 
     private int id;
     private String noteText;
-    private User createtByUserId;
+    private User createdUser;
     private Date dateCreate;
+    private List<File> files;
+    private boolean isDeleted;
 
     public Note() {
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     public int getId() {
@@ -31,12 +41,12 @@ public class Note implements Serializable {
         this.noteText = noteText;
     }
 
-    public User getCreatetByUserId() {
-        return createtByUserId;
+    public User getCreatedUser() {
+        return createdUser;
     }
 
-    public void setCreatetByUserId(User createtByUserId) {
-        this.createtByUserId = createtByUserId;
+    public void setCreatedUser(User createdUser) {
+        this.createdUser = createdUser;
     }
 
     public Date getDateCreate() {
@@ -47,6 +57,13 @@ public class Note implements Serializable {
         this.dateCreate = dateCreate;
     }
 
+    public List<File> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<File> files) {
+        this.files = files;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -57,7 +74,7 @@ public class Note implements Serializable {
 
         if (id != note.id) return false;
         if (noteText != null ? !noteText.equals(note.noteText) : note.noteText != null) return false;
-        if (createtByUserId != null ? !createtByUserId.equals(note.createtByUserId) : note.createtByUserId != null)
+        if (createdUser != null ? !createdUser.equals(note.createdUser) : note.createdUser != null)
             return false;
         return dateCreate != null ? dateCreate.equals(note.dateCreate) : note.dateCreate == null;
 
@@ -67,7 +84,7 @@ public class Note implements Serializable {
     public int hashCode() {
         int result = id;
         result = 31 * result + (noteText != null ? noteText.hashCode() : 0);
-        result = 31 * result + (createtByUserId != null ? createtByUserId.hashCode() : 0);
+        result = 31 * result + (createdUser != null ? createdUser.hashCode() : 0);
         result = 31 * result + (dateCreate != null ? dateCreate.hashCode() : 0);
         return result;
     }
@@ -77,7 +94,7 @@ public class Note implements Serializable {
         return "Note{" +
                 "id=" + id +
                 ", noteText='" + noteText + '\'' +
-                ", createtByUserId=" + createtByUserId +
+                ", createtByUserId=" + createdUser +
                 ", dateCreate=" + dateCreate +
                 '}';
     }
