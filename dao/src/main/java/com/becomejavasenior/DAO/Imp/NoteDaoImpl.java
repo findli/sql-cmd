@@ -14,6 +14,16 @@ import java.util.List;
 
 public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> {
 
+    private static final String SELECT_DEALS_FOR_LIST= "SELECT crm_pallas.note.id as noteId,\n" +
+            "crm_pallas.note.note_text,\n" +
+            "crm_pallas.user.last_name as lName,\n" +
+            "crm_pallas.note.creation_date_time as createDateNote\n" +
+            "FROM crm_pallas.note\n" +
+            "JOIN crm_pallas.user ON crm_pallas.note.created_by_user_id = crm_pallas.user.id\n" +
+            "JOIN crm_pallas.company_note on crm_pallas.note.id = crm_pallas.company_note.note_id\n" +
+            "JOIN crm_pallas.company on crm_pallas.company_note.company_id = crm_pallas.company.id \n" +
+            "WHERE crm_pallas.company.id = ?";
+
     @Override
     void createStatement(PreparedStatement preparedStatement, Note note) throws DaoException {
         try {
@@ -114,25 +124,14 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
     }
 
     @Override
-    public List<Note> getNotesForList() {
+    public List<Note> getNotesForList(int id) {
         List<Note> notes = new ArrayList<>();
         User user;
         Note note;
 
         try (Connection connection = PostgresDaoFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT crm_pallas.note.id as noteId, crm_pallas.note.note_text,\n" +
-                     "crm_pallas.user.last_name as lName,\n" +
-                     "crm_pallas.note.creation_date_time as createDateNote,\n" +
-                     "crm_pallas.file.id as fileId,\n" +
-                     "crm_pallas.file.file_name,\n" +
-                     "crm_pallas.file.creation_date_time as createDateFile,\n" +
-                     "crm_pallas.file.file_path,\n" +
-                     "crm_pallas.file.file_size_in_bytes as fileSize\n" +
-                     "FROM crm_pallas.note\n" +
-                     "JOIN crm_pallas.user ON crm_pallas.note.created_by_user_id = crm_pallas.user.id\n" +
-                     "JOIN crm_pallas.note_file ON crm_pallas.note_file.file_id = crm_pallas.note.id\n" +
-                     "JOIN crm_pallas.file on crm_pallas.file.id = crm_pallas.note_file.file_id")) {
-
+             PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST)) {
+            statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 user = new User();

@@ -46,8 +46,8 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
-    public List<Deal> getDealsForList() {
-        return dealDao.getDealsForList();
+    public List<Deal> getDealsForList(int id) {
+        return dealDao.getDealsForList(id);
     }
 
     @Override

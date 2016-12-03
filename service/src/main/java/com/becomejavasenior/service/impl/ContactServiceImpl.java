@@ -40,7 +40,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public List<Contact> getContactsForList() {
-        return contactDao.getContactsForList();
+    public List<Contact> getContactsForList(int id) {
+        return contactDao.getContactsForList(id);
     }
 }

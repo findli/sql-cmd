@@ -186,13 +186,13 @@
         </div>
     </div>
 </div>
-<script title="text/javascript">
+<%--<script title="text/javascript">
     $(function () {
         $('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
         $('#datetimepicker2').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
 
     });
-</script>
+</script>--%>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->

@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface DealDao<Deal> extends AbstractDao<Deal> {
 
-    List<Deal> getDealsForList();
+    List<Deal> getDealsForList(int id);
 }

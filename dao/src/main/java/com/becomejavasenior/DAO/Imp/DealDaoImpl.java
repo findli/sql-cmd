@@ -25,7 +25,8 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             "FROM crm_pallas.deal\n" +
             "  JOIN crm_pallas.stage ON crm_pallas.deal.stage_id = crm_pallas.stage.id\n" +
             "  JOIN crm_pallas.contact ON crm_pallas.deal.primary_contact_id = crm_pallas.contact.id\n" +
-            "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id\n";
+            "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id\n " +
+            "WHERE crm_pallas.company.id= ?";
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Deal deal) throws DaoException {
@@ -178,7 +179,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
     }
 
     @Override
-    public List<Deal> getDealsForList() {
+    public List<Deal> getDealsForList(int id) {
         List<Deal> deals = new ArrayList<>();
         Deal deal;
         Contact contact;
@@ -187,7 +188,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
 
         try (Connection connection = PostgresDaoFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST)) {
-
+            statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {

@@ -39,8 +39,8 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public List<Note> getNotesForList() {
-        return noteDao.getNotesForList();
+    public List<Note> getNotesForList(int id) {
+        return noteDao.getNotesForList(id);
     }
 
     @Override

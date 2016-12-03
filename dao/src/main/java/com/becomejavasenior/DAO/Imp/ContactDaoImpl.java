@@ -141,15 +141,15 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
     }
 
     @Override
-    public List<Contact> getContactsForList() {
+    public List<Contact> getContactsForList(int id) {
         List<Contact> contacts = new ArrayList<>();
         Contact contact;
         Company company;
         User user;
 
         try (Connection connection = PostgresDaoFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM crm_pallas.contact where company_id = 1")) {
-
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM crm_pallas.contact where company_id = ?")) {
+            statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 company = new Company();

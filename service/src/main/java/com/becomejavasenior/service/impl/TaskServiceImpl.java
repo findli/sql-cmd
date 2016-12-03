@@ -40,8 +40,8 @@ public class TaskServiceImpl implements TaskService  {
     }
 
     @Override
-    public List<Task> getTasksForList() {
-        return taskDAO.getTasksForList();
+    public List<Task> getTasksForList(int id) {
+        return taskDAO.getTasksForList(id);
     }
 
     @Override

@@ -12,6 +12,6 @@ public interface TaskService {
     List<Task> getAll() throws DaoException, ClassNotFoundException;
     Task getById(int id) throws DaoException;
     void delete(int id) throws DaoException;
-    List<Task> getTasksForList();
+    List<Task> getTasksForList(int id);
     public void createNewTask() throws DaoException, ClassNotFoundException;
 }

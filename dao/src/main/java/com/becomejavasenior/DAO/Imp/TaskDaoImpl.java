@@ -16,6 +16,20 @@ import java.util.List;
 
 public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> {
 
+
+    private static final String SELECT_DEALS_FOR_LIST = "SELECT crm_pallas.task.id,crm_pallas.task.title,\n" +
+            "crm_pallas.task_type.title as typeTytle,\n" +
+            "crm_pallas.task.description,\n" +
+            "crm_pallas.task.deadline_date as deadlineDate,\n" +
+            "crm_pallas.user.last_name as lName\n" +
+            "FROM crm_pallas.task\n" +
+            "  JOIN crm_pallas.task_type on crm_pallas.task_type.id = crm_pallas.task.task_type_id\n" +
+            "  JOIN crm_pallas.period_in_days_type on crm_pallas.period_in_days_type.id = crm_pallas.task.period_in_days_type_id\n" +
+            "  JOIN crm_pallas.user on crm_pallas.user.id = crm_pallas.task.responsible_user_id\n" +
+            "  JOIN crm_pallas.company_task on crm_pallas.task.id = crm_pallas.company_task.task_id\n" +
+            "  JOIN crm_pallas.company on crm_pallas.company_task.company_id = crm_pallas.company.id\n" +
+            "WHERE crm_pallas.company.id = ?;";
+
     @Override
     public String getCreateQuery() {
         return "INSERT INTO task (title, task_type_id, description, deadline_date, time, period_in_days_type_id, period_in_minutes, responsible_user_id, is_finished, is_deleted ) VALUES(?,?,?,?,?,?,?,?,?,?)";
@@ -118,20 +132,15 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
     }
 
     @Override
-    public List<Task> getTasksForList() {
+    public List<Task> getTasksForList(int id) {
         List<Task> tasks = new ArrayList<>();
         Task task;
         TaskType taskType;
         User responsibleUser;
 
         try (Connection connection = PostgresDaoFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT crm_pallas.task.id,crm_pallas.task.title, crm_pallas.task_type.title as typeTytle," +
-                     "crm_pallas.task.description, crm_pallas.task.deadline_date as deadlineDate,\n" +
-                     "crm_pallas.user.last_name as lName FROM crm_pallas.task\n" +
-                     "  JOIN crm_pallas.task_type on crm_pallas.task_type.id = crm_pallas.task.task_type_id\n" +
-                     "  JOIN crm_pallas.period_in_days_type on crm_pallas.period_in_days_type.id = crm_pallas.task.period_in_days_type_id\n" +
-                     "  JOIN crm_pallas.user on crm_pallas.user.id = crm_pallas.task.responsible_user_id;")) {
-
+             PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST)) {
+            statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {

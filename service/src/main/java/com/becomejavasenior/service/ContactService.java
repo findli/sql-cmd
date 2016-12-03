@@ -19,5 +19,5 @@ public interface ContactService {
 
     void delete(int id) throws DaoException;
 
-    List getContactsForList();
+    List getContactsForList(int id);
 }

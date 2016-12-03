@@ -5,6 +5,7 @@ import com.becomejavasenior.DAO.AbstractDao;
 
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DataBaseUtil;
+import org.apache.log4j.Logger;
 /*import org.apache.log4j.Logger;*/
 
 import java.sql.*;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 
-   /* public static Logger log = Logger.getLogger(AbstractDaoImpl.class);*/
+    public static Logger log = Logger.getLogger(AbstractDaoImpl.class);
 
     @Override
     public T create(T entity) throws DaoException {
@@ -150,7 +151,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     @Override
 
     public List<T> getAll() throws DaoException, ClassNotFoundException {
-      /*  log.trace("Call getAll() in AbstractDaoImpl");
+        log.trace("Call getAll() in AbstractDaoImpl");
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -187,8 +188,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         }
 
         log.trace("return List entity");
-        return listEntity;*/
-      return null;
+        return listEntity;
     }
 
     abstract String getCreateQuery();

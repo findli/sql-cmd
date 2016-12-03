@@ -13,6 +13,6 @@ public interface NoteService {
     List<Note> getAll() throws DaoException, ClassNotFoundException;
     Note getById(int id) throws DaoException;
     void delete(int id) throws DaoException;
-    List<Note> getNotesForList();
+    List<Note> getNotesForList(int id);
     public void createNewNote() throws DaoException, ClassNotFoundException;
 }
