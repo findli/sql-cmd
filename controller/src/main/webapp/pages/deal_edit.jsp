@@ -119,111 +119,126 @@
                             <h2>Edit contact</h2><br>
 
                             <!-- Навигация -->
+
                             <ul class="nav nav-tabs" role="tablist">
-                                <li class="active"><a href="#contact1" aria-controls="contact1" role="tab" data-toggle="tab">Contact 1</a></li>
-                                <li><a href="#contact2" aria-controls="contact2" role="tab" data-toggle="tab">Contact 2</a></li>
+                                <c:forEach items="${contacts}" var="contact">
+                                    <c:if test="${contact.id == 1}">
+                                        <li class="active"><a href="#${contact.getlName()}" aria-controls="${contact.getlName()}" role="tab" data-toggle="tab">${contact.getlName()}</a></li>
+                                    </c:if>
+                                    <c:if test="${contact.id > 1}">
+                                        <li><a href="#${contact.getlName()}" aria-controls="${contact.getlName()}" role="tab" data-toggle="tab">${contact.getlName()}</a></li>
+                                    </c:if>
+                                </c:forEach>
                             </ul>
 
                             <!-- Содержимое вкладок -->
                             <div class="tab-content">
                                 <br>
-                                <div role="tabpanel" class="tab-pane active" id="contact1">
+                                <c:forEach items="${contacts}" var="contact">
+                                    <c:if test="${contact.id == 1}">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="${contact.getlName()}">
 
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Name </label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" type="text" placeholder="Name">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Contact</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="text" value="${contact.getfName()} ${contact.getlName()}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Company </label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="text" value="${contact.getCompany().getTitle()}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Position </label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="text" value="${contact.getPosition()}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <select class="col-sm-3 form-control" style="width: 100px">
+                                                    <option>Work</option>
+                                                    <option>Mobile</option>
+                                                    <option>Home</option>
+                                                </select>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="text" name="formPhone" placeholder="Number">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Email </label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="text" value="${contact.getEmail()}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Skype </label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="text" value="${contact.getSkype()}">
+                                                </div>
+                                            </div>
+
                                         </div>
-                                    </div>
+                                    </c:if>
+                                    <c:if test="${contact.id > 1}">
+                                        <div role="tabpanel" class="tab-pane fade" id="${contact.getlName()}">
 
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Company </label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" type="text" placeholder="Company">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Contact</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="text" value="${contact.getfName()} ${contact.getlName()}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Company </label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="text" value="${contact.getCompany().getTitle()}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Position </label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="text" value="${contact.getPosition()}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <select class="col-sm-3 form-control" style="width: 100px">
+                                                    <option>Work</option>
+                                                    <option>Mobile</option>
+                                                    <option>Home</option>
+                                                </select>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="text" name="formPhone" placeholder="Number">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Email </label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="text" value="${contact.getEmail()}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Skype </label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="text" value="${contact.getSkype()}">
+                                                </div>
+                                            </div>
+
                                         </div>
-                                    </div>
+                                    </c:if>
+                                </c:forEach>
 
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Position </label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" type="text" placeholder="Position">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <select class="col-sm-3 form-control" style="width: 100px">
-                                            <option>Work</option>
-                                            <option>Mobile</option>
-                                            <option>Home</option>
-                                        </select>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" type="text" name="formPhone" placeholder="Number">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Email </label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" type="text" placeholder="Email">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Skype </label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" type="text" placeholder="Skype">
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div role="tabpanel" class="tab-pane" id="contact2">
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Name </label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" type="text" placeholder="Name">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Company </label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" type="text" placeholder="Company">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Position </label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" type="text" placeholder="Position">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <select class="col-sm-3 form-control" style="width: 100px">
-                                            <option>Work</option>
-                                            <option>Mobile</option>
-                                            <option>Home</option>
-                                        </select>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" type="text" name="formPhone" placeholder="Number">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Email </label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" type="text" placeholder="Email">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Skype </label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" type="text" placeholder="Skype">
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="form-group">
                                     <div class="col-sm-10">
                                         <input class="formAddBut" type="button" value="Добавить">

@@ -13,5 +13,7 @@ public interface DealService {
     void delete(int id) throws DaoException;
     List<Deal> getDealsForList();
     public void createNewDeal(Deal deal, Contact contact, Task task, Company company, File file) throws DaoException, ClassNotFoundException;
+    public List<Contact> getContactsByDealName(String dealName);
+
 
 }
