@@ -40,7 +40,7 @@ public class CompanyDetailServlet extends HttpServlet {
         List<Contact> contactList = contactService.getContactsForList(idCompany);
         List<Deal> dealList = dealService.getDealsForList(idCompany);
         List<Task> taskList = taskService.getTasksForList(idCompany);
-     /*   List<File> fileList = fileService.getFilesForList();*/
+        List<File> fileList = fileService.getFilesForList(idCompany);
         List<Note> noteList = noteService.getNotesForList(idCompany);
         Company company = null;
         try {
@@ -49,13 +49,19 @@ public class CompanyDetailServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-
         session.setAttribute("contactList", contactList);
         session.setAttribute("dealList", dealList);
         session.setAttribute("taskList", taskList);
         session.setAttribute("noteList", noteList);
         session.setAttribute("company", company);
-   /*     session.setAttribute("fileList", fileList);*/
+        session.setAttribute("fileList", fileList);
+        session.setAttribute("idCompany" , idCompany);
+
+        int idTask = 0;
+        if (request.getParameter("idTask") != null) {
+            idTask = Integer.parseInt(request.getParameter("idTask"));
+            System.out.println("sss" + idTask);
+        }
 
         response.sendRedirect("/pages/companyDetail.jsp");
     }

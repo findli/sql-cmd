@@ -52,40 +52,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public List<File> getFilesForList() {
-        List<File> files = new ArrayList<>();
-        File file;
-        User user;
-
-        try (Connection connection = PostgresDaoFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT crm_pallas.file.id " +
-                     "crm_pallas.file.file_name, \n" +
-                     "crm_pallas.file.creation_date_time,\n" +
-                     "crm_pallas.file.file_path,\n" +
-                     "crm_pallas.file.file_size_in_bytes as fileSize,\n" +
-                     "crm_pallas.user.last_name as lName\n" +
-                     "FROM crm_pallas.note JOIN crm_pallas.note_file ON crm_pallas.note_file.file_id = crm_pallas.note.id\n" +
-                     "JOIN crm_pallas.file on crm_pallas.file.id = crm_pallas.note_file.file_id\n" +
-                     "JOIN crm_pallas.user on crm_pallas.note.created_by_user_id = crm_pallas.user.id")) {
-
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                file = new File();
-                user = new User();
-                file.setId(resultSet.getInt("id"));
-                file.setFileName(resultSet.getString("file_name"));
-                file.setFilePath(resultSet.getString("file_path"));
-                file.setFileSize((byte) resultSet.getInt("fileSize"));
-                file.setDateCreate(resultSet.getDate("createDate"));
-                user.setlName(resultSet.getString("lName"));
-
-
-                files.add(file);
-            }
-        } catch (SQLException ex) {
-            throw new DatabaseException(ex);
-        }
-        return files;
+    public List<File> getFilesForList(int id) {
+        return  file.getFilesForList(id);
     }
 }

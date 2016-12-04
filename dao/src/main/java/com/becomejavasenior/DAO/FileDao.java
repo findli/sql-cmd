@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface FileDao {
 
-    List<File> getFilesForList();
+    List<File> getFilesForList(int id);
 
 }

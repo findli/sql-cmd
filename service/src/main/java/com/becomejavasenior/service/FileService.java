@@ -12,6 +12,6 @@ public interface FileService {
     List<File> getAll() throws DaoException, ClassNotFoundException;
     File getById(int id) throws DaoException;
     void delete(int id) throws DaoException;
-    List<File> getFilesForList();
+    List<File> getFilesForList(int id);
     public void createNewFile() throws DaoException, ClassNotFoundException;
 }
