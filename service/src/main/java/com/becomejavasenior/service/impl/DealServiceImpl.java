@@ -43,6 +43,11 @@ public class DealServiceImpl implements DealService {
     public List<Deal> getAll() throws DaoException, ClassNotFoundException {
         return dealDao.getAll();
     }
+    @Override
+    public List<Contact> getContactsByDealName(String dealName) {
+        return dealDao.getContactsByDealName(dealName);
+    }
+
 
     @Override
     public List<Deal> getDealsForList() {

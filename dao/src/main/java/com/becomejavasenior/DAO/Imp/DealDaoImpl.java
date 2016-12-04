@@ -27,6 +27,17 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             "  JOIN crm_pallas.contact ON crm_pallas.deal.primary_contact_id = crm_pallas.contact.id\n" +
             "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id ORDER BY dealId DESC\n";
 
+    private static final String SELECT_ALL_CONTACT = "SELECT crm_pallas.contact.id, crm_pallas.contact.last_name FROM crm_pallas.deal JOIN\n" +
+            " crm_pallas.contact_deal ON crm_pallas.deal.id=crm_pallas.contact_deal.deal_id\n " +
+            " JOIN crm_pallas.contact ON crm_pallas.contact_deal.contact_id=crm_pallas.contact.id\n" +
+            " WHERE crm_pallas.deal.title=?";
+
+    private static final String SELECT_ALL_CONTACT2 = "SELECT c1.id AS contactId, c1.first_name, c1.last_name, c1.post, c1.email, c1.skype, c2.id AS companyId\n" +
+            "FROM crm_pallas.deal d\n" +
+            "  INNER JOIN crm_pallas.contact_deal cd ON ( d.id = cd.deal_id  )\n" +
+            "  INNER JOIN crm_pallas.contact c1 ON ( cd.contact_id = c1.id  )\n" +
+            "  INNER JOIN crm_pallas.company c2 ON ( c1.company_id = c2.id  ) WHERE d.title =?";
+
     @Override
     void createStatement(PreparedStatement preparedStatement, Deal deal) throws DaoException {
         try {
@@ -75,6 +86,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         CompanyDao<Company> company = new CompanyDaoImpl();
         StageDao<Stage> stage = new StageDaoImpl();
         UserDao<User> user = new UserDaoImpl();
+
         try {
             deal.setId(resultSet.getInt("id"));
             deal.setCompany(company.getById(resultSet.getInt("company_id")));
@@ -87,6 +99,39 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             throw new DaoException("Can't get entity from Deal", e);
         }
         return deal;
+    }
+    @Override
+    public List<Contact> getContactsByDealName(String dealName) {
+        List<Contact> contacts = new ArrayList<>();
+        CompanyDao<Company> company = new CompanyDaoImpl();
+        Contact contact;
+
+        try (Connection connection = PostgresDAOFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_CONTACT2)) {
+
+            statement.setString(1, dealName);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                contact = new Contact();
+                contact.setId(resultSet.getInt("contactId"));
+                contact.setlName(resultSet.getString("last_name"));
+                contact.setfName(resultSet.getString("first_name"));
+                contact.setPosition(resultSet.getString("post"));
+                contact.setCompany(company.getById(resultSet.getInt("companyId")));
+                contact.setEmail(resultSet.getString("email"));
+                contact.setSkype(resultSet.getString("skype"));
+                contacts.add(contact);
+            }
+        } catch (SQLException ex) {
+            //logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new DatabaseException(ex);
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
+
+        return contacts;
     }
 
     @Override

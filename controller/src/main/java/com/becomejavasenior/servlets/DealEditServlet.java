@@ -62,16 +62,17 @@ public class DealEditServlet extends HttpServlet {
             stage = stageService.getById(deal.getStage().getId());
             address = addressService.getById(company.getAddress().getId());
         } catch (DaoException e) {
-            e.printStackTrace();
+            log.error("DAOException in DealEditServlet in Controller layer", e);
         }
 
         try {
             stages = stageService.getAll();
             users = userService.getAll();
         } catch (DaoException e) {
-            e.printStackTrace();
+            log.error("DAOException in DealEditServlet in Controller layer", e);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            log.error("ClassNotFoundException in DealEditServlet in Controller layer", e);
+
         }
 
         String stageTitle = deal.getStage().getTitle();
@@ -82,15 +83,18 @@ public class DealEditServlet extends HttpServlet {
         String responsibleUser = deal.getResponsibleUser().getlName();
         users.remove(deal.getResponsibleUser().getId()-1);
 
+        List<Contact> contacts = dealService.getContactsByDealName(deal.getTitle());
+
 
         session.setAttribute("address", address);
+        session.setAttribute("deal", deal);
         session.setAttribute("idDeal", idDeal);
         session.setAttribute("stages", stages);
         session.setAttribute("stage", stage);
         session.setAttribute("responsibleUser", responsibleUser);
         session.setAttribute("users", users);
         session.setAttribute("company", company);
-        session.setAttribute("deal", deal);
+        session.setAttribute("contacts", contacts);
         request.getRequestDispatcher("/pages/deal_edit.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -104,7 +108,7 @@ public class DealEditServlet extends HttpServlet {
         try {
             deal = dealService.getById(idDeal);
         } catch (DaoException e) {
-            e.printStackTrace();
+            log.error("DAOException in DealEditServlet in Controller layer", e);
         }
 
         if (action.equals("editDealDeal")) {
@@ -117,7 +121,7 @@ public class DealEditServlet extends HttpServlet {
                 str += getBudgetFromRequest(request) + "; \n";
                 str += getUserFromRequest(request) + "; \n";
             } catch (DaoException e) {
-                e.printStackTrace();
+                log.error("DAOException in DealEditServlet in Controller layer", e);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -157,6 +161,15 @@ public class DealEditServlet extends HttpServlet {
 
         }
     }
+//    public List<Contact> contactsFromDeal(Deal deal) {
+//        List<Contact> contacts = new ArrayList<>();
+//        for (int i = 0; i < deal.getDealContact().size(); ++i) {
+//            contacts.add(deal.getDealContact().get(i));
+//        }
+//        return contacts;
+//    }
+
+
     public String getRoomFromRequest(HttpServletRequest request) {
 
         String room = request.getParameter("room");
