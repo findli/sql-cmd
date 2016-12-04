@@ -5,9 +5,7 @@ import com.becomejavasenior.DAO.Imp.*;
 import com.becomejavasenior.DAO.StageDao;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.DealService;
-import com.becomejavasenior.service.TaskService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DealServiceImpl implements DealService {
@@ -47,10 +45,6 @@ public class DealServiceImpl implements DealService {
         return dealDao.getAll();
     }
     @Override
-    public List<Stage> getAllStage() {
-        return dealDao.getAllStage();
-    }
-    @Override
     public List<Contact> getContactsByDealName(String dealName) {
         return dealDao.getContactsByDealName(dealName);
     }
@@ -62,16 +56,8 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
-    public void createNewDeal(Deal deal, Contact contact, Task task, Company company, File file2) throws DaoException, ClassNotFoundException {
+    public void createNewDeal(Deal deal, Contact contact, Task task2, Company company, File file2) throws DaoException, ClassNotFoundException {
 
-        try {
-            taskDao.create(task);
-        }catch (DaoException e){
-            e.printStackTrace();
-        }
-        List<Task> tasks = new ArrayList<>();
-        tasks.add(task);
-        deal.setTasks(tasks);
         contact = contactWithId(contact);
         deal.setPrimaryContact(contact);
 
@@ -82,19 +68,14 @@ public class DealServiceImpl implements DealService {
         stage = (Stage) stageDao.getById(1);
         deal.setStage(stage);
 
-        User user = (User) userDao.getByName(deal.getResponsibleUser().getlName());
+        User user = responsibleUserWithId(deal.getResponsibleUser());
         deal.setResponsibleUser(user);
 
         dealDao.create(deal);
 
     }
 
-    @Override
-    public List<Deal> getAllDealsByStage(String stage) {
-        return dealDao.getDealsByStage(stage);
-    }
-
-    // Необходимо править
+// Необходимо править
     public Contact contactWithId(Contact contact) throws ClassNotFoundException, DaoException {
 //        List<Contact> contacts = contactDao.getAll();
 //        for(int i = 0; i < contacts.size(); i++) {
