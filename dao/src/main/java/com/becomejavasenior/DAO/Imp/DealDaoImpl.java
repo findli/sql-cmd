@@ -42,16 +42,14 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             "  JOIN crm_pallas.contact ON crm_pallas.deal.primary_contact_id = crm_pallas.contact.id\n" +
             "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id ORDER BY dealId DESC\n";
 
-    private static final String SELECT_ALL_CONTACT = "SELECT crm_pallas.contact.id, crm_pallas.contact.last_name FROM crm_pallas.deal JOIN\n" +
-            " crm_pallas.contact_deal ON crm_pallas.deal.id=crm_pallas.contact_deal.deal_id\n " +
-            " JOIN crm_pallas.contact ON crm_pallas.contact_deal.contact_id=crm_pallas.contact.id\n" +
-            " WHERE crm_pallas.deal.title=?";
-
-    private static final String SELECT_ALL_CONTACT2 = "SELECT c1.id AS contactId, c1.first_name, c1.last_name, c1.post, c1.email, c1.skype, c2.id AS companyId\n" +
+    private static final String SELECT_ALL_CONTACT = "SELECT c1.id AS contactId, c1.first_name, c1.last_name, c1.post AS position, c1.email, c1.skype, c2.id AS companyId, c2.title, cp.phone_number, pt.title AS phone_type\n" +
             "FROM crm_pallas.deal d\n" +
             "  INNER JOIN crm_pallas.contact_deal cd ON ( d.id = cd.deal_id  )\n" +
             "  INNER JOIN crm_pallas.contact c1 ON ( cd.contact_id = c1.id  )\n" +
-            "  INNER JOIN crm_pallas.company c2 ON ( c1.company_id = c2.id  ) WHERE d.title =?";
+            "  INNER JOIN crm_pallas.company c2 ON ( c1.company_id = c2.id  )\n" +
+            "  LEFT OUTER JOIN crm_pallas.contact_phone cp ON ( c1.id = cp.contact_id  )\n" +
+            "  LEFT OUTER JOIN crm_pallas.phone_type pt ON ( cp.phone_type_id = pt.id  ) WHERE d.title =?";
+
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Deal deal) throws DaoException {
@@ -122,7 +120,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         Contact contact;
 
         try (Connection connection = PostgresDAOFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_CONTACT2)) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_CONTACT)) {
 
             statement.setString(1, dealName);
             ResultSet resultSet = statement.executeQuery();
@@ -133,10 +131,11 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 contact.setId(resultSet.getInt("contactId"));
                 contact.setlName(resultSet.getString("last_name"));
                 contact.setfName(resultSet.getString("first_name"));
-                contact.setPosition(resultSet.getString("post"));
+                contact.setPosition(resultSet.getString("position"));
                 contact.setCompany(company.getById(resultSet.getInt("companyId")));
                 contact.setEmail(resultSet.getString("email"));
                 contact.setSkype(resultSet.getString("skype"));
+
                 contacts.add(contact);
             }
         } catch (SQLException ex) {
