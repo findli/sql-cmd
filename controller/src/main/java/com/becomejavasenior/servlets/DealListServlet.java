@@ -25,7 +25,7 @@ public class DealListServlet extends HttpServlet {
         UserService userService = new UserServiceImpl();
         CompanyService companyService = new CompanyServiceImpl();
 
-       /* List<Deal> dealList = dealService.getDealsForList();*/
+        List<Deal> dealList = dealService.getDealsForList();
         List<TaskType> taskTypeList = null;
         List<User> users = null;
         List<Company> companyList = null;
@@ -42,7 +42,7 @@ public class DealListServlet extends HttpServlet {
         session.setAttribute("companyList", companyList);
         session.setAttribute("users", users);
         session.setAttribute("taskTypeList", taskTypeList);
-/*        session.setAttribute("dealList", dealList);*/
+        session.setAttribute("dealList", dealList);
         request.getRequestDispatcher("/pages/deal.jsp").forward(request, response);
     }
 

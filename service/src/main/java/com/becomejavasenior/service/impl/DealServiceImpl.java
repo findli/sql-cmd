@@ -51,6 +51,11 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
+    public List<Deal> getDealsForList() {
+        return dealDao.getDealsForList();
+    }
+
+    @Override
     public void createNewDeal(Deal deal, Contact contact, Task task2, Company company, File file2) throws DaoException, ClassNotFoundException {
 
         contact = contactWithId(contact);
