@@ -19,6 +19,7 @@ public class ContactServiceImpl implements ContactService {
     private final TaskDao taskDao = new TaskDaoImpl();
     private final DealDao dealDao = new DealDaoImpl();
     private final StageDao stageDao = new StageDaoImpl();
+    private final TagDao tagDao = new TagDaoImpl();//TODO: create
 
     private ContactDao<Contact> contactDAO = new ContactDaoImpl();
 
@@ -45,6 +46,15 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public void delete(int id) throws DaoException {
         contactDAO.delete(id);
+    }
+
+    @Override
+    public void createNewContact(Contact contact, Tag tag, File file) throws DaoException, ClassNotFoundException {
+
+
+
+
+        contactDao.create(contact);
     }
 
 }
