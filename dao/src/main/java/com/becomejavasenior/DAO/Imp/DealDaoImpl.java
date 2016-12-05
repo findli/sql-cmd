@@ -136,6 +136,10 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 contact.setEmail(resultSet.getString("email"));
                 contact.setSkype(resultSet.getString("skype"));
 
+                /*
+                Here you need to add the phone type and the phone to display in the editing form of the Deals
+                 */
+
                 contacts.add(contact);
             }
         } catch (SQLException ex) {
