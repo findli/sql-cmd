@@ -45,6 +45,10 @@ public class DealServiceImpl implements DealService {
         return dealDao.getAll();
     }
     @Override
+    public List<Stage> getAllStage() {
+        return dealDao.getAllStage();
+    }
+    @Override
     public List<Contact> getContactsByDealName(String dealName) {
         return dealDao.getContactsByDealName(dealName);
     }
@@ -75,7 +79,12 @@ public class DealServiceImpl implements DealService {
 
     }
 
-// Необходимо править
+    @Override
+    public List<Deal> getAllDealsByStage(String stage) {
+        return dealDao.getDealsByStage(stage);
+    }
+
+    // Необходимо править
     public Contact contactWithId(Contact contact) throws ClassNotFoundException, DaoException {
 //        List<Contact> contacts = contactDao.getAll();
 //        for(int i = 0; i < contacts.size(); i++) {

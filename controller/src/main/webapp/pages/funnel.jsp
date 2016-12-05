@@ -144,48 +144,51 @@
 
                     <br><br><br><br>
 
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <tr>
-                                <th>Первичный контакт</th>
-                                <th>Переговоры</th>
-                                <th>Принимают решение</th>
-                                <th>Согласование договора</th>
-                            </tr>
-                            <tr>
-                                <td>Name deal1<br>
-                                    10000$<br>
-                                    Ivanov, Petrov<br>
-                                    MMM
-                                </td>
-                                <td>Name deal2<br>
-                                    15200$<br>
-                                    Zaharov, Petrov<br>
-                                    Bank
-                                </td>
-                                <td></td>
-                                <td>Name deal3<br>
-                                    2520$<br>
-                                    Agapov, Ivanov2<br>
-                                    STO
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Name deal3<br>
-                                    2520$<br>
-                                    Agapov, Ivanov2<br>
-                                    STO
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td>Name deal4<br>
-                                    32400$<br>
-                                    Agapov, Ivanov2<br>
-                                    STO2
-                                </td>
-                            </tr>
-
-                        </table>
+                    <div class="row">
+                        <div class="col-md-9" align="center">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Первичный контакт</th>
+                                    <th>Переговоры</th>
+                                    <th>Принимают решение</th>
+                                    <th>Согласование договора</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <c:forEach var="stage" items="${stageList}">
+                                        <td>
+                                            <c:set var="sum" value="${0}"/>
+                                            <c:set var="count" value="${0}"/>
+                                            <c:forEach var="deal" items="${dealService.getAllDealsByStage(stage.title)}">
+                                                <c:set var="sum" value="${sum + deal.getBudget()}"/>
+                                                <c:set var="count" value="${count + 1}"/>
+                                            </c:forEach>
+                                            <c:out value="${sum}"/> $<br><br>
+                                            <c:out value="${count}"/> Сделок<br><br>
+                                        </td>
+                                    </c:forEach>
+                                </tr>
+                                <tr>
+                                    <c:forEach var="stage" items="${stageList}">
+                                        <td>
+                                            <c:forEach var="deal" items="${dealService.getAllDealsByStage(stage.title)}">
+                                                <c:out value="${deal.getTitle()}"/><br><br>
+                                                <c:out value="${deal.getBudget()}"/> $<br><br>
+                                                <c:out value="${deal.getCompany().getTitle()}"/><br><br>
+                                                <c:forEach var="contact" items="${dealService.getContactsByDealName(deal.title)}">
+                                                    <c:out value="${contact.getlName()}"/><br><br>
+                                                </c:forEach>
+                                                <hr>
+                                            </c:forEach>
+                                        </td>
+                                    </c:forEach>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-3"></div>
                     </div>
                 </div>
             </div>

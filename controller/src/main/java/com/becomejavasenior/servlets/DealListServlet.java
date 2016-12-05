@@ -43,11 +43,7 @@ public class DealListServlet extends HttpServlet {
         session.setAttribute("users", users);
         session.setAttribute("taskTypeList", taskTypeList);
         session.setAttribute("dealList", dealList);
-        request.getRequestDispatcher("/pages/deal.jsp").forward(request, response);
+        response.sendRedirect("/pages/deal.jsp");
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
-    }
 }
