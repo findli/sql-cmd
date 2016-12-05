@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/bootstrap.css">
+
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
@@ -40,7 +41,7 @@
                 <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
                 <li><a href="/contact" target="_self">Contacts</a></li>
-                <li><a href="/taskList" target="_self">Tasks</a></li>
+                <li><a href="#" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
                 <li><a href="#" target="_self">Settings</a></li>
             </ul>
@@ -80,7 +81,7 @@
                             <div class="col-sm-9">
                                 <div class="input-group date" id="datetimepicker1">
                                     <input type="text" class="form-control" />
-                                        <span class="input-group-addon">
+                                    <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
                                         </span>
                                 </div>
@@ -92,7 +93,7 @@
                             <div class="col-sm-9">
                                 <div class="input-group date" id="datetimepicker2">
                                     <input type="text" class="form-control" />
-                                        <span class="input-group-addon">
+                                    <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
                                         </span>
                                 </div>
@@ -104,7 +105,7 @@
                             <div class="col-sm-9">
                                 <select class="form-control">
                                     <c:forEach var="user" items="${users}">
-                                        <option><c:out value="${user.getlName()}"/></option>
+                                        <option><c:out value="${user.lName}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -115,7 +116,7 @@
                             <div class="col-sm-9">
                                 <select class="form-control">
                                     <c:forEach var="taskType" items="${taskTypeList}">
-                                        <option><c:out value="${taskType.getType()}"/></option>
+                                        <option><c:out value="${taskType.type}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -145,7 +146,7 @@
                     <br><br><br><br>
 
                     <div class="row">
-                        <div class="col-md-12" align="center">
+                        <div class="col-md-9" align="center">
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
@@ -174,14 +175,12 @@
                                     <c:forEach var="stage" items="${stageList}">
                                         <td>
                                             <c:forEach var="deal" items="${dealService.getAllDealsByStage(stage.title)}">
-                                                <dl>
-                                                    <dt><b style="color: #2b669a"><c:out value="${deal.getTitle()}"/></b></dt>
-                                                    <dd><b style="color: #a94442"><c:out value="${deal.getBudget()}"/> $</b></dd>
-                                                    <dd><c:out value="${deal.getCompany().getTitle()}"/></dd>
-                                                    <c:forEach var="contact" items="${dealService.getContactsByDealName(deal.title)}">
-                                                        <dd><b style="color: #2b542c"><c:out value="${contact.getlName()}"/></b></dd>
-                                                    </c:forEach>
-                                                </dl>
+                                                <c:out value="${deal.getTitle()}"/><br><br>
+                                                <c:out value="${deal.getBudget()}"/> $<br><br>
+                                                <c:out value="${deal.getCompany().getTitle()}"/><br><br>
+                                                <c:forEach var="contact" items="${dealService.getContactsByDealName(deal.title)}">
+                                                    <c:out value="${contact.getlName()}"/><br><br>
+                                                </c:forEach>
                                                 <hr>
                                             </c:forEach>
                                         </td>
@@ -190,30 +189,31 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-0"></div>
+                        <div class="col-md-3"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
-        $('#datetimepicker2').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
+<%--<script type="text/javascript">--%>
+    <%--$(function () {--%>
+        <%--$('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
+        <%--$('#datetimepicker2').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
 
-    });
-</script>
+    <%--});--%>
+<%--</script>--%>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 
 </body>
 
+<script src="../js/bootstrap.js"></script>
 <%--<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>--%>
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<%--<!-- <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script> -->--%>
 <script type="text/javascript" src="../js/script.js"></script>
 </html>
