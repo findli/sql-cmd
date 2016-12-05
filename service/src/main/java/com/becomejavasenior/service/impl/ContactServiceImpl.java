@@ -1,10 +1,9 @@
 package com.becomejavasenior.service.impl;
 
 
-import com.becomejavasenior.DAO.ContactDao;
-import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.Imp.ContactDaoImpl;
-import com.becomejavasenior.bean.Contact;
+import com.becomejavasenior.DAO.*;
+import com.becomejavasenior.DAO.Imp.*;
+import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.ContactService;
 import org.apache.log4j.Logger;
 
@@ -13,6 +12,13 @@ import java.util.List;
 public class ContactServiceImpl implements ContactService {
 
     public static Logger log = Logger.getLogger(CompanyServiceImpl.class);
+
+    private final CompanyDao companyDao = new CompanyDaoImpl();
+    private final UserDao userDao = new UserDaoImpl();
+    private final ContactDao contactDao = new ContactDaoImpl();
+    private final TaskDao taskDao = new TaskDaoImpl();
+    private final DealDao dealDao = new DealDaoImpl();
+    private final StageDao stageDao = new StageDaoImpl();
 
     private ContactDao<Contact> contactDAO = new ContactDaoImpl();
 
@@ -40,4 +46,5 @@ public class ContactServiceImpl implements ContactService {
     public void delete(int id) throws DaoException {
         contactDAO.delete(id);
     }
+
 }
