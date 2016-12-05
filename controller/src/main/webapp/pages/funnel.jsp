@@ -145,7 +145,7 @@
                     <br><br><br><br>
 
                     <div class="row">
-                        <div class="col-md-9" align="center">
+                        <div class="col-md-12" align="center">
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
@@ -179,7 +179,7 @@
                                                     <dd><b style="color: #a94442"><c:out value="${deal.getBudget()}"/> $</b></dd>
                                                     <dd><c:out value="${deal.getCompany().getTitle()}"/></dd>
                                                     <c:forEach var="contact" items="${dealService.getContactsByDealName(deal.title)}">
-                                                        <dd><c:out value="${contact.getlName()}"/></dd>
+                                                        <dd><b style="color: #2b542c"><c:out value="${contact.getlName()}"/></b></dd>
                                                     </c:forEach>
                                                 </dl>
                                                 <hr>
@@ -190,7 +190,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-3"></div>
+                        <div class="col-md-0"></div>
                     </div>
                 </div>
             </div>
