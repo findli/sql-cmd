@@ -42,7 +42,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
 
     @Override
     public String getDeleteQuery() {
-        return "DELETE FROM task WHERE id = ?";
+        return "DELETE FROM crm_pallas.company_task WHERE crm_pallas.company_task.task_id =?";
     }
 
     @Override

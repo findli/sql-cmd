@@ -76,13 +76,23 @@ $(function () {
     });
     $("#actionButNote").on("click", function () {
         if ($(this).is(":checked")) {
-            console.log("check");
             $('.noteBlock').css('display', 'block');
         }
         else {
-            console.log("uncheck");
             $('.noteBlock').css('display', 'none');
         }
+    });
+    $('.actionBut').click(function () {
+        $.ajax({
+            type:'POST',
+            data: {
+                action: this.id
+            },
+            url: '/companyDetail'
+        });
+        $(this.parentNode.parentNode.parentNode).css('display', 'none');
+
+
     });
 
 });
