@@ -9,8 +9,7 @@ import com.becomejavasenior.service.DealService;
 import java.util.List;
 
 public class DealServiceImpl implements DealService {
-
-    //    private final CompanyDao companyDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getCompanyDAO();
+//    private final CompanyDao companyDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getCompanyDAO();
 //    private final UserDao userDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getUserDAO();
 //    private final ContactDao contactDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getContactDAO();
 //    private final TaskDao taskDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getTaskDAO();
@@ -22,6 +21,8 @@ public class DealServiceImpl implements DealService {
     private final TaskDao taskDao = new TaskDaoImpl();
     private final DealDao dealDao = new DealDaoImpl();
     private final StageDao stageDao = new StageDaoImpl();
+
+
 
     public Deal create (Deal deal) throws DaoException {
         return (Deal) dealDao.create(deal);
@@ -42,6 +43,10 @@ public class DealServiceImpl implements DealService {
 
     public List<Deal> getAll() throws DaoException, ClassNotFoundException {
         return dealDao.getAll();
+    }
+    @Override
+    public List<Stage> getAllStage() {
+        return dealDao.getAllStage();
     }
     @Override
     public List<Contact> getContactsByDealName(String dealName) {
@@ -72,6 +77,11 @@ public class DealServiceImpl implements DealService {
 
         dealDao.create(deal);
 
+    }
+
+    @Override
+    public List<Deal> getAllDealsByStage(String stage) {
+        return dealDao.getDealsByStage(stage);
     }
 
     // Необходимо править
