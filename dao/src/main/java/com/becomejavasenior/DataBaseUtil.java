@@ -17,7 +17,7 @@ public class DataBaseUtil {
     private static final String PROPERTIES_FILE = "database.properties";
 
     static {
-        if(Objects.equals(System.getenv("DEPLOYMENT_ENVIRONMENT"),"production")) {
+     /*    if(Objects.equals(System.getenv("DEPLOYMENT_ENVIRONMENT"),"production")) {
             URI dbUri = null;
             try {
                 dbUri = new URI(System.getenv("DATABASE_URL"));
@@ -38,7 +38,7 @@ public class DataBaseUtil {
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             InputStream propertiesFile = classLoader.getResourceAsStream(PROPERTIES_FILE);
 
-            if (propertiesFile == null) {
+           if (propertiesFile == null) {
                 throw new DatabaseException("Properties file '" + PROPERTIES_FILE + "' is missing in classpath.");
             }
 
@@ -46,12 +46,12 @@ public class DataBaseUtil {
                 properties.load(propertiesFile);
             } catch (IOException e) {
                 throw new DatabaseException("Properties file '" + PROPERTIES_FILE + "' can't be loaded.", e);
-            }
+            }*/
             dataSource = new BasicDataSource();
-            dataSource.setDriverClassName(properties.getProperty("db.driver"));/*("org.postgresql.Driver"); */
-            dataSource.setUrl(properties.getProperty("db.url"));/*("jdbc:postgresql://localhost:5432/crm_pallas");//*/
-            dataSource.setUsername(properties.getProperty("db.user"));/*;/("postgres");/*/
-            dataSource.setPassword(properties.getProperty("db.password"));/*/("root");/*/
+            dataSource.setDriverClassName("org.postgresql.Driver");//(properties.getProperty("db.driver"));
+            dataSource.setUrl("jdbc:postgresql://localhost:5432/crm_pallas");//(properties.getProperty("db.url"));/*//*/
+            dataSource.setUsername("postgres");//((properties.getProperty"db.user"));/*;//*/
+            dataSource.setPassword("root"); //(properties.getProperty("db.password"));/*//*/
             dataSource.setInitialSize(10);//(Integer.parseInt(properties.getProperty("db.initsize")));
             dataSource.setMaxTotal(100);//(Integer.parseInt(properties.getProperty("db.maxtotal")));
             dataSource.setMaxWaitMillis(30000);//(Long.parseLong(properties.getProperty("db.maxwait")));
@@ -59,7 +59,7 @@ public class DataBaseUtil {
             dataSource.setDefaultTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             dataSource.setDefaultAutoCommit(true);
         }
-    }
+    //}
 
     public static Connection getConnection() throws SQLException {
 
