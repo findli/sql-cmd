@@ -81,7 +81,7 @@
                             <div class="col-sm-9">
                                 <div class="input-group date" id="datetimepicker1">
                                     <input type="text" class="form-control" />
-                                    <span class="input-group-addon">
+                                        <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
                                         </span>
                                 </div>
@@ -93,7 +93,7 @@
                             <div class="col-sm-9">
                                 <div class="input-group date" id="datetimepicker2">
                                     <input type="text" class="form-control" />
-                                    <span class="input-group-addon">
+                                        <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
                                         </span>
                                 </div>
@@ -174,15 +174,19 @@
                                 <tr>
                                     <c:forEach var="stage" items="${stageList}">
                                         <td>
-                                            <c:forEach var="deal" items="${dealService.getAllDealsByStage(stage.title)}">
-                                                <c:out value="${deal.getTitle()}"/><br><br>
-                                                <c:out value="${deal.getBudget()}"/> $<br><br>
-                                                <c:out value="${deal.getCompany().getTitle()}"/><br><br>
-                                                <c:forEach var="contact" items="${dealService.getContactsByDealName(deal.title)}">
-                                                    <c:out value="${contact.getlName()}"/><br><br>
+
+                                                <c:forEach var="deal" items="${dealService.getAllDealsByStage(stage.title)}">
+                                                    <dl>
+                                                    <dt><c:out value="${deal.getTitle()}"/></dt>
+                                                    <dd><c:out value="${deal.getBudget()}"/> $</dd>
+                                                    <dd><c:out value="${deal.getCompany().getTitle()}"/></dd>
+                                                    <c:forEach var="contact" items="${dealService.getContactsByDealName(deal.title)}">
+                                                        <dd><c:out value="${contact.getlName()}"/></dd>
+                                                    </c:forEach>
+                                                    </dl>
+                                                    <hr>
                                                 </c:forEach>
-                                                <hr>
-                                            </c:forEach>
+
                                         </td>
                                     </c:forEach>
                                 </tr>
@@ -212,8 +216,8 @@
 <script src="../js/bootstrap.js"></script>
 <%--<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>--%>
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
-<%--<!-- <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script> -->--%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
 </html>
