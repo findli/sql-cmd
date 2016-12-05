@@ -176,12 +176,12 @@
 
                                                 <c:forEach var="deal" items="${dealService.getAllDealsByStage(stage.title)}">
                                                     <dl>
-                                                    <dt><c:out value="${deal.getTitle()}"/></dt>
-                                                    <dd><c:out value="${deal.getBudget()}"/> $</dd>
-                                                    <dd><c:out value="${deal.getCompany().getTitle()}"/></dd>
-                                                    <c:forEach var="contact" items="${dealService.getContactsByDealName(deal.title)}">
-                                                        <dd><c:out value="${contact.getlName()}"/></dd>
-                                                    </c:forEach>
+                                                        <dt><b style="color: #2b669a"><c:out value="${deal.getTitle()}"/></b></dt>
+                                                        <dd><c:out value="${deal.getBudget()}"/> $</dd>
+                                                        <dd><c:out value="${deal.getCompany().getTitle()}"/></dd>
+                                                        <c:forEach var="contact" items="${dealService.getContactsByDealName(deal.title)}">
+                                                            <dd><c:out value="${contact.getlName()}"/></dd>
+                                                        </c:forEach>
                                                     </dl>
                                                     <hr>
                                                 </c:forEach>
