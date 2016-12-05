@@ -1,6 +1,7 @@
 package com.becomejavasenior.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 public class Contact implements Serializable {
@@ -14,6 +15,12 @@ public class Contact implements Serializable {
     private String email;
     private User responsibleUser;
     private boolean isDeleted;
+    private List<Note> contactNote;
+    private List<Tag> contactTag;
+    private List<Task> contactTask;
+    private List<Deal> contactDeal;
+    private List<EventHistory> contactEvent;
+    private List<Phone> contactPhone;
 
     public Contact() {
     }
@@ -88,6 +95,58 @@ public class Contact implements Serializable {
 
     public void setDeleted(boolean deleted) {
         this.isDeleted = deleted;
+    }
+
+    public void setContactNote(List<Note> contactNote) {
+        this.contactNote = contactNote;
+    }
+
+    public List<Note> getContactNote() {
+        return contactNote;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public List<Tag> getContactTag() {
+        return contactTag;
+    }
+
+    public void setContactTag(List<Tag> contactTag) {
+        this.contactTag = contactTag;
+    }
+
+    public List<Task> getContactTask() {
+        return contactTask;
+    }
+
+    public void setContactTask(List<Task> contactTask) {
+        this.contactTask = contactTask;
+    }
+
+    public List<Deal> getContactDeal() {
+        return contactDeal;
+    }
+
+    public void setContactDeal(List<Deal> contactDeal) {
+        this.contactDeal = contactDeal;
+    }
+
+    public List<EventHistory> getContactEvent() {
+        return contactEvent;
+    }
+
+    public void setContactEvent(List<EventHistory> contactEvent) {
+        this.contactEvent = contactEvent;
+    }
+
+    public List<Phone> getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(List<Phone> contactPhone) {
+        this.contactPhone = contactPhone;
     }
 
     @Override
