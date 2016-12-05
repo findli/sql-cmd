@@ -173,19 +173,17 @@
                                 <tr>
                                     <c:forEach var="stage" items="${stageList}">
                                         <td>
-
-                                                <c:forEach var="deal" items="${dealService.getAllDealsByStage(stage.title)}">
-                                                    <dl>
-                                                        <dt><b style="color: #2b669a"><c:out value="${deal.getTitle()}"/></b></dt>
-                                                        <dd><b style="color: #a94442"><c:out value="${deal.getBudget()}"/> $</b></dd>
-                                                        <dd><c:out value="${deal.getCompany().getTitle()}"/></dd>
-                                                        <c:forEach var="contact" items="${dealService.getContactsByDealName(deal.title)}">
-                                                            <dd><c:out value="${contact.getlName()}"/></dd>
-                                                        </c:forEach>
-                                                    </dl>
-                                                    <hr>
-                                                </c:forEach>
-
+                                            <c:forEach var="deal" items="${dealService.getAllDealsByStage(stage.title)}">
+                                                <dl>
+                                                    <dt><b style="color: #2b669a"><c:out value="${deal.getTitle()}"/></b></dt>
+                                                    <dd><b style="color: #a94442"><c:out value="${deal.getBudget()}"/> $</b></dd>
+                                                    <dd><c:out value="${deal.getCompany().getTitle()}"/></dd>
+                                                    <c:forEach var="contact" items="${dealService.getContactsByDealName(deal.title)}">
+                                                        <dd><c:out value="${contact.getlName()}"/></dd>
+                                                    </c:forEach>
+                                                </dl>
+                                                <hr>
+                                            </c:forEach>
                                         </td>
                                     </c:forEach>
                                 </tr>
