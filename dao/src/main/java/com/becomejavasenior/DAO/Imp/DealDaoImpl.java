@@ -42,6 +42,23 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             "  JOIN crm_pallas.contact ON crm_pallas.deal.primary_contact_id = crm_pallas.contact.id\n" +
             "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id ORDER BY dealId DESC\n";
 
+    private static final String SELECT_ALL_CONTACT = "SELECT c1.id AS contactId, c1.first_name, c1.last_name, c1.post AS position, c1.email, c1.skype, c2.id AS companyId, c2.title, cp.phone_number, pt.title AS phone_type\n" +
+            "FROM crm_pallas.deal d\n" +
+            "  INNER JOIN crm_pallas.contact_deal cd ON ( d.id = cd.deal_id  )\n" +
+            "  INNER JOIN crm_pallas.contact c1 ON ( cd.contact_id = c1.id  )\n" +
+            "  INNER JOIN crm_pallas.company c2 ON ( c1.company_id = c2.id  )\n" +
+            "  LEFT OUTER JOIN crm_pallas.contact_phone cp ON ( c1.id = cp.contact_id  )\n" +
+            "  LEFT OUTER JOIN crm_pallas.phone_type pt ON ( cp.phone_type_id = pt.id  ) WHERE d.title =?";
+
+    private static final String SELECT_ALL_STAGES = "SELECT id, title FROM crm_pallas.stage ORDER BY id LIMIT 4";
+
+    private static final String SELECT_ALL_DEAL_BY_STAGE = "SELECT deal.id, deal.title, deal.budget, company.id AS companyId, company.title AS companyName\n" +
+            "  FROM crm_pallas.deal\n" +
+            "  JOIN crm_pallas.company ON crm_pallas.company.id = crm_pallas.deal.company_id\n" +
+            "  WHERE crm_pallas.deal.id IN (SELECT crm_pallas.deal.id\n" +
+            "                  FROM crm_pallas.deal\n" +
+            "                    JOIN crm_pallas.stage ON crm_pallas.deal.stage_id = crm_pallas.stage.id WHERE crm_pallas.stage.title=?)";
+
     @Override
     void createStatement(PreparedStatement preparedStatement, Deal deal) throws DaoException {
         try {
@@ -90,6 +107,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         CompanyDao<Company> company = new CompanyDaoImpl();
         StageDao<Stage> stage = new StageDaoImpl();
         UserDao<User> user = new UserDaoImpl();
+
         try {
             deal.setId(resultSet.getInt("id"));
             deal.setCompany(company.getById(resultSet.getInt("company_id")));
@@ -102,6 +120,103 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             throw new DaoException("Can't get entity from Deal", e);
         }
         return deal;
+    }
+
+    @Override
+    public List<Stage> getAllStage() {
+        List<Stage> stages = new ArrayList<>();
+        Stage stage;
+
+        try (Connection connection = PostgresDAOFactory.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(SELECT_ALL_STAGES)) {
+
+            while (resultSet.next()) {
+
+                stage = new Stage();
+                stage.setId(resultSet.getInt("id"));
+                stage.setTitle(resultSet.getString("title"));
+
+                stages.add(stage);
+            }
+        } catch (SQLException ex) {
+            //logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new DatabaseException(ex);
+        }
+        return stages;
+    }
+
+    @Override
+    public List<Deal> getDealsByStage(String stage) {
+        List<Deal> deals = new ArrayList<>();
+        Deal deal;
+        Company company;
+
+        try (Connection connection = PostgresDAOFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_DEAL_BY_STAGE)) {
+
+            statement.setString(1, stage);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                deal = new Deal();
+                company = new Company();
+
+                deal.setId(resultSet.getInt("id"));
+                deal.setTitle(resultSet.getString("title"));
+                deal.setBudget(resultSet.getInt("budget"));
+                company.setId(resultSet.getInt("companyId"));
+                company.setTitle(resultSet.getString("companyName"));
+                deal.setCompany(company);
+
+                deals.add(deal);
+            }
+        } catch (SQLException ex) {
+            //logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new DatabaseException(ex);
+        }
+
+        return deals;
+    }
+
+    @Override
+    public List<Contact> getContactsByDealName(String dealTitle) {
+        List<Contact> contacts = new ArrayList<>();
+        CompanyDao<Company> company = new CompanyDaoImpl();
+        Contact contact;
+
+        try (Connection connection = PostgresDAOFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_CONTACT)) {
+
+            statement.setString(1, dealTitle);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                contact = new Contact();
+                contact.setId(resultSet.getInt("contactId"));
+                contact.setlName(resultSet.getString("last_name"));
+                contact.setfName(resultSet.getString("first_name"));
+                contact.setPosition(resultSet.getString("position"));
+                contact.setCompany(company.getById(resultSet.getInt("companyId")));
+                contact.setEmail(resultSet.getString("email"));
+                contact.setSkype(resultSet.getString("skype"));
+
+                /*
+                Here you need to add the phone type and the phone to display in the editing form of the Deals
+                 */
+
+                contacts.add(contact);
+            }
+        } catch (SQLException ex) {
+            //logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new DatabaseException(ex);
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
+
+        return contacts;
     }
 
     @Override
