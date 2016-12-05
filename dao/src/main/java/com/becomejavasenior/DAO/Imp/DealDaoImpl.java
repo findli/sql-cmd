@@ -130,27 +130,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         }
         return stages;
     }
-    /*
-    stage = [
-    Deal    id=4,
-            title='terraNo1',
-            company=        id=2,
-                            title='Factory',
-                            phoneNumber='null',
-                            email='null',
-                            website='null',
-                            address=null,
-                            responsibleUser=null},
-            budget=3390,
-            stage=null,
-            responsible_user=null,
-            isDeleted=false,
-            primary_contact_id=null},
-            Deal        id=5,
-                        title='SuperNova',
-                        company=Company{id=3, title='ProBank2', phoneNumber='null', email='null', website='null', address=null, responsibleUser=null}, budget=120, stage=null, responsible_user=null, isDeleted=false, primary_contact_id=null}]
 
-     */
     @Override
     public List<Deal> getDealsByStage(String stage) {
         List<Deal> deals = new ArrayList<>();
