@@ -50,6 +50,7 @@ public class TaskListServlet extends HttpServlet{
                      e.printStackTrace();
                  }
         }
-        request.getRequestDispatcher("/pages/taskList.jsp").forward(request, response);
+        //request.getRequestDispatcher("/pages/taskList.jsp").forward(request, response);
+        response.sendRedirect("/taskList");
     }
 }
