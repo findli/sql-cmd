@@ -121,8 +121,7 @@ public class TaskEditServlet extends HttpServlet{
         }catch (DaoException e){
           e.printStackTrace();
         }
-        //request.getRequestDispatcher("/pages/taskList.jsp").forward(request, response);
-        response.sendRedirect("/taskList");
+        request.getRequestDispatcher("/pages/taskList.jsp").forward(request, response);
     }
 
     private int parseString(String text){

@@ -74,7 +74,7 @@
                 <select class="form-control" name="PeriodInDaysType">
                   <c:forEach var="period" items="${PeriodInDaysTypeList}">
                     <option value="${period.getId()}"><c:out value="${period.getTitle()}"/></option>
-                  </c:forEach>
+                    </c:forEach>
                 </select>
               </div>
             </div>
