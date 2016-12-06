@@ -695,3 +695,16 @@ INSERT INTO crm_pallas.deal( title, company_id, budget, stage_id, responsible_us
 
 INSERT INTO crm_pallas.contact_deal( contact_id, deal_id ) VALUES ( 1, 1 ); 
 
+INSERT INTO crm_pallas.language(id, title, short_title) VALUES ( 2, 'English', 'en');
+INSERT INTO crm_pallas.language(id, title, short_title) VALUES ( 3, 'Russian', 'ru');
+
+INSERT INTO crm_pallas.period_in_days_type(id, title, days_in_period) VALUES (1, 'Сегодня', 1);
+INSERT INTO crm_pallas.period_in_days_type(id, title, days_in_period) VALUES (2, 'Весь день', 1);
+INSERT INTO crm_pallas.period_in_days_type(id, title, days_in_period) VALUES (3, 'Завтра', 1);
+INSERT INTO crm_pallas.period_in_days_type(id, title, days_in_period) VALUES (4, 'Следующая неделя', 7);
+INSERT INTO crm_pallas.period_in_days_type(id, title, days_in_period) VALUES (5, 'Следующий месяц', 30);
+INSERT INTO crm_pallas.period_in_days_type(id, title, days_in_period) VALUES (6, 'Следующий год', 30);
+
+INSERT INTO crm_pallas.task(id, title, task_type_id, description, deadline_date, deadline_time, period_in_days_type_id, period_in_minutes, responsible_user_id, is_finished, is_deleted) VALUES (1, 'Deal1', 1, 'Test Deal', '2015-05-12', '12:24', 1, 30, 1, false, false);
+INSERT INTO crm_pallas.task(id, title, task_type_id, description, deadline_date, deadline_time, period_in_days_type_id, period_in_minutes, responsible_user_id, is_finished, is_deleted) VALUES (2, 'Deal2', 2, 'Test Deal2', '2016-08-12', '12:24', 2, 30, 2, false, false);
+INSERT INTO crm_pallas.task(id, title, task_type_id, description, deadline_date, deadline_time, period_in_days_type_id, period_in_minutes, responsible_user_id, is_finished, is_deleted) VALUES (3, 'Contact', 3, 'Test Task', '2016-10-08', '15:24', 3, 30, 3, false, false);
