@@ -1,5 +1,10 @@
 package com.becomejavasenior.servlets;
 
+import com.becomejavasenior.bean.Contact;
+import com.becomejavasenior.service.ContactService;
+import com.becomejavasenior.service.impl.ContactServiceImpl;
+import org.apache.log4j.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +14,11 @@ import java.io.IOException;
 
 @WebServlet(name = "contactEditServlet", urlPatterns = "/contactEdit")
 public class ContactEditServlet extends HttpServlet {
+
+    public static Logger log = Logger.getLogger(ContactEditServlet.class);
+
+    ContactService contactService = new ContactServiceImpl();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.sendRedirect("/pages/contact_edit.jsp");
