@@ -99,7 +99,8 @@ public class TaskAddServlet extends HttpServlet {
         }catch (DaoException e){
           e.printStackTrace();
         }
-        request.getRequestDispatcher("/pages/taskList.jsp").forward(request, response);
+        //request.getRequestDispatcher("/pages/taskList.jsp").forward(request, response);
+        response.sendRedirect("/taskList");
     }
 
     private int parseString(String text){
