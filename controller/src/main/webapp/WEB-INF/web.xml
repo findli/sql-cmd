@@ -25,4 +25,8 @@
         <location>/pages/errorsPage.jsp</location> // страница для всяческих ошибок
     </error-page>
 
+    <error-page>
+        <location>/pages/errorsPage.jsp</location> // страница для всяческих ошибок
+    </error-page>
+
 </web-app>
