@@ -51,7 +51,7 @@
                     <!--Add deal-->
                     <div class="forms--nDeal">
                         <fieldset>
-                            <form class="form-horizontal">
+                        <form class="form-horizontal">
                             <h2>Edit deal</h2><br>
 
                             <div class="form-group">
@@ -293,10 +293,8 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Address </label>
                                 <div class="col-sm-9">
-                                    <%--<textarea class="form-control" value="${company.getAddress()}"--%>
-                                              <%--placeholder="хз пока не получилось" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>--%>
-                                        <input onclick="location.href='#modalAddAddress'" class="formAddBut" type="button"
-                                               value="Edit address">
+                                    <input onclick="location.href='#modalEditAddress'" class="formAddBut" type="button"
+                                           value="Edit address">
                                 </div>
                             </div>
 
@@ -308,7 +306,7 @@
                             </div>
                             <span id="result2" style="color:red"></span>
                             <!--Modal window contact-->
-                            <div id="modalAddAddress" class="modalDialog">
+                            <div id="modalEditAddress" class="modalDialog">
                                 <%--<form id="add_address_form">--%>
                                 <div style="height: 300px;">
                                     <header>
