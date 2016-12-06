@@ -11,29 +11,6 @@
     <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
-
-    <%--<script type="text/javascript">--%>
-        <%--$(function(){--%>
-            <%--$('#bttNewDeal').click(function(){--%>
-
-                <%--var newDeal = $('#dealNewName').val();--%>
-                <%--$.ajax({--%>
-                    <%--type: 'POST',--%>
-                    <%--data: {--%>
-                        <%--newDeal : newDeal,--%>
-                        <%--action : 'editDealDeal',--%>
-                        <%--idDeal : ${idDeal}--%>
-                    <%--},--%>
-                    <%--url: '/dealEdit2',--%>
-                    <%--success: function(result) {--%>
-                        <%--$('#result1').html(result);--%>
-                    <%--}--%>
-                <%--})--%>
-            <%--});--%>
-        <%--});--%>
-    <%--</script>--%>
-
-
     <title>Edit deal</title>
 </head>
 <body>
@@ -62,7 +39,7 @@
                 <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
                 <li><a href="/contact" target="_self">Contacts</a></li>
-                <li><a href="/taskList" target="_self">Tasks</a></li>
+                <li><a href="#" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
                 <li><a href="#" target="_self">Settings</a></li>
             </ul>
@@ -70,13 +47,11 @@
 
         <div class="wrapper__aboutCompany">
             <div class="forms">
-                <%--<form class="form-horizontal" role="form" method="post" action="/dealEdit" id="dealForm2"--%>
-                      <%--enctype="multipart/form-data">--%>
 
                     <!--Add deal-->
                     <div class="forms--nDeal">
                         <fieldset>
-                            <form class="form-horizontal">
+                        <form class="form-horizontal">
                             <h2>Edit deal</h2><br>
 
                             <div class="form-group">
@@ -141,7 +116,7 @@
                     <!--Edit contact-->
                     <div class="forms--nDeal">
                         <form class="form-horizontal">
-                            <h2>Edit contact</h2><p style="color: #2b669a">не реализовано</p><br>
+                            <h2>Edit contact</h2><br>
 
                             <!-- Навигация -->
 
@@ -318,8 +293,8 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Address </label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" value="${company.getAddress()}"
-                                              placeholder="хз пока не получилось" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>
+                                    <input onclick="location.href='#modalEditAddress'" class="formAddBut" type="button"
+                                           value="Edit address">
                                 </div>
                             </div>
 
@@ -330,15 +305,39 @@
                                 </div>
                             </div>
                             <span id="result2" style="color:red"></span>
+                            <!--Modal window contact-->
+                            <div id="modalEditAddress" class="modalDialog">
+                                <%--<form id="add_address_form">--%>
+                                <div style="height: 300px;">
+                                    <header>
+                                        <div class="wrapper__modal1Title">
+                                            <div><i class="fa fa-industry"></i></div>
+                                            <h3>Edit address</h3>
+                                        </div>
+                                    </header>
+                                    <p>Country <input type="text" class="modalInput" id="AddressCountry" value="${address.getCountry()}"></p>
+                                    <p>City <input  type="text" class="modalInput" id="AddressCity" value="${address.getCity()}"></p>
+                                    <p>Street <input type="text" class="modalInput" id="AddressStreet" value="${address.getStreet()}"></p>
+                                    <p>zip code <input type="text" class="modalInput" id="AddressZipcode" value="${address.getZipcode()}"></p>
+                                    <p>Building number <input type="text" class="modalInput" id="AddressBuilding" value="${address.getBuildNum()}"></p>
+                                    <p>office room <input type="text" class="modalInput" id="AddressRoom" value="${address.getOfficeRoom()}"></p>
+                                    <%--<input class="modalBut" type="button" value="Save contact" onclick="add_contact();">--%>
+                                    <input class="modalBut" onclick="location.href='#close'" type="button"
+                                           value="Save">
+                                </div>
+                                <%--</form>--%>
+                            </div>
+                            <!--End-->
 
                         </form>
 
                     </div>
 
+
                         <!--Add task-->
                     <div class="forms--nDeal--Task">
                         <form class="form-horizontal">
-                            <h2>Edit task</h2> <p style="color: #2b669a">не реализовано</p><br>
+                            <h2>Edit task</h2><br>
 
                             <!-- Навигация -->
                             <ul class="nav nav-tabs" role="tablist">
@@ -372,8 +371,6 @@
                         </form>
 
                     </div>
-
-                <%--</form>--%>
 
             </div>
         </div>

@@ -47,6 +47,39 @@ $(function(){
             }
         });
     });
+    $('#bttAddCompany').click(function () {
+
+        var title = $('#companyName').val();
+        var phone = $('#companyPhone').val();
+        var web = $('#companyWeb').val();
+        var email = $('#companyEmail').val();
+        var country = $('#AddressCountry').val();
+        var city = $('#AddressCity').val();
+        var street = $('#AddressStreet').val();
+        var zipcode = $('#AddressZipcode').val();
+        var building = $('#AddressBuilding').val();
+        var room = $('#AddressRoom').val();
+        $.ajax({
+            type: 'POST',
+            data: {
+                title : title,
+                phone : phone,
+                web : web,
+                email : email,
+                country : country,
+                city : city,
+                street : street,
+                zipcode : zipcode,
+                building : building,
+                room : room,
+                action: 'addDealCompany'
+            },
+            url: '/dealCreate2',
+            success:function(result) {
+                $('#result3').html(result);
+            }
+        });
+    })
 });
 
 function add_contact() {
