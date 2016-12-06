@@ -7,6 +7,7 @@ import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.ContactService;
 import org.apache.log4j.Logger;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 public class ContactServiceImpl implements ContactService {
@@ -53,8 +54,23 @@ public class ContactServiceImpl implements ContactService {
 
 
 
+        User user = responsibleUserWithId(contact.getResponsibleUser());
+        contact.setResponsibleUser(user);
 
         contactDao.create(contact);
+    }
+
+    public User responsibleUserWithId(User user) throws ClassNotFoundException, DaoException {
+
+        List<User> userList = userDao.getAll();
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getlName().equals(user.getlName())){
+                user = userList.get(i);
+                break;
+            }
+        }
+
+        return user;
     }
 
 }

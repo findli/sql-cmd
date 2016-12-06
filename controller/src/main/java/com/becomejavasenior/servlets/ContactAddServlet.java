@@ -25,9 +25,20 @@ public class ContactAddServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
+        ContactService contactService = new ContactServiceImpl();
 
+        List<Contact> contactList = null;
 
-        response.sendRedirect("/pages/contact_add.jsp");
+        try {
+            contactList = contactService.getAll();
+        } catch (DaoException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        session.setAttribute("contactList", contactList);
+        request.getRequestDispatcher("/pages/contact_add.jsp").forward(request, response);
 
     }
 
@@ -50,6 +61,8 @@ public class ContactAddServlet extends HttpServlet {
         } catch (ClassNotFoundException e){
 
         }
+
+        response.sendRedirect("/contact");
     }
 
     private Contact getContactFromRequest(HttpServletRequest request){
@@ -58,6 +71,7 @@ public class ContactAddServlet extends HttpServlet {
         contact.setfName(request.getParameter("fName"));
         contact.setlName(request.getParameter("lName"));
         contact.setPosition(request.getParameter("Post"));
+     //TODO:   contact.setContactPhone(request.getParameter("formPhone"));
         contact.setEmail(request.getParameter("Email"));
         contact.setSkype(request.getParameter("Skype"));
 
@@ -88,6 +102,7 @@ public class ContactAddServlet extends HttpServlet {
 
     private Tag getTagFromRequest(HttpServletRequest request){
         Tag tag = new Tag();
+        tag.setTitle(request.getParameter("companyTag"));
 
         return tag;
     }
