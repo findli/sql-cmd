@@ -146,21 +146,25 @@
                             <!-- Навигация -->
 
                             <ul class="nav nav-tabs" role="tablist">
+                                <c:set var="i" value="${0}"/>
                                 <c:forEach items="${contacts}" var="contact">
-                                    <c:if test="${contact.id == 1}">
+
+                                    <c:if test="${i == 0}">
                                         <li class="active"><a href="#${contact.getlName()}" aria-controls="${contact.getlName()}" role="tab" data-toggle="tab">${contact.getlName()}</a></li>
                                     </c:if>
-                                    <c:if test="${contact.id > 1}">
+                                    <c:if test="${i > 0}">
                                         <li><a href="#${contact.getlName()}" aria-controls="${contact.getlName()}" role="tab" data-toggle="tab">${contact.getlName()}</a></li>
                                     </c:if>
+                                    <c:set var="i" value="${i + 1}"/>
                                 </c:forEach>
                             </ul>
 
                             <!-- Содержимое вкладок -->
                             <div class="tab-content">
                                 <br>
+                                <c:set var="i" value="${0}"/>
                                 <c:forEach items="${contacts}" var="contact">
-                                    <c:if test="${contact.id == 1}">
+                                    <c:if test="${i == 0}">
                                         <div role="tabpanel" class="tab-pane fade in active" id="${contact.getlName()}">
 
                                             <div class="form-group">
@@ -211,7 +215,7 @@
 
                                         </div>
                                     </c:if>
-                                    <c:if test="${contact.id > 1}">
+                                    <c:if test="${i > 0}">
                                         <div role="tabpanel" class="tab-pane fade" id="${contact.getlName()}">
 
                                             <div class="form-group">
@@ -262,6 +266,7 @@
 
                                         </div>
                                     </c:if>
+                                    <c:set var="i" value="${i + 1}"/>
                                 </c:forEach>
 
                                 <div class="form-group">
