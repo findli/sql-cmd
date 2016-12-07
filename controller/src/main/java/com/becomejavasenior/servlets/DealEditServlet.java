@@ -1,6 +1,6 @@
 package com.becomejavasenior.servlets;
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
 import com.becomejavasenior.service.impl.*;
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,44 +25,61 @@ public class DealEditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        HttpSession session = request.getSession();
+
         CompanyService companyService = new CompanyServiceImpl();
         StageService stageService = new StageServiceImpl();
+        UserService userService = new UserServiceImpl();
 
         int idDeal = 1;
         if (request.getParameter("idDeal") != null) {
             idDeal = Integer.parseInt(request.getParameter("idDeal"));
-            System.out.println("id = " + request.getParameter("idDeal"));
-        } else {
-            System.out.println("id = null");
         }
-        HttpSession session = request.getSession();
+
+
 
         dealService = new DealServiceImpl();
         companyService = new CompanyServiceImpl();
 
         Deal deal = null;
         Company company = null;
-        Stage stage = new Stage();
+        Stage stage = null;
         List<Stage> stages = null;
+        List<User> users = null;
 
         try {
             deal = dealService.getById(idDeal);
             company = companyService.getById(deal.getCompany().getId());
             stage = stageService.getById(deal.getStage().getId());
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             e.printStackTrace();
         }
 
         try {
             stages = stageService.getAll();
-        } catch (DAOException e) {
+
+            users = userService.getAll();
+        } catch (DaoException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
+        String stageTitle = deal.getStage().getTitle();
+        session.setAttribute("stageTitle", stageTitle);
+
+        stages.remove(stage.getId()-1);
+
+        String responsibleUser = deal.getResponsibleUser().getlName();
+        users.remove(deal.getResponsibleUser().getId()-1);
+
+
+
+        session.setAttribute("idDeal", idDeal);
         session.setAttribute("stages", stages);
         session.setAttribute("stage", stage);
+        session.setAttribute("responsibleUser", responsibleUser);
+        session.setAttribute("users", users);
         session.setAttribute("company", company);
         session.setAttribute("deal", deal);
         request.getRequestDispatcher("/pages/deal_edit.jsp").forward(request, response);
@@ -71,29 +87,33 @@ public class DealEditServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
 
-        Deal deal = getDealFromRequest(request);
-        Contact contact = getContactFromRequest(request);
-        Task task = getTaskFromRequest(request);
-        Company company = getCompanyFromRequest(request);
-        File attachedFile = getFileFromRequest(request);
-
-        try {
-            dealService.update(deal);
-//            dealService.createNewDeal(deal, contact, task, company, attachedFile);
-        } catch (DAOException e) {
-            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
+//        request.setCharacterEncoding("UTF-8");
+//        response.setContentType("text/html");
+//
+//        Deal deal = getDealFromRequest(request);
+//        Contact contact = getContactFromRequest(request);
+//        Task task = getTaskFromRequest(request);
+//        Company company = getCompanyFromRequest(request);
+//        File attachedFile = getFileFromRequest(request);
+//
+//        try {
+//            dealService.update(deal);
+////            dealService.createNewDeal(deal, contact, task, company, attachedFile);
+//        } catch (DaoException e) {
 //            e.printStackTrace();
-        }
-        response.sendRedirect("/deal");
+////        } catch (ClassNotFoundException e) {
+////            e.printStackTrace();
+//        }
+//        request.getRequestDispatcher("/deal").forward(request, response);
+//        response.sendRedirect("/deal");
     }
     private Deal getDealFromRequest(HttpServletRequest request) {
+
         Deal deal = new Deal();
         deal.setTitle(request.getParameter("dealNewName"));
         System.out.println("deal name = " + deal.getTitle());
+        deal.setTitle("best");
 
         User user = new User();
         user.setlName(request.getParameter("responsibleUser"));

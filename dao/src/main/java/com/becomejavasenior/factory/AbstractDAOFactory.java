@@ -6,15 +6,15 @@ public abstract class AbstractDAOFactory {
 
     public static final int POSTGRESQL = 1;
 
-    public abstract CompanyDAO getCompanyDAO();
-    public abstract ContactDAO getContactDAO();
-    public abstract DealDAO getDealDAO();
-    public abstract TaskDAO getTaskDAO();
-    public abstract UserDAO getUserDAO();
-    public abstract StageDAO getStageDAO();
-    public abstract AddressDAO getAddressDAO();
-    public abstract PeriodInDaysTypeDAO getPeriodInDaysTypeDAO();
-    public abstract TaskTypeDAO getTaskTypeDAO();
+    public abstract CompanyDao getCompanyDAO();
+    public abstract ContactDao getContactDAO();
+    public abstract DealDao getDealDAO();
+    public abstract TaskDao getTaskDAO();
+    public abstract UserDao getUserDAO();
+    public abstract StageDao getStageDAO();
+    public abstract AddressDao getAddressDAO();
+    public abstract PeriodInDaysTypeDao getPeriodInDaysTypeDAO();
+    public abstract TaskTypeDao getTaskTypeDAO();
 
 
     public static AbstractDAOFactory getDAOFactory(int factory) {

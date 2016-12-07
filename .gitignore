@@ -15,16 +15,10 @@ buildNumber.properties
 controller/controller.iml
 dao/dao.iml
 model/model.iml
-<<<<<<< HEAD
 service/service.iml
-<<<<<<< HEAD
 crm-system.iml
-=======
->>>>>>> d45dc0c76d2a132e406cece5fddc0c6661b025d8
-=======
 
 crm-pallas.iml
-crm-system.iml
 .DS_Store
 
 untitled/
@@ -35,5 +29,3 @@ untitled/
 controller.iml
 /lib
 /web
-
->>>>>>> alexander_palko

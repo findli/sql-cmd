@@ -1,10 +1,12 @@
 package com.becomejavasenior.servlets;
 
-import com.becomejavasenior.DAO.DAOException;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.CompanyService;
+import com.becomejavasenior.service.ContactService;
 import com.becomejavasenior.service.DealService;
 import com.becomejavasenior.service.impl.CompanyServiceImpl;
+import com.becomejavasenior.service.impl.ContactServiceImpl;
 import com.becomejavasenior.service.impl.DealServiceImpl;
 
 import javax.servlet.ServletException;
@@ -28,19 +30,20 @@ public class DealCreateServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        CompanyService companyService = new CompanyServiceImpl();
+        ContactService contactService = new ContactServiceImpl();
 
-        List<Company> companyList = null;
+        List<Contact> contactList = null;
 
         try {
-            companyList = companyService.getAll();
-        } catch (DAOException e) {
+
+            contactList = contactService.getAll();
+        } catch (DaoException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        session.setAttribute("companyList", companyList);
+        session.setAttribute("contactList", contactList);
         request.getRequestDispatcher("/pages/deal_add.jsp").forward(request, response);
 
     }
@@ -58,7 +61,7 @@ public class DealCreateServlet extends HttpServlet{
 
         try {
             dealService.createNewDeal(deal, contact, task, company, attachedFile);
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

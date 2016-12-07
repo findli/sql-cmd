@@ -15,15 +15,14 @@ public class Contact implements Serializable {
     private String email;
     private User responsibleUser;
     private boolean isDeleted;
-    private List<Task> tasks;
-    private List<EventHistory> events;
-    private List<Phone> phoneNumbers;
+    private List<Note> contactNote;
+    private List<Tag> contactTag;
+    private List<Task> contactTask;
+    private List<Deal> contactDeal;
+    private List<EventHistory> contactEvent;
+    private List<Phone> contactPhone;
 
     public Contact() {
-    }
-
-    public boolean isDeleted() {
-        return isDeleted;
     }
 
     public int getId() {
@@ -98,28 +97,56 @@ public class Contact implements Serializable {
         this.isDeleted = deleted;
     }
 
-    public List<Task> getTasks() {
-        return tasks;
+    public void setContactNote(List<Note> contactNote) {
+        this.contactNote = contactNote;
     }
 
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+    public List<Note> getContactNote() {
+        return contactNote;
     }
 
-    public List<EventHistory> getEvents() {
-        return events;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setEvents(List<EventHistory> events) {
-        this.events = events;
+    public List<Tag> getContactTag() {
+        return contactTag;
     }
 
-    public List<Phone> getPhoneNumbers() {
-        return phoneNumbers;
+    public void setContactTag(List<Tag> contactTag) {
+        this.contactTag = contactTag;
     }
 
-    public void setPhoneNumbers(List<Phone> phoneNumbers) {
-        this.phoneNumbers = phoneNumbers;
+    public List<Task> getContactTask() {
+        return contactTask;
+    }
+
+    public void setContactTask(List<Task> contactTask) {
+        this.contactTask = contactTask;
+    }
+
+    public List<Deal> getContactDeal() {
+        return contactDeal;
+    }
+
+    public void setContactDeal(List<Deal> contactDeal) {
+        this.contactDeal = contactDeal;
+    }
+
+    public List<EventHistory> getContactEvent() {
+        return contactEvent;
+    }
+
+    public void setContactEvent(List<EventHistory> contactEvent) {
+        this.contactEvent = contactEvent;
+    }
+
+    public List<Phone> getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(List<Phone> contactPhone) {
+        this.contactPhone = contactPhone;
     }
 
     @Override
@@ -155,11 +182,12 @@ public class Contact implements Serializable {
                 "id=" + id +
                 ", name='" + fName + '\'' +
                 ", Surname='" + lName + '\'' +
-//                ", responsibleUser=" + responsibleUser.getfName() + " " + responsibleUser.getlName() + '\'' +
+                ", responsibleUser=" + responsibleUser.getfName() + " " + responsibleUser.getlName() + '\'' +
                 ", position='" + position + '\'' +
                 ", skype='" + skype + '\'' +
                 ", email='" + email + '\'' +
-//                ", company=" + company.getTitle() +
+                ", company=" + company.getTitle() +
+                ", responsibleUser=" + responsibleUser.getfName() + " " + responsibleUser.getlName() + '\'' +
                 '}';
     }
 }
