@@ -53,7 +53,7 @@
                 <div class="forms">
 
                     <!--Add contact-->
-                        <div class="forms--nCompany">
+                        <div class="forms--nContact">
                             <!--       <form class="form-horizontal">-->
                                      <h2>Contact</h2>
 
@@ -65,15 +65,22 @@
                                      </div>
 
                                      <div class="form-group">
-                                         <label class="col-sm-3 control-label">Tags </label>
+                                         <label class="col-sm-3 control-label">Position </label>
                                          <div class="col-sm-9">
-                                             <input class="form-control" type="text" placeholder="Tags" name="companyTag" id="companyTag">
+                                             <input class="form-control" type="text" placeholder="position" name="position" id="position">
                                          </div>
                                      </div>
 
                                     <div class="form-group">
+                                        <label class="col-sm-3 control-label">Tag </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" placeholder="Tag" name="Tag" id="Tag">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label class="col-sm-3 control-label">Responsible </label>
-                                        <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
+                                        <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser" style="width: 150px;">
                                             <c:forEach var="user" items="${users}">
                                                 <option><c:out value="${user.lName}"/></option>
                                             </c:forEach>
@@ -104,7 +111,7 @@
                                              <input class="form-control" type="text" placeholder="Skype" id="Skype" name="Skype">
                                          </div>
                                      </div>
-
+<!--
                                      <div class="form-group">
                                          <label class="col-sm-3 control-label">Address </label>
                                          <div class="col-sm-9">
@@ -125,73 +132,77 @@
                                              <input type="file" title="Search for a file to add">
                                          </div>
                                      </div>
-
+-->
                                      <div class="form-group">
                                          <div class="col-sm-10">
-                                             <input class="formAddBut" type="button" value="Save">
-                                             <input class="formAddBut" type="button" value="Clean">
+                                             <%--<input class="formAddBut" type="button" value="Save">--%>
+                                             <button>Подтвердить</button>
                                          </div>
                                      </div>
                                      <!--    </form> -->
                               </div>
 
                           <!--Add company-->
-                    <div class="forms--nCompany">
+                    <div class="forms--nContact">
                     <!--    <form class="form-horizontal"> -->
                             <h2>Company</h2>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Name </label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" placeholder="Name company">
-                                </div>
-                            </div>
+                        <!-- Навигация -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="active"><a href="#old" aria-controls="old" role="tab" data-toggle="tab">Old company</a></li>
+                            <li><a href="#new" aria-controls="new" role="tab" data-toggle="tab">New company</a></li>
+                        </ul>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Tags </label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" placeholder="Tag">
-                                </div>
-                            </div>
+                        <!-- Содержимое вкладок -->
+                        <div class="tab-content">
+                            <br>
+                            <div role="tabpanel" class="tab-pane active" id="old">
 
-                            <div class="form-group">
-                                <select class="col-sm-3 form-control">
-                                    <option>Work</option>
-                                    <option>Mobile</option>
-                                    <option>Home</option>
+                                <select class="form-control" style="float: none; width: 250px" id="company" name="company">
+                                    <c:forEach var="company" items="${companyList}">
+                                        <option><c:out value="${company.title}"/></option>
+                                    </c:forEach>
                                 </select>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" name="formPhone" placeholder="Number">
-                                </div>
+
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Email </label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" placeholder="Email">
+                            <div role="tabpanel" class="tab-pane" id="new">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Name: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" placeholder="Name">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Web </label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" placeholder="Url">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Phone: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" placeholder="Phone">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Address </label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" placeholder="Address">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">email: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" placeholder="email">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <div class="col-sm-10">
-                                    <input class="formAddBut" type="button" value="Применить">
-                                    <input class="formAddBut" type="button" value="Очистить">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Web: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" placeholder="Url">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Address: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" placeholder="Address">
+                                    </div>
                                 </div>
                             </div>
+                        </div>
                     <!--    </form> -->
                     </div>
 

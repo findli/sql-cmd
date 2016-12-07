@@ -157,12 +157,21 @@ public class Contact implements Serializable {
         Contact contact = (Contact) o;
 
         if (id != contact.id) return false;
+        if (isDeleted != contact.isDeleted) return false;
         if (fName != null ? !fName.equals(contact.fName) : contact.fName != null) return false;
         if (lName != null ? !lName.equals(contact.lName) : contact.lName != null) return false;
+        if (company != null ? !company.equals(contact.company) : contact.company != null) return false;
         if (position != null ? !position.equals(contact.position) : contact.position != null) return false;
         if (skype != null ? !skype.equals(contact.skype) : contact.skype != null) return false;
-        return email != null ? email.equals(contact.email) : contact.email == null;
-
+        if (email != null ? !email.equals(contact.email) : contact.email != null) return false;
+        if (responsibleUser != null ? !responsibleUser.equals(contact.responsibleUser) : contact.responsibleUser != null)
+            return false;
+        if (!contactNote.equals(contact.contactNote)) return false;
+        if (!contactTag.equals(contact.contactTag)) return false;
+        if (!contactTask.equals(contact.contactTask)) return false;
+        if (!contactDeal.equals(contact.contactDeal)) return false;
+        if (!contactEvent.equals(contact.contactEvent)) return false;
+        return contactPhone.equals(contact.contactPhone);
     }
 
     @Override
@@ -170,9 +179,18 @@ public class Contact implements Serializable {
         int result = id;
         result = 31 * result + (fName != null ? fName.hashCode() : 0);
         result = 31 * result + (lName != null ? lName.hashCode() : 0);
+        result = 31 * result + (company != null ? company.hashCode() : 0);
         result = 31 * result + (position != null ? position.hashCode() : 0);
         result = 31 * result + (skype != null ? skype.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (responsibleUser != null ? responsibleUser.hashCode() : 0);
+        result = 31 * result + (isDeleted ? 1 : 0);
+        result = 31 * result + contactNote.hashCode();
+        result = 31 * result + contactTag.hashCode();
+        result = 31 * result + contactTask.hashCode();
+        result = 31 * result + contactDeal.hashCode();
+        result = 31 * result + contactEvent.hashCode();
+        result = 31 * result + contactPhone.hashCode();
         return result;
     }
 
@@ -180,14 +198,14 @@ public class Contact implements Serializable {
     public String toString() {
         return "Contact{" +
                 "id=" + id +
-                ", name='" + fName + '\'' +
-                ", Surname='" + lName + '\'' +
-                ", responsibleUser=" + responsibleUser.getfName() + " " + responsibleUser.getlName() + '\'' +
+                ", fName='" + fName + '\'' +
+                ", lName='" + lName + '\'' +
+                ", company=" + company +
                 ", position='" + position + '\'' +
                 ", skype='" + skype + '\'' +
                 ", email='" + email + '\'' +
-                ", company=" + company.getTitle() +
-                ", responsibleUser=" + responsibleUser.getfName() + " " + responsibleUser.getlName() + '\'' +
+                ", responsibleUser=" + responsibleUser +
+                ", isDeleted=" + isDeleted +
                 '}';
     }
 }
