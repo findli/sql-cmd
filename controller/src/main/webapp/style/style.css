@@ -878,12 +878,46 @@ Forms Filters deal
 /* ==========================================================================
 Forms Contact
 ========================================================================== */
+/*
+.forms--nCompany {
+    width: 450px;
+    margin: 5px 0 0 15px;
+    float: left;
+    min-height: 520px;
+    border: 1px solid blue;
+    padding: 0 5px;
+}
+
+.forms--nCompany input {
+    padding-left: 4px;
+    float: right;
+    font-size: 15px;
+}
+
+.forms--nCompany p {
+    padding: 10px 0 10px 15px;
+    font-size: 18px;
+}
+
+.forms--nCompany a {
+    font-size: 15px;
+    margin-left: 15px;
+}
+
+.forms--nCompany select {
+    margin: 8px 0 4px 13px;
+    height: 30px;
+    width: 80px;
+}
+ */
 
 .forms--nContact {
-    width: 550px;
-    margin: 5px 5px 5px 5px;
+    width: 450px;
+    margin: 5px 0 0 15px;
     float: left;
-    min-height: 250px;
+    height: 650px;
+    border: 1px solid blue;
+    padding: 0 5px;
 }
 
 .forms--nContact input {
@@ -905,7 +939,8 @@ Forms Contact
 
 .forms--nContact select {
     margin: 8px 0 4px 13px;
-    height: 24px;
+    height: 30px;
+    width: 80px;
 }
 
 /* ==========================================================================

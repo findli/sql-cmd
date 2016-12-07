@@ -11,10 +11,19 @@ public class Note implements Serializable {
     private String noteText;
     private User createdUser;
     private Date dateCreate;
-    private List<File> files;
     private boolean isDeleted;
+    private List<File> files;
+
 
     public Note() {
+    }
+
+    public List<File> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<File> files) {
+        this.files = files;
     }
 
     public boolean isDeleted() {
@@ -57,14 +66,6 @@ public class Note implements Serializable {
         this.dateCreate = dateCreate;
     }
 
-    public List<File> getFiles() {
-        return files;
-    }
-
-    public void setFiles(List<File> files) {
-        this.files = files;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,7 +95,7 @@ public class Note implements Serializable {
         return "Note{" +
                 "id=" + id +
                 ", noteText='" + noteText + '\'' +
-                ", createtByUserId=" + createdUser +
+                ", createdUser=" + createdUser +
                 ", dateCreate=" + dateCreate +
                 '}';
     }

@@ -15,15 +15,14 @@ public class Contact implements Serializable {
     private String email;
     private User responsibleUser;
     private boolean isDeleted;
-    private List<Task> tasks;
-    private List<EventHistory> events;
-    private List<Phone> phoneNumbers;
+    private List<Note> contactNote;
+    private List<Tag> contactTag;
+    private List<Task> contactTask;
+    private List<Deal> contactDeal;
+    private List<EventHistory> contactEvent;
+    private List<Phone> contactPhone;
 
     public Contact() {
-    }
-
-    public boolean isDeleted() {
-        return isDeleted;
     }
 
     public int getId() {
@@ -98,28 +97,56 @@ public class Contact implements Serializable {
         this.isDeleted = deleted;
     }
 
-    public List<Task> getTasks() {
-        return tasks;
+    public void setContactNote(List<Note> contactNote) {
+        this.contactNote = contactNote;
     }
 
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+    public List<Note> getContactNote() {
+        return contactNote;
     }
 
-    public List<EventHistory> getEvents() {
-        return events;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setEvents(List<EventHistory> events) {
-        this.events = events;
+    public List<Tag> getContactTag() {
+        return contactTag;
     }
 
-    public List<Phone> getPhoneNumbers() {
-        return phoneNumbers;
+    public void setContactTag(List<Tag> contactTag) {
+        this.contactTag = contactTag;
     }
 
-    public void setPhoneNumbers(List<Phone> phoneNumbers) {
-        this.phoneNumbers = phoneNumbers;
+    public List<Task> getContactTask() {
+        return contactTask;
+    }
+
+    public void setContactTask(List<Task> contactTask) {
+        this.contactTask = contactTask;
+    }
+
+    public List<Deal> getContactDeal() {
+        return contactDeal;
+    }
+
+    public void setContactDeal(List<Deal> contactDeal) {
+        this.contactDeal = contactDeal;
+    }
+
+    public List<EventHistory> getContactEvent() {
+        return contactEvent;
+    }
+
+    public void setContactEvent(List<EventHistory> contactEvent) {
+        this.contactEvent = contactEvent;
+    }
+
+    public List<Phone> getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(List<Phone> contactPhone) {
+        this.contactPhone = contactPhone;
     }
 
     @Override
@@ -130,12 +157,21 @@ public class Contact implements Serializable {
         Contact contact = (Contact) o;
 
         if (id != contact.id) return false;
+        if (isDeleted != contact.isDeleted) return false;
         if (fName != null ? !fName.equals(contact.fName) : contact.fName != null) return false;
         if (lName != null ? !lName.equals(contact.lName) : contact.lName != null) return false;
+        if (company != null ? !company.equals(contact.company) : contact.company != null) return false;
         if (position != null ? !position.equals(contact.position) : contact.position != null) return false;
         if (skype != null ? !skype.equals(contact.skype) : contact.skype != null) return false;
-        return email != null ? email.equals(contact.email) : contact.email == null;
-
+        if (email != null ? !email.equals(contact.email) : contact.email != null) return false;
+        if (responsibleUser != null ? !responsibleUser.equals(contact.responsibleUser) : contact.responsibleUser != null)
+            return false;
+        if (!contactNote.equals(contact.contactNote)) return false;
+        if (!contactTag.equals(contact.contactTag)) return false;
+        if (!contactTask.equals(contact.contactTask)) return false;
+        if (!contactDeal.equals(contact.contactDeal)) return false;
+        if (!contactEvent.equals(contact.contactEvent)) return false;
+        return contactPhone.equals(contact.contactPhone);
     }
 
     @Override
@@ -143,9 +179,18 @@ public class Contact implements Serializable {
         int result = id;
         result = 31 * result + (fName != null ? fName.hashCode() : 0);
         result = 31 * result + (lName != null ? lName.hashCode() : 0);
+        result = 31 * result + (company != null ? company.hashCode() : 0);
         result = 31 * result + (position != null ? position.hashCode() : 0);
         result = 31 * result + (skype != null ? skype.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (responsibleUser != null ? responsibleUser.hashCode() : 0);
+        result = 31 * result + (isDeleted ? 1 : 0);
+        result = 31 * result + contactNote.hashCode();
+        result = 31 * result + contactTag.hashCode();
+        result = 31 * result + contactTask.hashCode();
+        result = 31 * result + contactDeal.hashCode();
+        result = 31 * result + contactEvent.hashCode();
+        result = 31 * result + contactPhone.hashCode();
         return result;
     }
 
@@ -153,13 +198,14 @@ public class Contact implements Serializable {
     public String toString() {
         return "Contact{" +
                 "id=" + id +
-                ", name='" + fName + '\'' +
-                ", Surname='" + lName + '\'' +
-//                ", responsibleUser=" + responsibleUser.getfName() + " " + responsibleUser.getlName() + '\'' +
+                ", fName='" + fName + '\'' +
+                ", lName='" + lName + '\'' +
+                ", company=" + company +
                 ", position='" + position + '\'' +
                 ", skype='" + skype + '\'' +
                 ", email='" + email + '\'' +
-//                ", company=" + company.getTitle() +
+                ", responsibleUser=" + responsibleUser +
+                ", isDeleted=" + isDeleted +
                 '}';
     }
 }

@@ -12,7 +12,6 @@ public class Address implements Serializable {
     private int zipcode;
     private String officeRoom;
 
-
     public Address() {
     }
 
