@@ -1,7 +1,5 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.bean.Contact;
-
 import com.becomejavasenior.DAO.CompanyDao;
 import com.becomejavasenior.DAO.ContactDao;
 import com.becomejavasenior.DAO.DaoException;
@@ -29,7 +27,7 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             preparedStatement.setInt(6, contact.getCompany().getId());
             preparedStatement.setInt(7, contact.getResponsibleUser().getId());
 //            preparedStatement.setDate(8, new Date(contact.getCreated().getTime()) );
-            preparedStatement.setBoolean(8, contact.is_deleted());
+            preparedStatement.setBoolean(8, contact.isDeleted());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -47,9 +45,9 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             preparedStatement.setInt(6, contact.getCompany().getId());
             preparedStatement.setInt(7, contact.getResponsibleUser().getId());
 //            preparedStatement.setDate(8, new Date(contact.getUpdated().getTime()));
-            preparedStatement.setBoolean(8, contact.is_deleted());
+            preparedStatement.setBoolean(8, contact.isDeleted());
             preparedStatement.setInt(9, contact.getId());
-        } catch (SQLException e) {
+            } catch (SQLException e) {
             e.printStackTrace();
         }
     }

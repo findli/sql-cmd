@@ -34,7 +34,7 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
 
             throw new DaoException("Can't create statement for Company", e);
 
-       }
+        }
     }
 
     @Override
@@ -64,11 +64,11 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
         Company company = new Company();
         List<Company> companies = getAll();
         for (int i = 0; i < companies.size(); ++i) {
-            if(companies.get(i).getTitle().equals(str)) {
-                company = companies.get(i);
-                break;
+                if(companies.get(i).getTitle().equals(str)) {
+                        company = companies.get(i);
+                        break;
+                    }
             }
-        }
         return company;
     }
 
@@ -90,7 +90,6 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             company.setDeleted(resultSet.getBoolean("is_deleted"));
 
         } catch (SQLException e){
-
             throw new DaoException("Can't get entity from Company", e);
         }
         return company;
