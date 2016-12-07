@@ -30,7 +30,6 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             preparedStatement.setInt(7, contact.getResponsibleUser().getId());
 //            preparedStatement.setDate(8, new Date(contact.getCreated().getTime()) );
             preparedStatement.setBoolean(8, contact.is_deleted());
-            preparedStatement.setInt(9, contact.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
