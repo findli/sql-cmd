@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@Deprecated
 @WebServlet(name = "dealCreate2Servlet", urlPatterns = "/dealCreate2")
 @MultipartConfig(maxFileSize = 102400)
 public class DealCreate2Servlet extends HttpServlet {
