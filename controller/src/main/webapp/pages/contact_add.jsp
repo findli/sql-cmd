@@ -58,23 +58,16 @@
                                      <h2>Contact</h2>
 
                                      <div class="form-group">
-                                         <label class="col-sm-3 control-label">First Name </label>
+                                         <label class="col-sm-3 control-label">Name </label>
                                          <div class="col-sm-9">
-                                             <input class="form-control" type="text" placeholder="fName" name="fName" id="fName">
-                                         </div>
-                                     </div>
-
-                                     <div class="form-group">
-                                         <label class="col-sm-3 control-label">Last Name </label>
-                                         <div class="col-sm-9">
-                                             <input class="form-control" type="text" placeholder="lName" name="lName" id="lName">
+                                             <input class="form-control" type="text" placeholder="Name" name="Name" id="Name">
                                          </div>
                                      </div>
 
                                      <div class="form-group">
                                          <label class="col-sm-3 control-label">Tags </label>
                                          <div class="col-sm-9">
-                                             <input class="form-control" type="text" placeholder="companyTag" name="companyTag" id="companyTag">
+                                             <input class="form-control" type="text" placeholder="Tags" name="companyTag" id="companyTag">
                                          </div>
                                      </div>
 
@@ -136,6 +129,7 @@
                                      <div class="form-group">
                                          <div class="col-sm-10">
                                              <input class="formAddBut" type="button" value="Save">
+                                             <input class="formAddBut" type="button" value="Clean">
                                          </div>
                                      </div>
                                      <!--    </form> -->
