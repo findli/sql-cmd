@@ -123,6 +123,15 @@ public class Company implements Serializable {
         this.contacts = contacts;
     }
 
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
