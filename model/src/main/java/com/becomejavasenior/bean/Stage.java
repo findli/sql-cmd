@@ -1,6 +1,7 @@
 package com.becomejavasenior.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Stage implements Serializable{
 
@@ -9,6 +10,7 @@ public class Stage implements Serializable{
     private String color;
     private int priority;
     private boolean isDeletable;
+    private List<Deal> deals;
 
     public Stage(){
 
@@ -52,6 +54,22 @@ public class Stage implements Serializable{
 
     public void setDeletable(boolean deletable) {
         this.isDeletable = deletable;
+    }
+
+    public void setIsDeletable(boolean isDeletable) {
+        this.isDeletable = isDeletable;
+    }
+
+    public void setDeals(List<Deal> deals) {
+        this.deals = deals;
+    }
+
+    public boolean isDeletable() {
+        return isDeletable;
+    }
+
+    public List<Deal> getDeals() {
+        return deals;
     }
 
     @Override

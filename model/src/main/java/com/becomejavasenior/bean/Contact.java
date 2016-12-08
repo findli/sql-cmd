@@ -18,6 +18,8 @@ public class Contact implements Serializable {
     private List<Task> tasks;
     private List<EventHistory> events;
     private List<Phone> phoneNumbers;
+    private List<Note> contactNotes;
+    private List<Phone> phones;
 
     public Contact() {
     }
@@ -120,6 +122,26 @@ public class Contact implements Serializable {
 
     public void setPhoneNumbers(List<Phone> phoneNumbers) {
         this.phoneNumbers = phoneNumbers;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public void setContactNotes(List<Note> contactNotes) {
+        this.contactNotes = contactNotes;
+    }
+
+    public List<Note> getContactNotes() {
+        return contactNotes;
+    }
+
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
+    }
+
+    public List<Phone> getPhones() {
+        return phones;
     }
 
     @Override
