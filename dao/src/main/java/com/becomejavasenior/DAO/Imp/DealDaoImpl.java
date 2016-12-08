@@ -53,8 +53,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             preparedStatement.setInt(4, deal.getStage().getId());
             preparedStatement.setInt(5, deal.getResponsibleUser().getId());
             preparedStatement.setBoolean(6, deal.isDeleted());
-            preparedStatement.setInt(7, deal.getPrimaryContact().getId());
-            preparedStatement.setTimestamp(8, new Timestamp(deal.getCreateDate().getTime()));
+            preparedStatement.setTimestamp(7, new Timestamp(deal.getCreateDate().getTime()));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,8 +71,6 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             preparedStatement.setInt(5, deal.getResponsibleUser().getId());
             preparedStatement.setBoolean(6, deal.isDeleted());
             preparedStatement.setInt(7, deal.getId());
-//            preparedStatement.setInt(7, deal.getPrimaryContact().getId());
-//            preparedStatement.setTimestamp(8, new Timestamp(deal.getCreateDate().getTime()));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -216,7 +213,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
 
     @Override
     String getCreateQuery() {
-        return DataBaseUtil.getQuery("INSERT INTO crm_pallas.deal (title, company_id, budget, stage_id, responsible_user_id,  is_deleted, primary_contact_id, date_create) values (?,?,?,?,?,?,?,?)");
+        return DataBaseUtil.getQuery("INSERT INTO crm_pallas.deal (title, company_id, budget, stage_id, responsible_user_id,  is_deleted, date_create) values (?,?,?,?,?,?,?)");
     }
 
     @Override
@@ -280,8 +277,6 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 stage.setId(resultSet.getInt("stage_id"));
                 deal.setStage(stage);
                 deal.setStage(stage);
-                contact.setId(resultSet.getInt("primary_contact_id"));
-                deal.setPrimaryContact(contact);
                 deal.setCreateDate(resultSet.getDate("date_create"));
 
                 deals.add(deal);
