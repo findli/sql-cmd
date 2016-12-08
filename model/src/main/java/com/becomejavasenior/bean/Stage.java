@@ -82,6 +82,7 @@ public class Stage implements Serializable{
         if (id != stage.id) return false;
         if (isDeletable != stage.isDeletable) return false;
         if (!title.equals(stage.title)) return false;
+        if (priority != stage.priority) return false;
         return color.equals(stage.color);
 
     }

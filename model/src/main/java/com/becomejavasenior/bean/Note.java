@@ -107,6 +107,11 @@ public class Note implements Serializable {
         if (noteText != null ? !noteText.equals(note.noteText) : note.noteText != null) return false;
         if (createdUser != null ? !createdUser.equals(note.createdUser) : note.createdUser != null)
             return false;
+        if (deal != null ? !deal.equals(note.deal) : note.deal != null) return false;
+        if (contact != null ? !contact.equals(note.contact) : note.contact != null) return false;
+        if (company != null ? !company.equals(note.company) : note.company != null) return false;
+        if (noteText != null ? !noteText.equals(note.noteText) : note.noteText != null) return false;
+        if (isDeleted != note.isDeleted) return false;
         return dateCreate != null ? dateCreate.equals(note.dateCreate) : note.dateCreate == null;
 
     }
@@ -117,6 +122,9 @@ public class Note implements Serializable {
         result = 31 * result + (noteText != null ? noteText.hashCode() : 0);
         result = 31 * result + (createdUser != null ? createdUser.hashCode() : 0);
         result = 31 * result + (dateCreate != null ? dateCreate.hashCode() : 0);
+        result = 31 * result + (deal != null ? deal.hashCode() : 0);
+        result = 31 * result + (contact != null ? contact.hashCode() : 0);
+        result = 31 * result + (company != null ? company.hashCode() : 0);
         return result;
     }
 
@@ -127,6 +135,10 @@ public class Note implements Serializable {
                 ", noteText='" + noteText + '\'' +
                 ", createtByUserId=" + createdUser +
                 ", dateCreate=" + dateCreate +
+                ", dateCreate=" + deal.getTitle() +
+                ", dateCreate=" + contact.getfName() + '\'' + contact.getlName() +
+                ", dateCreate=" + company.getTitle() +
+                ", dateCreate=" + isDeleted +
                 '}';
     }
 }

@@ -156,6 +156,9 @@ public class Contact implements Serializable {
         if (lName != null ? !lName.equals(contact.lName) : contact.lName != null) return false;
         if (position != null ? !position.equals(contact.position) : contact.position != null) return false;
         if (skype != null ? !skype.equals(contact.skype) : contact.skype != null) return false;
+        if (company != null ? !company.equals(contact.company) : contact.company != null) return false;
+        if (responsibleUser != null ? !responsibleUser.equals(contact.responsibleUser) : contact.responsibleUser != null) return false;
+        if (isDeleted != contact.isDeleted) return false;
         return email != null ? email.equals(contact.email) : contact.email == null;
 
     }
@@ -168,6 +171,8 @@ public class Contact implements Serializable {
         result = 31 * result + (position != null ? position.hashCode() : 0);
         result = 31 * result + (skype != null ? skype.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (company != null ? company.hashCode() : 0);
+        result = 31 * result + (responsibleUser != null ? responsibleUser.hashCode() : 0);
         return result;
     }
 
@@ -177,11 +182,12 @@ public class Contact implements Serializable {
                 "id=" + id +
                 ", name='" + fName + '\'' +
                 ", Surname='" + lName + '\'' +
-//                ", responsibleUser=" + responsibleUser.getfName() + " " + responsibleUser.getlName() + '\'' +
+                ", responsibleUser=" + responsibleUser.getfName() + " " + responsibleUser.getlName() + '\'' +
                 ", position='" + position + '\'' +
                 ", skype='" + skype + '\'' +
                 ", email='" + email + '\'' +
-//                ", company=" + company.getTitle() +
+                ", company=" + company.getTitle() +
+                ", company=" + isDeleted +
                 '}';
     }
 }
