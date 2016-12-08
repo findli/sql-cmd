@@ -1,16 +1,9 @@
 package com.becomejavasenior;
 
-import com.becomejavasenior.DAO.DatabaseException;
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Objects;
-import java.util.Properties;
 
 public class DataBaseUtil {
     private static BasicDataSource dataSource;
