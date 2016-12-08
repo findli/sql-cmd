@@ -13,10 +13,10 @@ public class Deal implements Serializable {
     private Stage stage;
     private User responsibleUser;
     private boolean isDeleted;
-    private List<Task> dealTask;
-    private List<Tag> dealTag;
-    private List<Contact> dealContact;
-    private List<Note> dealNote;
+    private List<Task> tasks;
+    private List<Tag> tags;
+    private List<Contact> contacts;
+    private List<Note> notes;
     private Date createDate;
 
     public Deal(){
@@ -24,35 +24,39 @@ public class Deal implements Serializable {
     }
 
     public List<Contact> getDealContact() {
-        return dealContact;
+        return contacts;
     }
 
-    public void setDealContact(List<Contact> dealContact) {
-        this.dealContact = dealContact;
+    public void setDealContacts(List<Contact> dealContact) {
+        this.contacts = dealContact;
     }
 
-    public List<Note> getDealNote() {
-        return dealNote;
+    public void setDealNotes(List<Note> dealNotes){
+        this.notes = dealNotes;
+    }
+
+    public List<Note> getDealNotes() {
+        return notes;
     }
 
     public void setDealNote(List<Note> dealNote) {
-        this.dealNote = dealNote;
+        this.notes = dealNote;
     }
 
-    public List<Tag> getDealTag() {
-        return dealTag;
+    public List<Tag> getDealTags() {
+        return tags;
     }
 
-    public void setDealTag(List<Tag> dealTag) {
-        this.dealTag = dealTag;
+    public void setDealTags(List<Tag> dealTag) {
+        this.tags = dealTag;
     }
 
-    public List<Task> getDealTask() {
-        return dealTask;
+    public List<Task> getDealTasks() {
+        return tasks;
     }
 
-    public void setDealTask(List<Task> dealTask) {
-        this.dealTask = dealTask;
+    public void setDealTasks(List<Task> dealTask) {
+        this.tasks = dealTask;
     }
 
     public Date getCreateDate() {

@@ -10,7 +10,7 @@ public class File {
     private String filePath;
     private byte fileSize;
     private Date dateCreate;
-    private Note fileNote;
+    private Note note;
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
@@ -29,7 +29,7 @@ public class File {
     }
 
     public void setFileNote(Note fileNote) {
-        this.fileNote = fileNote;
+        this.note = fileNote;
     }
 
     public int getId() {
@@ -49,7 +49,7 @@ public class File {
     }
 
     public Note getFileNote() {
-        return fileNote;
+        return note;
     }
 
     public Date getDateCreate() {
