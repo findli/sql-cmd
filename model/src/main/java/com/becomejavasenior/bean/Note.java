@@ -11,8 +11,11 @@ public class Note implements Serializable {
     private String noteText;
     private User createdUser;
     private Date dateCreate;
-    private List<File> files;
+    private Deal deal;
+    private Contact contact;
+    private Company company;
     private boolean isDeleted;
+    private List<File> files;
 
     public Note() {
     }
@@ -45,7 +48,7 @@ public class Note implements Serializable {
         return createdUser;
     }
 
-    public void setCreatedUser(User createdUser) {
+    public void setCreatedUser( User createdUser) {
         this.createdUser = createdUser;
     }
 
@@ -57,12 +60,40 @@ public class Note implements Serializable {
         this.dateCreate = dateCreate;
     }
 
-    public List<File> getFiles() {
-        return files;
+    public void setDeal(Deal dealNote) {
+        this.deal = dealNote;
+    }
+
+    public void setContact(Contact contactNote) {
+        this.contact = contactNote;
+    }
+
+    public void setCompany(Company companyNote) {
+        this.company = companyNote;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public Company getCompany() {
+        return company;
     }
 
     public void setFiles(List<File> files) {
         this.files = files;
+    }
+
+    public List<File> getFiles() {
+        return files;
+    }
+
+    public Deal getDeal() {
+        return deal;
     }
 
     @Override
