@@ -3,6 +3,7 @@ package com.becomejavasenior.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class User implements Serializable {
 
@@ -18,6 +19,13 @@ public class User implements Serializable {
     private String note;
     private Date dateCreate;
     private Language language;
+    private List<Deal> userDeals;
+    private List<Task> userTasks;
+    private List<Company> userCompanys;
+    private List<LoginHistory> userLoginHistory;
+    private List<Contact> userContacts;
+    private List<EventHistory> userEventHistory;
+    private List<Note> userNotes;
 
     public User() {
     }
@@ -117,6 +125,70 @@ public class User implements Serializable {
 
     public void setLanguage(Language language) {
         this.language = language;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    public void setIsNotification(boolean isNotification) {
+        this.isNotification = isNotification;
+    }
+
+    public void setUserDeals(List<Deal> userDeals) {
+        this.userDeals = userDeals;
+    }
+
+    public void setUserTasks(List<Task> userTasks) {
+        this.userTasks = userTasks;
+    }
+
+    public void setUserCompanys(List<Company> userCompanys) {
+        this.userCompanys = userCompanys;
+    }
+
+    public void setUserLoginHistory(List<LoginHistory> userLoginHistory) {
+        this.userLoginHistory = userLoginHistory;
+    }
+
+    public void setUserContacts(List<Contact> userContacts) {
+        this.userContacts = userContacts;
+    }
+
+    public void setUserEventHistory(List<EventHistory> userEventHistory) {
+        this.userEventHistory = userEventHistory;
+    }
+
+    public void setUserNotes(List<Note> userNotes) {
+        this.userNotes = userNotes;
+    }
+
+    public List<Deal> getUserDeals() {
+        return userDeals;
+    }
+
+    public List<Task> getUserTasks() {
+        return userTasks;
+    }
+
+    public List<Company> getUserCompanys() {
+        return userCompanys;
+    }
+
+    public List<LoginHistory> getUserLoginHistory() {
+        return userLoginHistory;
+    }
+
+    public List<Contact> getUserContacts() {
+        return userContacts;
+    }
+
+    public List<EventHistory> getUserEventHistory() {
+        return userEventHistory;
+    }
+
+    public List<Note> getUserNotes() {
+        return userNotes;
     }
 
     @Override
