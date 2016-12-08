@@ -11,19 +11,12 @@ public class Note implements Serializable {
     private String noteText;
     private User createdUser;
     private Date dateCreate;
+    private List<Deal> dealNote;
+    private List<Contact> contactNote;
+    private List<Company> companyNote;
     private boolean isDeleted;
-    private List<File> files;
-
 
     public Note() {
-    }
-
-    public List<File> getFiles() {
-        return files;
-    }
-
-    public void setFiles(List<File> files) {
-        this.files = files;
     }
 
     public boolean isDeleted() {
@@ -54,7 +47,7 @@ public class Note implements Serializable {
         return createdUser;
     }
 
-    public void setCreatedUser(User createdUser) {
+    public void setCreatedUser( User createdUser) {
         this.createdUser = createdUser;
     }
 
@@ -64,6 +57,34 @@ public class Note implements Serializable {
 
     public void setDateCreate(Date dateCreate) {
         this.dateCreate = dateCreate;
+    }
+
+    public void setDealNote(List<Deal> dealNote) {
+        this.dealNote = dealNote;
+    }
+
+    public void setContactNote(List<Contact> contactNote) {
+        this.contactNote = contactNote;
+    }
+
+    public void setCompanyNote(List<Company> companyNote) {
+        this.companyNote = companyNote;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public List<Deal> getDealNote() {
+        return dealNote;
+    }
+
+    public List<Contact> getContactNote() {
+        return contactNote;
+    }
+
+    public List<Company> getCompanyNote() {
+        return companyNote;
     }
 
     @Override
@@ -95,7 +116,7 @@ public class Note implements Serializable {
         return "Note{" +
                 "id=" + id +
                 ", noteText='" + noteText + '\'' +
-                ", createdUser=" + createdUser +
+                ", createtByUserId=" + createdUser +
                 ", dateCreate=" + dateCreate +
                 '}';
     }
