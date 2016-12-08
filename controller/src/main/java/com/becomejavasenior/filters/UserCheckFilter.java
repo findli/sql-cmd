@@ -22,8 +22,8 @@ public class UserCheckFilter implements javax.servlet.Filter {
         User user = (User) session.getAttribute("user");
 
         if (user == null && !LOGIN_ACTION_URI.equals(requestLocal.getRequestURI())) {
-            RequestDispatcher rd = requestLocal.getRequestDispatcher("/login.jsp");
-            rd.forward(requestLocal, response);
+            RequestDispatcher requestDispatcher = requestLocal.getRequestDispatcher("/login.jsp");
+            requestDispatcher.forward(requestLocal, response);
             return;
         }
         chain.doFilter(requestLocal, response);
