@@ -17,7 +17,6 @@ public class Deal implements Serializable {
     private List<Tag> dealTag;
     private List<Contact> dealContact;
     private List<Note> dealNote;
-    private Contact primaryContact;
     private Date createDate;
 
     public Deal(){
@@ -62,14 +61,6 @@ public class Deal implements Serializable {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
-
-    public Contact getPrimaryContact() {
-        return primaryContact;
-    }
-
-    public void setPrimaryContact(Contact primaryContact) {
-        this.primaryContact = primaryContact;
     }
 
     public int getId() {
@@ -169,7 +160,6 @@ public class Deal implements Serializable {
                 ", stage=" + stage +
                 ", responsible_user=" + responsibleUser +
                 ", isDeleted=" + isDeleted +
-                ", primary_contact_id=" + primaryContact +
                 '}';
     }
 }

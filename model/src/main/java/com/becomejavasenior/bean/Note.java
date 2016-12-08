@@ -1,3 +1,4 @@
+
 package com.becomejavasenior.bean;
 
 
@@ -11,13 +12,20 @@ public class Note implements Serializable {
     private String noteText;
     private User createdUser;
     private Date dateCreate;
-    private Deal deal;
-    private Contact contact;
-    private Company company;
+    private List<Deal> dealNote;
+    private List<Contact> contactNote;
+    private List<Company> companyNote;
     private boolean isDeleted;
-    private List<File> files;
 
     public Note() {
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     public int getId() {
@@ -40,7 +48,7 @@ public class Note implements Serializable {
         return createdUser;
     }
 
-    public void setCreatedUser(User createdUser) {
+    public void setCreatedUser( User createdUser) {
         this.createdUser = createdUser;
     }
 
@@ -52,44 +60,32 @@ public class Note implements Serializable {
         this.dateCreate = dateCreate;
     }
 
-    public Deal getDeal() {
-        return deal;
+    public void setDealNote(List<Deal> dealNote) {
+        this.dealNote = dealNote;
     }
 
-    public void setDeal(Deal deal) {
-        this.deal = deal;
+    public void setContactNote(List<Contact> contactNote) {
+        this.contactNote = contactNote;
     }
 
-    public Contact getContact() {
-        return contact;
+    public void setCompanyNote(List<Company> companyNote) {
+        this.companyNote = companyNote;
     }
 
-    public void setContact(Contact contact) {
-        this.contact = contact;
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
-    public Company getCompany() {
-        return company;
+    public List<Deal> getDealNote() {
+        return dealNote;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public List<Contact> getContactNote() {
+        return contactNote;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
-
-    public List<File> getFiles() {
-        return files;
-    }
-
-    public void setFiles(List<File> files) {
-        this.files = files;
+    public List<Company> getCompanyNote() {
+        return companyNote;
     }
 
     @Override
@@ -100,14 +96,11 @@ public class Note implements Serializable {
         Note note = (Note) o;
 
         if (id != note.id) return false;
-        if (isDeleted != note.isDeleted) return false;
         if (noteText != null ? !noteText.equals(note.noteText) : note.noteText != null) return false;
-        if (createdUser != null ? !createdUser.equals(note.createdUser) : note.createdUser != null) return false;
-        if (dateCreate != null ? !dateCreate.equals(note.dateCreate) : note.dateCreate != null) return false;
-        if (deal != null ? !deal.equals(note.deal) : note.deal != null) return false;
-        if (contact != null ? !contact.equals(note.contact) : note.contact != null) return false;
-        if (company != null ? !company.equals(note.company) : note.company != null) return false;
-        return files != null ? files.equals(note.files) : note.files == null;
+        if (createdUser != null ? !createdUser.equals(note.createdUser) : note.createdUser != null)
+            return false;
+        return dateCreate != null ? dateCreate.equals(note.dateCreate) : note.dateCreate == null;
+
     }
 
     @Override
@@ -116,11 +109,6 @@ public class Note implements Serializable {
         result = 31 * result + (noteText != null ? noteText.hashCode() : 0);
         result = 31 * result + (createdUser != null ? createdUser.hashCode() : 0);
         result = 31 * result + (dateCreate != null ? dateCreate.hashCode() : 0);
-        result = 31 * result + (deal != null ? deal.hashCode() : 0);
-        result = 31 * result + (contact != null ? contact.hashCode() : 0);
-        result = 31 * result + (company != null ? company.hashCode() : 0);
-        result = 31 * result + (isDeleted ? 1 : 0);
-        result = 31 * result + (files != null ? files.hashCode() : 0);
         return result;
     }
 
@@ -129,13 +117,8 @@ public class Note implements Serializable {
         return "Note{" +
                 "id=" + id +
                 ", noteText='" + noteText + '\'' +
-                ", createdUser=" + createdUser +
+                ", createtByUserId=" + createdUser +
                 ", dateCreate=" + dateCreate +
-                ", deal=" + deal +
-                ", contact=" + contact +
-                ", company=" + company +
-                ", isDeleted=" + isDeleted +
-                ", files=" + files +
                 '}';
     }
 }
