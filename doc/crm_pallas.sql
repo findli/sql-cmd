@@ -68,7 +68,7 @@ CREATE TABLE crm_pallas.event_object_type (
 	CONSTRAINT pk_event_object_type PRIMARY KEY ( id )
  );
 
-CREATE TABLE crm_pallas.language (
+CREATE TABLE crm_pallas."language" ( 
 	id                   serial  NOT NULL,
 	title                varchar  NOT NULL,
 	short_title          varchar(3)  NOT NULL,
@@ -77,8 +77,8 @@ CREATE TABLE crm_pallas.language (
 
 CREATE TABLE crm_pallas.period_in_days_type ( 
 	id                   serial  NOT NULL,
-	tytle                varchar  NOT NULL,
-	days_in_period       varchar  NOT NULL,
+	title                varchar  NOT NULL,
+	days_in_period       integer  NOT NULL,
 	CONSTRAINT pk_period_in_days_type PRIMARY KEY ( id )
  );
 
@@ -126,11 +126,11 @@ CREATE TABLE crm_pallas."user" (
 	rights               integer  ,
 	photo_path           varchar  ,
 	is_notification_enabled bool  NOT NULL,
-	notes                varchar  ,
+	note                 varchar  ,
 	creation_date_time   timestamp  NOT NULL,
 	language_id          integer  ,
 	CONSTRAINT pk_user PRIMARY KEY ( id ),
-	CONSTRAINT fk_user FOREIGN KEY ( language_id ) REFERENCES crm_pallas.language_( id )    
+	CONSTRAINT fk_user FOREIGN KEY ( language_id ) REFERENCES crm_pallas."language"( id )    
  );
 
 CREATE INDEX idx_user ON crm_pallas."user" ( language_id );
@@ -195,10 +195,12 @@ CREATE TABLE crm_pallas.deal (
 	is_deleted           bool  NOT NULL,
 	created              timestamp  NOT NULL,
 	updated              timestamp  ,
+	primary_contact_id   integer  NOT NULL,
 	CONSTRAINT pk_deal PRIMARY KEY ( id ),
 	CONSTRAINT fk_deal FOREIGN KEY ( responsible_user_id ) REFERENCES crm_pallas."user"( id )    ,
 	CONSTRAINT fk_deal_0 FOREIGN KEY ( stage_id ) REFERENCES crm_pallas.stage( id )    ,
-	CONSTRAINT fk_deal_1 FOREIGN KEY ( company_id ) REFERENCES crm_pallas.company( id )    
+	CONSTRAINT fk_deal_1 FOREIGN KEY ( company_id ) REFERENCES crm_pallas.company( id )    ,
+	CONSTRAINT fk_deal_2 FOREIGN KEY ( primary_contact_id ) REFERENCES crm_pallas.contact( id )    
  );
 
 CREATE INDEX idx_deal ON crm_pallas.deal ( responsible_user_id );
@@ -206,6 +208,8 @@ CREATE INDEX idx_deal ON crm_pallas.deal ( responsible_user_id );
 CREATE INDEX idx_deal_0 ON crm_pallas.deal ( stage_id );
 
 CREATE INDEX idx_deal_1 ON crm_pallas.deal ( company_id );
+
+CREATE INDEX idx_deal_2 ON crm_pallas.deal ( primary_contact_id );
 
 CREATE TABLE crm_pallas.deal_contact ( 
 	deal_id              integer  NOT NULL,
@@ -278,7 +282,7 @@ CREATE TABLE crm_pallas.note (
 	deal_id              integer  ,
 	contact_id           integer  ,
 	company_id           integer  ,
-	is_deleted           integer  NOT NULL,
+	is_deleted           bool  NOT NULL,
 	CONSTRAINT pk_note PRIMARY KEY ( id ),
 	CONSTRAINT fk_note FOREIGN KEY ( deal_id ) REFERENCES crm_pallas.deal( id )    ,
 	CONSTRAINT fk_note_0 FOREIGN KEY ( contact_id ) REFERENCES crm_pallas.contact( id )    ,
@@ -297,7 +301,7 @@ CREATE TABLE crm_pallas.settings (
 	timezone_id          integer  ,
 	currency_id          integer  ,
 	CONSTRAINT pk_settings PRIMARY KEY ( id ),
-	CONSTRAINT fk_settings FOREIGN KEY ( default_language_id ) REFERENCES crm_pallas.language_( id )    ,
+	CONSTRAINT fk_settings FOREIGN KEY ( default_language_id ) REFERENCES crm_pallas."language"( id )    ,
 	CONSTRAINT fk_settings_0 FOREIGN KEY ( timezone_id ) REFERENCES crm_pallas.timezone( id )    ,
 	CONSTRAINT fk_settings_1 FOREIGN KEY ( currency_id ) REFERENCES crm_pallas.currency( id )    
  );
@@ -374,6 +378,4 @@ CREATE TABLE crm_pallas."file" (
  );
 
 CREATE INDEX idx_file ON crm_pallas."file" ( note_id );
-
-ALTER TABLE crm_pallas.deal ADD primary_contact_id INTEGER;
 
