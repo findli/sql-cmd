@@ -64,19 +64,11 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
         Company company = new Company();
         List<Company> companies = getAll();
         for (int i = 0; i < companies.size(); ++i) {
-<<<<<<< HEAD
-                if(companies.get(i).getTitle().equals(str)) {
-                        company = companies.get(i);
-                        break;
-                    }
-            }
-=======
             if(companies.get(i).getTitle().equals(str)) {
                 company = companies.get(i);
                 break;
             }
         }
->>>>>>> 50cf5c182a3dd4372af6b8b7ffa929918c179119
         return company;
     }
 
