@@ -1,7 +1,9 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.DaoException;
+import com.becomejavasenior.DAO.LanguageDao;
 import com.becomejavasenior.DAO.UserDao;
+import com.becomejavasenior.bean.Language;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDAOFactory;
@@ -25,6 +27,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
             preparedStatement.setBoolean(8, user.isNotification());
             preparedStatement.setString(9, user.getNote());
             preparedStatement.setDate(10, (Date) user.getDateCreate());
+            preparedStatement.setInt(11, user.getLanguage().getId());
 //            preparedStatement.setInt(11, user.getLanguage().getId());
 
         } catch (SQLException e) {
@@ -68,6 +71,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     @Override
     User getEntity(ResultSet resultSet) throws DaoException {
         User user = new User();
+        LanguageDao<Language> language = new LanguageDaoImpl();
         try {
             user.setId(resultSet.getInt("id"));
             user.setlName(resultSet.getString("last_name"));
@@ -80,7 +84,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
             user.setNotification(resultSet.getBoolean("is_notification_enabled"));
             user.setNote(resultSet.getString("note"));
             user.setDateCreate(resultSet.getDate("creation_date_time"));
-//            user.setLanguage(resultSet.getInt("language_id"));
+//            user.setLanguage(language.getById(resultSet.getInt("language_id")));
 
         } catch (SQLException e) {
             throw new DaoException("Can't get entity from Deal", e);

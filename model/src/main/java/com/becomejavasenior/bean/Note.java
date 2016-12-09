@@ -20,14 +20,6 @@ public class Note implements Serializable {
     public Note() {
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
-
     public int getId() {
         return id;
     }
@@ -48,7 +40,7 @@ public class Note implements Serializable {
         return createdUser;
     }
 
-    public void setCreatedUser( User createdUser) {
+    public void setCreatedUser(User createdUser) {
         this.createdUser = createdUser;
     }
 
@@ -60,40 +52,44 @@ public class Note implements Serializable {
         this.dateCreate = dateCreate;
     }
 
-    public void setDeal(Deal dealNote) {
-        this.deal = dealNote;
+    public Deal getDeal() {
+        return deal;
     }
 
-    public void setContact(Contact contactNote) {
-        this.contact = contactNote;
-    }
-
-    public void setCompany(Company companyNote) {
-        this.company = companyNote;
-    }
-
-    public void setIsDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setDeal(Deal deal) {
+        this.deal = deal;
     }
 
     public Contact getContact() {
         return contact;
     }
 
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
     public Company getCompany() {
         return company;
     }
 
-    public void setFiles(List<File> files) {
-        this.files = files;
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     public List<File> getFiles() {
         return files;
     }
 
-    public Deal getDeal() {
-        return deal;
+    public void setFiles(List<File> files) {
+        this.files = files;
     }
 
     @Override
@@ -104,16 +100,14 @@ public class Note implements Serializable {
         Note note = (Note) o;
 
         if (id != note.id) return false;
+        if (isDeleted != note.isDeleted) return false;
         if (noteText != null ? !noteText.equals(note.noteText) : note.noteText != null) return false;
-        if (createdUser != null ? !createdUser.equals(note.createdUser) : note.createdUser != null)
-            return false;
+        if (createdUser != null ? !createdUser.equals(note.createdUser) : note.createdUser != null) return false;
+        if (dateCreate != null ? !dateCreate.equals(note.dateCreate) : note.dateCreate != null) return false;
         if (deal != null ? !deal.equals(note.deal) : note.deal != null) return false;
         if (contact != null ? !contact.equals(note.contact) : note.contact != null) return false;
         if (company != null ? !company.equals(note.company) : note.company != null) return false;
-        if (noteText != null ? !noteText.equals(note.noteText) : note.noteText != null) return false;
-        if (isDeleted != note.isDeleted) return false;
-        return dateCreate != null ? dateCreate.equals(note.dateCreate) : note.dateCreate == null;
-
+        return files != null ? files.equals(note.files) : note.files == null;
     }
 
     @Override
@@ -125,6 +119,9 @@ public class Note implements Serializable {
         result = 31 * result + (deal != null ? deal.hashCode() : 0);
         result = 31 * result + (contact != null ? contact.hashCode() : 0);
         result = 31 * result + (company != null ? company.hashCode() : 0);
+
+        result = 31 * result + (isDeleted ? 1 : 0);
+        result = 31 * result + (files != null ? files.hashCode() : 0);
         return result;
     }
 
@@ -133,12 +130,13 @@ public class Note implements Serializable {
         return "Note{" +
                 "id=" + id +
                 ", noteText='" + noteText + '\'' +
-                ", createtByUserId=" + createdUser +
+                ", createdUser=" + createdUser +
                 ", dateCreate=" + dateCreate +
-                ", dateCreate=" + deal.getTitle() +
-                ", dateCreate=" + contact.getfName() + '\'' + contact.getlName() +
-                ", dateCreate=" + company.getTitle() +
-                ", dateCreate=" + isDeleted +
+                ", deal=" + deal +
+                ", contact=" + contact +
+                ", company=" + company +
+                ", isDeleted=" + isDeleted +
+                ", files=" + files +
                 '}';
     }
 }

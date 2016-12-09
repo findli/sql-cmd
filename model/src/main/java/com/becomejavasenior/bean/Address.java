@@ -15,7 +15,6 @@ public class Address implements Serializable {
     private String officeRoom;
     private List<Company> companies;
 
-
     public Address() {
     }
 

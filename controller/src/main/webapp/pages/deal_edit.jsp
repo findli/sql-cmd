@@ -48,214 +48,108 @@
         <div class="wrapper__aboutCompany">
             <div class="forms">
 
-                    <!--Add deal-->
-                    <div class="forms--nDeal">
-                        <fieldset>
-                        <form class="form-horizontal">
-                            <h2>Edit deal</h2><br>
+                <!--Add deal-->
+                <div class="forms--nDeal">
+                    <fieldset>
+                    <form class="form-horizontal">
+                        <h2>Edit deal</h2><br>
 
-                            <div class="form-group">
-                                <%--<span id="idDeal"></span>--%>
-                                <label class="col-sm-3 control-label">Name </label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" value="${deal.getTitle()}" id="dealNewName" name="dealNewName">
-
-                                </div>
+                        <div class="form-group">
+                            <%--<span id="idDeal"></span>--%>
+                            <label class="col-sm-3 control-label">Name </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" value="${deal.getTitle()}" id="dealNewName" name="dealNewName">
 
                             </div>
 
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Tag </label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" placeholder="Tag не реализовано" id="dealTag" name="dealTag">
-                                </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Tag </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Tag не реализовано" id="dealTag" name="dealTag">
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Responsible </label>
-                                <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
-                                    <option>${responsibleUser}</option>
-                                    <c:forEach var="user" items="${users}">
-                                        <option><c:out value="${user.lName}"/></option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Budget </label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" value="${deal.budget}" id="dealBudget" name="dealBudget">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Stage </label>
-                                <select class="col-sm-9 form-control" id="stageDeal" name="stageDeal">
-                                    <option>${stageTitle}</option>
-                                    <c:forEach var="stage" items="${stages}">
-                                        <option><c:out value="${stage.title}"/></option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-
-
-                            <div class="form-group">
-                                <div class="col-sm-10">
-                                        <input type="hidden" id="idDeal" value="${deal.getId()}" />
-                                        <button type="button" class="btn btn-success" id="bttEditDeal">Применить</button>
-                                </div>
-                            </div>
-                            <span id="result1" style="color:red"></span>
-
-                        </form>
-                        </fieldset>
-
-                    </div>
-
-                    <!--Edit contact-->
-                    <div class="forms--nDeal">
-                        <form class="form-horizontal">
-                            <h2>Edit contact</h2><br>
-
-                            <!-- Навигация -->
-
-                            <ul class="nav nav-tabs" role="tablist">
-                                <c:set var="i" value="${0}"/>
-                                <c:forEach items="${contacts}" var="contact">
-
-                                    <c:if test="${i == 0}">
-                                        <li class="active"><a href="#${contact.getlName()}" aria-controls="${contact.getlName()}" role="tab" data-toggle="tab">${contact.getlName()}</a></li>
-                                    </c:if>
-                                    <c:if test="${i > 0}">
-                                        <li><a href="#${contact.getlName()}" aria-controls="${contact.getlName()}" role="tab" data-toggle="tab">${contact.getlName()}</a></li>
-                                    </c:if>
-                                    <c:set var="i" value="${i + 1}"/>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Responsible </label>
+                            <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
+                                <option>${responsibleUser}</option>
+                                <c:forEach var="user" items="${users}">
+                                    <option><c:out value="${user.getlName()}"/></option>
                                 </c:forEach>
-                            </ul>
+                            </select>
+                        </div>
 
-                            <!-- Содержимое вкладок -->
-                            <div class="tab-content">
-                                <br>
-                                <c:set var="i" value="${0}"/>
-                                <c:forEach items="${contacts}" var="contact">
-                                    <c:if test="${i == 0}">
-                                        <div role="tabpanel" class="tab-pane fade in active" id="${contact.getlName()}">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Budget </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" value="${deal.budget}" id="dealBudget" name="dealBudget">
+                            </div>
+                        </div>
 
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">Contact</label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" type="text" value="${contact.getfName()} ${contact.getlName()}">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">Company </label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" type="text" value="${contact.getCompany().getTitle()}">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">Position </label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" type="text" value="${contact.getPosition()}">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <select class="col-sm-3 form-control" style="width: 100px">
-                                                    <option>Work</option>
-                                                    <option>Mobile</option>
-                                                    <option>Home</option>
-                                                </select>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" type="text" name="formPhone" placeholder="Number">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">Email </label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" type="text" value="${contact.getEmail()}">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">Skype </label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" type="text" value="${contact.getSkype()}">
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </c:if>
-                                    <c:if test="${i > 0}">
-                                        <div role="tabpanel" class="tab-pane fade" id="${contact.getlName()}">
-
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">Contact</label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" type="text" value="${contact.getfName()} ${contact.getlName()}">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">Company </label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" type="text" value="${contact.getCompany().getTitle()}">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">Position </label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" type="text" value="${contact.getPosition()}">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <select class="col-sm-3 form-control" style="width: 100px">
-                                                    <option>Work</option>
-                                                    <option>Mobile</option>
-                                                    <option>Home</option>
-                                                </select>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" type="text" name="formPhone" placeholder="Number">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">Email </label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" type="text" value="${contact.getEmail()}">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">Skype </label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" type="text" value="${contact.getSkype()}">
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </c:if>
-                                    <c:set var="i" value="${i + 1}"/>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Stage </label>
+                            <select class="col-sm-9 form-control" id="stageDeal" name="stageDeal">
+                                <option>${stageTitle}</option>
+                                <c:forEach var="stage" items="${stages}">
+                                    <option><c:out value="${stage.title}"/></option>
                                 </c:forEach>
+                            </select>
+                        </div>
 
-                                <div class="form-group">
-                                    <div class="col-sm-10">
-                                        <input class="formAddBut" type="button" value="Добавить">
-                                        <input class="formAddBut" type="button" value="Открепить">
-                                    </div>
-                                </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                    <input type="hidden" id="idDeal" value="${deal.getId()}" />
+                                    <button type="button" class="btn btn-success" id="bttEditDeal">Применить</button>
+                            </div>
+                        </div>
+                        <span id="result1" style="color:red"></span>
+
+                    </form>
+                    </fieldset>
+
+                </div>
+
+                <!--Add task-->
+                <div class="forms--nDeal--Task">
+                    <form class="form-horizontal">
+                        <h2>Edit task</h2><br>
+
+                        <!-- Навигация -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="active"><a href="#task" aria-controls="task" role="tab" data-toggle="tab">Task</a></li>
+                            <li><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">Comment</a></li>
+                            <li><a href="#action" aria-controls="action" role="tab" data-toggle="tab">Action</a></li>
+                            <li><a href="#file" aria-controls="file" role="tab" data-toggle="tab">File</a></li>
+                        </ul>
+
+                        <!-- Содержимое вкладок -->
+                        <div class="tab-content">
+                            <br>
+                            <div role="tabpanel" class="tab-pane active" id="task">
+                                Task
 
                             </div>
-                        </form>
 
-                    </div>
-                    <!--End-->
+                            <div role="tabpanel" class="tab-pane" id="comment">
+                                Comment
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="action">
+                                Action
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="file">
+                                File
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
 
                     <!--Edit company-->
                     <div class="forms--nDeal">
@@ -333,44 +227,152 @@
 
                     </div>
 
+                <!--Edit contact-->
+                <div class="forms--nDeal">
+                    <form class="form-horizontal">
+                        <h2>Edit contact</h2><br>
 
-                        <!--Add task-->
-                    <div class="forms--nDeal--Task">
-                        <form class="form-horizontal">
-                            <h2>Edit task</h2><br>
+                        <!-- Навигация -->
 
-                            <!-- Навигация -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="active"><a href="#task" aria-controls="task" role="tab" data-toggle="tab">Task</a></li>
-                                <li><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">Comment</a></li>
-                                <li><a href="#action" aria-controls="action" role="tab" data-toggle="tab">Action</a></li>
-                                <li><a href="#file" aria-controls="file" role="tab" data-toggle="tab">File</a></li>
-                            </ul>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <c:set var="i" value="${0}"/>
+                            <c:forEach items="${contacts}" var="contact">
 
-                            <!-- Содержимое вкладок -->
-                            <div class="tab-content">
-                                <br>
-                                <div role="tabpanel" class="tab-pane active" id="task">
-                                    Task
+                                <c:if test="${i == 0}">
+                                    <li class="active"><a href="#${contact.getlName()}" aria-controls="${contact.getlName()}" role="tab" data-toggle="tab">${contact.getlName()}</a></li>
+                                </c:if>
+                                <c:if test="${i > 0}">
+                                    <li><a href="#${contact.getlName()}" aria-controls="${contact.getlName()}" role="tab" data-toggle="tab">${contact.getlName()}</a></li>
+                                </c:if>
+                                <c:set var="i" value="${i + 1}"/>
+                            </c:forEach>
+                        </ul>
 
+                        <!-- Содержимое вкладок -->
+                        <div class="tab-content">
+                            <br>
+                            <c:set var="i" value="${0}"/>
+                            <c:forEach items="${contacts}" var="contact">
+                                <c:if test="${i == 0}">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="${contact.getlName()}">
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Contact</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="text" value="${contact.getfName()} ${contact.getlName()}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Company </label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="text" value="${contact.getCompany().getTitle()}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Position </label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="text" value="${contact.getPosition()}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <select class="col-sm-3 form-control" style="width: 100px">
+                                                <option>Work</option>
+                                                <option>Mobile</option>
+                                                <option>Home</option>
+                                            </select>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="text" name="formPhone" placeholder="Number">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Email </label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="text" value="${contact.getEmail()}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Skype </label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="text" value="${contact.getSkype()}">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </c:if>
+                                <c:if test="${i > 0}">
+                                    <div role="tabpanel" class="tab-pane fade" id="${contact.getlName()}">
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Contact</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="text" value="${contact.getfName()} ${contact.getlName()}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Company </label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="text" value="${contact.getCompany().getTitle()}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Position </label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="text" value="${contact.getPosition()}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <select class="col-sm-3 form-control" style="width: 100px">
+                                                <option>Work</option>
+                                                <option>Mobile</option>
+                                                <option>Home</option>
+                                            </select>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="text" name="formPhone" placeholder="Number">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Email </label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="text" value="${contact.getEmail()}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Skype </label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="text" value="${contact.getSkype()}">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </c:if>
+                                <c:set var="i" value="${i + 1}"/>
+                            </c:forEach>
+
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <input class="formAddBut" type="button" value="Добавить">
+                                    <input class="formAddBut" type="button" value="Открепить">
                                 </div>
-
-                                <div role="tabpanel" class="tab-pane" id="comment">
-                                    Comment
-                                </div>
-
-                                <div role="tabpanel" class="tab-pane" id="action">
-                                    Action
-                                </div>
-
-                                <div role="tabpanel" class="tab-pane" id="file">
-                                    File
-                                </div>
-
                             </div>
-                        </form>
 
-                    </div>
+                        </div>
+                    </form>
+
+                </div>
+                <!--End-->
+
+
+
 
             </div>
         </div>
