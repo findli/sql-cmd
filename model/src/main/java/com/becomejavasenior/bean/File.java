@@ -56,6 +56,8 @@ public class File {
         return dateCreate;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -78,6 +80,7 @@ public class File {
         result = 31 * result + (filePath != null ? filePath.hashCode() : 0);
         result = 31 * result + (int) fileSize;
         result = 31 * result + (dateCreate != null ? dateCreate.hashCode() : 0);
+        result = 31 * result + (note != null ? note.hashCode() : 0);
         return result;
     }
 
@@ -90,6 +93,7 @@ public class File {
                 ", filePath='" + filePath + '\'' +
                 ", fileSize=" + fileSize +
                 ", dateCreate=" + dateCreate +
+                ", dateCreate=" + note +
                 '}';
     }
 }
