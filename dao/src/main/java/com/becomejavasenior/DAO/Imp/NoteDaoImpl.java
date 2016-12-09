@@ -1,10 +1,8 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.NoteDao;
+import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DataBaseUtil;
-import com.becomejavasenior.bean.Note;
-import com.becomejavasenior.bean.User;
+import com.becomejavasenior.bean.*;
 import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDAOFactory;
 
@@ -21,6 +19,10 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
             preparedStatement.setInt(2, note.getCreatedUser().getId());
             preparedStatement.setTimestamp(3, new Timestamp(note.getDateCreate().getTime()));
             preparedStatement.setBoolean(4, note.isDeleted());
+            preparedStatement.setInt(5, note.getContact().getId());
+            preparedStatement.setInt(6, note.getCompany().getId());
+            preparedStatement.setInt(7, note.getDeal().getId());
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -34,6 +36,10 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
             preparedStatement.setInt(2, note.getCreatedUser().getId());
             preparedStatement.setTimestamp(3, new Timestamp(note.getDateCreate().getTime()));
             preparedStatement.setBoolean(4, note.isDeleted());
+            preparedStatement.setInt(5, note.getContact().getId());
+            preparedStatement.setInt(6, note.getCompany().getId());
+            preparedStatement.setInt(7, note.getDeal().getId());
+            preparedStatement.setInt(8, note.getId());
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,7 +58,7 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
 
     @Override
     String getCreateQuery() {
-        return DataBaseUtil.getQuery("INSERT INTO crm_pallas.note (note_text, created_by_user_id, creation_date_time) values (?,?,?)");
+        return DataBaseUtil.getQuery("INSERT INTO crm_pallas.note (note_text, created_by_user_id, creation_date_time, is_deleted, contact_id, company_id, deal_id) values (?,?,?,?,?,?,?)");
 
     }
 
@@ -64,7 +70,7 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
     @Override
     String getUpdateQuery() {
         return DataBaseUtil.getQuery("UPDATE crm_pallas.note SET note_text = ?, created_by_user_id = ?, " +
-                "creation_date_time = ? WHERE id = ?");
+                "creation_date_time = ?, is_deleted = ?, contact_id = ?, company_id = ?, deal_id = ? WHERE id = ?");
     }
 
     @Override
@@ -77,6 +83,9 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         List<Note> notes = new ArrayList<>();
         Note note;
         User createdUser;
+        Company company;
+        Contact contact;
+        Deal deal;
 
         try (Connection connection = PostgresDAOFactory.getConnection();
              Statement statement = connection.createStatement();
@@ -86,6 +95,9 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
 
                 note = new Note();
                 createdUser = new User();
+                company = new Company();
+                contact = new Contact();
+                deal = new Deal();
 
                 note.setId(resultSet.getInt("id"));
                 createdUser.setId(resultSet.getInt("created_by_user_id"));
@@ -93,6 +105,12 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
                 note.setNoteText(resultSet.getString("note_text"));
                 note.setDateCreate(resultSet.getDate("creation_date_time"));
                 note.setDeleted(resultSet.getBoolean("is_deleted"));
+                company.setId(resultSet.getInt("company_id"));
+                note.setCompany(company);
+                contact.setId(resultSet.getInt("contact_id"));
+                note.setContact(contact);
+                deal.setId(resultSet.getInt("deal_id"));
+                note.setDeal(deal);
 
                 notes.add(note);
             }
@@ -110,7 +128,26 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
 
     @Override
     Note getEntity(ResultSet resultSet) throws DaoException {
-        return null;
+        Note note = new Note();
+        UserDao<User> user = new UserDaoImpl();
+        CompanyDao<Company> company = new CompanyDaoImpl();
+        ContactDao<Contact> contact = new ContactDaoImpl();
+        DealDao<Deal> deal = new DealDaoImpl();
+
+        try {
+            note.setId(resultSet.getInt("id"));
+            note.setCreatedUser(user.getById(resultSet.getInt("created_by_user_id")));
+            note.setNoteText(resultSet.getString("note_text"));
+            note.setDateCreate(resultSet.getDate("creation_date_time"));
+            note.setDeleted(resultSet.getBoolean("is_deleted"));
+            note.setCompany(company.getById(resultSet.getInt("company_id")));
+            note.setContact(contact.getById(resultSet.getInt("contact_id")));
+            note.setDeal(deal.getById(resultSet.getInt("deal_id")));
+
+        } catch (SQLException e) {
+            throw new DaoException("Can't get entity from Note", e);
+        }
+        return note;
     }
 
 }

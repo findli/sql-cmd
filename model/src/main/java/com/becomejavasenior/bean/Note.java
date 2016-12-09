@@ -11,18 +11,13 @@ public class Note implements Serializable {
     private String noteText;
     private User createdUser;
     private Date dateCreate;
-    private List<File> files;
+    private Deal deal;
+    private Contact contact;
+    private Company company;
     private boolean isDeleted;
+    private List<File> files;
 
     public Note() {
-    }
-
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
     }
 
     public int getId() {
@@ -57,6 +52,38 @@ public class Note implements Serializable {
         this.dateCreate = dateCreate;
     }
 
+    public Deal getDeal() {
+        return deal;
+    }
+
+    public void setDeal(Deal deal) {
+        this.deal = deal;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
     public List<File> getFiles() {
         return files;
     }
@@ -73,11 +100,14 @@ public class Note implements Serializable {
         Note note = (Note) o;
 
         if (id != note.id) return false;
+        if (isDeleted != note.isDeleted) return false;
         if (noteText != null ? !noteText.equals(note.noteText) : note.noteText != null) return false;
-        if (createdUser != null ? !createdUser.equals(note.createdUser) : note.createdUser != null)
-            return false;
-        return dateCreate != null ? dateCreate.equals(note.dateCreate) : note.dateCreate == null;
-
+        if (createdUser != null ? !createdUser.equals(note.createdUser) : note.createdUser != null) return false;
+        if (dateCreate != null ? !dateCreate.equals(note.dateCreate) : note.dateCreate != null) return false;
+        if (deal != null ? !deal.equals(note.deal) : note.deal != null) return false;
+        if (contact != null ? !contact.equals(note.contact) : note.contact != null) return false;
+        if (company != null ? !company.equals(note.company) : note.company != null) return false;
+        return files != null ? files.equals(note.files) : note.files == null;
     }
 
     @Override
@@ -86,6 +116,11 @@ public class Note implements Serializable {
         result = 31 * result + (noteText != null ? noteText.hashCode() : 0);
         result = 31 * result + (createdUser != null ? createdUser.hashCode() : 0);
         result = 31 * result + (dateCreate != null ? dateCreate.hashCode() : 0);
+        result = 31 * result + (deal != null ? deal.hashCode() : 0);
+        result = 31 * result + (contact != null ? contact.hashCode() : 0);
+        result = 31 * result + (company != null ? company.hashCode() : 0);
+        result = 31 * result + (isDeleted ? 1 : 0);
+        result = 31 * result + (files != null ? files.hashCode() : 0);
         return result;
     }
 
@@ -94,8 +129,13 @@ public class Note implements Serializable {
         return "Note{" +
                 "id=" + id +
                 ", noteText='" + noteText + '\'' +
-                ", createtByUserId=" + createdUser +
+                ", createdUser=" + createdUser +
                 ", dateCreate=" + dateCreate +
+                ", deal=" + deal +
+                ", contact=" + contact +
+                ", company=" + company +
+                ", isDeleted=" + isDeleted +
+                ", files=" + files +
                 '}';
     }
 }

@@ -40,7 +40,7 @@
                 <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
                 <li><a href="/contact" target="_self">Contacts</a></li>
-                <li><a href="#" target="_self">Tasks</a></li>
+                <li><a href="/taskList" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
                 <li><a href="#" target="_self">Settings</a></li>
             </ul>
@@ -68,9 +68,9 @@
                             <tbody>
                             <c:forEach var="company" items="${companyList}">
                                 <tr>
-                                    <td><c:out value="${company.getTitle()}"/></td>
-                                    <td><c:out value="${company.getPhoneNumber()}"/></td>
-                                    <td><c:out value="${company.getEmail()}"/></td>
+                                    <td><c:out value="${company.title}"/></td>
+                                    <td><c:out value="${company.phoneNumber}"/></td>
+                                    <td><c:out value="${company.email}"/></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
