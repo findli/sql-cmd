@@ -10,51 +10,7 @@ public class File {
     private String filePath;
     private byte fileSize;
     private Date dateCreate;
-    private Note note;
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public void setFileSize(byte fileSize) {
-        this.fileSize = fileSize;
-    }
-
-    public void setDateCreate(Date dateCreate) {
-        this.dateCreate = dateCreate;
-    }
-
-    public void setFileNote(Note fileNote) {
-        this.note = fileNote;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public byte getFileSize() {
-        return fileSize;
-    }
-
-    public Note getFileNote() {
-        return note;
-    }
-
-    public Date getDateCreate() {
-        return dateCreate;
-    }
 
     @Override
     public boolean equals(Object o) {

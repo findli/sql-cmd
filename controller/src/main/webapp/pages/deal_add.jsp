@@ -51,62 +51,62 @@
             <form class="form-horizontal" role="form" method="post" action="/dealCreate" id="dealCreate"
                   enctype="multipart/form-data">
                 <div class="forms">
-                        <!--Add deal-->
+                    <!--Add deal-->
                     <div class="forms--nDeal">
                         <%--<form class="form-horizontal">--%>
-                              <h2>Add deal</h2>
+                        <h2>Add deal</h2>
 
-                              <div class="form-group">
-                                  <label class="col-sm-3 control-label">Name </label>
-                                  <div class="col-sm-9">
-                                      <input class="form-control" type="text" placeholder="Name" id="dealName" name="dealName">
-                                  </div>
-                              </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Name </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Name" id="dealName" name="dealName">
+                            </div>
+                        </div>
 
-                              <div class="form-group">
-                                  <label class="col-sm-3 control-label">Tag </label>
-                                  <div class="col-sm-9">
-                                      <input class="form-control" type="text" placeholder="Tag" id="dealTag" name="dealTag">
-                                  </div>
-                              </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Tag </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Tag" id="dealTag" name="dealTag">
+                            </div>
+                        </div>
 
-                              <div class="form-group">
-                                  <label class="col-sm-3 control-label">Responsible </label>
-                                  <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
-                                      <c:forEach var="user" items="${users}">
-                                          <option><c:out value="${user.lName}"/></option>
-                                      </c:forEach>
-                                  </select>
-                              </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Responsible </label>
+                            <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
+                                <c:forEach var="user" items="${users}">
+                                    <option><c:out value="${user.lName}"/></option>
+                                </c:forEach>
+                            </select>
+                        </div>
 
-                              <div class="form-group">
-                                  <label class="col-sm-3 control-label">Budget </label>
-                                  <div class="col-sm-9">
-                                      <input class="form-control" type="text" placeholder="$" id="dealBudget" name="dealBudget">
-                                  </div>
-                              </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Budget </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="$" id="dealBudget" name="dealBudget">
+                            </div>
+                        </div>
 
-                              <div class="form-group">
-                                  <label class="col-sm-3 control-label">Comment </label>
-                                  <div class="col-sm-9">
-                                      <textarea class="form-control" placeholder="Message" id="noteDeal" name="noteDeal"></textarea>
-                                  </div>
-                              </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Comment </label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" placeholder="Message" id="noteDeal" name="noteDeal"></textarea>
+                            </div>
+                        </div>
 
-                              <div class="form-group">
-                                  <label class="col-sm-3 control-label">Add files </label>
-                                  <div class="col-sm-9">
-                                      <input type="file" title="Search for a file to add">
-                                  </div>
-                              </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Add files </label>
+                            <div class="col-sm-9">
+                                <input type="file" title="Search for a file to add">
+                            </div>
+                        </div>
 
-                              <div class="form-group">
-                                  <div class="col-sm-10">
-                                      <button>Применить</button>
-                                      <%--<a href="/deal" class="btn btn-primary">Применить</a>--%>
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <button>Применить</button>
+                                <%--<a href="/deal" class="btn btn-primary">Применить</a>--%>
                                 <%--<a href="#" class="btn btn-primary">Очистить</a>--%>
-                                  </div>
-                              </div>
+                            </div>
+                        </div>
                         <%--</form>--%>
                     </div>
 
@@ -182,26 +182,26 @@
                     <!--Add company-->
                     <div class="forms--nDeal">
                         <%--<form class="form-horizontal">--%>
-                            <h2>Add company</h2>
+                        <h2>Add company</h2>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Name </label>
-                                <div class="col-sm-9">
-                                    <select class="form-control" style="float: none; width: 250px" id="companyDeal" name="companyDeal">
-                                        <c:forEach var="company" items="${companyList}">
-                                            <option><c:out value="${company.getTitle()}"/></option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Name </label>
+                            <div class="col-sm-9">
+                                <select class="form-control" style="float: none; width: 250px" id="companyDeal" name="companyDeal">
+                                    <c:forEach var="company" items="${companyList}">
+                                        <option><c:out value="${company.getTitle()}"/></option>
+                                    </c:forEach>
+                                </select>
                             </div>
-                            <%--<div class="form-group">--%>
-                                <%--<label class="col-sm-3 control-label">Address </label>--%>
-                                <%--<div class="col-sm-9">--%>
-                                    <input onclick="location.href='#modalAddAddress'" class="formAddBut" type="button"
-                                    value="Add company">
-                                <%--</div>--%>
-                            <%--</div>--%>
-                            <span id="result3" style="color:red"></span>
+                        </div>
+                        <%--<div class="form-group">--%>
+                        <%--<label class="col-sm-3 control-label">Address </label>--%>
+                        <%--<div class="col-sm-9">--%>
+                        <input onclick="location.href='#modalAddAddress'" class="formAddBut" type="button"
+                               value="Add company">
+                        <%--</div>--%>
+                        <%--</div>--%>
+                        <span id="result3" style="color:red"></span>
 
                     </div>
 
@@ -272,7 +272,7 @@
             </form>
             <!--Modal window contact-->
             <div id="modalAddAddress" class="modalDialog">
-                <form class="form-horizontal">
+                <form class="form-horizontal" style="height: 400px; position: relative; margin: 10% auto; background: #fff; width: 460px">
                     <div style="height: 300px;">
                         <header>
                             <div class="wrapper__modal1Title">
@@ -292,7 +292,7 @@
                         <p>Building number <input type="text" class="modalInput" id="AddressBuilding" placeholder="Building number"></p>
                         <p>office room <input type="text" class="modalInput" id="AddressRoom" placeholder="office room"></p>
                         <%--<input class="modalBut" onclick="location.href='#close'" type="button"--%>
-                               <%--value="Save">--%>
+                        <%--value="Save">--%>
                         <button onclick="location.href='#close'" type="button" class="btn btn-success" id="bttAddCompany">Применить</button>
                     </div>
                 </form>
@@ -302,9 +302,9 @@
     </div>
 </div>
 <%--<script type="text/javascript">--%>
-    <%--$(function () {--%>
-        <%--$('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
-    <%--});--%>
+<%--$(function () {--%>
+<%--$('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
+<%--});--%>
 <%--</script>--%>
 
 </body>
