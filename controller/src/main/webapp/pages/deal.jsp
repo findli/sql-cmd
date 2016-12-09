@@ -140,7 +140,7 @@
                     <div class="col-md-12">
                             <a href="/funnel" class="btn btn-primary">Funnel</a>
                             <a href="/deal" class="btn btn-primary">List</a>
-                            <a href="/pages/deal_add.jsp" class="btn btn-primary pull-center">Add deal</a>
+                            <a href="/dealCreate" class="btn btn-primary pull-center">Add deal</a>
                     </div>
 
                     <%--<input class="formAddBut" type="button" value="Add deal" align="right">--%>

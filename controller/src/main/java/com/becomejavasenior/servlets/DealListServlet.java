@@ -44,6 +44,7 @@ public class DealListServlet extends HttpServlet {
         session.setAttribute("taskTypeList", taskTypeList);
         session.setAttribute("dealList", dealList);
         response.sendRedirect("/pages/deal.jsp");
+//        request.getRequestDispatcher("/pages/deal.jsp").forward(request, response);
     }
 
 }
