@@ -104,7 +104,7 @@
                             <div class="col-sm-9">
                                 <select class="form-control">
                                     <c:forEach var="user" items="${users}">
-                                        <option><c:out value="${user.lName}"/></option>
+                                        <option><c:out value="${user.getlName()}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -115,7 +115,7 @@
                             <div class="col-sm-9">
                                 <select class="form-control">
                                     <c:forEach var="taskType" items="${taskTypeList}">
-                                        <option><c:out value="${taskType.type}"/></option>
+                                        <option><c:out value="${taskType.getType()}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>

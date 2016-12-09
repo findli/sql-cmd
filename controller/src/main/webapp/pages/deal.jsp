@@ -111,7 +111,7 @@
                             <div class="col-sm-9">
                                 <select class="form-control">
                                     <c:forEach var="user" items="${users}">
-                                        <option><c:out value="${user.lName}"/></option>
+                                        <option><c:out value="${user.getlName()}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>

@@ -22,7 +22,6 @@ public class Company implements Serializable {
     public Company() {
     }
 
-
     public int getId() {
         return id;
     }
@@ -69,10 +68,6 @@ public class Company implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
-    }
-
-    public Boolean getDeleted() {
-        return isDeleted;
     }
 
     public User getResponsibleUser() {
@@ -131,15 +126,6 @@ public class Company implements Serializable {
         return isDeleted;
     }
 
-    public List<Deal> getDeals() {
-        return deals;
-    }
-
-    public void setDeals(List<Deal> deals) {
-        this.deals = deals;
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -152,9 +138,15 @@ public class Company implements Serializable {
         if (phoneNumber != null ? !phoneNumber.equals(company.phoneNumber) : company.phoneNumber != null) return false;
         if (email != null ? !email.equals(company.email) : company.email != null) return false;
         if (website != null ? !website.equals(company.website) : company.website != null) return false;
-        if (isDeleted != company.isDeleted) return false;
-        return address != null ? address.equals(company.address) : company.address == null;
-
+        if (address != null ? !address.equals(company.address) : company.address != null) return false;
+        if (responsibleUser != null ? !responsibleUser.equals(company.responsibleUser) : company.responsibleUser != null)
+            return false;
+        if (isDeleted != null ? !isDeleted.equals(company.isDeleted) : company.isDeleted != null) return false;
+        if (tags != null ? !tags.equals(company.tags) : company.tags != null) return false;
+        if (notes != null ? !notes.equals(company.notes) : company.notes != null) return false;
+        if (tasks != null ? !tasks.equals(company.tasks) : company.tasks != null) return false;
+        if (contacts != null ? !contacts.equals(company.contacts) : company.contacts != null) return false;
+        return deals != null ? deals.equals(company.deals) : company.deals == null;
     }
 
     @Override
@@ -165,7 +157,13 @@ public class Company implements Serializable {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (website != null ? website.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (isDeleted ? 1 : 0);
+        result = 31 * result + (responsibleUser != null ? responsibleUser.hashCode() : 0);
+        result = 31 * result + (isDeleted != null ? isDeleted.hashCode() : 0);
+        result = 31 * result + (tags != null ? tags.hashCode() : 0);
+        result = 31 * result + (notes != null ? notes.hashCode() : 0);
+        result = 31 * result + (tasks != null ? tasks.hashCode() : 0);
+        result = 31 * result + (contacts != null ? contacts.hashCode() : 0);
+        result = 31 * result + (deals != null ? deals.hashCode() : 0);
         return result;
     }
 
@@ -179,8 +177,16 @@ public class Company implements Serializable {
                 ", website='" + website + '\'' +
                 ", address=" + address +
                 ", responsibleUser=" + responsibleUser +
-                ", responsibleUser=" + isDeleted +
+                ", isDeleted=" + isDeleted +
                 '}';
+    }
+
+    public List<Deal> getDeals() {
+        return deals;
+    }
+
+    public void setDeals(List<Deal> deals) {
+        this.deals = deals;
     }
 
 }
