@@ -1,5 +1,6 @@
 package com.becomejavasenior.service;
 
+
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.User;
 
@@ -11,5 +12,5 @@ public interface UserService {
     List<User> getAll() throws DaoException, ClassNotFoundException;
     User getById(int id) throws DaoException;
     void delete(int id) throws DaoException;
-    User getByName(String str) throws DaoException, ClassNotFoundException;
+    public User getByName(String str) throws DaoException, ClassNotFoundException;
 }

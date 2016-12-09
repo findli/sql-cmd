@@ -13,12 +13,6 @@
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
 
-
-    <%--<script type="text/javascript" src="../js/bootstrap.js"></script>--%>
-    <%--<link rel="stylesheet" href="../js/script.js">--%>
-    <%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>--%>
-
-
     <title>Deal</title>
 </head>
 <body>
@@ -47,7 +41,7 @@
                 <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
                 <li><a href="/contact" target="_self">Contacts</a></li>
-                <li><a href="#" target="_self">Tasks</a></li>
+                <li><a href="/taskList" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
                 <li><a href="#" target="_self">Settings</a></li>
             </ul>
@@ -85,10 +79,10 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">От: </label>
                             <div class="col-sm-9">
-                                <div class="input-group date" id="datetimepicker1">
+                                <div class="input-group date" id="datetimepicker8">
                                     <input type="text" class="form-control" />
                                         <span class="input-group-addon">
-                                            <span class="glyphicon-calendar glyphicon"></span>
+                                            <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                 </div>
                             </div>
@@ -97,7 +91,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">До: </label>
                             <div class="col-sm-9">
-                                <div class="input-group date" id="datetimepicker2">
+                                <div class="input-group date" id="datetimepicker9">
                                     <input type="text" class="form-control" />
                                         <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
@@ -111,7 +105,7 @@
                             <div class="col-sm-9">
                                 <select class="form-control">
                                     <c:forEach var="user" items="${users}">
-                                        <option><c:out value="${user.lName}"/></option>
+                                        <option><c:out value="${user.getlName()}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -146,7 +140,7 @@
                     <div class="col-md-12">
                             <a href="/funnel" class="btn btn-primary">Funnel</a>
                             <a href="/deal" class="btn btn-primary">List</a>
-                            <a href="/pages/deal_add.jsp" class="btn btn-primary pull-center">Add deal</a>
+                            <a href="/dealCreate" class="btn btn-primary pull-center">Add deal</a>
                     </div>
 
                     <%--<input class="formAddBut" type="button" value="Add deal" align="right">--%>
@@ -167,10 +161,8 @@
                                 </thead>
                                 <tbody id="t_deals">
                                 <c:forEach var="deal" items="${dealList}">
-
                                     <%--<tr class="rowlink" onclick="window.location.href='/dealEdit?idDeal=${deal.getId()}'; return false">--%>
                                     <tr data-href="/dealEdit?idDeal=${deal.getId()}">
-
                                         <td class="item"><c:out value="${deal.title}"/></td>
                                         <td><c:out value="${deal.getPrimaryContact().getlName()}"/></td>
                                         <td><c:out value="${deal.getCompany().getTitle()}"/></td>
@@ -188,20 +180,35 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
-        $('#datetimepicker2').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
+<%--<script type="text/javascript">--%>
+    <%--$(function () {--%>
+        <%--$('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
+        <%--$('#datetimepicker2').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
 
-    });
-</script>
+    <%--});--%>
+<%--</script>--%>
+<%--<script type="text/javascript">--%>
+    <%--$(function () {--%>
+        <%--//Инициализация datetimepicker8 и datetimepicker9--%>
+        <%--$("#datetimepicker8").datetimepicker();--%>
+        <%--$("#datetimepicker9").datetimepicker();--%>
+        <%--//При изменении даты в 8 datetimepicker, она устанавливается как минимальная для 9 datetimepicker--%>
+        <%--$("#datetimepicker8").on("dp.change",function (e) {--%>
+            <%--$("#datetimepicker9").data("DateTimePicker").setMinDate(e.date);--%>
+        <%--});--%>
+        <%--//При изменении даты в 9 datetimepicker, она устанавливается как максимальная для 8 datetimepicker--%>
+        <%--$("#datetimepicker9").on("dp.change",function (e) {--%>
+            <%--$("#datetimepicker8").data("DateTimePicker").setMaxDate(e.date);--%>
+        <%--});--%>
+    <%--});--%>
+<%--</script>--%>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>

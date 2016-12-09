@@ -42,7 +42,6 @@ public class ContactListServlet extends HttpServlet {
         session.setAttribute("contactList", contactList);
 
         response.sendRedirect("/pages/contact.jsp");
-
     }
 
 }

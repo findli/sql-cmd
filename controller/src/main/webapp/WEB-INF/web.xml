@@ -5,20 +5,12 @@
 <web-app>
     <display-name>CRM Web Application</display-name>
 
-   <welcome-file-list>
+    <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
- <!--
-    <servlet>
-        <servlet-name>companyList</servlet-name>
-        <servlet-class>com.becomejavasenior.servlets.CompanyListServlet</servlet-class>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>companyList</servlet-name>
-        <url-pattern>/company</url-pattern>
-    </servlet-mapping> -->
-=======
->>>>>>> d80b510610f3099333cb46c2d4958fca80808ef8
+
+    <error-page>
+        <location>/pages/errorsPage.jsp</location> // страница для всяческих ошибок
+    </error-page>
 
 </web-app>

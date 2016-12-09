@@ -85,7 +85,7 @@ public class ContactAddServlet extends HttpServlet {
         contact.setfName(request.getParameter("fName"));
         contact.setlName(request.getParameter("lName"));
         contact.setPosition(request.getParameter("position"));
-     //TODO:   contact.setContactPhone(request.getParameter("formPhone"));
+        //TODO:   contact.setContactPhone(request.getParameter("formPhone"));
         contact.setEmail(request.getParameter("Email"));
         contact.setSkype(request.getParameter("Skype"));
         contact.setDeleted(false);
