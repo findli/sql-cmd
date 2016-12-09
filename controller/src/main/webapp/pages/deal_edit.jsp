@@ -77,7 +77,7 @@
                             <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
                                 <option>${responsibleUser}</option>
                                 <c:forEach var="user" items="${users}">
-                                    <option><c:out value="${user.lName}"/></option>
+                                    <option><c:out value="${user.getlName()}"/></option>
                                 </c:forEach>
                             </select>
                         </div>

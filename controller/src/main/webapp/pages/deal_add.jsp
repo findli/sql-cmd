@@ -189,7 +189,7 @@
                                 <div class="col-sm-9">
                                     <select class="form-control" style="float: none; width: 250px" id="companyDeal" name="companyDeal">
                                         <c:forEach var="company" items="${companyList}">
-                                            <option><c:out value="${company.title}"/></option>
+                                            <option><c:out value="${company.getTitle()}"/></option>
                                         </c:forEach>
                                     </select>
                                 </div>

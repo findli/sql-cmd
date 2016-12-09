@@ -72,7 +72,7 @@ public class DealServiceImpl implements DealService {
         stage = (Stage) stageDao.getById(1);
         deal.setStage(stage);
 
-        User user = responsibleUserWithId(deal.getResponsibleUser());
+        User user = (User) userDao.getByName(deal.getResponsibleUser().getlName());
         deal.setResponsibleUser(user);
 
         dealDao.create(deal);

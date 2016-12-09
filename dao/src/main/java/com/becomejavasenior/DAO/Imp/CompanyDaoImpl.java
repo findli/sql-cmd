@@ -76,8 +76,8 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
     public Company getEntity(ResultSet resultSet) throws DaoException {
 
         Company company = new Company();
-        AddressDao<Address> addressDao = new AddressDaoImpl();
-        UserDao<User> userDao = new UserDaoImpl();
+        AddressDao<Address> address = new AddressDaoImpl();
+        UserDao<User> user = new UserDaoImpl();
 
         try{
             company.setId(resultSet.getInt("id"));
@@ -85,8 +85,8 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             company.setPhoneNumber(resultSet.getString("phone_number"));
             company.setEmail(resultSet.getString("email"));
             company.setWebsite(resultSet.getString("website"));
-            company.setAddress(addressDao.getById(resultSet.getInt("address_id")));
-            company.setResponsibleUser(userDao.getById(resultSet.getInt("responsible_user_id")));
+            company.setAddress(address.getById(resultSet.getInt("address_id")));
+            company.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
             company.setDeleted(resultSet.getBoolean("is_deleted"));
 
         } catch (SQLException e){

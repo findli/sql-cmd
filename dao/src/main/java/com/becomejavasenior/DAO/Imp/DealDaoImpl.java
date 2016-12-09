@@ -29,7 +29,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
 
     private static final String SELECT_ALL_CONTACT = "SELECT c1.id AS contactId, c1.first_name, c1.last_name, c1.post AS position, c1.email, c1.skype, c2.id AS companyId, c2.title, cp.phone_number, pt.title AS phone_type\n" +
             "FROM crm_pallas.deal d\n" +
-            "  INNER JOIN crm_pallas.contact_deal cd ON ( d.id = cd.deal_id  )\n" +
+            "  INNER JOIN crm_pallas.deal_contact cd ON ( d.id = cd.deal_id  )\n" +
             "  INNER JOIN crm_pallas.contact c1 ON ( cd.contact_id = c1.id  )\n" +
             "  INNER JOIN crm_pallas.company c2 ON ( c1.company_id = c2.id  )\n" +
             "  LEFT OUTER JOIN crm_pallas.contact_phone cp ON ( c1.id = cp.contact_id  )\n" +
@@ -54,6 +54,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             preparedStatement.setInt(5, deal.getResponsibleUser().getId());
             preparedStatement.setBoolean(6, deal.isDeleted());
             preparedStatement.setTimestamp(7, new Timestamp(deal.getCreateDate().getTime()));
+            preparedStatement.setInt(8, deal.getPrimaryContact().getId());
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,7 +71,8 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             preparedStatement.setInt(4, deal.getStage().getId());
             preparedStatement.setInt(5, deal.getResponsibleUser().getId());
             preparedStatement.setBoolean(6, deal.isDeleted());
-            preparedStatement.setInt(7, deal.getId());
+            preparedStatement.setInt(7, deal.getPrimaryContact().getId());
+            preparedStatement.setInt(8, deal.getId());
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -89,6 +91,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         CompanyDao<Company> company = new CompanyDaoImpl();
         StageDao<Stage> stage = new StageDaoImpl();
         UserDao<User> user = new UserDaoImpl();
+        ContactDao<Contact> contact = new ContactDaoImpl();
 
         try {
             deal.setId(resultSet.getInt("id"));
@@ -98,6 +101,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             deal.setTitle(resultSet.getString("title"));
             deal.setBudget(resultSet.getInt("budget"));
             deal.setDeleted(resultSet.getBoolean("is_deleted"));
+            deal.setPrimaryContact(contact.getById(resultSet.getInt("primary_contact_id")));
         } catch (SQLException e) {
             throw new DaoException("Can't get entity from Deal", e);
         }
@@ -167,6 +171,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         List<Contact> contacts = new ArrayList<>();
         CompanyDao<Company> company = new CompanyDaoImpl();
         Contact contact;
+        UserDao<User> user = new UserDaoImpl();
 
         try (Connection connection = PostgresDAOFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_CONTACT)) {
@@ -184,7 +189,8 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 contact.setCompany(company.getById(resultSet.getInt("companyId")));
                 contact.setEmail(resultSet.getString("email"));
                 contact.setSkype(resultSet.getString("skype"));
-
+//                contact.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
+//                contact.setDeleted(resultSet.getBoolean("is_deleted"));
                 /*
                 Here you need to add the phone type and the phone to display in the editing form of the Deals
                  */
@@ -213,7 +219,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
 
     @Override
     String getCreateQuery() {
-        return DataBaseUtil.getQuery("INSERT INTO crm_pallas.deal (title, company_id, budget, stage_id, responsible_user_id,  is_deleted, date_create) values (?,?,?,?,?,?,?)");
+        return DataBaseUtil.getQuery("INSERT INTO crm_pallas.deal (title, company_id, budget, stage_id, responsible_user_id,  is_deleted, created, primary_contact_id) values (?,?,?,?,?,?,?,?)");
     }
 
     @Override
@@ -224,7 +230,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
     @Override
     String getUpdateQuery() {
         return DataBaseUtil.getQuery("UPDATE crm_pallas.deal SET title = ?, company_id = ?, " +
-                "budget = ?, stage_id = ?, responsible_user_id =?, is_deleted = ? WHERE id = ?");
+                "budget = ?, stage_id = ?, responsible_user_id =?, is_deleted = ?, primary_contact_id = ? WHERE id = ?");
     }
 
     @Override
@@ -277,7 +283,8 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 stage.setId(resultSet.getInt("stage_id"));
                 deal.setStage(stage);
                 deal.setStage(stage);
-                deal.setCreateDate(resultSet.getDate("date_create"));
+                deal.setCreateDate(resultSet.getDate("created"));
+                contact.setId(resultSet.getInt("primary_contact_id"));
 
                 deals.add(deal);
             }

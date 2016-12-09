@@ -19,7 +19,7 @@ CREATE TABLE crm_pallas.company (
 	website              varchar  ,
 	address_id           integer  ,
 	responsible_user_id  integer  NOT NULL,
-	is_deleted           integer  NOT NULL,
+	is_deleted           bool  NOT NULL,
 	CONSTRAINT pk_company PRIMARY KEY ( id ),
 	CONSTRAINT fk_company FOREIGN KEY ( address_id ) REFERENCES crm_pallas.address( id )    
  );
@@ -35,7 +35,7 @@ CREATE TABLE crm_pallas.contact (
 	email                varchar  ,
 	skype                varchar  ,
 	responsible_user_id  integer  ,
-	is_deleted           integer  NOT NULL,
+	is_deleted           bool  NOT NULL,
 	CONSTRAINT pk_contact PRIMARY KEY ( id )
  );
 
@@ -68,7 +68,7 @@ CREATE TABLE crm_pallas.event_object_type (
 	CONSTRAINT pk_event_object_type PRIMARY KEY ( id )
  );
 
-CREATE TABLE crm_pallas.language_ ( 
+CREATE TABLE crm_pallas.language (
 	id                   serial  NOT NULL,
 	title                varchar  NOT NULL,
 	short_title          varchar(3)  NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE crm_pallas.language_ (
 CREATE TABLE crm_pallas.period_in_days_type ( 
 	id                   serial  NOT NULL,
 	tytle                varchar  NOT NULL,
-	days_in_period       date  NOT NULL,
+	days_in_period       varchar  NOT NULL,
 	CONSTRAINT pk_period_in_days_type PRIMARY KEY ( id )
  );
 
@@ -374,4 +374,6 @@ CREATE TABLE crm_pallas."file" (
  );
 
 CREATE INDEX idx_file ON crm_pallas."file" ( note_id );
+
+ALTER TABLE crm_pallas.deal ADD primary_contact_id INTEGER;
 
