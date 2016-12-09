@@ -126,14 +126,6 @@ public class Company implements Serializable {
         return isDeleted;
     }
 
-    public List<Deal> getDeals() {
-        return deals;
-    }
-
-    public void setDeals(List<Deal> deals) {
-        this.deals = deals;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -189,5 +181,12 @@ public class Company implements Serializable {
                 '}';
     }
 
-}
+    public List<Deal> getDeals() {
+        return deals;
+    }
 
+    public void setDeals(List<Deal> deals) {
+        this.deals = deals;
+    }
+
+}

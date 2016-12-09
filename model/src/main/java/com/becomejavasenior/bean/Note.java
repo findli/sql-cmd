@@ -119,7 +119,6 @@ public class Note implements Serializable {
         result = 31 * result + (deal != null ? deal.hashCode() : 0);
         result = 31 * result + (contact != null ? contact.hashCode() : 0);
         result = 31 * result + (company != null ? company.hashCode() : 0);
-
         result = 31 * result + (isDeleted ? 1 : 0);
         result = 31 * result + (files != null ? files.hashCode() : 0);
         return result;
