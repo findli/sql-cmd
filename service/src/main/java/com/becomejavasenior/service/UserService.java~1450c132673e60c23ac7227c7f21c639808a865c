@@ -13,4 +13,5 @@ public interface UserService {
     void delete(int id) throws DaoException;
     User getByName(String str) throws DaoException, ClassNotFoundException;
 
+
 }

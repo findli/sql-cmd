@@ -3,7 +3,6 @@ package com.becomejavasenior.bean;
 import java.io.Serializable;
 import java.util.List;
 
-
 public class Company implements Serializable {
 
     private int id;
@@ -11,10 +10,14 @@ public class Company implements Serializable {
     private String phoneNumber;
     private String email;
     private String website;
-    private Adress adress;
+    private Address address;
     private User responsibleUser;
     private Boolean isDeleted;
-
+    private List<Tag> tags;
+    private List<Note> notes;
+    private List<Task> tasks;
+    private List<Contact> contacts;
+    private List<Deal> deals;
 
     public Company() {
     }
@@ -59,12 +62,12 @@ public class Company implements Serializable {
         this.website = website;
     }
 
-    public Adress getAdress() {
-        return adress;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAdress(Adress adress) {
-        this.adress = adress;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public User getResponsibleUser() {
@@ -73,6 +76,46 @@ public class Company implements Serializable {
 
     public void setResponsibleUser(User responsibleUser) {
         this.responsibleUser = responsibleUser;
+    }
+
+    public Boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
     }
 
     public void setIsDeleted(Boolean isDeleted) {
@@ -95,8 +138,15 @@ public class Company implements Serializable {
         if (phoneNumber != null ? !phoneNumber.equals(company.phoneNumber) : company.phoneNumber != null) return false;
         if (email != null ? !email.equals(company.email) : company.email != null) return false;
         if (website != null ? !website.equals(company.website) : company.website != null) return false;
-        return adress != null ? adress.equals(company.adress) : company.adress == null;
-
+        if (address != null ? !address.equals(company.address) : company.address != null) return false;
+        if (responsibleUser != null ? !responsibleUser.equals(company.responsibleUser) : company.responsibleUser != null)
+            return false;
+        if (isDeleted != null ? !isDeleted.equals(company.isDeleted) : company.isDeleted != null) return false;
+        if (tags != null ? !tags.equals(company.tags) : company.tags != null) return false;
+        if (notes != null ? !notes.equals(company.notes) : company.notes != null) return false;
+        if (tasks != null ? !tasks.equals(company.tasks) : company.tasks != null) return false;
+        if (contacts != null ? !contacts.equals(company.contacts) : company.contacts != null) return false;
+        return deals != null ? deals.equals(company.deals) : company.deals == null;
     }
 
     @Override
@@ -106,7 +156,14 @@ public class Company implements Serializable {
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (website != null ? website.hashCode() : 0);
-        result = 31 * result + (adress != null ? adress.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (responsibleUser != null ? responsibleUser.hashCode() : 0);
+        result = 31 * result + (isDeleted != null ? isDeleted.hashCode() : 0);
+        result = 31 * result + (tags != null ? tags.hashCode() : 0);
+        result = 31 * result + (notes != null ? notes.hashCode() : 0);
+        result = 31 * result + (tasks != null ? tasks.hashCode() : 0);
+        result = 31 * result + (contacts != null ? contacts.hashCode() : 0);
+        result = 31 * result + (deals != null ? deals.hashCode() : 0);
         return result;
     }
 
@@ -118,9 +175,18 @@ public class Company implements Serializable {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", website='" + website + '\'' +
-                ", adress=" + adress +
+                ", address=" + address +
                 ", responsibleUser=" + responsibleUser +
                 ", isDeleted=" + isDeleted +
                 '}';
     }
+
+    public List<Deal> getDeals() {
+        return deals;
+    }
+
+    public void setDeals(List<Deal> deals) {
+        this.deals = deals;
+    }
+
 }

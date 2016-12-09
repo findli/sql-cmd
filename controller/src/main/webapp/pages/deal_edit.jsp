@@ -51,64 +51,64 @@
                 <!--Add deal-->
                 <div class="forms--nDeal">
                     <fieldset>
-                    <form class="form-horizontal">
-                        <h2>Edit deal</h2><br>
+                        <form class="form-horizontal">
+                            <h2>Edit deal</h2><br>
 
-                        <div class="form-group">
-                            <%--<span id="idDeal"></span>--%>
-                            <label class="col-sm-3 control-label">Name </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" value="${deal.getTitle()}" id="dealNewName" name="dealNewName">
+                            <div class="form-group">
+                                <%--<span id="idDeal"></span>--%>
+                                <label class="col-sm-3 control-label">Name </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" value="${deal.getTitle()}" id="dealNewName" name="dealNewName">
+
+                                </div>
 
                             </div>
 
-                        </div>
 
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Tag </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag не реализовано" id="dealTag" name="dealTag">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Tag </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" placeholder="Tag не реализовано" id="dealTag" name="dealTag">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Responsible </label>
-                            <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
-                                <option>${responsibleUser}</option>
-                                <c:forEach var="user" items="${users}">
-                                    <option><c:out value="${user.getlName()}"/></option>
-                                </c:forEach>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Budget </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" value="${deal.budget}" id="dealBudget" name="dealBudget">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Responsible </label>
+                                <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
+                                    <option>${responsibleUser}</option>
+                                    <c:forEach var="user" items="${users}">
+                                        <option><c:out value="${user.getlName()}"/></option>
+                                    </c:forEach>
+                                </select>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Stage </label>
-                            <select class="col-sm-9 form-control" id="stageDeal" name="stageDeal">
-                                <option>${stageTitle}</option>
-                                <c:forEach var="stage" items="${stages}">
-                                    <option><c:out value="${stage.title}"/></option>
-                                </c:forEach>
-                            </select>
-                        </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Budget </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" value="${deal.budget}" id="dealBudget" name="dealBudget">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Stage </label>
+                                <select class="col-sm-9 form-control" id="stageDeal" name="stageDeal">
+                                    <option>${stageTitle}</option>
+                                    <c:forEach var="stage" items="${stages}">
+                                        <option><c:out value="${stage.title}"/></option>
+                                    </c:forEach>
+                                </select>
+                            </div>
 
 
-                        <div class="form-group">
-                            <div class="col-sm-10">
+                            <div class="form-group">
+                                <div class="col-sm-10">
                                     <input type="hidden" id="idDeal" value="${deal.getId()}" />
                                     <button type="button" class="btn btn-success" id="bttEditDeal">Применить</button>
+                                </div>
                             </div>
-                        </div>
-                        <span id="result1" style="color:red"></span>
+                            <span id="result1" style="color:red"></span>
 
-                    </form>
+                        </form>
                     </fieldset>
 
                 </div>
@@ -151,81 +151,81 @@
 
                 </div>
 
-                    <!--Edit company-->
-                    <div class="forms--nDeal">
-                        <form class="form-horizontal">
-                            <h2>Edit company</h2><br>
+                <!--Edit company-->
+                <div class="forms--nDeal">
+                    <form class="form-horizontal">
+                        <h2>Edit company</h2><br>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Name </label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" value="${company.title}" id="companyNewName" name="companyNewName">
-                                </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Name </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" value="${company.title}" id="companyNewName" name="companyNewName">
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Phone </label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" value = "${company.getPhoneNumber()}" placeholder="Phone" id="companyNewPhone" name="companyNewPhone">
-                                </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Phone </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" value = "${company.getPhoneNumber()}" placeholder="Phone" id="companyNewPhone" name="companyNewPhone">
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">email </label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" value="${company.getEmail()}" placeholder="email" id="companyNewEmail" name="companyNewEmail">
-                                </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">email </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" value="${company.getEmail()}" placeholder="email" id="companyNewEmail" name="companyNewEmail">
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Web </label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" value="${company.getWebsite()}" placeholder="Url" id="companyNewWeb" name="companyNewWeb">
-                                </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Web </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" value="${company.getWebsite()}" placeholder="Url" id="companyNewWeb" name="companyNewWeb">
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Address </label>
-                                <div class="col-sm-9">
-                                    <input onclick="location.href='#modalEditAddress'" class="formAddBut" type="button"
-                                           value="Edit address">
-                                </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Address </label>
+                            <div class="col-sm-9">
+                                <input onclick="location.href='#modalEditAddress'" class="formAddBut" type="button"
+                                       value="Edit address">
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <div class="col-sm-10">
-                                    <%--<input type="hidden" id="idDeal" value="${deal.getId()}" />--%>
-                                    <button type="button" class="btn btn-success" id="bttEditCompany">Применить</button>
-                                </div>
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <%--<input type="hidden" id="idDeal" value="${deal.getId()}" />--%>
+                                <button type="button" class="btn btn-success" id="bttEditCompany">Применить</button>
                             </div>
-                            <span id="result2" style="color:red"></span>
-                            <!--Modal window contact-->
-                            <div id="modalEditAddress" class="modalDialog">
-                                <%--<form id="add_address_form">--%>
-                                <div style="height: 300px;">
-                                    <header>
-                                        <div class="wrapper__modal1Title">
-                                            <div><i class="fa fa-industry"></i></div>
-                                            <h3>Edit address</h3>
-                                        </div>
-                                    </header>
-                                    <p>Country <input type="text" class="modalInput" id="AddressCountry" value="${address.getCountry()}"></p>
-                                    <p>City <input  type="text" class="modalInput" id="AddressCity" value="${address.getCity()}"></p>
-                                    <p>Street <input type="text" class="modalInput" id="AddressStreet" value="${address.getStreet()}"></p>
-                                    <p>zip code <input type="text" class="modalInput" id="AddressZipcode" value="${address.getZipcode()}"></p>
-                                    <p>Building number <input type="text" class="modalInput" id="AddressBuilding" value="${address.getBuildNum()}"></p>
-                                    <p>office room <input type="text" class="modalInput" id="AddressRoom" value="${address.getOfficeRoom()}"></p>
-                                    <%--<input class="modalBut" type="button" value="Save contact" onclick="add_contact();">--%>
-                                    <input class="modalBut" onclick="location.href='#close'" type="button"
-                                           value="Save">
-                                </div>
-                                <%--</form>--%>
+                        </div>
+                        <span id="result2" style="color:red"></span>
+                        <!--Modal window contact-->
+                        <div id="modalEditAddress" class="modalDialog">
+                            <%--<form id="add_address_form">--%>
+                            <div style="height: 300px;">
+                                <header>
+                                    <div class="wrapper__modal1Title">
+                                        <div><i class="fa fa-industry"></i></div>
+                                        <h3>Edit address</h3>
+                                    </div>
+                                </header>
+                                <p>Country <input type="text" class="modalInput" id="AddressCountry" value="${address.getCountry()}"></p>
+                                <p>City <input  type="text" class="modalInput" id="AddressCity" value="${address.getCity()}"></p>
+                                <p>Street <input type="text" class="modalInput" id="AddressStreet" value="${address.getStreet()}"></p>
+                                <p>zip code <input type="text" class="modalInput" id="AddressZipcode" value="${address.getZipcode()}"></p>
+                                <p>Building number <input type="text" class="modalInput" id="AddressBuilding" value="${address.getBuildNum()}"></p>
+                                <p>office room <input type="text" class="modalInput" id="AddressRoom" value="${address.getOfficeRoom()}"></p>
+                                <%--<input class="modalBut" type="button" value="Save contact" onclick="add_contact();">--%>
+                                <input class="modalBut" onclick="location.href='#close'" type="button"
+                                       value="Save">
                             </div>
-                            <!--End-->
+                            <%--</form>--%>
+                        </div>
+                        <!--End-->
 
-                        </form>
+                    </form>
 
-                    </div>
+                </div>
 
                 <!--Edit contact-->
                 <div class="forms--nDeal">
