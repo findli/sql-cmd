@@ -272,7 +272,7 @@
             </form>
             <!--Modal window contact-->
             <div id="modalAddAddress" class="modalDialog">
-                <form class="form-horizontal">
+                <form class="form-horizontal" style="height: 400px; position: relative; margin: 10% auto; background: #fff; width: 460px">
                     <div style="height: 300px;">
                         <header>
                             <div class="wrapper__modal1Title">
