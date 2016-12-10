@@ -4,8 +4,13 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.CompanyService;
 import com.becomejavasenior.service.ContactService;
+import com.becomejavasenior.service.PeriodInDaysTypeService;
+import com.becomejavasenior.service.TaskTypeService;
 import com.becomejavasenior.service.impl.CompanyServiceImpl;
 import com.becomejavasenior.service.impl.ContactServiceImpl;
+import com.becomejavasenior.service.impl.PeriodInDaysTypeServiceImpl;
+import com.becomejavasenior.service.impl.TaskTypeServiceImpl;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,35 +19,50 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "ContactAddServlet", urlPatterns = "/contactAdd")
 public class ContactAddServlet extends HttpServlet {
 
+    public static Logger log = Logger.getLogger(ContactAddServlet.class);
     private ContactService contactService = new ContactServiceImpl();
-    private CompanyService companyService = new CompanyServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        ContactService contactService = new ContactServiceImpl();
-        CompanyService companyService = new CompanyServiceImpl();
 
+        List<TaskType> TaskTypeList = null;
+        List<PeriodInDaysType> PeriodInDaysTypeList = null;
         List<Contact> contactList = null;
         List<Company> companyList = null;
+      //TODO:  List<Phone> phoneList = null;
+
+        CompanyService companyService = new CompanyServiceImpl();
+        TaskTypeService taskTypeService = new TaskTypeServiceImpl();
+        PeriodInDaysTypeService periodService = new PeriodInDaysTypeServiceImpl();
+
+
 
         try {
             contactList = contactService.getAll();
+            log.trace("get contactList in ContactAddServlet");
             companyList = companyService.getAll();
+            log.trace("get companyList in ContactAddServlet");
+            TaskTypeList = taskTypeService.getAll();
+            log.trace("get TaskTypeList in ContactAddServlet");
+            PeriodInDaysTypeList = periodService.getAll();
+            log.trace("get PeriodInDaysTypeList in ContactAddServlet");
         } catch (DaoException e) {
+            log.warn("DaoException in ContactAddServlet");
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
+            log.warn("ClassNotFoundException in ContactAddServlet");
             e.printStackTrace();
         }
 
+        session.setAttribute("TaskTypeList", TaskTypeList);
+        session.setAttribute("PeriodInDaysTypeList", PeriodInDaysTypeList);
         session.setAttribute("contactList", contactList);
         session.setAttribute("companyList", companyList);
         request.getRequestDispatcher("/pages/contact_add.jsp").forward(request, response);
@@ -81,6 +101,7 @@ public class ContactAddServlet extends HttpServlet {
 
     private Contact getContactFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
         Contact contact = new Contact();
+        CompanyService companyService = new CompanyServiceImpl();
 
         contact.setfName(request.getParameter("fName"));
         contact.setlName(request.getParameter("lName"));
