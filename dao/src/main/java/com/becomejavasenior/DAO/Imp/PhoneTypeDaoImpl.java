@@ -2,10 +2,12 @@ package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.PhoneTypeDao;
+import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.PhoneType;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class PhoneTypeDaoImpl extends AbstractDaoImpl<PhoneType> implements PhoneTypeDao<PhoneType> {
@@ -15,44 +17,50 @@ public class PhoneTypeDaoImpl extends AbstractDaoImpl<PhoneType> implements Phon
         return null;
     }
 
+
     @Override
-    public PhoneType create(PhoneType entity) throws DaoException {
-        return super.create(entity);
+    void createStatement(PreparedStatement statement, PhoneType entity) throws DaoException {
+
+        try {
+
+            statement.setString(1, entity.getTitle());
+
+        } catch (SQLException e) {
+
+            throw new DaoException("Can't create statement for PhoneType", e);
+
+        }
     }
 
     @Override
-    void createStatement(PreparedStatement preparedStatement, PhoneType entity) throws DaoException {
+    void updateStatement(PreparedStatement statement, PhoneType entity) throws DaoException {
 
-    }
+        try {
 
-    @Override
-    public PhoneType update(PhoneType entity) throws DaoException {
-        return super.update(entity);
-    }
+            statement.setString(1, entity.getTitle());
 
-    @Override
-    void updateStatement(PreparedStatement preparedStatement, PhoneType entity) throws DaoException {
+        } catch (SQLException e) {
 
-    }
+            throw new DaoException("Can't update statement for PhoneType", e);
 
-    @Override
-    public void delete(Integer id) throws DaoException {
-        super.delete(id);
-    }
-
-    @Override
-    public PhoneType getById(Integer id) throws DaoException {
-        return super.getById(id);
+        }
     }
 
     @Override
     PhoneType getEntity(ResultSet resultSet) throws DaoException {
-        return null;
-    }
 
-    @Override
-    public List<PhoneType> getAll() throws DaoException, ClassNotFoundException {
-        return super.getAll();
+        PhoneType phoneType = new PhoneType();
+
+        try {
+
+            phoneType.setId(resultSet.getInt("id"));
+            phoneType.setTitle(resultSet.getString("title"));
+
+        } catch (SQLException e) {
+            throw new DaoException("", e);
+        }
+
+        return phoneType;
     }
 
     @Override
@@ -72,12 +80,12 @@ public class PhoneTypeDaoImpl extends AbstractDaoImpl<PhoneType> implements Phon
 
     @Override
     String getByIdQuery() {
-        return null;
+        return DataBaseUtil.getQuery("SELECT * FROM crm_pallas.phone_type WHERE id=?");
     }
 
     @Override
     String getAllQuery() {
-        return null;
+        return DataBaseUtil.getQuery("SELECT * FROM crm_pallas.phone_type");
     }
 
     @Override
