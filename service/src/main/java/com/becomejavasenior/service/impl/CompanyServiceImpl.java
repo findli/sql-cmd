@@ -1,5 +1,6 @@
 package com.becomejavasenior.service.impl;
 
+import com.becomejavasenior.DAO.AbstractDao;
 import com.becomejavasenior.DAO.CompanyDao;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.Imp.CompanyDaoImpl;

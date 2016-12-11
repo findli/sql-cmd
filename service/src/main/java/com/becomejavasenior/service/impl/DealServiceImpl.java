@@ -59,7 +59,7 @@ public class DealServiceImpl implements DealService {
     public void createNewDeal(Deal deal, Contact contact, Task task2, Company company, File file2) throws DaoException, ClassNotFoundException {
 
         contact = contactWithId(contact);
-        deal.setPrimaryContact(contact);
+  /*      deal.setPrimaryContact(contact);*/
 
         company = companyWithId(company);
         deal.setCompany(company);

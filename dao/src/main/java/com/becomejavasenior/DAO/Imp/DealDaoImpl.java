@@ -51,7 +51,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             preparedStatement.setInt(4, deal.getStage().getId());
             preparedStatement.setInt(5, deal.getResponsibleUser().getId());
             preparedStatement.setBoolean(6, deal.isDeleted());
-            preparedStatement.setInt(7, deal.getPrimaryContact().getId());
+/*            preparedStatement.setInt(7, deal.getPrimaryContact().getId());*/
             preparedStatement.setTimestamp(8, new Timestamp(deal.getCreateDate().getTime()));
 
         } catch (SQLException e) {
@@ -181,7 +181,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 deal.setStage(stage);
                 deal.setStage(stage);
                 contact.setId(resultSet.getInt("primary_contact_id"));
-                deal.setPrimaryContact(contact);
+             /*   deal.setPrimaryContact(contact);*/
                 deal.setCreateDate(resultSet.getDate("date_create"));
 
                 deals.add(deal);
@@ -223,7 +223,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 company.setId(resultSet.getInt("companyId"));
                 company.setTitle(resultSet.getString("company"));
                 contact.setCompany(company);
-                deal.setPrimaryContact(contact);
+     /*           deal.setPrimaryContact(contact);*/
                 deal.setCompany(company);
 
                 deals.add(deal);
@@ -266,7 +266,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 company.setId(resultSet.getInt("companyId"));
                 company.setTitle(resultSet.getString("company"));
                 contact.setCompany(company);
-                deal.setPrimaryContact(contact);
+       /*         deal.setPrimaryContact(contact);*/
                 deal.setCompany(company);
 
                 deals.add(deal);

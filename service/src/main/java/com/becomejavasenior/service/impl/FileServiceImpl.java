@@ -4,16 +4,9 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.FileDao;
 import com.becomejavasenior.DAO.Imp.FileDaoImpl;
 import com.becomejavasenior.bean.File;
-import com.becomejavasenior.bean.User;
-import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDaoFactory;
+import com.becomejavasenior.bean.Note;
 import com.becomejavasenior.service.FileService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 

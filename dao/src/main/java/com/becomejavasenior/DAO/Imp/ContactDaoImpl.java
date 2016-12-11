@@ -2,9 +2,7 @@ package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DataBaseUtil;
-import com.becomejavasenior.bean.Company;
-import com.becomejavasenior.bean.Contact;
-import com.becomejavasenior.bean.User;
+import com.becomejavasenior.bean.*;
 import com.becomejavasenior.factory.PostgresDaoFactory;
 
 import java.sql.*;
@@ -12,6 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactDao<Contact> {
+
+    private static final String SELECT_DEALS_FOR_LIST = "SELECT crm_pallas.contact.id,\n" +
+            "  crm_pallas.contact.first_name as fName,\n" +
+            "  crm_pallas.contact.last_name as lName,\n" +
+            "  crm_pallas.contact.post,\n" +
+            "  crm_pallas.contact.email,\n" +
+            "  crm_pallas.contact.skype,\n" +
+            "  crm_pallas.contact_phone.phone_number as phoneNumber,\n" +
+            "  crm_pallas.phone_type.title,\n" +
+            "  crm_pallas.company.id as companyId\n" +
+            "FROM crm_pallas.contact\n" +
+            "  JOIN crm_pallas.company ON crm_pallas.contact.company_id = crm_pallas.company.id\n" +
+            "  JOIN crm_pallas.contact_phone ON crm_pallas.contact.id = crm_pallas.contact_phone.contact_id\n" +
+            "  JOIN crm_pallas.phone_type ON crm_pallas.contact_phone.phone_type_id = crm_pallas.phone_type.id\n" +
+            "where company_id = ? AND contact.is_deleted = FALSE";
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Contact contact) {
@@ -145,10 +158,11 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         List<Contact> contacts = new ArrayList<>();
         Contact contact;
         Company company;
+        List<String> phoneList = new ArrayList<>();
+        PhoneType phoneType;
         User user;
-
         try (Connection connection = PostgresDaoFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM crm_pallas.contact where company_id = ?")) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST)) {
             statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -156,17 +170,38 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
                 contact = new Contact();
                 user = new User();
                 contact.setId(resultSet.getInt("id"));
-                contact.setfName(resultSet.getString("first_name"));
-                contact.setlName(resultSet.getString("last_name"));
-                company.setId(resultSet.getInt("company_id"));
+                contact.setfName(resultSet.getString("fName"));
+                contact.setlName(resultSet.getString("lName"));
+                company.setId(resultSet.getInt("companyId"));
                 contact.setCompany(company);
                 contact.setPosition(resultSet.getString("post"));
                 contact.setEmail(resultSet.getString("email"));
                 contact.setSkype(resultSet.getString("skype"));
-                user.setId(resultSet.getInt("responsible_user_id"));
-                contact.setResponsibleUser(user);
-                contact.setDeleted(resultSet.getBoolean("is_deleted"));
                 contacts.add(contact);
+
+        /*try (Connection connection = PostgresDaoFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST)) {
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                company = new Company();
+                contact = new Contact();
+
+         *//*       user = new User();*//*
+                contact.setId(resultSet.getInt("id"));
+                contact.setfName(resultSet.getString("fName"));
+                contact.setlName(resultSet.getString("lName"));
+                company.setId(resultSet.getInt("companyId"));
+                contact.setCompany(company);
+                contact.setPosition(resultSet.getString("post"));
+                contact.setEmail(resultSet.getString("email"));
+                contact.setSkype(resultSet.getString("skype"));
+
+
+       *//*         user.setId(resultSet.getInt("responsible_user_id"));
+                contact.setResponsibleUser(user);*//*
+*//*                contact.setDeleted(resultSet.getBoolean("is_deleted"));*//*
+                contacts.add(contact);*/
             }
         } catch (SQLException ex) {
             throw new DatabaseException(ex);

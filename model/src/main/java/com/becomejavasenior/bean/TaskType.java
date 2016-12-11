@@ -1,12 +1,14 @@
 package com.becomejavasenior.bean;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class TaskType implements Serializable {
 
     private int id;
     private String type;
+    private List<Task> tasks;
 
     public TaskType() {
     }
@@ -25,6 +27,14 @@ public class TaskType implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
     }
 
     @Override

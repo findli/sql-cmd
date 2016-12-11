@@ -49,6 +49,11 @@ public class CompanyDetailServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+
+        if (request.getParameter("formUpdateCompany") != null) {
+            System.out.println("POST!!!!!!");
+        }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -66,12 +71,11 @@ public class CompanyDetailServlet extends HttpServlet {
         NoteService noteService = new NoteServiceImpl();
         CompanyService companyService = new CompanyServiceImpl();
 
-
         List<Contact> contactList = contactService.getContactsForList(idCompany);
         List<Deal> dealList = dealService.getDealsForList(idCompany);
         List<Task> taskList = taskService.getTasksForList(idCompany);
-        List<File> fileList = fileService.getFilesForList(idCompany);
         List<Note> noteList = noteService.getNotesForList(idCompany);
+        List<File> fileList = fileService.getFilesForList(idCompany);
         Company company = null;
         try {
             company = companyService.getById(idCompany);
@@ -95,6 +99,10 @@ public class CompanyDetailServlet extends HttpServlet {
             } catch (DaoException e) {
                 e.printStackTrace();
             }
+        }
+
+        if (request.getParameter("formUpdateCompany") != null) {
+            System.out.println("!!!!!!");
         }
 
         response.sendRedirect("/pages/companyDetail.jsp");

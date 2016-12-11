@@ -17,12 +17,12 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
     private static final String SELECT_DEALS_FOR_LIST= "SELECT crm_pallas.note.id as noteId,\n" +
             "crm_pallas.note.note_text,\n" +
             "crm_pallas.user.last_name as lName,\n" +
-            "crm_pallas.note.creation_date_time as createDateNote\n" +
+            "crm_pallas.user.first_name as fName,\n" +
+            "crm_pallas.note.created_date_time as createDateNote\n" +
             "FROM crm_pallas.note\n" +
             "JOIN crm_pallas.user ON crm_pallas.note.created_by_user_id = crm_pallas.user.id\n" +
-            "JOIN crm_pallas.company_note on crm_pallas.note.id = crm_pallas.company_note.note_id\n" +
-            "JOIN crm_pallas.company on crm_pallas.company_note.company_id = crm_pallas.company.id \n" +
-            "WHERE crm_pallas.company.id = ?";
+            "JOIN crm_pallas.company ON crm_pallas.note.company_id = crm_pallas.company.id\n" +
+            "WHERE crm_pallas.company.id = ? AND crm_pallas.note.is_deleted = FALSE";
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Note note) throws DaoException {
@@ -93,17 +93,13 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 
             while (resultSet.next()) {
-
                 note = new Note();
                 createdUser = new User();
-
                 note.setId(resultSet.getInt("id"));
                 createdUser.setId(resultSet.getInt("created_by_user_id"));
                 note.setCreatedUser(createdUser);
                 note.setNoteText(resultSet.getString("note_text"));
-                note.setDateCreate(resultSet.getDate("creation_date_time"));
-                note.setDeleted(resultSet.getBoolean("is_deleted"));
-
+                note.setDateCreate(resultSet.getDate("createDateNote"));
                 notes.add(note);
             }
         } catch (SQLException ex) {

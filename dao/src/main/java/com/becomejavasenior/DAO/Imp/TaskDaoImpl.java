@@ -144,17 +144,17 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                task = new Task();
-                taskType = new TaskType();
+               task = new Task();
+                 taskType = new TaskType();
                 responsibleUser = new User();
                 task.setId(resultSet.getInt("id"));
                 task.setTitle(resultSet.getString("title"));
                 taskType.setType(resultSet.getString("typeTytle"));
-                task.setTaskTypeId(taskType);
+                task.setTaskType(taskType);
                 task.setDescription(resultSet.getString("description"));
-                task.setDeadLine(resultSet.getDate("deadlineDate"));
+                task.setDeadlineDate(resultSet.getDate("deadlineDate"));
                 responsibleUser.setlName(resultSet.getString("lName"));
-                task.setResponsibleUserId(responsibleUser);
+                task.setResponsibleUser(responsibleUser);
                 tasks.add(task);
             }
         } catch (SQLException ex) {
