@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class LanguageDaoImpl extends AbstractDaoImpl<Language> implements LanguageDao<Language> {
+public class LanguageDaoImpl extends AbstractDaoImpl<Language> implements LanguageDao {
 
     @Override
     public String getCreateQuery() {

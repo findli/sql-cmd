@@ -37,7 +37,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
 
     @Override
     String getAllQuery() {
-        return "SELECT * FROM crm_pallas.user ORDER BY id";
+        return "SELECT * FROM crm_pallas.user";
     }
 
     @Override
@@ -71,7 +71,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     @Override
     User getEntity(ResultSet resultSet) throws DaoException {
         User user = new User();
-        LanguageDao<Language> language = new LanguageDaoImpl();
+     /*   LanguageDao<Language> language = new LanguageDaoImpl();*/
         try {
             user.setId(resultSet.getInt("id"));
             user.setlName(resultSet.getString("last_name"));

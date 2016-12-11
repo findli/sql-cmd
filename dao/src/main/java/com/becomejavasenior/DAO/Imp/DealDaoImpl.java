@@ -13,6 +13,21 @@ import java.util.List;
 
 public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> {
 
+    private static final String SELECT_DEALS_FOR_LIST_BY_ID = "SELECT\n" +
+            "  crm_pallas.deal.id AS dealId,\n" +
+            "  crm_pallas.deal.title,\n" +
+            "  crm_pallas.deal.budget,\n" +
+            "  crm_pallas.stage.title AS stage,\n" +
+            "  crm_pallas.contact.id AS contactId,\n" +
+            "  crm_pallas.contact.last_name AS contact,\n" +
+            "  crm_pallas.company.id AS companyId,\n" +
+            "  crm_pallas.company.title AS company\n" +
+            "FROM crm_pallas.deal\n" +
+            "  JOIN crm_pallas.stage ON crm_pallas.deal.stage_id = crm_pallas.stage.id\n" +
+            "  JOIN crm_pallas.contact ON crm_pallas.deal.primary_contact_id = crm_pallas.contact.id\n" +
+            "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id\n " +
+            "WHERE crm_pallas.company.id= ?";
+
     private static final String SELECT_DEALS_FOR_LIST = "SELECT\n" +
             "  crm_pallas.deal.id AS dealId,\n" +
             "  crm_pallas.deal.title,\n" +
@@ -286,11 +301,57 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 deal.setCreateDate(resultSet.getDate("created"));
                 contact.setId(resultSet.getInt("primary_contact_id"));
 
+             /*   deal.setPrimaryContact(contact);*/
+                deal.setCreateDate(resultSet.getDate("date_create"));
+
                 deals.add(deal);
             }
         } catch (SQLException ex) {
             throw new DatabaseException(ex);
         }
+        return deals;
+    }
+
+    @Override
+    public List<Deal> getDealsForList(int id) {
+        List<Deal> deals = new ArrayList<>();
+        Deal deal;
+        Contact contact;
+        Company company;
+        Stage stage;
+
+        try (Connection connection = PostgresDaoFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST_BY_ID)) {
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                deal = new Deal();
+                company = new Company();
+                contact = new Contact();
+                stage = new Stage();
+
+                deal.setId(resultSet.getInt("dealId"));
+                deal.setTitle(resultSet.getString("title"));
+                deal.setBudget(resultSet.getInt("budget"));
+                stage.setTitle(resultSet.getString("stage"));
+                deal.setStage(stage);
+                contact.setId(resultSet.getInt("contactId"));
+                contact.setlName(resultSet.getString("contact"));
+
+                company.setId(resultSet.getInt("companyId"));
+                company.setTitle(resultSet.getString("company"));
+                contact.setCompany(company);
+     /*           deal.setPrimaryContact(contact);*/
+                deal.setCompany(company);
+
+                deals.add(deal);
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex);
+        }
+
         return deals;
     }
 
@@ -325,7 +386,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 company.setId(resultSet.getInt("companyId"));
                 company.setTitle(resultSet.getString("company"));
                 contact.setCompany(company);
-                deal.setPrimaryContact(contact);
+       /*         deal.setPrimaryContact(contact);*/
                 deal.setCompany(company);
 
                 deals.add(deal);

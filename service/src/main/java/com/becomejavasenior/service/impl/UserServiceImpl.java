@@ -23,6 +23,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getByName(String str) throws DaoException, ClassNotFoundException {
+        return userDao.getByName(str);
+    }
+
+    @Override
     public List<User> getAll() throws DaoException, ClassNotFoundException {
         return userDao.getAll();
     }
@@ -35,10 +40,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(User user) throws DaoException {
         userDao.update(user);
-    }
-
-    @Override
-    public User getByName(String str) throws DaoException, ClassNotFoundException {
-        return userDao.getByName(str);
     }
 }

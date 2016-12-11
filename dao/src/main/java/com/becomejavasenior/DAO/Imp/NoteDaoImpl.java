@@ -12,6 +12,16 @@ import java.util.List;
 
 public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> {
 
+    private static final String SELECT_DEALS_FOR_LIST= "SELECT crm_pallas.note.id as noteId,\n" +
+            "crm_pallas.note.note_text,\n" +
+            "crm_pallas.user.last_name as lName,\n" +
+            "crm_pallas.user.first_name as fName,\n" +
+            "crm_pallas.note.created_date_time as createDateNote\n" +
+            "FROM crm_pallas.note\n" +
+            "JOIN crm_pallas.user ON crm_pallas.note.created_by_user_id = crm_pallas.user.id\n" +
+            "JOIN crm_pallas.company ON crm_pallas.note.company_id = crm_pallas.company.id\n" +
+            "WHERE crm_pallas.company.id = ? AND crm_pallas.note.is_deleted = FALSE";
+
     @Override
     void createStatement(PreparedStatement preparedStatement, Note note) throws DaoException {
         try {
@@ -49,6 +59,11 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
     @Override
     String getAllQuery() {
         return DataBaseUtil.getQuery("SELECT * FROM crm_pallas.note WHERE is_deleted = FALSE");
+    }
+
+    @Override
+    public List<Note> getByFilter(String query) {
+        return null;
     }
 
     @Override
@@ -121,10 +136,6 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         return notes;
     }
 
-    @Override
-    public List<Note> getByFilter(String query) {
-        return null;
-    }
 
     @Override
     Note getEntity(ResultSet resultSet) throws DaoException {
@@ -150,4 +161,29 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         return note;
     }
 
+    @Override
+    public List<Note> getNotesForList(int id) {
+        List<Note> notes = new ArrayList<>();
+        User user;
+        Note note;
+
+        try (Connection connection = PostgresDaoFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST)) {
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                user = new User();
+                note = new Note();
+                note.setId(resultSet.getInt("noteId"));
+                note.setNoteText(resultSet.getString("note_text"));
+                user.setlName(resultSet.getString("lName"));
+                note.setCreatedUser(user);
+                note.setDateCreate(resultSet.getDate("createDateNote"));
+                notes.add(note);
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex);
+        }
+        return notes;
+    }
 }

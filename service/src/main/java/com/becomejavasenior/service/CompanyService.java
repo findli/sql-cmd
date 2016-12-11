@@ -20,4 +20,3 @@ public interface CompanyService {
 
     Company getByName(String str) throws DaoException, ClassNotFoundException;
 }
-

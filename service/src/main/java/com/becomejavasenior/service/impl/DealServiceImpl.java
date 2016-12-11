@@ -43,6 +43,11 @@ public class DealServiceImpl implements DealService {
         dealDao.delete(id);
     }
 
+    @Override
+    public List<Deal> getDealsForList(int id) {
+        return dealDao.getDealsForList();
+    }
+
     public List<Deal> getAll() throws DaoException, ClassNotFoundException {
         return dealDao.getAll();
     }

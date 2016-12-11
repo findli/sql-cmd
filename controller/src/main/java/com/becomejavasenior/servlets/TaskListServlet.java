@@ -45,7 +45,7 @@ public class TaskListServlet extends HttpServlet{
         while(listParameters.hasMoreElements()){
             String paramName = (String)listParameters.nextElement();
                  try {
-                     taskService.deleteTask(Integer.parseInt(paramName));
+                     taskService.delete(Integer.parseInt(paramName));
                  }catch (DaoException e){
                      e.printStackTrace();
                  }

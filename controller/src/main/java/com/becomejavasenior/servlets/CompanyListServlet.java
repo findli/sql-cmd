@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name="companyList", urlPatterns = "/company")
+@WebServlet(name="companyListServlet", urlPatterns = "/company")
 public class CompanyListServlet extends HttpServlet {
 
     public static Logger log = Logger.getLogger(CompanyListServlet.class);
@@ -43,7 +43,8 @@ public class CompanyListServlet extends HttpServlet {
         }
 
         session.setAttribute("companyList", companyList);
-        req.getRequestDispatcher("pages/companyList.jsp").forward(req, resp);
+
+        req.getRequestDispatcher("pages/company.jsp").forward(req, resp);
     }
 
 }

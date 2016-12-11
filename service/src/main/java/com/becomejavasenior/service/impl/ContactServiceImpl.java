@@ -15,37 +15,40 @@ public class ContactServiceImpl implements ContactService {
 
     private final CompanyDao companyDao = new CompanyDaoImpl();
     private final UserDao userDao = new UserDaoImpl();
-    private final ContactDao contactDao = new ContactDaoImpl();
     private final TaskDao taskDao = new TaskDaoImpl();
     private final DealDao dealDao = new DealDaoImpl();
     private final StageDao stageDao = new StageDaoImpl();
     private final TagDao tagDao = new TagDaoImpl();//TODO: create
-
-    private ContactDao<Contact> contactDAO = new ContactDaoImpl();
+    private ContactDao<Contact> contactDao = new ContactDaoImpl();
 
     @Override
     public Contact create(Contact contact) throws DaoException {
-        return contactDAO.create(contact);
+        return contactDao.create(contact);
     }
 
     @Override
     public void update(Contact contact) throws DaoException {
-        contactDAO.update(contact);
+        contactDao.update(contact);
     }
 
     @Override
     public List<Contact> getAll() throws DaoException, ClassNotFoundException {
-        return contactDAO.getAll();
+        return contactDao.getAll();
     }
 
     @Override
     public Contact getById(int id) throws DaoException {
-        return contactDAO.getById(id);
+        return contactDao.getById(id);
     }
 
     @Override
     public void delete(int id) throws DaoException {
-        contactDAO.delete(id);
+        contactDao.delete(id);
+    }
+
+    @Override
+    public List<Contact> getContactsForList(int id) {
+        return contactDao.getContactsForList(id);
     }
 
     @Override
