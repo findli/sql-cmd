@@ -3,11 +3,14 @@ package com.becomejavasenior.DAO.Imp;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.FileDao;
 import com.becomejavasenior.bean.File;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 
+@Repository("fileDao")
 public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao<File> {
     @Override
     public File getByName(String str) throws DaoException, ClassNotFoundException {

@@ -5,7 +5,13 @@ import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
 import com.becomejavasenior.service.impl.*;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -25,13 +31,25 @@ import java.util.List;
 public class DealCreateServlet extends HttpServlet{
 
     public static Logger log = Logger.getLogger(DealCreateServlet.class);
+    private ApplicationContext context;
 
-    private DealService dealService = new DealServiceImpl();
+    @Autowired
+    @Qualifier("dealService")
+    private DealService dealService;
+
+    @Autowired
+    @Qualifier("contactService")
+    ContactService contactService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        ContactService contactService = new ContactServiceImpl();
         List<TaskType> TaskTypeList = null;
         List<PeriodInDaysType> PeriodInDaysTypeList = null;
 

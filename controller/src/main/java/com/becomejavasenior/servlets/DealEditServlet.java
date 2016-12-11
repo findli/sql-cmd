@@ -5,7 +5,13 @@ import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
 import com.becomejavasenior.service.impl.*;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,32 +28,46 @@ import java.util.List;
 public class DealEditServlet extends HttpServlet {
 
     public static Logger log = Logger.getLogger(DealEditServlet.class);
+    private ApplicationContext context;
 
-    DealService dealService = new DealServiceImpl();
-    CompanyService companyService = new CompanyServiceImpl();
-    AddressService addressService = new AddressServiceImpl();
+    @Autowired
+    @Qualifier("dealService")
+    DealService dealService;
+
+    @Autowired
+    @Qualifier("companyService")
+    CompanyService companyService;
+
+    @Autowired
+    @Qualifier("addressService")
+    AddressService addressService;
+
     String str = null;
     Deal deal;
     Company company;
     Address address;
 
     @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+    }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
 
-        CompanyService companyService = new CompanyServiceImpl();
         StageService stageService = new StageServiceImpl();
         UserService userService = new UserServiceImpl();
-        AddressService addressService = new AddressServiceImpl();
 
         int idDeal = 1;
         if (request.getParameter("idDeal") != null) {
             idDeal = Integer.parseInt(request.getParameter("idDeal"));
         }
 
-        dealService = new DealServiceImpl();
-        companyService = new CompanyServiceImpl();
+//        dealService = new DealServiceImpl();
+//        companyService = new CompanyServiceImpl();
 
         Deal deal = new Deal();
         Company company = new Company();

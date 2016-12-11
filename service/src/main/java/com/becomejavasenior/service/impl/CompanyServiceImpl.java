@@ -6,18 +6,26 @@ import com.becomejavasenior.DAO.Imp.CompanyDaoImpl;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.service.CompanyService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service(value = "companyService")
 public class CompanyServiceImpl implements CompanyService {
 
     public static Logger log = Logger.getLogger(CompanyServiceImpl.class);
 
-    private CompanyDao<Company> companyDAO = new CompanyDaoImpl();
+    private CompanyDao companyDAO;
+
+    @Autowired
+    public CompanyServiceImpl(CompanyDao companyDAO) {
+        this.companyDAO = companyDAO;
+    }
 
     @Override
     public Company create(Company company) throws DaoException {
-        return companyDAO.create(company);
+        return (Company) companyDAO.create(company);
     }
 
     @Override
@@ -33,16 +41,16 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company getById(int id) throws DaoException {
-        return companyDAO.getById(id);
+        return (Company) companyDAO.getById(id);
     }
 
     @Override
     public Company update(Company company) throws DaoException {
-        return companyDAO.update(company);
+        return (Company) companyDAO.update(company);
     }
 
     @Override
     public Company getByName(String str) throws DaoException, ClassNotFoundException {
-        return companyDAO.getByName(str);
+        return (Company) companyDAO.getByName(str);
     }
 }

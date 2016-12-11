@@ -1,7 +1,7 @@
 package com.becomejavasenior.bean;
 
+
 import java.io.Serializable;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class Address implements Serializable {

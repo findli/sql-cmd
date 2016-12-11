@@ -4,7 +4,15 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
 import com.becomejavasenior.service.impl.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.persistence.SecondaryTables;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,15 +23,30 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "dealListServlet", urlPatterns = "/deal")
+@Controller("dealServlet")
 public class DealListServlet extends HttpServlet {
+    private ApplicationContext context;
+
+    @Autowired
+    @Qualifier("dealService")
+    private DealService dealService;
+
+    @Autowired
+    @Qualifier("companyService")
+    CompanyService companyService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+                super.init(config);
+                SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        DealService dealService = new DealServiceImpl();
+
         TaskTypeService taskTypesService = new TaskTypeServiceImpl();
         UserService userService = new UserServiceImpl();
-        CompanyService companyService = new CompanyServiceImpl();
 
         List<Deal> dealList = dealService.getDealsForList();
         List<TaskType> taskTypeList = null;
@@ -43,8 +66,8 @@ public class DealListServlet extends HttpServlet {
         session.setAttribute("users", users);
         session.setAttribute("taskTypeList", taskTypeList);
         session.setAttribute("dealList", dealList);
-        response.sendRedirect("/pages/deal.jsp");
-//        request.getRequestDispatcher("/pages/deal.jsp").forward(request, response);
+//        response.sendRedirect("/pages/deal.jsp");
+        request.getRequestDispatcher("/pages/deal.jsp").forward(request, response);
     }
 
 }

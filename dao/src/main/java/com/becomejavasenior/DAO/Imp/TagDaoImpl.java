@@ -6,11 +6,14 @@ import com.becomejavasenior.DAO.TagDao;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Tag;
 import com.becomejavasenior.factory.PostgresDAOFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("tagDao")
 public class TagDaoImpl extends AbstractDaoImpl<Tag> implements TagDao<Tag> {
 
     @Override

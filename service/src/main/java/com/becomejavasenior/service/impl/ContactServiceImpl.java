@@ -1,31 +1,44 @@
 package com.becomejavasenior.service.impl;
 
-
 import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DAO.Imp.*;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.ContactService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service(value = "contactService")
 public class ContactServiceImpl implements ContactService {
 
     public static Logger log = Logger.getLogger(CompanyServiceImpl.class);
 
-    private final CompanyDao companyDao = new CompanyDaoImpl();
-    private final UserDao userDao = new UserDaoImpl();
-    private final ContactDao contactDao = new ContactDaoImpl();
-    private final TaskDao taskDao = new TaskDaoImpl();
-    private final DealDao dealDao = new DealDaoImpl();
-    private final StageDao stageDao = new StageDaoImpl();
-    private final TagDao tagDao = new TagDaoImpl();//TODO: create
+    private final CompanyDao companyDao;
+    private final UserDao userDao;
+    private final ContactDao contactDao;
+    private final TaskDao taskDao;
+    private final DealDao dealDao;
+    private final StageDao stageDao;
+    private final TagDao tagDao;
+    private final ContactDao contactDAO;
 
-    private ContactDao<Contact> contactDAO = new ContactDaoImpl();
+    @Autowired
+    public ContactServiceImpl(CompanyDao companyDao, UserDao userDao, ContactDao contactDao, TaskDao taskDao, DealDao dealDao, StageDao stageDao, TagDao tagDao, ContactDao contactDAO) {
+        this.companyDao = companyDao;
+        this.userDao = userDao;
+        this.contactDao = contactDao;
+        this.taskDao = taskDao;
+        this.dealDao = dealDao;
+        this.stageDao = stageDao;
+        this.tagDao = tagDao;
+        this.contactDAO = contactDAO;
+    }
 
     @Override
     public Contact create(Contact contact) throws DaoException {
-        return contactDAO.create(contact);
+        return (Contact) contactDAO.create(contact);
     }
 
     @Override
@@ -40,7 +53,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contact getById(int id) throws DaoException {
-        return contactDAO.getById(id);
+        return (Contact) contactDAO.getById(id);
     }
 
     @Override

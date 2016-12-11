@@ -8,11 +8,14 @@ import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.Contact;
 import com.becomejavasenior.bean.User;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("contactDao")
 public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactDao<Contact> {
 
     @Override

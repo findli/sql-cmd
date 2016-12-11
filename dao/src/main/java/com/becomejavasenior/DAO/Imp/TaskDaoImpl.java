@@ -3,10 +3,13 @@ package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.bean.*;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.List;
 
+@Repository("taskDao")
 public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> {
 
     @Override

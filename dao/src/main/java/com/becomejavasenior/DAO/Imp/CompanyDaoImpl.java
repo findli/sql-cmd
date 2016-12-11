@@ -8,6 +8,8 @@ import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Address;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.User;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("companyDao")
 public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyDao<Company> {
 
     @Override

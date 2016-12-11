@@ -7,11 +7,14 @@ import com.becomejavasenior.bean.Language;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDAOFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("userDao")
 public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> {
     @Override
     void createStatement(PreparedStatement preparedStatement, User user) throws DaoException {
