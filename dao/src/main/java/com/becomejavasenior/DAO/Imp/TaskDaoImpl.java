@@ -68,7 +68,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             preparedStatement.setString(1, task.getTitle());
             preparedStatement.setInt(2, task.getTaskType().getId());
             preparedStatement.setString(3, task.getDescription());
-            /*preparedStatement.setDate(4, sqlDate);*/
+            preparedStatement.setDate(4, (java.sql.Date) sqlDate);
             preparedStatement.setInt(5, task.getPeriodInDaysType().getId());
             preparedStatement.setInt(6, task.getPeriodInMinutes());
             preparedStatement.setInt(7, task.getResponsibleUser().getId());
@@ -86,7 +86,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             preparedStatement.setString(1, task.getTitle());
             preparedStatement.setInt(2, task.getTaskType().getId());
             preparedStatement.setString(3, task.getDescription());
-            /*preparedStatement.setDate(4, sqlDate);*/
+            preparedStatement.setDate(4, (java.sql.Date) sqlDate);
             preparedStatement.setInt(5, task.getPeriodInDaysType().getId());
             preparedStatement.setInt(6, task.getPeriodInMinutes());
             preparedStatement.setInt(7, task.getResponsibleUser().getId());
