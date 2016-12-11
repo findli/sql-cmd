@@ -61,7 +61,7 @@ public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao {
 
     @Override
     String getDeleteQuery() {
-        return null;
+        return "DELETE FROM crm_pallas.file WHERE crm_pallas.file.id =?";
     }
 
     @Override

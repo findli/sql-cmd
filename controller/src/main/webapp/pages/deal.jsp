@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
@@ -80,7 +80,7 @@
                             <label class="col-sm-3 control-label">От: </label>
                             <div class="col-sm-9">
                                 <div class="input-group date" id="datetimepicker8">
-                                    <input type="text" class="form-control" />
+                                    <input type="text" class="form-control"/>
                                     <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -92,7 +92,7 @@
                             <label class="col-sm-3 control-label">До: </label>
                             <div class="col-sm-9">
                                 <div class="input-group date" id="datetimepicker9">
-                                    <input type="text" class="form-control" />
+                                    <input type="text" class="form-control"/>
                                     <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
                                         </span>
@@ -213,3 +213,5 @@
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
+
+</html>

@@ -35,14 +35,6 @@ public class DealEditServlet extends HttpServlet {
         UserService userService = new UserServiceImpl();
         AddressService addressService = new AddressServiceImpl();
 
-        int idDeal = 1;
-        if (request.getParameter("idDeal") != null) {
-            idDeal = Integer.parseInt(request.getParameter("idDeal"));
-        }
-
-        dealService = new DealServiceImpl();
-        companyService = new CompanyServiceImpl();
-
         Deal deal = new Deal();
         Company company = new Company();
         Stage stage = new Stage();
@@ -50,41 +42,43 @@ public class DealEditServlet extends HttpServlet {
         List<User> users = null;
         Address address = new Address();
 
-        try {
-            deal = dealService.getById(idDeal);
-            company = companyService.getById(deal.getCompany().getId());
-            stage = stageService.getById(deal.getStage().getId());
-            address = addressService.getById(company.getAddress().getId());
-        } catch (DaoException e) {
-            e.printStackTrace();
+        int idDeal = 1;
+        if (request.getParameter("idDeal") != null) {
+            idDeal = Integer.parseInt(request.getParameter("idDeal"));
+            dealService = new DealServiceImpl();
+            companyService = new CompanyServiceImpl();
+
+            try {
+                deal = dealService.getById(idDeal);
+                company = companyService.getById(deal.getCompany().getId());
+                stage = stageService.getById(deal.getStage().getId());
+                address = addressService.getById(company.getAddress().getId());
+            } catch (DaoException e) {
+                e.printStackTrace();
+            }
+            try {
+                stages = stageService.getAll();
+                users = userService.getAll();
+            } catch (DaoException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            String stageTitle = deal.getStage().getTitle();
+            session.setAttribute("stageTitle", stageTitle);
+
+            stages.remove(stage.getId()-1);
+
+            String responsibleUser = deal.getResponsibleUser().getlName();
+            users.remove(deal.getResponsibleUser().getId()-1);
+
+            session.setAttribute("address", address);
+            session.setAttribute("idDeal", idDeal);
+            session.setAttribute("stages", stages);
+            session.setAttribute("stage", stage);
+            session.setAttribute("responsibleUser", responsibleUser);
+            session.setAttribute("users", users);
+            session.setAttribute("company", company);
+            session.setAttribute("deal", deal);
         }
-
-        try {
-            stages = stageService.getAll();
-            users = userService.getAll();
-        } catch (DaoException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        String stageTitle = deal.getStage().getTitle();
-        session.setAttribute("stageTitle", stageTitle);
-
-        stages.remove(stage.getId()-1);
-
-        String responsibleUser = deal.getResponsibleUser().getlName();
-        users.remove(deal.getResponsibleUser().getId()-1);
-
-
-        session.setAttribute("address", address);
-        session.setAttribute("idDeal", idDeal);
-        session.setAttribute("stages", stages);
-        session.setAttribute("stage", stage);
-        session.setAttribute("responsibleUser", responsibleUser);
-        session.setAttribute("users", users);
-        session.setAttribute("company", company);
-        session.setAttribute("deal", deal);
         request.getRequestDispatcher("/pages/deal_edit.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -108,9 +102,7 @@ public class DealEditServlet extends HttpServlet {
                 str += getStageFromRequest(request) + "; \n";
                 str += getBudgetFromRequest(request) + "; \n";
                 str += getUserFromRequest(request) + "; \n";
-            } catch (DaoException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (DaoException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
 

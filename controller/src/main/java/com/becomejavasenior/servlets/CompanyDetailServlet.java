@@ -12,49 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.List;
-
 
 @WebServlet(name = "companyDetailServlet", urlPatterns = "/companyDetail")
 public class CompanyDetailServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        response.setContentType("text/plain");
-
-        String action = request.getParameter("action");
-        if (action.startsWith("formTaskDel")) {
-            TaskService taskService = new TaskServiceImpl();
-            String idTask = action.substring(12);
-            try {
-                taskService.delete(Integer.parseInt(idTask));
-            } catch (DaoException e) {
-                e.printStackTrace();
-            }
-        } else if (action.startsWith("formNoteDel")){
-            NoteService noteService = new NoteServiceImpl();
-            String idNote = action.substring(12);
-            try {
-                noteService.delete(Integer.parseInt(idNote));
-            } catch (DaoException e) {
-                e.printStackTrace();
-            }
-        } else if (action.startsWith("formFileDel")){
-            FileService fileService= new FileServiceImpl();
-            String idFile = action.substring(12);
-            try {
-                fileService.delete(Integer.parseInt(idFile));
-            } catch (DaoException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (request.getParameter("formUpdateCompany") != null) {
-            System.out.println("POST!!!!!!");
-        }
-
-    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -100,11 +61,39 @@ public class CompanyDetailServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+        response.sendRedirect("/pages/companyDetail.jsp");
+    }
 
-        if (request.getParameter("formUpdateCompany") != null) {
-            System.out.println("!!!!!!");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        response.setContentType("text/plain");
+
+        String action = request.getParameter("action");
+        if (action.startsWith("formTaskDel")) {
+            TaskService taskService = new TaskServiceImpl();
+            String idTask = action.substring(12);
+            try {
+                taskService.delete(Integer.parseInt(idTask));
+            } catch (DaoException e) {
+                e.printStackTrace();
+            }
+        } else if (action.startsWith("formNoteDel")){
+            NoteService noteService = new NoteServiceImpl();
+            String idNote = action.substring(12);
+            try {
+                noteService.delete(Integer.parseInt(idNote));
+            } catch (DaoException e) {
+                e.printStackTrace();
+            }
+        } else if (action.startsWith("formFileDel")){
+            FileService fileService= new FileServiceImpl();
+            String idFile = action.substring(12);
+            try {
+                fileService.delete(Integer.parseInt(idFile));
+            } catch (DaoException e) {
+                e.printStackTrace();
+            }
         }
 
-        response.sendRedirect("/pages/companyDetail.jsp");
     }
 }

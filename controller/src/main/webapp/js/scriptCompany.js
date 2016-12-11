@@ -79,6 +79,14 @@ $(function () {
             $('.noteBlock').css('display', 'none');
         }
     });
+    $("#formTaskDone").on("click", function () {
+        if ($(this).is(":checked")) {
+            $('.taskBlock').css('display', 'block');
+        }
+        else {
+            $('.taskBlock').css('display', 'none');
+        }
+    });
     $('.actionBut').click(function () {
         $.ajax({
             type:'POST',

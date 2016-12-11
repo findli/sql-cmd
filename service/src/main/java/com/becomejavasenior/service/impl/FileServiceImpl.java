@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FileServiceImpl implements FileService {
 
-    private final FileDao file = new FileDaoImpl();
+    private final FileDao fileDao = new FileDaoImpl();
 
     @Override
     public File create(File t) throws DaoException {
@@ -36,7 +36,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void delete(int id) throws DaoException {
-
+        fileDao.delete(id);
     }
 
     @Override
@@ -46,6 +46,6 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public List<File> getFilesForList(int id) {
-        return  file.getFilesForList(id);
+        return  fileDao.getFilesForList(id);
     }
 }

@@ -41,7 +41,7 @@
                 <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
                 <li><a href="/contact" target="_self">Contacts</a></li>
-                <li><a href="#" target="_self">Tasks</a></li>
+                <li><a href="/taskList" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
                 <li><a href="#" target="_self">Settings</a></li>
             </ul>
@@ -97,7 +97,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Add files </label>
                             <div class="col-sm-9">
-                                <input type="file" type="Search for a file to add">
+                                <input type="file" title="Search for a file to add">
                             </div>
                         </div>
 
@@ -120,32 +120,52 @@
                         <%--enctype="multipart/form-data">--%>
                         <h2>Add contact</h2>
                         <div class="wrapper__users">
-                            <div class="users__panel">
-                                <br>
-                                <label>Makarov</label>
-                                <a href="#">Edit</a>
-                                <a href="#">Undock</a>
-                                <input class="users__panel--input" type="checkbox">
-                            </div>
-                            <div class="users__panel--body">
-                                <label>Position: Director</label><br>
-                                <label>Email: makarov@gmail.com</label><br>
+                            <%--<div class="users__panel">--%>
+                            <%--<br>--%>
+                            <%--<label>Makarov</label>--%>
+                            <%--<a href="#">Edit</a>--%>
+                            <%--<a href="#">Undock</a>--%>
+                            <%--<input class="users__panel--input" type="checkbox">--%>
+                            <%--</div>--%>
+                            <%--<div class="users__panel--body">--%>
+                            <%--<label>Position: Director</label><br>--%>
+                            <%--<label>Email: makarov@gmail.com</label><br>--%>
 
-                                <div class="form-group">
-                                    <select class="col-sm-4 form-control" name="phone_type" id=phone_type">
+                            <%--<div class="form-group">--%>
+                            <%--<select class="col-sm-4 form-control" name="phone_type" id=phone_type">--%>
+                            <%--<option>Work telephone</option>--%>
+                            <%--<option>Mobile telephone</option>--%>
+                            <%--<option>Home telephone</option>--%>
+                            <%--</select>--%>
+                            <%--<div class="col-sm-7">--%>
+                            <%--<input class="form-control" type="text" name="formPhone" id="formPhone"--%>
+                            <%--placeholder="Number">--%>
+                            <%--</div>--%>
+                            <%--</div>--%>
+
+
+                            <%--<label>Skype: skypeMakarov</label>--%>
+                            <%--</div>--%>
+                            <c:forEach items="${contactList}" var="contactList">
+                                <div id="fu${contactList.getId()}" class="users__panel">
+                                    <p>${contactList.getfName()} ${contactList.getlName()}</p>
+                                    <a href="#">Edit</a>
+                                    <a href="#">Undock</a>
+                                    <input class="users__panel--input" id='cbfu${contactList.getId()}' type="checkbox">
+                                </div>
+                                <div class="users__panel--body">
+                                    <p>Position: ${contactList.getPosition()}</p>
+                                    <p>Email: ${contactList.getEmail()}</p>
+                                    <select>
                                         <option>Work telephone</option>
                                         <option>Mobile telephone</option>
                                         <option>Home telephone</option>
                                     </select>
-                                    <div class="col-sm-7">
-                                        <input class="form-control" type="text" name="formPhone" id="formPhone"
-                                               placeholder="Number">
-                                    </div>
+                                    <input class="text" id='formPhonefu${contactList.getId()}' type="text" name="formPhone"
+                                           placeholder="Number">
+                                    <p>Skype: ${contactList.getSkype()}</p>
                                 </div>
-
-
-                                <label>Skype: skypeMakarov</label>
-                            </div>
+                            </c:forEach>
                         </div>
 
                         <input onclick="location.href='#modalAddContact'" class="formAddBut" type="button"
@@ -163,12 +183,10 @@
                                 </div>
                             </header>
                             <p style="display: inline">Name <input style="float: none; width: 148px" type="text"
-                                                                   class="modalInput"
-                                                                   value="${contact.setfName()}"></p>
+                                                                   class="modalInput" placeholder="Name"></p>
                             <p style="display: inline;">Surname <input style="float: none; width: 147px" type="text"
-                                                                       class="modalInput"
-                                                                       value="${contact.setlName()}"></p>
-                            <p>Position <input type="text" class="modalInput" id="modalContactPosition" value="${contact.setPosition()}"></p>
+                                                                       class="modalInput" placeholder="Surname"></p>
+                            <p>Position <input type="text" class="modalInput" id="modalContactPosition" placeholder="Position"></p>
                             <p>Phone <i class="fa fa-plus-square"></i>
                                 <select>
                                     <option>Working</option>
@@ -181,8 +199,8 @@
                                 <input style="float: none; width: 140px" class="modalInput" name="formPhone"
                                        placeholder="+38(067)123-45-67">
                             </p>
-                            <p>Email <input type="text" class="modalInput"  value="${contact.setEmail()}"></p>
-                            <p>Skype <input type="text" class="modalInput"  value="${contact.setSkype()}"></p>
+                            <p>Email <input type="text" class="modalInput"  placeholder="Email"></p>
+                            <p>Skype <input type="text" class="modalInput"  placeholder="Skype"></p>
                             <input class="modalBut" type="button" value="Save contact" onclick="add_contact();">
                             <input class="modalBut cancel" onclick="location.href='#close'" type="button"
                                    value="Cancel">
@@ -210,7 +228,7 @@
 
                                 <select class="form-control" style="float: none; width: 250px" id="companyDeal" name="companyDeal">
                                     <c:forEach var="company" items="${companyList}">
-                                        <option><c:out value="${company.type}"/></option>
+                                        <option><c:out value="${company.title}"/></option>
                                     </c:forEach>
                                 </select>
 
@@ -335,7 +353,9 @@
 <%--$('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
 <%--});--%>
 <%--</script>--%>
+
 </body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>

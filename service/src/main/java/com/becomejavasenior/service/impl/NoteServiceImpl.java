@@ -35,7 +35,7 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public void delete(int id) throws DaoException {
-
+        noteDao.delete(id);
     }
 
     @Override

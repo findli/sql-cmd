@@ -28,7 +28,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             "  JOIN crm_pallas.user on crm_pallas.user.id = crm_pallas.task.responsible_user_id\n" +
             "  JOIN crm_pallas.company_task on crm_pallas.task.id = crm_pallas.company_task.task_id\n" +
             "  JOIN crm_pallas.company on crm_pallas.company_task.company_id = crm_pallas.company.id\n" +
-            "WHERE crm_pallas.company.id = ?;";
+            "WHERE crm_pallas.company.id = ? AND crm_pallas.task.is_finished = FALSE;";
 
     @Override
     public String getCreateQuery() {
@@ -110,19 +110,12 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
     @Override
     public Task getEntity(ResultSet resultSet) throws DaoException {
         Task task = new Task();
-        TaskTypeDao<TaskType> taskType = new TaskTypeDaoImpl();
-        PeriodInDaysTypeDao<PeriodInDaysType> periodInDaysType = new PeriodInDaysTypeDaoImpl();
-//        UserDao<User> user = new UserDaoImpl();
+
         try {
             task.setId(resultSet.getInt("id"));
             task.setTitle(resultSet.getString("title"));
-//            task.setTaskTypeId(taskType.getById(resultSet.getInt("task_type_id")));
             task.setDescription(resultSet.getString("description"));
-//            task.setDeadlineDate(resultSet.getDate("deadline_date"));
-//            task.setTime(resultSet.getTime("time"));
-//            task.setPeriodInDaysTypeId(periodInDaysType.getById(resultSet.getInt("period_in_days_type_id")));
             task.setPeriodInMinutes(resultSet.getInt("period_in_minutes"));
-//            task.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
             task.setFinished(resultSet.getBoolean("is_finished"));
             task.setDeleted(resultSet.getBoolean("is_deleted"));
         } catch (SQLException e) {
