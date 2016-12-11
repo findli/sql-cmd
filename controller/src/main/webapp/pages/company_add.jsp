@@ -1,21 +1,26 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/bootstrap.css">
-
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <%--  <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>--%>
-    <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
-    <title>Add contact</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+    <!-- <script type="text/javascript" src="js/bootstrap.file-input.js"></script> -->
+
+    <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
+    <title>Add Company</title>
 </head>
+<html>
 <body>
 <header>
     <div class="wrapper">
@@ -23,7 +28,7 @@
             <p>Logo</p>
         </div>
         <div class="header__title">
-            <h3>Contact</h3>
+            <h3>Add Company</h3>
             <div class="header__user">
                 <div class="header__user--photo">
                     <i class="fa fa-user"></i>
@@ -38,7 +43,7 @@
     <div class="wrapper">
         <div id="navbar">
             <ul>
-                <li><a href="/index.jsp" target="_self">Home</a></li>
+                <li><a href="#" target="_self">Home</a></li>
                 <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
                 <li><a href="/contact" target="_self">Contacts</a></li>
@@ -49,45 +54,32 @@
         </div>
 
         <div class="wrapper__aboutCompany">
-            <form class="form-horizontal" role="form" method="post" action="/contactAdd">
-                <div class="forms">
+            <div class="forms">
+                <form class="form-horizontal" role="form" method="post" action="/dealCreate" id="dealForm"
+                      enctype="multipart/form-data">
 
-                    <!--Add contact-->
-                    <div class="forms--nContact">
-                        <!--       <form class="form-horizontal">-->
-                        <h2>Contact</h2>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">First Name </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="fName" name="fName" id="fName">
-                            </div>
-                        </div>
+                    <!--Add deal-->
+                    <div class="forms--nDeal">
+                        <%--<form class="form-horizontal">--%>
+                        <h2>Add deal</h2>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Last Name </label>
+                            <label class="col-sm-3 control-label">Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="lName" name="lName" id="lName">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Position </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="position" name="position" id="position">
+                                <input class="form-control" type="text" placeholder="Name" id="dealName" name="dealName">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tag </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag" name="Tag" id="Tag">
+                                <input class="form-control" type="text" placeholder="Tag" id="dealTag" name="dealTag">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Responsible </label>
-                            <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser" style="width: 150px;">
+                            <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
                                 <c:forEach var="user" items="${users}">
                                     <option><c:out value="${user.lName}"/></option>
                                 </c:forEach>
@@ -95,62 +87,119 @@
                         </div>
 
                         <div class="form-group">
-                            <select class="col-sm-3 form-control">
-                                <option>Work</option>
-                                <option>Mobile</option>
-                                <option>Home</option>
-                            </select>
+                            <label class="col-sm-3 control-label">Budget </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" name="formPhone" id="formPhone" placeholder="Number">
+                                <input class="form-control" type="text" placeholder="$" id="dealBudget" name="dealBudget">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Email </label>
+                            <label class="col-sm-3 control-label">Comment </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Email" id="Email" name="Email">
+                                <textarea class="form-control" placeholder="Message" id="noteDeal" name="noteDeal"></textarea>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Skype </label>
+                            <label class="col-sm-3 control-label">Add files </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Skype" id="Skype" name="Skype">
+                                <input type="file" title="Search for a file to add">
                             </div>
                         </div>
-                        <!--
-                                                             <div class="form-group">
-                                                                 <label class="col-sm-3 control-label">Address </label>
-                                                                 <div class="col-sm-9">
-                                                                     <input class="form-control" type="text" placeholder="Address" id="contactAddress" name="contactAddress">
-                                                                 </div>
-                                                             </div>
-                                                             <div class="form-group">
-                                                                 <label class="col-sm-3 control-label">Comment </label>
-                                                                 <div class="col-sm-9">
-                                                                     <textarea class="form-control" placeholder="Message" id="noteContact" name="noteContact"></textarea>
-                                                                 </div>
-                                                             </div>
-                                                             <div class="form-group">
-                                                                 <label class="col-sm-3 control-label">Add files </label>
-                                                                 <div class="col-sm-9">
-                                                                     <input type="file" title="Search for a file to add">
-                                                                 </div>
-                                                             </div>
-                        -->
+
                         <div class="form-group">
                             <div class="col-sm-10">
-                                <%--<input class="formAddBut" type="button" value="Save">--%>
-                                <button>Подтвердить</button>
+                                <button>Применить</button>
+                                <%--<a href="/deal" class="btn btn-primary">Применить</a>--%>
+                                <%--<a href="#" class="btn btn-primary">Очистить</a>--%>
                             </div>
                         </div>
-                        <!--    </form> -->
+                        <%--<select class="form-control" style="float: none; width: 250px" id="companyDeal" name="companyDeal">--%>
+                        <%----%>
+                        <%--</select>--%>
+                        <%--</form>--%>
                     </div>
 
+                    <!--Add contact-->
+                    <div class="forms--nDeal--Contact">
+                        <%--<form id="add_contact_form">--%>
+                        <h2>Add contact</h2>
+                        <div class="wrapper__users">
+                            <div class="users__panel">
+                                <br>
+                                <label>Makarov</label>
+                                <a href="#">Edit</a>
+                                <a href="#">Undock</a>
+                                <input class="users__panel--input" type="checkbox">
+                            </div>
+                            <div class="users__panel--body">
+                                <label>Position: Director</label><br>
+                                <label>Email: makarov@gmail.com</label><br>
+
+                                <div class="form-group">
+                                    <select class="col-sm-4 form-control" name="phone_type" id=phone_type">
+                                        <option>Work telephone</option>
+                                        <option>Mobile telephone</option>
+                                        <option>Home telephone</option>
+                                    </select>
+                                    <div class="col-sm-7">
+                                        <input class="form-control" type="text" name="formPhone" id="formPhone"
+                                               placeholder="Number">
+                                    </div>
+                                </div>
+
+
+                                <label>Skype: skypeMakarov</label>
+                            </div>
+                        </div>
+
+                        <input onclick="location.href='#modalAddContact'" class="formAddBut" type="button"
+                               value="Add contact">
+                        <%--</form>--%>
+                    </div>
+                    <!--Modal window contact-->
+                    <div id="modalAddContact" class="modalDialog">
+                        <%--<form id="add_contact_form">--%>
+                        <div>
+                            <header>
+                                <div class="wrapper__modal1Title">
+                                    <div><i class="fa fa-user"></i></div>
+                                    <h3>Add contact</h3>
+                                </div>
+                            </header>
+                            <p style="display: inline">Name <input style="float: none; width: 148px" type="text"
+                                                                   class="modalInput"
+                                                                   value="${contact.setfName()}"></p>
+                            <p style="display: inline;">Surname <input style="float: none; width: 147px" type="text"
+                                                                       class="modalInput"
+                                                                       value="${contact.setlName()}"></p>
+                            <p>Position <input type="text" class="modalInput" id="modalContactPosition" value="${contact.setPosition()}"></p>
+                            <p>Phone <i class="fa fa-plus-square"></i>
+                                <select>
+                                    <option>Working</option>
+                                    <option>Direct working</option>
+                                    <option>Mobile</option>
+                                    <option>Fax</option>
+                                    <option>Home</option>
+                                    <option>Other</option>
+                                </select>
+                                <input style="float: none; width: 140px" class="modalInput" name="formPhone"
+                                       placeholder="+38(067)123-45-67">
+                            </p>
+                            <p>Email <input type="text" class="modalInput"  value="${contact.setEmail()}"></p>
+                            <p>Skype <input type="text" class="modalInput"  value="${contact.setSkype()}"></p>
+                            <input class="modalBut" type="button" value="Save contact" onclick="add_contact();">
+                            <input class="modalBut cancel" onclick="location.href='#close'" type="button"
+                                   value="Cancel">
+                        </div>
+                        <%--</form>--%>
+                    </div>
+                    <!--End-->
+
                     <!--Add company-->
-                    <div class="forms--nContact">
-                        <!--    <form class="form-horizontal"> -->
-                        <h2>Company</h2>
+                    <div class="forms--nDeal">
+                        <%--<form class="form-horizontal">--%>
+                        <h2>Add company</h2>
 
                         <!-- Навигация -->
                         <ul class="nav nav-tabs" role="tablist">
@@ -163,7 +212,7 @@
                             <br>
                             <div role="tabpanel" class="tab-pane active" id="old">
 
-                                <select class="form-control" style="float: none; width: 250px" id="company" name="company">
+                                <select class="form-control" style="float: none; width: 250px" id="companyDeal" name="companyDeal">
                                     <c:forEach var="company" items="${companyList}">
                                         <option><c:out value="${company.title}"/></option>
                                     </c:forEach>
@@ -208,13 +257,13 @@
                                 </div>
                             </div>
                         </div>
-                        <!--    </form> -->
+                        <%--</form>--%>
                     </div>
 
                     <!--Add task-->
-                    <div class="forms--nContact--Task">
-                        <!--   <form class="form-horizontal"> -->
-                        <h2>Task</h2>
+                    <div class="forms--nDeal--Task">
+                        <%--<form class="form-horizontal">--%>
+                        <h2>Add task</h2>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Period </label>
@@ -231,7 +280,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">Date and time </label>
+                            <label class="col-sm-3 control-label">Date and time </label>
                             <div class="col-sm-8">
                                 <div class="input-group date" id="datetimepicker">
                                     <input type="text" class="form-control" />
@@ -246,12 +295,9 @@
                             <label class="col-sm-3 control-label">Responsible </label>
                             <div class="col-sm-9">
                                 <select class="form-control">
-                                    <option>Manager 1</option>
-                                    <option>Manager 2</option>
-                                    <option>Manager 3</option>
-                                    <option>Manager 4</option>
-                                    <option>Manager 5</option>
-                                    <option>Manager 6</option>
+                                    <c:forEach var="user" items="${users}">
+                                        <option><c:out value="${user.lName}"/></option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
@@ -260,9 +306,9 @@
                             <label class="col-sm-3 control-label">Task type </label>
                             <div class="col-sm-9">
                                 <select class="form-control">
-                                    <option>Follow-up</option>
-                                    <option>Meeting</option>
-                                    <option>Order</option>
+                                    <c:forEach var="taskType" items="${taskTypeList}">
+                                        <option><c:out value="${taskType.type}"/></option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
@@ -281,49 +327,12 @@
                             </div>
                         </div>
 
-                        <!--   </form> -->
+                        <%--</form>--%>
                     </div>
 
-                    <!--Add deal-->
-                    <div class="forms--nContact--Deal">
-                        <!--  <form class="form-horizontal"> -->
-                        <h2>Deal</h2>
+                </form>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Name </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Name deal">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Status </label>
-                            <div class="col-sm-9">
-                                <select class="form-control">
-                                    <option>Deal off</option>
-                                    <option>in progress</option>
-                                    <option>pause</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Budget </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="$">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <input class="formAddBut" type="button" value="Применить">
-                                <input class="formAddBut" type="button" value="Очистить">
-                            </div>
-                        </div>
-                        <!--  </form> -->
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
@@ -332,13 +341,6 @@
         $('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
     });
 </script>
-
 </body>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.js"></script>
-<script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
 </html>

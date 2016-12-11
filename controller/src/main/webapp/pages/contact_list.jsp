@@ -41,7 +41,7 @@
                 <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
                 <li><a href="/contact" target="_self">Contacts</a></li>
-                <li><a href="/taskList" target="_self">Tasks</a></li>
+                <li><a href="#" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
                 <li><a href="#" target="_self">Settings</a></li>
             </ul>
@@ -184,33 +184,33 @@
                     </div>
 
                     <%--<div class="table-responsive">--%>
-                        <%--<table class="table table-striped">--%>
-                            <%--<tr>--%>
-                                <%--<th>Имя</th>--%>
-                                <%--<th>Компания</th>--%>
-                                <%--<th>Телефон</th>--%>
-                                <%--<th>Email</th>--%>
-                            <%--</tr>--%>
-                            <%--<tr>--%>
-                                <%--<td>Иван Петров</td>--%>
-                                <%--<td>БМВ Бавария</td>--%>
-                                <%--<td>(067) 485-85-03</td>--%>
-                                <%--<td>ivan@google.com</td>--%>
-                            <%--</tr>--%>
-                            <%--<tr>--%>
-                                <%--<td>Елена Бабич</td>--%>
-                                <%--<td>Митсубиси</td>--%>
-                                <%--<td>(067) 444-67-34</td>--%>
-                                <%--<td>elena@google.com</td>--%>
-                            <%--</tr>--%>
-                            <%--<tr>--%>
-                                <%--<td>Дмитрий Агафонов</td>--%>
-                                <%--<td>Митсубиси Электрик</td>--%>
-                                <%--<td>(067) 454-77-84</td>--%>
-                                <%--<td>dmitry@google.com</td>--%>
-                            <%--</tr>--%>
+                    <%--<table class="table table-striped">--%>
+                    <%--<tr>--%>
+                    <%--<th>Имя</th>--%>
+                    <%--<th>Компания</th>--%>
+                    <%--<th>Телефон</th>--%>
+                    <%--<th>Email</th>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                    <%--<td>Иван Петров</td>--%>
+                    <%--<td>БМВ Бавария</td>--%>
+                    <%--<td>(067) 485-85-03</td>--%>
+                    <%--<td>ivan@google.com</td>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                    <%--<td>Елена Бабич</td>--%>
+                    <%--<td>Митсубиси</td>--%>
+                    <%--<td>(067) 444-67-34</td>--%>
+                    <%--<td>elena@google.com</td>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                    <%--<td>Дмитрий Агафонов</td>--%>
+                    <%--<td>Митсубиси Электрик</td>--%>
+                    <%--<td>(067) 454-77-84</td>--%>
+                    <%--<td>dmitry@google.com</td>--%>
+                    <%--</tr>--%>
 
-                        <%--</table>--%>
+                    <%--</table>--%>
                     <%--</div>--%>
                 </div>
             </div>

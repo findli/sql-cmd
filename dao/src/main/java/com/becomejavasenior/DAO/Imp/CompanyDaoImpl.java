@@ -60,7 +60,15 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
 
     @Override
     public Company getByName(String str) throws DaoException, ClassNotFoundException {
-        return null;
+        Company company = new Company();
+        List<Company> companies = getAll();
+        for (int i = 0; i < companies.size(); ++i) {
+            if(companies.get(i).getTitle().equals(str)) {
+                company = companies.get(i);
+                break;
+            }
+        }
+        return company;
     }
 
     @Override
@@ -68,7 +76,7 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
 
         Company company = new Company();
         AddressDao<Address> addressDao = new AddressDaoImpl();
-        UserDao<User> userDao = new UserDaoImpl();
+        UserDao<User> user = new UserDaoImpl();
 
         try{
             company.setId(resultSet.getInt("id"));

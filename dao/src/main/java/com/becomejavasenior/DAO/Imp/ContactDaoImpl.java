@@ -1,8 +1,15 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.*;
+import com.becomejavasenior.DAO.CompanyDao;
+import com.becomejavasenior.DAO.ContactDao;
+import com.becomejavasenior.DAO.DaoException;
+import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.DataBaseUtil;
-import com.becomejavasenior.bean.*;
+import com.becomejavasenior.bean.Company;
+import com.becomejavasenior.bean.Contact;
+import com.becomejavasenior.bean.PhoneType;
+import com.becomejavasenior.bean.User;
+import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDaoFactory;
 
 import java.sql.*;
@@ -39,7 +46,6 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             preparedStatement.setInt(7, contact.getResponsibleUser().getId());
 //            preparedStatement.setDate(8, new Date(contact.getCreated().getTime()) );
             preparedStatement.setBoolean(8, contact.isDeleted());
-            preparedStatement.setInt(9, contact.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -178,30 +184,6 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
                 contact.setEmail(resultSet.getString("email"));
                 contact.setSkype(resultSet.getString("skype"));
                 contacts.add(contact);
-
-        /*try (Connection connection = PostgresDaoFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST)) {
-            statement.setInt(1,id);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                company = new Company();
-                contact = new Contact();
-
-         *//*       user = new User();*//*
-                contact.setId(resultSet.getInt("id"));
-                contact.setfName(resultSet.getString("fName"));
-                contact.setlName(resultSet.getString("lName"));
-                company.setId(resultSet.getInt("companyId"));
-                contact.setCompany(company);
-                contact.setPosition(resultSet.getString("post"));
-                contact.setEmail(resultSet.getString("email"));
-                contact.setSkype(resultSet.getString("skype"));
-
-
-       *//*         user.setId(resultSet.getInt("responsible_user_id"));
-                contact.setResponsibleUser(user);*//*
-*//*                contact.setDeleted(resultSet.getBoolean("is_deleted"));*//*
-                contacts.add(contact);*/
             }
         } catch (SQLException ex) {
             throw new DatabaseException(ex);

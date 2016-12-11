@@ -6,7 +6,6 @@ import com.becomejavasenior.DAO.AbstractDao;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DataBaseUtil;
 import org.apache.log4j.Logger;
-/*import org.apache.log4j.Logger;*/
 
 import java.sql.*;
 import java.util.ArrayList;

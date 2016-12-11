@@ -4,6 +4,7 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
 import com.becomejavasenior.service.impl.*;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +18,9 @@ import java.util.List;
 
 @WebServlet(name = "dealEditServlet", urlPatterns = "/dealEdit")
 public class DealEditServlet extends HttpServlet {
+
+    public static Logger log = Logger.getLogger(DealEditServlet.class);
+
     DealService dealService = new DealServiceImpl();
     CompanyService companyService = new CompanyServiceImpl();
     AddressService addressService = new AddressServiceImpl();
@@ -79,6 +83,7 @@ public class DealEditServlet extends HttpServlet {
             session.setAttribute("company", company);
             session.setAttribute("deal", deal);
         }
+
         request.getRequestDispatcher("/pages/deal_edit.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -92,17 +97,21 @@ public class DealEditServlet extends HttpServlet {
         try {
             deal = dealService.getById(idDeal);
         } catch (DaoException e) {
-            e.printStackTrace();
+            log.error("DAOException in DealEditServlet in Controller layer", e);
         }
 
         if (action.equals("editDealDeal")) {
+
+            log.trace("editDealDeal");
 
             str = getNameDealFromRequest(request) + "; \n";
             try {
                 str += getStageFromRequest(request) + "; \n";
                 str += getBudgetFromRequest(request) + "; \n";
                 str += getUserFromRequest(request) + "; \n";
-            } catch (DaoException | ClassNotFoundException e) {
+            } catch (DaoException e) {
+                log.error("DAOException in DealEditServlet in Controller layer", e);
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
 
@@ -141,6 +150,15 @@ public class DealEditServlet extends HttpServlet {
 
         }
     }
+//    public List<Contact> contactsFromDeal(Deal deal) {
+//        List<Contact> contacts = new ArrayList<>();
+//        for (int i = 0; i < deal.getDealContact().size(); ++i) {
+//            contacts.add(deal.getDealContact().get(i));
+//        }
+//        return contacts;
+//    }
+
+
     public String getRoomFromRequest(HttpServletRequest request) {
 
         String room = request.getParameter("room");

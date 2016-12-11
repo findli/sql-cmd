@@ -19,7 +19,7 @@ public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTy
 
     @Override
     public String getUpdateQuery(){
-        return "UPDATE crm_pallas.task_type SET title = ?";
+        return "UPDATE crm_pallas.task_type SET title = ? WHERE id = ?";
     }
 
     @Override
@@ -55,6 +55,7 @@ public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTy
     public void updateStatement(PreparedStatement preparedStatement, TaskType taskType) throws DaoException {
         try {
             preparedStatement.setString(1, taskType.getType());
+            preparedStatement.setInt(2, taskType.getId());
         } catch (SQLException e){
             throw new DaoException("Can't update statement for TaskType", e);
         }

@@ -41,7 +41,7 @@
                 <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
                 <li><a href="/contact" target="_self">Contacts</a></li>
-                <li><a href="#" target="_self">Tasks</a></li>
+                <li><a href="/taskList" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
                 <li><a href="#" target="_self">Settings</a></li>
             </ul>
@@ -105,7 +105,7 @@
                             <div class="col-sm-9">
                                 <select class="form-control">
                                     <c:forEach var="user" items="${users}">
-                                        <option><c:out value="${user.lName}"/></option>
+                                        <option><c:out value="${user.getlName()}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -116,7 +116,7 @@
                             <div class="col-sm-9">
                                 <select class="form-control">
                                     <c:forEach var="taskType" items="${taskTypeList}">
-                                        <option><c:out value="${taskType.type}"/></option>
+                                        <option><c:out value="${taskType.getType()}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -145,48 +145,53 @@
 
                     <br><br><br><br>
 
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <tr>
-                                <th>Первичный контакт</th>
-                                <th>Переговоры</th>
-                                <th>Принимают решение</th>
-                                <th>Согласование договора</th>
-                            </tr>
-                            <tr>
-                                <td>Name deal1<br>
-                                    10000$<br>
-                                    Ivanov, Petrov<br>
-                                    MMM
-                                </td>
-                                <td>Name deal2<br>
-                                    15200$<br>
-                                    Zaharov, Petrov<br>
-                                    Bank
-                                </td>
-                                <td></td>
-                                <td>Name deal3<br>
-                                    2520$<br>
-                                    Agapov, Ivanov2<br>
-                                    STO
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Name deal3<br>
-                                    2520$<br>
-                                    Agapov, Ivanov2<br>
-                                    STO
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td>Name deal4<br>
-                                    32400$<br>
-                                    Agapov, Ivanov2<br>
-                                    STO2
-                                </td>
-                            </tr>
-
-                        </table>
+                    <div class="row">
+                        <div class="col-md-12" align="center">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Первичный контакт</th>
+                                    <th>Переговоры</th>
+                                    <th>Принимают решение</th>
+                                    <th>Согласование договора</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <c:forEach var="stage" items="${stageList}">
+                                        <td>
+                                            <c:set var="sum" value="${0}"/>
+                                            <c:set var="count" value="${0}"/>
+                                            <c:forEach var="deal" items="${dealService.getAllDealsByStage(stage.title)}">
+                                                <c:set var="sum" value="${sum + deal.getBudget()}"/>
+                                                <c:set var="count" value="${count + 1}"/>
+                                            </c:forEach>
+                                            <c:out value="${sum}"/> $<br><br>
+                                            <c:out value="${count}"/> Сделок<br><br>
+                                        </td>
+                                    </c:forEach>
+                                </tr>
+                                <tr>
+                                    <c:forEach var="stage" items="${stageList}">
+                                        <td>
+                                            <c:forEach var="deal" items="${dealService.getAllDealsByStage(stage.title)}">
+                                                <dl>
+                                                    <dt><b style="color: #2b669a"><c:out value="${deal.getTitle()}"/></b></dt>
+                                                    <dd><b style="color: #a94442"><c:out value="${deal.getBudget()}"/> $</b></dd>
+                                                    <dd><c:out value="${deal.getCompany().getTitle()}"/></dd>
+                                                    <c:forEach var="contact" items="${dealService.getContactsByDealName(deal.title)}">
+                                                        <dd><b style="color: #2b542c"><c:out value="${contact.getlName()}"/></b></dd>
+                                                    </c:forEach>
+                                                </dl>
+                                                <hr>
+                                            </c:forEach>
+                                        </td>
+                                    </c:forEach>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-0"></div>
                     </div>
                 </div>
             </div>
@@ -211,6 +216,10 @@
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+<<<<<<< HEAD
 <%--<!-- <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script> -->--%>
+=======
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+>>>>>>> 017e3047a6f8419588546e7b83d18b7ac34ce64a
 <script type="text/javascript" src="../js/script.js"></script>
 </html>

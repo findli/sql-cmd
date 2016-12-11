@@ -1,9 +1,18 @@
 package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.bean.*;
-import com.becomejavasenior.service.*;
-import com.becomejavasenior.service.impl.*;
+import com.becomejavasenior.bean.Company;
+import com.becomejavasenior.bean.Deal;
+import com.becomejavasenior.bean.Stage;
+import com.becomejavasenior.bean.User;
+import com.becomejavasenior.service.CompanyService;
+import com.becomejavasenior.service.DealService;
+import com.becomejavasenior.service.StageService;
+import com.becomejavasenior.service.UserService;
+import com.becomejavasenior.service.impl.CompanyServiceImpl;
+import com.becomejavasenior.service.impl.DealServiceImpl;
+import com.becomejavasenior.service.impl.StageServiceImpl;
+import com.becomejavasenior.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +22,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@Deprecated
 @WebServlet(name = "dealEdit2Servlet", urlPatterns = "/dealEdit2")
 public class DealEdit2Servlet extends HttpServlet {
     DealService dealService = new DealServiceImpl();
     CompanyService companyService = new CompanyServiceImpl();
-    AddressService addressService = new AddressServiceImpl();
     String str = null;
     Deal deal;
     Company company;
-    Address address;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/plain");
@@ -57,81 +63,22 @@ public class DealEdit2Servlet extends HttpServlet {
         } else if (action.equals("editDealCompany")) {
             company = new Company();
             int idCompany = deal.getCompany().getId();
-            int idAddress = deal.getCompany().getAddress().getId();
 
             try {
                 company = companyService.getById(idCompany);
-                address = addressService.getById(idAddress);
             } catch (DaoException e) {
                 e.printStackTrace();
             }
-
-
 
             str = getNameCompanyFromRequest(request) + "; \n";
             str += getPhoneFromRequest(request) + "; \n";
             str += getEmailFromRequest(request) + "; \n";
             str += getWebFromRequest(request) + "; \n";
-            str += getCountryFromRequest(request) + "; \n";
-            str += getCityFromRequest(request) + "; \n";
-            str += getStreetFromRequest(request) + "; \n";
-            str += getZipcodeFromRequest(request) + "; \n";
-            str += getBuildingFromRequest(request) + "; \n";
-            str += getRoomFromRequest(request) + " \n";
 
-            addressUpdate();
-            company.setAddress(address);
             companyUpdate();
             out.print(str);
 
         }
-    }
-    public String getRoomFromRequest(HttpServletRequest request) {
-
-        String room = request.getParameter("room");
-        address.setOfficeRoom(room);
-
-        return "Building = " + address.getOfficeRoom();
-    }
-    public String getBuildingFromRequest(HttpServletRequest request) {
-
-        String building = request.getParameter("building");
-        address.setBuildNum(building);
-
-        return "Building = " + address.getBuildNum();
-    }
-
-    public String getZipcodeFromRequest(HttpServletRequest request) {
-
-        int zipcode = Integer.valueOf(request.getParameter("zipcode"));
-        address.setZipcode(zipcode);
-
-        return "Zipcode = " + address.getZipcode();
-    }
-
-    public String getStreetFromRequest(HttpServletRequest request) {
-
-        String street = request.getParameter("street");
-        address.setStreet(street);
-
-        return "Street = " + address.getStreet();
-    }
-
-    public String getCityFromRequest(HttpServletRequest request) {
-
-        String city = request.getParameter("city");
-        address.setCity(city);
-
-        return "City = " + address.getCity();
-    }
-
-
-    public String getCountryFromRequest(HttpServletRequest request) {
-
-        String country = request.getParameter("country");
-        address.setCountry(country);
-
-        return "Country = " + address.getCountry();
     }
 
     public String getWebFromRequest(HttpServletRequest request) {
@@ -139,7 +86,7 @@ public class DealEdit2Servlet extends HttpServlet {
         String newWeb = request.getParameter("newWeb");
         company.setWebsite(newWeb);
 
-        return "Web = " + company.getWebsite();
+        return "new Web = " + company.getWebsite();
     }
 
     public String getEmailFromRequest(HttpServletRequest request) {
@@ -147,7 +94,7 @@ public class DealEdit2Servlet extends HttpServlet {
         String newEmail = request.getParameter("newEmail");
         company.setEmail(newEmail);
 
-        return "Email = " + company.getEmail();
+        return "new Email = " + company.getEmail();
     }
 
     public String getPhoneFromRequest(HttpServletRequest request) {
@@ -155,7 +102,7 @@ public class DealEdit2Servlet extends HttpServlet {
         String newPhone = request.getParameter("newPhone");
         company.setPhoneNumber(newPhone);
 
-        return "Phone = " + company.getPhoneNumber();
+        return "new Phone = " + company.getPhoneNumber();
     }
 
     public String getNameCompanyFromRequest(HttpServletRequest request) {
@@ -163,19 +110,18 @@ public class DealEdit2Servlet extends HttpServlet {
         String companyNewName = request.getParameter("newCompany");
         company.setTitle(companyNewName);
 
-        return "Name = " + company.getTitle();
+        return "new Name = " + company.getTitle();
     }
 
     public String getBudgetFromRequest(HttpServletRequest request) {
-
         int dealNewBudget = Integer.valueOf(request.getParameter("newBudget"));
         deal.setBudget(dealNewBudget);
-//        try {
-//            deal = dealService.update(deal);
-//        } catch (DaoException e) {
-//            e.printStackTrace();
-//        }
-        return "Budget = " + deal.getBudget();
+        try {
+            deal = dealService.update(deal);
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
+        return "new Budget = " + deal.getBudget();
     }
 
     public String getNameDealFromRequest(HttpServletRequest request) {
@@ -183,7 +129,7 @@ public class DealEdit2Servlet extends HttpServlet {
         String dealNewName = request.getParameter("newDeal");
         deal.setTitle(dealNewName);
 
-        return "Name = " + deal.getTitle();
+        return "new name = " + deal.getTitle();
     }
 
     public String getStageFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
@@ -193,7 +139,7 @@ public class DealEdit2Servlet extends HttpServlet {
         Stage stage = stageService.getByName(dealNewStage);
         deal.setStage(stage);
 
-        return "Stage = " + deal.getStage().getTitle();
+        return "new stage = " + deal.getStage().getTitle();
     }
 
     public String getUserFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
@@ -203,7 +149,7 @@ public class DealEdit2Servlet extends HttpServlet {
         User user = userService.getByName(dealNewUser);
         deal.setResponsibleUser(user);
 
-        return "User = " + deal.getResponsibleUser().getlName();
+        return "new User = " + deal.getResponsibleUser().getlName();
     }
 
     public void companyUpdate() {
@@ -222,11 +168,5 @@ public class DealEdit2Servlet extends HttpServlet {
         }
     }
 
-    public void addressUpdate() {
-        try {
-            address = addressService.update(address);
-        } catch (DaoException e) {
-            e.printStackTrace();
-        }
-    }
 }
+
