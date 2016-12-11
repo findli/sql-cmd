@@ -4,7 +4,7 @@ import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDAOFactory;
+import com.becomejavasenior.factory.PostgresDaoFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -87,7 +87,7 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         Contact contact;
         Deal deal;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 

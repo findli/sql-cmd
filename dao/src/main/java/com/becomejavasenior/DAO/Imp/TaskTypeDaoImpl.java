@@ -4,7 +4,7 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.TaskTypeDao;
 import com.becomejavasenior.bean.TaskType;
 import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDAOFactory;
+import com.becomejavasenior.factory.PostgresDaoFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -84,7 +84,7 @@ public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTy
         List<TaskType> taskTypes = new ArrayList<>();
         TaskType taskType;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
             while (resultSet.next()) {
