@@ -33,12 +33,12 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
 
     @Override
     public String getCreateQuery() {
-        return "INSERT INTO task (title, task_type_id, description, deadline_date, time, period_in_days_type_id, period_in_minutes, responsible_user_id, is_finished, is_deleted ) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        return "INSERT INTO crm_pallas.task (title, task_type_id, description, deadline_date, time, period_in_days_type_id, period_in_minutes, responsible_user_id, is_finished, is_deleted ) VALUES(?,?,?,?,?,?,?,?,?,?)";
     }
 
     @Override
     public String getUpdateQuery() {
-        return "UPDATE task SET title = ?, task_type_id = ?, description = ?, deadline_date = ?, time = ?, period_in_days_type_id = ?, period_in_minutes = ?, responsible_user_id = ?, is_finished = ?, is_deleted = ?";
+        return "UPDATE crm_pallas.task SET title = ?, task_type_id = ?, description = ?, deadline_date = ?, time = ?, period_in_days_type_id = ?, period_in_minutes = ?, responsible_user_id = ?, is_finished = ?, is_deleted = ? WHERE id = ?";
     }
 
     @Override
@@ -48,7 +48,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
 
     @Override
     public String getAllQuery() {
-        return "SELECT * FROM task";
+        return "SELECT * FROM crm_pallas.task";
     }
 
     @Override
@@ -58,7 +58,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
 
     @Override
     public String getByIdQuery() {
-        return "SELECT * FROM task WHERE id = ?";
+        return "SELECT * FROM crm_pallas.task WHERE id = ?";
     }
 
     @Override
