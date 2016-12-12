@@ -45,6 +45,8 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             statement.setString(2, company.getPhoneNumber());
             statement.setString(3, company.getEmail());
             statement.setString(4, company.getWebsite());
+            statement.setInt(5, company.getAddress().getId());
+            statement.setInt(6, company.getId());
 /*            statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.isDeleted());
