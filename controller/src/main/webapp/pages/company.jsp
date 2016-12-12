@@ -48,7 +48,7 @@
                 <div class="forms--lDeal">
 
                     <div class="col-md-12">
-                        <a href="/companyCreate" class="btn btn-primary pull-center">Add company</a>
+                        <a href="/companyadd" class="btn btn-primary pull-center">Add company</a>
                     </div>
 
                     <br><br><br><br>
