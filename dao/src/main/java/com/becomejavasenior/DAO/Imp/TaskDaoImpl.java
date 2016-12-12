@@ -27,6 +27,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             "WHERE crm_pallas.company.id = ? AND crm_pallas.task.is_finished = FALSE;";
 
     @Override
+
     public List<Task> getTasksForList(int id) {
         List<Task> tasks = new ArrayList<>();
         Task task;
@@ -67,6 +68,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
     @Override
     public String getUpdateQuery(){
         return "UPDATE crm_pallas.task SET title = ?, task_type_id = ?, description = ?, deadline_date = ?, period_in_days_type_id = ?, period_in_minutes = ?, responsible_user_id = ?, is_finished = ?, is_deleted = ? WHERE id = ?";
+
     }
 
     @Override
@@ -98,6 +100,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             preparedStatement.setBoolean(8, task.isFinished());
             preparedStatement.setBoolean(9, task.isDeleted());
         } catch (SQLException e){
+
             throw new DaoException("Can't create statement for Task", e);
         }
     }
@@ -133,6 +136,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             task.setTaskType(taskType.getById(resultSet.getInt("task_type_id")));
             task.setDescription(resultSet.getString("description"));
             task.setDeadlineDate(resultSet.getDate("deadline_date"));
+            task.setDeadlineTime(resultSet.getTime("deadline_time"));
             task.setPeriodInDaysType(periodInDaysType.getById(resultSet.getInt("period_in_days_type_id")));
             task.setPeriodInMinutes(resultSet.getInt("period_in_minutes"));
             task.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));

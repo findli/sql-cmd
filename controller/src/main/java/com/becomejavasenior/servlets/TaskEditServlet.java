@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -120,6 +121,7 @@ public class TaskEditServlet extends HttpServlet{
         task.setTaskType(taskType);
         task.setDescription(request.getParameter("description"));
         task.setDeadlineDate(date);
+        task.setDeadlineTime(new Time(date.getTime()));
         task.setPeriodInDaysType(periodInDaysType);
         task.setPeriodInMinutes((int) date.getTime());
         task.setResponsibleUser(user);
