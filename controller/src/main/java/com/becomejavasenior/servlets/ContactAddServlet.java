@@ -2,14 +2,8 @@ package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
-import com.becomejavasenior.service.CompanyService;
-import com.becomejavasenior.service.ContactService;
-import com.becomejavasenior.service.PeriodInDaysTypeService;
-import com.becomejavasenior.service.TaskTypeService;
-import com.becomejavasenior.service.impl.CompanyServiceImpl;
-import com.becomejavasenior.service.impl.ContactServiceImpl;
-import com.becomejavasenior.service.impl.PeriodInDaysTypeServiceImpl;
-import com.becomejavasenior.service.impl.TaskTypeServiceImpl;
+import com.becomejavasenior.service.*;
+import com.becomejavasenior.service.impl.*;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -36,11 +30,13 @@ public class ContactAddServlet extends HttpServlet {
         List<PeriodInDaysType> PeriodInDaysTypeList = null;
         List<Contact> contactList = null;
         List<Company> companyList = null;
+        List<PhoneType> phoneTypes = null;
       //TODO:  List<Phone> phoneList = null;
 
         CompanyService companyService = new CompanyServiceImpl();
         TaskTypeService taskTypeService = new TaskTypeServiceImpl();
         PeriodInDaysTypeService periodService = new PeriodInDaysTypeServiceImpl();
+        PhoneService phoneService = new PhoneServiceImpl();
 
 
 
@@ -53,6 +49,9 @@ public class ContactAddServlet extends HttpServlet {
             log.trace("get TaskTypeList in ContactAddServlet");
             PeriodInDaysTypeList = periodService.getAll();
             log.trace("get PeriodInDaysTypeList in ContactAddServlet");
+            phoneTypes = phoneService.getAllPhoneTypes();
+            log.trace("get PhoneTypeList in ContactAddServlet");
+
         } catch (DaoException e) {
             log.warn("DaoException in ContactAddServlet");
             e.printStackTrace();
@@ -65,6 +64,7 @@ public class ContactAddServlet extends HttpServlet {
         session.setAttribute("PeriodInDaysTypeList", PeriodInDaysTypeList);
         session.setAttribute("contactList", contactList);
         session.setAttribute("companyList", companyList);
+        session.setAttribute("phoneTypes", phoneTypes);
         request.getRequestDispatcher("/pages/contact_add.jsp").forward(request, response);
 
     }
