@@ -7,12 +7,8 @@ import com.becomejavasenior.bean.TaskType;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.factory.PostgresDaoFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> {
@@ -33,17 +29,17 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
 
     @Override
     public String getCreateQuery() {
-        return "INSERT INTO crm_pallas.task (title, task_type_id, description, deadline_date, time, period_in_days_type_id, period_in_minutes, responsible_user_id, is_finished, is_deleted ) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        return "INSERT INTO crm_pallas.task (title, task_type_id, description, deadline_date, deadline_time, period_in_days_type_id, period_in_minutes, responsible_user_id, is_finished, is_deleted ) VALUES(?,?,?,?,?,?,?,?,?,?)";
     }
 
     @Override
     public String getUpdateQuery() {
-        return "UPDATE crm_pallas.task SET title = ?, task_type_id = ?, description = ?, deadline_date = ?, time = ?, period_in_days_type_id = ?, period_in_minutes = ?, responsible_user_id = ?, is_finished = ?, is_deleted = ? WHERE id = ?";
+        return "UPDATE crm_pallas.task SET title = ?, task_type_id = ?, description = ?, deadline_date = ?, deadline_time = ?, period_in_days_type_id = ?, period_in_minutes = ?, responsible_user_id = ?, is_finished = ?, is_deleted = ? WHERE id = ?";
     }
 
     @Override
     public String getDeleteQuery() {
-        return "DELETE FROM crm_pallas.company_task WHERE crm_pallas.company_task.task_id =?";
+        return "DELETE FROM crm_pallas.task WHERE id = ?";
     }
 
     @Override
@@ -69,11 +65,12 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             preparedStatement.setInt(2, task.getTaskType().getId());
             preparedStatement.setString(3, task.getDescription());
             preparedStatement.setDate(4, (java.sql.Date) sqlDate);
-            preparedStatement.setInt(5, task.getPeriodInDaysType().getId());
-            preparedStatement.setInt(6, task.getPeriodInMinutes());
-            preparedStatement.setInt(7, task.getResponsibleUser().getId());
-            preparedStatement.setBoolean(8, task.isFinished());
-            preparedStatement.setBoolean(9, task.isDeleted());
+            preparedStatement.setTime(5, task.getDeadlineTime());
+            preparedStatement.setInt(6, task.getPeriodInDaysType().getId());
+            preparedStatement.setInt(7, task.getPeriodInMinutes());
+            preparedStatement.setInt(8, task.getResponsibleUser().getId());
+            preparedStatement.setBoolean(9, task.isFinished());
+            preparedStatement.setBoolean(10, task.isDeleted());
         } catch (SQLException e) {
             throw new DaoException("Can't create statement for Task", e);
         }
@@ -87,11 +84,13 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             preparedStatement.setInt(2, task.getTaskType().getId());
             preparedStatement.setString(3, task.getDescription());
             preparedStatement.setDate(4, (java.sql.Date) sqlDate);
-            preparedStatement.setInt(5, task.getPeriodInDaysType().getId());
-            preparedStatement.setInt(6, task.getPeriodInMinutes());
-            preparedStatement.setInt(7, task.getResponsibleUser().getId());
-            preparedStatement.setBoolean(8, task.isFinished());
-            preparedStatement.setBoolean(9, task.isDeleted());
+            preparedStatement.setTime(5, task.getDeadlineTime());
+            preparedStatement.setInt(6, task.getPeriodInDaysType().getId());
+            preparedStatement.setInt(7, task.getPeriodInMinutes());
+            preparedStatement.setInt(8, task.getResponsibleUser().getId());
+            preparedStatement.setBoolean(9, task.isFinished());
+            preparedStatement.setBoolean(10, task.isDeleted());
+            preparedStatement.setInt(11, task.getId());
         } catch (SQLException e) {
             throw new DaoException("Can't update statement for Task", e);
         }
@@ -109,6 +108,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             task.setTaskType(taskType.getById(resultSet.getInt("task_type_id")));
             task.setDescription(resultSet.getString("description"));
             task.setDeadlineDate(resultSet.getDate("deadline_date"));
+            task.setDeadlineTime(resultSet.getTime("deadline_time"));
             task.setPeriodInDaysType(periodInDaysType.getById(resultSet.getInt("period_in_days_type_id")));
             task.setPeriodInMinutes(resultSet.getInt("period_in_minutes"));
             task.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
