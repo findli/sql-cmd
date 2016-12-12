@@ -391,7 +391,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 company.setId(resultSet.getInt("companyId"));
                 company.setTitle(resultSet.getString("company"));
                 contact.setCompany(company);
-       /*         deal.setPrimaryContact(contact);*/
+                deal.setPrimaryContact(contact);
                 deal.setCompany(company);
 
                 deals.add(deal);
