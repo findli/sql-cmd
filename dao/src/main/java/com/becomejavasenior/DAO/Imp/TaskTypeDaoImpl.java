@@ -4,12 +4,15 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.TaskTypeDao;
 import com.becomejavasenior.bean.TaskType;
 import com.becomejavasenior.exceptions.DatabaseException;
+
 import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("taskTypeDao")
 public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTypeDao<TaskType> {
 
     @Override

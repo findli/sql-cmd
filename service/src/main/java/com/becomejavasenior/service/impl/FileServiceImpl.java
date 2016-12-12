@@ -4,7 +4,6 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.FileDao;
 import com.becomejavasenior.DAO.Imp.FileDaoImpl;
 import com.becomejavasenior.bean.File;
-import com.becomejavasenior.bean.Note;
 import com.becomejavasenior.service.FileService;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
 
 public class FileServiceImpl implements FileService {
 
-    private final FileDao fileDao = new FileDaoImpl();
+    private final FileDao<File> fileDao = new FileDaoImpl();
 
     @Override
     public File create(File t) throws DaoException {

@@ -5,12 +5,16 @@ import java.sql.*;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Stage;
 import com.becomejavasenior.exceptions.DatabaseException;
+
 import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Repository("stageDao")
 public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomejavasenior.DAO.StageDao<Stage> {
 
     @Override

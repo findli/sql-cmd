@@ -4,7 +4,12 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
 import com.becomejavasenior.service.impl.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +20,26 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "companyDetailServlet", urlPatterns = "/companyDetail")
+@Controller("companyDetailServlet")
 public class CompanyDetailServlet extends HttpServlet {
+
+    @Autowired
+    @Qualifier(value = "dealService")
+    DealService dealService;
+
+    @Autowired
+    @Qualifier(value = "contactService")
+    ContactService contactService;
+
+    @Autowired
+    @Qualifier(value = "companyService")
+    CompanyService companyService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -25,12 +49,10 @@ public class CompanyDetailServlet extends HttpServlet {
             idCompany = Integer.parseInt(request.getParameter("idCompany"));
         }
 
-        ContactService contactService = new ContactServiceImpl();
-        DealService dealService = new DealServiceImpl();
+
         TaskService taskService = new TaskServiceImpl();
         FileService fileService = new FileServiceImpl();
         NoteService noteService = new NoteServiceImpl();
-        CompanyService companyService = new CompanyServiceImpl();
 
         List<Contact> contactList = contactService.getContactsForList(idCompany);
         List<Deal> dealList = dealService.getDealsForList(idCompany);

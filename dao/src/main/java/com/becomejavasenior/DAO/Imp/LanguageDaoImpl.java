@@ -3,13 +3,15 @@ package com.becomejavasenior.DAO.Imp;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.LanguageDao;
 import com.becomejavasenior.bean.Language;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class LanguageDaoImpl extends AbstractDaoImpl<Language> implements LanguageDao {
+@Repository("languageDao")
+public class LanguageDaoImpl extends AbstractDaoImpl<Language> implements LanguageDao<Language> {
 
     @Override
     public String getCreateQuery() {
