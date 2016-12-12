@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @WebServlet(name = "companyDetailServlet", urlPatterns = "/companyDetail")
@@ -61,7 +63,7 @@ public class CompanyDetailServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        response.sendRedirect("/pages/companyDetail.jsp");
+        request.getRequestDispatcher("/pages/companyDetail.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -69,29 +71,104 @@ public class CompanyDetailServlet extends HttpServlet {
         response.setContentType("text/plain");
 
         String action = request.getParameter("action");
-        if (action.startsWith("formTaskDel")) {
-            TaskService taskService = new TaskServiceImpl();
-            String idTask = action.substring(12);
-            try {
-                taskService.delete(Integer.parseInt(idTask));
-            } catch (DaoException e) {
-                e.printStackTrace();
-            }
-        } else if (action.startsWith("formNoteDel")){
-            NoteService noteService = new NoteServiceImpl();
-            String idNote = action.substring(12);
-            try {
-                noteService.delete(Integer.parseInt(idNote));
-            } catch (DaoException e) {
-                e.printStackTrace();
-            }
-        } else if (action.startsWith("formFileDel")){
-            FileService fileService= new FileServiceImpl();
-            String idFile = action.substring(12);
-            try {
-                fileService.delete(Integer.parseInt(idFile));
-            } catch (DaoException e) {
-                e.printStackTrace();
+        if (action != null) {
+            if (action.startsWith("formTaskDel")) {
+                TaskService taskService = new TaskServiceImpl();
+                String idTask = action.substring(12);
+                try {
+                    taskService.delete(Integer.parseInt(idTask));
+                } catch (DaoException e) {
+                    e.printStackTrace();
+                }
+            } else if (action.startsWith("formNoteDel")) {
+                NoteService noteService = new NoteServiceImpl();
+                String idNote = action.substring(12);
+                try {
+                    noteService.delete(Integer.parseInt(idNote));
+                } catch (DaoException e) {
+                    e.printStackTrace();
+                }
+            } else if (action.startsWith("formFileDel")) {
+                FileService fileService = new FileServiceImpl();
+                String idFile = action.substring(12);
+                try {
+                    fileService.delete(Integer.parseInt(idFile));
+                } catch (DaoException e) {
+                    e.printStackTrace();
+                }
+            } else if (action.startsWith("addCompany")) {
+                CompanyService companyService = new CompanyServiceImpl();
+                AddressService addressService = new AddressServiceImpl();
+                Company company = new Company();
+                Address address = new Address();
+                Address getIdAddress = new Address();
+                User user = new User();
+
+                String addressStr = request.getParameter("address");
+                addressStr = addressStr.replace(" ", "");
+                List<String> addressSplit = new ArrayList<>();
+                Collections.addAll(addressSplit, addressStr.split(","));
+
+                address.setZipcode(Integer.parseInt(addressSplit.get(0)));
+                address.setCountry(addressSplit.get(1));
+                address.setCity(addressSplit.get(2));
+                address.setStreet(addressSplit.get(3));
+                address.setBuildNum(addressSplit.get(4));
+                address.setOfficeRoom(addressSplit.get(5));
+               try {
+                    getIdAddress = addressService.create(address);
+                } catch (DaoException e) {
+                    e.printStackTrace();
+                }
+                company.setTitle(request.getParameter("title"));
+                company.setPhoneNumber(request.getParameter("phone"));
+                company.setEmail(request.getParameter("email"));
+                company.setWebsite(request.getParameter("web"));
+                address.setId(getIdAddress.getId());
+                company.setAddress(getIdAddress);
+                user.setId(1);//Доработать - брать из сессии
+                company.setResponsibleUser(user);
+                company.setDeleted(false);
+
+                try {
+                    companyService.create(company);
+                } catch (DaoException e) {
+                    e.printStackTrace();
+                }
+
+            } else if (action.startsWith("updateAddress")) {
+                CompanyService companyService = new CompanyServiceImpl();
+                AddressService addressService = new AddressServiceImpl();
+                Company company = new Company();
+                Address address = new Address();
+
+                try {
+                    company = companyService.getById(Integer.parseInt(request.getParameter("id")));
+                    int idAdress = Integer.parseInt(request.getParameter("idAddress"));
+                    address = addressService.getById(idAdress);
+                } catch (DaoException e) {
+                    e.printStackTrace();
+                }
+                company.setTitle(request.getParameter("title"));
+                company.setEmail(request.getParameter("email"));
+                company.setPhoneNumber(request.getParameter("phone"));
+                company.setWebsite(request.getParameter("web"));
+   /*             String addressStr = request.getParameter("address");
+                List<String> addressSplit = new ArrayList<>();
+                Collections.addAll(addressSplit, addressStr.split(", "));
+                address.setId(Integer.parseInt(request.getParameter("idAddress")));
+                address.setZipcode(Integer.parseInt(addressSplit.get(0)));
+                address.setCountry(addressSplit.get(1));
+                address.setCity(addressSplit.get(2));
+                address.setStreet(addressSplit.get(3));
+                address.setBuildNum(addressSplit.get(4));
+                address.setOfficeRoom(addressSplit.get(5));*/
+                company.setAddress(address);
+                try {
+                    companyService.update(company);
+                } catch (DaoException e) {
+                    e.printStackTrace();
+                }
             }
         }
 

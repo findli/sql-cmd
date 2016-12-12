@@ -11,10 +11,8 @@
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+<%--    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>--%>
+
     <!-- <script type="text/javascript" src="js/bootstrap.file-input.js"></script> -->
 
     <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
@@ -224,35 +222,41 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Name: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Name">
+                                        <input class="form-control" id="addCompName" type="text" placeholder="Name">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Phone: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Phone">
+                                        <input class="form-control" type="text" id="addCompPhone" placeholder="Phone">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">email: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="email">
+                                        <input class="form-control" type="text" id="addCompEmail" placeholder="email">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Web: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Url">
+                                        <input class="form-control" type="text" id="addCompWeb" placeholder="Url">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Address: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Address">
+                                        <input class="form-control" type="text" id="addCompAdress" placeholder="zipcode, Country, City, Street, Build, Office">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        <input class="formAddBut" type="button" id="bttAddCompany" value="Применить">
+                                        <input class="formAddBut" type="button" value="Очистить">
                                     </div>
                                 </div>
                             </div>
@@ -342,5 +346,9 @@
     });
 </script>
 </body>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
 </html>

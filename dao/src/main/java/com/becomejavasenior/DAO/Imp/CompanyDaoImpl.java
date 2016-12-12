@@ -29,7 +29,6 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.isDeleted());
-            statement.setInt(8, company.getAddress().getId());
         } catch (SQLException e) {
 
             throw new DaoException("Can't create statement for Company", e);
@@ -46,10 +45,10 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             statement.setString(2, company.getPhoneNumber());
             statement.setString(3, company.getEmail());
             statement.setString(4, company.getWebsite());
-            statement.setInt(5, company.getAddress().getId());
+/*            statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.isDeleted());
-            statement.setInt(8, company.getAddress().getId());
+            statement.setInt(8, company.getAddress().getId());*/
 
         } catch (SQLException e) {
 
@@ -101,7 +100,7 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
     }
 
     public String getUpdateQuery() {
-        return "UPDATE crm_pallas.company SET title = ?, phone_number = ?, email = ?, website = ?, address_id = ?, responsible_user_id = ?, is_deleted = ?";
+        return DataBaseUtil.getQuery("UPDATE crm_pallas.company SET title = ?, phone_number = ?, email = ?, website = ?, address_id = ? where id=?");
     }
 
     public String getDeleteQuery() {

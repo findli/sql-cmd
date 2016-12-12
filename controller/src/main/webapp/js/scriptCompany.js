@@ -43,22 +43,21 @@ $(function () {
 });
 
 
-
 /*reset forms*/
 
 /*$(".cancel").click(function () {
-    $('.modalInput').val("");
-    $('.modalTextArea').val("");
-});*/
+ $('.modalInput').val("");
+ $('.modalTextArea').val("");
+ });*/
 
-jQuery( function($) {
-    $('tbody tr[data-href]').addClass('clickable').click( function() {
+jQuery(function ($) {
+    $('tbody tr[data-href]').addClass('clickable').click(function () {
         window.location = $(this).attr('data-href');
     });
 });
 
-$(function(){
-    $('#t_company').on('click', '.rowlink', function(){
+$(function () {
+    $('#t_company').on('click', '.rowlink', function () {
     });
 });
 
@@ -89,7 +88,7 @@ $(function () {
     });
     $('.actionBut').click(function () {
         $.ajax({
-            type:'POST',
+            type: 'POST',
             data: {
                 action: this.id
             },
@@ -97,57 +96,83 @@ $(function () {
         });
         $(this.parentNode.parentNode.parentNode).css('display', 'none');
     });
+    $('.formAddBut').click(function () {
+        var id = $("#idformComp").val();
+        var idAddress = $("#idformAddress").val();
+        var title = $("#formCompany").val();
+        var tag = $("#formTag").val();
+        var phone = $("#formPhone").val();
+        var email = $("#formEmail").val();
+        var web = $("#formWeb").val();
+        var address = $('#formAddress').val();
+        console.log(address);
+        $.ajax({
+            type: 'POST',
+            data: {
+                id: id,
+                idAddress: idAddress,
+                title: title,
+                tag: tag,
+                phone: phone,
+                email: email,
+                web: web,
+                address: address,
+                action: 'updateAddress'
+            },
+            url: '/companyDetail'
+        });
+    });
+
 });
 
 
-
 /*for (var i = 0 ; i<$('.taskDate').length; i++){
-    var dateWrapper = $('.taskDate')[i];
-    var dateFromHtml = dateWrapper.innerText.split('-');
-    var date = new Date(dateFromHtml[0],dateFromHtml[1]-1,dateFromHtml[2]);
-    var today = new Date();
-    if (today > date){
-        $(dateWrapper.parentNode).css('border', 'red solid 3px');
-    }
-}*/
+ var dateWrapper = $('.taskDate')[i];
+ var dateFromHtml = dateWrapper.innerText.split('-');
+ var date = new Date(dateFromHtml[0],dateFromHtml[1]-1,dateFromHtml[2]);
+ var today = new Date();
+ if (today > date){
+ $(dateWrapper.parentNode).css('border', 'red solid 3px');
+ }
+ }*/
 
 
 
-    /*
-    var wrapper = $('.cd-date');
+/*
+ var wrapper = $('.cd-date');
 
-    for (var i = 0 ; i<$('.cd-date').length; i++){
-        var dateWrapper = $('.cd-date')[i];
-        var dateFromHtml = dateWrapper.innerText.split('-');
-        var date = new Date(dateFromHtml[0],dateFromHtml[1]-1,dateFromHtml[2]);
-    var inp = $('.cd-date').prev().prev().attr('class');
-    }
-    */
+ for (var i = 0 ; i<$('.cd-date').length; i++){
+ var dateWrapper = $('.cd-date')[i];
+ var dateFromHtml = dateWrapper.innerText.split('-');
+ var date = new Date(dateFromHtml[0],dateFromHtml[1]-1,dateFromHtml[2]);
+ var inp = $('.cd-date').prev().prev().attr('class');
+ }
+ */
 
 /*console.log($('.dateInMs')[0].innerText);
 
-var ms= ($('.dateInMs'));
-console.log($('.dateInMs').innerText);*/
+ var ms= ($('.dateInMs'));
+ console.log($('.dateInMs').innerText);*/
 /*for (var j = 0, len = ms.length - 1; j < len; j++) {
-    var swapped = false;
-    var k = 0;
-    while (k < len - j) {
-        console.log($('.dateInMs').innerText[k]);
-        if (ms[k].innerText > ms[k + 1].innerText) {
-            var c = ms[k].innerText;
-            console.log("ccc " +c + " m " + ms[k].innerText);
-            ms[k].innerText = ms[k + 1].innerText;
-            ms[k + 1].innerText = c;
-            swapped = true;
-        }
-        k++;
-    }
+ var swapped = false;
+ var k = 0;
+ while (k < len - j) {
+ console.log($('.dateInMs').innerText[k]);
+ if (ms[k].innerText > ms[k + 1].innerText) {
+ var c = ms[k].innerText;
+ console.log("ccc " +c + " m " + ms[k].innerText);
+ ms[k].innerText = ms[k + 1].innerText;
+ ms[k + 1].innerText = c;
+ swapped = true;
+ }
+ k++;
+ }
 
-    if(!swapped)
-        break;
-}*/
+ if(!swapped)
+ break;
+ }*/
 
 /*for (var t = 0 ; t<$('.cd-date').length; t++){
-    console.log($('.dateInMs')[t].innerText);
-}*/
+ console.log($('.dateInMs')[t].innerText);
+ }*/
 
