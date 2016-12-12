@@ -61,7 +61,8 @@ public class CompanyDetailServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        response.sendRedirect("/pages/companyDetail.jsp");
+//        response.sendRedirect("/pages/companyDetail.jsp");
+        request.getRequestDispatcher("/pages/companyDetail.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -69,6 +70,11 @@ public class CompanyDetailServlet extends HttpServlet {
         response.setContentType("text/plain");
 
         String action = request.getParameter("action");
+        if(action==null) {
+            System.out.println("Update company");
+            //Здесь форма обновления компании
+
+        } else
         if (action.startsWith("formTaskDel")) {
             TaskService taskService = new TaskServiceImpl();
             String idTask = action.substring(12);
