@@ -179,35 +179,35 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Title: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Name">
+                                        <input class="form-control" type="text" name="nameCompany" placeholder="Name">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Phone: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Phone">
+                                        <input class="form-control" type="text" name="phoneCompany" placeholder="Phone">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">email: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="email">
+                                        <input class="form-control" type="text" name="emailCompany" placeholder="email">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Web: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Url">
+                                        <input class="form-control" type="text" name="webCompany" placeholder="Url">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Address: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Address">
+                                        <input class="form-control" type="text" name="addressCompany" placeholder="Address">
                                     </div>
                                 </div>
                             </div>
@@ -292,8 +292,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Stage </label>
                             <select class="col-sm-9 form-control" id="stageDeal" name="stageDeal">
-                                <option>${stageTitle}</option>
-                                <c:forEach var="stage" items="${stages}">
+                                <c:forEach var="stage" items="${stageList}">
                                     <option><c:out value="${stage.title}"/></option>
                                 </c:forEach>
                             </select>
@@ -328,7 +327,7 @@
 </body>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>

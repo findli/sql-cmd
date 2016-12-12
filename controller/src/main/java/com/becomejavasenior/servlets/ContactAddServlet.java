@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "ContactAddServlet", urlPatterns = "/contactAdd")
@@ -20,6 +23,7 @@ public class ContactAddServlet extends HttpServlet {
 
     public static Logger log = Logger.getLogger(ContactAddServlet.class);
     private ContactService contactService = new ContactServiceImpl();
+    CompanyService companyService = new CompanyServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,12 +35,14 @@ public class ContactAddServlet extends HttpServlet {
         List<Contact> contactList = null;
         List<Company> companyList = null;
         List<PhoneType> phoneTypes = null;
+        List<Stage> stageList = null;
       //TODO:  List<Phone> phoneList = null;
 
-        CompanyService companyService = new CompanyServiceImpl();
+
         TaskTypeService taskTypeService = new TaskTypeServiceImpl();
         PeriodInDaysTypeService periodService = new PeriodInDaysTypeServiceImpl();
         PhoneService phoneService = new PhoneServiceImpl();
+        StageService stageService = new StageServiceImpl();
 
 
 
@@ -51,6 +57,8 @@ public class ContactAddServlet extends HttpServlet {
             log.trace("get PeriodInDaysTypeList in ContactAddServlet");
             phoneTypes = phoneService.getAllPhoneTypes();
             log.trace("get PhoneTypeList in ContactAddServlet");
+            stageList = stageService.getAll();
+            log.trace("get StageList in ContactAddServlet");
 
         } catch (DaoException e) {
             log.warn("DaoException in ContactAddServlet");
@@ -65,6 +73,7 @@ public class ContactAddServlet extends HttpServlet {
         session.setAttribute("contactList", contactList);
         session.setAttribute("companyList", companyList);
         session.setAttribute("phoneTypes", phoneTypes);
+        session.setAttribute("stageList", stageList);
         request.getRequestDispatcher("/pages/contact_add.jsp").forward(request, response);
 
     }
@@ -75,8 +84,21 @@ public class ContactAddServlet extends HttpServlet {
         response.setContentType("text/html");
 
         Contact contact = null;
+        Company company = null;
+        Task task = null;
+        Deal deal = null;
+
         try {
             contact = getContactFromRequest(request);
+
+            company = getCompanyFromRequest(request);
+            contact.setCompany(company);
+            task = getTaskFromRequest(request);
+            //contact.setTasks(task);
+
+            deal = getDealFromRequest(request);
+            // set deal
+
         } catch (DaoException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -86,15 +108,16 @@ public class ContactAddServlet extends HttpServlet {
 
         File attachedFile = getFileFromRequest(request);
 
-        try {
+     /*   try {
 
-            contactService.createNewContact(contact, tag, attachedFile);
+
+            //contactService.createNewContact(contact, tag, attachedFile);
 
         } catch (DaoException e) {
 
         } catch (ClassNotFoundException e){
 
-        }
+        }*/
 
         response.sendRedirect("/contact");
     }
@@ -114,9 +137,6 @@ public class ContactAddServlet extends HttpServlet {
         User user = new User();
         user.setlName(request.getParameter("responsibleUser"));
         contact.setResponsibleUser(user);
-        Company company = new Company();
-        company = companyService.getByName(request.getParameter("company"));
-        contact.setCompany(company);
 
 //        String noteContent = request.getParameter("noteContact");
 //        if (!noteContent.isEmpty()){
@@ -139,6 +159,79 @@ public class ContactAddServlet extends HttpServlet {
         return contact;
     }
 
+    private Company getCompanyFromRequest(HttpServletRequest request) {
+        Company company = new Company();
+        if (request.getParameter("nameCompany")!= "") {
+            company.setTitle(request.getParameter("nameCompany"));
+            company.setPhoneNumber(request.getParameter("phoneCompany"));
+            company.setEmail(request.getParameter("emailCompany"));
+            company.setWebsite(request.getParameter("webCompany"));
+            //TODO: company.setAddress();
+        } else {
+            try {
+                company =  companyService.getByName(request.getParameter("company"));
+            } catch (DaoException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return company;
+    }
+
+    private Deal getDealFromRequest (HttpServletRequest request) {
+        Deal deal = new Deal();
+        deal.setTitle(request.getParameter("dealName"));
+
+        Stage stage = new Stage();
+        stage.setTitle(request.getParameter("stageTitle"));
+        deal.setStage(stage);
+
+        if (!request.getParameter("dealBudget").isEmpty()) {
+            deal.setBudget(new Integer(request.getParameter("dealBudget")));
+        }
+
+        return deal;
+    }
+
+    private Task getTaskFromRequest (HttpServletRequest request) {
+
+        Task task = new Task();
+        TaskType taskType = new TaskType();
+        User user = new User();
+        PeriodInDaysType periodInDaysType = new PeriodInDaysType();
+
+        SimpleDateFormat format = new SimpleDateFormat();
+        format.applyPattern("dd.MM.yyyy HH:mm");
+        Date date = null;
+
+        TaskTypeService taskTypeService = new TaskTypeServiceImpl();
+        PeriodInDaysTypeService periodInDaysService = new PeriodInDaysTypeServiceImpl();
+        UserService userService = new UserServiceImpl();
+        TaskService taskService = new TaskServiceImpl();
+
+        try {
+            user = userService.getById(parseString(request.getParameter("ResponsibleUserTask")));
+            taskType = taskTypeService.getById(parseString(request.getParameter("TaskType")));
+            date = format.parse(request.getParameter("DeadlineDate"));
+            periodInDaysType = periodInDaysService.getById(parseString(request.getParameter("PeriodInDaysType")));
+        }catch ( ParseException e){
+            e.printStackTrace();
+        }catch (DaoException e){
+            e.printStackTrace();
+        }
+        task.setTaskType(taskType);
+        task.setDeadlineDate(date);
+        task.setPeriodInDaysType(periodInDaysType);
+        task.setPeriodInMinutes((int) date.getTime());
+        task.setResponsibleUser(user);
+        task.setFinished(false);
+        task.setDeleted(false);
+
+        return task;
+    }
+
     private Tag getTagFromRequest(HttpServletRequest request){
         Tag tag = new Tag();
         tag.setTitle(request.getParameter("Tag"));
@@ -150,5 +243,10 @@ public class ContactAddServlet extends HttpServlet {
         File attachedFile = new File();
 
         return attachedFile;
+    }
+
+    private int parseString(String text){
+        int id = Integer.parseInt(text);
+        return id;
     }
 }
