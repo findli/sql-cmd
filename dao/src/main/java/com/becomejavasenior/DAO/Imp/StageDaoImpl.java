@@ -5,12 +5,16 @@ import java.sql.*;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Stage;
 import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDAOFactory;
+
+import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Repository("stageDao")
 public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomejavasenior.DAO.StageDao<Stage> {
 
     @Override
@@ -30,7 +34,7 @@ public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomeja
 
     @Override
     public String getAllQuery(){
-        return "SELECT * FROM crm_pallas.stage ORDER BY id";
+        return "SELECT * FROM crm_pallas.stage";
     }
 
     @Override
@@ -119,7 +123,7 @@ public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomeja
         List<Stage> stages = new ArrayList<>();
         Stage stage;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 
@@ -137,4 +141,3 @@ public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomeja
         return stages;
     }
 }
-

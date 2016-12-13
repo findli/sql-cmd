@@ -182,12 +182,12 @@ public class Contact implements Serializable {
                 "id=" + id +
                 ", name='" + fName + '\'' +
                 ", Surname='" + lName + '\'' +
-                ", responsibleUser=" + responsibleUser.getfName() + " " + responsibleUser.getlName() + '\'' +
+                ", responsibleUser=" + responsibleUser + '\'' +
                 ", position='" + position + '\'' +
                 ", skype='" + skype + '\'' +
                 ", email='" + email + '\'' +
-                ", company=" + company.getTitle() +
-                ", company=" + isDeleted +
+                ", company=" + company +
+                ", isDeleted=" + isDeleted +
                 '}';
     }
 }

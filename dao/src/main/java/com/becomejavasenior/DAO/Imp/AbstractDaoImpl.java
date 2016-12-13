@@ -148,6 +148,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     abstract T getEntity(ResultSet resultSet) throws DaoException;
 
     @Override
+
     public List<T> getAll() throws DaoException, ClassNotFoundException {
         log.trace("Call getAll() in AbstractDaoImpl");
 

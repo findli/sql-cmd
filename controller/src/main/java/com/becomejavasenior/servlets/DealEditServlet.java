@@ -5,7 +5,14 @@ import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
 import com.becomejavasenior.service.impl.*;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,40 +21,45 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "dealEditServlet", urlPatterns = "/dealEdit")
+@Controller("dealEditServlet")
 public class DealEditServlet extends HttpServlet {
 
     public static Logger log = Logger.getLogger(DealEditServlet.class);
+    private ApplicationContext context;
 
-    DealService dealService = new DealServiceImpl();
-    CompanyService companyService = new CompanyServiceImpl();
-    AddressService addressService = new AddressServiceImpl();
+    @Autowired
+    @Qualifier("dealService")
+    DealService dealService;
+
+    @Autowired
+    @Qualifier("companyService")
+    CompanyService companyService;
+
+    @Autowired
+    @Qualifier("addressService")
+    AddressService addressService;
+
     String str = null;
     Deal deal;
     Company company;
     Address address;
 
     @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+    }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
 
-        CompanyService companyService = new CompanyServiceImpl();
         StageService stageService = new StageServiceImpl();
         UserService userService = new UserServiceImpl();
-        AddressService addressService = new AddressServiceImpl();
-
-        int idDeal = 1;
-        if (request.getParameter("idDeal") != null) {
-            idDeal = Integer.parseInt(request.getParameter("idDeal"));
-        }
-
-        dealService = new DealServiceImpl();
-        companyService = new CompanyServiceImpl();
 
         Deal deal = new Deal();
         Company company = new Company();
@@ -56,45 +68,42 @@ public class DealEditServlet extends HttpServlet {
         List<User> users = null;
         Address address = new Address();
 
-        try {
-            deal = dealService.getById(idDeal);
-            company = companyService.getById(deal.getCompany().getId());
-            stage = stageService.getById(deal.getStage().getId());
-            address = addressService.getById(company.getAddress().getId());
-        } catch (DaoException e) {
-            log.error("DAOException in DealEditServlet in Controller layer", e);
+        int idDeal = 1;
+        if (request.getParameter("idDeal") != null) {
+            idDeal = Integer.parseInt(request.getParameter("idDeal"));
+
+            try {
+                deal = dealService.getById(idDeal);
+                company = companyService.getById(deal.getCompany().getId());
+                stage = stageService.getById(deal.getStage().getId());
+                address = addressService.getById(company.getAddress().getId());
+            } catch (DaoException e) {
+                e.printStackTrace();
+            }
+            try {
+                stages = stageService.getAll();
+                users = userService.getAll();
+            } catch (DaoException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            String stageTitle = deal.getStage().getTitle();
+            session.setAttribute("stageTitle", stageTitle);
+
+            stages.remove(stage.getId()-1);
+
+            String responsibleUser = deal.getResponsibleUser().getlName();
+            users.remove(deal.getResponsibleUser().getId()-1);
+
+            session.setAttribute("address", address);
+            session.setAttribute("idDeal", idDeal);
+            session.setAttribute("stages", stages);
+            session.setAttribute("stage", stage);
+            session.setAttribute("responsibleUser", responsibleUser);
+            session.setAttribute("users", users);
+            session.setAttribute("company", company);
+            session.setAttribute("deal", deal);
         }
 
-        try {
-            stages = stageService.getAll();
-            users = userService.getAll();
-        } catch (DaoException e) {
-            log.error("DAOException in DealEditServlet in Controller layer", e);
-        } catch (ClassNotFoundException e) {
-            log.error("ClassNotFoundException in DealEditServlet in Controller layer", e);
-
-        }
-
-        String stageTitle = deal.getStage().getTitle();
-        session.setAttribute("stageTitle", stageTitle);
-
-        stages.remove(stage.getId()-1);
-
-        String responsibleUser = deal.getResponsibleUser().getlName();
-        users.remove(deal.getResponsibleUser().getId()-1);
-
-        List<Contact> contacts = dealService.getContactsByDealName(deal.getTitle());
-
-
-        session.setAttribute("address", address);
-        session.setAttribute("deal", deal);
-        session.setAttribute("idDeal", idDeal);
-        session.setAttribute("stages", stages);
-        session.setAttribute("stage", stage);
-        session.setAttribute("responsibleUser", responsibleUser);
-        session.setAttribute("users", users);
-        session.setAttribute("company", company);
-        session.setAttribute("contacts", contacts);
         request.getRequestDispatcher("/pages/deal_edit.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -156,7 +165,7 @@ public class DealEditServlet extends HttpServlet {
 
             addressUpdate();
             company.setAddress(address);
-            companyUpdate();
+            /*companyUpdate();*/
             out.print(str);
 
         }
@@ -274,8 +283,8 @@ public class DealEditServlet extends HttpServlet {
 
         StageService stageService = new StageServiceImpl();
         String dealNewStage = request.getParameter("newStage");
-        Stage stage = stageService.getByName(dealNewStage);
-        deal.setStage(stage);
+        /*Stage stage = stageService.getByName(dealNewStage);
+        deal.setStage(stage);*/
 
         return "Stage = " + deal.getStage().getTitle();
     }
@@ -284,19 +293,19 @@ public class DealEditServlet extends HttpServlet {
 
         UserService userService = new UserServiceImpl();
         String dealNewUser = request.getParameter("newUser");
-        User user = userService.getByName(dealNewUser);
-        deal.setResponsibleUser(user);
+       /* User user = userService.getByName(dealNewUser);
+        deal.setResponsibleUser(user);*/
 
         return "User = " + deal.getResponsibleUser().getlName();
     }
 
-    public void companyUpdate() {
+   /* public void companyUpdate() {
         try {
             company = companyService.update(company);
         } catch (DaoException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public void dealUpdate() {
         try {

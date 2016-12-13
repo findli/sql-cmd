@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
@@ -80,8 +80,8 @@
                             <label class="col-sm-3 control-label">От: </label>
                             <div class="col-sm-9">
                                 <div class="input-group date" id="datetimepicker8">
-                                    <input type="text" class="form-control" />
-                                        <span class="input-group-addon">
+                                    <input type="text" class="form-control"/>
+                                    <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                 </div>
@@ -92,8 +92,8 @@
                             <label class="col-sm-3 control-label">До: </label>
                             <div class="col-sm-9">
                                 <div class="input-group date" id="datetimepicker9">
-                                    <input type="text" class="form-control" />
-                                        <span class="input-group-addon">
+                                    <input type="text" class="form-control"/>
+                                    <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
                                         </span>
                                 </div>
@@ -138,6 +138,7 @@
                 <div class="forms--lDeal">
 
                     <div class="col-md-12">
+
                             <a href="/funnel" class="btn btn-primary">Funnel</a>
                             <a href="/deal" class="btn btn-primary">List</a>
                             <a href="/dealCreate" class="btn btn-primary pull-center">Add deal</a>
@@ -181,26 +182,26 @@
     </div>
 </div>
 <%--<script type="text/javascript">--%>
-    <%--$(function () {--%>
-        <%--$('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
-        <%--$('#datetimepicker2').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
+<%--$(function () {--%>
+<%--$('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
+<%--$('#datetimepicker2').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
 
-    <%--});--%>
+<%--});--%>
 <%--</script>--%>
 <%--<script type="text/javascript">--%>
-    <%--$(function () {--%>
-        <%--//Инициализация datetimepicker8 и datetimepicker9--%>
-        <%--$("#datetimepicker8").datetimepicker();--%>
-        <%--$("#datetimepicker9").datetimepicker();--%>
-        <%--//При изменении даты в 8 datetimepicker, она устанавливается как минимальная для 9 datetimepicker--%>
-        <%--$("#datetimepicker8").on("dp.change",function (e) {--%>
-            <%--$("#datetimepicker9").data("DateTimePicker").setMinDate(e.date);--%>
-        <%--});--%>
-        <%--//При изменении даты в 9 datetimepicker, она устанавливается как максимальная для 8 datetimepicker--%>
-        <%--$("#datetimepicker9").on("dp.change",function (e) {--%>
-            <%--$("#datetimepicker8").data("DateTimePicker").setMaxDate(e.date);--%>
-        <%--});--%>
-    <%--});--%>
+<%--$(function () {--%>
+<%--//Инициализация datetimepicker8 и datetimepicker9--%>
+<%--$("#datetimepicker8").datetimepicker();--%>
+<%--$("#datetimepicker9").datetimepicker();--%>
+<%--//При изменении даты в 8 datetimepicker, она устанавливается как минимальная для 9 datetimepicker--%>
+<%--$("#datetimepicker8").on("dp.change",function (e) {--%>
+<%--$("#datetimepicker9").data("DateTimePicker").setMinDate(e.date);--%>
+<%--});--%>
+<%--//При изменении даты в 9 datetimepicker, она устанавливается как максимальная для 8 datetimepicker--%>
+<%--$("#datetimepicker9").on("dp.change",function (e) {--%>
+<%--$("#datetimepicker8").data("DateTimePicker").setMaxDate(e.date);--%>
+<%--});--%>
+<%--});--%>
 <%--</script>--%>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -212,6 +213,7 @@
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="../js/task.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
 
 </html>

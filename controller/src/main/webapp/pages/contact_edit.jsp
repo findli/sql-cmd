@@ -38,7 +38,7 @@
     <div class="wrapper">
         <div id="navbar">
             <ul>
-                <li><a href="/home" target="_self">Home</a></li>
+                <li><a href="/index.jsp" target="_self">Home</a></li>
                 <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
                 <li><a href="/contact" target="_self">Contacts</a></li>
@@ -282,14 +282,14 @@
     </div>
 </div>
 <%--<script type="text/javascript">--%>
-    <%--$(function () {--%>
-        <%--$('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
-    <%--});--%>
+<%--$(function () {--%>
+<%--$('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
+<%--});--%>
 <%--</script>--%>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
 </html>

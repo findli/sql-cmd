@@ -115,131 +115,131 @@
                         <%--<form class="form-horizontal">--%>
                         <h2>Add task</h2>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Title </label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="Title"  class="form-control"  placeholder="Title"/>
-                                </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Title </label>
+                            <div class="col-sm-9">
+                                <input type="text" name="Title"  class="form-control"  placeholder="Title"/>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Period </label>
-                                <div class="col-sm-9">
-                                    <select class="form-control" name="PeriodInDaysType">
-                                        <c:forEach var="period" items="${PeriodInDaysTypeList}">
-                                            <option value="${period.getId()}"><c:out value="${period.getTitle()}"/></option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Period </label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="PeriodInDaysType">
+                                    <c:forEach var="period" items="${PeriodInDaysTypeList}">
+                                        <option value="${period.getId()}"><c:out value="${period.getTitle()}"/></option>
+                                    </c:forEach>
+                                </select>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Date and time </label>
-                                <div class="col-sm-8">
-                                    <div class="input-group date" id="datetimepicker">
-                                        <input type="text" name="DeadlineDate" class="form-control" />
-                                        <span class="input-group-addon">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Date and time </label>
+                            <div class="col-sm-8">
+                                <div class="input-group date" id="datetimepicker">
+                                    <input type="text" name="DeadlineDate" class="form-control" />
+                                    <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
                                         </span>
-                                    </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Responsible </label>
-                                <div class="col-sm-9">
-                                    <select class="form-control"  name="ResponsibleUserTask">
-                                        <c:forEach var="user" items="${users}">
-                                            <option value="${user.getId()}"><c:out value="${user.getfName()}"/> <c:out value="${user.getlName()}"/> </option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Responsible </label>
+                            <div class="col-sm-9">
+                                <select class="form-control"  name="ResponsibleUserTask">
+                                    <c:forEach var="user" items="${users}">
+                                        <option value="${user.getId()}"><c:out value="${user.getfName()}"/> <c:out value="${user.getlName()}"/> </option>
+                                    </c:forEach>
+                                </select>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Task type </label>
-                                <div class="col-sm-9">
-                                    <select class="form-control" name="TaskType">
-                                        <c:forEach var="taskType" items="${TaskTypeList}">
-                                            <option value="${taskType.getId()}"><c:out value="${taskType.getType()}"/></option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Task type </label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="TaskType">
+                                    <c:forEach var="taskType" items="${TaskTypeList}">
+                                        <option value="${taskType.getId()}"><c:out value="${taskType.getType()}"/></option>
+                                    </c:forEach>
+                                </select>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Comment </label>
-                                <div class="col-sm-9">
-                                    <textarea class="form-control" name="Description" placeholder="Message"></textarea>
-                                </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Comment </label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" name="Description" placeholder="Message"></textarea>
                             </div>
-
-                            <%--<div class="form-group">--%>
-                                <%--<div class="col-sm-10">--%>
-                                    <%--<input class="formAddBut" type="submit" value="Save" >--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
+                        </div>
 
                         <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">Period </label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<select class="form-control">--%>
-                                    <%--<option>Today</option>--%>
-                                    <%--<option>All day</option>--%>
-                                    <%--<option>Tommorow</option>--%>
-                                    <%--<option>Next week</option>--%>
-                                    <%--<option>Next month</option>--%>
-                                    <%--<option>Next year</option>--%>
-                                <%--</select>--%>
-                            <%--</div>--%>
+                        <%--<div class="col-sm-10">--%>
+                        <%--<input class="formAddBut" type="submit" value="Save" >--%>
+                        <%--</div>--%>
                         <%--</div>--%>
 
                         <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">Date and time </label>--%>
-                            <%--<div class="col-sm-8">--%>
-                                <%--<div class="input-group date" id="datetimepicker">--%>
-                                    <%--<input type="text" class="form-control" />--%>
-                                    <%--<span class="input-group-addon">--%>
-                                                <%--<span class="glyphicon-calendar glyphicon"></span>--%>
-                                            <%--</span>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
+                        <%--<label class="col-sm-3 control-label">Period </label>--%>
+                        <%--<div class="col-sm-9">--%>
+                        <%--<select class="form-control">--%>
+                        <%--<option>Today</option>--%>
+                        <%--<option>All day</option>--%>
+                        <%--<option>Tommorow</option>--%>
+                        <%--<option>Next week</option>--%>
+                        <%--<option>Next month</option>--%>
+                        <%--<option>Next year</option>--%>
+                        <%--</select>--%>
+                        <%--</div>--%>
                         <%--</div>--%>
 
                         <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">Responsible </label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<select class="form-control">--%>
-                                    <%--<c:forEach var="user" items="${users}">--%>
-                                        <%--<option><c:out value="${user.lName}"/></option>--%>
-                                    <%--</c:forEach>--%>
-                                <%--</select>--%>
-                            <%--</div>--%>
+                        <%--<label class="col-sm-3 control-label">Date and time </label>--%>
+                        <%--<div class="col-sm-8">--%>
+                        <%--<div class="input-group date" id="datetimepicker">--%>
+                        <%--<input type="text" class="form-control" />--%>
+                        <%--<span class="input-group-addon">--%>
+                        <%--<span class="glyphicon-calendar glyphicon"></span>--%>
+                        <%--</span>--%>
+                        <%--</div>--%>
+                        <%--</div>--%>
                         <%--</div>--%>
 
                         <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">Task type </label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<select class="form-control">--%>
-                                    <%--<c:forEach var="taskType" items="${taskTypeList}">--%>
-                                        <%--<option><c:out value="${taskType.type}"/></option>--%>
-                                    <%--</c:forEach>--%>
-                                <%--</select>--%>
-                            <%--</div>--%>
+                        <%--<label class="col-sm-3 control-label">Responsible </label>--%>
+                        <%--<div class="col-sm-9">--%>
+                        <%--<select class="form-control">--%>
+                        <%--<c:forEach var="user" items="${users}">--%>
+                        <%--<option><c:out value="${user.lName}"/></option>--%>
+                        <%--</c:forEach>--%>
+                        <%--</select>--%>
+                        <%--</div>--%>
                         <%--</div>--%>
 
                         <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">Comment </label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<textarea class="form-control" placeholder="Message"></textarea>--%>
-                            <%--</div>--%>
+                        <%--<label class="col-sm-3 control-label">Task type </label>--%>
+                        <%--<div class="col-sm-9">--%>
+                        <%--<select class="form-control">--%>
+                        <%--<c:forEach var="taskType" items="${taskTypeList}">--%>
+                        <%--<option><c:out value="${taskType.type}"/></option>--%>
+                        <%--</c:forEach>--%>
+                        <%--</select>--%>
+                        <%--</div>--%>
                         <%--</div>--%>
 
                         <%--<div class="form-group">--%>
-                            <%--<div class="col-sm-10">--%>
-                                <%--<input class="formAddBut" type="button" value="Применить">--%>
-                                <%--<input class="formAddBut" type="button" value="Очистить">--%>
-                            <%--</div>--%>
+                        <%--<label class="col-sm-3 control-label">Comment </label>--%>
+                        <%--<div class="col-sm-9">--%>
+                        <%--<textarea class="form-control" placeholder="Message"></textarea>--%>
+                        <%--</div>--%>
+                        <%--</div>--%>
+
+                        <%--<div class="form-group">--%>
+                        <%--<div class="col-sm-10">--%>
+                        <%--<input class="formAddBut" type="button" value="Применить">--%>
+                        <%--<input class="formAddBut" type="button" value="Очистить">--%>
+                        <%--</div>--%>
                         <%--</div>--%>
                         <%--</form>--%>
                     </div>

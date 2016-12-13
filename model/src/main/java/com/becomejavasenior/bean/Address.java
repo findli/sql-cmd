@@ -1,7 +1,7 @@
 package com.becomejavasenior.bean;
 
+
 import java.io.Serializable;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class Address implements Serializable {
@@ -13,7 +13,7 @@ public class Address implements Serializable {
     private String buildNum;
     private int zipcode;
     private String officeRoom;
-    private List<Company> companies;
+
 
     public Address() {
     }
@@ -72,14 +72,6 @@ public class Address implements Serializable {
 
     public void setOfficeRoom(String officeRoom) {
         this.officeRoom = officeRoom;
-    }
-
-    public void setCompanies(List<Company> companies) {
-        this.companies = companies;
-    }
-
-    public List<Company> getCompanies() {
-        return companies;
     }
 
     @Override

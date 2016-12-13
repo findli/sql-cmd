@@ -6,12 +6,17 @@ import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.bean.Language;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDAOFactory;
+
+import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("userDao")
 public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> {
     @Override
     void createStatement(PreparedStatement preparedStatement, User user) throws DaoException {
@@ -37,7 +42,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
 
     @Override
     String getAllQuery() {
-        return "SELECT * FROM crm_pallas.user ORDER BY id";
+        return "SELECT * FROM crm_pallas.user";
     }
 
     @Override
@@ -71,7 +76,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     @Override
     User getEntity(ResultSet resultSet) throws DaoException {
         User user = new User();
-        LanguageDao<Language> language = new LanguageDaoImpl();
+     /*   LanguageDao<Language> language = new LanguageDaoImpl();*/
         try {
             user.setId(resultSet.getInt("id"));
             user.setlName(resultSet.getString("last_name"));
@@ -111,7 +116,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     public List<User> getAll() throws DaoException, ClassNotFoundException {
         List<User> users = new ArrayList<>();
         User user;
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 
