@@ -12,4 +12,5 @@ public interface TaskService {
     public  void deleteTask(int id) throws DaoException;
     public Task getById(int id) throws DaoException;
     public Task update(Task task) throws DaoException;
+    List<Task> getTasksForList(int id);
 }

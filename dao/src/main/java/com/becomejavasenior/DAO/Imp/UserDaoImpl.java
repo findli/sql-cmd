@@ -6,7 +6,7 @@ import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.bean.Language;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDAOFactory;
+import com.becomejavasenior.factory.PostgresDaoFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -111,7 +111,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     public List<User> getAll() throws DaoException, ClassNotFoundException {
         List<User> users = new ArrayList<>();
         User user;
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 

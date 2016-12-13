@@ -4,13 +4,23 @@ import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDAOFactory;
+import com.becomejavasenior.factory.PostgresDaoFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> {
+
+    private static final String SELECT_NOTE_FOR_LIST= "SELECT crm_pallas.note.id as noteId,\n" +
+            "crm_pallas.note.note_text,\n" +
+            "crm_pallas.user.last_name as lName,\n" +
+            "crm_pallas.user.first_name as fName,\n" +
+            "crm_pallas.note.created_date_time as createDateNote\n" +
+            "FROM crm_pallas.note\n" +
+            "JOIN crm_pallas.user ON crm_pallas.note.created_by_user_id = crm_pallas.user.id\n" +
+            "JOIN crm_pallas.company ON crm_pallas.note.company_id = crm_pallas.company.id\n" +
+            "WHERE crm_pallas.company.id = ? AND crm_pallas.note.is_deleted = FALSE";
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Note note) throws DaoException {
@@ -87,7 +97,7 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         Contact contact;
         Deal deal;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 
@@ -148,6 +158,32 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
             throw new DaoException("Can't get entity from Note", e);
         }
         return note;
+    }
+
+    @Override
+    public List<Note> getNotesForList(int id) {
+        List<Note> notes = new ArrayList<>();
+        User user;
+        Note note;
+
+        try (Connection connection = PostgresDaoFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_NOTE_FOR_LIST)) {
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                user = new User();
+                note = new Note();
+                note.setId(resultSet.getInt("noteId"));
+                note.setNoteText(resultSet.getString("note_text"));
+                user.setlName(resultSet.getString("lName"));
+                note.setCreatedUser(user);
+                note.setDateCreate(resultSet.getDate("createDateNote"));
+                notes.add(note);
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex);
+        }
+        return notes;
     }
 
 }

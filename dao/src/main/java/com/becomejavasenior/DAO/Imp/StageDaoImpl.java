@@ -1,12 +1,11 @@
 package com.becomejavasenior.DAO.Imp;
 
-import java.sql.*;
-
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Stage;
 import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDAOFactory;
+import com.becomejavasenior.factory.PostgresDaoFactory;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,7 +118,7 @@ public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomeja
         List<Stage> stages = new ArrayList<>();
         Stage stage;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 

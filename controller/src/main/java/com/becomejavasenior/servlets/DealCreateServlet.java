@@ -72,10 +72,11 @@ public class DealCreateServlet extends HttpServlet{
         Contact contact = getContactFromRequest(request);
         Task task = getTaskFromRequest(request);
         Company company = getCompanyFromRequest(request);
+        Note note = getNoteFromRequest(request, deal);
         File attachedFile = getFileFromRequest(request);
 
         try {
-            dealService.createNewDeal(deal, contact, task, company, attachedFile);
+            dealService.createNewDeal(deal, contact, task, company, note);
         } catch (DaoException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

@@ -2,10 +2,8 @@ package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DAO.Imp.*;
-import com.becomejavasenior.DAO.StageDao;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.DealService;
-import com.becomejavasenior.service.TaskService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +21,7 @@ public class DealServiceImpl implements DealService {
     private final TaskDao taskDao = new TaskDaoImpl();
     private final DealDao dealDao = new DealDaoImpl();
     private final StageDao stageDao = new StageDaoImpl();
-
+    private final NoteDao noteDao = new NoteDaoImpl();
 
 
     public Deal create (Deal deal) throws DaoException {
@@ -41,6 +39,11 @@ public class DealServiceImpl implements DealService {
 
     public void delete(int id) throws DaoException {
         dealDao.delete(id);
+    }
+
+    @Override
+    public List<Deal> getDealsForList(int id) {
+        return dealDao.getDealsForList();
     }
 
     public List<Deal> getAll() throws DaoException, ClassNotFoundException {
@@ -62,13 +65,12 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
-    public void createNewDeal(Deal deal, Contact contact, Task task, Company company, File file2) throws DaoException, ClassNotFoundException {
+    public void createNewDeal(Deal deal, Contact contact, Task task, Company company, Note note) throws DaoException, ClassNotFoundException {
 
-        try {
+        if(!task.getTitle().equals("")) {
             taskDao.create(task);
-        }catch (DaoException e){
-            e.printStackTrace();
         }
+
         List<Task> tasks = new ArrayList<>();
         tasks.add(task);
         deal.setTasks(tasks);
@@ -86,6 +88,12 @@ public class DealServiceImpl implements DealService {
         deal.setResponsibleUser(user);
 
         dealDao.create(deal);
+
+        if(!note.getNoteText().equals("")) {
+            deal = (Deal) dealDao.getByName(note.getDeal().getTitle());
+            note.setDeal(deal);
+            noteDao.create(note);
+        }
 
     }
 

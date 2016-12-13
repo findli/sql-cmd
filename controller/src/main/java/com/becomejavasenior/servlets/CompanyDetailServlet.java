@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -91,7 +89,7 @@ public class CompanyDetailServlet extends HttpServlet {
         if (request.getParameter("idTask") != null) {
             idTask = Integer.parseInt(request.getParameter("idTask"));
             try {
-                taskService.delete(idTask);
+                taskService.deleteTask(idTask);
             } catch (DaoException e) {
                 e.printStackTrace();
             }

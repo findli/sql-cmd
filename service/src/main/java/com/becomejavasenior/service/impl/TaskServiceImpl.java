@@ -36,8 +36,15 @@ public class TaskServiceImpl implements TaskService {
         return task;
     }
 
+
+    @Override
+    public List<Task> getTasksForList(int id) {
+        return taskDAO.getTasksForList(id);
+    }
+
     public Task update(Task task) throws DaoException{
         task = (Task)taskDAO.update(task);
         return task;
     }
+
 }

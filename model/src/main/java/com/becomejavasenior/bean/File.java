@@ -12,6 +12,8 @@ public class File {
     private Date dateCreate;
     private Note fileNote;
 
+    public void setId(int id) { this.id = id; }
+
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
