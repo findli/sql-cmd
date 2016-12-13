@@ -2,11 +2,13 @@ package com.becomejavasenior.bean;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Language implements Serializable {
     private int id;
     private String title;
     private String shortTitle;
+    private List<User> users;
 
     public Language(){ }
 
@@ -32,6 +34,14 @@ public class Language implements Serializable {
 
     public String getShortTitle() {
         return shortTitle;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public List<User> getUsers() {
+        return users;
     }
 
     @Override

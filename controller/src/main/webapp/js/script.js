@@ -59,6 +59,39 @@ $(function(){
             }
         });
     });
+    $('#bttAddCompany').click(function () {
+
+        var title = $('#companyName').val();
+        var phone = $('#companyPhone').val();
+        var web = $('#companyWeb').val();
+        var email = $('#companyEmail').val();
+        var country = $('#AddressCountry').val();
+        var city = $('#AddressCity').val();
+        var street = $('#AddressStreet').val();
+        var zipcode = $('#AddressZipcode').val();
+        var building = $('#AddressBuilding').val();
+        var room = $('#AddressRoom').val();
+        $.ajax({
+            type: 'POST',
+            data: {
+                title : title,
+                phone : phone,
+                web : web,
+                email : email,
+                country : country,
+                city : city,
+                street : street,
+                zipcode : zipcode,
+                building : building,
+                room : room,
+                action: 'addDealCompany'
+            },
+            url: '/dealCreate2',
+            success:function(result) {
+                $('#result3').html(result);
+            }
+        });
+    })
 });
 // $(function () {
 //     $('#datetimepicker1').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
@@ -97,3 +130,45 @@ $(function(){
         //alert('idDeal');
     });
 });
+
+//Accordion
+$(document).ready(function () {
+    var previousId = null;
+    $('.users__panel--body').hide();
+    /*    $('.users__panel--input').click(function () {
+     console.log('#'+this.id);
+     /!*$('#'+this.id).is(':checked');*!/
+     $('#'+this.id).checked=true;
+     $('#'+this.id).attr("checked","checked");
+     return false;
+     });*/
+    $('.users__panel--input').change(function () {
+        console.log('#' + this.id);
+        /* $('#'+this.id).prop("checked", this.checked);*/
+        return false;
+    });
+
+    $('.users__panel').click(function () {
+        if ($(previousId).hasClass('opened') && previousId != this) {
+            $(previousId).toggleClass('opened').toggleClass('closed').next().slideToggle();
+            $closeSlide(previousId.id)
+        }
+        $(this).toggleClass('opened').toggleClass('closed').next().slideToggle();
+        previousId = this;
+        if ($(this).hasClass('opened')) {
+            document.getElementById(this.id).style.background = '#0e6cff';
+        }
+        else {
+            $closeSlide(this.id)
+        }
+    });
+});
+
+$closeSlide = function (elementId) {
+    document.getElementById(elementId).style.background = '#74aafb';
+
+};
+
+
+
+

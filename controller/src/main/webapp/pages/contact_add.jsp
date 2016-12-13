@@ -42,36 +42,56 @@
                 <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
                 <li><a href="/contact" target="_self">Contacts</a></li>
-                <li><a href="#" target="_self">Tasks</a></li>
+                <li><a href="/taskList" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
                 <li><a href="#" target="_self">Settings</a></li>
             </ul>
         </div>
 
         <div class="wrapper__aboutCompany">
-            <div class="forms">
+            <form class="form-horizontal" role="form" method="post" action="/contactAdd">
+                <div class="forms">
 
-                <!--Add contact-->
-                <div class="forms--nCompany">
-                    <form class="form-horizontal">
+                    <!--Add contact-->
+                    <div class="forms--nContact">
+                        <!--       <form class="form-horizontal">-->
                         <h2>Contact</h2>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Name </label>
+                            <label class="col-sm-3 control-label">First Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Name">
+                                <input class="form-control" type="text" placeholder="fName" name="fName" id="fName">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Tags </label>
+                            <label class="col-sm-3 control-label">Last Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag">
+                                <input class="form-control" type="text" placeholder="lName" name="lName" id="lName">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <a href="#">Responsible</a><br>
+                            <label class="col-sm-3 control-label">Position </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="position" name="position" id="position">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Tag </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Tag" name="Tag" id="Tag">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Responsible </label>
+                            <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser" style="width: 150px;">
+                                <c:forEach var="user" items="${users}">
+                                    <option><c:out value="${user.lName}"/></option>
+                                </c:forEach>
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -81,117 +101,119 @@
                                 <option>Home</option>
                             </select>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" name="formPhone" placeholder="Number">
+                                <input class="form-control" type="text" name="formPhone" id="formPhone" placeholder="Number">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Email </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Email">
+                                <input class="form-control" type="text" placeholder="Email" id="Email" name="Email">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Skype </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Skype">
+                                <input class="form-control" type="text" placeholder="Skype" id="Skype" name="Skype">
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Address </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Address">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Comment </label>
-                            <div class="col-sm-9">
-                                <textarea class="form-control" placeholder="Message"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Add files </label>
-                            <div class="col-sm-9">
-                                <input type="file" type="Search for a file to add">
-                            </div>
-                        </div>
-
+                        <!--
+                                                             <div class="form-group">
+                                                                 <label class="col-sm-3 control-label">Address </label>
+                                                                 <div class="col-sm-9">
+                                                                     <input class="form-control" type="text" placeholder="Address" id="contactAddress" name="contactAddress">
+                                                                 </div>
+                                                             </div>
+                                                             <div class="form-group">
+                                                                 <label class="col-sm-3 control-label">Comment </label>
+                                                                 <div class="col-sm-9">
+                                                                     <textarea class="form-control" placeholder="Message" id="noteContact" name="noteContact"></textarea>
+                                                                 </div>
+                                                             </div>
+                                                             <div class="form-group">
+                                                                 <label class="col-sm-3 control-label">Add files </label>
+                                                                 <div class="col-sm-9">
+                                                                     <input type="file" title="Search for a file to add">
+                                                                 </div>
+                                                             </div>
+                        -->
                         <div class="form-group">
                             <div class="col-sm-10">
-                                <input class="formAddBut" type="button" value="Применить">
-                                <input class="formAddBut" type="button" value="Очистить">
+                                <%--<input class="formAddBut" type="button" value="Save">--%>
+                                <button>Подтвердить</button>
                             </div>
                         </div>
-                    </form>
-                </div>
+                        <!--    </form> -->
+                    </div>
 
-                <!--Add company-->
-                <div class="forms--nCompany">
-                    <form class="form-horizontal">
+                    <!--Add company-->
+                    <div class="forms--nContact">
+                        <!--    <form class="form-horizontal"> -->
                         <h2>Company</h2>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Name </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Name company">
+                        <!-- Навигация -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="active"><a href="#old" aria-controls="old" role="tab" data-toggle="tab">Old company</a></li>
+                            <li><a href="#new" aria-controls="new" role="tab" data-toggle="tab">New company</a></li>
+                        </ul>
+
+                        <!-- Содержимое вкладок -->
+                        <div class="tab-content">
+                            <br>
+                            <div role="tabpanel" class="tab-pane active" id="old">
+
+                                <select class="form-control" style="float: none; width: 250px" id="company" name="company">
+                                    <c:forEach var="company" items="${companyList}">
+                                        <option><c:out value="${company.title}"/></option>
+                                    </c:forEach>
+                                </select>
+
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="new">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Name: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" placeholder="Name">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Phone: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" placeholder="Phone">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">email: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" placeholder="email">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Web: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" placeholder="Url">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Address: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" placeholder="Address">
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <!--    </form> -->
+                    </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Tags </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <select class="col-sm-3 form-control">
-                                <option>Work</option>
-                                <option>Mobile</option>
-                                <option>Home</option>
-                            </select>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" name="formPhone" placeholder="Number">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Email </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Email">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Web </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Url">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Address </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Address">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <input class="formAddBut" type="button" value="Применить">
-                                <input class="formAddBut" type="button" value="Очистить">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!--Add task-->
-                <div class="forms--nContact--Task">
-                    <form class="form-horizontal">
+                    <!--Add task-->
+                    <div class="forms--nContact--Task">
+                        <!--   <form class="form-horizontal"> -->
                         <h2>Task</h2>
 
                         <div class="form-group">
@@ -214,8 +236,8 @@
                                 <div class="input-group date" id="datetimepicker">
                                     <input type="text" class="form-control" />
                                     <span class="input-group-addon">
-                                            <span class="glyphicon-calendar glyphicon"></span>
-                                        </span>
+                                                <span class="glyphicon-calendar glyphicon"></span>
+                                            </span>
                                 </div>
                             </div>
                         </div>
@@ -259,12 +281,12 @@
                             </div>
                         </div>
 
-                    </form>
-                </div>
+                        <!--   </form> -->
+                    </div>
 
-                <!--Add deal-->
-                <div class="forms--nContact--Deal">
-                    <form class="form-horizontal">
+                    <!--Add deal-->
+                    <div class="forms--nContact--Deal">
+                        <!--  <form class="form-horizontal"> -->
                         <h2>Deal</h2>
 
                         <div class="form-group">
@@ -298,11 +320,10 @@
                                 <input class="formAddBut" type="button" value="Очистить">
                             </div>
                         </div>
-                    </form>
+                        <!--  </form> -->
+                    </div>
                 </div>
-
-
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -314,9 +335,10 @@
 
 </body>
 
-<script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
 </html>

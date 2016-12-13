@@ -40,7 +40,7 @@
                 <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
                 <li><a href="/contact" target="_self">Contacts</a></li>
-                <li><a href="#" target="_self">Tasks</a></li>
+                <li><a href="/taskList" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
                 <li><a href="#" target="_self">Settings</a></li>
             </ul>
@@ -80,7 +80,7 @@
                             <div class="col-sm-9">
                                 <div class="input-group date" id="datetimepicker1">
                                     <input type="text" class="form-control" />
-                                    <span class="input-group-addon">
+                                        <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
                                         </span>
                                 </div>
@@ -92,7 +92,7 @@
                             <div class="col-sm-9">
                                 <div class="input-group date" id="datetimepicker2">
                                     <input type="text" class="form-control" />
-                                    <span class="input-group-addon">
+                                        <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
                                         </span>
                                 </div>
@@ -104,7 +104,7 @@
                             <div class="col-sm-9">
                                 <select class="form-control">
                                     <c:forEach var="user" items="${users}">
-                                        <option><c:out value="${user.lName}"/></option>
+                                        <option><c:out value="${user.getlName()}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -115,7 +115,7 @@
                             <div class="col-sm-9">
                                 <select class="form-control">
                                     <c:forEach var="taskType" items="${taskTypeList}">
-                                        <option><c:out value="${taskType.type}"/></option>
+                                        <option><c:out value="${taskType.getType()}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>

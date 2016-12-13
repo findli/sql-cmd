@@ -93,7 +93,7 @@ header {
     margin: 15px 0px 0px 15px;
 }
 
-.header__user--photo .fa-user .fa-industry {
+.header__user--photo .fa-user {
     color: white;
     margin: 7px 0 0 10px;
     font-size: 25px;
@@ -297,7 +297,7 @@ Forms New Deal
     width: 450px;
     margin: 5px 0 0 15px;
     float: left;
-    min-height: 420px;
+    min-height: 450px;
     border: 1px solid blue;
     padding: 0 5px;
 }
@@ -351,7 +351,7 @@ Forms New Deal Contact
     width: 450px;
     margin: 5px 0 0 15px;
     float: left;
-    min-height: 420px;
+    min-height: 450px;
     border: 1px solid blue;
     padding: 0 5px;
 }
@@ -421,7 +421,7 @@ Forms New Deal Task
     width: 450px;
     margin: 5px 0 0 15px;
     float: left;
-    min-height: 370px;
+    min-height: 450px;
     border: 1px solid blue;
     padding: 0 5px;
 }
@@ -873,17 +873,13 @@ Forms Filters deal
     width: 150px;
 }
 
-
-
-/* ==========================================================================
-Forms Contact
-========================================================================== */
-
 .forms--nContact {
-    width: 550px;
-    margin: 5px 5px 5px 5px;
+    width: 450px;
+    margin: 5px 0 0 15px;
     float: left;
-    min-height: 250px;
+    height: 650px;
+    border: 1px solid blue;
+    padding: 0 5px;
 }
 
 .forms--nContact input {
@@ -905,7 +901,8 @@ Forms Contact
 
 .forms--nContact select {
     margin: 8px 0 4px 13px;
-    height: 24px;
+    height: 30px;
+    width: 80px;
 }
 
 /* ==========================================================================

@@ -2,6 +2,7 @@ package com.becomejavasenior.service;
 
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Company;
+import com.becomejavasenior.bean.Task;
 
 import java.util.List;
 
@@ -19,3 +20,4 @@ public interface CompanyService {
 
     Company getByName(String str) throws DaoException, ClassNotFoundException;
 }
+

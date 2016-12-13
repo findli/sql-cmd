@@ -1,12 +1,11 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.DAO.AbstractDao;
 
+import com.becomejavasenior.DAO.AbstractDao;
 
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DataBaseUtil;
 import org.apache.log4j.Logger;
-/*import org.apache.log4j.Logger;*/
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -149,7 +148,6 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     abstract T getEntity(ResultSet resultSet) throws DaoException;
 
     @Override
-
     public List<T> getAll() throws DaoException, ClassNotFoundException {
         log.trace("Call getAll() in AbstractDaoImpl");
 

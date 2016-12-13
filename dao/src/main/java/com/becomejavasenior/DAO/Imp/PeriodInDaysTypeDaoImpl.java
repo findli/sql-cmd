@@ -13,22 +13,22 @@ public class PeriodInDaysTypeDaoImpl extends AbstractDaoImpl<PeriodInDaysType> i
 
     @Override
     public String getCreateQuery(){
-        return "INSERT INTO period_in_days_type (title, daysInPeriod) VALUES(?, ?)";
+        return "INSERT INTO crm_pallas.period_in_days_type (title, daysInPeriod) VALUES(?, ?)";
     }
 
     @Override
     public String getUpdateQuery(){
-        return "UPDATE period_in_days_type SET title = ?, daysInPeriod = ?";
+        return "UPDATE crm_pallas.period_in_days_type SET title = ?, daysInPeriod = ? WHERE id = ?";
     }
 
     @Override
     public String getDeleteQuery(){
-        return "DELETE FROM period_in_days_type WHERE id = ?";
+        return "DELETE FROM crm_pallas.period_in_days_type WHERE id = ?";
     }
 
     @Override
     public String getAllQuery(){
-        return "SELECT * FROM period_in_days_type";
+        return "SELECT * FROM crm_pallas.period_in_days_type";
     }
 
     @Override
@@ -38,7 +38,7 @@ public class PeriodInDaysTypeDaoImpl extends AbstractDaoImpl<PeriodInDaysType> i
 
     @Override
     public String getByIdQuery(){
-        return "SELECT * FROM period_in_days_type WHERE id = ?";
+        return "SELECT * FROM crm_pallas.period_in_days_type WHERE id = ?";
     }
 
     @Override
@@ -56,6 +56,7 @@ public class PeriodInDaysTypeDaoImpl extends AbstractDaoImpl<PeriodInDaysType> i
         try {
             preparedStatement.setString(1, periodInDaysType.getTitle());
             preparedStatement.setInt(2, periodInDaysType.getDaysInPeriod());
+            preparedStatement.setInt(3, periodInDaysType.getId());
         } catch (SQLException e){
             throw new DaoException("Can't update statement for PeriodInDaysType", e);
         }
@@ -67,7 +68,7 @@ public class PeriodInDaysTypeDaoImpl extends AbstractDaoImpl<PeriodInDaysType> i
         try {
             periodInDaysType.setId(resultSet.getInt("id"));
             periodInDaysType.setTitle(resultSet.getString("title"));
-            periodInDaysType.setDaysInPeriod(resultSet.getInt("daysInPeriod"));
+            periodInDaysType.setDaysInPeriod(resultSet.getInt("days_In_Period"));
 
         } catch (SQLException e){
             throw new DaoException("Can't get entity from PeriodInDaysType", e);

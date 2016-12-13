@@ -1,4 +1,8 @@
 package com.becomejavasenior.DAO;
 
-public interface LanguageDao {
+
+import com.becomejavasenior.bean.Language;
+
+public interface LanguageDao<Language> extends AbstractDao<Language> {
+
 }

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "dealEditServlet", urlPatterns = "/dealEdit")
@@ -154,7 +156,7 @@ public class DealEditServlet extends HttpServlet {
 
             addressUpdate();
             company.setAddress(address);
-            /*companyUpdate();*/
+            companyUpdate();
             out.print(str);
 
         }
@@ -272,8 +274,8 @@ public class DealEditServlet extends HttpServlet {
 
         StageService stageService = new StageServiceImpl();
         String dealNewStage = request.getParameter("newStage");
-        /*Stage stage = stageService.getByName(dealNewStage);
-        deal.setStage(stage);*/
+        Stage stage = stageService.getByName(dealNewStage);
+        deal.setStage(stage);
 
         return "Stage = " + deal.getStage().getTitle();
     }
@@ -282,19 +284,19 @@ public class DealEditServlet extends HttpServlet {
 
         UserService userService = new UserServiceImpl();
         String dealNewUser = request.getParameter("newUser");
-       /* User user = userService.getByName(dealNewUser);
-        deal.setResponsibleUser(user);*/
+        User user = userService.getByName(dealNewUser);
+        deal.setResponsibleUser(user);
 
         return "User = " + deal.getResponsibleUser().getlName();
     }
 
-   /* public void companyUpdate() {
+    public void companyUpdate() {
         try {
             company = companyService.update(company);
         } catch (DaoException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
     public void dealUpdate() {
         try {

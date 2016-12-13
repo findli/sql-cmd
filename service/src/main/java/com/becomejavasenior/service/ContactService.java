@@ -2,13 +2,14 @@ package com.becomejavasenior.service;
 
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Contact;
+import com.becomejavasenior.bean.File;
+import com.becomejavasenior.bean.Tag;
 
 import java.util.List;
 
-/**
- * Created by alpo123 on 28.11.16.
- */
+
 public interface ContactService {
+
     Contact create(Contact t) throws DaoException;
 
     void update(Contact t) throws DaoException;
@@ -19,5 +20,6 @@ public interface ContactService {
 
     void delete(int id) throws DaoException;
 
-    List getContactsForList(int id);
+    public void createNewContact(Contact contact, Tag tag, File file) throws DaoException, ClassNotFoundException;;
+
 }
