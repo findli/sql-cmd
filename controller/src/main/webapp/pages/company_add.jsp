@@ -222,46 +222,36 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Name: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" id="addCompName" type="text" placeholder="Name">
+                                        <input class="form-control" type="text" placeholder="Name">
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Phone: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" id="addCompPhone" placeholder="Phone">
+                                        <input class="form-control" type="text" placeholder="Phone">
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">email: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" id="addCompEmail" placeholder="email">
+                                        <input class="form-control" type="text" placeholder="email">
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Web: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" id="addCompWeb" placeholder="Url">
+                                        <input class="form-control" type="text" placeholder="Url">
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Address: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" id="addCompAdress" placeholder="zipcode, Country, City, Street, Build, Office">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-10">
-                                        <input class="formAddBut" type="button" id="bttAddCompany" value="Применить">
-                                        <input class="formAddBut" type="button" value="Очистить">
+                                        <input class="form-control" type="text" placeholder="Address">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <%--</form>--%>
+                            <%--</form>--%>
                     </div>
 
                     <!--Add task-->

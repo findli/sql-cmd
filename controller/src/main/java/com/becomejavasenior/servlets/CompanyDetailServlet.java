@@ -72,6 +72,12 @@ public class CompanyDetailServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         if (action != null) {
+            CompanyService companyService = new CompanyServiceImpl();
+            AddressService addressService = new AddressServiceImpl();
+            Company company = new Company();
+            Address address = new Address();
+            Address getIdAddress = new Address();
+            User user = new User();
             if (action.startsWith("formTaskDel")) {
                 TaskService taskService = new TaskServiceImpl();
                 String idTask = action.substring(12);
@@ -97,13 +103,6 @@ public class CompanyDetailServlet extends HttpServlet {
                     e.printStackTrace();
                 }
             } else if (action.startsWith("addCompany")) {
-                CompanyService companyService = new CompanyServiceImpl();
-                AddressService addressService = new AddressServiceImpl();
-                Company company = new Company();
-                Address address = new Address();
-                Address getIdAddress = new Address();
-                User user = new User();
-
                 String addressStr = request.getParameter("address");
                 addressStr = addressStr.replace(" ", "");
                 List<String> addressSplit = new ArrayList<>();
@@ -137,15 +136,9 @@ public class CompanyDetailServlet extends HttpServlet {
                 }
 
             } else if (action.startsWith("updateAddress")) {
-                CompanyService companyService = new CompanyServiceImpl();
-                AddressService addressService = new AddressServiceImpl();
-                Company company = new Company();
-                Address address = new Address();
 
                 try {
                     company = companyService.getById(Integer.parseInt(request.getParameter("id")));
-                    int idAdress = Integer.parseInt(request.getParameter("idAddress"));
-                    address = addressService.getById(idAdress);
                 } catch (DaoException e) {
                     e.printStackTrace();
                 }
@@ -153,18 +146,24 @@ public class CompanyDetailServlet extends HttpServlet {
                 company.setEmail(request.getParameter("email"));
                 company.setPhoneNumber(request.getParameter("phone"));
                 company.setWebsite(request.getParameter("web"));
-   /*             String addressStr = request.getParameter("address");
+                String addressStr = request.getParameter("address");
                 List<String> addressSplit = new ArrayList<>();
                 Collections.addAll(addressSplit, addressStr.split(", "));
                 address.setId(Integer.parseInt(request.getParameter("idAddress")));
+
                 address.setZipcode(Integer.parseInt(addressSplit.get(0)));
                 address.setCountry(addressSplit.get(1));
                 address.setCity(addressSplit.get(2));
                 address.setStreet(addressSplit.get(3));
                 address.setBuildNum(addressSplit.get(4));
-                address.setOfficeRoom(addressSplit.get(5));*/
+                address.setOfficeRoom(addressSplit.get(5));
+
                 company.setAddress(address);
+                user.setId(company.getResponsibleUser().getId());
+                company.setResponsibleUser(user);
+                company.setDeleted(false);
                 try {
+                    addressService.update(address);
                     companyService.update(company);
                 } catch (DaoException e) {
                     e.printStackTrace();

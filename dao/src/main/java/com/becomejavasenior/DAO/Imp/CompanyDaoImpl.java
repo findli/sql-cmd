@@ -45,10 +45,11 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             statement.setString(2, company.getPhoneNumber());
             statement.setString(3, company.getEmail());
             statement.setString(4, company.getWebsite());
-/*            statement.setInt(5, company.getAddress().getId());
+            statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.isDeleted());
-            statement.setInt(8, company.getAddress().getId());*/
+            statement.setInt(8, company.getId());
+
 
         } catch (SQLException e) {
 
@@ -75,7 +76,7 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
 
         Company company = new Company();
         AddressDao<Address> addressDao = new AddressDaoImpl();
-        UserDao<User> user = new UserDaoImpl();
+        UserDao<User> userDao = new UserDaoImpl();
 
         try{
             company.setId(resultSet.getInt("id"));
@@ -84,8 +85,8 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             company.setEmail(resultSet.getString("email"));
             company.setWebsite(resultSet.getString("website"));
             company.setAddress(addressDao.getById(resultSet.getInt("address_id")));
-/*            company.setResponsibleUser(userDao.getById(resultSet.getInt("responsible_user_id")));*/
-/*            company.setDeleted(resultSet.getBoolean("is_deleted"));*/
+            company.setResponsibleUser(userDao.getById(resultSet.getInt("responsible_user_id")));
+            company.setDeleted(resultSet.getBoolean("is_deleted"));
 
         } catch (SQLException e){
 
@@ -100,7 +101,7 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
     }
 
     public String getUpdateQuery() {
-        return DataBaseUtil.getQuery("UPDATE crm_pallas.company SET title = ?, phone_number = ?, email = ?, website = ?, address_id = ? where id=?");
+        return DataBaseUtil.getQuery("UPDATE crm_pallas.company SET title = ?, phone_number = ?, email = ?, website = ?, address_id = ?, responsible_user_id = ?, is_deleted = ? where id=?");
     }
 
     public String getDeleteQuery() {

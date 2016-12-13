@@ -123,6 +123,27 @@ $(function () {
         });
     });
 
+    $('#bttAddCompany').click(function () {
+
+        var title = $('#addCompName').val();
+        var phone = $('#addCompPhone').val();
+        var web = $('#addCompWeb').val();
+        var email = $('#addCompEmail').val();
+        var address = $('#addCompAdress').val();
+        $.ajax({
+            type: 'POST',
+            data: {
+                title: title,
+                phone: phone,
+                web: web,
+                email: email,
+                address: address,
+                action: 'addCompany'
+            },
+            url: '/companyDetail'
+        });
+    })
+
 });
 
 
