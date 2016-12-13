@@ -1,7 +1,6 @@
 package com.becomejavasenior.service.impl;
 
 
-
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.Imp.TaskDaoImpl;
 import com.becomejavasenior.DAO.TaskDao;
@@ -14,30 +13,37 @@ import java.util.List;
 public class TaskServiceImpl implements TaskService {
 
     List<Task> listTasks = new ArrayList<Task>();
-    TaskDao taskDAO = new TaskDaoImpl();
+    TaskDao taskDao = new TaskDaoImpl();
     Task task = null;
 
 
-    public List<Task> getAll() throws DaoException, ClassNotFoundException{
-        listTasks = taskDAO.getAll();
+    public List<Task> getAll() throws DaoException, ClassNotFoundException {
+        listTasks = taskDao.getAll();
         return listTasks;
     }
 
-    public void addTask(Task task) throws DaoException{
-        taskDAO.create(task);
+    public void addTask(Task task) throws DaoException {
+        taskDao.create(task);
     }
 
-    public void deleteTask(int id) throws DaoException{
-        taskDAO.delete(id);
+    public void delete(int id) throws DaoException {
+        taskDao.delete(id);
     }
 
-    public Task getById(int id) throws DaoException{
-      task = (Task)taskDAO.getById(id);
+    public Task getById(int id) throws DaoException {
+        task = (Task) taskDao.getById(id);
         return task;
     }
 
-    public Task update(Task task) throws DaoException{
-        task = (Task)taskDAO.update(task);
+
+    @Override
+    public List<Task> getTasksForList(int id) {
+        return taskDao.getTasksForList(id);
+    }
+
+
+    public Task update(Task task) throws DaoException {
+        task = (Task) taskDao.update(task);
         return task;
     }
 }

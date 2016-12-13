@@ -5,7 +5,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../style/bootstrap.css">
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
@@ -40,7 +39,7 @@
                 <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
                 <li><a href="/contact" target="_self">Contacts</a></li>
-                <li><a href="/taskList" target="_self">Tasks</a></li>
+                <li><a href="#" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
                 <li><a href="#" target="_self">Settings</a></li>
             </ul>
@@ -51,7 +50,7 @@
                 <div class="forms--lDeal">
 
                     <div class="col-md-12">
-                        <a href="/companyCreate" class="btn btn-primary pull-center">Add company</a>
+                        <a href="/companyadd" class="btn btn-primary pull-center">Add company</a>
                     </div>
 
                     <br><br><br><br>
@@ -67,10 +66,10 @@
                             </thead>
                             <tbody>
                             <c:forEach var="company" items="${companyList}">
-                                <tr>
-                                    <td><c:out value="${company.title}"/></td>
-                                    <td><c:out value="${company.phoneNumber}"/></td>
-                                    <td><c:out value="${company.email}"/></td>
+                                <tr data-href="/companyDetail?idCompany=${company.getId()}">
+                                    <td><c:out value="${company.getTitle()}"/></td>
+                                    <td><c:out value="${company.getPhoneNumber()}"/></td>
+                                    <td><c:out value="${company.getEmail()}"/></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -84,13 +83,6 @@
 </div>
 
 </body>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.js"></script>
-<script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="../js/script.js"></script>
-
-
+<script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="../js/scriptCompany.js"></script>
 </html>

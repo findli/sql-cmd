@@ -8,6 +8,8 @@ import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Address;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.User;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("companyDao")
 public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyDao<Company> {
 
     @Override
@@ -51,7 +54,6 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             statement.setBoolean(7, company.isDeleted());
             statement.setInt(8, company.getId());
 
-
         } catch (SQLException e) {
 
             throw new DaoException("Can't update statement for Company", e);
@@ -76,7 +78,7 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
     public Company getEntity(ResultSet resultSet) throws DaoException {
 
         Company company = new Company();
-        AddressDao<Address> address = new AddressDaoImpl();
+        AddressDao<Address> addressDao = new AddressDaoImpl();
         UserDao<User> user = new UserDaoImpl();
 
         try{
@@ -85,9 +87,9 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             company.setPhoneNumber(resultSet.getString("phone_number"));
             company.setEmail(resultSet.getString("email"));
             company.setWebsite(resultSet.getString("website"));
-            company.setAddress(address.getById(resultSet.getInt("address_id")));
-            company.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
-            company.setDeleted(resultSet.getBoolean("is_deleted"));
+            company.setAddress(addressDao.getById(resultSet.getInt("address_id")));
+/*            company.setResponsibleUser(userDao.getById(resultSet.getInt("responsible_user_id")));*/
+/*            company.setDeleted(resultSet.getBoolean("is_deleted"));*/
 
         } catch (SQLException e){
             throw new DaoException("Can't get entity from Company", e);

@@ -7,7 +7,12 @@ import com.becomejavasenior.service.ContactService;
 import com.becomejavasenior.service.UserService;
 import com.becomejavasenior.service.impl.ContactServiceImpl;
 import com.becomejavasenior.service.impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,11 +23,22 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "contactListServlet", urlPatterns = "/contact")
+@Controller("contactListServlet")
 public class ContactListServlet extends HttpServlet {
+
+    @Autowired
+    @Qualifier("contactService")
+    ContactService contactService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ContactService contactService = new ContactServiceImpl();
         UserService userService = new UserServiceImpl();
 
         HttpSession session = request.getSession();

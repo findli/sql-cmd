@@ -10,7 +10,11 @@ public class File {
     private String filePath;
     private byte fileSize;
     private Date dateCreate;
-    private Note fileNote;
+    private Note note;
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
@@ -29,7 +33,7 @@ public class File {
     }
 
     public void setFileNote(Note fileNote) {
-        this.fileNote = fileNote;
+        this.note = fileNote;
     }
 
     public int getId() {
@@ -49,12 +53,14 @@ public class File {
     }
 
     public Note getFileNote() {
-        return fileNote;
+        return note;
     }
 
     public Date getDateCreate() {
         return dateCreate;
     }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -78,6 +84,7 @@ public class File {
         result = 31 * result + (filePath != null ? filePath.hashCode() : 0);
         result = 31 * result + (int) fileSize;
         result = 31 * result + (dateCreate != null ? dateCreate.hashCode() : 0);
+        result = 31 * result + (note != null ? note.hashCode() : 0);
         return result;
     }
 
@@ -90,6 +97,7 @@ public class File {
                 ", filePath='" + filePath + '\'' +
                 ", fileSize=" + fileSize +
                 ", dateCreate=" + dateCreate +
+                ", dateCreate=" + note +
                 '}';
     }
 }

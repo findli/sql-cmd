@@ -4,12 +4,15 @@ package com.becomejavasenior.DAO.Imp;
 import com.becomejavasenior.DAO.AddressDao;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Address;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository("addressDao")
 public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressDao<Address> {
 
     @Override

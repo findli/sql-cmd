@@ -6,12 +6,17 @@ import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.bean.Language;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.exceptions.DatabaseException;
+
 import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("userDao")
 public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> {
     @Override
     void createStatement(PreparedStatement preparedStatement, User user) throws DaoException {
@@ -28,7 +33,6 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
             preparedStatement.setString(9, user.getNote());
             preparedStatement.setDate(10, (Date) user.getDateCreate());
             preparedStatement.setInt(11, user.getLanguage().getId());
-//            preparedStatement.setInt(11, user.getLanguage().getId());
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,7 +51,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
 
     @Override
     String getCreateQuery() {
-        return "INSERT INTO crm_pallas.user (last_name) VALUES(?)";
+        return "INSERT INTO crm_pallas.user (first_name, last_name, password_hash, email, is_admin, rights, photo_path, is_notification_enabled, note, creation_date_time, language_id) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     }
 
     @Override
@@ -71,7 +75,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     @Override
     User getEntity(ResultSet resultSet) throws DaoException {
         User user = new User();
-        LanguageDao<Language> language = new LanguageDaoImpl();
+     /*   LanguageDao<Language> language = new LanguageDaoImpl();*/
         try {
             user.setId(resultSet.getInt("id"));
             user.setlName(resultSet.getString("last_name"));
