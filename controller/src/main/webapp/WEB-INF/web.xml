@@ -18,7 +18,5 @@
         <servlet-name>companyList</servlet-name>
         <url-pattern>/company</url-pattern>
     </servlet-mapping> -->
-=======
->>>>>>> d80b510610f3099333cb46c2d4958fca80808ef8
 
 </web-app>
