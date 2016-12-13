@@ -33,7 +33,6 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
             preparedStatement.setString(9, user.getNote());
             preparedStatement.setDate(10, (Date) user.getDateCreate());
             preparedStatement.setInt(11, user.getLanguage().getId());
-//            preparedStatement.setInt(11, user.getLanguage().getId());
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,7 +51,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
 
     @Override
     String getCreateQuery() {
-        return "INSERT INTO crm_pallas.user (last_name) VALUES(?)";
+        return "INSERT INTO crm_pallas.user (first_name, last_name, password_hash, email, is_admin, rights, photo_path, is_notification_enabled, note, creation_date_time, language_id) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     }
 
     @Override
