@@ -101,7 +101,15 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
 
     @Override
     public Deal getByName(String str) throws DaoException, ClassNotFoundException {
-        return null;
+        Deal deal = new Deal();
+        List<Deal> deals = getAll();
+        for (int i = 0; i < deals.size(); ++i) {
+            if(deals.get(i).getTitle().equals(str)) {
+                deal = deals.get(i);
+                break;
+            }
+        }
+        return deal;
     }
 
     @Override

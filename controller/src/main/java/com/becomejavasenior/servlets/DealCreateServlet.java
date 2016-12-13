@@ -91,10 +91,11 @@ public class DealCreateServlet extends HttpServlet{
         Contact contact = getContactFromRequest(request);
         Task task = getTaskFromRequest(request);
         Company company = getCompanyFromRequest(request);
-        File attachedFile = getFileFromRequest(request);
+        Note note = getNoteFromRequest(request, deal);
+//        File attachedFile = getFileFromRequest(request);
 
         try {
-            dealService.createNewDeal(deal, contact, task, company, attachedFile);
+            dealService.createNewDeal(deal, contact, task, company, note);
         } catch (DaoException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -102,9 +103,37 @@ public class DealCreateServlet extends HttpServlet{
         }
         response.sendRedirect("/deal");
     }
+
+    private Note getNoteFromRequest(HttpServletRequest request, Deal deal) {
+        Note note = new Note();
+
+        String noteContent = request.getParameter("noteDeal");
+        if (!noteContent.isEmpty()) {
+            note.setNoteText(noteContent);
+            note.setDeleted(false);
+
+            note.setDateCreate(new Date());
+            User creator = new User();
+            creator.setId(1); //TODO: change to user under which the logged in
+            note.setCreatedUser(creator);
+            note.setDeal(deal);
+            Company company = new Company();
+            company.setId(1);
+            note.setCompany(company);
+            Contact contact = new Contact();
+            contact.setId(1);
+            note.setContact(contact);
+
+        } else {
+            note.setNoteText("");
+        }
+        return note;
+    }
     private Deal getDealFromRequest(HttpServletRequest request) {
         Deal deal = new Deal();
+
         deal.setTitle(request.getParameter("dealName"));
+
 
         User user = new User();
         user.setlName(request.getParameter("responsibleUser"));
@@ -112,24 +141,6 @@ public class DealCreateServlet extends HttpServlet{
 
         deal.setCreateDate(new Date());
         deal.setDeleted(false);
-
-        String noteContent = request.getParameter("noteDeal");
-        if (!noteContent.isEmpty()) {
-            List<Note> noteList = new ArrayList<>();
-            Note note = new Note();
-            note.setNoteText(request.getParameter("noteDeal"));
-            note.setDeleted(false);
-
-            note.setDateCreate(new Date());
-            User creator = new User();
-            creator.setId(1); //TODO: change to user under which the logged in
-            note.setCreatedUser(creator);
-            noteList.add(note);
-            deal.setDealNote(noteList);
-        } else {
-            List<Note> noteList = new ArrayList<>();
-            deal.setDealNote(noteList);
-        }
 
         if (!request.getParameter("dealBudget").isEmpty()) {
             deal.setBudget(new Integer(request.getParameter("dealBudget")));
@@ -142,6 +153,11 @@ public class DealCreateServlet extends HttpServlet{
     }
     private Task getTaskFromRequest(HttpServletRequest request) {
         Task task = new Task();
+        if(request.getParameter("Title").isEmpty()) {
+            task.setTitle("");
+            return task;
+        }
+
         TaskType taskType = new TaskType();
         User user = new User();
         PeriodInDaysType periodInDaysType = new PeriodInDaysType();
@@ -158,7 +174,9 @@ public class DealCreateServlet extends HttpServlet{
         try {
             user = userService.getById(parseString(request.getParameter("ResponsibleUserTask")));
             taskType = taskTypeService.getById(parseString(request.getParameter("TaskType")));
-            date = format.parse(request.getParameter("DeadlineDate"));
+            if(!request.getParameter("DeadlineDate").isEmpty()) {
+                date = format.parse(request.getParameter("DeadlineDate"));
+            }
             periodInDaysType = periodInDaysService.getById(parseString(request.getParameter("PeriodInDaysType")));
         }catch ( ParseException e){
             e.printStackTrace();
