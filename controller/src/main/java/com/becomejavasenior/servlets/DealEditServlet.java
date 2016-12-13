@@ -150,8 +150,6 @@ public class DealEditServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
-
-
             str = getNameCompanyFromRequest(request) + "; \n";
             str += getPhoneFromRequest(request) + "; \n";
             str += getEmailFromRequest(request) + "; \n";
@@ -165,7 +163,11 @@ public class DealEditServlet extends HttpServlet {
 
             addressUpdate();
             company.setAddress(address);
-            /*companyUpdate();*/
+            User user = new User();
+            user.setId(1); //TODO: change to user under which the logged in
+            company.setResponsibleUser(user);
+            company.setDeleted(false);
+            companyUpdate();
             out.print(str);
 
         }
@@ -283,8 +285,8 @@ public class DealEditServlet extends HttpServlet {
 
         StageService stageService = new StageServiceImpl();
         String dealNewStage = request.getParameter("newStage");
-        /*Stage stage = stageService.getByName(dealNewStage);
-        deal.setStage(stage);*/
+        Stage stage = stageService.getByName(dealNewStage);
+        deal.setStage(stage);
 
         return "Stage = " + deal.getStage().getTitle();
     }
@@ -293,19 +295,19 @@ public class DealEditServlet extends HttpServlet {
 
         UserService userService = new UserServiceImpl();
         String dealNewUser = request.getParameter("newUser");
-       /* User user = userService.getByName(dealNewUser);
-        deal.setResponsibleUser(user);*/
+        User user = userService.getByName(dealNewUser);
+        deal.setResponsibleUser(user);
 
         return "User = " + deal.getResponsibleUser().getlName();
     }
 
-   /* public void companyUpdate() {
+    public void companyUpdate() {
         try {
             company = companyService.update(company);
         } catch (DaoException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
     public void dealUpdate() {
         try {

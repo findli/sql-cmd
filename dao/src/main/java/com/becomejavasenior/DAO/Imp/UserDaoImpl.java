@@ -42,7 +42,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
 
     @Override
     String getAllQuery() {
-        return "SELECT * FROM crm_pallas.user";
+        return "SELECT * FROM crm_pallas.user ORDER BY id";
     }
 
     @Override
