@@ -1,28 +1,46 @@
 package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.DAO.*;
-import com.becomejavasenior.DAO.Imp.*;
+import com.becomejavasenior.DAO.StageDao;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.DealService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service(value = "dealService")
 public class DealServiceImpl implements DealService {
-//    private final CompanyDao companyDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getCompanyDAO();
-//    private final UserDao userDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getUserDAO();
-//    private final ContactDao contactDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getContactDAO();
-//    private final TaskDao taskDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getTaskDAO();
-//    private final DealDao dealDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getDealDAO();
-//    private final StageDao stageDao = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getStageDAO();
-    private final CompanyDao companyDao = new CompanyDaoImpl();
-    private final UserDao userDao = new UserDaoImpl();
-    private final ContactDao contactDao = new ContactDaoImpl();
-    private final TaskDao taskDao = new TaskDaoImpl();
-    private final DealDao dealDao = new DealDaoImpl();
-    private final StageDao stageDao = new StageDaoImpl();
-    private final NoteDao noteDao = new NoteDaoImpl();
 
+    private final CompanyDao companyDao;
+    private final ContactDao contactDao;
+    private final TaskDao taskDao;
+    private final DealDao dealDao;
+    private final StageDao stageDao;
+    private final AddressDao addressDao;
+    private final UserDao userDao;
+    private final NoteDao noteDao;
+
+    @Autowired
+    public DealServiceImpl(CompanyDao companyDao,
+                           UserDao userDao,
+                           ContactDao contactDao,
+                           TaskDao taskDao,
+                           DealDao dealDao,
+                           StageDao stageDao,
+                           AddressDao addressDao,
+                           NoteDao noteDao) {
+        this.companyDao = companyDao;
+        this.userDao = userDao;
+        this.contactDao = contactDao;
+        this.taskDao = taskDao;
+        this.dealDao = dealDao;
+        this.stageDao = stageDao;
+        this.addressDao = addressDao;
+        this.noteDao = noteDao;
+    }
 
     public Deal create (Deal deal) throws DaoException {
         return (Deal) dealDao.create(deal);
@@ -36,7 +54,6 @@ public class DealServiceImpl implements DealService {
         return (Deal)dealDao.getById(id);
     }
 
-
     public void delete(int id) throws DaoException {
         dealDao.delete(id);
     }
@@ -49,15 +66,16 @@ public class DealServiceImpl implements DealService {
     public List<Deal> getAll() throws DaoException, ClassNotFoundException {
         return dealDao.getAll();
     }
+
     @Override
     public List<Stage> getAllStage() {
         return dealDao.getAllStage();
     }
+
     @Override
     public List<Contact> getContactsByDealName(String dealName) {
         return dealDao.getContactsByDealName(dealName);
     }
-
 
     @Override
     public List<Deal> getDealsForList() {

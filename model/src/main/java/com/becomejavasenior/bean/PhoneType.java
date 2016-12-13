@@ -5,12 +5,9 @@ import java.io.Serializable;
 
 public class PhoneType implements Serializable{
 
+
     private int id;
     private String title;
-
-    public PhoneType() {
-
-    }
 
     public int getId() {
         return id;
@@ -45,5 +42,13 @@ public class PhoneType implements Serializable{
         int result = id;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "PhoneType{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
     }
 }

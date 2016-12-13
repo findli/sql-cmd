@@ -333,11 +333,10 @@ header h1 {
     }
     .cd-timeline-content .cd-date {
         position: absolute;
-        width: 37%;
+        width: 39%;
         left: 116%;
-        top: 6px;
+        top: 11px;
         font-size: 16px;
-        font-size: 1rem;
     }
     .cd-timeline-block:nth-child(even) .cd-timeline-content {
         float: right;

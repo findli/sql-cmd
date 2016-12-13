@@ -4,22 +4,14 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.FileDao;
 import com.becomejavasenior.DAO.Imp.FileDaoImpl;
 import com.becomejavasenior.bean.File;
-import com.becomejavasenior.bean.User;
-import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDaoFactory;
 import com.becomejavasenior.service.FileService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class FileServiceImpl implements FileService {
 
-    private final FileDao file = new FileDaoImpl();
+    private final FileDao<File> fileDao = new FileDaoImpl();
 
     @Override
     public File create(File t) throws DaoException {
@@ -43,7 +35,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void delete(int id) throws DaoException {
-
+        fileDao.delete(id);
     }
 
     @Override
@@ -53,6 +45,6 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public List<File> getFilesForList(int id) {
-        return  file.getFilesForList(id);
+        return  fileDao.getFilesForList(id);
     }
 }

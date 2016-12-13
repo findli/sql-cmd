@@ -3,12 +3,15 @@ package com.becomejavasenior.DAO.Imp;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.PeriodInDaysTypeDao;
 import com.becomejavasenior.bean.PeriodInDaysType;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository("periodInDaysTypeDao")
 public class PeriodInDaysTypeDaoImpl extends AbstractDaoImpl<PeriodInDaysType> implements PeriodInDaysTypeDao<PeriodInDaysType> {
 
     @Override

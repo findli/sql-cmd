@@ -2,16 +2,15 @@ package com.becomejavasenior.DAO.Imp;
 
 
 import com.becomejavasenior.DAO.*;
-import com.becomejavasenior.bean.PeriodInDaysType;
-import com.becomejavasenior.bean.Task;
-import com.becomejavasenior.bean.TaskType;
-import com.becomejavasenior.bean.User;
+import com.becomejavasenior.bean.*;
 import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("taskDao")
 public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> {
 
     private static final String SELECT_TASKS_FOR_LIST = "SELECT crm_pallas.task.id,crm_pallas.task.title,\n" +
@@ -69,6 +68,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
     @Override
     public String getUpdateQuery(){
         return "UPDATE crm_pallas.task SET title = ?, task_type_id = ?, description = ?, deadline_date = ?, period_in_days_type_id = ?, period_in_minutes = ?, responsible_user_id = ?, is_finished = ?, is_deleted = ? WHERE id = ?";
+
     }
 
     @Override
@@ -100,6 +100,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             preparedStatement.setBoolean(8, task.isFinished());
             preparedStatement.setBoolean(9, task.isDeleted());
         } catch (SQLException e){
+
             throw new DaoException("Can't create statement for Task", e);
         }
     }
@@ -135,6 +136,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             task.setTaskType(taskType.getById(resultSet.getInt("task_type_id")));
             task.setDescription(resultSet.getString("description"));
             task.setDeadlineDate(resultSet.getDate("deadline_date"));
+            task.setDeadlineTime(resultSet.getTime("deadline_time"));
             task.setPeriodInDaysType(periodInDaysType.getById(resultSet.getInt("period_in_days_type_id")));
             task.setPeriodInMinutes(resultSet.getInt("period_in_minutes"));
             task.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));

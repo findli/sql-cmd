@@ -5,11 +5,13 @@ import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("noteDao")
 public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> {
 
     private static final String SELECT_NOTE_FOR_LIST= "SELECT crm_pallas.note.id as noteId,\n" +
@@ -62,13 +64,18 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
     }
 
     @Override
+    public List<Note> getByFilter(String query) {
+        return null;
+    }
+
+    @Override
     String getByIdQuery() {
         return DataBaseUtil.getQuery("SELECT * FROM crm_pallas.note WHERE id=?");
     }
 
     @Override
     String getCreateQuery() {
-        return DataBaseUtil.getQuery("INSERT INTO crm_pallas.note (note_text, created_by_user_id, creation_date_time, is_deleted, contact_id, company_id, deal_id) values (?,?,?,?,?,?,?)");
+        return DataBaseUtil.getQuery("INSERT INTO crm_pallas.note (note_text, created_by_user_id, created_date_time, is_deleted, contact_id, company_id, deal_id) values (?,?,?,?,?,?,?)");
 
     }
 
@@ -131,10 +138,6 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         return notes;
     }
 
-    @Override
-    public List<Note> getByFilter(String query) {
-        return null;
-    }
 
     @Override
     Note getEntity(ResultSet resultSet) throws DaoException {
@@ -148,7 +151,7 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
             note.setId(resultSet.getInt("id"));
             note.setCreatedUser(user.getById(resultSet.getInt("created_by_user_id")));
             note.setNoteText(resultSet.getString("note_text"));
-            note.setDateCreate(resultSet.getDate("creation_date_time"));
+            note.setDateCreate(resultSet.getDate("created_date_time"));
             note.setDeleted(resultSet.getBoolean("is_deleted"));
             note.setCompany(company.getById(resultSet.getInt("company_id")));
             note.setContact(contact.getById(resultSet.getInt("contact_id")));

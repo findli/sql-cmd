@@ -7,6 +7,7 @@ import com.becomejavasenior.bean.File;
 import com.becomejavasenior.bean.Note;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,8 +16,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("fileDao")
 public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao<File> {
-
 
     private static final String SELECT_FILE_FOR_LIST = "SELECT\n" +
             "  crm_pallas.file.id,\n" +
@@ -111,5 +112,4 @@ public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao<File> 
     public List<File> getByFilter(String query) {
         return null;
     }
-
 }

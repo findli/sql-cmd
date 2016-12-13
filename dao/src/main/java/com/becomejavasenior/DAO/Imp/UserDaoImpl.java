@@ -1,17 +1,17 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.LanguageDao;
 import com.becomejavasenior.DAO.UserDao;
-import com.becomejavasenior.bean.Language;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("userDao")
 public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> {
     @Override
     void createStatement(PreparedStatement preparedStatement, User user) throws DaoException {
@@ -71,7 +71,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     @Override
     User getEntity(ResultSet resultSet) throws DaoException {
         User user = new User();
-        LanguageDao<Language> language = new LanguageDaoImpl();
+     /*   LanguageDao<Language> language = new LanguageDaoImpl();*/
         try {
             user.setId(resultSet.getInt("id"));
             user.setlName(resultSet.getString("last_name"));
