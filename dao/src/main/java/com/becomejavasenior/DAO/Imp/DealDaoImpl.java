@@ -127,7 +127,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         List<Stage> stages = new ArrayList<>();
         Stage stage;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_ALL_STAGES)) {
 
@@ -152,7 +152,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         Deal deal;
         Company company;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_DEAL_BY_STAGE)) {
 
             statement.setString(1, stage);
@@ -186,7 +186,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         CompanyDao<Company> company = new CompanyDaoImpl();
         Contact contact;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_CONTACT)) {
 
             statement.setString(1, dealTitle);
