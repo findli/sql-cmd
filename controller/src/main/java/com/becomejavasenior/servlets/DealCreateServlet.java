@@ -122,6 +122,7 @@ public class DealCreateServlet extends HttpServlet{
             note.setCompany(company);
             Contact contact = new Contact();
             contact.setId(1); //TODO: change to contact under which the logged in
+
             note.setContact(contact);
 
         } else {
