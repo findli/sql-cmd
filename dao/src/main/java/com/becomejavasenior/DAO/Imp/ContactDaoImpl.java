@@ -141,5 +141,11 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         return contactList;
     }
 
+    @Override
+    public List<Contact> getContactsForList(int contactId){
+        List<Contact> contactList = new ArrayList<>();
+
+        return contactList;
+    }
     // TODO Write queries to filter
 }

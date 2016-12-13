@@ -49,6 +49,11 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
+    public List<Contact> getContactsForList(int contactId) {
+        return contactDao.getContactsForList(contactId);
+    }
+
+    @Override
     public void createNewContact(Contact contact, Tag tag, File file) throws DaoException, ClassNotFoundException {
 
 
