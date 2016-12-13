@@ -10,12 +10,22 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
-#.gitignore
 .idea/
 .git
 controller/controller.iml
 dao/dao.iml
 model/model.iml
 service/service.iml
-crm-system.iml
+
+crm-pallas.iml
+.DS_Store
+
+untitled/
+*.iml
+/src
+/out
+
+controller.iml
+/lib
+/web
 

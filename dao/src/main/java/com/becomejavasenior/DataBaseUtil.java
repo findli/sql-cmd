@@ -1,30 +1,73 @@
 package com.becomejavasenior;
 
-import java.io.FileInputStream;
+import com.becomejavasenior.exceptions.DatabaseException;
+import org.apache.commons.dbcp2.BasicDataSource;
+
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.Properties;
 
 public class DataBaseUtil {
+    private static BasicDataSource dataSource;
+    private static final String PROPERTIES_FILE = "database.properties";
 
-    public static Connection getConnection() {
-        Properties props = new Properties();
-        FileInputStream fileInputStream;
-        Connection con = null;
-        try {
-            fileInputStream = new FileInputStream("db.properties");
-            props.load(fileInputStream);
+    static {
+        if(Objects.equals(System.getenv("DEPLOYMENT_ENVIRONMENT"),"production")) {
+            URI dbUri = null;
+            try {
+                dbUri = new URI(System.getenv("DATABASE_URL"));
+            } catch (URISyntaxException e) {
+                throw new DatabaseException("DATABASE_URL can't be loaded.", e);
+            }
+            String username = dbUri.getUserInfo().split(":")[0];
+            String password = dbUri.getUserInfo().split(":")[1];
+            String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 
-            Class.forName(props.getProperty("org.postgresql.Driver"));
+            dataSource = new BasicDataSource();
+            dataSource.setUrl(dbUrl);
+            dataSource.setUsername(username);
+            dataSource.setPassword(password);
+        } else {
+            Properties properties = new Properties();
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream propertiesFile = classLoader.getResourceAsStream(PROPERTIES_FILE);
 
-            con = DriverManager.getConnection(props.getProperty("url"),
-                    props.getProperty("username"),
-                    props.getProperty("password"));
-        } catch (IOException | ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            if (propertiesFile == null) {
+                throw new DatabaseException("Properties file '" + PROPERTIES_FILE + "' is missing in classpath.");
+            }
+
+            try {
+                properties.load(propertiesFile);
+            } catch (IOException e) {
+                throw new DatabaseException("Properties file '" + PROPERTIES_FILE + "' can't be loaded.", e);
+            }
+
+            dataSource = new BasicDataSource();
+            dataSource.setDriverClassName(properties.getProperty("db.driver"));
+            dataSource.setUrl(properties.getProperty("db.url"));
+            dataSource.setUsername(properties.getProperty("db.user"));
+            dataSource.setPassword(properties.getProperty("db.password"));
+            dataSource.setInitialSize(Integer.parseInt(properties.getProperty("db.initsize")));
+            dataSource.setMaxTotal(Integer.parseInt(properties.getProperty("db.maxtotal")));
+            dataSource.setMaxWaitMillis(Long.parseLong(properties.getProperty("db.maxwait")));
+            dataSource.setMaxIdle(Integer.parseInt(properties.getProperty("db.maxidle")));
+            dataSource.setDefaultTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+            dataSource.setDefaultAutoCommit(true);
         }
-        return con;
+    }
+
+    public static Connection getConnection() throws SQLException {
+//        String dbUrl = System.getenv("JDBC_DATABASE_URL");
+//        return DriverManager.getConnection(dbUrl);
+        return dataSource.getConnection();
+    }
+
+    public static String getQuery(String name) {
+        return name;
     }
 }

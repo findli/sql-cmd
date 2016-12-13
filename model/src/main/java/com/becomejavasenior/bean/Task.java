@@ -1,14 +1,19 @@
 package com.becomejavasenior.bean;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 
 public class Task implements Serializable {
+
+    private static final long serialVersionUID = 6293431459384559680L;
+
     private int id;
     private String title;
     private TaskType taskType;
     private String description;
     private Date deadlineDate;
+    private Time deadlineTime;
     private PeriodInDaysType periodInDaysType;
     private int periodInMinutes;
     private User responsibleUser;
@@ -56,6 +61,14 @@ public class Task implements Serializable {
 
     public void setDeadlineDate(Date deadlineDate) {
         this.deadlineDate = deadlineDate;
+    }
+
+    public void setDeadlineTime(Time deadlineTime) {
+        this.deadlineTime = deadlineTime;
+    }
+
+    public Time getDeadlineTime() {
+        return deadlineTime;
     }
 
     public PeriodInDaysType getPeriodInDaysType() {
@@ -150,3 +163,4 @@ public class Task implements Serializable {
                 '}';
     }
 }
+

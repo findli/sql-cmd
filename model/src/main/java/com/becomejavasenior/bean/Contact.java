@@ -15,9 +15,17 @@ public class Contact implements Serializable {
     private String email;
     private User responsibleUser;
     private boolean isDeleted;
-
+    private List<Task> tasks;
+    private List<EventHistory> events;
+    private List<Phone> phoneNumbers;
+    private List<Note> contactNotes;
+    private List<Phone> phones;
 
     public Contact() {
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
     public int getId() {
@@ -92,6 +100,49 @@ public class Contact implements Serializable {
         this.isDeleted = deleted;
     }
 
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public List<EventHistory> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<EventHistory> events) {
+        this.events = events;
+    }
+
+    public List<Phone> getPhoneNumbers() {
+        return phoneNumbers;
+    }
+
+    public void setPhoneNumbers(List<Phone> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public void setContactNotes(List<Note> contactNotes) {
+        this.contactNotes = contactNotes;
+    }
+
+    public List<Note> getContactNotes() {
+        return contactNotes;
+    }
+
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
+    }
+
+    public List<Phone> getPhones() {
+        return phones;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -105,6 +156,9 @@ public class Contact implements Serializable {
         if (lName != null ? !lName.equals(contact.lName) : contact.lName != null) return false;
         if (position != null ? !position.equals(contact.position) : contact.position != null) return false;
         if (skype != null ? !skype.equals(contact.skype) : contact.skype != null) return false;
+        if (company != null ? !company.equals(contact.company) : contact.company != null) return false;
+        if (responsibleUser != null ? !responsibleUser.equals(contact.responsibleUser) : contact.responsibleUser != null) return false;
+        if (isDeleted != contact.isDeleted) return false;
         return email != null ? email.equals(contact.email) : contact.email == null;
 
     }
@@ -117,6 +171,8 @@ public class Contact implements Serializable {
         result = 31 * result + (position != null ? position.hashCode() : 0);
         result = 31 * result + (skype != null ? skype.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (company != null ? company.hashCode() : 0);
+        result = 31 * result + (responsibleUser != null ? responsibleUser.hashCode() : 0);
         return result;
     }
 
@@ -131,6 +187,7 @@ public class Contact implements Serializable {
                 ", skype='" + skype + '\'' +
                 ", email='" + email + '\'' +
                 ", company=" + company.getTitle() +
+                ", company=" + isDeleted +
                 '}';
     }
 }
