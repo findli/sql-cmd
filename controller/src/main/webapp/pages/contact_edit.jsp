@@ -42,7 +42,7 @@
                 <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
                 <li><a href="/contact" target="_self">Contacts</a></li>
-                <li><a href="#" target="_self">Tasks</a></li>
+                <li><a href="/taskList" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
                 <li><a href="#" target="_self">Settings</a></li>
             </ul>
@@ -205,35 +205,21 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Name" id="editDealCompanyName" name="editDealCompanyName">
+                                <input class="form-control" type="text" placeholder="Name" id="editDealContactName" name="editDealContactName">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Phone </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag" id="editDealCompanyPhone" name="editDealCompanyPhone">
+                                <input class="form-control" type="text" placeholder="Tag" id="editDealContactPhone" name="editDealCompanyPhone">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">email </label>
+                            <label class="col-sm-3 control-label">Budget </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag" id="editDealCompanyEmail" name="editDealCompanyEmail">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Web </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag" id="editDealCompanyWeb" name="editDealCompanyWeb">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Address </label>
-                            <div class="col-sm-9">
-                                <textarea class="form-control" placeholder="Address" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>
+                                <input class="form-control" type="text" placeholder="Tag" id="editContactDealBudget" name="editContactDealBudget">
                             </div>
                         </div>
 

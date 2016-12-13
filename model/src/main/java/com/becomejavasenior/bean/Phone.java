@@ -6,6 +6,7 @@ import java.io.Serializable;
 public class Phone implements Serializable {
 
     private int id;
+    private Contact contact;
     private PhoneType phoneType;
     private String phoneNumber;
 
@@ -18,6 +19,14 @@ public class Phone implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 
     public PhoneType getPhoneType() {

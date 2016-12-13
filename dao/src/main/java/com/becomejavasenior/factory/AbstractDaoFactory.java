@@ -2,7 +2,7 @@ package com.becomejavasenior.factory;
 
 import com.becomejavasenior.DAO.*;
 
-public abstract class AbstractDAOFactory {
+public abstract class AbstractDaoFactory {
 
     public static final int POSTGRESQL = 1;
 
@@ -17,10 +17,10 @@ public abstract class AbstractDAOFactory {
     public abstract TaskTypeDao getTaskTypeDAO();
 
 
-    public static AbstractDAOFactory getDAOFactory(int factory) {
+    public static AbstractDaoFactory getDAOFactory(int factory) {
         switch (factory) {
             case POSTGRESQL:
-                return new PostgresDAOFactory();
+                return new PostgresDaoFactory();
             default:
                 return null;
         }

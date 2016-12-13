@@ -7,7 +7,6 @@ import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.ContactService;
 import org.apache.log4j.Logger;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 public class ContactServiceImpl implements ContactService {
@@ -47,6 +46,11 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public void delete(int id) throws DaoException {
         contactDAO.delete(id);
+    }
+
+    @Override
+    public List<Contact> getContactsForList(int contactId) {
+        return contactDao.getContactsForList(contactId);
     }
 
     @Override

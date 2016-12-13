@@ -1,14 +1,10 @@
 package com.becomejavasenior.DAO.Imp;
 
-import com.becomejavasenior.bean.Contact;
-
-import com.becomejavasenior.DAO.CompanyDao;
-import com.becomejavasenior.DAO.ContactDao;
-import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.UserDao;
+import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.Contact;
+import com.becomejavasenior.bean.Phone;
 import com.becomejavasenior.bean.User;
 
 import java.sql.*;
@@ -29,7 +25,7 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             preparedStatement.setInt(6, contact.getCompany().getId());
             preparedStatement.setInt(7, contact.getResponsibleUser().getId());
 //            preparedStatement.setDate(8, new Date(contact.getCreated().getTime()) );
-            preparedStatement.setBoolean(8, contact.is_deleted());
+            preparedStatement.setBoolean(8, contact.isDeleted());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -47,9 +43,9 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             preparedStatement.setInt(6, contact.getCompany().getId());
             preparedStatement.setInt(7, contact.getResponsibleUser().getId());
 //            preparedStatement.setDate(8, new Date(contact.getUpdated().getTime()));
-            preparedStatement.setBoolean(8, contact.is_deleted());
+            preparedStatement.setBoolean(8, contact.isDeleted());
             preparedStatement.setInt(9, contact.getId());
-            } catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -66,6 +62,7 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         User user;
         CompanyDao<Company> companyDao = new CompanyDaoImpl();
         UserDao<User> userDAO = new UserDaoImpl();
+        PhoneDao<Phone> phoneDao  = new PhoneDaoImpl();
 
         List<String> taskList = new ArrayList<String>();
         List<String> eventHistoryList = new ArrayList<String>();
@@ -81,6 +78,7 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             contact.setDeleted(resultSet.getBoolean("is_deleted"));
             contact.setCompany(companyDao.getById(resultSet.getInt("company_id")));
             contact.setResponsibleUser(userDAO.getById(resultSet.getInt("responsible_user_id")));
+      //      contact.setPhone(phoneDao.getById(resultSet.getInt("phone_id")));
 
 
 //            taskList.add(resultSet.getString("tasks"));
@@ -143,5 +141,11 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         return contactList;
     }
 
+    @Override
+    public List<Contact> getContactsForList(int contactId){
+        List<Contact> contactList = new ArrayList<>();
+
+        return contactList;
+    }
     // TODO Write queries to filter
 }

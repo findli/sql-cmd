@@ -1,6 +1,7 @@
 package com.becomejavasenior.bean;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class PeriodInDaysType implements Serializable {
@@ -8,6 +9,7 @@ public class PeriodInDaysType implements Serializable {
     private int id;
     private String title;
     private int daysInPeriod;
+    private List<Task> tasks;
 
     public PeriodInDaysType() {
     }
@@ -34,6 +36,14 @@ public class PeriodInDaysType implements Serializable {
 
     public void setDaysInPeriod(int daysInPeriod) {
         this.daysInPeriod = daysInPeriod;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
     }
 
     @Override
