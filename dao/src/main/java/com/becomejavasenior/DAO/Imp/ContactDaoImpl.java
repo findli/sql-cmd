@@ -4,14 +4,66 @@ import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.Contact;
-import com.becomejavasenior.bean.Phone;
+import com.becomejavasenior.bean.PhoneType;
 import com.becomejavasenior.bean.User;
+import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("contactDao")
 public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactDao<Contact> {
+
+    private static final String SELECT_CONTACT_FOR_LIST = "SELECT crm_pallas.contact.id,\n" +
+            "  crm_pallas.contact.first_name as fName,\n" +
+            "  crm_pallas.contact.last_name as lName,\n" +
+            "  crm_pallas.contact.post,\n" +
+            "  crm_pallas.contact.email,\n" +
+            "  crm_pallas.contact.skype,\n" +
+            "  crm_pallas.contact_phone.phone_number as phoneNumber,\n" +
+            "  crm_pallas.phone_type.title,\n" +
+            "  crm_pallas.company.id as companyId\n" +
+            "FROM crm_pallas.contact\n" +
+            "  JOIN crm_pallas.company ON crm_pallas.contact.company_id = crm_pallas.company.id\n" +
+            "  JOIN crm_pallas.contact_phone ON crm_pallas.contact.id = crm_pallas.contact_phone.contact_id\n" +
+            "  JOIN crm_pallas.phone_type ON crm_pallas.contact_phone.phone_type_id = crm_pallas.phone_type.id\n" +
+            "where company_id = ? AND contact.is_deleted = FALSE";
+
+    @Override
+    public List<Contact> getContactsForList(int id) {
+        List<Contact> contacts = new ArrayList<>();
+        Contact contact;
+        Company company;
+        List<String> phoneList = new ArrayList<>();
+        PhoneType phoneType;
+        User user;
+        try (Connection connection = PostgresDaoFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_CONTACT_FOR_LIST)) {
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                company = new Company();
+                contact = new Contact();
+                user = new User();
+                contact.setId(resultSet.getInt("id"));
+                contact.setfName(resultSet.getString("fName"));
+                contact.setlName(resultSet.getString("lName"));
+                company.setId(resultSet.getInt("companyId"));
+                contact.setCompany(company);
+                contact.setPosition(resultSet.getString("post"));
+                contact.setEmail(resultSet.getString("email"));
+                contact.setSkype(resultSet.getString("skype"));
+                contacts.add(contact);
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex);
+        }
+
+        return contacts;
+    }
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Contact contact) {
@@ -62,7 +114,6 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         User user;
         CompanyDao<Company> companyDao = new CompanyDaoImpl();
         UserDao<User> userDAO = new UserDaoImpl();
-        PhoneDao<Phone> phoneDao  = new PhoneDaoImpl();
 
         List<String> taskList = new ArrayList<String>();
         List<String> eventHistoryList = new ArrayList<String>();
@@ -78,7 +129,6 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             contact.setDeleted(resultSet.getBoolean("is_deleted"));
             contact.setCompany(companyDao.getById(resultSet.getInt("company_id")));
             contact.setResponsibleUser(userDAO.getById(resultSet.getInt("responsible_user_id")));
-      //      contact.setPhone(phoneDao.getById(resultSet.getInt("phone_id")));
 
 
 //            taskList.add(resultSet.getString("tasks"));
@@ -140,12 +190,4 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
 
         return contactList;
     }
-
-    @Override
-    public List<Contact> getContactsForList(int contactId){
-        List<Contact> contactList = new ArrayList<>();
-
-        return contactList;
-    }
-    // TODO Write queries to filter
 }

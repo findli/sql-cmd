@@ -5,12 +5,16 @@ import com.becomejavasenior.DAO.DatabaseException;
 import com.becomejavasenior.DAO.TagDao;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Tag;
-import com.becomejavasenior.factory.PostgresDAOFactory;
+
+import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("tagDao")
 public class TagDaoImpl extends AbstractDaoImpl<Tag> implements TagDao<Tag> {
 
     @Override
@@ -61,7 +65,7 @@ public class TagDaoImpl extends AbstractDaoImpl<Tag> implements TagDao<Tag> {
         List<Tag> tagList = new ArrayList<>();
         Tag tag;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 

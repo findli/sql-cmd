@@ -71,6 +71,16 @@
                                 <input class="form-control" type="text" placeholder="lName" name="lName" id="lName">
                             </div>
                         </div>
+<<<<<<< HEAD
+=======
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Position </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="position" name="position" id="position">
+                            </div>
+                        </div>
+>>>>>>> master
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tag </label>
@@ -237,8 +247,8 @@
                                 <div class="input-group date" id="datetimepicker">
                                     <input type="text" name="DeadlineDate" class="form-control" />
                                     <span class="input-group-addon">
-                                            <span class="glyphicon-calendar glyphicon"></span>
-                                        </span>
+                                                <span class="glyphicon-calendar glyphicon"></span>
+                                            </span>
                                 </div>
                             </div>
                         </div>
@@ -327,7 +337,7 @@
 </body>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>

@@ -6,13 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../style/reset.css">
-    <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="../style/reset.css">
+    <link rel="stylesheet" href="../style/style.css">
 
-    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
     <title>Contact</title>
 </head>
 <body>
@@ -169,8 +167,8 @@
                                 </thead>
                                 <tbody id="t_contacts">
                                 <c:forEach var="contact" items="${contactList}">
-                                    <%--<tr class="rowlink" onclick="window.location.href='/dealEdit?idDeal=${deal.getId()}'; return false">--%>
-                                    <tr data-href="/contactEdit?idContact=${contact.getId()}">
+                                    <tr class="rowlink" onclick="window.location.href='/contactEdit?idDeal=${contact.getId()}'; return false">
+                                    <%--<tr data-href="/contactEdit?idContact=${contact.getId()}">--%>
                                         <td class="item"><c:out value="${contact.getlName()}"/></td>
                                         <td><c:out value="${contact.getCompany().getTitle()}"/></td>
                                         <td><c:out value="${contact.getlName()}"/></td>
@@ -190,9 +188,12 @@
 
 </body>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>--%>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
+</body>
 <script src="../js/bootstrap.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script> -->
+<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>--%>
+<script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
 </html>

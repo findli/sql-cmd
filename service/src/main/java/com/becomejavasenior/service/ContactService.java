@@ -20,7 +20,7 @@ public interface ContactService {
 
     void delete(int id) throws DaoException;
 
-    List<Contact> getContactsForList(int id);
+    List getContactsForList(int id);
 
     public void createNewContact(Contact contact, Tag tag, File file) throws DaoException, ClassNotFoundException;;
 

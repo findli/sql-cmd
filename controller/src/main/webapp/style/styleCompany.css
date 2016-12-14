@@ -144,10 +144,15 @@ Forms New company
     min-height: 250px
 }
 
-.forms--nCompany input {
+.forms--nCompany input, .forms--nCompany textarea {
     padding-left: 4px;
     float: right;
     font-size: 15px;
+}
+
+.forms--nCompany textarea{
+    height: 55px;
+    width: 200px;
 }
 
 .forms--nCompany p {
@@ -175,6 +180,7 @@ Forms Users
 
 .forms--users {
     width: 385px;
+    height: 315px;
     float: left;
     margin-left: 75px;
     margin-top: 13px;
@@ -455,6 +461,10 @@ tr:nth-child(2n) {
 Forms task
 ========================================================================== */
 
+/*.cd-timeline-block{
+    display: none;
+}*/
+
 .form--action {
     width: 440px;
     margin-left: 75px;
@@ -481,11 +491,11 @@ Forms task
 
 .action__task {
     border: 1px solid #000;
-    margin-top: 10px;
+ /*   margin-top: 10px;*/
     background: #fff0d8;
 }
 
-.action__task p {
+.action__task p, .action__task a {
     padding: 3px 0 3px 5px;
     font-size: 12px;
 }
