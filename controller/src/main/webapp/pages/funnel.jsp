@@ -178,7 +178,7 @@
                                                 <dl>
                                                     <dt><b style="color: #2b669a"><c:out value="${deal.getTitle()}"/></b></dt>
                                                     <dd><b style="color: #a94442"><c:out value="${deal.getBudget()}"/> $</b></dd>
-                                                    <%--<dd><c:out value="${deal.getCompany().getTitle()}"/></dd>--%>
+                                                    <dd><c:out value="${deal.getCompany().getTitle()}"/></dd>
                                                     <c:forEach var="contact" items="${dealService.getContactsByDealName(deal.title)}">
                                                         <dd><b style="color: #2b542c"><c:out value="${contact.getlName()}"/></b></dd>
                                                     </c:forEach>

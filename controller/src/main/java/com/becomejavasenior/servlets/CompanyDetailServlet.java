@@ -47,6 +47,10 @@ public class CompanyDetailServlet extends HttpServlet {
     @Qualifier("noteService")
     NoteService noteService;
 
+    @Autowired
+    @Qualifier("addressService")
+    AddressService addressService;
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -67,13 +71,17 @@ public class CompanyDetailServlet extends HttpServlet {
         List<Task> taskList = taskService.getTasksForList(idCompany);
         List<Note> noteList = noteService.getNotesForList(idCompany);
         List<File> fileList = fileService.getFilesForList(idCompany);
-        Company company = null;
+
+        Company company = new Company();
+        Address address = new Address();
         try {
             company = companyService.getById(idCompany);
+            address = addressService.getById(company.getAddress().getId());
         } catch (DaoException e) {
             e.printStackTrace();
         }
 
+        session.setAttribute("address", address);
         session.setAttribute("contactList", contactList);
         session.setAttribute("dealList", dealList);
         session.setAttribute("taskList", taskList);
