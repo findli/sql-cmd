@@ -5,6 +5,9 @@ import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.service.CompanyService;
 import com.becomejavasenior.service.impl.CompanyServiceImpl;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +19,12 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name="companyListServlet", urlPatterns = "/company")
+@Controller("companyListServlet")
 public class CompanyListServlet extends HttpServlet {
+
+    @Autowired
+    @Qualifier
+    CompanyService companyService;
 
     public static Logger log = Logger.getLogger(CompanyListServlet.class);
 
@@ -25,7 +33,7 @@ public class CompanyListServlet extends HttpServlet {
 
         log.trace("run doGet() in CompanyListServlet");
         HttpSession session = req.getSession();
-        CompanyService companyService = new CompanyServiceImpl();
+/*        CompanyService companyService = new CompanyServiceImpl();*/
 
         List<Company> companyList = null;
 
