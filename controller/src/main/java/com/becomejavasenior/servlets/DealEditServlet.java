@@ -42,6 +42,14 @@ public class DealEditServlet extends HttpServlet {
     @Qualifier("addressService")
     AddressService addressService;
 
+    @Autowired
+    @Qualifier("stageService")
+    StageService stageService;
+
+    @Autowired
+    @Qualifier("userService")
+    UserService userService;
+
     String str = null;
     Deal deal;
     Company company;
@@ -57,9 +65,6 @@ public class DealEditServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-
-        StageService stageService = new StageServiceImpl();
-        UserService userService = new UserServiceImpl();
 
         Deal deal = new Deal();
         Company company = new Company();
@@ -283,7 +288,6 @@ public class DealEditServlet extends HttpServlet {
 
     public String getStageFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
 
-        StageService stageService = new StageServiceImpl();
         String dealNewStage = request.getParameter("newStage");
         Stage stage = stageService.getByName(dealNewStage);
         deal.setStage(stage);
@@ -293,7 +297,6 @@ public class DealEditServlet extends HttpServlet {
 
     public String getUserFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
 
-        UserService userService = new UserServiceImpl();
         String dealNewUser = request.getParameter("newUser");
         User user = userService.getByName(dealNewUser);
         deal.setResponsibleUser(user);

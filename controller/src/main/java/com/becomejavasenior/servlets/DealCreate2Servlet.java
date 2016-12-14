@@ -44,7 +44,9 @@ public class DealCreate2Servlet extends HttpServlet {
     @Qualifier("companyService")
     CompanyService companyService;
 
-    UserService userService = new UserServiceImpl();
+    @Autowired
+    @Qualifier("userService")
+    UserService userService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
