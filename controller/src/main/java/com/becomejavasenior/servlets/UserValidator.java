@@ -28,8 +28,8 @@ public class UserValidator extends HttpServlet {
     private static Map<String, User> getUsers() {
         Map<String, User> users = new HashMap<String, User>();
 
-        User userOne = new User("one", "one");
-        User userTwo = new User("two", "TWO");
+        User userOne = new User("user1", "password1");
+        User userTwo = new User("user2", "password2");
 
         users.put(userOne.getName(), userOne);
         users.put(userTwo.getName(), userTwo);
