@@ -118,10 +118,11 @@ public class DealCreateServlet extends HttpServlet{
             note.setCreatedUser(creator);
             note.setDeal(deal);
             Company company = new Company();
-            company.setId(1);
+            company.setId(1); //TODO: change to company under which the logged in
             note.setCompany(company);
             Contact contact = new Contact();
-            contact.setId(1);
+            contact.setId(1); //TODO: change to contact under which the logged in
+
             note.setContact(contact);
 
         } else {

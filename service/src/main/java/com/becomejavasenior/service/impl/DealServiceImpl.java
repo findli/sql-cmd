@@ -110,9 +110,6 @@ public class DealServiceImpl implements DealService {
         if(!note.getNoteText().equals("")) {
             deal = (Deal) dealDao.getByName(note.getDeal().getTitle());
             note.setDeal(deal);
-
-            System.out.println(note.getDeal().getTitle() + " " + note.getDeal().getId());
-
             noteDao.create(note);
         }
 
