@@ -178,7 +178,7 @@
                                                 <dl>
                                                     <dt><b style="color: #2b669a"><c:out value="${deal.getTitle()}"/></b></dt>
                                                     <dd><b style="color: #a94442"><c:out value="${deal.getBudget()}"/> $</b></dd>
-                                                    <dd><c:out value="${deal.getCompany().getTitle()}"/></dd>
+                                                    <%--<dd><c:out value="${deal.getCompany().getTitle()}"/></dd>--%>
                                                     <c:forEach var="contact" items="${dealService.getContactsByDealName(deal.title)}">
                                                         <dd><b style="color: #2b542c"><c:out value="${contact.getlName()}"/></b></dd>
                                                     </c:forEach>
@@ -216,10 +216,6 @@
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
-<<<<<<< HEAD
-<%--<!-- <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script> -->--%>
-=======
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
->>>>>>> 017e3047a6f8419588546e7b83d18b7ac34ce64a
 <script type="text/javascript" src="../js/script.js"></script>
 </html>

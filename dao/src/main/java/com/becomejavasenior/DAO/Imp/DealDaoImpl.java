@@ -125,20 +125,35 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
     @Override
     Deal getEntity(ResultSet resultSet) throws DaoException {
         Deal deal = new Deal();
-        CompanyDao<Company> company = new CompanyDaoImpl(dataSource);
-        StageDao<Stage> stage = new StageDaoImpl(dataSource);
-        UserDao<User> user = new UserDaoImpl(dataSource);
-        ContactDao<Contact> contact = new ContactDaoImpl(dataSource);
+        Company company = new Company();
+        Stage stage = new Stage();
+        User user = new User();
+        Contact contact = new Contact();
+        Address address = new Address();
 
         try {
             deal.setId(resultSet.getInt("id"));
-            deal.setCompany(company.getById(resultSet.getInt("company_id")));
-            deal.setStage(stage.getById(resultSet.getInt("stage_id")));
-            deal.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
+
+            address.setId(resultSet.getInt("addressId"));
+            company.setAddress(address);
+            company.setId(resultSet.getInt("company_id"));
+            deal.setCompany(company);
+
+            stage.setId(resultSet.getInt("stage_id"));
+            stage.setTitle(resultSet.getString("stage"));
+            deal.setStage(stage);
+
+            user.setId(resultSet.getInt("responsible_user_id"));
+            user.setlName(resultSet.getString("users_last_name"));
+            user.setfName(resultSet.getString("users_first_name"));
+            deal.setResponsibleUser(user);
+
             deal.setTitle(resultSet.getString("title"));
             deal.setBudget(resultSet.getInt("budget"));
             deal.setDeleted(resultSet.getBoolean("is_deleted"));
-            deal.setPrimaryContact(contact.getById(resultSet.getInt("primary_contact_id")));
+
+            contact.setId(resultSet.getInt("primary_contact_id"));
+            deal.setPrimaryContact(contact);
         } catch (SQLException e) {
             throw new DaoException("Can't get entity from Deal", e);
         }
@@ -245,12 +260,21 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
 
     @Override
     String getAllQuery() {
-        return DataBaseUtil.getQuery("SELECT * FROM crm_pallas.deal WHERE is_deleted = FALSE");
+        return DataBaseUtil.getQuery("SELECT d.id, d.title, d.company_id, d.budget, d.stage_id, d.primary_contact_id, d.responsible_user_id, d.is_deleted, d.created, d.updated, u.first_name, u.last_name, s.title, c1.title AS company_title, c1.address_id\n" +
+                " FROM crm_pallas.deal d \n" +
+                "\tINNER JOIN crm_pallas.\"user\" u ON ( d.responsible_user_id = u.id  )  \n" +
+                "\tINNER JOIN crm_pallas.stage s ON ( d.stage_id = s.id  )  \n" +
+                "\tINNER JOIN crm_pallas.company c1 ON ( d.company_id = c1.id  ) WHERE d.is_deleted = FALSE");
     }
 
     @Override
     String getByIdQuery() {
-        return DataBaseUtil.getQuery("SELECT * FROM crm_pallas.deal WHERE id=?");
+        return DataBaseUtil.getQuery("SELECT d.id, d.title, d.company_id, d.budget, d.stage_id, d.responsible_user_id, d.is_deleted, d.created, d.updated, d.primary_contact_id, " +
+                " u.first_name AS users_first_name, u.last_name AS users_last_name, s.title AS stage, c1.address_id AS addressId " +
+                " FROM crm_pallas.deal d " +
+                " INNER JOIN crm_pallas.\"user\" u ON ( d.responsible_user_id = u.id  ) " +
+                " INNER JOIN crm_pallas.stage s ON ( d.stage_id = s.id  ) " +
+                " INNER JOIN crm_pallas.company c1 ON ( d.company_id = c1.id  )  WHERE d.id=?");
     }
 
     @Override
@@ -309,21 +333,26 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 contact = new Contact();
 
                 deal.setId(resultSet.getInt("id"));
-                responsibleUser.setId(resultSet.getInt("responsible_user_id"));
-                deal.setResponsibleUser(responsibleUser);
-                company.setId(resultSet.getInt("company_id"));
-                deal.setCompany(company);
                 deal.setTitle(resultSet.getString("title"));
                 deal.setBudget(resultSet.getInt("budget"));
                 deal.setDeleted(false);
+
+                responsibleUser.setId(resultSet.getInt("responsible_user_id"));
+                responsibleUser.setlName(resultSet.getString("last_name"));
+                responsibleUser.setfName(resultSet.getString("first_name"));
+                deal.setResponsibleUser(responsibleUser);
+
+                company.setId(resultSet.getInt("company_id"));
+                company.setTitle(resultSet.getString("company_title"));
+                deal.setCompany(company);
+
                 stage.setId(resultSet.getInt("stage_id"));
                 deal.setStage(stage);
-                deal.setStage(stage);
-                deal.setCreateDate(resultSet.getDate("created"));
-                contact.setId(resultSet.getInt("primary_contact_id"));
 
-             /*   deal.setPrimaryContact(contact);*/
-//                deal.setCreateDate(resultSet.getDate("date_create"));
+                deal.setCreateDate(resultSet.getDate("created"));
+
+                contact.setId(resultSet.getInt("primary_contact_id"));
+                deal.setPrimaryContact(contact);
 
                 deals.add(deal);
             }
