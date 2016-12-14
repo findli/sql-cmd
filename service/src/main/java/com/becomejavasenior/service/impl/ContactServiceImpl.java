@@ -1,29 +1,34 @@
 package com.becomejavasenior.service.impl;
 
-
 import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DAO.Imp.*;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.ContactService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service(value = "contactService")
 public class ContactServiceImpl implements ContactService {
 
     public static Logger log = Logger.getLogger(CompanyServiceImpl.class);
 
-    private final CompanyDao companyDao = new CompanyDaoImpl();
-    private final UserDao userDao = new UserDaoImpl();
-    private final TaskDao taskDao = new TaskDaoImpl();
-    private final DealDao dealDao = new DealDaoImpl();
-    private final StageDao stageDao = new StageDaoImpl();
-    private final TagDao tagDao = new TagDaoImpl();//TODO: create
-    private ContactDao<Contact> contactDao = new ContactDaoImpl();
+    private final UserDao userDao;
+    private final ContactDao contactDao;
+
+    @Autowired
+    public ContactServiceImpl(UserDao userDao,
+                              ContactDao contactDao) {
+        this.userDao = userDao;
+        this.contactDao = contactDao;
+    }
 
     @Override
     public Contact create(Contact contact) throws DaoException {
-        return contactDao.create(contact);
+        return (Contact) contactDao.create(contact);
+
     }
 
     @Override
@@ -38,7 +43,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contact getById(int id) throws DaoException {
-        return contactDao.getById(id);
+        return (Contact) contactDao.getById(id);
     }
 
     @Override
@@ -53,9 +58,6 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public void createNewContact(Contact contact, Tag tag, File file) throws DaoException, ClassNotFoundException {
-
-
-
         User user = responsibleUserWithId(contact.getResponsibleUser());
         contact.setResponsibleUser(user);
 

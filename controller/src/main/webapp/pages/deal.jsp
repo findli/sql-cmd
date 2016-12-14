@@ -43,7 +43,7 @@
                 <li><a href="/contact" target="_self">Contacts</a></li>
                 <li><a href="/taskList" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
-                <li><a href="#" target="_self">Settings</a></li>
+                <li><a href="/settings" target="_self">Settings</a></li>
             </ul>
         </div>
         <div class="wrapper__aboutCompany">
@@ -213,6 +213,7 @@
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="../js/task.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
 
 </html>

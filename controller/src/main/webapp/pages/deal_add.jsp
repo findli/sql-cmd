@@ -43,7 +43,7 @@
                 <li><a href="/contact" target="_self">Contacts</a></li>
                 <li><a href="/taskList" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
-                <li><a href="#" target="_self">Settings</a></li>
+                <li><a href="/settings" target="_self">Settings</a></li>
             </ul>
         </div>
 
@@ -262,7 +262,7 @@
                         <%--<div class="form-group">--%>
                         <%--<label class="col-sm-3 control-label">Address </label>--%>
                         <%--<div class="col-sm-9">--%>
-                        <input onclick="location.href='#modalAddAddress'" class="formAddBut" type="button"
+                        <input onclick="location.href='#modalAddCompany'" class="formAddBut" type="button"
                                value="Add company">
                         <%--</div>--%>
                         <%--</div>--%>
@@ -336,7 +336,7 @@
                 </div>
             </form>
             <!--Modal window contact-->
-            <div id="modalAddAddress" class="modalDialog">
+            <div id="modalAddCompany" class="modalDialog">
                 <form class="form-horizontal" style="height: 400px; position: relative; margin: 10% auto; background: #fff; width: 460px">
                     <div style="height: 300px;">
                         <header>

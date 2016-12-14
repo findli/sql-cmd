@@ -6,7 +6,7 @@ import com.becomejavasenior.bean.Note;
 
 import java.util.List;
 
-public interface FileDao extends AbstractDao<File>{
+public interface FileDao<File> extends AbstractDao<File>{
 
     List<File> getFilesForList(int id);
 

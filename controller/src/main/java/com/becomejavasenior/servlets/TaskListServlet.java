@@ -6,7 +6,10 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Task;
 import com.becomejavasenior.service.impl.TaskServiceImpl;
 import com.becomejavasenior.service.TaskService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +21,14 @@ import java.util.Enumeration;
 import java.util.List;
 
 @WebServlet(name = "TaskListServlet", urlPatterns = "/taskList")
+@Controller("taskListServlet")
 public class TaskListServlet extends HttpServlet{
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         HttpSession session = request.getSession();

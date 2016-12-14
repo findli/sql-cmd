@@ -6,11 +6,15 @@ import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("dealDao")
 public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> {
 
     private static final String SELECT_DEALS_FOR_LIST_BY_ID = "SELECT\n" +
@@ -97,7 +101,15 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
 
     @Override
     public Deal getByName(String str) throws DaoException, ClassNotFoundException {
-        return null;
+        Deal deal = new Deal();
+        List<Deal> deals = getAll();
+        for (int i = 0; i < deals.size(); ++i) {
+            if(deals.get(i).getTitle().equals(str)) {
+                deal = deals.get(i);
+                break;
+            }
+        }
+        return deal;
     }
 
     @Override
@@ -123,6 +135,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         return deal;
     }
 
+    @Transactional
     @Override
     public List<Stage> getAllStage() {
         List<Stage> stages = new ArrayList<>();
@@ -302,7 +315,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 contact.setId(resultSet.getInt("primary_contact_id"));
 
              /*   deal.setPrimaryContact(contact);*/
-                deal.setCreateDate(resultSet.getDate("date_create"));
+//                deal.setCreateDate(resultSet.getDate("date_create"));
 
                 deals.add(deal);
             }
@@ -386,7 +399,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 company.setId(resultSet.getInt("companyId"));
                 company.setTitle(resultSet.getString("company"));
                 contact.setCompany(company);
-       /*         deal.setPrimaryContact(contact);*/
+                deal.setPrimaryContact(contact);
                 deal.setCompany(company);
 
                 deals.add(deal);

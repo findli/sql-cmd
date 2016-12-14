@@ -1,13 +1,13 @@
 package com.becomejavasenior.DAO.Imp;
 
-
 import com.becomejavasenior.DAO.DaoException;
+import com.becomejavasenior.DAO.DatabaseException;
 import com.becomejavasenior.DAO.FileDao;
 import com.becomejavasenior.bean.File;
 import com.becomejavasenior.bean.Note;
 import com.becomejavasenior.bean.User;
-import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,9 +16,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao {
+@Repository("fileDao")
+public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao<File> {
 
-    private static final String SELECT_DEALS_FOR_LIST = "SELECT\n" +
+    private static final String SELECT_FILE_FOR_LIST = "SELECT\n" +
             "  crm_pallas.file.id,\n" +
             "  crm_pallas.file.file_name as fileName,\n" +
             "  crm_pallas.file.file_path as pathFile,\n" +
@@ -32,7 +33,40 @@ public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao {
             "JOIN crm_pallas.company ON crm_pallas.note.company_id = crm_pallas.company.id\n" +
             "WHERE crm_pallas.company.id = ?";
 
+    @Override
+    public List<File> getFilesForList(int id) {
+        List<File> files = new ArrayList<>();
+        File file = new File();
+        User user;
+        Note note;
+        try (Connection connection = PostgresDaoFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_FILE_FOR_LIST)) {
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                user = new User();
+                note = new Note();
+                file.setId(resultSet.getInt("id"));
+                file.setFileName(resultSet.getString("fileName"));
+                file.setFilePath(resultSet.getString("pathFile"));
+                file.setFileSize((byte) resultSet.getInt("fileSize"));
+                file.setDateCreate(resultSet.getDate("createDateFile"));
+                user.setlName(resultSet.getString("lName"));
+                user.setfName(resultSet.getString("fName"));
+                note.setCreatedUser(user);
+                file.setFileNote(note);
+                files.add(file);
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex);
+        }
+        return files;
+    }
 
+    @Override
+    public File getByName(String str) throws DaoException, ClassNotFoundException {
+        return null;
+    }
 
     @Override
     void createStatement(PreparedStatement preparedStatement, File entity) throws DaoException {
@@ -61,7 +95,7 @@ public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao {
 
     @Override
     String getDeleteQuery() {
-        return "DELETE FROM crm_pallas.file WHERE crm_pallas.file.id =?";
+        return null;
     }
 
     @Override
@@ -76,41 +110,6 @@ public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao {
 
     @Override
     public List<File> getByFilter(String query) {
-        return null;
-    }
-
-    @Override
-    public List<File> getFilesForList(int id) {
-        List<File> files = new ArrayList<>();
-        File file = new File();
-        User user;
-        Note note;
-        try (Connection connection = PostgresDaoFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST)) {
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                user = new User();
-                note = new Note();
-                file.setId(resultSet.getInt("id"));
-                file.setFileName(resultSet.getString("fileName"));
-                file.setFilePath(resultSet.getString("pathFile"));
-                file.setFileSize((byte) resultSet.getInt("fileSize"));
-                file.setDateCreate(resultSet.getDate("createDateFile"));
-                user.setlName(resultSet.getString("lName"));
-                user.setfName(resultSet.getString("fName"));
-                note.setCreatedUser(user);
-                file.setFileNote(note);
-                files.add(file);
-            }
-        } catch (SQLException ex) {
-            throw new DatabaseException(ex);
-        }
-        return files;
-    }
-
-    @Override
-    public File getByName(String str) throws DaoException, ClassNotFoundException {
         return null;
     }
 }

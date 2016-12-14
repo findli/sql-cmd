@@ -3,32 +3,34 @@ package com.becomejavasenior.DAO.Imp;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.LanguageDao;
 import com.becomejavasenior.bean.Language;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class LanguageDaoImpl extends AbstractDaoImpl<Language> implements LanguageDao {
+@Repository("languageDao")
+public class LanguageDaoImpl extends AbstractDaoImpl<Language> implements LanguageDao<Language> {
 
     @Override
     public String getCreateQuery() {
-        return "INSERT INTO language (title, short_title ) VALUES(?,?)";
+        return "INSERT INTO crm_pallas.language (title, short_title ) VALUES(?,?)";
     }
 
     @Override
     public String getUpdateQuery() {
-        return "UPDATE language SET title = ?, short_title = ?";
+        return "UPDATE crm_pallas.language SET title = ?, short_title = ? WHERE id = ?";
     }
 
     @Override
     public String getDeleteQuery() {
-        return "DELETE FROM language WHERE id = ?";
+        return "DELETE FROM crm_pallas.language WHERE id = ?";
     }
 
     @Override
     public String getAllQuery() {
-        return "SELECT * FROM language";
+        return "SELECT * FROM crm_pallas.language";
     }
 
     @Override
@@ -38,7 +40,7 @@ public class LanguageDaoImpl extends AbstractDaoImpl<Language> implements Langua
 
     @Override
     public String getByIdQuery() {
-        return "SELECT * FROM language WHERE id = ?";
+        return "SELECT * FROM crm_pallas.language WHERE id = ?";
     }
 
     @Override
@@ -56,6 +58,7 @@ public class LanguageDaoImpl extends AbstractDaoImpl<Language> implements Langua
         try {
             preparedStatement.setString(1, language.getTitle());
             preparedStatement.setString(2, language.getShortTitle());
+            preparedStatement.setInt(3, language.getId());
         } catch (SQLException e){
             throw new DaoException("Can't update statement for Language", e);
         }

@@ -8,7 +8,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,22 +20,28 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name="companyListServlet", urlPatterns = "/company")
+@WebServlet(name="companyList", urlPatterns = "/company")
+
 @Controller("companyListServlet")
 public class CompanyListServlet extends HttpServlet {
 
+    public static Logger log = Logger.getLogger(CompanyListServlet.class);
+
     @Autowired
-    @Qualifier
+    @Qualifier("companyService")
     CompanyService companyService;
 
-    public static Logger log = Logger.getLogger(CompanyListServlet.class);
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         log.trace("run doGet() in CompanyListServlet");
         HttpSession session = req.getSession();
-/*        CompanyService companyService = new CompanyServiceImpl();*/
 
         List<Company> companyList = null;
 

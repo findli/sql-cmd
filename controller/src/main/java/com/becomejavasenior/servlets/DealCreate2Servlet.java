@@ -11,7 +11,12 @@ import com.becomejavasenior.service.impl.AddressServiceImpl;
 import com.becomejavasenior.service.impl.CompanyServiceImpl;
 import com.becomejavasenior.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -21,18 +26,31 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@Deprecated
 @WebServlet(name = "dealCreate2Servlet", urlPatterns = "/dealCreate2")
 @MultipartConfig(maxFileSize = 102400)
+@Controller("dealCreate2Servlet")
 public class DealCreate2Servlet extends HttpServlet {
 
     public static Logger log = Logger.getLogger(DealCreate2Servlet.class);
     String str = null;
     Company company;
     Address address;
-    AddressService addressService = new AddressServiceImpl();
-    CompanyService companyService = new CompanyServiceImpl();
+
+    @Autowired
+    @Qualifier("addressService")
+    AddressService addressService;
+
+    @Autowired
+    @Qualifier("companyService")
+    CompanyService companyService;
+
     UserService userService = new UserServiceImpl();
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
