@@ -73,6 +73,20 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             "                  FROM crm_pallas.deal\n" +
             "                    JOIN crm_pallas.stage ON crm_pallas.deal.stage_id = crm_pallas.stage.id WHERE crm_pallas.stage.title=?)";
 
+    private static final String SELECT_DEAL_BY_ID = "SELECT d.id, d.title, d.company_id, d.budget, d.stage_id, d.responsible_user_id, d.is_deleted, d.created, d.updated, d.primary_contact_id, " +
+            " u.first_name AS users_first_name, u.last_name AS users_last_name, s.title AS stage, c1.address_id AS addressId " +
+            " FROM crm_pallas.deal d " +
+            " INNER JOIN crm_pallas.\"user\" u ON ( d.responsible_user_id = u.id  ) " +
+            " INNER JOIN crm_pallas.stage s ON ( d.stage_id = s.id  ) " +
+            " INNER JOIN crm_pallas.company c1 ON ( d.company_id = c1.id  )  WHERE d.id=?";
+
+    private static final String SELECT_DEAL_GET_ALL = "SELECT d.id, d.title, d.company_id, d.budget, d.stage_id, d.primary_contact_id, d.responsible_user_id, d.is_deleted, d.created, d.updated, u.first_name, u.last_name, s.title, c1.title AS company_title, c1.address_id\n" +
+            " FROM crm_pallas.deal d \n" +
+            "\tINNER JOIN crm_pallas.\"user\" u ON ( d.responsible_user_id = u.id  )  \n" +
+            "\tINNER JOIN crm_pallas.stage s ON ( d.stage_id = s.id  )  \n" +
+            "\tINNER JOIN crm_pallas.company c1 ON ( d.company_id = c1.id  ) WHERE d.is_deleted = FALSE";
+
+
     @Override
     void createStatement(PreparedStatement preparedStatement, Deal deal) throws DaoException {
         try {
@@ -260,21 +274,12 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
 
     @Override
     String getAllQuery() {
-        return DataBaseUtil.getQuery("SELECT d.id, d.title, d.company_id, d.budget, d.stage_id, d.primary_contact_id, d.responsible_user_id, d.is_deleted, d.created, d.updated, u.first_name, u.last_name, s.title, c1.title AS company_title, c1.address_id\n" +
-                " FROM crm_pallas.deal d \n" +
-                "\tINNER JOIN crm_pallas.\"user\" u ON ( d.responsible_user_id = u.id  )  \n" +
-                "\tINNER JOIN crm_pallas.stage s ON ( d.stage_id = s.id  )  \n" +
-                "\tINNER JOIN crm_pallas.company c1 ON ( d.company_id = c1.id  ) WHERE d.is_deleted = FALSE");
+        return DataBaseUtil.getQuery(SELECT_DEAL_GET_ALL);
     }
 
     @Override
     String getByIdQuery() {
-        return DataBaseUtil.getQuery("SELECT d.id, d.title, d.company_id, d.budget, d.stage_id, d.responsible_user_id, d.is_deleted, d.created, d.updated, d.primary_contact_id, " +
-                " u.first_name AS users_first_name, u.last_name AS users_last_name, s.title AS stage, c1.address_id AS addressId " +
-                " FROM crm_pallas.deal d " +
-                " INNER JOIN crm_pallas.\"user\" u ON ( d.responsible_user_id = u.id  ) " +
-                " INNER JOIN crm_pallas.stage s ON ( d.stage_id = s.id  ) " +
-                " INNER JOIN crm_pallas.company c1 ON ( d.company_id = c1.id  )  WHERE d.id=?");
+        return DataBaseUtil.getQuery(SELECT_DEAL_BY_ID);
     }
 
     @Override
