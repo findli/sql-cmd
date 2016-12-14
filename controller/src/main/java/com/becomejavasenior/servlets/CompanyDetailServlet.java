@@ -35,6 +35,22 @@ public class CompanyDetailServlet extends HttpServlet {
     @Qualifier(value = "companyService")
     CompanyService companyService;
 
+    @Autowired
+    @Qualifier("taskService")
+    TaskService taskService;
+
+    @Autowired
+    @Qualifier("fileService")
+    FileService fileService;
+
+    @Autowired
+    @Qualifier("noteService")
+    NoteService noteService;
+
+    @Autowired
+    @Qualifier("addressService")
+    AddressService addressService;
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -50,22 +66,22 @@ public class CompanyDetailServlet extends HttpServlet {
         }
 
 
-        TaskService taskService = new TaskServiceImpl();
-        FileService fileService = new FileServiceImpl();
-        NoteService noteService = new NoteServiceImpl();
-
         List<Contact> contactList = contactService.getContactsForList(idCompany);
         List<Deal> dealList = dealService.getDealsForList(idCompany);
         List<Task> taskList = taskService.getTasksForList(idCompany);
         List<Note> noteList = noteService.getNotesForList(idCompany);
         List<File> fileList = fileService.getFilesForList(idCompany);
-        Company company = null;
+
+        Company company = new Company();
+        Address address = new Address();
         try {
             company = companyService.getById(idCompany);
+            address = addressService.getById(company.getAddress().getId());
         } catch (DaoException e) {
             e.printStackTrace();
         }
 
+        session.setAttribute("address", address);
         session.setAttribute("contactList", contactList);
         session.setAttribute("dealList", dealList);
         session.setAttribute("taskList", taskList);
@@ -98,7 +114,7 @@ public class CompanyDetailServlet extends HttpServlet {
 
         } else
         if (action.startsWith("formTaskDel")) {
-            TaskService taskService = new TaskServiceImpl();
+//            TaskService taskService = new TaskServiceImpl();
             String idTask = action.substring(12);
             try {
                 taskService.delete(Integer.parseInt(idTask));
@@ -106,7 +122,7 @@ public class CompanyDetailServlet extends HttpServlet {
                 e.printStackTrace();
             }
         } else if (action.startsWith("formNoteDel")){
-            NoteService noteService = new NoteServiceImpl();
+//            NoteService noteService = new NoteServiceImpl();
             String idNote = action.substring(12);
             try {
                 noteService.delete(Integer.parseInt(idNote));
@@ -114,7 +130,7 @@ public class CompanyDetailServlet extends HttpServlet {
                 e.printStackTrace();
             }
         } else if (action.startsWith("formFileDel")){
-            FileService fileService= new FileServiceImpl();
+//            FileService fileService= new FileServiceImpl();
             String idFile = action.substring(12);
             try {
                 fileService.delete(Integer.parseInt(idFile));

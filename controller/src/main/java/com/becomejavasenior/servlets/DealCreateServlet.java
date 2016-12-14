@@ -33,7 +33,6 @@ import java.util.List;
 public class DealCreateServlet extends HttpServlet{
 
     public static Logger log = Logger.getLogger(DealCreateServlet.class);
-    private ApplicationContext context;
 
     @Autowired
     @Qualifier("dealService")
@@ -42,6 +41,23 @@ public class DealCreateServlet extends HttpServlet{
     @Autowired
     @Qualifier("contactService")
     ContactService contactService;
+
+    @Autowired
+    @Qualifier("periodInDaysTypeService")
+    PeriodInDaysTypeService periodService;
+
+    @Autowired
+    @Qualifier("taskTypeService")
+    TaskTypeService taskTypeService;
+
+
+    @Autowired
+    @Qualifier("userService")
+    UserService userService;
+
+    @Autowired
+    @Qualifier("taskService")
+    TaskService taskService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -54,9 +70,6 @@ public class DealCreateServlet extends HttpServlet{
         HttpSession session = request.getSession();
         List<TaskType> TaskTypeList = null;
         List<PeriodInDaysType> PeriodInDaysTypeList = null;
-
-        TaskTypeService taskTypeService = new TaskTypeServiceImpl();
-        PeriodInDaysTypeService periodService = new PeriodInDaysTypeServiceImpl();
 
         List<Contact> contactList = null;
 
@@ -119,10 +132,11 @@ public class DealCreateServlet extends HttpServlet{
             note.setCreatedUser(creator);
             note.setDeal(deal);
             Company company = new Company();
-            company.setId(1);
+            company.setId(1); //TODO: change to company under which the logged in
             note.setCompany(company);
             Contact contact = new Contact();
-            contact.setId(1);
+            contact.setId(1); //TODO: change to contact under which the logged in
+
             note.setContact(contact);
 
         } else {
@@ -167,18 +181,13 @@ public class DealCreateServlet extends HttpServlet{
         format.applyPattern("dd.MM.yyyy HH:mm");
         Date date = null;
 
-        TaskTypeService taskTypeService = new TaskTypeServiceImpl();
-        PeriodInDaysTypeService periodInDaysService = new PeriodInDaysTypeServiceImpl();
-        UserService userService = new UserServiceImpl();
-        TaskService taskService = new TaskServiceImpl();
-
         try {
             user = userService.getById(parseString(request.getParameter("ResponsibleUserTask")));
             taskType = taskTypeService.getById(parseString(request.getParameter("TaskType")));
             if(!request.getParameter("DeadlineDate").isEmpty()) {
                 date = format.parse(request.getParameter("DeadlineDate"));
             }
-            periodInDaysType = periodInDaysService.getById(parseString(request.getParameter("PeriodInDaysType")));
+            periodInDaysType = periodService.getById(parseString(request.getParameter("PeriodInDaysType")));
         }catch ( ParseException e){
             e.printStackTrace();
         }catch (DaoException e){

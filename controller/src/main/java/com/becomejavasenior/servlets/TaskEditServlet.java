@@ -14,6 +14,8 @@ import com.becomejavasenior.service.PeriodInDaysTypeService;
 import com.becomejavasenior.service.TaskService;
 import com.becomejavasenior.service.TaskTypeService;
 import com.becomejavasenior.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -33,7 +35,23 @@ import java.util.List;
 
 @WebServlet(name = "TaskEditServlet", urlPatterns = "/taskEdit")
 @Controller("taskEditServlet")
-public class TaskEditServlet extends HttpServlet{
+public class TaskEditServlet extends HttpServlet {
+
+    @Autowired
+    @Qualifier("taskTypeService")
+    TaskTypeService taskTypeService;
+
+    @Autowired
+    @Qualifier("periodInDaysTypeService")
+    PeriodInDaysTypeService periodService;
+
+    @Autowired
+    @Qualifier("userService")
+    UserService userService;
+
+    @Autowired
+    @Qualifier("taskService")
+    TaskService taskService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -51,11 +69,6 @@ public class TaskEditServlet extends HttpServlet{
         SimpleDateFormat dateFormat = new SimpleDateFormat();
         dateFormat.applyPattern("dd.MM.yyyy HH:mm");
         Date date;
-
-        UserService userService = new UserServiceImpl();
-        TaskTypeService taskTypeService = new TaskTypeServiceImpl();
-        PeriodInDaysTypeService periodService = new PeriodInDaysTypeServiceImpl();
-        TaskService taskService = new TaskServiceImpl();
 
         try {
             listUsers = userService.getAll();
@@ -100,16 +113,11 @@ public class TaskEditServlet extends HttpServlet{
         Date date = null;
         int taskId = Integer.parseInt(request.getParameter("idTask"));
 
-        TaskTypeService taskTypeService = new TaskTypeServiceImpl();
-        PeriodInDaysTypeService periodInDaysService = new PeriodInDaysTypeServiceImpl();
-        UserService userService = new UserServiceImpl();
-        TaskService taskService = new TaskServiceImpl();
-
         try {
             user = userService.getById(parseString(request.getParameter("responsibleUsers")));
             taskType = taskTypeService.getById(parseString(request.getParameter("taskType")));
             date = format.parse(request.getParameter("deadlineDate"));
-            periodInDaysType = periodInDaysService.getById(parseString(request.getParameter("periodInDaysType")));
+            periodInDaysType = periodService.getById(parseString(request.getParameter("periodInDaysType")));
         }catch ( ParseException e){
             e.printStackTrace();
         }catch (DaoException e){

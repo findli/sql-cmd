@@ -5,14 +5,21 @@ import com.becomejavasenior.DAO.TaskTypeDao;
 import com.becomejavasenior.bean.TaskType;
 import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository("taskTypeDao")
 public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTypeDao<TaskType> {
+
+    @Autowired
+    public TaskTypeDaoImpl(DataSource dataSource) {
+        super(dataSource);
+    }
 
     @Override
     public String getCreateQuery(){
@@ -86,7 +93,7 @@ public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTy
         List<TaskType> taskTypes = new ArrayList<>();
         TaskType taskType;
 
-        try (Connection connection = PostgresDaoFactory.getConnection();
+        try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
             while (resultSet.next()) {

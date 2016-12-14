@@ -4,8 +4,10 @@ package com.becomejavasenior.DAO.Imp;
 import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,15 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             "  JOIN crm_pallas.company on crm_pallas.company_task.company_id = crm_pallas.company.id\n" +
             "WHERE crm_pallas.company.id = ? AND crm_pallas.task.is_finished = FALSE;";
 
+
+    @Autowired
+    public TaskDaoImpl(DataSource dataSource) {
+        super(dataSource);
+    }
+
+    @Autowired
+    DataSource dataSource;
+
     @Override
     public List<Task> getTasksForList(int id) {
         List<Task> tasks = new ArrayList<>();
@@ -33,7 +44,7 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
         TaskType taskType;
         User responsibleUser;
 
-        try (Connection connection = PostgresDaoFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_TASKS_FOR_LIST)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -126,9 +137,9 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
     @Override
     public Task getEntity(ResultSet resultSet) throws DaoException{
         Task task = new Task();
-        TaskTypeDao<TaskType> taskType = new TaskTypeDaoImpl();
-        PeriodInDaysTypeDao<PeriodInDaysType> periodInDaysType = new PeriodInDaysTypeDaoImpl();
-        UserDao<User> user = new UserDaoImpl();
+        TaskTypeDao<TaskType> taskType = new TaskTypeDaoImpl(dataSource);
+        PeriodInDaysTypeDao<PeriodInDaysType> periodInDaysType = new PeriodInDaysTypeDaoImpl(dataSource);
+        UserDao<User> user = new UserDaoImpl(dataSource);
         try {
             task.setId(resultSet.getInt("id"));
             task.setTitle(resultSet.getString("title"));
@@ -156,4 +167,5 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
     public List<Task> getByFilter(String filter){
         return null;
     }
+
 }

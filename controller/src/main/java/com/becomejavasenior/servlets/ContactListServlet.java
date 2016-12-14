@@ -30,6 +30,10 @@ public class ContactListServlet extends HttpServlet {
     @Qualifier("contactService")
     ContactService contactService;
 
+    @Autowired
+    @Qualifier("userService")
+    UserService userService;
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -38,8 +42,6 @@ public class ContactListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        UserService userService = new UserServiceImpl();
 
         HttpSession session = request.getSession();
         List<Contact> contactList = null;
