@@ -4,7 +4,7 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
 import com.becomejavasenior.service.impl.*;
-import org.apache.log4j.Logger;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -18,6 +18,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Logger;
+
 
 @WebServlet(name = "contactEditServlet", urlPatterns = "/contactEdit")
 @Controller("contactEditServlet")
@@ -35,12 +37,12 @@ public class ContactEditServlet extends HttpServlet {
     Company company;
     Address address;
 
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

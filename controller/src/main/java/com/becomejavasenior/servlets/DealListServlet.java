@@ -33,6 +33,14 @@ public class DealListServlet extends HttpServlet {
     @Qualifier("companyService")
     CompanyService companyService;
 
+    @Autowired
+    @Qualifier("taskTypeService")
+    TaskTypeService taskTypesService;
+
+    @Autowired
+    @Qualifier("userService")
+    UserService userService;
+
     @Override
     public void init(ServletConfig config) throws ServletException {
                 super.init(config);
@@ -42,9 +50,6 @@ public class DealListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-
-        TaskTypeService taskTypesService = new TaskTypeServiceImpl();
-        UserService userService = new UserServiceImpl();
 
         List<Deal> dealList = dealService.getDealsForList();
         List<TaskType> taskTypeList = null;

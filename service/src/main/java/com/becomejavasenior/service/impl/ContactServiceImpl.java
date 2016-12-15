@@ -2,7 +2,6 @@ package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.DAO.ContactDao;
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.Imp.ContactDaoImpl;
 import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.bean.Contact;
 import com.becomejavasenior.bean.File;
@@ -23,8 +22,6 @@ public class ContactServiceImpl implements ContactService {
     private final UserDao userDao;
     private final ContactDao contactDao;
 
-    private ContactDao<Contact> contactDAO = new ContactDaoImpl();
-
     @Autowired
     public ContactServiceImpl(UserDao userDao,
                               ContactDao contactDao) {
@@ -39,29 +36,27 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public void update(Contact contact) throws DaoException {
-        contactDAO.update(contact);
+        contactDao.update(contact);
     }
 
     @Override
     public List<Contact> getAll() throws DaoException, ClassNotFoundException {
-        return contactDAO.getAll();
+        return contactDao.getAll();
     }
 
     @Override
     public Contact getById(int id) throws DaoException {
-
         return (Contact) contactDao.getById(id);
-
     }
 
     @Override
     public void delete(int id) throws DaoException {
-        contactDAO.delete(id);
+        contactDao.delete(id);
     }
 
     @Override
-    public List<Contact> getContactsForList(int contactId) {
-        return contactDao.getContactsForList(contactId);
+    public List<Contact> getContactsForList(int id) {
+        return contactDao.getContactsForList(id);
     }
 
     @Override

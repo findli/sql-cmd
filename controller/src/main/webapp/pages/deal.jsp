@@ -89,7 +89,7 @@
                                     <input type="text" class="form-control"/>
                                     <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -100,8 +100,9 @@
                                 <div class="input-group date" id="datetimepicker9">
                                     <input type="text" class="form-control"/>
                                     <span class="input-group-addon">
-                                            <span class="glyphicon-calendar glyphicon"></span>
-                                        </span>
+                                        <span class="glyphicon-calendar glyphicon"></span>
+                                    </span>
+
                                 </div>
                             </div>
                         </div>
@@ -144,7 +145,6 @@
                 <div class="forms--lDeal">
 
                     <div class="col-md-12">
-
                             <a href="/funnel" class="btn btn-primary">Funnel</a>
                             <a href="/deal" class="btn btn-primary">List</a>
                             <a href="/dealCreate" class="btn btn-primary pull-center">Add deal</a>
@@ -208,7 +208,6 @@
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="../js/task.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
-
 
 </html>
 

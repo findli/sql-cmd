@@ -120,7 +120,7 @@ public class DealServiceImpl implements DealService {
         return dealDao.getDealsByStage(stage);
     }
 
-    // Необходимо править
+    // Необходимо править !!!
     public Contact contactWithId(Contact contact) throws ClassNotFoundException, DaoException {
 //        List<Contact> contacts = contactDao.getAll();
 //        for(int i = 0; i < contacts.size(); i++) {

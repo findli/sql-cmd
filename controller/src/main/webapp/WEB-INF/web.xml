@@ -18,7 +18,6 @@
         <param-value>/META-INF/applicationContext.xml</param-value>
     </context-param>
 
-
     <error-page>
         <location>/pages/errorsPage.jsp</location> <!-- страница для всяческих ошибок -->
     </error-page>
