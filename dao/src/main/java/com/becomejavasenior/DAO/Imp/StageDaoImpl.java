@@ -7,13 +7,9 @@ import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDaoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-<<<<<<< HEAD
-
 
 import java.sql.*;
-=======
 import javax.sql.DataSource;
->>>>>>> develop
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,11 +127,7 @@ public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomeja
         List<Stage> stages = new ArrayList<>();
         Stage stage;
 
-<<<<<<< HEAD
-        try (Connection connection = PostgresDaoFactory.getConnection();
-=======
         try (Connection connection = getConnection();
->>>>>>> develop
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 

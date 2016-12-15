@@ -212,13 +212,9 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 
     public abstract List<T> getByFilter(String query);
 
-<<<<<<< HEAD
-}
-
-=======
     protected Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
 
 }
->>>>>>> develop
+

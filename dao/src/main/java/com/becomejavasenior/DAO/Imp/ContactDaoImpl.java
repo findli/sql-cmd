@@ -7,10 +7,9 @@ import com.becomejavasenior.bean.Contact;
 import com.becomejavasenior.bean.PhoneType;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.factory.PostgresDaoFactory;
-<<<<<<< HEAD
-=======
+
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> develop
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -22,8 +21,6 @@ import java.util.List;
 @Repository("contactDao")
 public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactDao<Contact> {
 
-<<<<<<< HEAD
-=======
     @Autowired
     public ContactDaoImpl(DataSource dataSource) {
         super(dataSource);
@@ -32,7 +29,6 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
     @Autowired
     DataSource dataSource;
 
->>>>>>> develop
     private static final String SELECT_CONTACT_FOR_LIST = "SELECT crm_pallas.contact.id,\n" +
             "  crm_pallas.contact.first_name as fName,\n" +
             "  crm_pallas.contact.last_name as lName,\n" +
@@ -48,8 +44,6 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             "  JOIN crm_pallas.phone_type ON crm_pallas.contact_phone.phone_type_id = crm_pallas.phone_type.id\n" +
             "where company_id = ? AND contact.is_deleted = FALSE";
 
-<<<<<<< HEAD
-=======
     private static final String SELECT_CONTACT_BY_ID = "SELECT c1.id, c1.first_name, c1.last_name, c1.company_id, c1.post, c1.email, c1.skype, c1.responsible_user_id, c1.is_deleted, c2.title AS company_title " +
             " FROM crm_pallas.contact c1 " +
             " INNER JOIN crm_pallas.company c2 ON (c1.company_id = c2.id) WHERE c1.id=?";
@@ -58,7 +52,7 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             " FROM crm_pallas.contact c1" +
             " INNER JOIN crm_pallas.company c2 ON (c1.company_id = c2.id)";
 
->>>>>>> develop
+
     @Override
     public List<Contact> getContactsForList(int id) {
         List<Contact> contacts = new ArrayList<>();
@@ -67,11 +61,8 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         List<String> phoneList = new ArrayList<>();
         PhoneType phoneType;
         User user;
-<<<<<<< HEAD
-        try (Connection connection = PostgresDaoFactory.getConnection();
-=======
+
         try (Connection connection = getConnection();
->>>>>>> develop
              PreparedStatement statement = connection.prepareStatement(SELECT_CONTACT_FOR_LIST)) {
             statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();

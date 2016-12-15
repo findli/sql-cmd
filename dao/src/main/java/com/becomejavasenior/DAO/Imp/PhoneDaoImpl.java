@@ -8,7 +8,12 @@ import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Contact;
 import com.becomejavasenior.bean.Phone;
 import com.becomejavasenior.bean.PhoneType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +21,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("phoneDao")
 public class PhoneDaoImpl extends AbstractDaoImpl<Phone> implements PhoneDao<Phone> {
+
+    @Autowired
+    @Qualifier("contactDao")
+    ContactDao contactDao;
+
+    @Autowired
+    @Qualifier("phoneTypeDao")
+    PhoneTypeDao phoneTypeDao;
+
+    @Autowired
+    public PhoneDaoImpl(DataSource dataSource) {
+        super(dataSource);
+    }
+
+
 
     @Override
     public Phone getByName(String str) throws DaoException, ClassNotFoundException {
@@ -58,14 +79,12 @@ public class PhoneDaoImpl extends AbstractDaoImpl<Phone> implements PhoneDao<Pho
     Phone getEntity(ResultSet resultSet) throws DaoException {
 
         Phone phone = new Phone();
-        PhoneTypeDao<PhoneType> phoneTypeDao = new PhoneTypeDaoImpl();
-        ContactDao<Contact> contactDao = new ContactDaoImpl();
 
         try {
 
             phone.setId(resultSet.getInt("id"));
-            phone.setContact(contactDao.getById(resultSet.getInt("contact_id")));
-            phone.setPhoneType(phoneTypeDao.getById(resultSet.getInt("phone_type_id")));
+            phone.setContact((Contact) contactDao.getById(resultSet.getInt("contact_id")));
+            phone.setPhoneType((PhoneType) phoneTypeDao.getById(resultSet.getInt("phone_type_id")));
             phone.setPhoneNumber(resultSet.getString("phone_number"));
 
         } catch (SQLException e){
@@ -108,7 +127,7 @@ public class PhoneDaoImpl extends AbstractDaoImpl<Phone> implements PhoneDao<Pho
         List<Phone> phoneList = new ArrayList();
 
         try {
-            Connection connection = DataBaseUtil.getConnection();
+            Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

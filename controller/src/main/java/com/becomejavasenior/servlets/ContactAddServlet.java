@@ -2,10 +2,9 @@ package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
+import com.becomejavasenior.service.*;
 import org.apache.log4j.Logger;
 
-import com.becomejavasenior.service.CompanyService;
-import com.becomejavasenior.service.ContactService;
 import com.becomejavasenior.service.impl.CompanyServiceImpl;
 import com.becomejavasenior.service.impl.ContactServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +30,6 @@ import java.util.List;
 public class ContactAddServlet extends HttpServlet {
 
     public static Logger log = Logger.getLogger(ContactAddServlet.class);
-    private ContactService contactService = new ContactServiceImpl();
-    CompanyService companyService = new CompanyServiceImpl();
 
     @Autowired
     @Qualifier("contactService")
@@ -40,7 +37,28 @@ public class ContactAddServlet extends HttpServlet {
 
     @Autowired
     @Qualifier("companyService")
-    private CompanyService companyService;
+    CompanyService companyService;
+
+    @Autowired
+    @Qualifier("taskTypeService")
+    TaskTypeService taskTypeService;
+
+    @Autowired
+    @Qualifier("periodInDaysTypeService")
+    PeriodInDaysTypeService periodService;
+
+    @Autowired
+    @Qualifier("phoneService")
+    PhoneService phoneService;
+
+    @Autowired
+    @Qualifier("stageService")
+    StageService stageService;
+
+    @Autowired
+    @Qualifier("userService")
+    UserService userService;
+
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -60,14 +78,6 @@ public class ContactAddServlet extends HttpServlet {
         List<PhoneType> phoneTypes = null;
         List<Stage> stageList = null;
       //TODO:  List<Phone> phoneList = null;
-
-
-        TaskTypeService taskTypeService = new TaskTypeServiceImpl();
-        PeriodInDaysTypeService periodService = new PeriodInDaysTypeServiceImpl();
-        PhoneService phoneService = new PhoneServiceImpl();
-        StageService stageService = new StageServiceImpl();
-
-
 
         try {
             contactList = contactService.getAll();
@@ -147,7 +157,6 @@ public class ContactAddServlet extends HttpServlet {
 
     private Contact getContactFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
         Contact contact = new Contact();
-        CompanyService companyService = new CompanyServiceImpl();
 
         contact.setfName(request.getParameter("fName"));
         contact.setlName(request.getParameter("lName"));
@@ -229,16 +238,11 @@ public class ContactAddServlet extends HttpServlet {
         format.applyPattern("dd.MM.yyyy HH:mm");
         Date date = null;
 
-        TaskTypeService taskTypeService = new TaskTypeServiceImpl();
-        PeriodInDaysTypeService periodInDaysService = new PeriodInDaysTypeServiceImpl();
-        UserService userService = new UserServiceImpl();
-        TaskService taskService = new TaskServiceImpl();
-
         try {
             user = userService.getById(parseString(request.getParameter("ResponsibleUserTask")));
             taskType = taskTypeService.getById(parseString(request.getParameter("TaskType")));
             date = format.parse(request.getParameter("DeadlineDate"));
-            periodInDaysType = periodInDaysService.getById(parseString(request.getParameter("PeriodInDaysType")));
+            periodInDaysType = periodService.getById(parseString(request.getParameter("PeriodInDaysType")));
         }catch ( ParseException e){
             e.printStackTrace();
         }catch (DaoException e){

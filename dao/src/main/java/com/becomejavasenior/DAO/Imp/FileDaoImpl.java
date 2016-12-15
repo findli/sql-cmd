@@ -7,15 +7,13 @@ import com.becomejavasenior.bean.File;
 import com.becomejavasenior.bean.Note;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.factory.PostgresDaoFactory;
-<<<<<<< HEAD
+
 import org.springframework.stereotype.Repository;
 
-=======
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
->>>>>>> develop
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,14 +24,11 @@ import java.util.List;
 @Repository("fileDao")
 public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao<File> {
 
-<<<<<<< HEAD
-=======
     @Autowired
     public FileDaoImpl(DataSource dataSource) {
         super(dataSource);
     }
 
->>>>>>> develop
     private static final String SELECT_FILE_FOR_LIST = "SELECT\n" +
             "  crm_pallas.file.id,\n" +
             "  crm_pallas.file.file_name as fileName,\n" +
@@ -54,11 +49,8 @@ public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao<File> 
         File file = new File();
         User user;
         Note note;
-<<<<<<< HEAD
-        try (Connection connection = PostgresDaoFactory.getConnection();
-=======
+
         try (Connection connection = getConnection();
->>>>>>> develop
              PreparedStatement statement = connection.prepareStatement(SELECT_FILE_FOR_LIST)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();

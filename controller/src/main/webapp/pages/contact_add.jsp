@@ -71,8 +71,6 @@
                                 <input class="form-control" type="text" placeholder="lName" name="lName" id="lName">
                             </div>
                         </div>
-<<<<<<< HEAD
-=======
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Position </label>
@@ -80,7 +78,6 @@
                                 <input class="form-control" type="text" placeholder="position" name="position" id="position">
                             </div>
                         </div>
->>>>>>> master
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tag </label>
@@ -101,12 +98,12 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Position </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="position" name="position" id="position">
-                            </div>
-                        </div>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label">Position </label>--%>
+                            <%--<div class="col-sm-9">--%>
+                                <%--<input class="form-control" type="text" placeholder="position" name="position" id="position">--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
 
                         <div class="form-group">
                             <select class="col-sm-3 form-control">

@@ -4,15 +4,8 @@ import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.exceptions.DatabaseException;
-<<<<<<< HEAD
 import com.becomejavasenior.factory.PostgresDaoFactory;
-
-import org.springframework.stereotype.Component;
-
-=======
-
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> develop
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +17,6 @@ import java.util.List;
 @Repository("dealDao")
 public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> {
 
-<<<<<<< HEAD
-=======
     @Autowired
     public DealDaoImpl(DataSource dataSource) {
         super(dataSource);
@@ -34,7 +25,6 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
     @Autowired
     DataSource dataSource;
 
->>>>>>> develop
     private static final String SELECT_DEALS_FOR_LIST_BY_ID = "SELECT\n" +
             "  crm_pallas.deal.id AS dealId,\n" +
             "  crm_pallas.deal.title,\n" +
@@ -188,7 +178,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         List<Stage> stages = new ArrayList<>();
         Stage stage;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_ALL_STAGES)) {
 
@@ -213,7 +203,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         Deal deal;
         Company company;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_DEAL_BY_STAGE)) {
 
             statement.setString(1, stage);
@@ -248,7 +238,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         Contact contact;
         UserDao<User> user = new UserDaoImpl(dataSource);
 
-        try (Connection connection = getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_CONTACT)) {
 
             statement.setString(1, dealTitle);
@@ -310,7 +300,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
     public List<Deal> getByFilter(String query) {
         List<Deal> dealList = new ArrayList<Deal>();
         try{
-            Connection connection = getConnection();
+            Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -332,12 +322,8 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         User responsibleUser;
         Company company;
         Contact contact;
+        try (Connection connection = dataSource.getConnection();
 
-<<<<<<< HEAD
-        try (Connection connection = PostgresDaoFactory.getConnection();
-=======
-        try (Connection connection = getConnection();
->>>>>>> develop
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 
@@ -387,7 +373,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         Company company;
         Stage stage;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST_BY_ID)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -430,11 +416,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         Company company;
         Stage stage;
 
-<<<<<<< HEAD
-        try (Connection connection = PostgresDaoFactory.getConnection();
-=======
-        try (Connection connection = getConnection();
->>>>>>> develop
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST)) {
 
             ResultSet resultSet = statement.executeQuery();

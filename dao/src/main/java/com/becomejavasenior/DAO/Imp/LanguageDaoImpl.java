@@ -4,24 +4,20 @@ package com.becomejavasenior.DAO.Imp;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.LanguageDao;
 import com.becomejavasenior.bean.Language;
-<<<<<<< HEAD
+
 
 import org.springframework.stereotype.Repository;
 
-=======
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
->>>>>>> develop
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-<<<<<<< HEAD
 
-=======
->>>>>>> develop
 @Repository("languageDao")
 public class LanguageDaoImpl extends AbstractDaoImpl<Language> implements LanguageDao<Language> {
 

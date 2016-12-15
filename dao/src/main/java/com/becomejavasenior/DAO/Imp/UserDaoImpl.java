@@ -4,20 +4,14 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.exceptions.DatabaseException;
-<<<<<<< HEAD
 import com.becomejavasenior.factory.PostgresDaoFactory;
 import org.springframework.stereotype.Repository;
 
-=======
-
-import com.becomejavasenior.factory.PostgresDaoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+
 
 
 import javax.sql.DataSource;
->>>>>>> develop
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -127,11 +121,8 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     public List<User> getAll() throws DaoException, ClassNotFoundException {
         List<User> users = new ArrayList<>();
         User user;
-<<<<<<< HEAD
-        try (Connection connection = PostgresDaoFactory.getConnection();
-=======
+
         try (Connection connection = getConnection();
->>>>>>> develop
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 

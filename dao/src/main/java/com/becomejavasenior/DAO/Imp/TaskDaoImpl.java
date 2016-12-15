@@ -4,10 +4,7 @@ package com.becomejavasenior.DAO.Imp;
 import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.factory.PostgresDaoFactory;
-<<<<<<< HEAD
-=======
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> develop
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -31,10 +28,6 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             "  JOIN crm_pallas.company on crm_pallas.company_task.company_id = crm_pallas.company.id\n" +
             "WHERE crm_pallas.company.id = ? AND crm_pallas.task.is_finished = FALSE;";
 
-<<<<<<< HEAD
-    @Override
-
-=======
 
     @Autowired
     public TaskDaoImpl(DataSource dataSource) {
@@ -45,18 +38,13 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
     DataSource dataSource;
 
     @Override
->>>>>>> develop
     public List<Task> getTasksForList(int id) {
         List<Task> tasks = new ArrayList<>();
         Task task;
         TaskType taskType;
         User responsibleUser;
 
-<<<<<<< HEAD
-        try (Connection connection = PostgresDaoFactory.getConnection();
-=======
         try (Connection connection = getConnection();
->>>>>>> develop
              PreparedStatement statement = connection.prepareStatement(SELECT_TASKS_FOR_LIST)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
