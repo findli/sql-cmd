@@ -14,7 +14,12 @@ import com.becomejavasenior.service.impl.CrmCurrencyServiceImpl;
 import com.becomejavasenior.service.impl.CrmSettingsServiceImpl;
 import com.becomejavasenior.service.impl.LanguageServiceImpl;
 import com.becomejavasenior.service.impl.TimeZoneServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,16 +30,36 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "SettingsServlet", urlPatterns = "/settings")
-public class SettingsServlet extends HttpServlet{
+@Controller("settingsServlet")
+public class SettingsServlet extends HttpServlet {
+
+    @Autowired
+    @Qualifier("timeZoneService")
+    TimeZoneService timeZoneService;
+
+    @Autowired
+    @Qualifier("languageService")
+    LanguageService languageService;
+
+    @Autowired
+    @Qualifier("crmCurrencyService")
+    CrmCurrencyService crmCurrencyService;
+
+    @Autowired
+    @Qualifier("crmSettingsService")
+    CrmSettingsService crmSettingsService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+    }
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         List<TimeZone> timeZoneList = null;
         List<Language> languageList = null;
         List<CrmCurrency> crmCurrencyList = null;
-
-        TimeZoneService timeZoneService = new TimeZoneServiceImpl();
-        LanguageService languageService = new LanguageServiceImpl();
-        CrmCurrencyService crmCurrencyService = new CrmCurrencyServiceImpl();
 
         try{
             timeZoneList = timeZoneService.getAll();
@@ -60,10 +85,6 @@ public class SettingsServlet extends HttpServlet{
         TimeZone timeZone = new TimeZone();
         Language language = new Language();
         CrmCurrency crmCurrency = new CrmCurrency();
-        CrmSettingsService crmSettingsService = new CrmSettingsServiceImpl();
-        TimeZoneService timeZoneService = new TimeZoneServiceImpl();
-        LanguageService languageService = new LanguageServiceImpl();
-        CrmCurrencyService crmCurrencyService = new CrmCurrencyServiceImpl();
 
         try {
             timeZone = timeZoneService.getById(parseString(request.getParameter("TimeZone")));

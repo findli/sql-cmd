@@ -133,17 +133,6 @@ public class DealServiceImpl implements DealService {
         return contact;
     }
 
-    public User responsibleUserWithId(User user) throws ClassNotFoundException, DaoException {
-        List<User> users = userDao.getAll();
-        for(int i = 0; i < users.size(); i++) {
-            if(users.get(i).getlName().equals(user.getlName())) {
-                user = users.get(i);
-                break;
-            }
-        }
-        return user;
-    }
-
     public Company companyWithId(Company company) throws ClassNotFoundException, DaoException {
 
         List<Company> companies = companyDao.getAll();
