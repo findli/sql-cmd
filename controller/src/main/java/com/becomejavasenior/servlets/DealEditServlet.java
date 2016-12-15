@@ -42,6 +42,14 @@ public class DealEditServlet extends HttpServlet {
     @Qualifier("addressService")
     AddressService addressService;
 
+    @Autowired
+    @Qualifier("stageService")
+    StageService stageService;
+
+    @Autowired
+    @Qualifier("userService")
+    UserService userService;
+
     String str = null;
     Deal deal;
     Company company;
@@ -57,9 +65,6 @@ public class DealEditServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-
-        StageService stageService = new StageServiceImpl();
-        UserService userService = new UserServiceImpl();
 
         Deal deal = new Deal();
         Company company = new Company();
@@ -150,8 +155,6 @@ public class DealEditServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
-
-
             str = getNameCompanyFromRequest(request) + "; \n";
             str += getPhoneFromRequest(request) + "; \n";
             str += getEmailFromRequest(request) + "; \n";
@@ -165,7 +168,11 @@ public class DealEditServlet extends HttpServlet {
 
             addressUpdate();
             company.setAddress(address);
-            /*companyUpdate();*/
+            User user = new User();
+            user.setId(1); //TODO: change to user under which the logged in
+            company.setResponsibleUser(user);
+            company.setDeleted(false);
+            companyUpdate();
             out.print(str);
 
         }
@@ -281,31 +288,29 @@ public class DealEditServlet extends HttpServlet {
 
     public String getStageFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
 
-        StageService stageService = new StageServiceImpl();
         String dealNewStage = request.getParameter("newStage");
-        /*Stage stage = stageService.getByName(dealNewStage);
-        deal.setStage(stage);*/
+        Stage stage = stageService.getByName(dealNewStage);
+        deal.setStage(stage);
 
         return "Stage = " + deal.getStage().getTitle();
     }
 
     public String getUserFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
 
-        UserService userService = new UserServiceImpl();
         String dealNewUser = request.getParameter("newUser");
-       /* User user = userService.getByName(dealNewUser);
-        deal.setResponsibleUser(user);*/
+        User user = userService.getByName(dealNewUser);
+        deal.setResponsibleUser(user);
 
         return "User = " + deal.getResponsibleUser().getlName();
     }
 
-   /* public void companyUpdate() {
+    public void companyUpdate() {
         try {
             company = companyService.update(company);
         } catch (DaoException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
     public void dealUpdate() {
         try {
