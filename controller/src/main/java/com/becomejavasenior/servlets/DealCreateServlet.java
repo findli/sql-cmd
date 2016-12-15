@@ -3,14 +3,11 @@ package com.becomejavasenior.servlets;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
-import com.becomejavasenior.service.impl.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -23,7 +20,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -105,7 +101,7 @@ public class DealCreateServlet extends HttpServlet{
         Task task = getTaskFromRequest(request);
         Company company = getCompanyFromRequest(request);
         Note note = getNoteFromRequest(request, deal);
-//        File attachedFile = getFileFromRequest(request);
+        File attachedFile = getFileFromRequest(request);
 
         try {
             dealService.createNewDeal(deal, contact, task, company, note);
@@ -210,10 +206,12 @@ public class DealCreateServlet extends HttpServlet{
         System.out.println("company = " + company.getTitle());
         return company;
     }
+
     private File getFileFromRequest(HttpServletRequest request) {
         File attachedFile = new File();
         return attachedFile;
     }
+
     private int parseString(String text){
         int id = Integer.parseInt(text);
         return id;

@@ -25,4 +25,25 @@
         </property>
         <property name="defaultAutoCommit" value="true"/>
     </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource" />
+    </bean>
+
+    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"-->
+          <!--destroy-method="close">-->
+        <!--<property name="driverClassName" value="${db.driver}"/>-->
+        <!--<property name="url" value="${db.url}"/>-->
+        <!--<property name="username" value="${db.user}"/>-->
+        <!--<property name="password" value="${db.password}"/>-->
+        <!--&lt;!&ndash;<property name="initialSize" value="${db.initsize}"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="maxTotal" value="${db.maxtotal}"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="maxWaitMillis" value="${db.maxwait}"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="maxIdle" value="${db.maxidle}"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="defaultTransactionIsolation">&ndash;&gt;-->
+            <!--&lt;!&ndash;<util:constant static-field="java.sql.Connection.TRANSACTION_READ_COMMITTED"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</property>&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="defaultAutoCommit" value="true"/>&ndash;&gt;-->
+
+    <!--</bean>-->
 </beans>
