@@ -29,4 +29,7 @@ untitled/
 controller.iml
 /lib
 /web
+
+# database.properties -> database.properties-stub
 /dao/src/main/resources/database.properties
+/controller/src/main/webapp/WEB-INF/database.properties
