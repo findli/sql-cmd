@@ -38,7 +38,19 @@ public class CompanyDetailServlet extends HttpServlet {
     CompanyService companyService;
 
     @Autowired
-    @Qualifier(value = "addressService")
+    @Qualifier("taskService")
+    TaskService taskService;
+
+    @Autowired
+    @Qualifier("fileService")
+    FileService fileService;
+
+    @Autowired
+    @Qualifier("noteService")
+    NoteService noteService;
+
+    @Autowired
+    @Qualifier("addressService")
     AddressService addressService;
 
     @Override
@@ -56,22 +68,22 @@ public class CompanyDetailServlet extends HttpServlet {
         }
 
 
-        TaskService taskService = new TaskServiceImpl();
-        FileService fileService = new FileServiceImpl();
-        NoteService noteService = new NoteServiceImpl();
-
         List<Contact> contactList = contactService.getContactsForList(idCompany);
         List<Deal> dealList = dealService.getDealsForList(idCompany);
         List<Task> taskList = taskService.getTasksForList(idCompany);
         List<Note> noteList = noteService.getNotesForList(idCompany);
         List<File> fileList = fileService.getFilesForList(idCompany);
-        Company company = null;
+
+        Company company = new Company();
+        Address address = new Address();
         try {
             company = companyService.getById(idCompany);
+            address = addressService.getById(company.getAddress().getId());
         } catch (DaoException e) {
             e.printStackTrace();
         }
 
+        session.setAttribute("address", address);
         session.setAttribute("contactList", contactList);
         session.setAttribute("dealList", dealList);
         session.setAttribute("taskList", taskList);
@@ -89,6 +101,7 @@ public class CompanyDetailServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+//        response.sendRedirect("/pages/companyDetail.jsp");
         request.getRequestDispatcher("/pages/companyDetail.jsp").forward(request, response);
     }
 
@@ -97,16 +110,11 @@ public class CompanyDetailServlet extends HttpServlet {
         response.setContentType("text/plain");
 
         String action = request.getParameter("action");
-
-        if (action != null) {
-     /*       CompanyService companyService = new CompanyServiceImpl();*/
-    /*        AddressService addressService = new AddressServiceImpl();*/
-            Company company = new Company();
-            Address address = new Address();
-            Address getIdAddress = new Address();
-            User user = new User();
+        Address address = new Address();
+        Company company = new Company();
+        User user = new User();
+        if (action == null) {
             if (action.startsWith("formTaskDel")) {
-                TaskService taskService = new TaskServiceImpl();
                 String idTask = action.substring(12);
                 try {
                     taskService.delete(Integer.parseInt(idTask));
@@ -114,7 +122,6 @@ public class CompanyDetailServlet extends HttpServlet {
                     e.printStackTrace();
                 }
             } else if (action.startsWith("formNoteDel")) {
-                NoteService noteService = new NoteServiceImpl();
                 String idNote = action.substring(12);
                 try {
                     noteService.delete(Integer.parseInt(idNote));
@@ -122,7 +129,6 @@ public class CompanyDetailServlet extends HttpServlet {
                     e.printStackTrace();
                 }
             } else if (action.startsWith("formFileDel")) {
-                FileService fileService = new FileServiceImpl();
                 String idFile = action.substring(12);
                 try {
                     fileService.delete(Integer.parseInt(idFile));
@@ -134,14 +140,14 @@ public class CompanyDetailServlet extends HttpServlet {
                 addressStr = addressStr.replace(" ", "");
                 List<String> addressSplit = new ArrayList<>();
                 Collections.addAll(addressSplit, addressStr.split(","));
-
+                Address getIdAddress = new Address();
                 address.setZipcode(Integer.parseInt(addressSplit.get(0)));
                 address.setCountry(addressSplit.get(1));
                 address.setCity(addressSplit.get(2));
                 address.setStreet(addressSplit.get(3));
                 address.setBuildNum(addressSplit.get(4));
                 address.setOfficeRoom(addressSplit.get(5));
-               try {
+                try {
                     getIdAddress = addressService.create(address);
                 } catch (DaoException e) {
                     e.printStackTrace();
@@ -162,8 +168,7 @@ public class CompanyDetailServlet extends HttpServlet {
                     e.printStackTrace();
                 }
 
-            } else if (action.startsWith("updateAddress")) {
-
+            } else if (action.startsWith("updateCompany")) {
                 try {
                     company = companyService.getById(Integer.parseInt(request.getParameter("id")));
                 } catch (DaoException e) {
@@ -195,6 +200,7 @@ public class CompanyDetailServlet extends HttpServlet {
                 } catch (DaoException e) {
                     e.printStackTrace();
                 }
+
             }
         }
     }

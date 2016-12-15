@@ -5,16 +5,26 @@ import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository("noteDao")
 public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> {
+
+    @Autowired
+    public NoteDaoImpl(DataSource dataSource) {
+        super(dataSource);
+    }
+
+    @Autowired
+    DataSource dataSource;
 
     private static final String SELECT_NOTE_FOR_LIST= "SELECT crm_pallas.note.id as noteId,\n" +
             "crm_pallas.note.note_text,\n" +
@@ -106,7 +116,7 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         Contact contact;
         Deal deal;
 
-        try (Connection connection = PostgresDaoFactory.getConnection();
+        try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 
@@ -144,10 +154,10 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
     @Override
     Note getEntity(ResultSet resultSet) throws DaoException {
         Note note = new Note();
-        UserDao<User> user = new UserDaoImpl();
-        CompanyDao<Company> company = new CompanyDaoImpl();
-        ContactDao<Contact> contact = new ContactDaoImpl();
-        DealDao<Deal> deal = new DealDaoImpl();
+        UserDao<User> user = new UserDaoImpl(dataSource);
+        CompanyDao<Company> company = new CompanyDaoImpl(dataSource);
+        ContactDao<Contact> contact = new ContactDaoImpl(dataSource);
+        DealDao<Deal> deal = new DealDaoImpl(dataSource);
 
         try {
             note.setId(resultSet.getInt("id"));
@@ -171,7 +181,7 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         User user;
         Note note;
 
-        try (Connection connection = PostgresDaoFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_NOTE_FOR_LIST)) {
             statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();

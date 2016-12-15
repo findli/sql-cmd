@@ -23,7 +23,6 @@ import java.util.List;
 @WebServlet(name = "dealListServlet", urlPatterns = "/deal")
 @Controller("dealListServlet")
 public class DealListServlet extends HttpServlet {
-    private ApplicationContext context;
 
     @Autowired
     @Qualifier("dealService")
@@ -32,6 +31,14 @@ public class DealListServlet extends HttpServlet {
     @Autowired
     @Qualifier("companyService")
     CompanyService companyService;
+
+    @Autowired
+    @Qualifier("taskTypeService")
+    TaskTypeService taskTypesService;
+
+    @Autowired
+    @Qualifier("userService")
+    UserService userService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -42,9 +49,6 @@ public class DealListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-
-        TaskTypeService taskTypesService = new TaskTypeServiceImpl();
-        UserService userService = new UserServiceImpl();
 
         List<Deal> dealList = dealService.getDealsForList();
         List<TaskType> taskTypeList = null;

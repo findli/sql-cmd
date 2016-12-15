@@ -108,7 +108,6 @@ $(function () {
         var email = $("#formEmail").val();
         var web = $("#formWeb").val();
         var address = $('#formAddress').val();
-        console.log(address);
         $.ajax({
             type: 'POST',
             data: {
@@ -120,7 +119,7 @@ $(function () {
                 email: email,
                 web: web,
                 address: address,
-                action: 'updateAddress'
+                action: 'updateCompany'
             },
             url: '/companyDetail'
         });
