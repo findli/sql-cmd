@@ -1,7 +1,7 @@
 db.driver=org.postgresql.Driver
 db.url=jdbc:postgresql://localhost:5432/crm_pallas
-db.user=
-db.password=
+db.user=root
+db.password=123
 db.initsize=10
 db.maxtotal=100
 db.maxwait=30000
