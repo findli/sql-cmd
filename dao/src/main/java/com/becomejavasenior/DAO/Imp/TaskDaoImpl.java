@@ -5,6 +5,7 @@ import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.factory.PostgresDaoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -36,6 +37,18 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
 
     @Autowired
     DataSource dataSource;
+
+    @Autowired
+    @Qualifier("userDao")
+    UserDao userDao;
+
+    @Autowired
+    @Qualifier("taskTypeDao")
+    TaskTypeDao taskTypeDao;
+
+    @Autowired
+    @Qualifier("periodInDaysTypeDao")
+    PeriodInDaysTypeDao periodInDaysTypedao;
 
     @Override
     public List<Task> getTasksForList(int id) {
@@ -137,19 +150,16 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
     @Override
     public Task getEntity(ResultSet resultSet) throws DaoException{
         Task task = new Task();
-        TaskTypeDao<TaskType> taskType = new TaskTypeDaoImpl(dataSource);
-        PeriodInDaysTypeDao<PeriodInDaysType> periodInDaysType = new PeriodInDaysTypeDaoImpl(dataSource);
-        UserDao<User> user = new UserDaoImpl(dataSource);
         try {
             task.setId(resultSet.getInt("id"));
             task.setTitle(resultSet.getString("title"));
-            task.setTaskType(taskType.getById(resultSet.getInt("task_type_id")));
+            task.setTaskType((TaskType) taskTypeDao.getById(resultSet.getInt("task_type_id")));
             task.setDescription(resultSet.getString("description"));
             task.setDeadlineDate(resultSet.getDate("deadline_date"));
             task.setDeadlineTime(resultSet.getTime("deadline_time"));
-            task.setPeriodInDaysType(periodInDaysType.getById(resultSet.getInt("period_in_days_type_id")));
+            task.setPeriodInDaysType((PeriodInDaysType) periodInDaysTypedao.getById(resultSet.getInt("period_in_days_type_id")));
             task.setPeriodInMinutes(resultSet.getInt("period_in_minutes"));
-            task.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
+            task.setResponsibleUser((User) userDao.getById(resultSet.getInt("responsible_user_id")));
             task.setFinished(resultSet.getBoolean("is_finished"));
             task.setDeleted(resultSet.getBoolean("is_deleted"));
         } catch (SQLException e){

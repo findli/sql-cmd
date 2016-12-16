@@ -33,7 +33,8 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
         try {
-            connection = dataSource.getConnection();
+            connection = getConnection();
+            log.trace("Open connection for create " + entity);
             String query = getCreateQuery();
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             createStatement(preparedStatement, entity);
@@ -71,7 +72,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
-            connection = dataSource.getConnection();
+            connection = getConnection();
             String query = getUpdateQuery();
             preparedStatement = connection.prepareStatement(query);
             updateStatement(preparedStatement, entity);
@@ -102,7 +103,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
-            connection = dataSource.getConnection();
+            connection = getConnection();
             String query = getDeleteQuery();
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
@@ -131,13 +132,14 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
         try {
-            connection = dataSource.getConnection();
+            connection = getConnection();
             String query = getByIdQuery();
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 entity = getEntity(resultSet);
+                log.trace("get " + entity);
             }
         } catch (SQLException e) {
             throw new DaoException("Can't get Entity by ID", e);
@@ -168,8 +170,8 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         ResultSet resultSet;
         List<T> listEntity = new ArrayList<>();
         try {
-            log.trace("Open connection");
-            connection = dataSource.getConnection();
+            log.trace("Open connection for getAll");
+            connection = getConnection();
             String query = getAllQuery();
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();

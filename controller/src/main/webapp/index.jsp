@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
 
-    <title>Company List</title>
+    <title>Home</title>
 </head>
 <body>
 <header>
@@ -47,12 +47,6 @@
         </div>
         <div class="wrapper__aboutCompany">
             <p class="text-primary">Start page</p><br>
-
-            <p class="text-success">Start with <a class="btn btn-link" href="/deal" role="button">Deal</a>
-                or <a class="btn btn-link" href="/company" role="button">Company</a> or
-                <a class="btn btn-link" href="/contact" role="button">Contacts</a></p>
-
-
         </div>
     </div>
 </div>

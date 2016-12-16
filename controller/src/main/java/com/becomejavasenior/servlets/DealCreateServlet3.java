@@ -1,3 +1,4 @@
+/*
 package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.DAO.DaoException;
@@ -18,33 +19,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet(name = "dealCreateServlet", urlPatterns = "/dealCreate")
+@WebServlet(name = "dealCreateServlet", urlPatterns = "/dealCreate3")
 @MultipartConfig(maxFileSize = 102400)
 @Controller("dealCreateServlet")
-public class DealCreateServlet extends HttpServlet {
+public class DealCreateServlet extends HttpServlet{
 
     public static Logger log = Logger.getLogger(DealCreateServlet.class);
-    String str = null;
-    Company company;
-    Address address;
 
     @Autowired
-    @Qualifier("addressService")
-    AddressService addressService;
-
-    @Autowired
-    @Qualifier("companyService")
-    CompanyService companyService;
-
-    @Autowired
-    @Qualifier("userService")
-    UserService userService;
+    @Qualifier("dealService")
+    private DealService dealService;
 
     @Autowired
     @Qualifier("contactService")
@@ -58,9 +47,14 @@ public class DealCreateServlet extends HttpServlet {
     @Qualifier("taskTypeService")
     TaskTypeService taskTypeService;
 
+
     @Autowired
-    @Qualifier("dealService")
-    private DealService dealService;
+    @Qualifier("userService")
+    UserService userService;
+
+    @Autowired
+    @Qualifier("taskService")
+    TaskService taskService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -100,153 +94,26 @@ public class DealCreateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html");
 
-        response.setContentType("text/plain");
-        PrintWriter out = response.getWriter();
+        Deal deal = getDealFromRequest(request);
+        Contact contact = getContactFromRequest(request);
+        Task task = getTaskFromRequest(request);
+        Company company = getCompanyFromRequest(request);
+        Note note = getNoteFromRequest(request, deal);
+        File attachedFile = getFileFromRequest(request);
 
-        String action = request.getParameter("action");
-        company = new Company();
-        address = new Address();
-
-        if (action==null) {
-            Deal deal = getDealFromRequest(request);
-            Contact contact = getContactFromRequest(request);
-            Task task = getTaskFromRequest(request);
-            Company company = getCompanyFromRequest(request);
-            Note note = getNoteFromRequest(request, deal);
-//            File attachedFile = getFileFromRequest(request);
-
-            try {
-                dealService.createNewDeal(deal, contact, task, company, note);
-            } catch (DaoException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            response.sendRedirect("/deal");
-        } else if (action.equals("addDealCompany")) {
-            log.trace("Processed form addDealCompany");
-
-            str = getNameCompanyFromRequest(request) + "; \n";
-            str += getPhoneFromRequest(request) + "; \n";
-            str += getEmailFromRequest(request) + "; \n";
-            str += getWebFromRequest(request) + "; \n";
-            str += getCountryFromRequest(request) + "; \n";
-            str += getCityFromRequest(request) + "; \n";
-            str += getStreetFromRequest(request) + "; \n";
-            str += getZipcodeFromRequest(request) + "; \n";
-            str += getBuildingFromRequest(request) + "; \n";
-            str += getRoomFromRequest(request) + " \n";
-
-            try {
-                address = addressCreate();
-                company.setAddress(address);
-                companyCreate();
-            } catch (DaoException e) {
-                e.printStackTrace();
-            }
-
-
-            out.print(str);
-
-
+        try {
+            dealService.createNewDeal(deal, contact, task, company, note);
+        } catch (DaoException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-    }
-    public String getNameCompanyFromRequest(HttpServletRequest request) {
-
-        String companyNewName = request.getParameter("title");
-//        if(companyNewName.equals(null)) {
-//            companyNewName = "";
-//        }
-        company.setTitle(companyNewName);
-
-        return "Name = " + company.getTitle();
-    }
-    public String getPhoneFromRequest(HttpServletRequest request) {
-
-        String newPhone = request.getParameter("phone");
-//        if(newPhone.equals(null)) {
-//            newPhone = "";
-//        }
-        company.setPhoneNumber(newPhone);
-
-        return "Phone = " + company.getPhoneNumber();
-    }
-    public String getEmailFromRequest(HttpServletRequest request) {
-
-        String newEmail = request.getParameter("email");
-//        if(newEmail.equals(null)) {
-//            newEmail = "";
-//        }
-        company.setEmail(newEmail);
-
-        return "Email = " + company.getEmail();
-    }
-    public String getWebFromRequest(HttpServletRequest request) {
-
-        String newWeb = request.getParameter("web");
-//        if(newWeb.equals(null)) {
-//            newWeb = "";
-//        }
-        company.setWebsite(newWeb);
-
-        return "Web = " + company.getWebsite();
-    }
-    public String getCountryFromRequest(HttpServletRequest request) {
-
-        String country = request.getParameter("country");
-//        if(country.equals(null)) {
-//            country = "";
-//        }
-        address.setCountry(country);
-
-        return "Country = " + address.getCountry();
-    }
-    public String getCityFromRequest(HttpServletRequest request) {
-
-        String city = request.getParameter("city");
-        address.setCity(city);
-
-        return "City = " + address.getCity();
-    }
-    public String getStreetFromRequest(HttpServletRequest request) {
-
-        String street = request.getParameter("street");
-        address.setStreet(street);
-
-        return "Street = " + address.getStreet();
-    }
-    public String getZipcodeFromRequest(HttpServletRequest request) {
-
-        int zipcode = Integer.valueOf(request.getParameter("zipcode"));
-        address.setZipcode(zipcode);
-
-        return "Zipcode = " + address.getZipcode();
-    }
-    public String getBuildingFromRequest(HttpServletRequest request) {
-
-        String building = request.getParameter("building");
-        address.setBuildNum(building);
-
-        return "Building = " + address.getBuildNum();
-    }
-    public String getRoomFromRequest(HttpServletRequest request) {
-
-        String room = request.getParameter("room");
-        address.setOfficeRoom(room);
-
-        return "Building = " + address.getOfficeRoom();
-    }
-    public Address addressCreate() throws DaoException {
-        return addressService.create(address);
+        response.sendRedirect("/deal");
     }
 
-    public void companyCreate() throws DaoException {
-        company.setDeleted(false);
-        User user = userService.getById(1);
-        company.setResponsibleUser(user);
-        companyService.create(company);
-    }
     private Note getNoteFromRequest(HttpServletRequest request, Deal deal) {
         Note note = new Note();
 
@@ -350,3 +217,4 @@ public class DealCreateServlet extends HttpServlet {
         return id;
     }
 }
+*/

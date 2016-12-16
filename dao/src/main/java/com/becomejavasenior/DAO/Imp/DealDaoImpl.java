@@ -154,6 +154,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
 
         try {
             deal.setId(resultSet.getInt("id"));
+
             company = (Company) companyDao.getById(resultSet.getInt("company_id"));
             deal.setCompany(company);
 
