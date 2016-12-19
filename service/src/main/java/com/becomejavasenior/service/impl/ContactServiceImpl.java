@@ -5,6 +5,7 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.Imp.ContactDaoImpl;
 import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.bean.Contact;
+import com.becomejavasenior.bean.File;
 import com.becomejavasenior.bean.Tag;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.service.ContactService;
