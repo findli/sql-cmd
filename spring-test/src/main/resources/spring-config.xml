@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--Enable AspectJ Annotations-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!--Use annotations for bean configuration-->
+    <context:annotation-config/>
+    <!--так нельзя потому что непосредственно в этом пакете бин классов нет-->
+    <!--<context:component-scan base-package="jss.w13_2"/>-->
+    <context:component-scan base-package="jss.w13_2.annotated"/>
+    <context:component-scan base-package="jss.w13_2.aop"/>
+
+    <!--Change the application bean scope without @Configuration class-->
+    <!--<bean id="application" class="jss.w13_2.annotated.Application" scope="prototype">-->
+    <!--<property name="service">-->
+    <!--<ref bean="emailService"/>-->
+    <!--</property>-->
+    <!--</bean>-->
+
+    <bean id="simpleCustomerDAO" class="jss.w13_2.aop.SimpleCustomerDAO" scope="singleton">
+        <property name="tableName">
+            <value>customers</value>
+        </property>
+    </bean>
+
 
     <!--DAO beans-->
     <bean id="connectionProvider" class="jss.w13_1.bean.dao.ConnectionProvider"
@@ -23,7 +48,7 @@
     <bean id="ordering1" class="jss.w13_1.bean.dao.Ordering">
         <property name="field" value="name"/>
         <!--<property name="type">-->
-            <!--<value type="jss.w13_1.bean.dao.Ordering$Type">ASC</value>-->
+        <!--<value type="jss.w13_1.bean.dao.Ordering$Type">ASC</value>-->
         <!--</property>-->
         <!--Ordering.Type.valueOf("ASC"); // !! ->to spring conf xml alternate variant-->
         <property name="type">
@@ -34,7 +59,6 @@
             </bean>
         </property>
     </bean>
-
 
 
     <bean id="filter1" class="jss.w13_1.bean.dao.SimpleFilter">
@@ -62,5 +86,5 @@
             </map>
         </property>
     </bean>
-<bean id="customerView" class="jss.w13_1.bean.dao.CustomerView" autowire="constructor"></bean>
+    <bean id="customerView" class="jss.w13_1.bean.dao.CustomerView" autowire="constructor"></bean>
 </beans>
