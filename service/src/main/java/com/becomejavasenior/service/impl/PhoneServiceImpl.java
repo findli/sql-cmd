@@ -8,13 +8,23 @@ import com.becomejavasenior.DAO.PhoneTypeDao;
 import com.becomejavasenior.bean.Phone;
 import com.becomejavasenior.bean.PhoneType;
 import com.becomejavasenior.service.PhoneService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service(value = "phoneService")
 public class PhoneServiceImpl implements PhoneService {
 
-    private final PhoneDao phoneDao = new PhoneDaoImpl();
-    private final PhoneTypeDao phoneTypeDao = new PhoneTypeDaoImpl();
+    private final PhoneDao phoneDao;
+    private final PhoneTypeDao phoneTypeDao;
+
+    @Autowired
+    public PhoneServiceImpl(PhoneDao phoneDao, PhoneTypeDao phoneTypeDao) {
+        this.phoneDao = phoneDao;
+        this.phoneTypeDao = phoneTypeDao;
+    }
 
     @Override
     public Phone create(Phone t) throws DaoException {

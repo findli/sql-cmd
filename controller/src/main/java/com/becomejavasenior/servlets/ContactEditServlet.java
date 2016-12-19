@@ -4,7 +4,9 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
 import com.becomejavasenior.service.impl.*;
-import org.apache.log4j.Logger;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -18,29 +20,51 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Logger;
+
+
 
 @WebServlet(name = "contactEditServlet", urlPatterns = "/contactEdit")
 @Controller("contactEditServlet")
 public class ContactEditServlet extends HttpServlet {
 
-    public static Logger log = Logger.getLogger(ContactEditServlet.class);
+//    public static Logger log = Logger.getLogger(ContactEditServlet.class);
 
-    ContactService contactService = new ContactServiceImpl();
-    CompanyService companyService = new CompanyServiceImpl();
-    AddressService addressService = new AddressServiceImpl();
-    DealService dealService = new DealServiceImpl();
-    UserService userService = new UserServiceImpl();
+    @Autowired
+    @Qualifier("contactService")
+    ContactService contactService;
+
+    @Autowired
+    @Qualifier("companyService")
+    CompanyService companyService;
+
+    @Autowired
+    @Qualifier("addressService")
+    AddressService addressService;
+
+    @Autowired
+    @Qualifier("dealService")
+    DealService dealService;
+
+    @Autowired
+    @Qualifier("userService")
+    UserService userService;
+
+    @Autowired
+    @Qualifier("stageService")
+    StageService stageService;
+
     Contact contact;
     Deal deal;
     Company company;
     Address address;
+
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -114,17 +138,17 @@ public class ContactEditServlet extends HttpServlet {
         try {
             contact = contactService.getById(idContact);
         } catch (DaoException e) {
-            log.error("DAOException in ContactEditServlet in Controller layer", e);
+//            log.error("DAOException in ContactEditServlet in Controller layer", e);
         }
 
         if (action.equals("editContactContact")) {
-            log.trace("editContactContact");
+//            log.trace("editContactContact");
 
             try {
                 //getPhoneFromRequest(request);
                 getUserFromRequest(request);
             } catch (DaoException e) {
-                log.error("DAOException in ContactEditServlet in Controller layer", e);
+//                log.error("DAOException in ContactEditServlet in Controller layer", e);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -284,7 +308,6 @@ public class ContactEditServlet extends HttpServlet {
 
     public String getStageFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
 
-        StageService stageService = new StageServiceImpl();
         String dealNewStage = request.getParameter("newStage");
         Stage stage = stageService.getByName(dealNewStage);
         deal.setStage(stage);
@@ -294,7 +317,6 @@ public class ContactEditServlet extends HttpServlet {
 
     public String getUserFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
 
-        UserService userService = new UserServiceImpl();
         String dealNewUser = request.getParameter("newUser");
         User user = userService.getByName(dealNewUser);
         deal.setResponsibleUser(user);

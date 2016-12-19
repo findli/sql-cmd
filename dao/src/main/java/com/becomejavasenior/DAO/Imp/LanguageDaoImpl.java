@@ -5,7 +5,13 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.LanguageDao;
 import com.becomejavasenior.bean.Language;
 
+
 import org.springframework.stereotype.Repository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +20,11 @@ import java.util.List;
 
 @Repository("languageDao")
 public class LanguageDaoImpl extends AbstractDaoImpl<Language> implements LanguageDao<Language> {
+
+    @Autowired
+    public LanguageDaoImpl(DataSource dataSource) {
+        super(dataSource);
+    }
 
     @Override
     public String getCreateQuery() {

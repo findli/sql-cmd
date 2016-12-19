@@ -1,6 +1,5 @@
 package com.becomejavasenior.DAO;
 
-
 import com.becomejavasenior.bean.File;
 import com.becomejavasenior.bean.Note;
 

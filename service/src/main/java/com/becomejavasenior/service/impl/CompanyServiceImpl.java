@@ -6,9 +6,11 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.Imp.CompanyDaoImpl;
 import com.becomejavasenior.DAO.Imp.TaskDaoImpl;
 import com.becomejavasenior.DAO.Imp.UserDaoImpl;
+import com.becomejavasenior.DAO.AddressDao;
+import com.becomejavasenior.DAO.CompanyDao;
+import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Address;
 import com.becomejavasenior.bean.Company;
-import com.becomejavasenior.bean.Task;
 import com.becomejavasenior.service.CompanyService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,13 @@ public class CompanyServiceImpl implements CompanyService {
     public static Logger log = Logger.getLogger(CompanyServiceImpl.class);
 
     private CompanyDao companyDao;
+    private AddressDao addressDao;
 
     @Autowired
-    public CompanyServiceImpl(CompanyDao companyDAO) {
-        this.companyDao = companyDAO;
+    public CompanyServiceImpl(CompanyDao companyDao,
+                              AddressDao addressDao) {
+        this.companyDao = companyDao;
+        this.addressDao = addressDao;
     }
 
     @Override
