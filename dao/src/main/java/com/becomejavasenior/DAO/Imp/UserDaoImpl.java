@@ -2,6 +2,7 @@ package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.UserDao;
+import com.becomejavasenior.bean.Language;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDaoFactory;
