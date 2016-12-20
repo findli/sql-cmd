@@ -98,11 +98,6 @@ public class TagDaoImpl extends AbstractDaoImpl<Tag> implements TagDao<Tag> {
     }
 
     @Override
-    public void delete(Integer id) throws DaoException {
-        super.delete(id);
-    }
-
-    @Override
     public Tag getById(Integer id) throws DaoException {
         return super.getById(id);
     }
@@ -138,4 +133,5 @@ public class TagDaoImpl extends AbstractDaoImpl<Tag> implements TagDao<Tag> {
     public List<Tag> getByFilter(String query) {
         return null;
     }
+
 }

@@ -119,4 +119,5 @@ public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao<File> 
     public List<File> getByFilter(String query) {
         return null;
     }
+
 }

@@ -71,6 +71,7 @@ public class TaskTypeDaoImpl extends AbstractDaoImpl<TaskType> implements TaskTy
         }
     }
 
+
     @Override
     public TaskType getByName(String str) throws DaoException, ClassNotFoundException {
         return null;

@@ -106,4 +106,5 @@ public class CrmSettingsDaoImpl extends AbstractDaoImpl<CrmSettings> implements 
     public List<CrmSettings> getByFilter(String query) {
         return null;
     }
+
 }

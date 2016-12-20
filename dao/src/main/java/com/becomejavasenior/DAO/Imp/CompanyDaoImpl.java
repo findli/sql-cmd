@@ -163,4 +163,5 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
 
         return companyList;
     }
+
 }

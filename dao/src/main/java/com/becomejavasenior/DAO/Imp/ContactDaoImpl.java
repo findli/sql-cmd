@@ -223,4 +223,5 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
 
         return contactList;
     }
+
 }

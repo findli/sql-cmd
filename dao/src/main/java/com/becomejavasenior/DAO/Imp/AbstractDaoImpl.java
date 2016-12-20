@@ -6,6 +6,8 @@ import com.becomejavasenior.DAO.AbstractDao;
 import com.becomejavasenior.DAO.DaoException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
@@ -13,7 +15,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Repository
 public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 
     public static Logger log = Logger.getLogger(AbstractDaoImpl.class);
@@ -92,6 +94,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
                 logOrIgnore.printStackTrace();
             }
         }
+
         return updateEntity;
     }
 
