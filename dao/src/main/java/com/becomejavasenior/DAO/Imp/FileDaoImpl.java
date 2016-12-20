@@ -7,9 +7,6 @@ import com.becomejavasenior.bean.File;
 import com.becomejavasenior.bean.Note;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.factory.PostgresDaoFactory;
-
-import org.springframework.stereotype.Repository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -49,7 +46,6 @@ public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao<File> 
         File file = new File();
         User user;
         Note note;
-
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_FILE_FOR_LIST)) {
             statement.setInt(1, id);
@@ -123,4 +119,5 @@ public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao<File> 
     public List<File> getByFilter(String query) {
         return null;
     }
+
 }

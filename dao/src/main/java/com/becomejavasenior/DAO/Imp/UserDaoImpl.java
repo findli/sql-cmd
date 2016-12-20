@@ -66,6 +66,11 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     }
 
     @Override
+    public void delete(Integer id) throws DaoException {
+
+    }
+
+    @Override
     public User getByName(String str) throws DaoException, ClassNotFoundException {
         User user = new User();
         List<User> users = getAll();
@@ -81,7 +86,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     @Override
     User getEntity(ResultSet resultSet) throws DaoException {
         User user = new User();
-     /*   LanguageDao<Language> language = new LanguageDaoImpl();*/
+        Language language = new Language();
         try {
             user.setId(resultSet.getInt("id"));
             user.setlName(resultSet.getString("last_name"));
@@ -94,7 +99,9 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
             user.setNotification(resultSet.getBoolean("is_notification_enabled"));
             user.setNote(resultSet.getString("note"));
             user.setDateCreate(resultSet.getDate("creation_date_time"));
-//            user.setLanguage(language.getById(resultSet.getInt("language_id")));
+
+            language.setId(resultSet.getInt("language_id"));
+            user.setLanguage(language);
 
         } catch (SQLException e) {
             throw new DaoException("Can't get entity from Deal", e);
@@ -110,11 +117,6 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     @Override
     void updateStatement(PreparedStatement preparedStatement, User entity) throws DaoException {
 
-    }
-
-    @Override
-    public void delete(Integer id) throws DaoException {
-        super.delete(id);
     }
 
     @Override
