@@ -12,7 +12,7 @@
 </head>
 <body>
 update customer
-<c:url var="saveUrl" value="save.htm"></c:url>
+<c:url var="saveUrl" value="/w13_3/customer/save.htm"></c:url>
 <%--<context>/save.htm--%>
 <form:form modelAttribute="customerAttribute" method="POST" action="${saveUrl}">
     <form:hidden path="id"/>

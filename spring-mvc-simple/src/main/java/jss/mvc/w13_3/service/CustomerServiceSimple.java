@@ -1,10 +1,10 @@
-package jss.mvc.service;
+package jss.mvc.w13_3.service;
 
-import jss.mvc.domain.Customer;
+import jss.mvc.w13_3.domain.Customer;
 
 import java.util.List;
 
-public interface CustomerService {
+public interface CustomerServiceSimple {
     Customer get(Long id);
     List<Customer> getAll();
 

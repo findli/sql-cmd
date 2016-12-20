@@ -1,17 +1,17 @@
-package jss.mvc.service;
+package jss.mvc.w13_3.service;
 
-import jss.mvc.domain.Customer;
+import jss.mvc.w13_3.domain.Customer;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service // spring boot interpret this class as service class for some controller
-public class CustomerServiceImpl implements CustomerService {
+public class CustomerServiceSimpleImpl implements CustomerServiceSimple {
     List<Customer> data = new ArrayList<>(20);
     long newId = 1;
 
-    public CustomerServiceImpl() {
+    public CustomerServiceSimpleImpl() {
         data.add(new Customer(1l, "Ann", 123));
         data.add(new Customer(2l, "Bruce", 345));
         data.add(new Customer(3l, "Clara", 456));

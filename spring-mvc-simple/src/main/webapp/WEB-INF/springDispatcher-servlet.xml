@@ -5,10 +5,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <!--Here goes configuration of dispatcher servlet-->
 
+    <!--чтобы диспатчер сервлет находил классы контроллеров-->
     <context:component-scan base-package="jss.mvc"/>
-    <!--скарнирует контроллеры-->
+    <!--скарнирует контроллеры на предмет handler mapping - кто будет парсить URL и находить соответствующий контроллер-->
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
-    <!--сканирует методы-->
+    <!--сканирует методы - из return находит *.jsp-->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"

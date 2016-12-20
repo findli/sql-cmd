@@ -1,7 +1,7 @@
-package jss.mvc.controller;
+package jss.mvc.w13_4.controller;
 
-import jss.mvc.domain.Customer;
-import jss.mvc.service.CustomerService;
+import jss.mvc.w13_4.domain.Customer;
+import jss.mvc.w13_4.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -16,12 +16,12 @@ import javax.annotation.PreDestroy;
 import java.io.IOException;
 
 @Controller
-@RequestMapping(value = "customer")
+@RequestMapping(value = "/w13_4/customer")
 @Scope("singleton")
 public class CustomerController {
 
     @Autowired
-    // по типу найдет jss.mvc.service.CustomerServiceImpl because of @Service
+    // по типу найдет jss.mvc.w13_4.service.CustomerServiceImpl because of @Service
     private CustomerService customerService;
 
     @PostConstruct
@@ -42,12 +42,12 @@ public class CustomerController {
     public String index(Model model) throws IOException {
         model.addAttribute("customers", customerService.getAll());
 
-        return "customer/index";
+        return "w13_4/customer/index";
     }
 
     @RequestMapping(value = "/create.htm", method = RequestMethod.GET)
     public String create(@ModelAttribute("customerAttribute") Customer customer, Model model) {
-        return "customer/create"; // show create customer form
+        return "w13_4/customer/create"; // show create customer form
     }
 
     @RequestMapping(value = "/update/{id}.htm", method = RequestMethod.GET)
@@ -61,7 +61,7 @@ public class CustomerController {
             customer.setRating(c.getRating());
             model.addAttribute("customerAttribute", customer);
         }
-        return "customer/update"; // show update customer form
+        return "w13_4/customer/update"; // show update customer form
     }
 
     @RequestMapping(value = "/delete/{id}.htm", method = RequestMethod.GET)
@@ -69,7 +69,7 @@ public class CustomerController {
             @PathVariable Long id,
             Model model) {
         customerService.delete(id);
-        return "redirect:/customer/index.htm"; // Redirect to customers list
+        return "redirect:/w13_4/customer/index.htm"; // Redirect to customers list
     }
 
     @RequestMapping(value = "/save.htm", method = RequestMethod.POST)
@@ -79,6 +79,6 @@ public class CustomerController {
         } else {
             customerService.update(customer);
         }
-        return "redirect:/customer/index.htm";
+        return "redirect:/w13_4/customer/index.htm";
     }
 }

@@ -1,4 +1,4 @@
-package jss.mvc.config;
+package jss.mvc.w13_4.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

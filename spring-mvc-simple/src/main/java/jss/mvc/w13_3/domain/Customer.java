@@ -1,4 +1,4 @@
-package jss.mvc.domain;
+package jss.mvc.w13_3.domain;
 
 public class Customer {
     Long id;
