@@ -48,7 +48,7 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Deal> imple
             "  JOIN crm_pallas.stage ON crm_pallas.deal.stage_id = crm_pallas.stage.id\n" +
             "  JOIN crm_pallas.contact ON crm_pallas.deal.primary_contact_id = crm_pallas.contact.id\n" +
             "  JOIN crm_pallas.company ON crm_pallas.deal.company_id = crm_pallas.company.id\n " +
-            "WHERE crm_pallas.company.id= ?";
+            "WHERE crm_pallas.company.id= '?'; ";
 
     private static final String SELECT_DEALS_FOR_LIST = "SELECT\n" +
             "  crm_pallas.deal.id AS dealId,\n" +
