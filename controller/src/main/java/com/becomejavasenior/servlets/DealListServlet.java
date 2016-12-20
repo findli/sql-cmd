@@ -23,7 +23,6 @@ import java.util.List;
 @WebServlet(name = "dealListServlet", urlPatterns = "/deal")
 @Controller("dealListServlet")
 public class DealListServlet extends HttpServlet {
-    private ApplicationContext context;
 
     @Autowired
     @Qualifier("dealService")

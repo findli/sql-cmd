@@ -50,10 +50,6 @@ public class TaskAddServlet extends HttpServlet {
     @Qualifier("periodInDaysTypeService")
     PeriodInDaysTypeService periodService;
 
-//    TaskTypeService taskTypeService = new TaskTypeServiceImpl();
-//    PeriodInDaysTypeService periodInDaysService = new PeriodInDaysTypeServiceImpl();
-//    UserService userService = new UserServiceImpl();
-
     @Autowired
     @Qualifier("taskService")
     TaskService taskService;
@@ -66,11 +62,10 @@ public class TaskAddServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         HttpSession session = request.getSession();
+
         List<User> listUsers = null;
         List<TaskType> listTaskTypes = null;
         List<PeriodInDaysType> listPeriods = null;
-        TaskTypeService taskTypeService = null;
-        PeriodInDaysTypeService periodService = null;
 
         try {
             listUsers = userService.getAll();

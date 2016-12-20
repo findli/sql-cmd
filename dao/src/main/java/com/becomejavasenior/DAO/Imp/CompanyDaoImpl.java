@@ -9,6 +9,7 @@ import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.factory.PostgresDaoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -29,6 +30,18 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
 
     @Autowired
     DataSource dataSource;
+
+    @Autowired
+    @Qualifier("companyDao")
+    CompanyDao companyDao;
+
+    @Autowired
+    @Qualifier("userDao")
+    UserDao userDao;
+
+    @Autowired
+    @Qualifier("addressDao")
+    AddressDao addressDao;
 
     @Override
     public void createStatement(PreparedStatement statement, Company company) throws DaoException {
@@ -87,8 +100,8 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
     public Company getEntity(ResultSet resultSet) throws DaoException {
 
         Company company = new Company();
-        User user = new User();
-        Address address = new Address();
+        User user;
+        Address address;
 
         try{
             company.setId(resultSet.getInt("id"));
@@ -96,9 +109,11 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             company.setPhoneNumber(resultSet.getString("phone_number"));
             company.setEmail(resultSet.getString("email"));
             company.setWebsite(resultSet.getString("website"));
-            address.setId(resultSet.getInt("address_id"));
+
+            address = (Address) addressDao.getById(resultSet.getInt("address_id"));
             company.setAddress(address);
-            user.setId(resultSet.getInt("responsible_user_id"));
+
+            user = (User) userDao.getById(resultSet.getInt("responsible_user_id"));
             company.setResponsibleUser(user);
             company.setDeleted(resultSet.getBoolean("is_deleted"));
 
@@ -147,4 +162,5 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
 
         return companyList;
     }
+
 }

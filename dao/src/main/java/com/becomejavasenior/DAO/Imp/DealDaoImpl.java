@@ -1,11 +1,15 @@
+/*
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.*;
+import com.becomejavasenior.DAO.StageDao;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.exceptions.DatabaseException;
-
+import com.becomejavasenior.factory.PostgresDaoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +18,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository("dealDao")
+//@Repository("dealDao")
 public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> {
 
     @Autowired
@@ -24,6 +28,26 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
 
     @Autowired
     DataSource dataSource;
+
+    @Autowired
+    @Qualifier("userDao")
+    UserDao userDao;
+
+    @Autowired
+    @Qualifier("contactDao")
+    ContactDao contactDao;
+
+    @Autowired
+    @Qualifier("addressDao")
+    AddressDao addressDao;
+
+    @Autowired
+    @Qualifier("stageDao")
+    StageDao stageDao;
+
+    @Autowired
+    @Qualifier("companyDao")
+    CompanyDao companyDao;
 
     private static final String SELECT_DEALS_FOR_LIST_BY_ID = "SELECT\n" +
             "  crm_pallas.deal.id AS dealId,\n" +
@@ -70,20 +94,6 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             "  WHERE crm_pallas.deal.id IN (SELECT crm_pallas.deal.id\n" +
             "                  FROM crm_pallas.deal\n" +
             "                    JOIN crm_pallas.stage ON crm_pallas.deal.stage_id = crm_pallas.stage.id WHERE crm_pallas.stage.title=?)";
-
-    private static final String SELECT_DEAL_BY_ID = "SELECT d.id, d.title, d.company_id, d.budget, d.stage_id, d.responsible_user_id, d.is_deleted, d.created, d.updated, d.primary_contact_id, " +
-            " u.first_name AS users_first_name, u.last_name AS users_last_name, s.title AS stage, c1.address_id AS addressId " +
-            " FROM crm_pallas.deal d " +
-            " INNER JOIN crm_pallas.\"user\" u ON ( d.responsible_user_id = u.id  ) " +
-            " INNER JOIN crm_pallas.stage s ON ( d.stage_id = s.id  ) " +
-            " INNER JOIN crm_pallas.company c1 ON ( d.company_id = c1.id  )  WHERE d.id=?";
-
-    private static final String SELECT_DEAL_GET_ALL = "SELECT d.id, d.title, d.company_id, d.budget, d.stage_id, d.primary_contact_id, d.responsible_user_id, d.is_deleted, d.created, d.updated, u.first_name, u.last_name, s.title, c1.title AS company_title, c1.address_id\n" +
-            " FROM crm_pallas.deal d \n" +
-            "\tINNER JOIN crm_pallas.\"user\" u ON ( d.responsible_user_id = u.id  )  \n" +
-            "\tINNER JOIN crm_pallas.stage s ON ( d.stage_id = s.id  )  \n" +
-            "\tINNER JOIN crm_pallas.company c1 ON ( d.company_id = c1.id  ) WHERE d.is_deleted = FALSE";
-
 
     @Override
     void createStatement(PreparedStatement preparedStatement, Deal deal) throws DaoException {
@@ -146,25 +156,20 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         try {
             deal.setId(resultSet.getInt("id"));
 
-            address.setId(resultSet.getInt("addressId"));
-            company.setAddress(address);
-            company.setId(resultSet.getInt("company_id"));
+            company = (Company) companyDao.getById(resultSet.getInt("company_id"));
             deal.setCompany(company);
 
-            stage.setId(resultSet.getInt("stage_id"));
-            stage.setTitle(resultSet.getString("stage"));
+            stage = (Stage) stageDao.getById(resultSet.getInt("stage_id"));
             deal.setStage(stage);
 
-            user.setId(resultSet.getInt("responsible_user_id"));
-            user.setlName(resultSet.getString("users_last_name"));
-            user.setfName(resultSet.getString("users_first_name"));
+            user = (User) userDao.getById(resultSet.getInt("responsible_user_id"));
             deal.setResponsibleUser(user);
 
             deal.setTitle(resultSet.getString("title"));
             deal.setBudget(resultSet.getInt("budget"));
             deal.setDeleted(resultSet.getBoolean("is_deleted"));
 
-            contact.setId(resultSet.getInt("primary_contact_id"));
+            contact = (Contact) contactDao.getById(resultSet.getInt("primary_contact_id"));
             deal.setPrimaryContact(contact);
         } catch (SQLException e) {
             throw new DaoException("Can't get entity from Deal", e);
@@ -172,7 +177,6 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         return deal;
     }
 
-    @Transactional
     @Override
     public List<Stage> getAllStage() {
         List<Stage> stages = new ArrayList<>();
@@ -259,7 +263,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 /*
                 Here you need to add the phone type and the phone to display in the editing form of the Deals
                  */
-
+/*
                 contacts.add(contact);
             }
         } catch (SQLException ex) {
@@ -272,12 +276,12 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
 
     @Override
     String getAllQuery() {
-        return DataBaseUtil.getQuery(SELECT_DEAL_GET_ALL);
+        return DataBaseUtil.getQuery("SELECT * FROM crm_pallas.deal ORDER BY id DESC");
     }
 
     @Override
     String getByIdQuery() {
-        return DataBaseUtil.getQuery(SELECT_DEAL_BY_ID);
+        return DataBaseUtil.getQuery("SELECT * FROM crm_pallas.deal WHERE id = ?");
     }
 
     @Override
@@ -319,9 +323,11 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
     public List<Deal> getAll() throws DaoException, ClassNotFoundException {
         List<Deal> deals = new ArrayList<>();
         Deal deal;
+
         User responsibleUser;
         Company company;
         Contact contact;
+        Stage stage;
 
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
@@ -330,31 +336,24 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
             while (resultSet.next()) {
 
                 deal = new Deal();
-                responsibleUser = new User();
-                company = new Company();
-                Stage stage = new Stage();
-                contact = new Contact();
 
                 deal.setId(resultSet.getInt("id"));
                 deal.setTitle(resultSet.getString("title"));
                 deal.setBudget(resultSet.getInt("budget"));
                 deal.setDeleted(false);
 
-                responsibleUser.setId(resultSet.getInt("responsible_user_id"));
-                responsibleUser.setlName(resultSet.getString("last_name"));
-                responsibleUser.setfName(resultSet.getString("first_name"));
+                responsibleUser = (User) userDao.getById(resultSet.getInt("responsible_user_id"));
                 deal.setResponsibleUser(responsibleUser);
 
-                company.setId(resultSet.getInt("company_id"));
-                company.setTitle(resultSet.getString("company_title"));
+                company = (Company) companyDao.getById(resultSet.getInt("company_id"));
                 deal.setCompany(company);
 
-                stage.setId(resultSet.getInt("stage_id"));
+                stage = (Stage) stageDao.getById(resultSet.getInt("stage_id"));
                 deal.setStage(stage);
 
                 deal.setCreateDate(resultSet.getDate("created"));
 
-                contact.setId(resultSet.getInt("primary_contact_id"));
+                contact = (Contact) contactDao.getById(resultSet.getInt("primary_contact_id"));
                 deal.setPrimaryContact(contact);
 
                 deals.add(deal);
@@ -451,3 +450,5 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         return deals;
     }
 }
+
+*/

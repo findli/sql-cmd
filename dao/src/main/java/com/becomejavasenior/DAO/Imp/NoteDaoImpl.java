@@ -6,6 +6,7 @@ import com.becomejavasenior.bean.*;
 import com.becomejavasenior.exceptions.DatabaseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +25,22 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
 
     @Autowired
     DataSource dataSource;
+
+    @Autowired
+    @Qualifier("userDao")
+    UserDao userDao;
+
+    @Autowired
+    @Qualifier("companyDao")
+    CompanyDao companyDao;
+
+    @Autowired
+    @Qualifier("contactDao")
+    ContactDao contactDao;
+
+    @Autowired
+    @Qualifier("dealDao")
+    DealDao dealDao;
 
     private static final String SELECT_NOTE_FOR_LIST= "SELECT crm_pallas.note.id as noteId,\n" +
             "crm_pallas.note.note_text,\n" +
@@ -128,16 +145,20 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
                 deal = new Deal();
 
                 note.setId(resultSet.getInt("id"));
-                createdUser.setId(resultSet.getInt("created_by_user_id"));
+
+                createdUser = (User) userDao.getById(resultSet.getInt("created_by_user_id"));
                 note.setCreatedUser(createdUser);
                 note.setNoteText(resultSet.getString("note_text"));
                 note.setDateCreate(resultSet.getDate("creation_date_time"));
                 note.setDeleted(resultSet.getBoolean("is_deleted"));
-                company.setId(resultSet.getInt("company_id"));
+
+                company = (Company) companyDao.getById(resultSet.getInt("company_id"));
                 note.setCompany(company);
-                contact.setId(resultSet.getInt("contact_id"));
+
+                contact = (Contact) contactDao.getById(resultSet.getInt("contact_id"));
                 note.setContact(contact);
-                deal.setId(resultSet.getInt("deal_id"));
+
+                deal = (Deal) dealDao.getById(resultSet.getInt("deal_id"));
                 note.setDeal(deal);
 
                 notes.add(note);
@@ -153,20 +174,29 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
     @Override
     Note getEntity(ResultSet resultSet) throws DaoException {
         Note note = new Note();
-        UserDao<User> user = new UserDaoImpl(dataSource);
-        CompanyDao<Company> company = new CompanyDaoImpl(dataSource);
-        ContactDao<Contact> contact = new ContactDaoImpl(dataSource);
-        DealDao<Deal> deal = new DealDaoImpl(dataSource);
+        User user = new User();
+        Company company = new Company();
+        Contact contact = new Contact();
+        Deal deal = new Deal();
 
         try {
             note.setId(resultSet.getInt("id"));
-            note.setCreatedUser(user.getById(resultSet.getInt("created_by_user_id")));
+
+            user = (User) userDao.getById(resultSet.getInt("created_by_user_id"));
+            note.setCreatedUser(user);
+
             note.setNoteText(resultSet.getString("note_text"));
             note.setDateCreate(resultSet.getDate("created_date_time"));
             note.setDeleted(resultSet.getBoolean("is_deleted"));
-            note.setCompany(company.getById(resultSet.getInt("company_id")));
-            note.setContact(contact.getById(resultSet.getInt("contact_id")));
-            note.setDeal(deal.getById(resultSet.getInt("deal_id")));
+
+            company = (Company) companyDao.getById(resultSet.getInt("company_id"));
+            note.setCompany(company);
+
+            contact = (Contact) contactDao.getById(resultSet.getInt("contact_id"));
+            note.setContact(contact);
+
+            deal = (Deal) dealDao.getById(resultSet.getInt("deal_id"));
+            note.setDeal(deal);
 
         } catch (SQLException e) {
             throw new DaoException("Can't get entity from Note", e);
@@ -198,4 +228,5 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         }
         return notes;
     }
+
 }

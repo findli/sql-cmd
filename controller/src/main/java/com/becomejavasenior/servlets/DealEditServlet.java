@@ -1,5 +1,6 @@
 package com.becomejavasenior.servlets;
 
+import com.becomejavasenior.DAO.CompanyDao;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
@@ -52,6 +53,10 @@ public class DealEditServlet extends HttpServlet {
     @Qualifier("userService")
     UserService userService;
 
+    @Autowired
+    @Qualifier("companyDao")
+    CompanyDao companyDao;
+
     String str = null;
     Deal deal;
     Company company;
@@ -81,9 +86,10 @@ public class DealEditServlet extends HttpServlet {
 
             try {
                 deal = dealService.getById(idDeal);
-                company = companyService.getById(deal.getCompany().getId());
+                company = (Company) companyService.getById(1);
                 stage = stageService.getById(deal.getStage().getId());
                 address = addressService.getById(company.getAddress().getId());
+
             } catch (DaoException e) {
                 e.printStackTrace();
             }
