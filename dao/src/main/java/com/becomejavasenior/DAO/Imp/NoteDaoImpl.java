@@ -230,4 +230,5 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         }
         return notes;
     }
+
 }

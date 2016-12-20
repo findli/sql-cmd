@@ -68,6 +68,11 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     }
 
     @Override
+    public void delete(Integer id) throws DaoException {
+
+    }
+
+    @Override
     public User getByName(String str) throws DaoException, ClassNotFoundException {
         User user = new User();
         List<User> users = getAll();
@@ -114,11 +119,6 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     @Override
     void updateStatement(PreparedStatement preparedStatement, User entity) throws DaoException {
 
-    }
-
-    @Override
-    public void delete(Integer id) throws DaoException {
-        super.delete(id);
     }
 
     @Override

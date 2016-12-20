@@ -87,4 +87,5 @@ public class CrmCurrencyDaoImpl extends AbstractDaoImpl<CrmCurrency> implements 
     public List<CrmCurrency> getByFilter(String query) {
         return null;
     }
+
 }

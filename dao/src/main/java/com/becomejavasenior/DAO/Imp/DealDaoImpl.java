@@ -1,3 +1,4 @@
+/*
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.*;
@@ -17,7 +18,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository("dealDao")
+//@Repository("dealDao")
 public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> {
 
     @Autowired
@@ -176,7 +177,6 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         return deal;
     }
 
-    @Transactional
     @Override
     public List<Stage> getAllStage() {
         List<Stage> stages = new ArrayList<>();
@@ -263,7 +263,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
                 /*
                 Here you need to add the phone type and the phone to display in the editing form of the Deals
                  */
-
+/*
                 contacts.add(contact);
             }
         } catch (SQLException ex) {
@@ -450,3 +450,5 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         return deals;
     }
 }
+
+*/

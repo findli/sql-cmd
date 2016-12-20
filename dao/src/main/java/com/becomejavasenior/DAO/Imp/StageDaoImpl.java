@@ -146,4 +146,5 @@ public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomeja
         }
         return stages;
     }
+
 }
