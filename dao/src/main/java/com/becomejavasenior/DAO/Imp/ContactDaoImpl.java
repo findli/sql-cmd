@@ -7,15 +7,46 @@ import com.becomejavasenior.bean.Contact;
 import com.becomejavasenior.bean.PhoneType;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository("contactDao")
 public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactDao<Contact> {
+
+    @Autowired
+    public ContactDaoImpl(DataSource dataSource) {
+        super(dataSource);
+    }
+
+    @Autowired
+    DataSource dataSource;
+
+    @Autowired
+    @Qualifier("userDao")
+    UserDao userDao;
+
+    @Autowired
+    @Qualifier("contactDao")
+    ContactDao contactDao;
+
+    @Autowired
+    @Qualifier("addressDao")
+    AddressDao addressDao;
+
+    @Autowired
+    @Qualifier("stageDao")
+    StageDao stageDao;
+
+    @Autowired
+    @Qualifier("companyDao")
+    CompanyDao companyDao;
 
     private static final String SELECT_CONTACT_FOR_LIST = "SELECT crm_pallas.contact.id,\n" +
             "  crm_pallas.contact.first_name as fName,\n" +
@@ -40,14 +71,13 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         List<String> phoneList = new ArrayList<>();
         PhoneType phoneType;
         User user;
-        try (Connection connection = PostgresDaoFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_CONTACT_FOR_LIST)) {
             statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 company = new Company();
                 contact = new Contact();
-                user = new User();
                 contact.setId(resultSet.getInt("id"));
                 contact.setfName(resultSet.getString("fName"));
                 contact.setlName(resultSet.getString("lName"));
@@ -110,10 +140,8 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
     @Override
     Contact getEntity(ResultSet resultSet) throws DaoException {
         Contact contact = new Contact();
-        Company company;
-        User user;
-        CompanyDao<Company> companyDao = new CompanyDaoImpl();
-        UserDao<User> userDAO = new UserDaoImpl();
+        Company company = new Company();
+        User user = new User();
 
         List<String> taskList = new ArrayList<String>();
         List<String> eventHistoryList = new ArrayList<String>();
@@ -127,8 +155,13 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
             contact.setSkype(resultSet.getString("skype"));
             contact.setEmail(resultSet.getString("email"));
             contact.setDeleted(resultSet.getBoolean("is_deleted"));
-            contact.setCompany(companyDao.getById(resultSet.getInt("company_id")));
-            contact.setResponsibleUser(userDAO.getById(resultSet.getInt("responsible_user_id")));
+
+            company = (Company) companyDao.getById(resultSet.getInt("company_id"));
+            contact.setCompany(company);
+
+            user = (User) userDao.getById(resultSet.getInt("responsible_user_id"));
+            contact.setResponsibleUser(user);
+
 
 
 //            taskList.add(resultSet.getString("tasks"));
@@ -162,7 +195,7 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
 
     @Override
     String getByIdQuery() {
-        return DataBaseUtil.getQuery("SELECT * FROM crm_pallas.contact WHERE id=?");
+        return DataBaseUtil.getQuery("SELECT * FROM crm_pallas.contact WHERE id = ?");
     }
 
     @Override
@@ -176,7 +209,7 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         List<Contact> contactList = new ArrayList<Contact>();
 
         try {
-            Connection connection = DataBaseUtil.getConnection();
+            Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -190,4 +223,5 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
 
         return contactList;
     }
+
 }

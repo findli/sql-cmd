@@ -6,6 +6,8 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Task;
 import com.becomejavasenior.service.impl.TaskServiceImpl;
 import com.becomejavasenior.service.TaskService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -22,7 +24,11 @@ import java.util.List;
 
 @WebServlet(name = "TaskListServlet", urlPatterns = "/taskList")
 @Controller("taskListServlet")
-public class TaskListServlet extends HttpServlet{
+public class TaskListServlet extends HttpServlet {
+
+    @Autowired
+    @Qualifier("taskService")
+    TaskService taskService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -33,7 +39,6 @@ public class TaskListServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         HttpSession session = request.getSession();
         List<Task> listTasks = null;
-        TaskService taskService = new TaskServiceImpl();
         try {
             listTasks = taskService.getAll();
         }catch (DaoException e){
@@ -49,7 +54,6 @@ public class TaskListServlet extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
-        TaskService taskService = new TaskServiceImpl();
 
         Enumeration listParameters =  request.getParameterNames();
         while(listParameters.hasMoreElements()){

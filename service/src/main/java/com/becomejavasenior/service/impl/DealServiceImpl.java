@@ -21,6 +21,7 @@ public class DealServiceImpl implements DealService {
     private final StageDao stageDao;
     private final AddressDao addressDao;
     private final UserDao userDao;
+    private final NoteDao noteDao;
 
     @Autowired
     public DealServiceImpl(CompanyDao companyDao,
@@ -29,7 +30,8 @@ public class DealServiceImpl implements DealService {
                            TaskDao taskDao,
                            DealDao dealDao,
                            StageDao stageDao,
-                           AddressDao addressDao) {
+                           AddressDao addressDao,
+                           NoteDao noteDao) {
         this.companyDao = companyDao;
         this.userDao = userDao;
         this.contactDao = contactDao;
@@ -37,6 +39,7 @@ public class DealServiceImpl implements DealService {
         this.dealDao = dealDao;
         this.stageDao = stageDao;
         this.addressDao = addressDao;
+        this.noteDao = noteDao;
     }
 
     public Deal create (Deal deal) throws DaoException {
@@ -80,20 +83,19 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
-    public void createNewDeal(Deal deal, Contact contact, Task task, Company company, File file2) throws DaoException, ClassNotFoundException {
+    public void createNewDeal(Deal deal, Contact contact, Task task, Company company, Note note) throws DaoException, ClassNotFoundException {
 
-        try {
+        if(!task.getTitle().equals("")) {
             taskDao.create(task);
-        }catch (DaoException e){
-            e.printStackTrace();
         }
+
         List<Task> tasks = new ArrayList<>();
         tasks.add(task);
         deal.setTasks(tasks);
         contact = contactWithId(contact);
         deal.setPrimaryContact(contact);
 
-        company = companyWithId(company);
+        company = (Company) companyDao.getByName(company.getTitle());
         deal.setCompany(company);
 
         Stage stage;
@@ -103,7 +105,13 @@ public class DealServiceImpl implements DealService {
         User user = (User) userDao.getByName(deal.getResponsibleUser().getlName());
         deal.setResponsibleUser(user);
 
-        dealDao.create(deal);
+        deal = (Deal) dealDao.create(deal);
+
+        if(!note.getNoteText().equals("")) {
+//            deal = (Deal) dealDao.getByName(note.getDeal().getTitle());
+            note.setDeal(deal);
+            noteDao.create(note);
+        }
 
     }
 
@@ -112,7 +120,7 @@ public class DealServiceImpl implements DealService {
         return dealDao.getDealsByStage(stage);
     }
 
-    // Необходимо править
+    // Необходимо править !!!
     public Contact contactWithId(Contact contact) throws ClassNotFoundException, DaoException {
 //        List<Contact> contacts = contactDao.getAll();
 //        for(int i = 0; i < contacts.size(); i++) {
@@ -125,26 +133,15 @@ public class DealServiceImpl implements DealService {
         return contact;
     }
 
-    public User responsibleUserWithId(User user) throws ClassNotFoundException, DaoException {
-        List<User> users = userDao.getAll();
-        for(int i = 0; i < users.size(); i++) {
-            if(users.get(i).getlName().equals(user.getlName())) {
-                user = users.get(i);
-                break;
-            }
-        }
-        return user;
-    }
-
-    public Company companyWithId(Company company) throws ClassNotFoundException, DaoException {
-
-        List<Company> companies = companyDao.getAll();
-        for(int i = 0; i < companies.size(); i++) {
-            if(companies.get(i).getTitle().equals(company.getTitle())) {
-                company = companies.get(i);
-                break;
-            }
-        }
-        return company;
-    }
+//    public Company companyWithId(Company company) throws ClassNotFoundException, DaoException {
+//
+//        List<Company> companies = companyDao.getAll();
+//        for(int i = 0; i < companies.size(); i++) {
+//            if(companies.get(i).getTitle().equals(company.getTitle())) {
+//                company = companies.get(i);
+//                break;
+//            }
+//        }
+//        return company;
+//    }
 }

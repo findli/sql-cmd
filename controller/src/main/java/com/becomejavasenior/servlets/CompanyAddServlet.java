@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "companyaddservlet", urlPatterns = "/companyadd")
-@Controller("CompanyAddServlet")
+@Controller("companyAddServlet")
 public class CompanyAddServlet extends HttpServlet {
 
     @Autowired

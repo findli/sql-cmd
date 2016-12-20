@@ -1,5 +1,6 @@
 package com.becomejavasenior.servlets;
 
+import com.becomejavasenior.DAO.CompanyDao;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
@@ -42,6 +43,18 @@ public class DealEditServlet extends HttpServlet {
     @Qualifier("addressService")
     AddressService addressService;
 
+    @Autowired
+    @Qualifier("stageService")
+    StageService stageService;
+
+    @Autowired
+    @Qualifier("userService")
+    UserService userService;
+
+    @Autowired
+    @Qualifier("companyDao")
+    CompanyDao companyDao;
+
     String str = null;
     Deal deal;
     Company company;
@@ -58,9 +71,6 @@ public class DealEditServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        StageService stageService = new StageServiceImpl();
-        UserService userService = new UserServiceImpl();
-
         Deal deal = new Deal();
         Company company = new Company();
         Stage stage = new Stage();
@@ -74,9 +84,10 @@ public class DealEditServlet extends HttpServlet {
 
             try {
                 deal = dealService.getById(idDeal);
-                company = companyService.getById(deal.getCompany().getId());
+                company = (Company) companyService.getById(1);
                 stage = stageService.getById(deal.getStage().getId());
                 address = addressService.getById(company.getAddress().getId());
+
             } catch (DaoException e) {
                 e.printStackTrace();
             }
@@ -150,8 +161,6 @@ public class DealEditServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
-
-
             str = getNameCompanyFromRequest(request) + "; \n";
             str += getPhoneFromRequest(request) + "; \n";
             str += getEmailFromRequest(request) + "; \n";
@@ -165,7 +174,11 @@ public class DealEditServlet extends HttpServlet {
 
             addressUpdate();
             company.setAddress(address);
-            /*companyUpdate();*/
+            User user = new User();
+            user.setId(1); //TODO: change to user under which the logged in
+            company.setResponsibleUser(user);
+            company.setDeleted(false);
+            companyUpdate();
             out.print(str);
 
         }
@@ -281,31 +294,29 @@ public class DealEditServlet extends HttpServlet {
 
     public String getStageFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
 
-        StageService stageService = new StageServiceImpl();
         String dealNewStage = request.getParameter("newStage");
-        /*Stage stage = stageService.getByName(dealNewStage);
-        deal.setStage(stage);*/
+        Stage stage = stageService.getByName(dealNewStage);
+        deal.setStage(stage);
 
         return "Stage = " + deal.getStage().getTitle();
     }
 
     public String getUserFromRequest(HttpServletRequest request) throws DaoException, ClassNotFoundException {
 
-        UserService userService = new UserServiceImpl();
         String dealNewUser = request.getParameter("newUser");
-       /* User user = userService.getByName(dealNewUser);
-        deal.setResponsibleUser(user);*/
+        User user = userService.getByName(dealNewUser);
+        deal.setResponsibleUser(user);
 
         return "User = " + deal.getResponsibleUser().getlName();
     }
 
-   /* public void companyUpdate() {
+    public void companyUpdate() {
         try {
             company = companyService.update(company);
         } catch (DaoException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
     public void dealUpdate() {
         try {

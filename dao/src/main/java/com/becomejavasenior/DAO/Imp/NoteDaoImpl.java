@@ -5,10 +5,13 @@ import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.exceptions.DatabaseException;
 import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +19,31 @@ import java.util.List;
 @Repository("noteDao")
 public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> {
 
-    private static final String SELECT_DEALS_FOR_LIST= "SELECT crm_pallas.note.id as noteId,\n" +
+    @Autowired
+    public NoteDaoImpl(DataSource dataSource) {
+        super(dataSource);
+    }
+
+    @Autowired
+    DataSource dataSource;
+
+    @Autowired
+    @Qualifier("userDao")
+    UserDao userDao;
+
+    @Autowired
+    @Qualifier("companyDao")
+    CompanyDao companyDao;
+
+    @Autowired
+    @Qualifier("contactDao")
+    ContactDao contactDao;
+
+    @Autowired
+    @Qualifier("dealDao")
+    DealDao dealDao;
+
+    private static final String SELECT_NOTE_FOR_LIST= "SELECT crm_pallas.note.id as noteId,\n" +
             "crm_pallas.note.note_text,\n" +
             "crm_pallas.user.last_name as lName,\n" +
             "crm_pallas.user.first_name as fName,\n" +
@@ -77,7 +104,7 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
 
     @Override
     String getCreateQuery() {
-        return DataBaseUtil.getQuery("INSERT INTO crm_pallas.note (note_text, created_by_user_id, creation_date_time, is_deleted, contact_id, company_id, deal_id) values (?,?,?,?,?,?,?)");
+        return DataBaseUtil.getQuery("INSERT INTO crm_pallas.note (note_text, created_by_user_id, created_date_time, is_deleted, contact_id, company_id, deal_id) values (?,?,?,?,?,?,?)");
 
     }
 
@@ -106,7 +133,7 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         Contact contact;
         Deal deal;
 
-        try (Connection connection = PostgresDaoFactory.getConnection();
+        try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 
@@ -119,16 +146,20 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
                 deal = new Deal();
 
                 note.setId(resultSet.getInt("id"));
-                createdUser.setId(resultSet.getInt("created_by_user_id"));
+
+                createdUser = (User) userDao.getById(resultSet.getInt("created_by_user_id"));
                 note.setCreatedUser(createdUser);
                 note.setNoteText(resultSet.getString("note_text"));
                 note.setDateCreate(resultSet.getDate("creation_date_time"));
                 note.setDeleted(resultSet.getBoolean("is_deleted"));
-                company.setId(resultSet.getInt("company_id"));
+
+                company = (Company) companyDao.getById(resultSet.getInt("company_id"));
                 note.setCompany(company);
-                contact.setId(resultSet.getInt("contact_id"));
+
+                contact = (Contact) contactDao.getById(resultSet.getInt("contact_id"));
                 note.setContact(contact);
-                deal.setId(resultSet.getInt("deal_id"));
+
+                deal = (Deal) dealDao.getById(resultSet.getInt("deal_id"));
                 note.setDeal(deal);
 
                 notes.add(note);
@@ -144,20 +175,29 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
     @Override
     Note getEntity(ResultSet resultSet) throws DaoException {
         Note note = new Note();
-        UserDao<User> user = new UserDaoImpl();
-        CompanyDao<Company> company = new CompanyDaoImpl();
-        ContactDao<Contact> contact = new ContactDaoImpl();
-        DealDao<Deal> deal = new DealDaoImpl();
+        User user = new User();
+        Company company = new Company();
+        Contact contact = new Contact();
+        Deal deal = new Deal();
 
         try {
             note.setId(resultSet.getInt("id"));
-            note.setCreatedUser(user.getById(resultSet.getInt("created_by_user_id")));
+
+            user = (User) userDao.getById(resultSet.getInt("created_by_user_id"));
+            note.setCreatedUser(user);
+
             note.setNoteText(resultSet.getString("note_text"));
-            note.setDateCreate(resultSet.getDate("creation_date_time"));
+            note.setDateCreate(resultSet.getDate("created_date_time"));
             note.setDeleted(resultSet.getBoolean("is_deleted"));
-            note.setCompany(company.getById(resultSet.getInt("company_id")));
-            note.setContact(contact.getById(resultSet.getInt("contact_id")));
-            note.setDeal(deal.getById(resultSet.getInt("deal_id")));
+
+            company = (Company) companyDao.getById(resultSet.getInt("company_id"));
+            note.setCompany(company);
+
+            contact = (Contact) contactDao.getById(resultSet.getInt("contact_id"));
+            note.setContact(contact);
+
+            deal = (Deal) dealDao.getById(resultSet.getInt("deal_id"));
+            note.setDeal(deal);
 
         } catch (SQLException e) {
             throw new DaoException("Can't get entity from Note", e);
@@ -171,8 +211,8 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         User user;
         Note note;
 
-        try (Connection connection = PostgresDaoFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST)) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_NOTE_FOR_LIST)) {
             statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -190,4 +230,5 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         }
         return notes;
     }
+
 }

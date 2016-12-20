@@ -4,13 +4,15 @@ import com.becomejavasenior.DAO.AddressDao;
 import com.becomejavasenior.DAO.CompanyDao;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.UserDao;
-import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.Address;
 import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.bean.User;
-import org.springframework.stereotype.Component;
+import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +22,26 @@ import java.util.List;
 
 @Repository("companyDao")
 public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyDao<Company> {
+
+    @Autowired
+    public CompanyDaoImpl(DataSource dataSource) {
+        super(dataSource);
+    }
+
+    @Autowired
+    DataSource dataSource;
+
+    @Autowired
+    @Qualifier("companyDao")
+    CompanyDao companyDao;
+
+    @Autowired
+    @Qualifier("userDao")
+    UserDao userDao;
+
+    @Autowired
+    @Qualifier("addressDao")
+    AddressDao addressDao;
 
     @Override
     public void createStatement(PreparedStatement statement, Company company) throws DaoException {
@@ -32,7 +54,6 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.isDeleted());
-            statement.setInt(8, company.getAddress().getId());
         } catch (SQLException e) {
 
             throw new DaoException("Can't create statement for Company", e);
@@ -52,7 +73,7 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.isDeleted());
-            statement.setInt(8, company.getAddress().getId());
+            statement.setInt(8, company.getId());
 
         } catch (SQLException e) {
 
@@ -78,8 +99,8 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
     public Company getEntity(ResultSet resultSet) throws DaoException {
 
         Company company = new Company();
-        AddressDao<Address> addressDao = new AddressDaoImpl();
-        UserDao<User> user = new UserDaoImpl();
+        User user;
+        Address address;
 
         try{
             company.setId(resultSet.getInt("id"));
@@ -87,9 +108,13 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             company.setPhoneNumber(resultSet.getString("phone_number"));
             company.setEmail(resultSet.getString("email"));
             company.setWebsite(resultSet.getString("website"));
-            company.setAddress(addressDao.getById(resultSet.getInt("address_id")));
-/*            company.setResponsibleUser(userDao.getById(resultSet.getInt("responsible_user_id")));*/
-/*            company.setDeleted(resultSet.getBoolean("is_deleted"));*/
+
+            address = (Address) addressDao.getById(resultSet.getInt("address_id"));
+            company.setAddress(address);
+
+            user = (User) userDao.getById(resultSet.getInt("responsible_user_id"));
+            company.setResponsibleUser(user);
+            company.setDeleted(resultSet.getBoolean("is_deleted"));
 
         } catch (SQLException e){
 
@@ -104,7 +129,7 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
     }
 
     public String getUpdateQuery() {
-        return "UPDATE crm_pallas.company SET title = ?, phone_number = ?, email = ?, website = ?, address_id = ?, responsible_user_id = ?, is_deleted = ?";
+        return "UPDATE crm_pallas.company SET title = ?, phone_number = ?, email = ?, website = ?, address_id = ?, responsible_user_id = ?, is_deleted = ? WHERE id = ?";
     }
 
     public String getDeleteQuery() {
@@ -124,7 +149,7 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
         List<Company> companyList = new ArrayList<Company>();
 
         try {
-            Connection connection = DataBaseUtil.getConnection();
+            Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -138,4 +163,5 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
 
         return companyList;
     }
+
 }
