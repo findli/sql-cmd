@@ -1,4 +1,4 @@
-package com.becomejavasenior.DAO.Imp;
+/*package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DataBaseUtil;
@@ -224,4 +224,4 @@ public class ContactDaoImpl extends AbstractDaoImpl<Contact> implements ContactD
         return contactList;
     }
 
-}
+}*/

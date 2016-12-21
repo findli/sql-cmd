@@ -2,9 +2,6 @@ package com.becomejavasenior.factory;
 
 import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DAO.Imp.*;
-import com.becomejavasenior.DAO.JdbcTempale.DealDaoJdbcTemplateImpl;
-import com.becomejavasenior.DAO.StageDao;
-import com.becomejavasenior.DataBaseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,10 +28,10 @@ public class PostgresDaoFactory extends AbstractDaoFactory {
         return new CompanyDaoImpl(dataSource);
     }
 
-    @Override
+ /*   @Override
     public ContactDao getContactDao() {
         return new ContactDaoImpl(dataSource);
-    }
+    }*/
 
 //    @Override
 //    public DealDao getDealDao() {
