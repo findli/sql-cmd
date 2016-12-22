@@ -41,7 +41,7 @@
                 <li><a href="/contact" target="_self">Contacts</a></li>
                 <li><a href="/taskList" target="_self">Tasks</a></li>
                 <li><a href="#" target="_self">Analitics</a></li>
-                <li><a href="#" target="_self">Settings</a></li>
+                <li><a href="/settings" target="_self">Settings</a></li>
             </ul>
         </div>
 

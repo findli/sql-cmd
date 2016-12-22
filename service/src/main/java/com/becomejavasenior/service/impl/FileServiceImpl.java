@@ -5,13 +5,21 @@ import com.becomejavasenior.DAO.FileDao;
 import com.becomejavasenior.DAO.Imp.FileDaoImpl;
 import com.becomejavasenior.bean.File;
 import com.becomejavasenior.service.FileService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
 import java.util.List;
 
-
+@Service(value = "fileService")
 public class FileServiceImpl implements FileService {
 
-    private final FileDao<File> fileDao = new FileDaoImpl();
+    private final FileDao fileDao;
+
+    @Autowired
+    public FileServiceImpl(FileDao fileDao) {
+        this.fileDao = fileDao;
+    }
 
     @Override
     public File create(File t) throws DaoException {
