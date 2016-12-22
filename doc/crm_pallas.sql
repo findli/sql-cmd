@@ -379,7 +379,7 @@ CREATE TABLE crm_pallas."file" (
 
 CREATE INDEX idx_file ON crm_pallas."file" ( note_id );
 
-ALTER TABLE company ADD FOREIGN KEY ( responsible_user_id ) REFERENCES crm_pallas."user"( id );
+ALTER TABLE crm_pallas.company ADD FOREIGN KEY ( responsible_user_id ) REFERENCES crm_pallas."user"( id );
 
-ALTER TABLE contact ADD FOREIGN KEY ( company_id ) REFERENCES crm_pallas.company( id );
+ALTER TABLE crm_pallas.contact ADD FOREIGN KEY ( company_id ) REFERENCES crm_pallas.company( id );
 

@@ -2,6 +2,7 @@ package com.becomejavasenior.factory;
 
 import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DAO.Imp.*;
+import com.becomejavasenior.DAO.JdbcTempale.DealDaoJdbcTemplateImpl;
 import com.becomejavasenior.DAO.StageDao;
 import com.becomejavasenior.DataBaseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,47 +27,48 @@ public class PostgresDaoFactory extends AbstractDaoFactory {
 
 
     @Override
-    public CompanyDao getCompanyDAO() {
+    public CompanyDao getCompanyDao() {
         return new CompanyDaoImpl(dataSource);
     }
 
     @Override
-    public ContactDao getContactDAO() {
+    public ContactDao getContactDao() {
         return new ContactDaoImpl(dataSource);
     }
 
-    @Override
-    public DealDao getDealDAO() {
-        return new DealDaoImpl(dataSource);
-    }
+//    @Override
+//    public DealDao getDealDao() {
+//        return new DealDaoJdbcTemplateImpl(dataSource);
+//    }
 
     @Override
-    public TaskDao getTaskDAO() {
+    public TaskDao getTaskDao() {
         return new TaskDaoImpl(dataSource);
     }
 
     @Override
-    public UserDao getUserDAO() {
+    public UserDao getUserDao() {
         return new UserDaoImpl(dataSource);
     }
 
     @Override
-    public StageDao getStageDAO() {
+    public StageDao getStageDao() {
         return new StageDaoImpl(dataSource);
     }
 
     @Override
-    public PeriodInDaysTypeDao getPeriodInDaysTypeDAO() {
+    public PeriodInDaysTypeDao getPeriodInDaysTypeDao() {
         return new PeriodInDaysTypeDaoImpl(dataSource);
     }
 
     @Override
-    public TaskTypeDao getTaskTypeDAO() {
+    public TaskTypeDao getTaskTypeDao() {
         return new TaskTypeDaoImpl(dataSource);
     }
 
     @Override
-    public AddressDao getAddressDAO() {
+    public AddressDao getAddressDao() {
         return new AddressDaoImpl(dataSource);
     }
+
 }

@@ -95,7 +95,7 @@ public class DealServiceImpl implements DealService {
         contact = contactWithId(contact);
         deal.setPrimaryContact(contact);
 
-        company = companyWithId(company);
+        company = (Company) companyDao.getByName(company.getTitle());
         deal.setCompany(company);
 
         Stage stage;
@@ -105,10 +105,10 @@ public class DealServiceImpl implements DealService {
         User user = (User) userDao.getByName(deal.getResponsibleUser().getlName());
         deal.setResponsibleUser(user);
 
-        dealDao.create(deal);
+        deal = (Deal) dealDao.create(deal);
 
         if(!note.getNoteText().equals("")) {
-            deal = (Deal) dealDao.getByName(note.getDeal().getTitle());
+//            deal = (Deal) dealDao.getByName(note.getDeal().getTitle());
             note.setDeal(deal);
             noteDao.create(note);
         }
@@ -133,15 +133,15 @@ public class DealServiceImpl implements DealService {
         return contact;
     }
 
-    public Company companyWithId(Company company) throws ClassNotFoundException, DaoException {
-
-        List<Company> companies = companyDao.getAll();
-        for(int i = 0; i < companies.size(); i++) {
-            if(companies.get(i).getTitle().equals(company.getTitle())) {
-                company = companies.get(i);
-                break;
-            }
-        }
-        return company;
-    }
+//    public Company companyWithId(Company company) throws ClassNotFoundException, DaoException {
+//
+//        List<Company> companies = companyDao.getAll();
+//        for(int i = 0; i < companies.size(); i++) {
+//            if(companies.get(i).getTitle().equals(company.getTitle())) {
+//                company = companies.get(i);
+//                break;
+//            }
+//        }
+//        return company;
+//    }
 }
