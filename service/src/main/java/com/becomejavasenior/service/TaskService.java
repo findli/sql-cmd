@@ -7,6 +7,7 @@ import com.becomejavasenior.bean.*;
 import java.util.List;
 
 public interface TaskService {
+
     List<Task> getAll() throws DaoException, ClassNotFoundException;
 
     void addTask(Task task) throws DaoException;

@@ -3,13 +3,22 @@ package com.becomejavasenior.DAO.Imp;
 import com.becomejavasenior.DAO.CrmCurrencyDao;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.CrmCurrency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository("crmCurrencyDao")
 public class CrmCurrencyDaoImpl extends AbstractDaoImpl<CrmCurrency> implements CrmCurrencyDao<CrmCurrency>{
+
+    @Autowired
+    public CrmCurrencyDaoImpl(DataSource dataSource) {
+        super(dataSource);
+    }
 
     @Override
     public String getCreateQuery(){
@@ -78,4 +87,5 @@ public class CrmCurrencyDaoImpl extends AbstractDaoImpl<CrmCurrency> implements 
     public List<CrmCurrency> getByFilter(String query) {
         return null;
     }
+
 }

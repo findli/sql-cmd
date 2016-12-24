@@ -9,8 +9,17 @@ public class Phone implements Serializable {
     private User user;
     private PhoneType phoneType;
     private String phoneNumber;
+    private Contact contact;
 
     public Phone() {
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 
     public int getId() {

@@ -1,6 +1,6 @@
 package com.becomejavasenior;
 
-import com.becomejavasenior.exceptions.DatabaseException;
+import com.becomejavasenior.DAO.DatabaseException;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.io.IOException;
@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Properties;

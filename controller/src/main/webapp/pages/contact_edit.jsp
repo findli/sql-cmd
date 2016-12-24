@@ -205,35 +205,21 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Name" id="editDealCompanyName" name="editDealCompanyName">
+                                <input class="form-control" type="text" placeholder="Name" id="editDealContactName" name="editDealContactName">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Phone </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag" id="editDealCompanyPhone" name="editDealCompanyPhone">
+                                <input class="form-control" type="text" placeholder="Tag" id="editDealContactPhone" name="editDealCompanyPhone">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">email </label>
+                            <label class="col-sm-3 control-label">Budget </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag" id="editDealCompanyEmail" name="editDealCompanyEmail">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Web </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag" id="editDealCompanyWeb" name="editDealCompanyWeb">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Address </label>
-                            <div class="col-sm-9">
-                                <textarea class="form-control" placeholder="Address" id="editDealCompanyAddress" name="editDealCompanyAddress"></textarea>
+                                <input class="form-control" type="text" placeholder="Tag" id="editContactDealBudget" name="editContactDealBudget">
                             </div>
                         </div>
 
@@ -282,14 +268,14 @@
     </div>
 </div>
 <%--<script type="text/javascript">--%>
-<%--$(function () {--%>
-<%--$('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
-<%--});--%>
+    <%--$(function () {--%>
+        <%--$('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});--%>
+    <%--});--%>
 <%--</script>--%>
 </body>
-<script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
 </html>

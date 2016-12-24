@@ -21,7 +21,7 @@
             <p>Logo</p>
         </div>
         <div class="header__title">
-            <h3>Company List</h3>
+            <h3>Home</h3>
             <div class="header__user">
                 <div class="header__user--photo">
                     <i class="fa fa-user"></i>
@@ -59,8 +59,8 @@
 
 </body>
 
-<script title="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-<script title="text/javascript" src="../js/script.js"></script>
-<script title="text/javascript" src="../js/moment-with-locales.min.js"></script>
-<script title="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
+<script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 </html>

@@ -1,11 +1,14 @@
 package com.becomejavasenior.DAO.Imp;
 
+
 import com.becomejavasenior.DAO.AddressDao;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Address;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +16,11 @@ import java.util.List;
 
 @Repository("addressDao")
 public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressDao<Address> {
+
+    @Autowired
+    public AddressDaoImpl(DataSource dataSource) {
+        super(dataSource);
+    }
 
     @Override
     public void createStatement(PreparedStatement statement, Address address) throws DaoException {
@@ -44,7 +52,6 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
             statement.setString(4, address.getBuildNum());
             statement.setInt(5, address.getZipcode());
             statement.setString(6, address.getOfficeRoom());
-            statement.setInt(7, address.getId());
 
         } catch (SQLException e) {
 
@@ -87,7 +94,7 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
     }
 
     public String getUpdateQuery() {
-        return "UPDATE crm_pallas.address SET country = ?, city = ?, street = ?, building_number = ?, zipcode = ?, office_room = ? WHERE id = ?";
+        return "UPDATE crm_pallas.address SET country = ?, city = ?, street = ?, building_number = ?, zipcode = ?, office_room = ?";
     }
 
     public String getDeleteQuery() {

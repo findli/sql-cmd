@@ -1,23 +1,30 @@
 package com.becomejavasenior.DAO.Imp;
 
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.LanguageDao;
 import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.bean.Language;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.exceptions.DatabaseException;
-
 import com.becomejavasenior.factory.PostgresDaoFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 
+
+
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository("userDao")
 public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> {
+
+    @Autowired
+    public UserDaoImpl(DataSource dataSource) {
+        super(dataSource);
+    }
+
     @Override
     void createStatement(PreparedStatement preparedStatement, User user) throws DaoException {
         try {
@@ -33,7 +40,6 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
             preparedStatement.setString(9, user.getNote());
             preparedStatement.setDate(10, (Date) user.getDateCreate());
             preparedStatement.setInt(11, user.getLanguage().getId());
-//            preparedStatement.setInt(11, user.getLanguage().getId());
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,7 +48,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
 
     @Override
     String getAllQuery() {
-        return "SELECT * FROM crm_pallas.user";
+        return "SELECT * FROM crm_pallas.user ORDER BY id";
     }
 
     @Override
@@ -52,12 +58,17 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
 
     @Override
     String getCreateQuery() {
-        return "INSERT INTO crm_pallas.user (last_name) VALUES(?)";
+        return "INSERT INTO crm_pallas.user (first_name, last_name, password_hash, email, is_admin, rights, photo_path, is_notification_enabled, note, creation_date_time, language_id) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     }
 
     @Override
     String getDeleteQuery() {
         return "DELETE FROM crm_pallas.user WHERE id = ?";
+    }
+
+    @Override
+    public void delete(Integer id) throws DaoException {
+
     }
 
     @Override
@@ -76,7 +87,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     @Override
     User getEntity(ResultSet resultSet) throws DaoException {
         User user = new User();
-     /*   LanguageDao<Language> language = new LanguageDaoImpl();*/
+        Language language = new Language();
         try {
             user.setId(resultSet.getInt("id"));
             user.setlName(resultSet.getString("last_name"));
@@ -89,7 +100,9 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
             user.setNotification(resultSet.getBoolean("is_notification_enabled"));
             user.setNote(resultSet.getString("note"));
             user.setDateCreate(resultSet.getDate("creation_date_time"));
-//            user.setLanguage(language.getById(resultSet.getInt("language_id")));
+
+            language.setId(resultSet.getInt("language_id"));
+            user.setLanguage(language);
 
         } catch (SQLException e) {
             throw new DaoException("Can't get entity from Deal", e);
@@ -108,15 +121,11 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     }
 
     @Override
-    public void delete(Integer id) throws DaoException {
-        super.delete(id);
-    }
-
-    @Override
     public List<User> getAll() throws DaoException, ClassNotFoundException {
         List<User> users = new ArrayList<>();
         User user;
-        try (Connection connection = PostgresDaoFactory.getConnection();
+
+        try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 

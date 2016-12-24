@@ -1,6 +1,4 @@
 package com.becomejavasenior.DAO;
 
-
-public interface StageDao<Stage> extends AbstractDao<Stage> {
-
+public interface StageDao<Stage> extends AbstractDao<Stage>{
 }

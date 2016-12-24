@@ -77,6 +77,7 @@ public class DealCreateServlet extends HttpServlet {
         List<Contact> contactList = null;
 
         try {
+
             contactList = contactService.getAll();
             log.trace("get contactList in DealCreateServlet");
             TaskTypeList = taskTypeService.getAll();
