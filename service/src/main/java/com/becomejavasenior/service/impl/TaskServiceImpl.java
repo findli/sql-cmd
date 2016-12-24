@@ -6,24 +6,16 @@ import com.becomejavasenior.DAO.Imp.TaskDaoImpl;
 import com.becomejavasenior.DAO.TaskDao;
 import com.becomejavasenior.bean.Task;
 import com.becomejavasenior.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service(value = "taskService")
 public class TaskServiceImpl implements TaskService {
 
     List<Task> listTasks = new ArrayList<Task>();
-    private final TaskDao taskDAO;
+    TaskDao taskDAO = new TaskDaoImpl();
     Task task = null;
 
-    @Autowired
-    public TaskServiceImpl(TaskDao taskDAO) {
-        this.taskDAO = taskDAO;
-    }
 
     public List<Task> getAll() throws DaoException, ClassNotFoundException {
         listTasks = taskDAO.getAll();

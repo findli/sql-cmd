@@ -5,23 +5,13 @@ import com.becomejavasenior.bean.CrmCurrency;
 import com.becomejavasenior.bean.CrmSettings;
 import com.becomejavasenior.bean.Language;
 import com.becomejavasenior.bean.TimeZone;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Repository("crmSettingsDao")
-public class CrmSettingsDaoImpl extends AbstractDaoImpl<CrmSettings> implements CrmSettingsDao<CrmSettings> {
-
-    @Autowired
-    public CrmSettingsDaoImpl(DataSource dataSource) {
-        super(dataSource);
-    }
+public class CrmSettingsDaoImpl extends AbstractDaoImpl<CrmSettings> implements CrmSettingsDao<CrmSettings>{
 
     @Override
     public String getCreateQuery(){
@@ -73,24 +63,15 @@ public class CrmSettingsDaoImpl extends AbstractDaoImpl<CrmSettings> implements 
 
     @Override
     public CrmSettings getEntity(ResultSet resultSet) throws DaoException{
-
         CrmSettings crmSettings = new CrmSettings();
-        CrmCurrency crmCurrency = new CrmCurrency();
-        Language language = new Language();
-        TimeZone timeZone = new TimeZone();
-
+        LanguageDao<Language> languageDao = new LanguageDaoImpl();
+        TimeZoneDao<TimeZone> timeZoneDao = new TimeZoneDaoImpl();
+        CrmCurrencyDao<CrmCurrency> crmCurrencyDao = new CrmCurrencyDaoImpl();
         try {
             crmSettings.setId(resultSet.getInt("id"));
-
-            language.setId(resultSet.getInt("default_language_id"));
-            crmSettings.setLanguage(language);
-
-            timeZone.setId(resultSet.getInt("timezone_id"));
-            crmSettings.setTimeZone(timeZone);
-
-            crmCurrency.setId(resultSet.getInt("currency_id"));
-            crmSettings.setCrmCurrency(crmCurrency);
-
+            crmSettings.setLanguage(languageDao.getById(resultSet.getInt("default_language_id")));
+            crmSettings.setTimeZone(timeZoneDao.getById(resultSet.getInt("timezone_id")));
+            crmSettings.setCrmCurrency(crmCurrencyDao.getById(resultSet.getInt("currency_id")));
         }catch (SQLException e){
             throw new DaoException("Can't get entity from TimeZone", e);
         }
@@ -106,5 +87,4 @@ public class CrmSettingsDaoImpl extends AbstractDaoImpl<CrmSettings> implements 
     public List<CrmSettings> getByFilter(String query) {
         return null;
     }
-
 }

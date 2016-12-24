@@ -3,11 +3,9 @@ package com.becomejavasenior.DAO.Imp;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.PeriodInDaysTypeDao;
 import com.becomejavasenior.bean.PeriodInDaysType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,11 +13,6 @@ import java.util.List;
 
 @Repository("periodInDaysTypeDao")
 public class PeriodInDaysTypeDaoImpl extends AbstractDaoImpl<PeriodInDaysType> implements PeriodInDaysTypeDao<PeriodInDaysType> {
-
-    @Autowired
-    public PeriodInDaysTypeDaoImpl(DataSource dataSource) {
-        super(dataSource);
-    }
 
     @Override
     public String getCreateQuery(){
@@ -90,5 +83,4 @@ public class PeriodInDaysTypeDaoImpl extends AbstractDaoImpl<PeriodInDaysType> i
     public PeriodInDaysType getByName(String str) throws DaoException, ClassNotFoundException {
         return null;
     }
-
 }

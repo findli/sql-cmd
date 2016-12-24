@@ -4,22 +4,13 @@ import com.becomejavasenior.DAO.AbstractDao;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.TimeZoneDao;
 import com.becomejavasenior.bean.TimeZone;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Repository("timeZoneDao")
-public class TimeZoneDaoImpl extends AbstractDaoImpl<TimeZone> implements TimeZoneDao<TimeZone> {
-
-    @Autowired
-    public TimeZoneDaoImpl(DataSource dataSource) {
-        super(dataSource);
-    }
+public class TimeZoneDaoImpl extends AbstractDaoImpl<TimeZone> implements TimeZoneDao<TimeZone>{
 
     @Override
     public String getCreateQuery(){
@@ -50,7 +41,7 @@ public class TimeZoneDaoImpl extends AbstractDaoImpl<TimeZone> implements TimeZo
     public void createStatement(PreparedStatement preparedStatement, TimeZone timeZone) throws DaoException {
         try {
             preparedStatement.setString(1, timeZone.getTitle());
-            preparedStatement.setString(2, timeZone.getShiftInHours());
+            preparedStatement.setInt(2, timeZone.getShiftInHours());
         } catch (SQLException e) {
             throw new DaoException("Can't create statement for TimeZone", e);
         }
@@ -60,7 +51,7 @@ public class TimeZoneDaoImpl extends AbstractDaoImpl<TimeZone> implements TimeZo
     public void updateStatement(PreparedStatement preparedStatement, TimeZone timeZone) throws DaoException {
         try {
             preparedStatement.setString(1, timeZone.getTitle());
-            preparedStatement.setString(2, timeZone.getShiftInHours());
+            preparedStatement.setInt(2, timeZone.getShiftInHours());
         } catch (SQLException e) {
             throw new DaoException("Can't update statement for TimeZone", e);
         }
@@ -72,7 +63,7 @@ public class TimeZoneDaoImpl extends AbstractDaoImpl<TimeZone> implements TimeZo
         try {
             timeZone.setId(resultSet.getInt("id"));
             timeZone.setTitle(resultSet.getString("title"));
-            timeZone.setShiftInHours(resultSet.getString("shift_in_hours"));
+            timeZone.setShiftInHours(resultSet.getInt("shift_in_hours"));
         }catch (SQLException e){
             throw new DaoException("Can't get entity from TimeZone", e);
         }

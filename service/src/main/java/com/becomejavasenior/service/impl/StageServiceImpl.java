@@ -5,25 +5,16 @@ import com.becomejavasenior.DAO.Imp.StageDaoImpl;
 import com.becomejavasenior.DAO.StageDao;
 import com.becomejavasenior.bean.Stage;
 import com.becomejavasenior.service.StageService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.sql.DataSource;
 import java.util.List;
 
-@Service(value = "stageService")
 public class StageServiceImpl implements StageService {
 
-    private StageDao stageDAO;
-
-    @Autowired
-    public StageServiceImpl(StageDao stageDAO) {
-        this.stageDAO = stageDAO;
-    }
+    private StageDao<Stage> stageDAO = new StageDaoImpl();
 
     @Override
     public Stage create(Stage stage) throws DaoException {
-        return (Stage) stageDAO.create(stage);
+        return stageDAO.create(stage);
     }
 
     @Override
@@ -34,7 +25,7 @@ public class StageServiceImpl implements StageService {
 
     @Override
     public Stage getByName(String str) throws DaoException, ClassNotFoundException {
-        return (Stage) stageDAO.getByName(str);
+        return stageDAO.getByName(str);
     }
 
     @Override
@@ -44,7 +35,7 @@ public class StageServiceImpl implements StageService {
 
     @Override
     public Stage getById(int id) throws DaoException {
-        return (Stage) stageDAO.getById(id);
+        return stageDAO.getById(id);
     }
 
     @Override

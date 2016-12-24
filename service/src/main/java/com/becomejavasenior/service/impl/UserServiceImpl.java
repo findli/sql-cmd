@@ -5,20 +5,12 @@ import com.becomejavasenior.DAO.Imp.UserDaoImpl;
 import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.sql.DataSource;
 import java.util.List;
 
-@Service(value = "userService")
 public class UserServiceImpl implements UserService {
 
-    private final UserDao<User> userDao;
-
-    public UserServiceImpl(UserDao<User> userDao) {
-        this.userDao = userDao;
-    }
+    private UserDao<User> userDao = new UserDaoImpl();
 
     @Override
     public User create(User user) throws DaoException {

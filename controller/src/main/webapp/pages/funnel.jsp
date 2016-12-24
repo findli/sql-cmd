@@ -216,6 +216,10 @@
 <script type="text/javascript" src="../js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+<<<<<<< HEAD
+<%--<!-- <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script> -->--%>
+=======
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+>>>>>>> 017e3047a6f8419588546e7b83d18b7ac34ce64a
 <script type="text/javascript" src="../js/script.js"></script>
 </html>

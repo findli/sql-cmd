@@ -1,25 +1,17 @@
 package com.becomejavasenior.service.impl;
 
+
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.Imp.NoteDaoImpl;
 import com.becomejavasenior.DAO.NoteDao;
 import com.becomejavasenior.bean.Note;
 import com.becomejavasenior.service.NoteService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.sql.DataSource;
 import java.util.List;
 
-@Service(value = "noteService")
 public class NoteServiceImpl implements NoteService {
 
-    private final NoteDao noteDao;
-
-    @Autowired
-    public NoteServiceImpl(NoteDao noteDao) {
-        this.noteDao = noteDao;
-    }
+    private final NoteDao noteDao = new NoteDaoImpl();
 
     @Override
     public Note create(Note t) throws DaoException {

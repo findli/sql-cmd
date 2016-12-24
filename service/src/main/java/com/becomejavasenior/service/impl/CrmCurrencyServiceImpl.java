@@ -5,24 +5,16 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.Imp.CrmCurrencyDaoImpl;
 import com.becomejavasenior.bean.CrmCurrency;
 import com.becomejavasenior.service.CrmCurrencyService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service(value = "crmCurrencyService")
 public class CrmCurrencyServiceImpl implements CrmCurrencyService{
 
-    private final CrmCurrencyDao crmCurrencyDao;
-
-    @Autowired
-    public CrmCurrencyServiceImpl(CrmCurrencyDao crmCurrencyDao) {
-        this.crmCurrencyDao = crmCurrencyDao;
-    }
+    CrmCurrencyDao<CrmCurrency> crmCurrencyDao = new CrmCurrencyDaoImpl();
 
     @Override
     public CrmCurrency create(CrmCurrency crmCurrency) throws DaoException {
-        return (CrmCurrency) crmCurrencyDao.create(crmCurrency);
+        return crmCurrencyDao.create(crmCurrency);
     }
 
     @Override
@@ -37,7 +29,7 @@ public class CrmCurrencyServiceImpl implements CrmCurrencyService{
 
     @Override
     public CrmCurrency getById(int id) throws DaoException {
-        return (CrmCurrency) crmCurrencyDao.getById(id);
+        return crmCurrencyDao.getById(id);
     }
 
     @Override

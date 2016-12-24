@@ -4,11 +4,8 @@ package com.becomejavasenior.DAO.Imp;
 import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.factory.PostgresDaoFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,35 +26,15 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
             "  JOIN crm_pallas.company on crm_pallas.company_task.company_id = crm_pallas.company.id\n" +
             "WHERE crm_pallas.company.id = ? AND crm_pallas.task.is_finished = FALSE;";
 
-
-    @Autowired
-    public TaskDaoImpl(DataSource dataSource) {
-        super(dataSource);
-    }
-
-    @Autowired
-    DataSource dataSource;
-
-    @Autowired
-    @Qualifier("userDao")
-    UserDao userDao;
-
-    @Autowired
-    @Qualifier("taskTypeDao")
-    TaskTypeDao taskTypeDao;
-
-    @Autowired
-    @Qualifier("periodInDaysTypeDao")
-    PeriodInDaysTypeDao periodInDaysTypedao;
-
     @Override
+
     public List<Task> getTasksForList(int id) {
         List<Task> tasks = new ArrayList<>();
         Task task;
         TaskType taskType;
         User responsibleUser;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = PostgresDaoFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_TASKS_FOR_LIST)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -150,16 +127,19 @@ public class TaskDaoImpl extends AbstractDaoImpl<Task> implements TaskDao<Task> 
     @Override
     public Task getEntity(ResultSet resultSet) throws DaoException{
         Task task = new Task();
+        TaskTypeDao<TaskType> taskType = new TaskTypeDaoImpl();
+        PeriodInDaysTypeDao<PeriodInDaysType> periodInDaysType = new PeriodInDaysTypeDaoImpl();
+        UserDao<User> user = new UserDaoImpl();
         try {
             task.setId(resultSet.getInt("id"));
             task.setTitle(resultSet.getString("title"));
-            task.setTaskType((TaskType) taskTypeDao.getById(resultSet.getInt("task_type_id")));
+            task.setTaskType(taskType.getById(resultSet.getInt("task_type_id")));
             task.setDescription(resultSet.getString("description"));
             task.setDeadlineDate(resultSet.getDate("deadline_date"));
             task.setDeadlineTime(resultSet.getTime("deadline_time"));
-            task.setPeriodInDaysType((PeriodInDaysType) periodInDaysTypedao.getById(resultSet.getInt("period_in_days_type_id")));
+            task.setPeriodInDaysType(periodInDaysType.getById(resultSet.getInt("period_in_days_type_id")));
             task.setPeriodInMinutes(resultSet.getInt("period_in_minutes"));
-            task.setResponsibleUser((User) userDao.getById(resultSet.getInt("responsible_user_id")));
+            task.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
             task.setFinished(resultSet.getBoolean("is_finished"));
             task.setDeleted(resultSet.getBoolean("is_deleted"));
         } catch (SQLException e){

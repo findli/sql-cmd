@@ -4,29 +4,16 @@ import com.becomejavasenior.DAO.AbstractDao;
 
 
 import com.becomejavasenior.DAO.DaoException;
+import com.becomejavasenior.DataBaseUtil;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
 public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 
     public static Logger log = Logger.getLogger(AbstractDaoImpl.class);
-
-    @Autowired
-    private final DataSource dataSource;
-
-    protected AbstractDaoImpl(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
 
     @Override
     public T create(T entity) throws DaoException {
@@ -35,8 +22,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
         try {
-            connection = getConnection();
-            log.trace("Open connection for create " + entity);
+            connection = DataBaseUtil.getConnection();
             String query = getCreateQuery();
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             createStatement(preparedStatement, entity);
@@ -74,7 +60,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
-            connection = getConnection();
+            connection = DataBaseUtil.getConnection();
             String query = getUpdateQuery();
             preparedStatement = connection.prepareStatement(query);
             updateStatement(preparedStatement, entity);
@@ -94,7 +80,6 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
                 logOrIgnore.printStackTrace();
             }
         }
-
         return updateEntity;
     }
 
@@ -106,7 +91,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
-            connection = getConnection();
+            connection = DataBaseUtil.getConnection();
             String query = getDeleteQuery();
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
@@ -135,14 +120,13 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
         try {
-            connection = getConnection();
+            connection = DataBaseUtil.getConnection();
             String query = getByIdQuery();
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 entity = getEntity(resultSet);
-                log.trace("get " + entity);
             }
         } catch (SQLException e) {
             throw new DaoException("Can't get Entity by ID", e);
@@ -173,9 +157,10 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         ResultSet resultSet;
         List<T> listEntity = new ArrayList<>();
         try {
-            log.trace("Open connection for getAll");
-            connection = getConnection();
+            log.trace("Open connection");
+            connection = DataBaseUtil.getConnection();
             String query = getAllQuery();
+            log.trace("Create statement");
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
             log.trace("Get resultset");
@@ -216,9 +201,5 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     abstract String getAllQuery();
 
     public abstract List<T> getByFilter(String query);
-
-    protected Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
-    }
 
 }

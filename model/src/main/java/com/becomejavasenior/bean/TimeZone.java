@@ -8,7 +8,7 @@ public class TimeZone implements Serializable{
 
     private int id;
     private String title;
-    private String shiftInHours;
+    private int shiftInHours;
     private List<CrmSettings> settingses;
 
     public TimeZone(){}
@@ -21,7 +21,7 @@ public class TimeZone implements Serializable{
         this.title = title;
     }
 
-    public void setShiftInHours(String shiftInHourse) {
+    public void setShiftInHours(int shiftInHourse) {
         this.shiftInHours = shiftInHourse;
     }
 
@@ -37,7 +37,7 @@ public class TimeZone implements Serializable{
         return title;
     }
 
-    public String getShiftInHours() {
+    public int getShiftInHours() {
         return shiftInHours;
     }
 
@@ -61,7 +61,7 @@ public class TimeZone implements Serializable{
     public int hashCode() {
         int result = id;
         result = 31 * result + title.hashCode();
-//        result = 31 * result + shiftInHours;
+        result = 31 * result + shiftInHours;
         return result;
     }
 

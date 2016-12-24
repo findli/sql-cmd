@@ -5,24 +5,16 @@ import com.becomejavasenior.DAO.Imp.LanguageDaoImpl;
 import com.becomejavasenior.DAO.LanguageDao;
 import com.becomejavasenior.bean.Language;
 import com.becomejavasenior.service.LanguageService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service(value = "languageService")
 public class LanguageServiceImpl implements LanguageService{
 
-    private final LanguageDao languageDao;
-
-    @Autowired
-    public LanguageServiceImpl(LanguageDao languageDao) {
-        this.languageDao = languageDao;
-    }
+    LanguageDao<Language> languageDao = new LanguageDaoImpl();
 
     @Override
     public Language create(Language language) throws DaoException {
-        return (Language) languageDao.create(language);
+        return languageDao.create(language);
     }
 
     @Override
@@ -37,7 +29,7 @@ public class LanguageServiceImpl implements LanguageService{
 
     @Override
     public Language getById(int id) throws DaoException {
-        return (Language) languageDao.getById(id);
+        return languageDao.getById(id);
     }
 
     @Override

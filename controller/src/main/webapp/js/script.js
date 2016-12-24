@@ -86,7 +86,7 @@ $(function () {
                 room : room,
                 action: 'addDealCompany'
             },
-            url: '/dealCreate',
+            url: '/dealCreate2',
             success:function(result) {
                 $('#result3').html(result);
             }

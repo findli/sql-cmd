@@ -95,7 +95,7 @@ public class DealServiceImpl implements DealService {
         contact = contactWithId(contact);
         deal.setPrimaryContact(contact);
 
-        company = (Company) companyDao.getByName(company.getTitle());
+        company = companyWithId(company);
         deal.setCompany(company);
 
         Stage stage;
@@ -105,10 +105,10 @@ public class DealServiceImpl implements DealService {
         User user = (User) userDao.getByName(deal.getResponsibleUser().getlName());
         deal.setResponsibleUser(user);
 
-        deal = (Deal) dealDao.create(deal);
+        dealDao.create(deal);
 
         if(!note.getNoteText().equals("")) {
-//            deal = (Deal) dealDao.getByName(note.getDeal().getTitle());
+            deal = (Deal) dealDao.getByName(note.getDeal().getTitle());
             note.setDeal(deal);
             noteDao.create(note);
         }
@@ -120,7 +120,7 @@ public class DealServiceImpl implements DealService {
         return dealDao.getDealsByStage(stage);
     }
 
-    // Необходимо править !!!
+    // Необходимо править
     public Contact contactWithId(Contact contact) throws ClassNotFoundException, DaoException {
 //        List<Contact> contacts = contactDao.getAll();
 //        for(int i = 0; i < contacts.size(); i++) {
@@ -133,15 +133,26 @@ public class DealServiceImpl implements DealService {
         return contact;
     }
 
-//    public Company companyWithId(Company company) throws ClassNotFoundException, DaoException {
-//
-//        List<Company> companies = companyDao.getAll();
-//        for(int i = 0; i < companies.size(); i++) {
-//            if(companies.get(i).getTitle().equals(company.getTitle())) {
-//                company = companies.get(i);
-//                break;
-//            }
-//        }
-//        return company;
-//    }
+    public User responsibleUserWithId(User user) throws ClassNotFoundException, DaoException {
+        List<User> users = userDao.getAll();
+        for(int i = 0; i < users.size(); i++) {
+            if(users.get(i).getlName().equals(user.getlName())) {
+                user = users.get(i);
+                break;
+            }
+        }
+        return user;
+    }
+
+    public Company companyWithId(Company company) throws ClassNotFoundException, DaoException {
+
+        List<Company> companies = companyDao.getAll();
+        for(int i = 0; i < companies.size(); i++) {
+            if(companies.get(i).getTitle().equals(company.getTitle())) {
+                company = companies.get(i);
+                break;
+            }
+        }
+        return company;
+    }
 }
