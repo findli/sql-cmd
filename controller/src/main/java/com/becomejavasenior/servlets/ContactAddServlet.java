@@ -120,17 +120,15 @@ public class ContactAddServlet extends HttpServlet {
         Company company = null;
         Task task = null;
         Deal deal = null;
+        Note note = new Note();
 
         try {
             contact = getContactFromRequest(request);
-
             company = getCompanyFromRequest(request);
-            contact.setCompany(company);
             task = getTaskFromRequest(request);
-            //contact.setTasks(task);
-
             deal = getDealFromRequest(request);
-            // set deal
+
+            contactService.createNewContact(contact,deal, company, task, note);
 
         } catch (DaoException e) {
             e.printStackTrace();
@@ -140,17 +138,6 @@ public class ContactAddServlet extends HttpServlet {
         Tag tag = getTagFromRequest(request);
 
         File attachedFile = getFileFromRequest(request);
-
-     /*   try {
-
-
-            //contactService.createNewContact(contact, tag, attachedFile);
-
-        } catch (DaoException e) {
-
-        } catch (ClassNotFoundException e){
-
-        }*/
 
         response.sendRedirect("/contact");
     }
@@ -276,4 +263,5 @@ public class ContactAddServlet extends HttpServlet {
         int id = Integer.parseInt(text);
         return id;
     }
+
 }
