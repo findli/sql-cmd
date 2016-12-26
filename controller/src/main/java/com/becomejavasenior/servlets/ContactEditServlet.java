@@ -3,8 +3,6 @@ package com.becomejavasenior.servlets;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
-import com.becomejavasenior.service.impl.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -20,7 +18,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.logging.Logger;
 
 
 
@@ -59,6 +56,8 @@ public class ContactEditServlet extends HttpServlet {
     Company company;
     Address address;
     Stage stage;
+    List<Stage> stages;
+    List<User> users;
 
 
     @Override
@@ -69,63 +68,60 @@ public class ContactEditServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         HttpSession session = request.getSession();
+
+        contact = new Contact();
+        deal = new Deal();
+        company = new Company();
+        address = new Address();
+        stage = new Stage();
+        users = null;
+        stages = null;
+        String str = null;
 
         int idContact = 1;
         if (request.getParameter("idContact") != null) {
             idContact = Integer.parseInt(request.getParameter("idContact"));
-
-            contact = new Contact();
-            deal = new Deal();
-            company = new Company();
-            address = new Address();
-            stage = new Stage();
-            List<User> users = null;
-            List<Stage> stages = null;
-            List<Company> companies = null;
-            String str = null;
-
-            try {
-                contact = contactService.getById(idContact);
-                company = companyService.getById(contact.getCompany().getId());
-
-                deal = dealService.getById(1);
-
-//            deal = dealService.getById(contact.getDeal().getId());
-                stage = stageService.getById(deal.getStage().getId());
-
-            } catch (DaoException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                //   stages = stageService.getAll();
-                users = userService.getAll();
-                companies = companyService.getAll();
-            } catch (ClassNotFoundException e) {
-
-            } catch (DaoException e) {
-
-            }
-
-            String stageTitle = deal.getStage().getTitle();
-            session.setAttribute("stageTitle", stageTitle);
-
-//        stages.remove(stage.getId()-1);
-
-            String responsibleUser = deal.getResponsibleUser().getlName();
-            users.remove(deal.getResponsibleUser().getId() - 1);
-
-            session.setAttribute("contact", contact);
-            session.setAttribute("idContact", idContact);
-            session.setAttribute("deal", deal);
-            session.setAttribute("stages", stages);
-            session.setAttribute("stage", stage);
-            session.setAttribute("responsibleUser", responsibleUser);
-            session.setAttribute("users", users);
-            session.setAttribute("company", company);
-            session.setAttribute("companies", companies);
         }
+
+        try {
+            contact = contactService.getById(idContact);
+            company = companyService.getById(contact.getCompany().getId());
+            deal = dealService.getById(1);
+            stage = stageService.getById(deal.getStage().getId());
+            //deal = dealService.getById(contact.getDeal().getId());
+            //stages = stageService.getById(deal.getStage.getId());
+
+          } catch (DaoException e) {
+                e.printStackTrace();
+        }
+
+        try {
+            stages = stageService.getAll();
+            users = userService.getAll();
+        } catch (ClassNotFoundException e) {
+
+        } catch (DaoException e){
+
+        }
+
+        String stageTitle = deal.getStage().getTitle();
+        session.setAttribute("stageTitle", stageTitle);
+
+        stages.remove(stage.getId()-1);
+
+        String responsibleUser = deal.getResponsibleUser().getlName();
+        users.remove(deal.getResponsibleUser().getId()-1);
+
+        session.setAttribute("contact", contact);
+        session.setAttribute("idContact", idContact);
+        session.setAttribute("deal", deal);
+        session.setAttribute("stages", stages);
+        session.setAttribute("stage", stage);
+        session.setAttribute("responsibleUser", responsibleUser);
+        session.setAttribute("user", users);
+        session.setAttribute("company", company);
 
         request.getRequestDispatcher("/pages/contact_edit.jsp").forward(request, response);
 
