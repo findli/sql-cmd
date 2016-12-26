@@ -334,7 +334,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Title </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Name deal">
+                                <input class="form-control" type="text" placeholder="Name deal" name="dealName" id="dealName">
                             </div>
                         </div>
 
@@ -350,7 +350,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Budget </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="$">
+                                <input class="form-control" type="text" placeholder="$" name="dealBudget" id="dealBudget">
                             </div>
                         </div>
 
