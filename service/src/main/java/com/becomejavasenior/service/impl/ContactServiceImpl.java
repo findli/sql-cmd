@@ -69,6 +69,7 @@ public class ContactServiceImpl implements ContactService {
                                  Task task, Note note) throws DaoException, ClassNotFoundException {
 
         if(!task.getDeadlineDate().equals("")) {
+            task.setTitle("contact task");
             taskDao.create(task);
         }
 
@@ -76,15 +77,7 @@ public class ContactServiceImpl implements ContactService {
         tasks.add(task);
         contact.setTasks(tasks);
 
-        List<Company> companies = companyDao.getAll();
-        for ( Company comp : companies ) {
-            if (company.getTitle() == comp.getTitle()) {
-                contact.setCompany(company);
-            }
-        }
-        if (contact.getCompany().equals(null)) {
-            contact.setCompany(company);
-        }
+        contact.setCompany(company);
 
         Stage stage;
         stage = (Stage) stageDao.getById(1);
@@ -95,10 +88,10 @@ public class ContactServiceImpl implements ContactService {
 
         contact = (Contact) contactDao.create(contact);
 
-        if(!note.getNoteText().equals("")) {
+/*        if(!note.getNoteText().equals("")) {
             note.setContact(contact);
             noteDao.create(note);
-        }
+        }*/
     }
 
     public User responsibleUserWithId(User user) throws ClassNotFoundException, DaoException {
