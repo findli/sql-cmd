@@ -239,7 +239,7 @@ public class ContactAddServlet extends HttpServlet {
         Date date = null;
 
         try {
-            user = userService.getById(parseString(request.getParameter("ResponsibleUserTask")));
+            user = userService.getById(parseString(request.getParameter("responsibleUserTask")));
             taskType = taskTypeService.getById(parseString(request.getParameter("TaskType")));
             date = format.parse(request.getParameter("DeadlineDate"));
             periodInDaysType = periodService.getById(parseString(request.getParameter("PeriodInDaysType")));
