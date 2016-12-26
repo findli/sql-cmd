@@ -4,9 +4,6 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
 import org.apache.log4j.Logger;
-
-import com.becomejavasenior.service.impl.CompanyServiceImpl;
-import com.becomejavasenior.service.impl.ContactServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -217,7 +214,7 @@ public class ContactAddServlet extends HttpServlet {
         deal.setTitle(request.getParameter("dealName"));
 
         Stage stage = new Stage();
-        stage.setTitle(request.getParameter("stageTitle"));
+        stage.setTitle(request.getParameter("stageDeal"));
         deal.setStage(stage);
 
         if (!request.getParameter("dealBudget").isEmpty()) {
@@ -251,7 +248,7 @@ public class ContactAddServlet extends HttpServlet {
         task.setTaskType(taskType);
         task.setDeadlineDate(date);
         task.setPeriodInDaysType(periodInDaysType);
-        task.setPeriodInMinutes((int) date.getTime());
+    //    task.setPeriodInMinutes((int) date.getTime());
         task.setResponsibleUser(user);
         task.setFinished(false);
         task.setDeleted(false);

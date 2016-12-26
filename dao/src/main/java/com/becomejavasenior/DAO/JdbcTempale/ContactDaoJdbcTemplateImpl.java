@@ -61,7 +61,7 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact>
 
     @Override
     public List<Contact> getContactsForList(int id) {
-        List<Contact> contacts = namedParameterJdbcTemplate.query(SELECT_CONTACT_FOR_LIST, new ContactRowMapper());
+        List<Contact> contacts = namedParameterJdbcTemplate.query(SELECT_CONTACT_FOR_LIST.replace("?", String.valueOf(id)), new ContactRowMapper());
         return contacts;
     }
 
