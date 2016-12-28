@@ -58,7 +58,7 @@ public class ContactEditServlet extends HttpServlet {
     Stage stage;
     List<Stage> stages;
     List<User> users;
-
+    String str;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -146,8 +146,14 @@ public class ContactEditServlet extends HttpServlet {
         if (action.equals("editContactContact")) {
 //            log.trace("editContactContact");
 
+            getfNameContactFromRequest(request);
+            getlNameContactFromRequest(request);
+            getPositionFromRequest(request);
+            getEmailFromRequest(request);
+            getSkypeFromRequest(request);
+
             try {
-                //getPhoneFromRequest(request);
+                getPhoneFromRequest(request);
                 getUserFromRequest(request);
             } catch (DaoException e) {
 //                log.error("DAOException in ContactEditServlet in Controller layer", e);
@@ -159,8 +165,8 @@ public class ContactEditServlet extends HttpServlet {
 
         } else if (action.equals("editContactDeal")){
             deal = new Deal();
-        //    int idDeal = company.getDeal().getId();
-          //  int idStage = company.getDeal().getStage().getId();
+           // int idDeal = contact.getDeal().getId();
+           // int idStage = contact.getDeal().getStage().getId();
 
             //try {
           //      deal = dealService.getById(idDeal);
@@ -173,7 +179,7 @@ public class ContactEditServlet extends HttpServlet {
 
 
 
-            dealUpdate();
+          //  dealUpdate();
 
         } else if (action.equals("editContactCompany")){
             company = new Company();
@@ -206,6 +212,22 @@ public class ContactEditServlet extends HttpServlet {
 
         }
 
+    }
+
+    private void getfNameContactFromRequest(HttpServletRequest request) {
+        contact.setfName(request.getParameter("contactfName"));
+    }
+
+    private void getlNameContactFromRequest(HttpServletRequest request) {
+        contact.setlName(request.getParameter("contactlName"));
+    }
+
+    private void getPositionFromRequest(HttpServletRequest request) {
+        contact.setPosition(request.getParameter("contactPosition"));
+    }
+
+    private void getSkypeFromRequest(HttpServletRequest request) {
+        contact.setSkype(request.getParameter("skype"));
     }
 
     public String getRoomFromRequest(HttpServletRequest request) {
@@ -266,7 +288,7 @@ public class ContactEditServlet extends HttpServlet {
 
     public String getEmailFromRequest(HttpServletRequest request) {
 
-        String newEmail = request.getParameter("newEmail");
+        String newEmail = request.getParameter("email");
         company.setEmail(newEmail);
 
         return "Email = " + company.getEmail();
