@@ -1,4 +1,4 @@
-package ya.example;
+package testservlet.example;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

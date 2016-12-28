@@ -45,6 +45,7 @@
           factory-bean="connectionProvider"
           factory-method="getConnection"/>
 
+
     <bean id="ordering1" class="jss.w13_1.bean.dao.Ordering">
         <property name="field" value="name"/>
         <!--<property name="type">-->

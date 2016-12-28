@@ -71,7 +71,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
         } catch (SQLException e) {
             connection = null;
             throw new RuntimeException(
-                    String.format("Cant get connection for model:%s user:%s",
+                    String.format("Can't get connection for model:%s user:%s",
                             database, userName),
                     e);
         }

@@ -24,8 +24,9 @@ public class Clear implements Command {
         if (data.length != 2) {
             throw new IllegalArgumentException("Формат команды 'clear|tableName', а ты ввел: " + command);
         }
-        manager.clear(data[1]);
+        String tableName = data[1];
+        manager.clear(tableName);
 
-        view.write(String.format("Таблица %s была успешно очищена.", data[1]));
+        view.write(String.format("Таблица %s была успешно очищена.", tableName));
     }
 }
