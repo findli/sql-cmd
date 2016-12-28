@@ -76,7 +76,7 @@
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Responsible </label>
-                            <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
+                            <select class="col-sm-9 form-control" id="newUser" name="newUser">
                                 <option>${responsibleUser}</option>
                                 <c:forEach var="user" items="${users}">
                                     <option><c:out value="${user.lName}"/></option>
