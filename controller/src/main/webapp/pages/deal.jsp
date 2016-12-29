@@ -102,6 +102,7 @@
                                     <span class="input-group-addon">
                                         <span class="glyphicon-calendar glyphicon"></span>
                                     </span>
+
                                 </div>
                             </div>
                         </div>
@@ -207,4 +208,6 @@
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="../js/task.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
+
 </html>
+

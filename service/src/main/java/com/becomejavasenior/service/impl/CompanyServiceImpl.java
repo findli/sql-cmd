@@ -1,4 +1,11 @@
 package com.becomejavasenior.service.impl;
+
+import com.becomejavasenior.DAO.AbstractDao;
+import com.becomejavasenior.DAO.CompanyDao;
+import com.becomejavasenior.DAO.DaoException;
+import com.becomejavasenior.DAO.Imp.CompanyDaoImpl;
+import com.becomejavasenior.DAO.Imp.TaskDaoImpl;
+import com.becomejavasenior.DAO.Imp.UserDaoImpl;
 import com.becomejavasenior.DAO.AddressDao;
 import com.becomejavasenior.DAO.CompanyDao;
 import com.becomejavasenior.DAO.DaoException;
@@ -39,7 +46,6 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public List<Company> getAll() throws DaoException, ClassNotFoundException {
         log.trace("getAll() in CompanyServiceImpl");
-
         return companyDao.getAll();
     }
 

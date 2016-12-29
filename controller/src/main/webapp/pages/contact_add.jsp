@@ -53,6 +53,7 @@
                 <div class="forms">
 
                     <!--Add contact-->
+
                     <div class="forms--nContact">
                         <!--       <form class="form-horizontal">-->
                         <h2>Contact</h2>
@@ -89,10 +90,20 @@
                             <label class="col-sm-3 control-label">Responsible </label>
                             <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser" style="width: 150px;">
                                 <c:forEach var="user" items="${users}">
-                                    <option><c:out value="${user.lName}"/></option>
+                                    <option>
+                                        <c:out value="${user.fName}"/>
+                                        <c:out value="${user.lName}"/>
+                                    </option>
                                 </c:forEach>
                             </select>
                         </div>
+
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label">Position </label>--%>
+                            <%--<div class="col-sm-9">--%>
+                                <%--<input class="form-control" type="text" placeholder="position" name="position" id="position">--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
 
                         <div class="form-group">
                             <select class="col-sm-3 form-control">
@@ -154,8 +165,8 @@
 
                         <!-- Навигация -->
                         <ul class="nav nav-tabs" role="tablist">
-                            <li class="active"><a href="#old" aria-controls="old" role="tab" data-toggle="tab">Old company</a></li>
-                            <li><a href="#new" aria-controls="new" role="tab" data-toggle="tab">New company</a></li>
+                            <li class="active"><a href="#old" aria-controls="old" role="tab" data-toggle="tab">Companies</a></li>
+                            <li><a href="#new" aria-controls="new" role="tab" data-toggle="tab">New Company</a></li>
                         </ul>
 
                         <!-- Содержимое вкладок -->
@@ -173,37 +184,37 @@
 
                             <div role="tabpanel" class="tab-pane" id="new">
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Name: </label>
+                                    <label class="col-sm-3 control-label">Title: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Name">
+                                        <input class="form-control" type="text" name="nameCompany" placeholder="Name">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Phone: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Phone">
+                                        <input class="form-control" type="text" name="phoneCompany" placeholder="Phone">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">email: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="email">
+                                        <input class="form-control" type="text" name="emailCompany" placeholder="email">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Web: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Url">
+                                        <input class="form-control" type="text" name="webCompany" placeholder="Url">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Address: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Address">
+                                        <input class="form-control" type="text" name="addressCompany" placeholder="Address">
                                     </div>
                                 </div>
                             </div>
@@ -219,22 +230,19 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Period </label>
                             <div class="col-sm-9">
-                                <select class="form-control">
-                                    <option>Today</option>
-                                    <option>All day</option>
-                                    <option>Tommorow</option>
-                                    <option>Next week</option>
-                                    <option>Next month</option>
-                                    <option>Next year</option>
+                                <select class="form-control" name="PeriodInDaysType">
+                                    <c:forEach var="period" items="${PeriodInDaysTypeList}">
+                                        <option value="${period.getId()}"><c:out value="${period.getTitle()}"/></option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">Date and time </label>
+                            <label class="col-sm-3 control-label">Date and time </label>
                             <div class="col-sm-8">
                                 <div class="input-group date" id="datetimepicker">
-                                    <input type="text" class="form-control" />
+                                    <input type="text" name="DeadlineDate" class="form-control" />
                                     <span class="input-group-addon">
                                                 <span class="glyphicon-calendar glyphicon"></span>
                                             </span>
@@ -245,13 +253,13 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Responsible </label>
                             <div class="col-sm-9">
-                                <select class="form-control">
-                                    <option>Manager 1</option>
-                                    <option>Manager 2</option>
-                                    <option>Manager 3</option>
-                                    <option>Manager 4</option>
-                                    <option>Manager 5</option>
-                                    <option>Manager 6</option>
+                                <select class="form-control" name="responsibleUserTask">
+                                    <c:forEach var="user" items="${users}">
+                                        <option value="${user.getId()}">
+                                            <c:out value="${user.fName}"/>
+                                            <c:out value="${user.lName}"/>
+                                        </option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
@@ -259,10 +267,10 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Task type </label>
                             <div class="col-sm-9">
-                                <select class="form-control">
-                                    <option>Follow-up</option>
-                                    <option>Meeting</option>
-                                    <option>Order</option>
+                                <select class="form-control" name="TaskType">
+                                    <c:forEach var="taskType" items="${TaskTypeList}">
+                                        <option value="${taskType.getId()}"><c:out value="${taskType.getType()}"/></option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
@@ -273,14 +281,6 @@
                                 <textarea class="form-control" placeholder="Message"></textarea>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <input class="formAddBut" type="button" value="Применить">
-                                <input class="formAddBut" type="button" value="Очистить">
-                            </div>
-                        </div>
-
                         <!--   </form> -->
                     </div>
 
@@ -290,21 +290,19 @@
                         <h2>Deal</h2>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Name </label>
+                            <label class="col-sm-3 control-label">Title </label>
                             <div class="col-sm-9">
                                 <input class="form-control" type="text" placeholder="Name deal">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Status </label>
-                            <div class="col-sm-9">
-                                <select class="form-control">
-                                    <option>Deal off</option>
-                                    <option>in progress</option>
-                                    <option>pause</option>
-                                </select>
-                            </div>
+                            <label class="col-sm-3 control-label">Stage </label>
+                            <select class="col-sm-9 form-control" id="stageDeal" name="stageDeal">
+                                <c:forEach var="stage" items="${stageList}">
+                                    <option><c:out value="${stage.title}"/></option>
+                                </c:forEach>
+                            </select>
                         </div>
 
                         <div class="form-group">

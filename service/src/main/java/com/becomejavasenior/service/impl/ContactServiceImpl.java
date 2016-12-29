@@ -1,8 +1,12 @@
 package com.becomejavasenior.service.impl;
 
-import com.becomejavasenior.DAO.*;
-import com.becomejavasenior.DAO.Imp.*;
-import com.becomejavasenior.bean.*;
+import com.becomejavasenior.DAO.ContactDao;
+import com.becomejavasenior.DAO.DaoException;
+import com.becomejavasenior.DAO.UserDao;
+import com.becomejavasenior.bean.Contact;
+import com.becomejavasenior.bean.File;
+import com.becomejavasenior.bean.Tag;
+import com.becomejavasenior.bean.User;
 import com.becomejavasenior.service.ContactService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +32,6 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public Contact create(Contact contact) throws DaoException {
         return (Contact) contactDao.create(contact);
-
     }
 
     @Override

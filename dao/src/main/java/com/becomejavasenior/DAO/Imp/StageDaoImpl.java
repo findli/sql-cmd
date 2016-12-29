@@ -1,7 +1,5 @@
 package com.becomejavasenior.DAO.Imp;
 
-import java.sql.*;
-
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.Stage;
 import com.becomejavasenior.exceptions.DatabaseException;
@@ -10,7 +8,7 @@ import com.becomejavasenior.factory.PostgresDaoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
+import java.sql.*;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
@@ -146,5 +144,5 @@ public class StageDaoImpl extends AbstractDaoImpl<Stage> implements com.becomeja
         }
         return stages;
     }
-
 }
+

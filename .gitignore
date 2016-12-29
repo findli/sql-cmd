@@ -16,7 +16,6 @@ controller/controller.iml
 dao/dao.iml
 model/model.iml
 service/service.iml
-crm-system.iml
 
 crm-pallas.iml
 .DS_Store

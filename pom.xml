@@ -15,16 +15,23 @@
         <hibernate.version>5.1.2.Final</hibernate.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+        <encoding>UTF-8</encoding>   <!-- new-->
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
+        <project.resources.sourceEncoding>${encoding}</project.resources.sourceEncoding>
+        <archetype.encoding>${encoding}</archetype.encoding> <!-- -->
+
     </properties>
     <build>
         <plugins>
             <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-compiler-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<source>1.8</source>-->
-                    <!--<target>1.8</target>-->
-                <!--</configuration>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-compiler-plugin</artifactId>-->
+            <!--<configuration>-->
+            <!--<source>1.8</source>-->
+            <!--<target>1.8</target>-->
+            <!--</configuration>-->
             <!--</plugin>-->
             <!--Heroku-->
             <plugin>
@@ -72,15 +79,15 @@
         <!-- Put here PostgreSQL connector dependency-->
         <!-- add -->
         <!--<dependency>-->
-            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--<artifactId>jackson-core</artifactId>-->
-            <!--<version>2.6.3</version>-->
+        <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+        <!--<artifactId>jackson-core</artifactId>-->
+        <!--<version>2.6.3</version>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--<artifactId>jackson-databind</artifactId>-->
-            <!--<version>2.6.3</version>-->
+        <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+        <!--<artifactId>jackson-databind</artifactId>-->
+        <!--<version>2.6.3</version>-->
         <!--</dependency>-->
 
         <dependency>
@@ -174,33 +181,33 @@
 
         <!-- HIBERNATE -->
         <!--<dependency>-->
-            <!--<groupId>org.hibernate</groupId>-->
-            <!--<artifactId>hibernate-core</artifactId>-->
-            <!--<version>${hibernate.version}</version>-->
+        <!--<groupId>org.hibernate</groupId>-->
+        <!--<artifactId>hibernate-core</artifactId>-->
+        <!--<version>${hibernate.version}</version>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>cglib</groupId>-->
-            <!--<artifactId>cglib-nodep</artifactId>-->
-            <!--<version>2.2</version>-->
+        <!--<groupId>cglib</groupId>-->
+        <!--<artifactId>cglib-nodep</artifactId>-->
+        <!--<version>2.2</version>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>org.javassist</groupId>-->
-            <!--<artifactId>javassist</artifactId>-->
-            <!--<version>3.18.2-GA</version>-->
+        <!--<groupId>org.javassist</groupId>-->
+        <!--<artifactId>javassist</artifactId>-->
+        <!--<version>3.18.2-GA</version>-->
         <!--</dependency>-->
 
         <!-- VALIDATION -->
         <!--<dependency>-->
-            <!--<groupId>javax.validation</groupId>-->
-            <!--<artifactId>validation-api</artifactId>-->
-            <!--<version>1.1.0.Final</version>-->
+        <!--<groupId>javax.validation</groupId>-->
+        <!--<artifactId>validation-api</artifactId>-->
+        <!--<version>1.1.0.Final</version>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.hibernate</groupId>-->
-            <!--<artifactId>hibernate-validator</artifactId>-->
-            <!--<version>5.2.1.Final</version>-->
+        <!--<groupId>org.hibernate</groupId>-->
+        <!--<artifactId>hibernate-validator</artifactId>-->
+        <!--<version>5.2.1.Final</version>-->
         <!--</dependency>-->
 
 

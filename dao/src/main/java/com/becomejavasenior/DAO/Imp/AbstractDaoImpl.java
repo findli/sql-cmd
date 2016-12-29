@@ -171,7 +171,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
-        List<T> listEntity = new ArrayList<>();
+        List<T> listEntity = new ArrayList<T>();
         try {
             log.trace("Open connection for getAll");
             connection = getConnection();
@@ -222,3 +222,4 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     }
 
 }
+

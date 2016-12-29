@@ -182,7 +182,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         List<Stage> stages = new ArrayList<>();
         Stage stage;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_ALL_STAGES)) {
 
@@ -207,7 +207,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         Deal deal;
         Company company;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_DEAL_BY_STAGE)) {
 
             statement.setString(1, stage);
@@ -242,7 +242,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         Contact contact;
         UserDao<User> user = new UserDaoImpl(dataSource);
 
-        try (Connection connection = getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_CONTACT)) {
 
             statement.setString(1, dealTitle);
@@ -304,7 +304,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
     public List<Deal> getByFilter(String query) {
         List<Deal> dealList = new ArrayList<Deal>();
         try{
-            Connection connection = getConnection();
+            Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -328,8 +328,8 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         Company company;
         Contact contact;
         Stage stage;
+>>>>>>> master
 
-        try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 
@@ -372,7 +372,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         Company company;
         Stage stage;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST_BY_ID)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -415,7 +415,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao<Deal> 
         Company company;
         Stage stage;
 
-        try (Connection connection = getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST)) {
 
             ResultSet resultSet = statement.executeQuery();

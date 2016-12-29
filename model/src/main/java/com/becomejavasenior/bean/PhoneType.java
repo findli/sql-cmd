@@ -3,7 +3,8 @@ package com.becomejavasenior.bean;
 
 import java.io.Serializable;
 
-public class PhoneType implements Serializable {
+public class PhoneType implements Serializable{
+
 
     private int id;
     private String title;

@@ -58,6 +58,7 @@ public class CompanyListServlet extends HttpServlet {
         }
 
         session.setAttribute("companyList", companyList);
+
         req.getRequestDispatcher("pages/company.jsp").forward(req, resp);
     }
 

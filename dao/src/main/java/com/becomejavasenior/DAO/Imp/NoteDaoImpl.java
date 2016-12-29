@@ -4,6 +4,9 @@ import com.becomejavasenior.DAO.*;
 import com.becomejavasenior.DataBaseUtil;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.exceptions.DatabaseException;
+import com.becomejavasenior.factory.PostgresDaoFactory;
+import org.springframework.stereotype.Repository;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,7 +21,6 @@ import java.util.List;
 @Repository("noteDao")
 public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> {
 
-    @Autowired
     public NoteDaoImpl(DataSource dataSource) {
         super(dataSource);
     }
@@ -203,6 +205,7 @@ public class NoteDaoImpl extends AbstractDaoImpl<Note> implements NoteDao<Note> 
         }
         return note;
     }
+
     @Override
     public List<Note> getNotesForList(int id) {
         List<Note> notes = new ArrayList<>();

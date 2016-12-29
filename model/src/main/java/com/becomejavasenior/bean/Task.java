@@ -69,7 +69,6 @@ public class Task implements Serializable {
 
     public Time getDeadlineTime() {
         return deadlineTime;
-
     }
 
     public PeriodInDaysType getPeriodInDaysType() {

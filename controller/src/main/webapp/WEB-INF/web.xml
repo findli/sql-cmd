@@ -8,37 +8,6 @@
     <welcome-file-list>
         <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
- <!--
-    <servlet>
-        <servlet-name>companyList</servlet-name>
-        <servlet-class>com.becomejavasenior.servlets.CompanyListServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>companyList</servlet-name>
-        <url-pattern>/company</url-pattern>
-    </servlet-mapping> -->
-
-    <servlet>
-        <servlet-name>userValidator</servlet-name>
-        <servlet-class>com.becomejavasenior.servlets.UserValidator</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>userValidator</servlet-name>
-        <url-pattern>/userValidator</url-pattern>
-    </servlet-mapping>
-    <filter>
-        <filter-name>UserCheckFilter</filter-name>
-        <filter-class>com.becomejavasenior.filters.UserCheckFilter</filter-class>
-        <init-param>
-            <param-name>loginActionURI</param-name>
-            <param-value>/userValidator</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>UserCheckFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
