@@ -3,8 +3,6 @@ package com.becomejavasenior.servlets;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
-import com.becomejavasenior.service.impl.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -20,7 +18,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.logging.Logger;
 
 
 
@@ -58,7 +55,10 @@ public class ContactEditServlet extends HttpServlet {
     Deal deal;
     Company company;
     Address address;
-
+    Stage stage;
+    List<Stage> stages;
+    List<User> users;
+    String str;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -68,26 +68,28 @@ public class ContactEditServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         HttpSession session = request.getSession();
+
+        contact = new Contact();
+        deal = new Deal();
+        company = new Company();
+        address = new Address();
+        stage = new Stage();
+        users = null;
+        stages = null;
+        String str = null;
 
         int idContact = 1;
         if (request.getParameter("idContact") != null) {
             idContact = Integer.parseInt(request.getParameter("idContact"));
         }
 
-        contact = new Contact();
-        deal = new Deal();
-        company = new Company();
-        address = new Address();
-        Stage stage = new Stage();
-        List<User> users = null;
-        List<Stage> stages = null;
-        String str = null;
-
         try {
             contact = contactService.getById(idContact);
             company = companyService.getById(contact.getCompany().getId());
-
+            deal = dealService.getById(1);
+            stage = stageService.getById(deal.getStage().getId());
             //deal = dealService.getById(contact.getDeal().getId());
             //stages = stageService.getById(deal.getStage.getId());
 
@@ -96,7 +98,7 @@ public class ContactEditServlet extends HttpServlet {
         }
 
         try {
-         //   stages = stageService.getAll();
+            stages = stageService.getAll();
             users = userService.getAll();
         } catch (ClassNotFoundException e) {
 
@@ -144,8 +146,14 @@ public class ContactEditServlet extends HttpServlet {
         if (action.equals("editContactContact")) {
 //            log.trace("editContactContact");
 
+            getfNameContactFromRequest(request);
+            getlNameContactFromRequest(request);
+            getPositionFromRequest(request);
+            getEmailFromRequest(request);
+            getSkypeFromRequest(request);
+
             try {
-                //getPhoneFromRequest(request);
+                getPhoneFromRequest(request);
                 getUserFromRequest(request);
             } catch (DaoException e) {
 //                log.error("DAOException in ContactEditServlet in Controller layer", e);
@@ -157,8 +165,8 @@ public class ContactEditServlet extends HttpServlet {
 
         } else if (action.equals("editContactDeal")){
             deal = new Deal();
-        //    int idDeal = company.getDeal().getId();
-          //  int idStage = company.getDeal().getStage().getId();
+           // int idDeal = contact.getDeal().getId();
+           // int idStage = contact.getDeal().getStage().getId();
 
             //try {
           //      deal = dealService.getById(idDeal);
@@ -171,7 +179,7 @@ public class ContactEditServlet extends HttpServlet {
 
 
 
-            dealUpdate();
+          //  dealUpdate();
 
         } else if (action.equals("editContactCompany")){
             company = new Company();
@@ -204,6 +212,22 @@ public class ContactEditServlet extends HttpServlet {
 
         }
 
+    }
+
+    private void getfNameContactFromRequest(HttpServletRequest request) {
+        contact.setfName(request.getParameter("contactfName"));
+    }
+
+    private void getlNameContactFromRequest(HttpServletRequest request) {
+        contact.setlName(request.getParameter("contactlName"));
+    }
+
+    private void getPositionFromRequest(HttpServletRequest request) {
+        contact.setPosition(request.getParameter("contactPosition"));
+    }
+
+    private void getSkypeFromRequest(HttpServletRequest request) {
+        contact.setSkype(request.getParameter("skype"));
     }
 
     public String getRoomFromRequest(HttpServletRequest request) {
@@ -264,7 +288,7 @@ public class ContactEditServlet extends HttpServlet {
 
     public String getEmailFromRequest(HttpServletRequest request) {
 
-        String newEmail = request.getParameter("newEmail");
+        String newEmail = request.getParameter("email");
         company.setEmail(newEmail);
 
         return "Email = " + company.getEmail();

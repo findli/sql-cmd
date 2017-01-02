@@ -4,13 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/bootstrap.css">
-    <%--<link rel="stylesheet" href="../style/style.css">--%>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <%--<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>--%>
-    <!-- <script type="text/javascript" src="js/bootstrap.file-input.js"></script> -->
-
-    <%--<link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />--%>
+    <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
 
@@ -58,22 +54,30 @@
                         <h2>Edit contact</h2><br>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Name </label>
+                            <label class="col-sm-3 control-label">First Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Name" id="contactName" name="contactName">
+                                <input class="form-control" type="text" value="${contact.getfName()}" id="contactfName" name="contactfName">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Last Name </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" value="${contact.getlName()}" id="contactlName" name="contactlName">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tag </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag" id="contactTag" name="contactTag">
+                                <input class="form-control" type="text" value="${contact.tag}" id="contactTag" name="contactTag">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Responsible </label>
-                            <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser">
+                            <select class="col-sm-9 form-control" id="newUser" name="newUser">
+                                <option>${responsibleUser}</option>
                                 <c:forEach var="user" items="${users}">
                                     <option><c:out value="${user.lName}"/></option>
                                 </c:forEach>
@@ -83,7 +87,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Position </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Position" id="contactPosition" name="contactPosition">
+                                <input class="form-control" type="text" value="${contact.position}" id="contactPosition" name="contactPosition">
                             </div>
                         </div>
 
@@ -102,14 +106,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Email </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Email" id="email" name="email">
+                                <input class="form-control" type="text" value="${contact.email}" id="email" name="email">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Skype </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Skype" id="skype" name="skype">
+                                <input class="form-control" type="text" value="${contact.skype}" id="skype" name="skype">
                             </div>
                         </div>
 
@@ -135,12 +139,9 @@
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="old">
                                 <select class="col-sm-3 form-control">
-                                    <option>Company 1</option>
-                                    <option>Company 2</option>
-                                    <option>Company 3</option>
-                                    <option>Company 4</option>
-                                    <option>Company 5</option>
-                                    <option>Company 5</option>
+                                    <c:forEach var="company" items="${companyList}">
+                                        <option><c:out value="${company.title}"/></option>
+                                    </c:forEach>
                                 </select>
 
                             </div>
@@ -149,7 +150,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Name </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Name company">
+                                        <input class="form-control" type="text" placeholder="Name company" id="nameCompany">
                                     </div>
                                 </div>
 
@@ -160,7 +161,7 @@
                                         <option>Home</option>
                                     </select>
                                     <div class="col-sm-8">
-                                        <input class="form-control" type="text" name="formPhone" placeholder="Number">
+                                        <input class="form-control" type="text" name="formPhone">
                                     </div>
                                 </div>
 
@@ -185,10 +186,10 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-10">
+                         <!--       <div class="col-sm-10">
                                     <button type="button" class="btn btn-success">Применить</button>
                                     <button type="button" class="btn btn-danger">Отмена</button>
-                                </div>
+                                </div> -->
 
                             </div>
                         </div>
@@ -205,21 +206,24 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Name" id="editDealContactName" name="editDealContactName">
+                                <input class="form-control" type="text" value="${deal.getTitle()}" id="editDealContactName" name="editDealContactName">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Phone </label>
-                            <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag" id="editDealContactPhone" name="editDealCompanyPhone">
-                            </div>
+                            <label class="col-sm-3 control-label">Stage </label>
+                            <select class="col-sm-9 form-control" id="stageDeal" name="stageDeal">
+                                <option>${stageTitle}</option>
+                                <c:forEach var="stage" items="${stages}">
+                                    <option><c:out value="${stage.title}"/></option>
+                                </c:forEach>
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Budget </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Tag" id="editContactDealBudget" name="editContactDealBudget">
+                                <input class="form-control" type="text" value="${deal.budget}" id="editContactDealBudget" name="editContactDealBudget">
                             </div>
                         </div>
 

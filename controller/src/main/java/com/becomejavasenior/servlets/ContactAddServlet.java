@@ -4,9 +4,6 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 import com.becomejavasenior.service.*;
 import org.apache.log4j.Logger;
-
-import com.becomejavasenior.service.impl.CompanyServiceImpl;
-import com.becomejavasenior.service.impl.ContactServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -129,17 +126,15 @@ public class ContactAddServlet extends HttpServlet {
         Company company = null;
         Task task = null;
         Deal deal = null;
+        Note note = new Note();
 
         try {
             contact = getContactFromRequest(request);
-
             company = getCompanyFromRequest(request);
-            contact.setCompany(company);
-//            task = getTaskFromRequest(request);
-            //contact.setTasks(task);
+            task = getTaskFromRequest(request);
+            deal = getDealFromRequest(request);
 
-//            deal = getDealFromRequest(request);
-            // set deal
+            contactService.createNewContact(contact,deal, company, task, note);
 
         } catch (DaoException e) {
             e.printStackTrace();
@@ -149,17 +144,6 @@ public class ContactAddServlet extends HttpServlet {
         Tag tag = getTagFromRequest(request);
 
         File attachedFile = getFileFromRequest(request);
-
-     /*   try {
-
-
-            //contactService.createNewContact(contact, tag, attachedFile);
-
-        } catch (DaoException e) {
-
-        } catch (ClassNotFoundException e){
-
-        }*/
 
         response.sendRedirect("/contact");
     }
@@ -226,7 +210,7 @@ public class ContactAddServlet extends HttpServlet {
         deal.setTitle(request.getParameter("dealName"));
 
         Stage stage = new Stage();
-        stage.setTitle(request.getParameter("stageTitle"));
+        stage.setTitle(request.getParameter("stageDeal"));
         deal.setStage(stage);
 
         if (!request.getParameter("dealBudget").isEmpty()) {
@@ -248,8 +232,7 @@ public class ContactAddServlet extends HttpServlet {
         Date date = null;
 
         try {
-            String responsibleUserTask = request.getParameter("responsibleUser");
-            user = userService.getById(parseString(responsibleUserTask));
+            user = userService.getById(parseString(request.getParameter("responsibleUserTask")));
             taskType = taskTypeService.getById(parseString(request.getParameter("TaskType")));
             date = format.parse(request.getParameter("DeadlineDate"));
             periodInDaysType = periodService.getById(parseString(request.getParameter("PeriodInDaysType")));
@@ -261,7 +244,7 @@ public class ContactAddServlet extends HttpServlet {
         task.setTaskType(taskType);
         task.setDeadlineDate(date);
         task.setPeriodInDaysType(periodInDaysType);
-        task.setPeriodInMinutes((int) date.getTime());
+    //    task.setPeriodInMinutes((int) date.getTime());
         task.setResponsibleUser(user);
         task.setFinished(false);
         task.setDeleted(false);
@@ -286,4 +269,5 @@ public class ContactAddServlet extends HttpServlet {
         int id = Integer.parseInt(text);
         return id;
     }
+
 }
