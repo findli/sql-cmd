@@ -1017,3 +1017,7 @@ Forms Cards
 .card-body p{
     text-align: center;
 }
+
+.card-body a{
+    text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
+}

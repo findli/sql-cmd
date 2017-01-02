@@ -17,6 +17,9 @@ public interface DealService {
     public List<Contact> getContactsByDealName(String dealName);
     public List<Stage> getAllStage();
     List<Deal> getAllDealsByStage(String stage);
+    public List getDealsForDashboard() throws DaoException, ClassNotFoundException;
+    public List<Deal> getListDealWithTask() throws DaoException, ClassNotFoundException;
+    public List<Deal> getListDealWithNotTask() throws DaoException, ClassNotFoundException;
 
 
 }

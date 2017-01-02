@@ -54,9 +54,9 @@
                 </div>
                 <div class="card-body">
                     <br>
-                    Всего сделок : ${allDeals}
+                    Всего сделок : <b><a href="/deal" target="_self">${allDeals}</a></b>
                     <br>
-                    Бюджет :
+                    Бюджет : <b><a href="/deal" target="_self">${allBudget}</a></b>
                     <br>
                 </div>
             </div>
@@ -69,9 +69,9 @@
                     </div>
                     <div class="card-body">
                         <br>
-                        Успешных сделок :
+                        Успешных сделок : <b><a href="/deal" target="_self">${dealsDone}</a></b>
                         <br>
-                        Нереализовано :
+                        Нереализовано : <b><a href="/deal" target="_self">${dealsClose}</a></b>
                         <br>
                     </div>
                 </div>
@@ -84,9 +84,9 @@
                     </div>
                     <div class="card-body">
                         <br>
-                        Сделок без задач :
+                        Сделок без задач : <b><a href="/deal" target="_self">${dealsWithNotTask}</a></b>
                         <br>
-                        Сделок с задачами :
+                        Сделок с задачами : <b><a href="/deal" target="_self">${dealWithTask}</a></b>
                         <br>
                     </div>
                 </div>
@@ -99,11 +99,11 @@
                      </div>
                      <div class="card-body">
                          <br>
-                         Задачи в работе :
+                         Задачи в работе : <b><a href="/taskList" target="_self">${tasksInProgress}</a></b>
                          <br>
-                         Выполненные :
+                         Выполненные : <b><a href="/taskList" target="_self">${tasksDone}</a></b>
                          <br>
-                         Просроченные :
+                         Просроченные : <b><a href="/taskList" target="_self">${tasksOverdue}</a></b>
                          <br>
                      </div>
                  </div>
@@ -116,9 +116,9 @@
                      </div>
                      <div class="card-body">
                          <br><br>
-                         Контактов :
+                         Контактов : <b><a href="/contact" target="_self">${allContacts}</a></b>
                          <br>
-                         Компаний :
+                         Компаний : <b><a href="/company" target="_self">${allCompany}</a></b>
                          <br>
                      </div>
                  </div>

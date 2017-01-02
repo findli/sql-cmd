@@ -9,7 +9,12 @@ import com.becomejavasenior.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -22,22 +27,15 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.List;
 
-@WebServlet(name = "TaskListServlet", urlPatterns = "/taskList")
-@Controller("taskListServlet")
-public class TaskListServlet extends HttpServlet {
+
+@Controller
+public class TaskListServlet {
 
     @Autowired
-    @Qualifier("taskService")
     TaskService taskService;
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        HttpSession session = request.getSession();
+    @RequestMapping(value = "/taskList", method = RequestMethod.GET)
+    protected String doGet(ModelMap model) {
         List<Task> listTasks = null;
         try {
             listTasks = taskService.getAll();
@@ -46,14 +44,13 @@ public class TaskListServlet extends HttpServlet {
         }catch (ClassNotFoundException e){
             e.printStackTrace();
         }
-        session.setAttribute("listTasks", listTasks);
-        request.getRequestDispatcher("/pages/taskList.jsp").forward(request, response);
+        model.addAttribute("listTasks", listTasks);
+        return "pages/taskList";
 
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
+    @RequestMapping(value = "/taskList", method = RequestMethod.POST)
+    protected String doPost( HttpServletRequest request) {
 
         Enumeration listParameters =  request.getParameterNames();
         while(listParameters.hasMoreElements()){
@@ -64,7 +61,6 @@ public class TaskListServlet extends HttpServlet {
                      e.printStackTrace();
                  }
         }
-        //request.getRequestDispatcher("/pages/taskList.jsp").forward(request, response);
-        response.sendRedirect("/taskList");
+        return "redirect:/taskList";
     }
 }
