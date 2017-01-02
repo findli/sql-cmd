@@ -90,64 +90,100 @@ $(function () {
         }
     });
     $('.actionBut').click(function () {
+        var setUrl = null;
+        if (this.id.startsWith("formTaskDel")) {
+            setUrl = "/delTask";
+        } else {
+            setUrl = "/delNote";
+        }
+        console.log(setUrl);
         $.ajax({
             type: 'POST',
-            data: {
-                action: this.id
-            },
-            url: '/companyDetail'
+            dataType: "html",
+            contentType: 'application/json',
+            mimeType: 'application/json',
+            data: JSON.stringify(this.id),
+            url: setUrl
         });
         $(this.parentNode.parentNode.parentNode).css('display', 'none');
     });
+
     $('.formAddBut').click(function () {
         var id = $("#idformComp").val();
-        var idAddress = $("#idformAddress").val();
         var title = $("#formCompany").val();
         var tag = $("#formTag").val();
         var phone = $("#formPhone").val();
         var email = $("#formEmail").val();
         var web = $("#formWeb").val();
-        var address = $('#formAddress').val();
-        console.log(address);
+
+        var idAddress = $("#idModalAddress").val();
+        var zip = $("#formZipcode").val();
+        var country = $("#formCountry").val();
+        var city = $("#formCity").val();
+        var street = $("#formStreet").val();
+        var build = $("#formBuildNum").val();
+        var office = $("#formOfficeRoom").val();
         $.ajax({
             type: 'POST',
-            data: {
+            dataType: "html",
+            contentType: 'application/json; charset=utf-8',
+            mimeType: 'application/json',
+
+            data: JSON.stringify({
                 id: id,
-                idAddress: idAddress,
                 title: title,
                 tag: tag,
-                phone: phone,
+                phoneNumber: phone,
                 email: email,
-                web: web,
-                address: address,
-                action: 'updateAddress'
-            },
-            url: '/companyDetail'
+                website: web,
+                address : {
+                    id : idAddress,
+                    zipcode: zip,
+                    country: country,
+                    city: city,
+                    street: street,
+                    buildNum: build,
+                    officeRoom: office
+                }
+            }),
+            url: '/updateCompany'
         });
     });
 
+    $('.modalBut').click(function () {
+        var id = $("#idModalAddress").val();
+        var zip = $("#modalZipcode").val();
+        var country = $("#modalCountry").val();
+        var city = $("#modalCity").val();
+        var street = $("#modalStreet").val();
+        var build = $("#modalBuildNum").val();
+        var office = $("#modalOfficeRoom").val();
+        $('#formAddress').text(zip + ', ' + country + ', ' + city + ', ' + street + ', ' + build + ', ' + office);
+        $("#formZipcode").val(zip);
+        $("#formCountry").val(country);
+        $("#formCity").val(city);
+        $("#formStreet").val(street);
+        $("#formBuildNum").val(build);
+        $("#formOfficeRoom").val(office);
+        $.ajax({
+            type: 'POST',
+            dataType: "html",
+            contentType: 'application/json; charset=utf-8',
+            mimeType: 'application/json',
 
+            data: JSON.stringify({
+                id: id,
+                zipcode: zip,
+                country: country,
+                city: city,
+                street: street,
+                buildNum: build,
+                officeRoom: office
+            }),
+            url: '/updateAddress'
+        });
+    });
 
-    /*$('#bttAddCompany').click(function () {
-
-     var title = $('#addCompName').val();
-     var phone = $('#addCompPhone').val();
-     var web = $('#addCompWeb').val();
-     var email = $('#addCompEmail').val();
-     var address = $('#addCompAdress').val();
-     $.ajax({
-     type: 'POST',
-     data: {
-     title: title,
-     phone: phone,
-     web: web,
-     email: email,
-     address: address,
-     action: 'addCompany'
-     },
-     url: '/companyDetail'
-     });
-     })*/
 
 });
 

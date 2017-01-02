@@ -22,6 +22,6 @@ public interface ContactService {
 
     List getContactsForList(int id);
 
-    public void createNewContact(Contact contact, Tag tag, File file) throws DaoException, ClassNotFoundException;;
+    public void createNewContact(Contact contact, Tag tag, File file) throws DaoException, ClassNotFoundException;
 
 }

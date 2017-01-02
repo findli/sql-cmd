@@ -8,9 +8,26 @@ public class File {
     private int id;
     private String fileName;
     private String filePath;
-    private byte fileSize;
+    private int fileSize;
     private Date dateCreate;
     private Note note;
+    private User user;
+
+    public Note getNote() {
+        return note;
+    }
+
+    public void setNote(Note note) {
+        this.note = note;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -24,7 +41,7 @@ public class File {
         this.filePath = filePath;
     }
 
-    public void setFileSize(byte fileSize) {
+    public void setFileSize(int fileSize) {
         this.fileSize = fileSize;
     }
 
@@ -48,7 +65,7 @@ public class File {
         return filePath;
     }
 
-    public byte getFileSize() {
+    public int getFileSize() {
         return fileSize;
     }
 

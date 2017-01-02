@@ -1,3 +1,4 @@
+/*
 package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.DAO.DaoException;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 
 @WebServlet(name = "companyDetailServlet", urlPatterns = "/companyDetail")
 @Controller("companyDetailServlet")
@@ -113,7 +115,7 @@ public class CompanyDetailServlet extends HttpServlet {
         Address address = new Address();
         Company company = new Company();
         User user = new User();
-        if (action == null) {
+        if (action != null) {
             if (action.startsWith("formTaskDel")) {
                 String idTask = action.substring(12);
                 try {
@@ -168,7 +170,7 @@ public class CompanyDetailServlet extends HttpServlet {
                     e.printStackTrace();
                 }
 
-            } else if (action.startsWith("updateCompany")) {
+                } else if (action.startsWith("updateAddress")) {
                 try {
                     company = companyService.getById(Integer.parseInt(request.getParameter("id")));
                 } catch (DaoException e) {
@@ -205,3 +207,4 @@ public class CompanyDetailServlet extends HttpServlet {
         }
     }
 }
+*/
