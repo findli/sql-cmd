@@ -27,10 +27,6 @@
                        id="password" placeholder="password"/>
                 <br>
                 <input class="btn btn-default" type="submit" value="LogIn"/>
-                <br>
-                user1
-                <br>
-                password1
             </form>
         </div>
     </div>
