@@ -18,6 +18,9 @@ import com.becomejavasenior.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.ServletConfig;
@@ -34,34 +37,24 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet(name = "TaskAddServlet", urlPatterns = "/taskAdd")
-@Controller("taskAddServlet")
-public class TaskAddServlet extends HttpServlet {
+
+@Controller
+public class TaskAddServlet {
 
     @Autowired
-    @Qualifier("userService")
     UserService userService;
 
     @Autowired
-    @Qualifier("taskTypeService")
     TaskTypeService taskTypeService;
 
     @Autowired
-    @Qualifier("periodInDaysTypeService")
     PeriodInDaysTypeService periodService;
 
     @Autowired
-    @Qualifier("taskService")
     TaskService taskService;
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
-    }
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        HttpSession session = request.getSession();
+    @RequestMapping(value = "/taskAdd", method = RequestMethod.GET)
+    public String doGet(ModelMap model) {
 
         List<User> listUsers = null;
         List<TaskType> listTaskTypes = null;
@@ -77,15 +70,14 @@ public class TaskAddServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        session.setAttribute("ResponsibleUserList", listUsers);
-        session.setAttribute("TaskTypeList", listTaskTypes);
-        session.setAttribute("PeriodInDaysTypeList", listPeriods);
-        request.getRequestDispatcher("/pages/taskAdd.jsp").forward(request, response);
+        model.addAttribute("ResponsibleUserList", listUsers);
+        model.addAttribute("TaskTypeList", listTaskTypes);
+        model.addAttribute("PeriodInDaysTypeList", listPeriods);
+        return "pages/taskAdd";
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
+    @RequestMapping(value = "/taskAdd", method = RequestMethod.POST)
+    public String doPost(HttpServletRequest request) {
 
         Task task = new Task();
         TaskType taskType = new TaskType();
@@ -122,8 +114,7 @@ public class TaskAddServlet extends HttpServlet {
         }catch (DaoException e){
           e.printStackTrace();
         }
-        //request.getRequestDispatcher("/pages/taskList.jsp").forward(request, response);
-        response.sendRedirect("/taskList");
+        return "redirect:/taskList";
     }
 
     private int parseString(String text){
