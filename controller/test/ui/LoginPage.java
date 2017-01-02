@@ -5,17 +5,27 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LoginPage {
-    private final WebDriver driver;
-    // The login page contains several HTML elements that will be represented as WebElements.
-    // The locators for these elements should only be defined once.
-    By usernameLocator = By.id("username");
-    By passwordLocator = By.id("passwd");
-    By loginButtonLocator = By.id("login");
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
+    private static final String DOMAIN_PORT = "http://localhost:8080";
+    By usernameElementLocator = By.id("email");
+    By passwordElementLocator = By.id("password");
+    By loginElementLocator = By.cssSelector("input[type=submit]");
+    By loginOutElementLocator = By.cssSelector("input[type=submit]");
+    private WebDriver driver;
 
+    @Before
+    public void setUp() {
+        System.setProperty("webdriver.gecko.driver", "/Users/miiix/Documents/geckodriver");
+        this.driver = new FirefoxDriver();
+
+        driver.navigate().to(DOMAIN_PORT);
         // Check that we're on the right page.
         if (!"Login".equals(driver.getTitle())) {
             // Alternatively, we could navigate to the login page, perhaps logging out first
@@ -23,64 +33,83 @@ public class LoginPage {
         }
     }
 
-    @Before
-    public void setUp() {
-
-    }
-
     @After
     public void tearDown() {
-
+        driver.close();
+        driver.quit();
     }
 
-    // The login page allows the user to type their username into the username field
     public LoginPage typeUsername(String username) {
-        // This is the only place that "knows" how to enter a username
-        driver.findElement(usernameLocator).sendKeys(username);
+        driver.findElement(usernameElementLocator).sendKeys(username);
 
         // Return the current page object as this action doesn't navigate to a page represented by another PageObject
         return this;
     }
 
-    // The login page allows the user to type their password into the password field
-    public LoginPage typePassword(String password) {
-        // This is the only place that "knows" how to enter a password
-        driver.findElement(passwordLocator).sendKeys(password);
+    public void typePassword(String password) {
+        driver.findElement(passwordElementLocator).sendKeys(password);
 
         // Return the current page object as this action doesn't navigate to a page represented by another PageObject
-        return this;
     }
 
     // The login page allows the user to submit the login form
-    public HomePage submitLogin() {
+    public void submitLogin() {
         // This is the only place that submits the login form and expects the destination to be the home page.
         // A seperate method should be created for the instance of clicking login whilst expecting a login failure.
-        driver.findElement(loginButtonLocator).submit();
+        driver.findElement(loginElementLocator).submit();
 
         // Return a new page object representing the destination. Should the login page ever
         // go somewhere else (for example, a legal disclaimer) then changing the method signature
         // for this method will mean that all tests that rely on this behaviour won't compile.
-        return new HomePage(driver);
+//        return new HomePage();
     }
 
-    // The login page allows the user to submit the login form knowing that an invalid username and / or password were entered
     @Test
-    public LoginPage submitLoginExpectingFailure() {
-        // This is the only place that submits the login form and expects the destination to be the login page due to login failure.
-        driver.findElement(loginButtonLocator).submit();
+    public void submitLoginExpectingFailure() {
+        // given
+        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(loginElementLocator));
 
-        // Return a new page object representing the destination. Should the user ever be navigated to the home page after submiting a login with credentials
-        // expected to fail login, the script will fail when it attempts to instantiate the LoginPage PageObject.
-        return new LoginPage(driver);
+        // when
+        typeUsername("random" + Math.random());
+        typePassword("random" + Math.random());
+        driver.findElement(loginElementLocator).submit();
+
+        // then
+        assertEquals(driver.getCurrentUrl(), DOMAIN_PORT + "/userValidator");
+        assertTrue(driver.getPageSource().contains("Wrong user/password"));
     }
 
+    @Test
+    public void logoutUser() {
+        // given
+        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(loginOutElementLocator));
+
+        // when
+        driver.get("/");
+        driver.findElement(loginOutElementLocator).click();
+
+        // then
+        assertEquals(driver.getCurrentUrl(), DOMAIN_PORT + "/user-logout");
+    }
+    @Test
     // Conceptually, the login page offers the user the service of being able to "log into"
     // the application using a user name and password.
-    public HomePage loginAs(String username, String password) {
+    public void loginAs() {
+        // given
+        // you wait to load
+        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(loginElementLocator));
+
+        // when
         // The PageObject methods that enter username, password & submit login have already defined and should not be repeated here.
-        typeUsername(username);
-        typePassword(password);
-        return submitLogin();
+        typeUsername("user1");
+        typePassword("password1");
+        submitLogin();
+
+        // then
+        assertEquals(driver.getCurrentUrl(), DOMAIN_PORT + "/userValidator");
+        assertTrue(driver.getPageSource().contains("You have logged in."));
     }
 }
-

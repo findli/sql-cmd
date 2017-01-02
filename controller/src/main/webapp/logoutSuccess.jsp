@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>You have logged in.</title>
+    <title>You are logged out.</title>
 </head>
 <body>
-You have logged in.
+You are logged out.
 </body>
 </html>

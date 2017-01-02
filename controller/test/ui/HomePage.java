@@ -1,9 +1,20 @@
 package ui;
 
-import org.openqa.selenium.WebDriver;
+import org.junit.Before;
+import org.junit.Test;
 
 public class HomePage {
-    public HomePage(WebDriver driver) {
+    @Before
+    public void setUp() {
+        System.setProperty("webdriver.gecko.driver", "/Users/miiix/Documents/geckodriver");
 
     }
+
+    @Test
+    public void test1() {
+
+    }
+//    public HomePage(WebDriver driver) {
+//
+//    }
 }

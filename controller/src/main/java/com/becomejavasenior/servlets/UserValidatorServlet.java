@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "UserValidator")
-public class UserValidator extends HttpServlet {
+@WebServlet(name = "UserValidatorServlet", urlPatterns = "/user-validator")
+public class UserValidatorServlet extends HttpServlet {
     private static final Map<String, User> users = getUsers();
 
     /**
