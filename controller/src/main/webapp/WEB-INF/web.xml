@@ -34,9 +34,11 @@
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
 
+<!--
     <error-page>
         <exception-type>java.lang.Exception</exception-type>
-        <location>/pages/errorsPage.jsp</location> <!-- страница для всяческих ошибок -->
+        <location>/pages/errorsPage.jsp</location> &lt;!&ndash; страница для всяческих ошибок &ndash;&gt;
     </error-page>
+-->
 
 </web-app>
