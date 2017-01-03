@@ -8,6 +8,7 @@ import com.becomejavasenior.bean.Company;
 import com.becomejavasenior.service.CompanyService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

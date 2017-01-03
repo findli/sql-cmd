@@ -54,4 +54,32 @@ public class TaskServiceImpl implements TaskService {
         task = (Task) taskDAO.update(task);
         return task;
     }
+
+    // Возвращает ArrayList где '0' элемент это количество задач со статусом "In progress"
+    //                          '1' элемент это количество задач со статусом "Done"
+    //                          '2' элемент это количество задач со статусом "Overdue"
+    //
+    public List getTaskForDashboard() throws DaoException, ClassNotFoundException{
+        List returnList = new ArrayList<>();
+        int tasksInProgress = 0;
+        int tasksDone = 0;
+        int tasksOverdue = 0;
+        listTasks = taskDAO.getAll();
+        for (int i = 0; i < listTasks.size(); i++) {
+            if(listTasks.get(i).getTaskType().getType().equals("In Progress")){
+                tasksInProgress++;
+            }
+            if(listTasks.get(i).getTaskType().getType().equals("Done")){
+                tasksDone++;
+            }
+            if(listTasks.get(i).getTaskType().getType().equals("Overdue")){
+                tasksOverdue++;
+            }
+        }
+        returnList.add(tasksInProgress);
+        returnList.add(tasksDone);
+        returnList.add(tasksOverdue);
+        return returnList;
+    }
 }
+

@@ -38,10 +38,10 @@ public class PostgresDaoFactory extends AbstractDaoFactory {
 //        return new DealDaoJdbcTemplateImpl(dataSource);
 //    }
 
-    @Override
+/*    @Override
     public TaskDao getTaskDao() {
         return new TaskDaoImpl(dataSource);
-    }
+    } */
 
     @Override
     public UserDao getUserDao() {
@@ -53,15 +53,15 @@ public class PostgresDaoFactory extends AbstractDaoFactory {
         return new StageDaoImpl(dataSource);
     }
 
-    @Override
-    public PeriodInDaysTypeDao getPeriodInDaysTypeDao() {
-        return new PeriodInDaysTypeDaoImpl(dataSource);
-    }
+//    @Override
+//    public PeriodInDaysTypeDao getPeriodInDaysTypeDao() {
+//        return new PeriodInDaysTypeDaoImpl(dataSource);
+//    }
 
-    @Override
-    public TaskTypeDao getTaskTypeDao() {
-        return new TaskTypeDaoImpl(dataSource);
-    }
+//    @Override
+//    public TaskTypeDao getTaskTypeDao() {
+//        return new TaskTypeDaoImpl(dataSource);
+//    }
 
     @Override
     public AddressDao getAddressDao() {

@@ -95,7 +95,7 @@ public class DealServiceImpl implements DealService {
         contact = contactWithId(contact);
         deal.setPrimaryContact(contact);
 
-        company = companyWithId(company);
+        company = (Company) companyDao.getByName(company.getTitle());
         deal.setCompany(company);
 
         Stage stage;
@@ -105,10 +105,10 @@ public class DealServiceImpl implements DealService {
         User user = (User) userDao.getByName(deal.getResponsibleUser().getlName());
         deal.setResponsibleUser(user);
 
-        dealDao.create(deal);
+        deal = (Deal) dealDao.create(deal);
 
         if(!note.getNoteText().equals("")) {
-            deal = (Deal) dealDao.getByName(note.getDeal().getTitle());
+//            deal = (Deal) dealDao.getByName(note.getDeal().getTitle());
             note.setDeal(deal);
             noteDao.create(note);
         }
@@ -120,7 +120,7 @@ public class DealServiceImpl implements DealService {
         return dealDao.getDealsByStage(stage);
     }
 
-    // Необходимо править
+    // Необходимо править !!!
     public Contact contactWithId(Contact contact) throws ClassNotFoundException, DaoException {
 //        List<Contact> contacts = contactDao.getAll();
 //        for(int i = 0; i < contacts.size(); i++) {
@@ -133,26 +133,56 @@ public class DealServiceImpl implements DealService {
         return contact;
     }
 
-    public User responsibleUserWithId(User user) throws ClassNotFoundException, DaoException {
-        List<User> users = userDao.getAll();
-        for(int i = 0; i < users.size(); i++) {
-            if(users.get(i).getlName().equals(user.getlName())) {
-                user = users.get(i);
-                break;
+    // Возвращает ArrayList где '0' элемент это весь бюджет по сделкам
+    //                          '1' элемент это количество сделот со статусом "готово"
+    //                          '2' элемент это количество сделок со статусом "закрыто и не реализовано"
+    //                          '3' всего сделок
+    public List getDealsForDashboard() throws DaoException, ClassNotFoundException{
+        int budget = 0;
+        int doneDeals = 0;
+        int closeDeals = 0;
+        List returnList = new ArrayList<>();
+        List<Deal> dealList = dealDao.getAll();
+        for (int i = 0; i < dealList.size(); i++) {
+            budget = budget + dealList.get(i).getBudget();
+            if(dealList.get(i).getStage().getTitle().equals("done")){
+                doneDeals++;
+            }
+            if(dealList.get(i).getStage().getTitle().equals("close is not realized")){
+                closeDeals++;
             }
         }
-        return user;
+        returnList.add(budget);
+        returnList.add(doneDeals);
+        returnList.add(closeDeals);
+        returnList.add(dealList.size());
+        return returnList;
     }
 
-    public Company companyWithId(Company company) throws ClassNotFoundException, DaoException {
-
-        List<Company> companies = companyDao.getAll();
-        for(int i = 0; i < companies.size(); i++) {
-            if(companies.get(i).getTitle().equals(company.getTitle())) {
-                company = companies.get(i);
-                break;
-            }
-        }
-        return company;
+    public List<Deal> getListDealWithTask() throws DaoException, ClassNotFoundException{
+        List<Deal> dealList = new ArrayList<>();
+        dealList = dealDao.getDealWithTask();
+        return dealList;
     }
+
+    public List<Deal> getListDealWithNotTask() throws DaoException, ClassNotFoundException{
+        List<Deal> dealList = new ArrayList<>();
+        dealList = dealDao.getDealWithNotTask();
+        return dealList;
+    }
+
+
+
+
+//    public Company companyWithId(Company company) throws ClassNotFoundException, DaoException {
+//
+//        List<Company> companies = companyDao.getAll();
+//        for(int i = 0; i < companies.size(); i++) {
+//            if(companies.get(i).getTitle().equals(company.getTitle())) {
+//                company = companies.get(i);
+//                break;
+//            }
+//        }
+//        return company;
+//    }
 }
