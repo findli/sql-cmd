@@ -169,7 +169,7 @@
                                 </thead>
                                 <tbody id="t_contacts">
                                 <c:forEach var="contact" items="${contactList}">
-                                    <%--<tr class="rowlink" onclick="window.location.href='/dealEdit?idDeal=${deal.getId()}'; return false">--%>
+                                    <%--<tr class="rowlink" onclick="window.location.href='/contactEdit?idContact=${contact.getId()}'; return false">--%>
                                     <tr data-href="/contactEdit?idContact=${contact.getId()}">
                                         <td class="item"><c:out value="${contact.getlName()}"/></td>
                                         <td><c:out value="${contact.getCompany().getTitle()}"/></td>
@@ -183,35 +183,6 @@
                         </form>
                     </div>
 
-                    <%--<div class="table-responsive">--%>
-                    <%--<table class="table table-striped">--%>
-                    <%--<tr>--%>
-                    <%--<th>Имя</th>--%>
-                    <%--<th>Компания</th>--%>
-                    <%--<th>Телефон</th>--%>
-                    <%--<th>Email</th>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                    <%--<td>Иван Петров</td>--%>
-                    <%--<td>БМВ Бавария</td>--%>
-                    <%--<td>(067) 485-85-03</td>--%>
-                    <%--<td>ivan@google.com</td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                    <%--<td>Елена Бабич</td>--%>
-                    <%--<td>Митсубиси</td>--%>
-                    <%--<td>(067) 444-67-34</td>--%>
-                    <%--<td>elena@google.com</td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                    <%--<td>Дмитрий Агафонов</td>--%>
-                    <%--<td>Митсубиси Электрик</td>--%>
-                    <%--<td>(067) 454-77-84</td>--%>
-                    <%--<td>dmitry@google.com</td>--%>
-                    <%--</tr>--%>
-
-                    <%--</table>--%>
-                    <%--</div>--%>
                 </div>
             </div>
         </div>

@@ -167,7 +167,7 @@
                                 </thead>
                                 <tbody id="t_contacts">
                                 <c:forEach var="contact" items="${contactList}">
-                                    <tr class="rowlink" onclick="window.location.href='/contactEdit?idDeal=${contact.getId()}'; return false">
+                                    <tr class="rowlink" onclick="window.location.href='/contactEdit?idContact=${contact.getId()}'; return false">
                                     <%--<tr data-href="/contactEdit?idContact=${contact.getId()}">--%>
                                         <td class="item"><c:out value="${contact.getlName()}"/></td>
                                         <td><c:out value="${contact.getCompany().getTitle()}"/></td>
