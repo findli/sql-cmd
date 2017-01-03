@@ -71,6 +71,7 @@ public class ContactAddServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
+        List<User> usersList = null;
         List<TaskType> TaskTypeList = null;
         List<PeriodInDaysType> PeriodInDaysTypeList = null;
         List<Contact> contactList = null;
@@ -80,6 +81,8 @@ public class ContactAddServlet extends HttpServlet {
       //TODO:  List<Phone> phoneList = null;
 
         try {
+            usersList = userService.getAll();
+            log.trace("get usersList in ContactAddServlet");
             contactList = contactService.getAll();
             log.trace("get contactList in ContactAddServlet");
             companyList = companyService.getAll();
@@ -92,7 +95,6 @@ public class ContactAddServlet extends HttpServlet {
             log.trace("get PhoneTypeList in ContactAddServlet");
             stageList = stageService.getAll();
             log.trace("get StageList in ContactAddServlet");
-
         } catch (DaoException e) {
             log.warn("DaoException in ContactAddServlet");
             e.printStackTrace();
@@ -101,6 +103,13 @@ public class ContactAddServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        System.out.println(usersList);
+        for (User user : usersList) {
+            System.out.println(user.getId());
+            System.out.println(user.getfName());
+            System.out.println(user.getlName());
+        }
+        session.setAttribute("usersList", usersList);
         session.setAttribute("TaskTypeList", TaskTypeList);
         session.setAttribute("PeriodInDaysTypeList", PeriodInDaysTypeList);
         session.setAttribute("contactList", contactList);
@@ -126,10 +135,10 @@ public class ContactAddServlet extends HttpServlet {
 
             company = getCompanyFromRequest(request);
             contact.setCompany(company);
-            task = getTaskFromRequest(request);
+//            task = getTaskFromRequest(request);
             //contact.setTasks(task);
 
-            deal = getDealFromRequest(request);
+//            deal = getDealFromRequest(request);
             // set deal
 
         } catch (DaoException e) {
@@ -239,7 +248,8 @@ public class ContactAddServlet extends HttpServlet {
         Date date = null;
 
         try {
-            user = userService.getById(parseString(request.getParameter("ResponsibleUserTask")));
+            String responsibleUserTask = request.getParameter("responsibleUser");
+            user = userService.getById(parseString(responsibleUserTask));
             taskType = taskTypeService.getById(parseString(request.getParameter("TaskType")));
             date = format.parse(request.getParameter("DeadlineDate"));
             periodInDaysType = periodService.getById(parseString(request.getParameter("PeriodInDaysType")));

@@ -1,4 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +62,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Name </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Name" id="contactName" name="contactName">
+                                <input class="form-control" type="text" value="${contact.getlName()}" id="contactName" name="contactName">
                             </div>
                         </div>
 
@@ -83,7 +85,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Position </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Position" id="contactPosition" name="contactPosition">
+                                <input class="form-control" type="text" value="${contact.getPosition()}" id="contactPosition" name="contactPosition">
                             </div>
                         </div>
 
@@ -102,14 +104,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Email </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Email" id="email" name="email">
+                                <input class="form-control" type="text" value="${contact.getEmail()}" id="email" name="email">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Skype </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="Skype" id="skype" name="skype">
+                                <input class="form-control" type="text" value="${contact.getSkype()}" id="skype" name="skype">
                             </div>
                         </div>
 
@@ -134,13 +136,18 @@
 
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="old">
-                                <select class="col-sm-3 form-control">
-                                    <option>Company 1</option>
-                                    <option>Company 2</option>
-                                    <option>Company 3</option>
-                                    <option>Company 4</option>
-                                    <option>Company 5</option>
-                                    <option>Company 5</option>
+                                <%--<select class="col-sm-3 form-control">--%>
+                                    <%--<option>Company 1</option>--%>
+                                    <%--<option>Company 2</option>--%>
+                                    <%--<option>Company 3</option>--%>
+                                    <%--<option>Company 4</option>--%>
+                                    <%--<option>Company 5</option>--%>
+                                    <%--<option>Company 5</option>--%>
+                                <%--</select>--%>
+                                <select class="col-sm-9 form-control" id="company" name="company">
+                                    <c:forEach var="company" items="${companies}">
+                                        <option><c:out value="${company.getTitle()}"/></option>
+                                    </c:forEach>
                                 </select>
 
                             </div>

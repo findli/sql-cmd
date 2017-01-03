@@ -36,7 +36,8 @@
 
     <error-page>
         <exception-type>java.lang.Exception</exception-type>
-        <location>/pages/errorsPage.jsp</location> <!-- страница для всяческих ошибок -->
+        <location>/pages/errorsPage.jsp</location> <!--страница для всяческих ошибок -->
     </error-page>
+
 
 </web-app>

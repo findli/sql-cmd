@@ -24,6 +24,7 @@ public class Deal implements Serializable {
 
     }
 
+
     public List<Task> getTasks() {
         return tasks;
     }

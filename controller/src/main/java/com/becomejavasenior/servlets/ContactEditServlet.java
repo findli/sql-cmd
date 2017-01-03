@@ -58,6 +58,7 @@ public class ContactEditServlet extends HttpServlet {
     Deal deal;
     Company company;
     Address address;
+    Stage stage;
 
 
     @Override
@@ -73,53 +74,58 @@ public class ContactEditServlet extends HttpServlet {
         int idContact = 1;
         if (request.getParameter("idContact") != null) {
             idContact = Integer.parseInt(request.getParameter("idContact"));
-        }
 
-        contact = new Contact();
-        deal = new Deal();
-        company = new Company();
-        address = new Address();
-        Stage stage = new Stage();
-        List<User> users = null;
-        List<Stage> stages = null;
-        String str = null;
+            contact = new Contact();
+            deal = new Deal();
+            company = new Company();
+            address = new Address();
+            stage = new Stage();
+            List<User> users = null;
+            List<Stage> stages = null;
+            List<Company> companies = null;
+            String str = null;
 
-        try {
-            contact = contactService.getById(idContact);
-            company = companyService.getById(contact.getCompany().getId());
+            try {
+                contact = contactService.getById(idContact);
+                company = companyService.getById(contact.getCompany().getId());
 
-            //deal = dealService.getById(contact.getDeal().getId());
-            //stages = stageService.getById(deal.getStage.getId());
+                deal = dealService.getById(1);
 
-          } catch (DaoException e) {
+//            deal = dealService.getById(contact.getDeal().getId());
+                stage = stageService.getById(deal.getStage().getId());
+
+            } catch (DaoException e) {
                 e.printStackTrace();
+            }
+
+            try {
+                //   stages = stageService.getAll();
+                users = userService.getAll();
+                companies = companyService.getAll();
+            } catch (ClassNotFoundException e) {
+
+            } catch (DaoException e) {
+
+            }
+
+            String stageTitle = deal.getStage().getTitle();
+            session.setAttribute("stageTitle", stageTitle);
+
+//        stages.remove(stage.getId()-1);
+
+            String responsibleUser = deal.getResponsibleUser().getlName();
+            users.remove(deal.getResponsibleUser().getId() - 1);
+
+            session.setAttribute("contact", contact);
+            session.setAttribute("idContact", idContact);
+            session.setAttribute("deal", deal);
+            session.setAttribute("stages", stages);
+            session.setAttribute("stage", stage);
+            session.setAttribute("responsibleUser", responsibleUser);
+            session.setAttribute("users", users);
+            session.setAttribute("company", company);
+            session.setAttribute("companies", companies);
         }
-
-        try {
-         //   stages = stageService.getAll();
-            users = userService.getAll();
-        } catch (ClassNotFoundException e) {
-
-        } catch (DaoException e){
-
-        }
-
-        String stageTitle = deal.getStage().getTitle();
-        session.setAttribute("stageTitle", stageTitle);
-
-        stages.remove(stage.getId()-1);
-
-        String responsibleUser = deal.getResponsibleUser().getlName();
-        users.remove(deal.getResponsibleUser().getId()-1);
-
-        session.setAttribute("contact", contact);
-        session.setAttribute("idContact", idContact);
-        session.setAttribute("deal", deal);
-        session.setAttribute("stages", stages);
-        session.setAttribute("stage", stage);
-        session.setAttribute("responsibleUser", responsibleUser);
-        session.setAttribute("user", users);
-        session.setAttribute("company", company);
 
         request.getRequestDispatcher("/pages/contact_edit.jsp").forward(request, response);
 
