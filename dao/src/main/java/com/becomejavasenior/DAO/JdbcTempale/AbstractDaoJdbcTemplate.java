@@ -30,7 +30,7 @@ public abstract class AbstractDaoJdbcTemplate<T> implements AbstractDao<T> {
     abstract public T getById(Integer id) throws DaoException;
 
     public void delete(int id, String tableName /*, Logger logger*/) {
-        jdbcTemplate.update("UPDATE " + tableName + " SET deleted = TRUE WHERE id = " + id);
+        jdbcTemplate.update("UPDATE  crm_pallas." + tableName + " SET is_deleted = TRUE WHERE id = " + id);
     }
 
     public JdbcTemplate getJdbcTemplate() {

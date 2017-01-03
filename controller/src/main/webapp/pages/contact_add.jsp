@@ -38,7 +38,7 @@
     <div class="wrapper">
         <div id="navbar">
             <ul>
-                <li><a href="/index.jsp" target="_self">Home</a></li>
+                <li><a href="/" target="_self">Home</a></li>
                 <li><a href="/deal" target="_self">Deals</a></li>
                 <li><a href="/company" target="_self">Company</a></li>
                 <li><a href="/contact" target="_self">Contacts</a></li>
@@ -89,8 +89,8 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Responsible </label>
                             <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser" style="width: 150px;">
-                                <c:forEach var="user" items="${users}">
-                                    <option>
+                                <c:forEach var="user" items="${usersList}">
+                                    <option value="${user.getId()}">
                                         <c:out value="${user.fName}"/>
                                         <c:out value="${user.lName}"/>
                                     </option>
@@ -254,10 +254,10 @@
                             <label class="col-sm-3 control-label">Responsible </label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="responsibleUserTask">
-                                    <c:forEach var="user" items="${users}">
-                                        <option value="${user.getId()}">
-                                            <c:out value="${user.fName}"/>
-                                            <c:out value="${user.lName}"/>
+                                    <c:forEach var="userRow" items="${sessionScope.usersList}">
+                                        <option value="${userRow.getId()}">
+                                            <c:out value="${userRow.fName}"/>
+                                            <c:out value="${userRow.lName}"/>
                                         </option>
                                     </c:forEach>
                                 </select>
@@ -268,7 +268,7 @@
                             <label class="col-sm-3 control-label">Task type </label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="TaskType">
-                                    <c:forEach var="taskType" items="${TaskTypeList}">
+                                    <c:forEach var="taskType" items="${sessionScope.TaskTypeList}">
                                         <option value="${taskType.getId()}"><c:out value="${taskType.getType()}"/></option>
                                     </c:forEach>
                                 </select>

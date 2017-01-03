@@ -92,6 +92,10 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Deal> imple
 
     private static final String INSERT_DEAL_CONTACT_SQL = "INSERT INTO deal_contact (deal_id, contact_id) VALUES (?, ?)";
 
+    private static final String SELECT_DEAL_WITH_TASK = "SELECT * FROM crm_pallas.deal INNER JOIN crm_pallas.deal_task ON crm_pallas.deal_task.deal_id = crm_pallas.deal.id ORDER BY id;";
+
+    private static final String SELECT_DEAL_WITH_NOT_TASK = "SELECT * FROM crm_pallas.deal RIGHT JOIN crm_pallas.deal_task ON crm_pallas.deal_task.deal_id != crm_pallas.deal.id ORDER BY id;";
+
     @Override
     public void delete(Integer id) throws DaoException {
         delete(id, "deal");
@@ -200,6 +204,14 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Deal> imple
     @Override
     public List<Deal> getDealsByStage(String stage) {
         return jdbcTemplate.query(SELECT_ALL_DEAL_BY_STAGE.replace("?", stage), DEAL_FOR_STAGE_ROW_MAPPER);
+    }
+
+    public List<Deal> getDealWithTask(){
+        return jdbcTemplate.query(SELECT_DEAL_WITH_TASK, DEAL_ROW_MAPPER);
+    }
+
+    public List<Deal> getDealWithNotTask(){
+        return jdbcTemplate.query(SELECT_DEAL_WITH_NOT_TASK, DEAL_ROW_MAPPER);
     }
 
     private final RowMapper<Deal> DEAL_FOR_STAGE_ROW_MAPPER = (resultSet, i) -> {

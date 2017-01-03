@@ -17,6 +17,10 @@ import com.becomejavasenior.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.ServletConfig;
@@ -33,39 +37,29 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet(name = "TaskEditServlet", urlPatterns = "/taskEdit")
-@Controller("taskEditServlet")
+
+@Controller
 public class TaskEditServlet extends HttpServlet {
 
     @Autowired
-    @Qualifier("taskTypeService")
     TaskTypeService taskTypeService;
 
     @Autowired
-    @Qualifier("periodInDaysTypeService")
     PeriodInDaysTypeService periodService;
 
     @Autowired
-    @Qualifier("userService")
     UserService userService;
 
     @Autowired
-    @Qualifier("taskService")
     TaskService taskService;
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
-    }
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
+    @RequestMapping(value = "/taskEdit", method = RequestMethod.GET)
+    public String doGet(@RequestParam("idTask") int idTask, ModelMap model) {
         List<User> listUsers = null;
         List<TaskType> listTaskTypes = null;
         List<PeriodInDaysType> listPeriods = null;
         Task task = null;
-        int taskId = Integer.parseInt(request.getParameter("idTask"));
+        int taskId = idTask;
         SimpleDateFormat dateFormat = new SimpleDateFormat();
         dateFormat.applyPattern("dd.MM.yyyy HH:mm");
         Date date;
@@ -86,22 +80,21 @@ public class TaskEditServlet extends HttpServlet {
         User userDef = task.getResponsibleUser();
         TaskType taskTypeDef = task.getTaskType();
         String description = task.getDescription();
-        session.setAttribute("idTask", taskId);
-        session.setAttribute("description", description);
-        session.setAttribute("taskTypeDef", taskTypeDef);
-        session.setAttribute("userDef", userDef);
-        session.setAttribute("periodInDaysTypeDef", periodInDaysTypeDef);
-        session.setAttribute("deadlineDate", deadlineDate);
-        session.setAttribute("task", task);
-        session.setAttribute("responsibleUserList", listUsers);
-        session.setAttribute("taskTypeList", listTaskTypes);
-        session.setAttribute("periodInDaysTypeList", listPeriods);
-        request.getRequestDispatcher("/pages/taskEdit.jsp").forward(request, response);
+        model.addAttribute("idTask", taskId);
+        model.addAttribute("description", description);
+        model.addAttribute("taskTypeDef", taskTypeDef);
+        model.addAttribute("userDef", userDef);
+        model.addAttribute("periodInDaysTypeDef", periodInDaysTypeDef);
+        model.addAttribute("deadlineDate", deadlineDate);
+        model.addAttribute("task", task);
+        model.addAttribute("responsibleUserList", listUsers);
+        model.addAttribute("taskTypeList", listTaskTypes);
+        model.addAttribute("periodInDaysTypeList", listPeriods);
+        return "pages/taskEdit";
     }
 
-    public  void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
+    @RequestMapping(value = "/taskEdit", method = RequestMethod.POST)
+    public  String doPost(HttpServletRequest request) {
 
         Task task = new Task();
         TaskType taskType = new TaskType();
@@ -141,8 +134,7 @@ public class TaskEditServlet extends HttpServlet {
         }catch (DaoException e){
           e.printStackTrace();
         }
-        //request.getRequestDispatcher("/pages/taskList.jsp").forward(request, response);
-        response.sendRedirect("/taskList");
+        return "redirect:/taskList";
     }
 
     private int parseString(String text){

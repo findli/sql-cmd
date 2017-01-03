@@ -133,6 +133,47 @@ public class DealServiceImpl implements DealService {
         return contact;
     }
 
+    // Возвращает ArrayList где '0' элемент это весь бюджет по сделкам
+    //                          '1' элемент это количество сделот со статусом "готово"
+    //                          '2' элемент это количество сделок со статусом "закрыто и не реализовано"
+    //                          '3' всего сделок
+    public List getDealsForDashboard() throws DaoException, ClassNotFoundException{
+        int budget = 0;
+        int doneDeals = 0;
+        int closeDeals = 0;
+        List returnList = new ArrayList<>();
+        List<Deal> dealList = dealDao.getAll();
+        for (int i = 0; i < dealList.size(); i++) {
+            budget = budget + dealList.get(i).getBudget();
+            if(dealList.get(i).getStage().getTitle().equals("done")){
+                doneDeals++;
+            }
+            if(dealList.get(i).getStage().getTitle().equals("close is not realized")){
+                closeDeals++;
+            }
+        }
+        returnList.add(budget);
+        returnList.add(doneDeals);
+        returnList.add(closeDeals);
+        returnList.add(dealList.size());
+        return returnList;
+    }
+
+    public List<Deal> getListDealWithTask() throws DaoException, ClassNotFoundException{
+        List<Deal> dealList = new ArrayList<>();
+        dealList = dealDao.getDealWithTask();
+        return dealList;
+    }
+
+    public List<Deal> getListDealWithNotTask() throws DaoException, ClassNotFoundException{
+        List<Deal> dealList = new ArrayList<>();
+        dealList = dealDao.getDealWithNotTask();
+        return dealList;
+    }
+
+
+
+
 //    public Company companyWithId(Company company) throws ClassNotFoundException, DaoException {
 //
 //        List<Company> companies = companyDao.getAll();
