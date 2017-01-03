@@ -270,45 +270,5 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Deal> imple
             jdbcTemplate.update(INSERT_DEAL_CONTACT_SQL, preparedStatementSetter);
         }
     }
-/*
-    @Override
-    public List<Contact> getContactsByDealName(String dealTitle) {
-        List<Contact> contacts = new ArrayList<>();
-        CompanyDao<Company> company = new CompanyDaoImpl(dataSource);
-        Contact contact;
-        UserDao<User> user = new UserDaoImpl(dataSource);
-
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_CONTACT)) {
-
-            statement.setString(1, dealTitle);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-
-                contact = new Contact();
-                contact.setId(resultSet.getInt("contactId"));
-                contact.setlName(resultSet.getString("last_name"));
-                contact.setfName(resultSet.getString("first_name"));
-//                contact.setPosition(resultSet.getString("position"));
-//                contact.setCompany(company.getById(resultSet.getInt("companyId")));
-//                contact.setEmail(resultSet.getString("email"));
-//                contact.setSkype(resultSet.getString("skype"));
-//                contact.setResponsibleUser(user.getById(resultSet.getInt("responsible_user_id")));
-//                contact.setDeleted(resultSet.getBoolean("is_deleted"));
-                /*
-                Here you need to add the phone type and the phone to display in the editing form of the Deals
-                 */
-/*
-                contacts.add(contact);
-            }
-        } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
-            throw new DatabaseException(ex);
-        }
-
-        return contacts;
-    }
-    */
 
 }

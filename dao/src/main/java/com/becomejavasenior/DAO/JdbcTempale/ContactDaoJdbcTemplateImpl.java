@@ -5,10 +5,11 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.mapper.ContactRowMapper;
 import com.becomejavasenior.DAO.mapper.DealRowMapper;
 import com.becomejavasenior.DAO.mapper.StageRowMapper;
-import com.becomejavasenior.bean.Contact;
+import com.becomejavasenior.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementSetter;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -61,7 +62,7 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact>
 
     @Override
     public List<Contact> getContactsForList(int id) {
-        List<Contact> contacts = namedParameterJdbcTemplate.query(SELECT_ALL_SQL, new ContactRowMapper());
+        List<Contact> contacts = namedParameterJdbcTemplate.query(SELECT_CONTACT_FOR_LIST.replace("?", String.valueOf(id)), CONTACT_FOR_LIST_ROW_MAPPER);
         return contacts;
     }
 
@@ -133,4 +134,27 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact>
         Contact contact = jdbcTemplate.queryForObject(SELECT_ALL_SQL + " AND id = ?", contactRowMapper, id);
         return contact;
     }
+
+    private final RowMapper<Contact> CONTACT_FOR_LIST_ROW_MAPPER = (resultSet, i) -> {
+
+        Phone phone = new Phone();
+        PhoneType phoneType = new PhoneType();
+        Company company = new Company();
+        Contact contact = new Contact();
+
+        contact.setId(resultSet.getInt("id"));
+        contact.setfName(resultSet.getString("fname"));
+        contact.setlName(resultSet.getString("lname"));
+        contact.setPosition(resultSet.getString("post"));
+        contact.setEmail(resultSet.getString("email"));
+        contact.setSkype(resultSet.getString("skype"));
+        phone.setPhoneNumber(resultSet.getString("phonenumber"));
+        phoneType.setTitle(resultSet.getString("title"));
+        phone.setPhoneType(phoneType);
+        contact.setPhone(phone);
+        company.setId(resultSet.getInt("companyid"));
+        contact.setCompany(company);
+
+        return contact;
+    };
 }

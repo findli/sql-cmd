@@ -58,6 +58,7 @@ public class ContactEditServlet extends HttpServlet {
     Deal deal;
     Company company;
     Address address;
+    Stage stage;
 
 
     @Override
@@ -79,7 +80,7 @@ public class ContactEditServlet extends HttpServlet {
         deal = new Deal();
         company = new Company();
         address = new Address();
-        Stage stage = new Stage();
+        stage = new Stage();
         List<User> users = null;
         List<Stage> stages = null;
         String str = null;
@@ -88,8 +89,10 @@ public class ContactEditServlet extends HttpServlet {
             contact = contactService.getById(idContact);
             company = companyService.getById(contact.getCompany().getId());
 
-            //deal = dealService.getById(contact.getDeal().getId());
-            //stages = stageService.getById(deal.getStage.getId());
+            deal = dealService.getById(1);
+
+//            deal = dealService.getById(contact.getDeal().getId());
+            stage = stageService.getById(deal.getStage().getId());
 
           } catch (DaoException e) {
                 e.printStackTrace();
@@ -107,7 +110,7 @@ public class ContactEditServlet extends HttpServlet {
         String stageTitle = deal.getStage().getTitle();
         session.setAttribute("stageTitle", stageTitle);
 
-        stages.remove(stage.getId()-1);
+//        stages.remove(stage.getId()-1);
 
         String responsibleUser = deal.getResponsibleUser().getlName();
         users.remove(deal.getResponsibleUser().getId()-1);
@@ -118,7 +121,7 @@ public class ContactEditServlet extends HttpServlet {
         session.setAttribute("stages", stages);
         session.setAttribute("stage", stage);
         session.setAttribute("responsibleUser", responsibleUser);
-        session.setAttribute("user", users);
+        session.setAttribute("users", users);
         session.setAttribute("company", company);
 
         request.getRequestDispatcher("/pages/contact_edit.jsp").forward(request, response);
