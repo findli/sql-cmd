@@ -115,6 +115,7 @@ $(function () {
         var phone = $("#formPhone").val();
         var email = $("#formEmail").val();
         var web = $("#formWeb").val();
+        var responsibleUser = $("#formResponsibleUser").val();
 
         var idAddress = $("#idModalAddress").val();
         var zip = $("#formZipcode").val();
@@ -136,8 +137,11 @@ $(function () {
                 phoneNumber: phone,
                 email: email,
                 website: web,
-                address : {
-                    id : idAddress,
+                responsibleUser: {
+                    id: responsibleUser
+                },
+                address: {
+                    id: idAddress,
                     zipcode: zip,
                     country: country,
                     city: city,

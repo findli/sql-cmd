@@ -56,7 +56,7 @@ public class CompanyDetail {
         company.setId(jsonString.getId());
         company.setDeleted(false);
         User user = new User();
-        user.setId(1);//В процессе
+        user.setId(jsonString.getResponsibleUser().getId());
         company.setResponsibleUser(user);
         updateCompanyAddress();
 
