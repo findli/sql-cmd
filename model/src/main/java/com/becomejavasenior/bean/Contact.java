@@ -16,6 +16,7 @@ public class Contact implements Serializable {
     private User responsibleUser;
     private boolean isDeleted;
     private Phone phone;
+    private PhoneType phoneType;
     private List<Task> tasks;
     private List<EventHistory> events;
     private List<Note> contactNotes;
@@ -99,9 +100,13 @@ public class Contact implements Serializable {
         this.isDeleted = deleted;
     }
 
-    public Phone getPhone() { return phone; }
+    public Phone getPhone() {
+        return phone;
+    }
 
-    public void setPhone(Phone phone) { this.phone = phone; }
+    public void setPhone(Phone phone) {
+        this.phone = phone;
+    }
 
     public List<Task> getTasks() {
         return tasks;
@@ -129,6 +134,14 @@ public class Contact implements Serializable {
 
     public List<Note> getContactNotes() {
         return contactNotes;
+    }
+
+    public PhoneType getPhoneType() {
+        return phoneType;
+    }
+
+    public void setPhoneType(PhoneType phoneType) {
+        this.phoneType = phoneType;
     }
 
     @Override

@@ -45,24 +45,28 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact>
         "responsible_user_id = ?, is_deleted = ? WHERE id = ?";
 
     private static final String SELECT_CONTACT_FOR_LIST = "SELECT crm_pallas.contact.id,\n" +
-            "  crm_pallas.contact.first_name as fName,\n" +
-            "  crm_pallas.contact.last_name as lName,\n" +
+            "  crm_pallas.contact.first_name,\n" +
+            "  crm_pallas.contact.last_name,\n" +
             "  crm_pallas.contact.post,\n" +
             "  crm_pallas.contact.email,\n" +
             "  crm_pallas.contact.skype,\n" +
             "  crm_pallas.contact_phone.phone_number as phoneNumber,\n" +
+            "  crm_pallas.contact_phone.id as phone_number_id,\n" +
             "  crm_pallas.phone_type.title,\n" +
-            "  crm_pallas.company.id as companyId\n" +
+            "  crm_pallas.phone_type.id as type_id,\n" +
+            "  crm_pallas.company.id as company_id,\n" +
+            "  crm_pallas.contact.responsible_user_id,\n" +
+            "  crm_pallas.contact.is_deleted\n" +
             "FROM crm_pallas.contact\n" +
             "  JOIN crm_pallas.company ON crm_pallas.contact.company_id = crm_pallas.company.id\n" +
             "  JOIN crm_pallas.contact_phone ON crm_pallas.contact.id = crm_pallas.contact_phone.contact_id\n" +
             "  JOIN crm_pallas.phone_type ON crm_pallas.contact_phone.phone_type_id = crm_pallas.phone_type.id\n" +
             "where company_id = ? AND contact.is_deleted = FALSE";
 
+
     @Override
     public List<Contact> getContactsForList(int id) {
-        List<Contact> contacts = namedParameterJdbcTemplate.query(SELECT_CONTACT_FOR_LIST.replace("?", String.valueOf(id)), new ContactRowMapper());
-        return contacts;
+        return jdbcTemplate.query(SELECT_CONTACT_FOR_LIST.replace("?", String.valueOf(id)), contactRowMapper);
     }
 
     @Override

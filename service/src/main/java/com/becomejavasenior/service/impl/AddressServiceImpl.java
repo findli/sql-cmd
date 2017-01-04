@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service(value = "addressService")
+/*@Service(value = "addressService")*/
 public class AddressServiceImpl implements AddressService {
 
     public static Logger log = Logger.getLogger(AddressServiceImpl.class);

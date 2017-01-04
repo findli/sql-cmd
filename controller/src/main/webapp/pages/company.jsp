@@ -65,8 +65,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="company" items="${companyList}">
-                                <tr data-href="/companyDetail?idCompany=${company.getId()}">
+                            <c:forEach var="company" items="${company}">
+                                <tr data-href="companyDetail?idCompany=${company.getId()}">
                                     <td><c:out value="${company.getTitle()}"/></td>
                                     <td><c:out value="${company.getPhoneNumber()}"/></td>
                                     <td><c:out value="${company.getEmail()}"/></td>
