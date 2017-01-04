@@ -5,10 +5,11 @@ import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.DAO.mapper.ContactRowMapper;
 import com.becomejavasenior.DAO.mapper.DealRowMapper;
 import com.becomejavasenior.DAO.mapper.StageRowMapper;
-import com.becomejavasenior.bean.Contact;
+import com.becomejavasenior.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementSetter;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -45,28 +46,24 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact>
         "responsible_user_id = ?, is_deleted = ? WHERE id = ?";
 
     private static final String SELECT_CONTACT_FOR_LIST = "SELECT crm_pallas.contact.id,\n" +
-            "  crm_pallas.contact.first_name,\n" +
-            "  crm_pallas.contact.last_name,\n" +
+            "  crm_pallas.contact.first_name as fName,\n" +
+            "  crm_pallas.contact.last_name as lName,\n" +
             "  crm_pallas.contact.post,\n" +
             "  crm_pallas.contact.email,\n" +
             "  crm_pallas.contact.skype,\n" +
             "  crm_pallas.contact_phone.phone_number as phoneNumber,\n" +
-            "  crm_pallas.contact_phone.id as phone_number_id,\n" +
             "  crm_pallas.phone_type.title,\n" +
-            "  crm_pallas.phone_type.id as type_id,\n" +
-            "  crm_pallas.company.id as company_id,\n" +
-            "  crm_pallas.contact.responsible_user_id,\n" +
-            "  crm_pallas.contact.is_deleted\n" +
+            "  crm_pallas.company.id as companyId\n" +
             "FROM crm_pallas.contact\n" +
             "  JOIN crm_pallas.company ON crm_pallas.contact.company_id = crm_pallas.company.id\n" +
             "  JOIN crm_pallas.contact_phone ON crm_pallas.contact.id = crm_pallas.contact_phone.contact_id\n" +
             "  JOIN crm_pallas.phone_type ON crm_pallas.contact_phone.phone_type_id = crm_pallas.phone_type.id\n" +
             "where company_id = ? AND contact.is_deleted = FALSE";
 
-
     @Override
     public List<Contact> getContactsForList(int id) {
-        return jdbcTemplate.query(SELECT_CONTACT_FOR_LIST.replace("?", String.valueOf(id)), contactRowMapper);
+        List<Contact> contacts = namedParameterJdbcTemplate.query(SELECT_CONTACT_FOR_LIST.replace("?", String.valueOf(id)), CONTACT_FOR_LIST_ROW_MAPPER);
+        return contacts;
     }
 
     @Override
@@ -137,4 +134,27 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact>
         Contact contact = jdbcTemplate.queryForObject(SELECT_ALL_SQL + " AND id = ?", contactRowMapper, id);
         return contact;
     }
+
+    private final RowMapper<Contact> CONTACT_FOR_LIST_ROW_MAPPER = (resultSet, i) -> {
+
+        Phone phone = new Phone();
+        PhoneType phoneType = new PhoneType();
+        Company company = new Company();
+        Contact contact = new Contact();
+
+        contact.setId(resultSet.getInt("id"));
+        contact.setfName(resultSet.getString("fname"));
+        contact.setlName(resultSet.getString("lname"));
+        contact.setPosition(resultSet.getString("post"));
+        contact.setEmail(resultSet.getString("email"));
+        contact.setSkype(resultSet.getString("skype"));
+        phone.setPhoneNumber(resultSet.getString("phonenumber"));
+        phoneType.setTitle(resultSet.getString("title"));
+        phone.setPhoneType(phoneType);
+        contact.setPhone(phone);
+        company.setId(resultSet.getInt("companyid"));
+        contact.setCompany(company);
+
+        return contact;
+    };
 }
