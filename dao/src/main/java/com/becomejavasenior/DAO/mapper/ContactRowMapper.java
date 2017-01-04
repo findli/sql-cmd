@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class ContactRowMapper implements RowMapper<Contact> {
@@ -68,25 +70,28 @@ public class ContactRowMapper implements RowMapper<Contact> {
             contact.setResponsibleUser(responsibleUser);
         }
 
-        if (resultSet.getObject(FIELD_TYPE_OF_PHONE_ID, Integer.class) != null){
-            PhoneType phoneType = null;
-            try {
-                phoneType =(PhoneType) phoneTypeDao.getById(resultSet.getInt(FIELD_TYPE_OF_PHONE_ID));
-            } catch (DaoException e) {
-                e.printStackTrace();
+     /*   StackTraceElement[] list = Thread.currentThread().getStackTrace();
+        if (list[12].getMethodName().equals("getContactsForList")) {
+            if (resultSet.getObject(FIELD_TYPE_OF_PHONE_ID, Integer.class) != null) {
+                PhoneType phoneType = null;
+                try {
+                    phoneType = (PhoneType) phoneTypeDao.getById(resultSet.getInt(FIELD_TYPE_OF_PHONE_ID));
+                } catch (DaoException e) {
+                    e.printStackTrace();
+                }
+                contact.setPhoneType(phoneType);
             }
-            contact.setPhoneType(phoneType);
-        }
 
-        if (resultSet.getObject(FIELD_PHONE_ID, Integer.class) != null){
-            Phone phone= null;
-            try {
-                phone= (Phone) phoneDao.getById(resultSet.getInt(FIELD_PHONE_ID));
-            } catch (DaoException e) {
-                e.printStackTrace();
+            if (resultSet.getObject(FIELD_PHONE_ID, Integer.class) != null) {
+                Phone phone = null;
+                try {
+                    phone = (Phone) phoneDao.getById(resultSet.getInt(FIELD_PHONE_ID));
+                } catch (DaoException e) {
+                    e.printStackTrace();
+                }
+                contact.setPhone(phone);
             }
-            contact.setPhone(phone);
-        }
+        }*/
         contact.setPosition(resultSet.getString(FIELD_POSITION));
         contact.setSkype(resultSet.getString(FIELD_SKYPE));
         contact.setEmail(resultSet.getString(FIELD_EMAIL));

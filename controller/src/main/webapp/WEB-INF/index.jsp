@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
-
+    
     <title>Home</title>
 </head>
 <body>
@@ -46,85 +45,85 @@
             </ul>
         </div>
         <div class="wrapper__aboutCompany">
-         <div class="card-container">
-            <div class="form--cards">
-            <div class="card-bloc">
-                <div class="card-header">
-                    <b>Сделки</b>
+            <div class="card-container">
+                <div class="form--cards">
+                    <div class="card-bloc">
+                        <div class="card-header">
+                            <b>Сделки</b>
+                        </div>
+                        <div class="card-body">
+                            <br>
+                            Всего сделок : <b><a href="/deal" target="_self">${allDeals}</a></b>
+                            <br>
+                            Бюджет : <b><a href="/deal" target="_self">${allBudget}</a></b>
+                            <br>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <br>
-                    Всего сделок : <b><a href="/deal" target="_self">${allDeals}</a></b>
-                    <br>
-                    Бюджет : <b><a href="/deal" target="_self">${allBudget}</a></b>
-                    <br>
+
+                <div class="form--cards">
+                    <div class="card-bloc">
+                        <div class="card-header">
+                            <b>Успешные сделки</b>
+                        </div>
+                        <div class="card-body">
+                            <br>
+                            Успешных сделок : <b><a href="/deal" target="_self">${dealsDone}</a></b>
+                            <br>
+                            Нереализовано : <b><a href="/deal" target="_self">${dealsClose}</a></b>
+                            <br>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="form--cards">
+                    <div class="card-bloc">
+                        <div class="card-header">
+                            <b>Сделки без задач</b>
+                        </div>
+                        <div class="card-body">
+                            <br>
+                            Сделок без задач : <b><a href="/deal" target="_self">${dealsWithNotTask}</a></b>
+                            <br>
+                            Сделок с задачами : <b><a href="/deal" target="_self">${dealWithTask}</a></b>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form--cards">
+                    <div class="card-bloc">
+                        <div class="card-header">
+                            <b>Задачи в работе</b>
+                        </div>
+                        <div class="card-body">
+                            <br>
+                            Задачи в работе : <b><a href="/taskList" target="_self">${tasksInProgress}</a></b>
+                            <br>
+                            Выполненные : <b><a href="/taskList" target="_self">${tasksDone}</a></b>
+                            <br>
+                            Просроченные : <b><a href="/taskList" target="_self">${tasksOverdue}</a></b>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form--cards">
+                    <div class="card-bloc">
+                        <div class="card-header">
+                            <b>Всего контактов и компаний</b>
+                        </div>
+                        <div class="card-body">
+                            <br><br>
+                            Контактов : <b><a href="/contact" target="_self">${allContacts}</a></b>
+                            <br>
+                            Компаний : <b><a href="/company" target="_self">${allCompany}</a></b>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </div>
-
-            <div class="form--cards">
-                <div class="card-bloc">
-                    <div class="card-header">
-                        <b>Успешные сделки</b>
-                    </div>
-                    <div class="card-body">
-                        <br>
-                        Успешных сделок : <b><a href="/deal" target="_self">${dealsDone}</a></b>
-                        <br>
-                        Нереализовано : <b><a href="/deal" target="_self">${dealsClose}</a></b>
-                        <br>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form--cards">
-                <div class="card-bloc">
-                    <div class="card-header">
-                        <b>Сделки без задач</b>
-                    </div>
-                    <div class="card-body">
-                        <br>
-                        Сделок без задач : <b><a href="/deal" target="_self">${dealsWithNotTask}</a></b>
-                        <br>
-                        Сделок с задачами : <b><a href="/deal" target="_self">${dealWithTask}</a></b>
-                        <br>
-                    </div>
-                </div>
-            </div>
-
-             <div class="form--cards">
-                 <div class="card-bloc">
-                     <div class="card-header">
-                         <b>Задачи в работе</b>
-                     </div>
-                     <div class="card-body">
-                         <br>
-                         Задачи в работе : <b><a href="/taskList" target="_self">${tasksInProgress}</a></b>
-                         <br>
-                         Выполненные : <b><a href="/taskList" target="_self">${tasksDone}</a></b>
-                         <br>
-                         Просроченные : <b><a href="/taskList" target="_self">${tasksOverdue}</a></b>
-                         <br>
-                     </div>
-                 </div>
-             </div>
-
-             <div class="form--cards">
-                 <div class="card-bloc">
-                     <div class="card-header">
-                         <b>Всего контактов и компаний</b>
-                     </div>
-                     <div class="card-body">
-                         <br><br>
-                         Контактов : <b><a href="/contact" target="_self">${allContacts}</a></b>
-                         <br>
-                         Компаний : <b><a href="/company" target="_self">${allCompany}</a></b>
-                         <br>
-                     </div>
-                 </div>
-             </div>
-
-         </div>
         </div>
     </div>
 </div>
