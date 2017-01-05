@@ -56,12 +56,13 @@ public class FileDaoImpl extends AbstractDaoImpl<File> implements FileDao<File> 
                 file.setId(resultSet.getInt("id"));
                 file.setFileName(resultSet.getString("fileName"));
                 file.setFilePath(resultSet.getString("pathFile"));
-                file.setFileSize((byte) resultSet.getInt("fileSize"));
+                file.setFileSize(resultSet.getInt("fileSize"));
                 file.setDateCreate(resultSet.getDate("createDateFile"));
                 user.setlName(resultSet.getString("lName"));
                 user.setfName(resultSet.getString("fName"));
                 note.setCreatedUser(user);
                 file.setFileNote(note);
+                file.setUser(user);
                 files.add(file);
             }
         } catch (SQLException ex) {

@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -79,12 +78,15 @@ public class PhoneDaoImpl extends AbstractDaoImpl<Phone> implements PhoneDao<Pho
     Phone getEntity(ResultSet resultSet) throws DaoException {
 
         Phone phone = new Phone();
+        Contact contact = new Contact();
+        PhoneType phoneType = new PhoneType();
 
         try {
-
             phone.setId(resultSet.getInt("id"));
-            phone.setContact((Contact) contactDao.getById(resultSet.getInt("contact_id")));
-            phone.setPhoneType((PhoneType) phoneTypeDao.getById(resultSet.getInt("phone_type_id")));
+            contact.setId(resultSet.getInt("contact_id"));
+            phone.setContact(contact);
+            phoneType.setId(resultSet.getInt("phone_type_id"));
+            phone.setPhoneType(phoneType);
             phone.setPhoneNumber(resultSet.getString("phone_number"));
 
         } catch (SQLException e){

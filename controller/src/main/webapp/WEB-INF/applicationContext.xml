@@ -2,24 +2,22 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd ">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd "
+       default-autowire="byName">
+
        <context:annotation-config/>
        <context:component-scan base-package="com.becomejavasenior"/>
 
        <context:property-placeholder location="WEB-INF/database.properties"/>
-       <!--<context:property-placeholder location="WEB-INF/database_heroku.properties"/>-->
+    <!--   <context:property-placeholder location="WEB-INF/database_heroku.properties"/>-->
 
 
        <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
               <constructor-arg ref="dataSource" />
        </bean>
-
-       <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-       <!--<property name="driverClassName" value="${db.driver}"/>-->
-       <!--<property name="url" value="${db.url}"/>-->
-       <!--<property name="username" value="${db.user}"/>-->
-       <!--<property name="password" value="${db.password}"/>-->
-       <!--</bean>-->
 
        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
               <property name="driverClassName" value="${db.driver}"/>
@@ -31,4 +29,9 @@
        <bean class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate" id="namedParameterJdbcTemplate">
               <constructor-arg name="dataSource" ref="dataSource"></constructor-arg>
        </bean>
+
+       <bean id="companyService" class="com.becomejavasenior.service.impl.CompanyServiceImpl"/>
+       <bean id="addressService" class="com.becomejavasenior.service.impl.AddressServiceImpl"/>
+       <bean id="companyDao" class="com.becomejavasenior.DAO.Imp.CompanyDaoImpl"/>
+       <bean id="addressDao" class="com.becomejavasenior.DAO.Imp.AddressDaoImpl"/>
 </beans>

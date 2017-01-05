@@ -10,7 +10,13 @@ import com.becomejavasenior.bean.User;
 import com.becomejavasenior.factory.PostgresDaoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -20,7 +26,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository("companyDao")
 public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyDao<Company> {
 
     @Autowired
@@ -44,6 +49,7 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
     AddressDao addressDao;
 
     @Override
+    @Transactional
     public void createStatement(PreparedStatement statement, Company company) throws DaoException {
 
         try{
@@ -54,11 +60,8 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.isDeleted());
-
         } catch (SQLException e) {
-
             throw new DaoException("Can't create statement for Company", e);
-
         }
     }
 
@@ -154,9 +157,7 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             while (resultSet.next()) {
                 companyList.add(getEntity(resultSet));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (DaoException e) {
+        } catch (SQLException | DaoException e) {
             e.printStackTrace();
         }
 

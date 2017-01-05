@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
@@ -80,7 +81,7 @@
                             <div class="col-sm-9">
                                 <div class="input-group date" id="datetimepicker1">
                                     <input type="text" class="form-control" />
-                                        <span class="input-group-addon">
+                                    <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
                                         </span>
                                 </div>
@@ -92,7 +93,7 @@
                             <div class="col-sm-9">
                                 <div class="input-group date" id="datetimepicker2">
                                     <input type="text" class="form-control" />
-                                        <span class="input-group-addon">
+                                    <span class="input-group-addon">
                                             <span class="glyphicon-calendar glyphicon"></span>
                                         </span>
                                 </div>

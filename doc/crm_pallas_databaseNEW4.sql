@@ -618,11 +618,8 @@ INSERT INTO crm_pallas.address( country, city, street, building_number, zipcode,
 
 INSERT INTO crm_pallas."language"( title, short_title, id ) VALUES ( 'ukr', 'ukr', 1 ); 
 
-INSERT INTO crm_pallas.stage( title, color, priority, is_deletable, id ) VALUES ( 'first contact', 'white', 1, false, 1 );
-INSERT INTO crm_pallas.stage( title, color, priority, is_deletable, id ) VALUES ( 'negotiations', 'white', 1, false, 2 );
-INSERT INTO crm_pallas.stage( title, color, priority, is_deletable, id ) VALUES ( 'decide', 'white', 1, false, 3 );
-INSERT INTO crm_pallas.stage( title, color, priority, is_deletable, id ) VALUES ( 'consent agreement', 'white', 1, false, 4 );
-INSERT INTO crm_pallas.stage( title, color, priority, is_deletable, id ) VALUES ( 'done', 'white', 1, false, 5 );
+INSERT INTO crm_pallas.stage( title, color, priority, is_deletable, id ) VALUES ( 'main', 'white', 1, false, 1 ); 
+INSERT INTO crm_pallas.stage( title, color, priority, is_deletable, id ) VALUES ( 'meeting', 'white', 1, false, 2 ); 
 
 INSERT INTO crm_pallas.task_type( title, id ) VALUES ( 'main', 1 ); 
 INSERT INTO crm_pallas.task_type( title, id ) VALUES ( 'priority', 2 ); 

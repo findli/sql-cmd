@@ -222,4 +222,3 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     }
 
 }
-
