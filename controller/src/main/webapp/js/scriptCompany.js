@@ -150,7 +150,7 @@ $(function () {
                     officeRoom: office
                 }
             }),
-            url: '/updateCompany'
+            url: '/createUpdateCompany'
         });
     });
 
@@ -184,7 +184,7 @@ $(function () {
                 buildNum: build,
                 officeRoom: office
             }),
-            url: '/updateAddress'
+            url: '/createUpdateAddress'
         });
     });
 

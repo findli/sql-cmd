@@ -37,10 +37,10 @@ public class CompanyDetail {
     }
 
 
-    @RequestMapping(value = "/updateCompany", method = RequestMethod.POST)
+    @RequestMapping(value = "/createUpdateCompany", method = RequestMethod.POST)
     public
     @ResponseBody
-    void updateCompany(@RequestBody Company jsonString) throws DaoException, ClassNotFoundException {
+    void createUpdateCompany(@RequestBody Company jsonString) throws DaoException, ClassNotFoundException {
         if (jsonString.getTitle().isEmpty()){
             company.setTitle(null);
         }else {
@@ -78,10 +78,10 @@ public class CompanyDetail {
         }
     }
 
-    @RequestMapping(value = "/updateAddress", method = RequestMethod.POST)
+    @RequestMapping(value = "/createUpdateAddress", method = RequestMethod.POST)
     public
     @ResponseBody
-    Address updateAddress(@RequestBody Address jsonString) throws DaoException, ClassNotFoundException {
+    Address createUpdateAddress(@RequestBody Address jsonString) throws DaoException, ClassNotFoundException {
         address.setId(jsonString.getId());
         address.setZipcode(jsonString.getZipcode());
         address.setCountry(jsonString.getCountry());

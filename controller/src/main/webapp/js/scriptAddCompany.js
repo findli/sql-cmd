@@ -33,7 +33,7 @@ $('.formAddBut').click(function () {
                 officeRoom: office
             }
         }),
-        url: '/updateCompany'
+        url: '/createUpdateCompany'
     });
 });
 
@@ -65,7 +65,7 @@ $('.modalBut').click(function () {
             buildNum: build,
             officeRoom: office
         }),
-        url: '/updateAddress'
+        url: '/createUpdateAddress'
     });
 });
 });
