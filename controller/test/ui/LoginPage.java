@@ -14,7 +14,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
@@ -24,12 +23,12 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/applicationContext.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/applicationContext.xml"})
 public class LoginPage {
     private static final String DOMAIN_PORT = "http://localhost:8080";
-//    @Autowired
-//    @Qualifier("userDao")
+    @Autowired
+    @Qualifier("userDao")
     public UserDao<User> userDao;
     By usernameElementLocator = By.id("email");
     By passwordElementLocator = By.id("password");
@@ -54,8 +53,8 @@ public class LoginPage {
 
     @After
     public void tearDown() {
-//        driver.close();
-//        driver.quit();
+        driver.close();
+        driver.quit();
     }
 
     public LoginPage typeUsername(String username) {
@@ -88,8 +87,10 @@ public class LoginPage {
         // given
         WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
         webDriverWait.until(ExpectedConditions.elementToBeClickable(loginElementLocator));
+        driver.get(DOMAIN_PORT + "/user-logout");
 
         // when
+        driver.get(DOMAIN_PORT + "/contactAdd");
         typeUsername("random" + Math.random());
         typePassword("random" + Math.random());
         driver.findElement(loginElementLocator).submit();
@@ -106,6 +107,8 @@ public class LoginPage {
     public void loginAs() throws DaoException, ClassNotFoundException {
         // given
         // you wait to load
+        driver.get(DOMAIN_PORT + "/user-logout");
+        driver.get(DOMAIN_PORT + "/contactAdd");
         WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
         webDriverWait.until(ExpectedConditions.elementToBeClickable(loginElementLocator));
 
@@ -126,9 +129,10 @@ public class LoginPage {
         // given
         WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
         webDriverWait.until(ExpectedConditions.elementToBeClickable(loginOutElementLocator));
+        driver.get(DOMAIN_PORT + "/user-logout");
 
         // when
-        driver.get("/");
+        driver.get(DOMAIN_PORT + "/contactAdd");
         driver.findElement(loginOutElementLocator).click();
 
         // then

@@ -20,5 +20,5 @@ public interface TaskService {
 
     List<Task> getTasksForList(int id);
 
-    public List getTaskForDashboard() throws DaoException, ClassNotFoundException;
+    List getTaskForDashboard() throws DaoException, ClassNotFoundException;
 }

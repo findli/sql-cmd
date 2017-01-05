@@ -13,7 +13,7 @@ public interface UserService {
     User getById(int id) throws DaoException;
     void delete(int id) throws DaoException;
 
-    public User getByName(String str) throws DaoException, ClassNotFoundException;
+    User getByName(String str) throws DaoException, ClassNotFoundException;
 
     boolean checkAuthorisation(String email, String password) throws SQLException;
 

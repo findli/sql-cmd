@@ -99,7 +99,7 @@ public class File {
         int result = id;
         result = 31 * result + (fileName != null ? fileName.hashCode() : 0);
         result = 31 * result + (filePath != null ? filePath.hashCode() : 0);
-        result = 31 * result + (int) fileSize;
+        result = 31 * result + fileSize;
         result = 31 * result + (dateCreate != null ? dateCreate.hashCode() : 0);
         result = 31 * result + (note != null ? note.hashCode() : 0);
         return result;

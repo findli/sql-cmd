@@ -84,7 +84,7 @@ public class DealEditServlet extends HttpServlet {
 
             try {
                 deal = dealService.getById(idDeal);
-                company = (Company) companyService.getById(1);
+                company = companyService.getById(1);
                 stage = stageService.getById(deal.getStage().getId());
                 address = addressService.getById(company.getAddress().getId());
 
