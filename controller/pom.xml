@@ -14,9 +14,6 @@
     <artifactId>controller</artifactId>
     <packaging>war</packaging>
 
-    <properties>
-        <struts2.version>2.5.5</struts2.version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>crm</groupId>

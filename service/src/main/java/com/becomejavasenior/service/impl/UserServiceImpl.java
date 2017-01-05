@@ -1,14 +1,12 @@
 package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.DAO.DaoException;
-import com.becomejavasenior.DAO.Imp.UserDaoImpl;
 import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.List;
 
 @Service(value = "userService")
@@ -48,5 +46,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByName(String str) throws DaoException, ClassNotFoundException {
         return userDao.getByName(str);
+    }
+
+    @Override
+    public boolean checkAuthorisation(String email, String password) throws SQLException {
+        return userDao.checkAuthorisation(email, password);
+    }
+
+    @Override
+    public User getByEmail(String email) throws SQLException {
+        return userDao.getByEmail(email);
     }
 }

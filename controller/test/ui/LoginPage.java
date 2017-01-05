@@ -1,5 +1,8 @@
 package ui;
 
+import com.becomejavasenior.DAO.DaoException;
+import com.becomejavasenior.DAO.UserDao;
+import com.becomejavasenior.bean.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +11,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -20,8 +26,13 @@ public class LoginPage {
     By loginOutElementLocator = By.cssSelector("input[type=submit]");
     private WebDriver driver;
 
+    @Autowired
+    private UserDao<User> userDao;
+
     @Before
     public void setUp() {
+
+
         System.setProperty("webdriver.gecko.driver", "/Users/miiix/Documents/geckodriver");
         this.driver = new FirefoxDriver();
 
@@ -76,7 +87,7 @@ public class LoginPage {
         driver.findElement(loginElementLocator).submit();
 
         // then
-        assertEquals(driver.getCurrentUrl(), DOMAIN_PORT + "/userValidator");
+        assertEquals(driver.getCurrentUrl(), DOMAIN_PORT + "/user-validator");
         assertTrue(driver.getPageSource().contains("Wrong user/password"));
     }
 
@@ -93,23 +104,34 @@ public class LoginPage {
         // then
         assertEquals(driver.getCurrentUrl(), DOMAIN_PORT + "/user-logout");
     }
+
     @Test
     // Conceptually, the login page offers the user the service of being able to "log into"
     // the application using a user name and password.
-    public void loginAs() {
+    public void loginAs() throws DaoException, ClassNotFoundException {
         // given
         // you wait to load
         WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
         webDriverWait.until(ExpectedConditions.elementToBeClickable(loginElementLocator));
 
+        User user = getSomeUserFromDb();
         // when
         // The PageObject methods that enter username, password & submit login have already defined and should not be repeated here.
-        typeUsername("user1");
-        typePassword("password1");
+        typeUsername(user.getEmail());
+        typePassword(user.getPassword());
         submitLogin();
 
         // then
-        assertEquals(driver.getCurrentUrl(), DOMAIN_PORT + "/userValidator");
+        assertEquals(driver.getCurrentUrl(), DOMAIN_PORT + "/user-validator");
         assertTrue(driver.getPageSource().contains("You have logged in."));
+    }
+
+    private User getSomeUserFromDb() throws ClassNotFoundException, DaoException {
+        List<User> users = userDao.getAll();
+        User user = users.get(0);
+        if (user != null) {
+            return user;
+        }
+        return null;
     }
 }

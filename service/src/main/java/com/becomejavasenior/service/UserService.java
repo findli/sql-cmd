@@ -3,6 +3,7 @@ package com.becomejavasenior.service;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.User;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface UserService {
@@ -13,4 +14,8 @@ public interface UserService {
     void delete(int id) throws DaoException;
 
     public User getByName(String str) throws DaoException, ClassNotFoundException;
+
+    boolean checkAuthorisation(String email, String password) throws SQLException;
+
+    Object getByEmail(String email) throws SQLException;
 }
