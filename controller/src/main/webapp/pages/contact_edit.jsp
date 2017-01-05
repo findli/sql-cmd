@@ -136,14 +136,6 @@
 
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="old">
-                                <%--<select class="col-sm-3 form-control">--%>
-                                    <%--<option>Company 1</option>--%>
-                                    <%--<option>Company 2</option>--%>
-                                    <%--<option>Company 3</option>--%>
-                                    <%--<option>Company 4</option>--%>
-                                    <%--<option>Company 5</option>--%>
-                                    <%--<option>Company 5</option>--%>
-                                <%--</select>--%>
                                 <select class="col-sm-9 form-control" id="company" name="company">
                                     <c:forEach var="company" items="${companies}">
                                         <option><c:out value="${company.getTitle()}"/></option>
