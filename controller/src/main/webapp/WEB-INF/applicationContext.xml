@@ -11,8 +11,8 @@
        <context:annotation-config/>
        <context:component-scan base-package="com.becomejavasenior"/>
 
-       <!--<context:property-placeholder location="WEB-INF/database.properties"/>-->
-          <context:property-placeholder location="WEB-INF/database_heroku.properties"/>
+       <context:property-placeholder location="WEB-INF/database.properties"/>
+          <!--<context:property-placeholder location="WEB-INF/database_heroku.properties"/>-->
 
 
        <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
