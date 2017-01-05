@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "userValidatorServlet")
+@WebServlet(name = "userValidatorServlet", urlPatterns = "/user-validator")
 @Controller("userValidatorServlet")
 public class UserValidatorServlet extends HttpServlet {
 
