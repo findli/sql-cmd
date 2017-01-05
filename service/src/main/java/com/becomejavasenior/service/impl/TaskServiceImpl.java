@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,5 +81,44 @@ public class TaskServiceImpl implements TaskService {
         returnList.add(tasksDone);
         returnList.add(tasksOverdue);
         return returnList;
+    }
+
+    public List<Task> getAllTasksForFilter(Date fromDate, Date toDate, int period_id, int task_type_id, int user_id) throws DaoException, ClassNotFoundException {
+        java.sql.Date sqlFromDate = null;
+        java.sql.Date sqlToDate = null;
+        if(fromDate != null) {
+             sqlFromDate = new java.sql.Date(fromDate.getTime());
+        }
+        if(toDate != null) {
+            sqlToDate = new java.sql.Date(toDate.getTime());
+        }
+        listTasks = taskDAO.getAllTasksForFilter(sqlFromDate, sqlToDate, period_id, task_type_id, user_id);
+        return listTasks;
+    }
+
+    public List<Task> getOverdueTasksForFilter(Date fromDate, Date toDate, int period_id, int task_type_id, int user_id) throws DaoException, ClassNotFoundException{
+        java.sql.Date sqlFromDate = null;
+        java.sql.Date sqlToDate = null;
+        if(fromDate != null) {
+            sqlFromDate = new java.sql.Date(fromDate.getTime());
+        }
+        if(toDate != null) {
+            sqlToDate = new java.sql.Date(toDate.getTime());
+        }
+        listTasks = taskDAO.getOverdueTasksForFilter(sqlFromDate, sqlToDate, period_id, task_type_id, user_id);
+        return listTasks;
+    }
+
+    public List<Task> getDeletedTasksForFilter(Date fromDate, Date toDate, int period_id, int task_type_id, int user_id) throws DaoException, ClassNotFoundException{
+        java.sql.Date sqlFromDate = null;
+        java.sql.Date sqlToDate = null;
+        if(fromDate != null) {
+            sqlFromDate = new java.sql.Date(fromDate.getTime());
+        }
+        if(toDate != null) {
+            sqlToDate = new java.sql.Date(toDate.getTime());
+        }
+        listTasks = taskDAO.getDeletedTasksForFilter(sqlFromDate, sqlToDate, period_id, task_type_id, user_id);
+        return listTasks;
     }
 }

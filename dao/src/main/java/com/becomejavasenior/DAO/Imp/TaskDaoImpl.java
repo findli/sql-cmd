@@ -14,7 +14,8 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
-import java.util.List;
+import java.sql.Date;
+import java.util.*;
 
 @Repository("taskDao")
 public class TaskDaoImpl extends AbstractDaoJdbcTemplate<Task> implements TaskDao<Task>{
@@ -124,6 +125,70 @@ public class TaskDaoImpl extends AbstractDaoJdbcTemplate<Task> implements TaskDa
     @Override
     public List<Task> getTasksForList(int id) {
         return jdbcTemplate.query(SELECT_TASKS_FOR_LIST.replace("?", String.valueOf(id)), TASK_FOR_LIST_ROW_MAPPER);
+    }
+
+    public List<Task> getAllTasksForFilter(Date fromDate, Date toDate, int period_id, int task_type_id, int user_id){
+        List<Task> taskList = new ArrayList<>();
+        String sqlForFilter = SELECT_ALL_SQL;
+      if(fromDate != null){
+          sqlForFilter = sqlForFilter + " AND deadline_date>="+"'"+fromDate+"'";
+      }
+      if(toDate != null){
+          sqlForFilter = sqlForFilter + " AND deadline_date<="+"'"+toDate+"'";
+      }
+      if(period_id != 0){
+          sqlForFilter = sqlForFilter + " AND period_in_days_type_id="+period_id;
+      }
+      if(task_type_id != 0){
+          sqlForFilter = sqlForFilter + " AND task_type_id="+task_type_id;
+      }
+      if(user_id != 0){
+          sqlForFilter = sqlForFilter + " AND responsible_user_id="+user_id;
+      }
+        return jdbcTemplate.query(sqlForFilter, TASK_ROW_MAPPER);
+    }
+
+    public List<Task> getOverdueTasksForFilter(Date fromDate, Date toDate, int period_id, int task_type_id, int user_id){
+        List<Task> taskList = new ArrayList<>();
+        String sqlForFilter = SELECT_ALL_SQL + " AND deadline_date<=CURRENT_DATE";
+        if(fromDate != null){
+            sqlForFilter = sqlForFilter + " AND deadline_date>="+"'"+fromDate+"'";
+        }
+        if(toDate != null){
+            sqlForFilter = sqlForFilter + " AND deadline_date<="+"'"+toDate+"'";
+        }
+        if(period_id != 0){
+            sqlForFilter = sqlForFilter + " AND period_in_days_type_id="+period_id;
+        }
+        if(task_type_id != 0){
+            sqlForFilter = sqlForFilter + " AND task_type_id="+task_type_id;
+        }
+        if(user_id != 0){
+            sqlForFilter = sqlForFilter + " AND responsible_user_id="+user_id;
+        }
+        sqlForFilter = sqlForFilter + " OR deadline_time>CURRENT_TIME";
+        return jdbcTemplate.query(sqlForFilter, TASK_ROW_MAPPER);
+    }
+
+    public List<Task> getDeletedTasksForFilter(Date fromDate, Date toDate, int period_id, int task_type_id, int user_id){
+        List<Task> taskList = new ArrayList<>();
+        String sqlForFilter = "SELECT * FROM crm_pallas.task WHERE is_deleted=TRUE ";
+        if(fromDate != null){
+            sqlForFilter = sqlForFilter + " AND deadline_date>="+"'"+fromDate+"'";
+        }
+        if(toDate != null){
+            sqlForFilter = sqlForFilter + " AND deadline_date<="+"'"+toDate+"'";
+        }
+        if(period_id != 0){
+            sqlForFilter = sqlForFilter + " AND period_in_days_type_id="+period_id;
+        }
+        if(task_type_id != 0){
+            sqlForFilter = sqlForFilter + " AND task_type_id="+task_type_id;
+        }
+        if(user_id != 0){
+            sqlForFilter = sqlForFilter + " AND responsible_user_id="+user_id;
+        }
+        return jdbcTemplate.query(sqlForFilter, TASK_ROW_MAPPER);
     }
 
     private final RowMapper<Task> TASK_FOR_LIST_ROW_MAPPER= (resultSet, i) -> {
