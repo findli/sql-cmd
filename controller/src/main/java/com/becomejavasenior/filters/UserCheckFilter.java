@@ -1,6 +1,6 @@
 package com.becomejavasenior.filters;
 
-import com.becomejavasenior.Entity.User;
+import com.becomejavasenior.bean.User;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -22,7 +22,7 @@ public class UserCheckFilter implements javax.servlet.Filter {
         User user = (User) session.getAttribute("user");
 
         if (user == null && !LOGIN_ACTION_URI.equals(requestLocal.getRequestURI())) {
-            RequestDispatcher requestDispatcher = requestLocal.getRequestDispatcher("/login.jsp");
+            RequestDispatcher requestDispatcher = requestLocal.getRequestDispatcher("/pages/login.jsp");
             requestDispatcher.forward(requestLocal, response);
             return;
         }

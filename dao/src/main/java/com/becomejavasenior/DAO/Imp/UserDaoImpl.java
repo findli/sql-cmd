@@ -5,12 +5,8 @@ import com.becomejavasenior.DAO.UserDao;
 import com.becomejavasenior.bean.Language;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.exceptions.DatabaseException;
-import com.becomejavasenior.factory.PostgresDaoFactory;
-import org.springframework.stereotype.Repository;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
-
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -28,7 +24,6 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     @Override
     void createStatement(PreparedStatement preparedStatement, User user) throws DaoException {
         try {
-
             preparedStatement.setString(1, user.getfName());
             preparedStatement.setString(2, user.getlName());
             preparedStatement.setString(3, user.getPassword());
@@ -40,10 +35,17 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
             preparedStatement.setString(9, user.getNote());
             preparedStatement.setDate(10, (Date) user.getDateCreate());
             preparedStatement.setInt(11, user.getLanguage().getId());
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    String getByEmailQuery() {
+        return "SELECT * FROM crm_pallas.user WHERE email=? LIMIT 1";
+    }
+
+    String getCheckAuthorisationQuery() {
+        return "SELECT id FROM crm_pallas.user WHERE email=? AND password=? LIMIT 1";
     }
 
     @Override
@@ -76,7 +78,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
         User user = new User();
         List<User> users = getAll();
         for (int i = 0; i < users.size(); ++i) {
-            if(users.get(i).getlName().equals(str)) {
+            if (users.get(i).getlName().equals(str)) {
                 user = users.get(i);
                 break;
             }
@@ -123,14 +125,13 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
     @Override
     public List<User> getAll() throws DaoException, ClassNotFoundException {
         List<User> users = new ArrayList<>();
-        User user;
 
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(getAllQuery())) {
 
             while (resultSet.next()) {
-                user = new User();
+                User user = new User();
 
                 user.setId(resultSet.getInt("id"));
                 user.setfName(resultSet.getString("first_name"));
@@ -145,7 +146,6 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
                 user.setNote(resultSet.getString("note"));
 
                 users.add(user);
-
             }
         } catch (SQLException ex) {
             throw new DatabaseException(ex);
@@ -159,4 +159,40 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
         return null;
     }
 
+    @Override
+    public boolean checkAuthorisation(String email, String password) throws SQLException {
+        PreparedStatement statement = getConnection().prepareStatement(getCheckAuthorisationQuery());
+        statement.setString(1, email);
+        statement.setString(2, password);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public User getByEmail(String email) throws SQLException {
+        User user = null;
+        PreparedStatement statement = getConnection().prepareStatement(getByEmailQuery());
+        statement.setString(1, email);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            user = new User();
+
+            user.setId(resultSet.getInt("id"));
+            user.setfName(resultSet.getString("first_name"));
+            user.setlName(resultSet.getString("last_name"));
+            user.setAdmin(resultSet.getBoolean("is_admin"));
+            user.setDateCreate(resultSet.getDate("creation_date_time"));
+            user.setEmail(resultSet.getString("email"));
+            user.setPassword(resultSet.getString("password_hash"));
+            user.setRights(resultSet.getInt("rights"));
+            user.setPhotoPath(resultSet.getString("photo_path"));
+            user.setNotification(resultSet.getBoolean("is_notification_enabled"));
+            user.setNote(resultSet.getString("note"));
+        }
+        return user;
+    }
 }

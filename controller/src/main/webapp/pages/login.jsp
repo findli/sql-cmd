@@ -18,9 +18,9 @@
             <h3 class="panel-title">Login</h3>
         </div>
         <div class="panel-body">
-            <form action="/userValidator" method="post">
+            <form action="/user-validator" method="post">
                 <label for="email">Email</label>
-                <input class="form-control" type="text" name="name" id="email"
+                <input class="form-control" type="text" name="email" id="email"
                        placeholder="email"/>
                 <label for="password">Password</label>
                 <input class="form-control" type="password" name="password"
