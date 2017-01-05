@@ -6,32 +6,40 @@ import com.becomejavasenior.bean.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/applicationContext.xml"})
 public class LoginPage {
     private static final String DOMAIN_PORT = "http://localhost:8080";
+//    @Autowired
+//    @Qualifier("userDao")
+    public UserDao<User> userDao;
     By usernameElementLocator = By.id("email");
     By passwordElementLocator = By.id("password");
     By loginElementLocator = By.cssSelector("input[type=submit]");
     By loginOutElementLocator = By.cssSelector("input[type=submit]");
     private WebDriver driver;
 
-    @Autowired
-    private UserDao<User> userDao;
-
     @Before
     public void setUp() {
-
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 
         System.setProperty("webdriver.gecko.driver", "/Users/miiix/Documents/geckodriver");
         this.driver = new FirefoxDriver();
@@ -46,8 +54,8 @@ public class LoginPage {
 
     @After
     public void tearDown() {
-        driver.close();
-        driver.quit();
+//        driver.close();
+//        driver.quit();
     }
 
     public LoginPage typeUsername(String username) {
@@ -91,19 +99,6 @@ public class LoginPage {
         assertTrue(driver.getPageSource().contains("Wrong user/password"));
     }
 
-    @Test
-    public void logoutUser() {
-        // given
-        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
-        webDriverWait.until(ExpectedConditions.elementToBeClickable(loginOutElementLocator));
-
-        // when
-        driver.get("/");
-        driver.findElement(loginOutElementLocator).click();
-
-        // then
-        assertEquals(driver.getCurrentUrl(), DOMAIN_PORT + "/user-logout");
-    }
 
     @Test
     // Conceptually, the login page offers the user the service of being able to "log into"
@@ -124,6 +119,20 @@ public class LoginPage {
         // then
         assertEquals(driver.getCurrentUrl(), DOMAIN_PORT + "/user-validator");
         assertTrue(driver.getPageSource().contains("You have logged in."));
+    }
+
+    @Test
+    public void logoutUser() {
+        // given
+        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(loginOutElementLocator));
+
+        // when
+        driver.get("/");
+        driver.findElement(loginOutElementLocator).click();
+
+        // then
+        assertEquals(driver.getCurrentUrl(), DOMAIN_PORT + "/user-logout");
     }
 
     private User getSomeUserFromDb() throws ClassNotFoundException, DaoException {

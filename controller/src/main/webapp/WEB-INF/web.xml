@@ -34,14 +34,14 @@
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
 
-    <servlet>
+<!--    <servlet>
         <servlet-name>userValidator</servlet-name>
         <servlet-class>com.becomejavasenior.servlets.UserValidatorServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userValidator</servlet-name>
         <url-pattern>/user-validator</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
     <filter>
         <filter-name>UserCheckFilter</filter-name>
         <filter-class>com.becomejavasenior.filters.UserCheckFilter</filter-class>
