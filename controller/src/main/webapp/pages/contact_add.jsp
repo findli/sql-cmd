@@ -239,7 +239,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Date and time </label>
+                            <label class="col-sm-3 control-label">Deadline</label>
                             <div class="col-sm-8">
                                 <div class="input-group date" id="datetimepicker">
                                     <input type="text" name="DeadlineDate" class="form-control" />

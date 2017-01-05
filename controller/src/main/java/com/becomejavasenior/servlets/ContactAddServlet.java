@@ -27,35 +27,27 @@ import java.util.List;
 public class ContactAddServlet extends HttpServlet {
 
     public static Logger log = Logger.getLogger(ContactAddServlet.class);
-
-    @Autowired
-    @Qualifier("contactService")
-    private ContactService contactService;
-
     @Autowired
     @Qualifier("companyService")
     CompanyService companyService;
-
     @Autowired
     @Qualifier("taskTypeService")
     TaskTypeService taskTypeService;
-
     @Autowired
     @Qualifier("periodInDaysTypeService")
     PeriodInDaysTypeService periodService;
-
     @Autowired
     @Qualifier("phoneService")
     PhoneService phoneService;
-
     @Autowired
     @Qualifier("stageService")
     StageService stageService;
-
     @Autowired
     @Qualifier("userService")
     UserService userService;
-
+    @Autowired
+    @Qualifier("contactService")
+    private ContactService contactService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -75,7 +67,7 @@ public class ContactAddServlet extends HttpServlet {
         List<Company> companyList = null;
         List<PhoneType> phoneTypes = null;
         List<Stage> stageList = null;
-      //TODO:  List<Phone> phoneList = null;
+        //TODO:  List<Phone> phoneList = null;
 
         try {
             usersList = userService.getAll();
@@ -100,12 +92,6 @@ public class ContactAddServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        System.out.println(usersList);
-        for (User user : usersList) {
-            System.out.println(user.getId());
-            System.out.println(user.getfName());
-            System.out.println(user.getlName());
-        }
         session.setAttribute("usersList", usersList);
         session.setAttribute("TaskTypeList", TaskTypeList);
         session.setAttribute("PeriodInDaysTypeList", PeriodInDaysTypeList);
@@ -118,32 +104,24 @@ public class ContactAddServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
 
-        Contact contact = null;
-        Company company = null;
-        Task task = null;
-        Deal deal = null;
-        Note note = new Note();
-
         try {
-            contact = getContactFromRequest(request);
-            company = getCompanyFromRequest(request);
-            task = getTaskFromRequest(request);
-            deal = getDealFromRequest(request);
+            Contact contact = getContactFromRequest(request);
+            Company company = getCompanyFromRequest(request);
+            Task task = getTaskFromRequest(request);
+            Deal deal = getDealFromRequest(request);
 
-            contactService.createNewContact(contact,deal, company, task, note);
-
+            contactService.createNewContact(contact, deal, company, task);
         } catch (DaoException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        Tag tag = getTagFromRequest(request);
-
-        File attachedFile = getFileFromRequest(request);
+//        Tag tag = getTagFromRequest(request);
+//        File attachedFile = getFileFromRequest(request);
 
         response.sendRedirect("/contact");
     }
@@ -159,8 +137,8 @@ public class ContactAddServlet extends HttpServlet {
         contact.setSkype(request.getParameter("Skype"));
         contact.setDeleted(false);
 
-        User user = new User();
-        user.setlName(request.getParameter("responsibleUser"));
+        User user = userService.getById(parseString(request.getParameter("responsibleUser")));
+
         contact.setResponsibleUser(user);
 
 //        String noteContent = request.getParameter("noteContact");
@@ -186,7 +164,7 @@ public class ContactAddServlet extends HttpServlet {
 
     private Company getCompanyFromRequest(HttpServletRequest request) {
         Company company = new Company();
-        if (request.getParameter("nameCompany")!= "") {
+        if (request.getParameter("nameCompany") != "") {
             company.setTitle(request.getParameter("nameCompany"));
             company.setPhoneNumber(request.getParameter("phoneCompany"));
             company.setEmail(request.getParameter("emailCompany"));
@@ -194,7 +172,7 @@ public class ContactAddServlet extends HttpServlet {
             //TODO: company.setAddress();
         } else {
             try {
-                company =  companyService.getByName(request.getParameter("company"));
+                company = companyService.getByName(request.getParameter("company"));
             } catch (DaoException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
@@ -205,7 +183,7 @@ public class ContactAddServlet extends HttpServlet {
         return company;
     }
 
-    private Deal getDealFromRequest (HttpServletRequest request) {
+    private Deal getDealFromRequest(HttpServletRequest request) {
         Deal deal = new Deal();
         deal.setTitle(request.getParameter("dealName"));
 
@@ -220,8 +198,7 @@ public class ContactAddServlet extends HttpServlet {
         return deal;
     }
 
-    private Task getTaskFromRequest (HttpServletRequest request) {
-
+    private Task getTaskFromRequest(HttpServletRequest request) {
         Task task = new Task();
         TaskType taskType = new TaskType();
         User user = new User();
@@ -236,36 +213,38 @@ public class ContactAddServlet extends HttpServlet {
             taskType = taskTypeService.getById(parseString(request.getParameter("TaskType")));
             date = format.parse(request.getParameter("DeadlineDate"));
             periodInDaysType = periodService.getById(parseString(request.getParameter("PeriodInDaysType")));
-        }catch ( ParseException e){
+        } catch (ParseException e) {
             e.printStackTrace();
-        }catch (DaoException e){
+        } catch (DaoException e) {
             e.printStackTrace();
         }
         task.setTaskType(taskType);
         task.setDeadlineDate(date);
         task.setPeriodInDaysType(periodInDaysType);
-    //    task.setPeriodInMinutes((int) date.getTime());
+        //    task.setPeriodInMinutes((int) date.getTime());
         task.setResponsibleUser(user);
         task.setFinished(false);
         task.setDeleted(false);
 
+        System.out.println(task.getDeadlineDate());
+
         return task;
     }
 
-    private Tag getTagFromRequest(HttpServletRequest request){
+    private Tag getTagFromRequest(HttpServletRequest request) {
         Tag tag = new Tag();
         tag.setTitle(request.getParameter("Tag"));
 
         return tag;
     }
 
-    private File getFileFromRequest(HttpServletRequest request){
+    private File getFileFromRequest(HttpServletRequest request) {
         File attachedFile = new File();
 
         return attachedFile;
     }
 
-    private int parseString(String text){
+    private int parseString(String text) {
         int id = Integer.parseInt(text);
         return id;
     }
