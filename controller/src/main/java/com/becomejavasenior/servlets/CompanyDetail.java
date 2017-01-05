@@ -40,8 +40,12 @@ public class CompanyDetail {
     @RequestMapping(value = "/updateCompany", method = RequestMethod.POST)
     public
     @ResponseBody
-    ModelAndView updateCompany(@RequestBody Company jsonString) throws DaoException, ClassNotFoundException {
-        company.setTitle(jsonString.getTitle());
+    void updateCompany(@RequestBody Company jsonString) throws DaoException, ClassNotFoundException {
+        if (jsonString.getTitle().isEmpty()){
+            company.setTitle(null);
+        }else {
+            company.setTitle(jsonString.getTitle());
+        }
         company.setPhoneNumber(jsonString.getPhoneNumber());
         company.setWebsite(jsonString.getWebsite());
         company.setEmail(jsonString.getEmail());
@@ -56,11 +60,22 @@ public class CompanyDetail {
         company.setId(jsonString.getId());
         company.setDeleted(false);
         User user = new User();
-        user.setId(jsonString.getResponsibleUser().getId());
-        company.setResponsibleUser(user);
-        updateCompanyAddress();
-
-        return getDetailCompany(jsonString.getId());
+        /**
+         * Новая компания приходит с id = 0
+         */
+        if (jsonString.getId() == 0) {
+            /**
+             * Id юзера взять из сессии
+             */
+            user.setId(1);
+            company.setResponsibleUser(user);
+            createCompanyAddress();
+        } else {
+            user.setId(jsonString.getResponsibleUser().getId());
+            company.setResponsibleUser(user);
+            updateCompanyAddress();
+            getDetailCompany(jsonString.getId());
+        }
     }
 
     @RequestMapping(value = "/updateAddress", method = RequestMethod.POST)
@@ -81,6 +96,16 @@ public class CompanyDetail {
         try {
             addressService.update(address);
             companyService.update(company);
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void createCompanyAddress() {
+        try {
+            address.setId(addressService.create(address).getId());
+            company.setAddress(address);
+            companyService.create(company);
         } catch (DaoException e) {
             e.printStackTrace();
         }

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <%--  <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>--%>
-    <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
     <title>Add contact</title>
@@ -75,7 +75,8 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Position </label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" placeholder="position" name="position" id="position">
+                                <input class="form-control" type="text" placeholder="position" name="position"
+                                       id="position">
                             </div>
                         </div>
 
@@ -88,7 +89,8 @@
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Responsible </label>
-                            <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser" style="width: 150px;">
+                            <select class="col-sm-9 form-control" id="responsibleUser" name="responsibleUser"
+                                    style="width: 150px;">
                                 <c:forEach var="user" items="${usersList}">
                                     <option value="${user.getId()}">
                                         <c:out value="${user.fName}"/>
@@ -99,10 +101,10 @@
                         </div>
 
                         <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">Position </label>--%>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<input class="form-control" type="text" placeholder="position" name="position" id="position">--%>
-                            <%--</div>--%>
+                        <%--<label class="col-sm-3 control-label">Position </label>--%>
+                        <%--<div class="col-sm-9">--%>
+                        <%--<input class="form-control" type="text" placeholder="position" name="position" id="position">--%>
+                        <%--</div>--%>
                         <%--</div>--%>
 
                         <div class="form-group">
@@ -112,7 +114,8 @@
                                 <option>Home</option>
                             </select>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" name="formPhone" id="formPhone" placeholder="Number">
+                                <input class="form-control" type="text" name="formPhone" id="formPhone"
+                                       placeholder="Number">
                             </div>
                         </div>
 
@@ -165,7 +168,8 @@
 
                         <!-- Навигация -->
                         <ul class="nav nav-tabs" role="tablist">
-                            <li class="active"><a href="#old" aria-controls="old" role="tab" data-toggle="tab">Companies</a></li>
+                            <li class="active"><a href="#old" aria-controls="old" role="tab"
+                                                  data-toggle="tab">Companies</a></li>
                             <li><a href="#new" aria-controls="new" role="tab" data-toggle="tab">New Company</a></li>
                         </ul>
 
@@ -174,7 +178,8 @@
                             <br>
                             <div role="tabpanel" class="tab-pane active" id="old">
 
-                                <select class="form-control" style="float: none; width: 250px" id="company" name="company">
+                                <select class="form-control" style="float: none; width: 250px" id="company"
+                                        name="company">
                                     <c:forEach var="company" items="${companyList}">
                                         <option><c:out value="${company.title}"/></option>
                                     </c:forEach>
@@ -183,41 +188,77 @@
                             </div>
 
                             <div role="tabpanel" class="tab-pane" id="new">
+                                <input type="hidden" id='formZipcode' value="">
+                                <input type="hidden" id='formCountry' value="">
+                                <input type="hidden" id='formCity' value="">
+                                <input type="hidden" id='formStreet' value="">
+                                <input type="hidden" id='formBuildNum' value="">
+                                <input type="hidden" id='formOfficeRoom' value="">
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Title: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="nameCompany" placeholder="Name">
+                                        <input class="form-control" id="formCompanyTabpanel" type="text" placeholder="Name">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Phone: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="phoneCompany" placeholder="Phone">
+                                        <input class="form-control" id="formPhoneTabpanel" type="text" placeholder="Phone">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">email: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="emailCompany" placeholder="email">
+                                        <input class="form-control" id="formEmailTabpanel" type="text" placeholder="email">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Web: </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="webCompany" placeholder="Url">
+                                        <input class="form-control" id="formWebTabpanel" type="text"placeholder="Url">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Address: </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="addressCompany" placeholder="Address">
+                                    <div class="col-sm-9" onclick="location.href='#modalAddAddress'"
+                                         title="Click me for edit">
+                                        <textarea disabled="disabled" class="text" id='formAddress' type="text" name="formAddress"></textarea>
                                     </div>
                                 </div>
+                                <input class="formAddBut" type="button" value="Add company">
                             </div>
+                            <div id="modalAddAddress" class="modalDialog">
+                                <div>
+                                    <header>
+                                        <div class="wrapper__modal1Title">
+                                            <div><i class="fa fa-user"></i></div>
+                                            <h3>Edit address</h3>
+                                        </div>
+                                    </header>
+                                    <p>Zipcode <input class="text" id='modalZipcode' type="text"
+                                                      value=""></p>
+                                    <p>Country <input class="text" id='modalCountry' type="text"
+                                                      value=""></p>
+                                    <p>City <input class="text" id='modalCity' type="text"
+                                                   value=""></p>
+                                    <p>Street <input class="text" id='modalStreet' type="text"
+                                                     value=""></p>
+                                    <p>BuildNum <input class="text" id='modalBuildNum' type="text"
+                                                       value=""></p>
+                                    <p>OfficeRoom <input class="text" id='modalOfficeRoom' type="text"
+                                                         value=""></p>
+                                    <input class="modalBut" id="modalButAddress" type="button"
+                                           onclick="location.href='#close'"
+                                           value="Save contact">
+                                    <input class="modalBut cancel" onclick="location.href='#close'" type="button"
+                                           value="Cancel">
+                                </div>
+                            </div>
+                            <!--End-->
                         </div>
                         <!--    </form> -->
                     </div>
@@ -242,7 +283,7 @@
                             <label class="col-sm-3 control-label">Date and time </label>
                             <div class="col-sm-8">
                                 <div class="input-group date" id="datetimepicker">
-                                    <input type="text" name="DeadlineDate" class="form-control" />
+                                    <input type="text" name="DeadlineDate" class="form-control"/>
                                     <span class="input-group-addon">
                                                 <span class="glyphicon-calendar glyphicon"></span>
                                             </span>
@@ -269,7 +310,8 @@
                             <div class="col-sm-9">
                                 <select class="form-control" name="TaskType">
                                     <c:forEach var="taskType" items="${sessionScope.TaskTypeList}">
-                                        <option value="${taskType.getId()}"><c:out value="${taskType.getType()}"/></option>
+                                        <option value="${taskType.getId()}"><c:out
+                                                value="${taskType.getType()}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -327,7 +369,7 @@
 </div>
 <script type="text/javascript">
     $(function () {
-        $('#datetimepicker').datetimepicker({language: 'ru',minuteStepping:10,daysOfWeekDisabled:[0,6]});
+        $('#datetimepicker').datetimepicker({language: 'ru', minuteStepping: 10, daysOfWeekDisabled: [0, 6]});
     });
 </script>
 
@@ -339,4 +381,5 @@
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
+<script type="text/javascript" src="../js/scriptAddCompany.js"></script>
 </html>

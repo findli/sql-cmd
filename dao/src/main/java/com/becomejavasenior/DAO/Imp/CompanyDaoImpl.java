@@ -10,10 +10,12 @@ import com.becomejavasenior.bean.User;
 import com.becomejavasenior.factory.PostgresDaoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
@@ -31,8 +33,6 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
         super(dataSource);
     }
 
-    private PlatformTransactionManager transactionManager;
-
     @Autowired
     DataSource dataSource;
 
@@ -48,17 +48,9 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
     @Qualifier("addressDao")
     AddressDao addressDao;
 
-    public void setTransactionManager(
-            PlatformTransactionManager transactionManager) {
-        this.transactionManager = transactionManager;
-    }
-
     @Override
+    @Transactional
     public void createStatement(PreparedStatement statement, Company company) throws DaoException {
-
-        TransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = transactionManager.getTransaction(def);
-
 
         try{
             statement.setString(1, company.getTitle());
@@ -68,10 +60,8 @@ public class CompanyDaoImpl extends AbstractDaoImpl<Company> implements CompanyD
             statement.setInt(5, company.getAddress().getId());
             statement.setInt(6, company.getResponsibleUser().getId());
             statement.setBoolean(7, company.isDeleted());
-
         } catch (SQLException e) {
             throw new DaoException("Can't create statement for Company", e);
-
         }
     }
 
