@@ -23,4 +23,6 @@ public interface ContactService {
     public void createNewContact(Contact contact, Deal deal, Company company,
                                  Task task, Note note) throws DaoException, ClassNotFoundException;
 
+    void createNewContact(Contact contact, Deal deal, Company company,
+                          Task task) throws DaoException, ClassNotFoundException;
 }
