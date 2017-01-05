@@ -11,6 +11,11 @@ $(function(){
     });
 });
 
+$(function () {
+    $('#datetimepicker1').datetimepicker({pickTime: false, language: 'ru', daysOfWeekDisabled:[0,6]});
+    $('#datetimepicker2').datetimepicker({pickTime: false, language: 'ru', daysOfWeekDisabled:[0,6]});
+});
+
 
 
 

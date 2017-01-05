@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class ContactRowMapper implements RowMapper<Contact> {
@@ -23,8 +25,8 @@ public class ContactRowMapper implements RowMapper<Contact> {
     private static final String FIELD_RESPONSIBLE_USER_ID = "responsible_user_id";
     private static final String FIELD_IS_DELETED = "is_deleted";
 
-    private static final String FIELD_TYPE_OF_PHONE = "type_of_phone";
-    private static final String FIELD_PHONE = "phone";
+    private static final String FIELD_TYPE_OF_PHONE_ID = "type_id";
+    private static final String FIELD_PHONE_ID = "phone_number_id";
     private static final String FIELD_DATE_CREATE = "date_create";
     private static final String FIELD_CREATED_BY_ID = "created_by_id";
     private static final String FIELD_COMPANY_NAME = "company_name";
@@ -34,6 +36,12 @@ public class ContactRowMapper implements RowMapper<Contact> {
 
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    PhoneTypeDao phoneTypeDao;
+
+    @Autowired
+    PhoneDao phoneDao;
 
     @Override
     public Contact mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -62,6 +70,28 @@ public class ContactRowMapper implements RowMapper<Contact> {
             contact.setResponsibleUser(responsibleUser);
         }
 
+     /*   StackTraceElement[] list = Thread.currentThread().getStackTrace();
+        if (list[12].getMethodName().equals("getContactsForList")) {
+            if (resultSet.getObject(FIELD_TYPE_OF_PHONE_ID, Integer.class) != null) {
+                PhoneType phoneType = null;
+                try {
+                    phoneType = (PhoneType) phoneTypeDao.getById(resultSet.getInt(FIELD_TYPE_OF_PHONE_ID));
+                } catch (DaoException e) {
+                    e.printStackTrace();
+                }
+                contact.setPhoneType(phoneType);
+            }
+
+            if (resultSet.getObject(FIELD_PHONE_ID, Integer.class) != null) {
+                Phone phone = null;
+                try {
+                    phone = (Phone) phoneDao.getById(resultSet.getInt(FIELD_PHONE_ID));
+                } catch (DaoException e) {
+                    e.printStackTrace();
+                }
+                contact.setPhone(phone);
+            }
+        }*/
         contact.setPosition(resultSet.getString(FIELD_POSITION));
         contact.setSkype(resultSet.getString(FIELD_SKYPE));
         contact.setEmail(resultSet.getString(FIELD_EMAIL));

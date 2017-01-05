@@ -4,6 +4,7 @@ package com.becomejavasenior.service;
 import com.becomejavasenior.DAO.DaoException;
 import com.becomejavasenior.bean.*;
 
+import java.util.Date;
 import java.util.List;
 
 public interface TaskService {
@@ -21,4 +22,10 @@ public interface TaskService {
     List<Task> getTasksForList(int id);
 
     public List getTaskForDashboard() throws DaoException, ClassNotFoundException;
+
+    public List<Task> getAllTasksForFilter(Date fromDate, Date toDate, int period_id, int task_type_id, int user_id) throws DaoException, ClassNotFoundException;
+
+    public List<Task> getOverdueTasksForFilter(Date fromDate, Date toDate, int period_id, int task_type_id, int user_id) throws DaoException, ClassNotFoundException;
+
+    public List<Task> getDeletedTasksForFilter(Date fromDate, Date toDate, int period_id, int task_type_id, int user_id) throws DaoException, ClassNotFoundException;
 }

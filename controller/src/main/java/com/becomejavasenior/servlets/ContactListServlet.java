@@ -1,3 +1,4 @@
+
 package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.DAO.DaoException;
@@ -5,8 +6,6 @@ import com.becomejavasenior.bean.Contact;
 import com.becomejavasenior.bean.User;
 import com.becomejavasenior.service.ContactService;
 import com.becomejavasenior.service.UserService;
-import com.becomejavasenior.service.impl.ContactServiceImpl;
-import com.becomejavasenior.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;

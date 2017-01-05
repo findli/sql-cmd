@@ -13,9 +13,9 @@ import java.util.List;
 @Service(value = "crmSettingsService")
 public class CrmSettingsServiceImpl implements CrmSettingsService{
 
-   private final CrmSettingsDao crmSettingsDao;
+    private final CrmSettingsDao crmSettingsDao;
 
-   @Autowired
+    @Autowired
     public CrmSettingsServiceImpl(CrmSettingsDao crmSettingsDao) {
         this.crmSettingsDao = crmSettingsDao;
     }

@@ -12,7 +12,7 @@ import java.sql.SQLException;
 @Service
 public class PostgresDaoFactory extends AbstractDaoFactory {
 
-//    public static Connection getConnection() throws SQLException {
+    //    public static Connection getConnection() throws SQLException {
 //        return DataBaseUtil.getConnection();
 //    }
     @Autowired

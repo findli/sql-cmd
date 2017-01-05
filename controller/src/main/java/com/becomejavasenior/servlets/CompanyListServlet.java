@@ -1,3 +1,4 @@
+/*
 package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.DAO.DaoException;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name="companyList", urlPatterns = "/company")
+
 @Controller("companyListServlet")
 public class CompanyListServlet extends HttpServlet {
 
@@ -63,3 +65,4 @@ public class CompanyListServlet extends HttpServlet {
     }
 
 }
+*/

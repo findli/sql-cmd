@@ -7,6 +7,7 @@ import com.becomejavasenior.bean.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
@@ -52,6 +53,7 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
             statement.setString(4, address.getBuildNum());
             statement.setInt(5, address.getZipcode());
             statement.setString(6, address.getOfficeRoom());
+            statement.setInt(7, address.getId());
 
         } catch (SQLException e) {
 
@@ -66,7 +68,8 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
     }
 
     @Override
-   public Address getEntity(ResultSet resultSet) throws DaoException {
+    @Transactional
+    public Address getEntity(ResultSet resultSet) throws DaoException {
 
         Address address = new Address();
 
@@ -94,7 +97,7 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
     }
 
     public String getUpdateQuery() {
-        return "UPDATE crm_pallas.address SET country = ?, city = ?, street = ?, building_number = ?, zipcode = ?, office_room = ?";
+        return "UPDATE crm_pallas.address SET country = ?, city = ?, street = ?, building_number = ?, zipcode = ?, office_room = ? WHERE id = ?";
     }
 
     public String getDeleteQuery() {

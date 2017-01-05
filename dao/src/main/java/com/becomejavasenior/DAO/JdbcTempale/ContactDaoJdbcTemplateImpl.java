@@ -52,13 +52,18 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact>
             "  crm_pallas.contact.email,\n" +
             "  crm_pallas.contact.skype,\n" +
             "  crm_pallas.contact_phone.phone_number as phoneNumber,\n" +
+            "  crm_pallas.contact_phone.id as phone_number_id,\n" +
             "  crm_pallas.phone_type.title,\n" +
-            "  crm_pallas.company.id as companyId\n" +
+            "  crm_pallas.phone_type.id as type_id,\n" +
+            "  crm_pallas.company.id as companyId,\n" +
+            "  crm_pallas.contact.responsible_user_id,\n" +
+            "  crm_pallas.contact.is_deleted\n" +
             "FROM crm_pallas.contact\n" +
             "  JOIN crm_pallas.company ON crm_pallas.contact.company_id = crm_pallas.company.id\n" +
             "  JOIN crm_pallas.contact_phone ON crm_pallas.contact.id = crm_pallas.contact_phone.contact_id\n" +
             "  JOIN crm_pallas.phone_type ON crm_pallas.contact_phone.phone_type_id = crm_pallas.phone_type.id\n" +
             "where company_id = ? AND contact.is_deleted = FALSE";
+
 
     @Override
     public List<Contact> getContactsForList(int id) {
@@ -148,11 +153,11 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact>
         contact.setPosition(resultSet.getString("post"));
         contact.setEmail(resultSet.getString("email"));
         contact.setSkype(resultSet.getString("skype"));
-        phone.setPhoneNumber(resultSet.getString("phonenumber"));
+        phone.setPhoneNumber(resultSet.getString("phoneNumber"));
         phoneType.setTitle(resultSet.getString("title"));
         phone.setPhoneType(phoneType);
         contact.setPhone(phone);
-        company.setId(resultSet.getInt("companyid"));
+        company.setId(resultSet.getInt("companyId"));
         contact.setCompany(company);
 
         return contact;

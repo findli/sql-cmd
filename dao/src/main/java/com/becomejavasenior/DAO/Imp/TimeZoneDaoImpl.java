@@ -50,7 +50,7 @@ public class TimeZoneDaoImpl extends AbstractDaoImpl<TimeZone> implements TimeZo
     public void createStatement(PreparedStatement preparedStatement, TimeZone timeZone) throws DaoException {
         try {
             preparedStatement.setString(1, timeZone.getTitle());
-            preparedStatement.setString(2, timeZone.getShiftInHours());
+            preparedStatement.setString(2, String.valueOf(timeZone.getShiftInHours()));
         } catch (SQLException e) {
             throw new DaoException("Can't create statement for TimeZone", e);
         }
@@ -60,7 +60,7 @@ public class TimeZoneDaoImpl extends AbstractDaoImpl<TimeZone> implements TimeZo
     public void updateStatement(PreparedStatement preparedStatement, TimeZone timeZone) throws DaoException {
         try {
             preparedStatement.setString(1, timeZone.getTitle());
-            preparedStatement.setString(2, timeZone.getShiftInHours());
+            preparedStatement.setString(2, String.valueOf(timeZone.getShiftInHours()));
         } catch (SQLException e) {
             throw new DaoException("Can't update statement for TimeZone", e);
         }
@@ -72,7 +72,7 @@ public class TimeZoneDaoImpl extends AbstractDaoImpl<TimeZone> implements TimeZo
         try {
             timeZone.setId(resultSet.getInt("id"));
             timeZone.setTitle(resultSet.getString("title"));
-            timeZone.setShiftInHours(resultSet.getString("shift_in_hours"));
+            timeZone.setShiftInHours(Integer.parseInt(resultSet.getString("shift_in_hours")));
         }catch (SQLException e){
             throw new DaoException("Can't get entity from TimeZone", e);
         }
