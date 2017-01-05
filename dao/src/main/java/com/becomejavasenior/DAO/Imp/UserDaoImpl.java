@@ -144,6 +144,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
                 user.setPhotoPath(resultSet.getString("photo_path"));
                 user.setNotification(resultSet.getBoolean("is_notification_enabled"));
                 user.setNote(resultSet.getString("note"));
+                user.setPassword(resultSet.getString("password"));
 
                 users.add(user);
             }
@@ -166,10 +167,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao<User> 
         statement.setString(2, password);
         ResultSet resultSet = statement.executeQuery();
 
-        if (resultSet.next()) {
-            return true;
-        }
-        return false;
+        return resultSet.next();
     }
 
     @Override

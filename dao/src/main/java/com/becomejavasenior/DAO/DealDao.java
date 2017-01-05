@@ -11,8 +11,8 @@ public interface DealDao<Deal> extends AbstractDao<Deal> {
     List<Deal> getDealsForList(int id);
     List<Deal> getDealsForList();
     List<Contact> getContactsByDealName(String dealName);
-    public List<Stage> getAllStage();
-    public List<Deal> getDealsByStage(String stage);
-    public List<Deal> getDealWithTask();
-    public List<Deal> getDealWithNotTask();
+    List<Stage> getAllStage();
+    List<Deal> getDealsByStage(String stage);
+    List<Deal> getDealWithTask();
+    List<Deal> getDealWithNotTask();
 }

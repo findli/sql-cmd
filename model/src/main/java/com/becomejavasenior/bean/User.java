@@ -31,13 +31,29 @@ public class User implements Serializable {
     public User() {
     }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
-    public void setId(int id) { this.id = id; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public boolean isAdmin() { return isAdmin; }
+    public boolean isAdmin() {
+        return isAdmin;
+    }
 
-    public boolean isNotification() { return isNotification; }
+    public void setAdmin(boolean admin) {
+        this.isAdmin = admin;
+    }
+
+    public boolean isNotification() {
+        return isNotification;
+    }
+
+    public void setNotification(boolean notification) {
+        this.isNotification = notification;
+    }
 
     public String getfName() {
         return fName;
@@ -75,10 +91,6 @@ public class User implements Serializable {
         return isAdmin;
     }
 
-    public void setAdmin(boolean admin) {
-        this.isAdmin = admin;
-    }
-
     public int getRights() {
         return rights;
     }
@@ -97,10 +109,6 @@ public class User implements Serializable {
 
     public boolean is_notification() {
         return isNotification;
-    }
-
-    public void setNotification(boolean notification) {
-        this.isNotification = notification;
     }
 
     public String getNote() {
@@ -135,68 +143,68 @@ public class User implements Serializable {
         this.isNotification = isNotification;
     }
 
-    public void setDeals(List<Deal> userDeals) {
-        this.deals = userDeals;
-    }
-
-    public void setTasks(List<Task> userTasks) {
-        this.tasks = userTasks;
-    }
-
-    public void setCompanies(List<Company> userCompanys) {
-        this.companies = userCompanys;
-    }
-
-    public void setLoginHistories(List<LoginHistory> userLoginHistory) {
-        this.loginHistories = userLoginHistory;
-    }
-
-    public void setContacts(List<Contact> userContacts) {
-        this.contacts = userContacts;
-    }
-
-    public void setEventHistories(List<EventHistory> userEventHistory) {
-        this.eventHistories = userEventHistory;
-    }
-
-    public void setNotes(List<Note> userNotes) {
-        this.notes = userNotes;
-    }
-
     public List<Deal> getDeals() {
         return deals;
+    }
+
+    public void setDeals(List<Deal> userDeals) {
+        this.deals = userDeals;
     }
 
     public List<Task> getTasks() {
         return tasks;
     }
 
+    public void setTasks(List<Task> userTasks) {
+        this.tasks = userTasks;
+    }
+
     public List<Company> getCompanies() {
         return companies;
+    }
+
+    public void setCompanies(List<Company> userCompanys) {
+        this.companies = userCompanys;
     }
 
     public List<LoginHistory> getLoginHistories() {
         return loginHistories;
     }
 
+    public void setLoginHistories(List<LoginHistory> userLoginHistory) {
+        this.loginHistories = userLoginHistory;
+    }
+
     public List<Contact> getContacts() {
         return contacts;
+    }
+
+    public void setContacts(List<Contact> userContacts) {
+        this.contacts = userContacts;
     }
 
     public List<EventHistory> getEventHistories() {
         return eventHistories;
     }
 
+    public void setEventHistories(List<EventHistory> userEventHistory) {
+        this.eventHistories = userEventHistory;
+    }
+
     public List<Note> getNotes() {
         return notes;
     }
 
-    public void setPhones(List<Phone> phones) {
-        this.phones = phones;
+    public void setNotes(List<Note> userNotes) {
+        this.notes = userNotes;
     }
 
     public List<Phone> getPhones() {
         return phones;
+    }
+
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
     }
 
     @Override

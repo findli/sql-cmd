@@ -13,13 +13,13 @@ public interface DealService {
     void delete(int id) throws DaoException;
     List<Deal> getDealsForList(int id);
     List<Deal> getDealsForList();
-    public void createNewDeal(Deal deal, Contact contact, Task task, Company company, Note note) throws DaoException, ClassNotFoundException;
-    public List<Contact> getContactsByDealName(String dealName);
-    public List<Stage> getAllStage();
+    void createNewDeal(Deal deal, Contact contact, Task task, Company company, Note note) throws DaoException, ClassNotFoundException;
+    List<Contact> getContactsByDealName(String dealName);
+    List<Stage> getAllStage();
     List<Deal> getAllDealsByStage(String stage);
-    public List getDealsForDashboard() throws DaoException, ClassNotFoundException;
-    public List<Deal> getListDealWithTask() throws DaoException, ClassNotFoundException;
-    public List<Deal> getListDealWithNotTask() throws DaoException, ClassNotFoundException;
+    List getDealsForDashboard() throws DaoException, ClassNotFoundException;
+    List<Deal> getListDealWithTask() throws DaoException, ClassNotFoundException;
+    List<Deal> getListDealWithNotTask() throws DaoException, ClassNotFoundException;
 
 
 }

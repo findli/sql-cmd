@@ -14,5 +14,5 @@ public interface NoteService {
     Note getById(int id) throws DaoException;
     void delete(int id) throws DaoException;
     List<Note> getNotesForList(int id);
-    public void createNewNote() throws DaoException, ClassNotFoundException;
+    void createNewNote() throws DaoException, ClassNotFoundException;
 }
