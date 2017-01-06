@@ -52,6 +52,7 @@
             <artifactId>selenium-server</artifactId>
             <version>3.0.1</version>
         </dependency>
+        <dependency>
             <groupId>com.github.jsimone</groupId>
             <artifactId>webapp-runner</artifactId>
             <version>8.0.30.2</version>

@@ -28,6 +28,4 @@ public interface TaskService {
     public List<Task> getOverdueTasksForFilter(Date fromDate, Date toDate, int period_id, int task_type_id, int user_id) throws DaoException, ClassNotFoundException;
 
     public List<Task> getDeletedTasksForFilter(Date fromDate, Date toDate, int period_id, int task_type_id, int user_id) throws DaoException, ClassNotFoundException;
-
-    List getTaskForDashboard() throws DaoException, ClassNotFoundException;
 }
