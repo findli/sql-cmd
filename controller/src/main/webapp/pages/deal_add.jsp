@@ -246,28 +246,104 @@
 
                     <!--Add company-->
                     <div class="forms--nDeal">
-                        <%--<form class="form-horizontal">--%>
-                        <h2>Add company</h2>
+                        <!--    <form class="form-horizontal"> -->
+                        <h2>Company</h2>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Name </label>
-                            <div class="col-sm-9">
-                                <select class="form-control" style="float: none; width: 250px" id="companyDeal" name="companyDeal">
+                        <!-- Навигация -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="active"><a href="#old" aria-controls="old" role="tab"
+                                                  data-toggle="tab">Companies</a></li>
+                            <li><a href="#new" aria-controls="new" role="tab" data-toggle="tab">New Company</a></li>
+                        </ul>
+
+                        <!-- Содержимое вкладок -->
+                        <div class="tab-content">
+                            <br>
+                            <div role="tabpanel" class="tab-pane active" id="old">
+
+                                <select class="form-control" style="float: none; width: 250px" id="company"
+                                        name="company">
                                     <c:forEach var="company" items="${companyList}">
-                                        <option><c:out value="${company.getTitle()}"/></option>
+                                        <option><c:out value="${company.title}"/></option>
                                     </c:forEach>
                                 </select>
+
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="new">
+                                <input type="hidden" id='formZipcode' value="">
+                                <input type="hidden" id='formCountry' value="">
+                                <input type="hidden" id='formCity' value="">
+                                <input type="hidden" id='formStreet' value="">
+                                <input type="hidden" id='formBuildNum' value="">
+                                <input type="hidden" id='formOfficeRoom' value="">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Title: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="formCompanyTabpanel" type="text" placeholder="Name">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Phone: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="formPhoneTabpanel" type="text" placeholder="Phone">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">email: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="formEmailTabpanel" type="text" placeholder="email">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Web: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="formWebTabpanel" type="text"placeholder="Url">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Address: </label>
+                                    <div class="col-sm-9" onclick="location.href='#modalAddAddress'"
+                                         title="Click me for edit">
+                                        <textarea disabled="disabled" class="text" id='formAddress' type="text" name="formAddress"></textarea>
+                                    </div>
+                                </div>
+                                <input class="formAddBut" type="button" value="Add company">
                             </div>
                         </div>
-                        <%--<div class="form-group">--%>
-                        <%--<label class="col-sm-3 control-label">Address </label>--%>
-                        <%--<div class="col-sm-9">--%>
-                        <input onclick="location.href='#modalAddCompany'" class="formAddBut" type="button"
-                               value="Add company">
-                        <%--</div>--%>
-                        <%--</div>--%>
-                        <span id="result3" style="color:red"></span>
-
+                        <div id="modalAddAddress" class="modalDialog">
+                            <div style="height:325px">
+                                <header>
+                                    <div class="wrapper__modal1Title">
+                                        <div><i class="fa fa-user"></i></div>
+                                        <h3>Edit address</h3>
+                                    </div>
+                                </header>
+                                <p>Zipcode <input class="text" id='modalZipcode' type="text"
+                                                  value=""></p>
+                                <p>Country <input class="text" id='modalCountry' type="text"
+                                                  value=""></p>
+                                <p>City <input class="text" id='modalCity' type="text"
+                                               value=""></p>
+                                <p>Street <input class="text" id='modalStreet' type="text"
+                                                 value=""></p>
+                                <p>BuildNum <input class="text" id='modalBuildNum' type="text"
+                                                   value=""></p>
+                                <p>OfficeRoom <input class="text" id='modalOfficeRoom' type="text"
+                                                     value=""></p>
+                                <input class="modalBut" id="modalButAddress" type="button"
+                                       onclick="location.href='#close'"
+                                       value="Save contact">
+                                <input class="modalBut cancel" onclick="location.href='#close'" type="button"
+                                       value="Cancel">
+                            </div>
+                        </div>
+                        <!--End-->
+                        <!--    </form> -->
                     </div>
 
                     <!--Add contact-->
@@ -379,4 +455,5 @@
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
+<script type="text/javascript" src="../js/scriptAddCompany.js"></script>
 </html>

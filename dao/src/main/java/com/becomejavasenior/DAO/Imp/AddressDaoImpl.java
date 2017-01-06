@@ -7,6 +7,7 @@ import com.becomejavasenior.bean.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
@@ -67,6 +68,7 @@ public class AddressDaoImpl extends AbstractDaoImpl<Address> implements AddressD
     }
 
     @Override
+    @Transactional
     public Address getEntity(ResultSet resultSet) throws DaoException {
 
         Address address = new Address();

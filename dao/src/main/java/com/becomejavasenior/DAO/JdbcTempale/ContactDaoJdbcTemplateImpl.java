@@ -64,10 +64,13 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact>
             "  JOIN crm_pallas.phone_type ON crm_pallas.contact_phone.phone_type_id = crm_pallas.phone_type.id\n" +
             "where company_id = ? AND contact.is_deleted = FALSE";
 
-
     @Override
     public List<Contact> getContactsForList(int id) {
-        List<Contact> contacts = namedParameterJdbcTemplate.query(SELECT_CONTACT_FOR_LIST.replace("?", String.valueOf(id)), CONTACT_FOR_LIST_ROW_MAPPER);
+//        List<Contact> contacts = namedParameterJdbcTemplate.query(SELECT_CONTACT_FOR_LIST.replace("?", String.valueOf(id)), CONTACT_FOR_LIST_ROW_MAPPER);
+//        List<Contact> contacts = namedParameterJdbcTemplate.query(SELECT_CONTACT_FOR_LIST, new ContactRowMapper());
+
+        List<Contact> contacts = namedParameterJdbcTemplate.query(SELECT_CONTACT_FOR_LIST.replace("?", String.valueOf(id)), new ContactRowMapper());
+
         return contacts;
     }
 
@@ -140,6 +143,7 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact>
         return contact;
     }
 
+    /*
     private final RowMapper<Contact> CONTACT_FOR_LIST_ROW_MAPPER = (resultSet, i) -> {
 
         Phone phone = new Phone();
@@ -162,4 +166,5 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact>
 
         return contact;
     };
+    */
 }
