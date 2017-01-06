@@ -14,7 +14,8 @@ import java.util.Properties;
 
 public class DataBaseUtil {
     private static BasicDataSource dataSource;
-    private static final String PROPERTIES_FILE = "database.properties";
+//    private static final String PROPERTIES_FILE = "database.properties";
+    private static final String PROPERTIES_FILE = "heroku.properties";
 
     static {
         if(Objects.equals(System.getenv("DEPLOYMENT_ENVIRONMENT"),"production")) {
