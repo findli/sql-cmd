@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
 @WebServlet(name = "ContactAddServlet", urlPatterns = "/contactAdd")
@@ -108,18 +109,24 @@ public class ContactAddServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
 
-        try {
-            Contact contact = getContactFromRequest(request);
-            Company company = getCompanyFromRequest(request);
-            Task task = getTaskFromRequest(request);
-            Deal deal = getDealFromRequest(request);
-
-            contactService.createNewContact(contact, deal, company, task);
-        } catch (DaoException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        Enumeration<String> params = request.getParameterNames();
+        while (params.hasMoreElements()) {
+            String paramName = params.nextElement();
+            System.out.println(paramName + " " + request.getParameter(paramName));
         }
+
+            try {
+                Contact contact = getContactFromRequest(request);
+                Company company = getCompanyFromRequest(request);
+                Task task = getTaskFromRequest(request);
+                Deal deal = getDealFromRequest(request);
+
+                contactService.createNewContact(contact, deal, company, task);
+            } catch (DaoException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
 //        Tag tag = getTagFromRequest(request);
 //        File attachedFile = getFileFromRequest(request);
 
@@ -164,7 +171,7 @@ public class ContactAddServlet extends HttpServlet {
 
     private Company getCompanyFromRequest(HttpServletRequest request) {
         Company company = new Company();
-        if (request.getParameter("nameCompany") != "") {
+        if (request.getParameter("nameCompany") != null && request.getParameter("nameCompany") != "") {
             company.setTitle(request.getParameter("nameCompany"));
             company.setPhoneNumber(request.getParameter("phoneCompany"));
             company.setEmail(request.getParameter("emailCompany"));
