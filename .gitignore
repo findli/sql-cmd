@@ -29,6 +29,6 @@ controller.iml
 /lib
 /web
 
-# database.properties -> database.properties-stub
+# database.properties-stub -> database.properties
 /dao/src/main/resources/database.properties
 /controller/src/main/webapp/WEB-INF/database.properties
