@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
 
 @WebServlet(name = "ContactAddServlet", urlPatterns = "/contactAdd")
@@ -109,24 +108,18 @@ public class ContactAddServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
 
-        Enumeration<String> params = request.getParameterNames();
-        while (params.hasMoreElements()) {
-            String paramName = params.nextElement();
-            System.out.println(paramName + " " + request.getParameter(paramName));
+        try {
+            Contact contact = getContactFromRequest(request);
+            Company company = getCompanyFromRequest(request);
+            Task task = getTaskFromRequest(request);
+            Deal deal = getDealFromRequest(request);
+
+            contactService.createNewContact(contact, deal, company, task);
+        } catch (DaoException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-
-            try {
-                Contact contact = getContactFromRequest(request);
-                Company company = getCompanyFromRequest(request);
-                Task task = getTaskFromRequest(request);
-                Deal deal = getDealFromRequest(request);
-
-                contactService.createNewContact(contact, deal, company, task);
-            } catch (DaoException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
 //        Tag tag = getTagFromRequest(request);
 //        File attachedFile = getFileFromRequest(request);
 
