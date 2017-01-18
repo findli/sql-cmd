@@ -1,19 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
 
     <!--Here goes DataSource, Hibernate, JPA configurations-->
 
     <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/salesdept?useUnicode=ues&amp;characterEncoding=UTF-8"/>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/java_jss_salesdept?useUnicode=yes&amp;characterEncoding=UTF-8"/>
         <property name="username" value="root"/>
         <property name="password" value="123"/>
+        <!--on start amount of connections to db-->
         <property name="initialSize" value="5"/>
+        <!--maximum amount of connections to db, after will be queued-->
         <property name="maxActive" value="10"/>
+        <!--how many can wait(простаивать). not required parameters.-->
         <property name="maxIdle" value="5"/>
-        <property name="minIDle" value="2"/>
+        <property name="minIdle" value="2"/>
     </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <!--Hibernate config-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <!--<property name="dataSource" ref="dataSource"/>-->
+        <property name="dataSource" ref="jndiDataSource"/>
+        <!--using annotations for ORM config-->
+        <property name="annotatedClasses">
+            <list>
+                <value>jss.mvc.w13_4.domain.Customer</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <!--<prop key="hibernate.show_sql">true</prop>-->
+                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
+            </props>
+        </property>
+
+        <!--Using xml for ORM config-->
+        <!--
+                <property name="mappingResources">
+                    <list>
+                        <value>customer.hbm.xml</value>
+                    </list>
+                </property>
+        -->
+
+    </bean>
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <jee:jndi-lookup id="jndiDataSource" jndi-name="java:comp/env/jdbc/java_jss_salesdept"/>
 
 </beans>

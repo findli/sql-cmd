@@ -1,5 +1,7 @@
 package jss.mvc.w13_4.dao;
 
+import java.util.List;
+
 public interface DAO<T> {
     T get(long id);
 
@@ -7,7 +9,7 @@ public interface DAO<T> {
 
     void save(T trans); // create new entity instance in DB and assign its ID
 
-    void update(T detached); // update existing entity instance in DB given detached instance with id field
+    Long update(T detached); // update existing entity instance in DB given detached instance with id field
 
     void delete(long id);
 }

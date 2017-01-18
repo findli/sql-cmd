@@ -30,11 +30,12 @@ public class MainController {
         try {
             doWork();
         } catch (ExitException e) {
+            // system.exit() breaks tests
             // do nothing
         }
     }
 
-    private void doWork() {
+    private void doWork() throws ExitException {
         view.write("Привет юзер!");
         view.write("Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password");
 
@@ -49,7 +50,7 @@ public class MainController {
                     }
                 } catch (Exception e) {
                     if (e instanceof ExitException) {
-                        throw e;
+                        throw new ExitException();
                     }
                     printError(e);
                     break;
@@ -62,10 +63,10 @@ public class MainController {
     private void printError(Exception e) {
         String message = e.getMessage();
         Throwable cause = e.getCause();
-        if (cause != null) {
-            message += " " + cause.getMessage();
+        if (cause != null && cause.getMessage().length() != 0) {
+            message = String.format(message + "%n" + cause.getMessage());
         }
-        view.write("Неудача! по причине: " + message);
+        view.write(String.format("Неудача!%n%s", message));
         view.write("Повтори попытку.");
     }
 

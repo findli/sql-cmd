@@ -9,12 +9,10 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 public abstract class DatabaseManagerTest {
-
-    //    private DatabaseManager manager;
     protected DatabaseManager manager;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         manager = getDatabaseManager();
         manager.connect("sqlcmd", "postgres", "postgres");
     }
@@ -23,19 +21,19 @@ public abstract class DatabaseManagerTest {
 
     @Test
     public void createTable() throws Exception {
+        // given
         manager.deleteAllTables();
+
         LinkedList<String> fields = new LinkedList<>();
         fields.add("id");
         fields.add("name");
         fields.add("email");
-        try {
-            manager.create("user", fields);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        manager.create("user", fields);
 
+        // when
         Set<String> tableNames = manager.getTableNames();
 
+        // then
         assertEquals(Arrays.toString(tableNames.toArray(new String[tableNames.size()])), "[user]");
     }
 
@@ -43,80 +41,74 @@ public abstract class DatabaseManagerTest {
     public void testCantAddSameTableName() throws Exception {
         //given
         manager.deleteAllTables();
+
         //when
         LinkedList<String> fields = new LinkedList<>();
         fields.add("id");
         fields.add("name");
         fields.add("email");
-        try {
-            manager.create("user", fields);
-        } catch (Exception e) {
-        }
+        manager.create("user", fields);
+
         fields = new LinkedList<>();
         fields.add("id");
         fields.add("name");
         fields.add("email");
-
         manager.create("user", fields);
+
         //then
+        // TODO: 30.12.16 assertion
     }
 
     @Test
-    public void testGetAllTableNames() {
+    public void testGetAllTableNames() throws Exception {
+        //given
+        manager.deleteAllTables();
+
+        // when
         LinkedList<String> fields = new LinkedList<>();
         fields.add("id");
         fields.add("name");
         fields.add("email");
-        try {
-            manager.create("user", fields);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        manager.create("user", fields);
+
         fields = new LinkedList<>();
         fields.add("id");
         fields.add("name");
         fields.add("ts");
-        try {
-            manager.create("task", fields);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        manager.create("task", fields);
 
+        // then
         Set<String> tableNames = manager.getTableNames();
         assertEquals("[user, task]", Arrays.toString(tableNames.toArray(new String[tableNames.size()])));
     }
 
     @Test
     public void testClearTable() throws Exception {
+        // given
+        manager.deleteAllTables();
+
         LinkedList<String> fields = new LinkedList<>();
         fields.add("id");
         fields.add("name");
         fields.add("email");
-        try {
-            manager.create("user", fields);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        manager.create("user", fields);
 
+        // when
         manager.clear("user");
 
-
+        // then
+        // TODO: 30.12.16 write assertion
     }
 
     @Test
-    public void testGetTableData() {
+    public void testGetTableData() throws Exception {
         // given
         manager.deleteAllTables();
-        // manager
         LinkedList<String> fields = new LinkedList<>();
         fields.add("id");
         fields.add("name");
         fields.add("password");
-        try {
-            manager.create("user", fields);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        manager.create("user", fields);
 
         // when
         HashMap<String, String> rows = new HashMap<String, String>();
@@ -124,6 +116,7 @@ public abstract class DatabaseManagerTest {
         rows.put("password", "ivanPassword");
         rows.put("id", "1");
         manager.insertData("user", rows);
+
         // then
         ArrayList users = manager.getTableData("user");
         System.out.println(users);
@@ -136,7 +129,7 @@ public abstract class DatabaseManagerTest {
     }
 
     @Test
-    public void testUpdateTableData() {
+    public void testUpdateTableData() throws Exception {
         // given
         manager.deleteAllTables();
 
@@ -144,11 +137,7 @@ public abstract class DatabaseManagerTest {
         input.add("name");
         input.add("password");
         input.add("id");
-        try {
-            manager.create("user", input);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        manager.create("user", input);
 
         HashMap<String, String> rows = new HashMap<String, String>();
         rows.put("name", "Ivan");
@@ -173,7 +162,7 @@ public abstract class DatabaseManagerTest {
     }
 
     @Test
-    public void testGetColumnNames() {
+    public void testGetColumnNames() throws Exception {
         // given
         manager.deleteAllTables();
 
@@ -181,11 +170,7 @@ public abstract class DatabaseManagerTest {
         input.add("name");
         input.add("password");
         input.add("id");
-        try {
-            manager.create("user", input);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        manager.create("user", input);
 
         // when
         String[] columnNames = manager.getTableColumns("user");
@@ -197,7 +182,9 @@ public abstract class DatabaseManagerTest {
     @Test
     public void testisConnected() {
         // given
+
         // when
+
         // then
         assertTrue(manager.isConnected());
     }

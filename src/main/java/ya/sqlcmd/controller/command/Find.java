@@ -27,10 +27,20 @@ public class Find implements Command {
         String[] data = command.split("\\|");
         String tableName = data[1];
 
-        String[] tableColumns = manager.getTableColumns(tableName);
+        String[] tableColumns = new String[0];
+        try {
+            tableColumns = manager.getTableColumns(tableName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         printHeader(tableColumns);
 
-        ArrayList tableData = manager.getTableData(tableName);
+        ArrayList tableData = null;
+        try {
+            tableData = manager.getTableData(tableName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         printTable(tableData);
     }
 

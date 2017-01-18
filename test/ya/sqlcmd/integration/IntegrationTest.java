@@ -14,11 +14,9 @@ public class IntegrationTest {
 
     private ConfigurableInputStream in;
     private ByteArrayOutputStream out;
-    private DatabaseManager databaseManager;
 
     @Before
-    public void setup() {
-        databaseManager = new JDBCDatabaseManager();
+    public void setUp() {
         out = new ByteArrayOutputStream();
         in = new ConfigurableInputStream();
 
@@ -63,7 +61,7 @@ public class IntegrationTest {
                 "До скорой встречи!\n", getData());
     }
 
-    public String getData() {
+    private String getData() {
         try {
             String result = new String(out.toByteArray(), "UTF-8");
             out.reset();
@@ -276,7 +274,9 @@ public class IntegrationTest {
         assertEquals("Привет юзер!\n" +
                 "Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password\n" +
                 // connect sqlcmd
-                "Неудача! по причине: Неверно количество параметров разделенных знаком '|', ожидается 4, но есть: 2\n" +
+                "Неудача!\n" +
+                "Ожидается, например: 'connect|sqlcmd|postgres|postgres'.\n" +
+                "Некорректный формат переданной команды: 'connect|sqlcmd'.\n" +
                 "Повтори попытку.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit
@@ -286,21 +286,6 @@ public class IntegrationTest {
     @Test
     public void testFindAfterConnect_withData() {
         // given
-//        databaseManager.connect("sqlcmd", "postgres", "postgres");
-//
-//        databaseManager.clear("user");
-//
-//        DataSet user1 = new DataSet();
-//        user1.put("id", 13);
-//        user1.put("name", "Stiven");
-//        user1.put("password", "*****");
-//        databaseManager.create("user", user1);
-//
-//        DataSet user2 = new DataSet();
-//        user2.put("id", 14);
-//        user2.put("name", "Eva");
-//        user2.put("password", "+++++");
-//        databaseManager.create("user", user2);
 
         in.add("connect|sqlcmd|postgres|postgres");
         in.add("drop tables");
@@ -362,7 +347,9 @@ public class IntegrationTest {
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
                 // clear|sadfasd|fsf|fdsf
-                "Неудача! по причине: Формат команды 'clear|tableName', а ты ввел: clear|sadfasd|fsf|fdsf\n" +
+                "Неудача!\n" +
+                "Ожидался следующий формат команды: 'clear|tableName'.\n" +
+                "Некорректный формат переданной команды: 'clear|sadfasd|fsf|fdsf'.\n" +
                 "Повтори попытку.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit
@@ -389,7 +376,8 @@ public class IntegrationTest {
                 "Все таблица были успешно удалены.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // create|user|error
-                "Неудача! по причине: В таблице должно бытьхотя бы одно поле. 'insert|tableName|column1|column2|...|columnN', а ты прислал: 'create|user|'\n" +
+                "Неудача!\n" +
+                "В таблице должно бытьхотя бы одно поле. 'insert|tableName|column1|column2|...|columnN', а ты прислал: 'create|user|'\n" +
                 "Повтори попытку.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit

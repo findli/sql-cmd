@@ -20,8 +20,13 @@ public class DropTables implements Command {
 
     @Override
     public void process(String command) {
-        manager.deleteAllTables();
+        try {
+            manager.deleteAllTables();
+            view.write("Все таблица были успешно удалены.");
+        } catch (Exception e) {
+            view.write("Все таблица не были успешно удалены.");
+            e.printStackTrace();
+        }
 
-        view.write("Все таблица были успешно удалены.");
     }
 }

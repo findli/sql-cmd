@@ -9,22 +9,10 @@ public class InMemoryDatabaseManager implements DatabaseManager {
     private InMemoryDatabaseManager.DataBase dataBase = this.new DataBase();
 
     @Override
-    public ArrayList<HashMap<String, String>> getTableData(String tableName) {
+    public ArrayList<HashMap<String, String>> getTableData(String tableName) throws IllegalAccessException {
         DataBase.Table table = null;
-        try {
-            table = this.dataBase.getTable(tableName);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        table = this.dataBase.getTable(tableName);
         return table.getRows();
-    }
-
-    private void validateTable(String tableName) {
-        // @todo implement
-//        if (!"user".equals(tableName)) {
-//        if (tableName != "user") {
-//            throw new UnsupportedOperationException("Only for 'user' table, but you try to work with: " + tableName);
-//        }
     }
 
     @Override
@@ -38,8 +26,7 @@ public class InMemoryDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public void clear(String tableName) {
-        // @todo implement
+    public void clear(String tableName) throws IllegalAccessException {
         this.dataBase.clear(tableName);
 //        validateTable(tableName);
 
@@ -48,12 +35,8 @@ public class InMemoryDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public void delete(String tableName) {
-        try {
-            dataBase.deleteTable(tableName);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+    public void delete(String tableName) throws IllegalAccessException {
+        dataBase.deleteTable(tableName);
     }
 
     @Override
@@ -68,21 +51,13 @@ public class InMemoryDatabaseManager implements DatabaseManager {
 //        freeIndex++;
     }
 
-    public void insertData(String tableName, HashMap<String, String> row) {
-        try {
-            this.dataBase.insert(tableName, row);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+    public void insertData(String tableName, HashMap<String, String> row) throws IllegalAccessException {
+        this.dataBase.insert(tableName, row);
     }
 
     @Override
-    public void update(String tableName, String id, HashMap<String, String> newValue) {
-        try {
-            this.dataBase.update(tableName, newValue, id);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+    public void update(String tableName, String id, HashMap<String, String> newValue) throws IllegalAccessException {
+        this.dataBase.update(tableName, newValue, id);
     }
 
     @Override
@@ -96,7 +71,7 @@ public class InMemoryDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public void deleteAllTables() {
+    public void deleteAllTables() throws IllegalAccessException {
         for (String tableName : dataBase.getTableNames()) {
             delete(tableName);
         }
@@ -144,13 +119,9 @@ public class InMemoryDatabaseManager implements DatabaseManager {
             throw new IllegalAccessException("There is no table named: " + tableName);
         }
 
-        public void clear(String tableName) {
-            try {
-                Table table = this.getTable(tableName);
-                table.clear();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+        public void clear(String tableName) throws IllegalAccessException {
+            Table table = this.getTable(tableName);
+            table.clear();
         }
 
         public LinkedHashSet<String> getTableNames() {

@@ -1,5 +1,6 @@
 package ya.sqlcmd.controller.command;
 
+import ya.sqlcmd.controller.command.helper.StringCommandParser;
 import ya.sqlcmd.model.DatabaseManager;
 import ya.sqlcmd.ui.View;
 
@@ -19,14 +20,20 @@ public class Clear implements Command {
     }
 
     @Override
-    public void process(String command) {
-        String[] data = command.split("\\|");
-        if (data.length != 2) {
-            throw new IllegalArgumentException("Формат команды 'clear|tableName', а ты ввел: " + command);
+    public void process(String command) throws Exception {
+        String[] data;
+        try {
+            data = StringCommandParser.parse(command, StringCommandParser.NOT_EQUAL_TWO);
+        } catch (IllegalArgumentException e) {
+            throw new Exception("Ожидался следующий формат команды: 'clear|tableName'.", e);
         }
         String tableName = data[1];
-        manager.clear(tableName);
+        try {
+            manager.clear(tableName);
+            view.write(String.format("Таблица %s была успешно очищена.", tableName));
+        } catch (Exception e) {
+            view.write(String.format("Таблица %s не была успешно очищена.", tableName));
+        }
 
-        view.write(String.format("Таблица %s была успешно очищена.", tableName));
     }
 }

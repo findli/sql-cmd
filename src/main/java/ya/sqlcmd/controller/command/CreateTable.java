@@ -39,10 +39,11 @@ public class CreateTable implements Command {
         }
         try {
             manager.create(tableName, fieldsOfNewTable);
+            view.write(String.format("Таблица %s была успешно создана с полями: '%s'.", tableName, fieldsOfNewTable.toString()));
         } catch (Exception e) {
+            view.write(String.format("Таблица %s не была успешно создана с полями: '%s'.", tableName, fieldsOfNewTable.toString()));
             e.printStackTrace();
         }
 
-        view.write(String.format("Таблица %s была успешно создана с полями: '%s'.", tableName, fieldsOfNewTable.toString()));
     }
 }

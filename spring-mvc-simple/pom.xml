@@ -32,11 +32,6 @@
         <!--Data access-->
 
         <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-jdbc</artifactId>
-            <version>7.0.47</version>
-        </dependency>
-        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.40</version>
@@ -45,6 +40,13 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
+        </dependency>
+
+        <!--Tomcat DataSource support-->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jdbc</artifactId>
+            <version>7.0.47</version>
         </dependency>
 
         <!-- Spring core & mvc -->
@@ -60,6 +62,8 @@
             <version>${spring.version}</version>
         </dependency>
         <dependency>
+            <!--интеграция с jdbc, hibernate-->
+            <!--LocalSessionFactoryBean-->
             <groupId>org.springframework</groupId>
             <!--интеграция с jdbc, hibernate и др реализациями orm-->
             <artifactId>spring-orm</artifactId>

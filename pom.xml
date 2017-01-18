@@ -7,13 +7,18 @@
 
     <groupId>JavaLearners</groupId>
     <artifactId>testCmdSql</artifactId>
-    <packaging>pom</packaging>
+
     <version>0.2</version>
+    <packaging>pom</packaging>
+
     <properties>
         <java.version>1.8</java.version>
         <module.name>sqlcmd</module.name>
     </properties>
     <modules>
+        <module>gwtphp</module>
+        <module>react</module>
+        <module>raxrs</module>
     </modules>
 
     <dependencies>

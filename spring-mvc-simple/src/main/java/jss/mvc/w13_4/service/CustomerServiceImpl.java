@@ -1,62 +1,62 @@
 package jss.mvc.w13_4.service;
 
+import jss.mvc.w13_4.dao.DAO;
+import jss.mvc.w13_4.dao.jdbc.CustomerDAOJdbcImpl;
 import jss.mvc.w13_4.domain.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service // spring boot interpret this class as service class for some controller
+@Transactional(
+//        value = "transactionManager",
+        readOnly = true
+)
 public class CustomerServiceImpl implements CustomerService {
-    List<Customer> data = new ArrayList<>(20);
-    long newId = 1;
+
+    @Autowired
+//    @Qualifier("customerDAOJdbcImpl")
+//    @Qualifier("customerDAOHibernateImpl")
+    @Qualifier("customerDAOHibernateTemplateImpl")
+    DAO<Customer> customerDAO;
 
     public CustomerServiceImpl() {
-        data.add(new Customer(1l, "Ann", 123));
-        data.add(new Customer(2l, "Bruce", 345));
-        data.add(new Customer(3l, "Clara", 456));
-        newId = 4;
+        customerDAO = new CustomerDAOJdbcImpl();
+    }
+
+    public void setCustomerDAO(DAO<Customer> customerDAO) {
+        this.customerDAO = customerDAO;
     }
 
     @Override
     public Customer get(Long id) {
-        Customer customer = null;
-//        data.stream().filter(c -> c.getId().longValue() == id.longValue()).findFirst().ifPresent(c-> customer);
-        for (Customer c : data) {
-            if (c.getId().longValue() == id.longValue()) {
-                customer = c;
-            }
-        }
-        return customer;
+        return customerDAO.get(id);
     }
 
     @Override
     public List<Customer> getAll() {
-        return data;
+        return customerDAO.getAll();
     }
 
     @Override
+    // для выполнения метода нужно создать транзакциюи завершить после выполнения метода
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void update(Customer customer) {
-        Customer c = get(customer.getId());
-
-        if (c != null) {
-            int index = data.indexOf(c);
-            data.set(index, customer);
-        }
+        customerDAO.update(customer);
     }
 
     @Override
     public void delete(Long id) {
-        Customer c = get(id);
-
-        if (c != null) {
-            data.remove(c);
-        }
+        customerDAO.delete(id);
     }
 
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void add(Customer customer) {
-        customer.setId(newId++);
-        data.add(customer);
+        customerDAO.save(customer);
     }
 }

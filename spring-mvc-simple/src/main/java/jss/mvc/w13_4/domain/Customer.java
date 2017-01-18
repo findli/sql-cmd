@@ -8,14 +8,22 @@ import java.util.Collection;
 @Entity
 @Table(name = "customers", schema = "java_jss_salesdept", catalog = "")
 public class Customer {
-    private int id;
+    private Long id;
     private String address;
     private String name;
     private String phone;
     private Integer rating;
-    private Collection<Order> orders;
+//    private Collection<Order> orders;
 
     public Customer() {
+    }
+
+    public Customer(Long id, String address, String name, String phone, Integer rating) {
+        this.id = id;
+        this.address = address;
+        this.name = name;
+        this.phone = phone;
+        this.rating = rating;
     }
 
     public Customer(String address, String name, String phone, Integer rating) {
@@ -25,13 +33,13 @@ public class Customer {
         this.rating = rating;
     }
 
-    public Customer(int id, String address, String name, String phone, Integer rating, Collection<Order> orders) {
+    public Customer(Long id, String address, String name, String phone, Integer rating, Collection<Order> orders) {
         this.id = id;
         this.address = address;
         this.name = name;
         this.phone = phone;
         this.rating = rating;
-        this.orders = orders;
+//        this.orders = orders;
     }
 
     @Override
@@ -42,17 +50,18 @@ public class Customer {
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", rating=" + rating +
-                ", orders=" + orders +
+//                ", orders=" + orders +
                 '}';
     }
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // use mysql autoincrement property
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -114,7 +123,7 @@ public class Customer {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = id.intValue();
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
@@ -122,12 +131,12 @@ public class Customer {
         return result;
     }
 
-    @OneToMany(mappedBy = "customer")
-    public Collection<Order> getOrders() {
-        return orders;
-    }
+//    @OneToMany(mappedBy = "customer")
+//    public Collection<Order> getOrders() {
+//        return orders;
+//    }
 
-    public void setOrders(Collection<Order> orders) {
-        this.orders = orders;
-    }
+//    public void setOrders(Collection<Order> orders) {
+//        this.orders = orders;
+//    }
 }

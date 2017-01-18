@@ -1,7 +1,5 @@
 package ya.sqlcmd.controller.command;
 
-/**
- * Created by indigo on 28.08.2000.
- */
+// system.exit() breaks tests
 public class ExitException extends RuntimeException {
 }

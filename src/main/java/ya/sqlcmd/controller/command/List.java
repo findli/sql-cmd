@@ -23,10 +23,18 @@ public class List implements Command {
 
     @Override
     public void process(String command) {
-        Set<String> tableNames = manager.getTableNames();
+        Set<String> tableNames = null;
+        try {
+            tableNames = manager.getTableNames();
+            view.write(format(tableNames));
+        } catch (Exception e) {
+            view.write("Ошибка при отображении списка таблиц.");
+            e.printStackTrace();
+        }
 
-        String message = Arrays.toString(tableNames.toArray(new String[tableNames.size()]));
+    }
 
-        view.write(message);
+    private String format(Set<String> tableNames) {
+        return Arrays.toString(tableNames.toArray(new String[tableNames.size()]));
     }
 }

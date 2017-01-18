@@ -2,9 +2,6 @@ package ya.sqlcmd.controller.command;
 
 import ya.sqlcmd.ui.View;
 
-/**
- * Created by indigo on 28.08.2015.
- */
 public class Help implements Command {
 
     private View view;

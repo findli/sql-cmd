@@ -20,33 +20,29 @@ public class InMemoryDatabaseManagerTest extends DatabaseManagerTest {
         //given
         LinkedList<String> fields = new LinkedList<String>() {
         };
-        try {
-            manager.create("user", fields);
-            manager.create("task", fields);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        manager.create("user", fields);
+        manager.create("task", fields);
+
         // when
         manager.deleteAllTables();
+
         //then
         assertEquals(manager.getTableNames().size(), 0);
     }
 
     @Test
-    public void testRemoveTable() {
+    public void testRemoveTable() throws Exception {
         //given - инициализация зависимостей
         manager.deleteAllTables();
-        LinkedList<String> fields = new LinkedList<String>() {};
-        try {
-            manager.create("user", fields);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        LinkedList<String> fields = new LinkedList<String>() {
+        };
+        manager.create("user", fields);
+
         //when - проверяемая логика
 
         manager.delete("user");
-        //then - проверка правильного выполнения логики
 
+        //then - проверка правильного выполнения логики
         Set<String> tableNames = manager.getTableNames();
         assertEquals("[]", Arrays.toString(tableNames.toArray(new String[tableNames.size()])));
     }
