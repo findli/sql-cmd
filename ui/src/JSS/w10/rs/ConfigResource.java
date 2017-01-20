@@ -1,6 +1,7 @@
 package JSS.w10.rs;
 
-import org.glassfish.jersey.server.ResourceConfig;
+//import org.glassfish.jersey.server.ResourceConfig;
+/*
 
 import javax.ws.rs.ApplicationPath;
 
@@ -11,3 +12,4 @@ public class ConfigResource extends ResourceConfig {
         packages("JSS.w10.rs");
     }
 }
+*/

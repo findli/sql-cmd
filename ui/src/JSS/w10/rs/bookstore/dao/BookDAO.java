@@ -53,13 +53,12 @@ public class BookDAO {
         return book;
     }
 
-    public Book remove(Book book) {
-        if (book.getId() > 0 && data.containsKey(book.getId())) {
-            data.remove(book.getId());
+    public Book remove(long id) {
+        if (id > 0 && data.containsKey(id)) {
+            data.remove(id);
         }
 
-        book.setId(-1);
-        return book;
+        return data.get(id);
     }
 
     public Book update(Book book) {

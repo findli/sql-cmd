@@ -1,9 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
+http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+
+       http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd
+
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
-http://cxf.apache.org/jaxrs http://cfx.apache.org/schemas/jaxrs.xsd
+
+http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+
+    http://www.springframework.org/schema/context     http://www.springframework.org/schema/context/spring-context-3.0.xsd
+
+    http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
 ">
     <!--todo impl-->
     <!--http://{}host}:{port}/{context}/{CXF-servlet}/[{jaxrs:server path}]?_wadl-->
@@ -14,8 +25,12 @@ http://cxf.apache.org/jaxrs http://cfx.apache.org/schemas/jaxrs.xsd
     <jaxrs:server id="rsService" address="/rs">
         <jaxrs:serviceBeans>
             <!--<ref bean="helloResource"/>-->
-            <bean class="JSS.w10.rs.HelloResources"/>
             <bean class="JSS.w10.rs.bookstore.BookResource"/>
+            <bean class="JSS.w10.rs.HelloResources"/>
+            <bean class="JSS.w10.rs.bookstore.BookListResource"/>
         </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <bean class="JSS.w10.rs.BookHtmlProvider"/>
+        </jaxrs:providers>
     </jaxrs:server>
 </beans>
